@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Example\BloomPostEffect.cpp">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\LightingPostEffect.cpp">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\main.cpp">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\States.cpp">
+      <Filter>Example</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\V3DModel.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\V3DObject.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\V3DScene.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VBackdrop.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VBase.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VCamera.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VCollision.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VContent.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VEmitter.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VGame.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VGlobal.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VGroup.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VInputHandler.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VInterpolate.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VMusic.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VObject.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VParticle.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VPostEffect.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VRandom.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VRenderGroup.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VRenderLayer.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VSoundManager.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VSprite.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VState.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VText.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VTextPath.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VTiledSprite.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VTilemap.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VTrailArea.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VTypedText.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\XInputDevice.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\WavePostEffect.cpp">
+      <Filter>Example</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Example\BloomPostEffect.h">
+      <Filter>Example</Filter>
+    </ClInclude>
+    <ClInclude Include="Example\LightingPostEffect.h">
+      <Filter>Example</Filter>
+    </ClInclude>
+    <ClInclude Include="Example\States.h">
+      <Filter>Example</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\V3DModel.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\V3DObject.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\V3DScene.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VAnimation.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VAnimationManager.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VBackdrop.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VBase.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VCamera.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VCollision.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VColour.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VContent.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VEmitter.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VGame.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VGlobal.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VGroup.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VInputHandler.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VInterpolate.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VMusic.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VObject.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VParticle.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VPostEffect.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VRandom.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VRange.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VRenderGroup.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VRenderLayer.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VSoundManager.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VSprite.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VState.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VText.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VTextPath.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VTile.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VTiledSprite.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VTilemap.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VTrailArea.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VTypedText.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\XInputDevice.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Example\WavePostEffect.h">
+      <Filter>Example</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Example\Assets\Backdrop.png">
+      <Filter>Example\Assets</Filter>
+    </Image>
+    <Image Include="Example\Assets\diffuse.png">
+      <Filter>Example\Assets</Filter>
+    </Image>
+    <Image Include="Example\Assets\gp.png">
+      <Filter>Example\Assets</Filter>
+    </Image>
+    <Image Include="Example\Assets\normal.png">
+      <Filter>Example\Assets</Filter>
+    </Image>
+    <Image Include="Example\Assets\Smoke.png">
+      <Filter>Example\Assets</Filter>
+    </Image>
+    <Image Include="Example\Assets\texture.jpg">
+      <Filter>Example\Assets</Filter>
+    </Image>
+    <Image Include="Example\Assets\Turret.png">
+      <Filter>Example\Assets</Filter>
+    </Image>
+    <Image Include="Example\Assets\Waterfall.png">
+      <Filter>Example\Assets</Filter>
+    </Image>
+    <Image Include="Example\Assets\Walls.png">
+      <Filter>Example\Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="VFrame\arial.ttf">
+      <Filter>Example\Assets</Filter>
+    </Font>
+    <Font Include="Example\Assets\DejaVuSansMono.ttf">
+      <Filter>Example\Assets</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Example\Assets\Add.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\AlphaThreshold.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\bloom.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\Brightness.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\Dissolve.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\DownSample.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\FullPass.vert">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\GaussianBlur.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\Glitch.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\HorizontalWave.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\level.csv">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\Lighting.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\LinedWave.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+    <None Include="Example\Assets\VerticalWave.frag">
+      <Filter>Example\Assets</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Example">
+      <UniqueIdentifier>{06303775-f333-4062-b00a-a88753609b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example\Assets">
+      <UniqueIdentifier>{5799f47f-9a52-4222-b132-2460fed89c8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VFrame">
+      <UniqueIdentifier>{115f759b-597c-4839-bca5-3c31b0c1cb04}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

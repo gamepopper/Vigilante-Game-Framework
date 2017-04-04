@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{4E9AE9B7-0431-431F-AE5E-E6F15CC09C4B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SFMLPractice</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Libs\SFML-2.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Libs\SFML-2.4.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-graphics-s-d.lib;sfml-audio-s-d.lib;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\Libs\SFML-2.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\Libs\SFML-2.4.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-s.lib;sfml-audio-s.lib;sfml-window-s.lib;sfml-system-s.lib;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Example\BloomPostEffect.cpp" />
+    <ClCompile Include="Example\States.cpp" />
+    <ClCompile Include="Example\LightingPostEffect.cpp" />
+    <ClCompile Include="Example\main.cpp" />
+    <ClCompile Include="VFrame\V3DModel.cpp" />
+    <ClCompile Include="VFrame\V3DObject.cpp" />
+    <ClCompile Include="VFrame\V3DScene.cpp" />
+    <ClCompile Include="VFrame\VBackdrop.cpp" />
+    <ClCompile Include="VFrame\VBase.cpp" />
+    <ClCompile Include="VFrame\VCamera.cpp" />
+    <ClCompile Include="VFrame\VCollision.cpp" />
+    <ClCompile Include="VFrame\VContent.cpp" />
+    <ClCompile Include="VFrame\VEmitter.cpp" />
+    <ClCompile Include="VFrame\VGame.cpp" />
+    <ClCompile Include="VFrame\VGlobal.cpp" />
+    <ClCompile Include="VFrame\VGroup.cpp" />
+    <ClCompile Include="VFrame\VInputHandler.cpp" />
+    <ClCompile Include="VFrame\VInterpolate.cpp" />
+    <ClCompile Include="VFrame\VMusic.cpp" />
+    <ClCompile Include="VFrame\VObject.cpp" />
+    <ClCompile Include="VFrame\VParticle.cpp" />
+    <ClCompile Include="VFrame\VRandom.cpp" />
+    <ClCompile Include="VFrame\VRenderGroup.cpp" />
+    <ClCompile Include="VFrame\VRenderLayer.cpp" />
+    <ClCompile Include="VFrame\VSprite.cpp" />
+    <ClCompile Include="VFrame\VState.cpp" />
+    <ClCompile Include="VFrame\VText.cpp" />
+    <ClCompile Include="VFrame\VTiledSprite.cpp" />
+    <ClCompile Include="VFrame\VTilemap.cpp" />
+    <ClCompile Include="VFrame\VTypedText.cpp" />
+    <ClCompile Include="VFrame\XInputDevice.cpp" />
+    <ClCompile Include="VFrame\VTrailArea.cpp" />
+    <ClCompile Include="VFrame\VPostEffect.cpp" />
+    <ClCompile Include="Example\WavePostEffect.cpp" />
+    <ClCompile Include="VFrame\VSoundManager.cpp" />
+    <ClCompile Include="VFrame\VTextPath.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Example\BloomPostEffect.h" />
+    <ClInclude Include="Example\States.h" />
+    <ClInclude Include="Example\LightingPostEffect.h" />
+    <ClInclude Include="VFrame\V3DModel.h" />
+    <ClInclude Include="VFrame\V3DObject.h" />
+    <ClInclude Include="VFrame\V3DScene.h" />
+    <ClInclude Include="VFrame\VAnimation.h" />
+    <ClInclude Include="VFrame\VAnimationManager.h" />
+    <ClInclude Include="VFrame\VBackdrop.h" />
+    <ClInclude Include="VFrame\VBase.h" />
+    <ClInclude Include="VFrame\VCamera.h" />
+    <ClInclude Include="VFrame\VCollision.h" />
+    <ClInclude Include="VFrame\VColour.h" />
+    <ClInclude Include="VFrame\VContent.h" />
+    <ClInclude Include="VFrame\VEmitter.h" />
+    <ClInclude Include="VFrame\VGame.h" />
+    <ClInclude Include="VFrame\VGlobal.h" />
+    <ClInclude Include="VFrame\VGroup.h" />
+    <ClInclude Include="VFrame\VInputHandler.h" />
+    <ClInclude Include="VFrame\VInterpolate.h" />
+    <ClInclude Include="VFrame\VMusic.h" />
+    <ClInclude Include="VFrame\VObject.h" />
+    <ClInclude Include="VFrame\VParticle.h" />
+    <ClInclude Include="VFrame\VRandom.h" />
+    <ClInclude Include="VFrame\VRange.h" />
+    <ClInclude Include="VFrame\VRenderGroup.h" />
+    <ClInclude Include="VFrame\VRenderLayer.h" />
+    <ClInclude Include="VFrame\VSprite.h" />
+    <ClInclude Include="VFrame\VState.h" />
+    <ClInclude Include="VFrame\VText.h" />
+    <ClInclude Include="VFrame\VTile.h" />
+    <ClInclude Include="VFrame\VTiledSprite.h" />
+    <ClInclude Include="VFrame\VTilemap.h" />
+    <ClInclude Include="VFrame\VTypedText.h" />
+    <ClInclude Include="VFrame\XInputDevice.h" />
+    <ClInclude Include="VFrame\VTrailArea.h" />
+    <ClInclude Include="VFrame\VPostEffect.h" />
+    <ClInclude Include="Example\WavePostEffect.h" />
+    <ClInclude Include="VFrame\VSoundManager.h" />
+    <ClInclude Include="VFrame\VTextPath.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="VFrame\arial.ttf" />
+    <Font Include="Example\Assets\DejaVuSansMono.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Example\Assets\Backdrop.png" />
+    <Image Include="Example\Assets\gp.png" />
+    <Image Include="Example\Assets\diffuse.png" />
+    <Image Include="Example\Assets\normal.png" />
+    <Image Include="Example\Assets\texture.jpg" />
+    <Image Include="Example\Assets\Turret.png" />
+    <Image Include="Example\Assets\Smoke.png" />
+    <Image Include="Example\Assets\Walls.png" />
+    <Image Include="Example\Assets\Waterfall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Example\Assets\Add.frag" />
+    <None Include="Example\Assets\AlphaThreshold.frag" />
+    <None Include="Example\Assets\bloom.frag" />
+    <None Include="Example\Assets\Brightness.frag" />
+    <None Include="Example\Assets\Dissolve.frag" />
+    <None Include="Example\Assets\DownSample.frag" />
+    <None Include="Example\Assets\FullPass.vert" />
+    <None Include="Example\Assets\Glitch.frag" />
+    <None Include="Example\Assets\GaussianBlur.frag" />
+    <None Include="Example\Assets\level.csv" />
+    <None Include="Example\Assets\Lighting.frag" />
+    <None Include="Example\Assets\LinedWave.frag" />
+    <None Include="Example\Assets\HorizontalWave.frag" />
+    <None Include="Example\Assets\VerticalWave.frag" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
