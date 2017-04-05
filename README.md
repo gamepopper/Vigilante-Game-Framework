@@ -18,8 +18,8 @@ The framework itself is found in the **VFrame** directory, the **Example** direc
 ![Easing Functions](http://i.imgur.com/jABi5k5.gif)
 
 ## Games Featured
-* Gemstone Keeper
-* Dungeon Racer
+* [Gemstone Keeper](http://gemstonekeeper.co.uk/)
+* [Dungeon Racer](https://gamepopper.itch.io/dungeon-racer)
 
 ## Feedback
 This framework is nowhere near complete and has room for improvement. Feel free to get in touch to suggest ways to improve functionality or features to add.
