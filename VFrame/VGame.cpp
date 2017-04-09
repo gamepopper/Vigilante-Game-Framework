@@ -97,6 +97,8 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	
 		while (VGlobal::p()->App.isOpen())
 		{
+			VGlobal::p()->Async.ProcessSyncRequests();
+
 			float dt = 1.0f / VGlobal::p()->FPS;
 			double start = clock.getElapsedTime().asSeconds();
 			double passed = start - end;

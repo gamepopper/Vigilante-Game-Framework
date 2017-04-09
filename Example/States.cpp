@@ -15,6 +15,7 @@ enum DemoPages
 	PAGE_BACKDROP,
 	PAGE_LIGHTING2D,
 	PAGE_GRAPHICS3D,
+	PAGE_ASYNC,
 	NUM_DEMOPAGES,
 };
 
@@ -23,8 +24,11 @@ void DemoStatesManager::SetNewPage()
 	VSubState* subState;
 	switch (CurrentPage)
 	{
-		case PAGE_ASCII: 
+		case PAGE_ASCII:
 			subState = new ASCIITestState();
+			break;
+		case PAGE_ASYNC:
+			subState = new AsyncTestState();
 			break;
 		case PAGE_BACKDROP:
 			subState = new BackdropState();

@@ -30,7 +30,7 @@ using std::vector;
 
 //Static and Animated Sprites
 /*
-This demonstrates static sprites, animated frame by frame system and custom shapes.
+This demonstrates static sprites and animated frame by frame system.
 */
 class SpriteState : public VSubState
 {
@@ -38,11 +38,6 @@ class SpriteState : public VSubState
 
 	VSprite* standardSprite;
 	VSprite* animatedSprite;
-
-	static const int CircleCount = 10;
-	VSprite* circle[CircleCount];
-
-	sf::Clock timer;
 
 public:
 	SpriteState() : VSubState() {}
@@ -74,23 +69,6 @@ public:
 
 		Add(sprite1);
 		Add(sprite2);
-
-		for (int i = 0; i < CircleCount; i++)
-		{
-			
-			VSprite* c = new VSprite();
-			if (i == 0)
-			{
-				c->MakeGraphicCircle(5, sf::Color::White);
-			}
-			else
-			{
-				c->LoadGraphicFromTexture(circle[0]->GetTexture());
-			}
-
-			circle[i] = c;
-			Add(c);
-		}
 	}
 
 	virtual void HandleEvents(sf::Event event)
@@ -130,19 +108,6 @@ public:
 
 		standardSprite->Size += sf::Vector2f(x1Resize / 100, y1Resize / 100);
 		animatedSprite->Size += sf::Vector2f(x2Resize / 100, y2Resize / 100);
-
-		sf::Vector2f centrePosition = sf::Vector2f(VGlobal::p()->Width / 2.0f, VGlobal::p()->Height / 2.0f + 100.0f);
-		float offset = 3.1415926f / CircleCount;
-		float radius = 50.0f;
-
-		for (int i = 0; i < CircleCount; i++)
-		{
-			float angle = offset * i;
-			float sin = sinf(timer.getElapsedTime().asSeconds() + angle);
-
-			sf::Vector2f dir = sf::Vector2f(cosf(angle), -sinf(angle));
-			circle[i]->SetPositionAtCentre(centrePosition + (dir * (sin * radius)));
-		}
 	}
 };
 
@@ -1042,7 +1007,7 @@ public:
 //	}
 //};
 
-#define TWOPI 6.283185307
+#define TWOPI 6.283185307f
 
 //Text Path
 /*
@@ -1124,6 +1089,145 @@ public:
 		}
 	}
 };
+
+class PixelMapRender : public VObject
+{
+	typedef VObject VSUPERCLASS;
+
+public:
+	sf::VertexArray Vertices;
+	sf::RenderStates RenderState = sf::RenderStates::Default;
+
+	virtual void Draw(sf::RenderTarget &RenderTarget)
+	{
+		VSUPERCLASS::Draw(RenderTarget);
+		RenderTarget.draw(Vertices, RenderState);
+	}
+};
+
+#include "PerlinNoise.h"
+//Async Function Test
+class AsyncTestState : public VSubState
+{
+	typedef VSubState VSUPERCLASS;
+
+private:
+	PixelMapRender* pixel;
+	VText* normalText;
+
+	static const int CircleCount = 10;
+	VSprite* circle[CircleCount];
+
+	sf::Clock timer;
+
+public:
+	AsyncTestState() : VSubState() {}
+	~AsyncTestState() = default;
+
+	virtual void Initialise()
+	{
+		VSUPERCLASS::Initialise();
+
+		for (int i = 0; i < CircleCount; i++)
+		{
+			VSprite* c = new VSprite();
+			if (i == 0)
+			{
+				c->MakeGraphicCircle(5, sf::Color::White);
+			}
+			else
+			{
+				c->LoadGraphicFromTexture(circle[0]->GetTexture());
+			}
+
+			circle[i] = c;
+			Add(c);
+		}
+
+		pixel = new PixelMapRender();
+		Add(pixel);
+
+		normalText = new VText(0.0f, VGlobal::p()->Height / 2.0f, VGlobal::p()->Width * 1.0f);
+		normalText->SetFormat("Example//Assets//DejaVuSansMono.ttf", 32, sf::Color::White, VTextAlign::ALIGNCENTER);
+		normalText->Text = L"LOADING MAP";
+		Add(normalText);
+
+		std::async(std::launch::async, &AsyncTestState::LoadMap, this);
+	}
+
+	void LoadMap()
+	{
+		int height = VGlobal::p()->Height;
+		int width = VGlobal::p()->Width; 
+		
+		pixel->Vertices.setPrimitiveType(sf::Quads);
+		pixel->Vertices.resize(width * height * 4);
+		std::vector<float> map = PerlinNoise::GenerateFloat(width, VGlobal::p()->Height, 3.0f, 7, 0.5f, 42);
+
+		int pixelCount = 0;
+		for (int y = 0; y < height; y++)
+			for (int x = 0; x < width; x++)
+			{
+				int index = (y * width) + x;
+				float value = map[index];
+
+				int p = pixelCount * 4;
+				pixel->Vertices[p + 0].position = sf::Vector2f(sf::Vector2i(x + 0, y + 0));
+				pixel->Vertices[p + 0].color = sf::Color(
+					sf::Uint8(255 * value),
+					sf::Uint8(255 * value),
+					sf::Uint8(255 * value),
+					255);
+				pixel->Vertices[p + 1].position = sf::Vector2f(sf::Vector2i(x + 1, y + 0));
+				pixel->Vertices[p + 1].color = sf::Color(
+					sf::Uint8(255 * value),
+					sf::Uint8(255 * value),
+					sf::Uint8(255 * value),
+					255);
+				pixel->Vertices[p + 2].position = sf::Vector2f(sf::Vector2i(x + 1, y + 1));
+				pixel->Vertices[p + 2].color = sf::Color(
+					sf::Uint8(255 * value),
+					sf::Uint8(255 * value),
+					sf::Uint8(255 * value),
+					255);
+				pixel->Vertices[p + 3].position = sf::Vector2f(sf::Vector2i(x + 0, y + 1));
+				pixel->Vertices[p + 3].color = sf::Color(
+					sf::Uint8(255 * value),
+					sf::Uint8(255 * value),
+					sf::Uint8(255 * value),
+					255);
+
+				pixelCount++;
+			}
+
+		VGlobal::p()->Async.SyncToMainLoop(std::bind(&AsyncTestState::OnLoadedMap, this));
+	}
+
+	void OnLoadedMap()
+	{
+		normalText->SetFillTint(sf::Color::Black);
+		normalText->Text = "LOAD COMPLETE";
+	}
+
+	virtual void Update(float dt)
+	{
+		VSUPERCLASS::Update(dt);
+
+		sf::Vector2f centrePosition = sf::Vector2f(VGlobal::p()->Width / 2.0f, VGlobal::p()->Height / 2.0f + 100.0f);
+		float offset = 3.1415926f / CircleCount;
+		float radius = 50.0f;
+
+		for (int i = 0; i < CircleCount; i++)
+		{
+			float angle = offset * i;
+			float sin = sinf(timer.getElapsedTime().asSeconds() + angle);
+
+			sf::Vector2f dir = sf::Vector2f(cosf(angle), -sinf(angle));
+			circle[i]->SetPositionAtCentre(centrePosition + (dir * (sin * radius)));
+		}
+	}
+};
+
 
 class DemoStatesManager : public VState
 {

@@ -80,17 +80,18 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\Libs\SFML-2.4.2\lib;$(SolutionDir)..\..\Libs\SFML-2.4.2\extlibs\libs-msvc\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s.lib;sfml-audio-s.lib;sfml-window-s.lib;sfml-system-s.lib;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-main.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-graphics-s.lib;sfml-audio-s.lib;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Example\BloomPostEffect.cpp" />
+    <ClCompile Include="Example\PerlinNoise.cpp" />
     <ClCompile Include="Example\States.cpp" />
-    <ClCompile Include="Example\LightingPostEffect.cpp" />
     <ClCompile Include="Example\main.cpp" />
     <ClCompile Include="VFrame\V3DModel.cpp" />
     <ClCompile Include="VFrame\V3DObject.cpp" />
     <ClCompile Include="VFrame\V3DScene.cpp" />
+    <ClCompile Include="VFrame\VAsync.cpp" />
     <ClCompile Include="VFrame\VBackdrop.cpp" />
     <ClCompile Include="VFrame\VBase.cpp" />
     <ClCompile Include="VFrame\VCamera.cpp" />
@@ -117,19 +118,19 @@
     <ClCompile Include="VFrame\XInputDevice.cpp" />
     <ClCompile Include="VFrame\VTrailArea.cpp" />
     <ClCompile Include="VFrame\VPostEffect.cpp" />
-    <ClCompile Include="Example\WavePostEffect.cpp" />
     <ClCompile Include="VFrame\VSoundManager.cpp" />
     <ClCompile Include="VFrame\VTextPath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\BloomPostEffect.h" />
+    <ClInclude Include="Example\PerlinNoise.h" />
     <ClInclude Include="Example\States.h" />
-    <ClInclude Include="Example\LightingPostEffect.h" />
     <ClInclude Include="VFrame\V3DModel.h" />
     <ClInclude Include="VFrame\V3DObject.h" />
     <ClInclude Include="VFrame\V3DScene.h" />
     <ClInclude Include="VFrame\VAnimation.h" />
     <ClInclude Include="VFrame\VAnimationManager.h" />
+    <ClInclude Include="VFrame\VAsync.h" />
     <ClInclude Include="VFrame\VBackdrop.h" />
     <ClInclude Include="VFrame\VBase.h" />
     <ClInclude Include="VFrame\VCamera.h" />
@@ -159,7 +160,6 @@
     <ClInclude Include="VFrame\XInputDevice.h" />
     <ClInclude Include="VFrame\VTrailArea.h" />
     <ClInclude Include="VFrame\VPostEffect.h" />
-    <ClInclude Include="Example\WavePostEffect.h" />
     <ClInclude Include="VFrame\VSoundManager.h" />
     <ClInclude Include="VFrame\VTextPath.h" />
   </ItemGroup>

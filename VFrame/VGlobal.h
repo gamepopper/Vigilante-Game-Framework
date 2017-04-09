@@ -12,6 +12,7 @@
 #include "VRandom.h"
 #include "VInputHandler.h"
 #include "VPostEffect.h"
+#include "VAsync.h"
 #include <vector>
 #include <functional>
 
@@ -20,7 +21,7 @@
 #include <sstream>
 #endif
 
-#define VFRAME_VERSION "0.9.9.4"
+#define VFRAME_VERSION "0.9.9.5"
 
 class VGlobal
 {
@@ -130,6 +131,9 @@ public:
 
 	//Access Keyboard, Mouse and Gamepad Input here
 	VInputHandler Input;
+
+	//Asynchronus Function Handling
+	VAsync Async;
 
 	//Window Style
 	int WindowStyle;

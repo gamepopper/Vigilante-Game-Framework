@@ -4,9 +4,6 @@
     <ClCompile Include="Example\BloomPostEffect.cpp">
       <Filter>Example</Filter>
     </ClCompile>
-    <ClCompile Include="Example\LightingPostEffect.cpp">
-      <Filter>Example</Filter>
-    </ClCompile>
     <ClCompile Include="Example\main.cpp">
       <Filter>Example</Filter>
     </ClCompile>
@@ -106,15 +103,15 @@
     <ClCompile Include="VFrame\XInputDevice.cpp">
       <Filter>VFrame</Filter>
     </ClCompile>
-    <ClCompile Include="Example\WavePostEffect.cpp">
+    <ClCompile Include="VFrame\VAsync.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Example\PerlinNoise.cpp">
       <Filter>Example</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\BloomPostEffect.h">
-      <Filter>Example</Filter>
-    </ClInclude>
-    <ClInclude Include="Example\LightingPostEffect.h">
       <Filter>Example</Filter>
     </ClInclude>
     <ClInclude Include="Example\States.h">
@@ -228,7 +225,10 @@
     <ClInclude Include="VFrame\XInputDevice.h">
       <Filter>VFrame</Filter>
     </ClInclude>
-    <ClInclude Include="Example\WavePostEffect.h">
+    <ClInclude Include="VFrame\VAsync.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Example\PerlinNoise.h">
       <Filter>Example</Filter>
     </ClInclude>
   </ItemGroup>
