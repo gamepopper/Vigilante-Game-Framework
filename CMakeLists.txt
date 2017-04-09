@@ -1,7 +1,7 @@
 project(VigilanteGameFramework)
 cmake_minimum_required(VERSION 3.1.0)
 if(${WIN32})
-	add_compile_options(/std:c++11 /Zc:rvalueCast)
+	add_compile_options(/Zc:rvalueCast)
 	if(${VGF_LTO})
 		set(VGF_LTO_FLAGS "/LTCG /GL")
 	endif()
