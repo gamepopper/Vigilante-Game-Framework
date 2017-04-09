@@ -6,12 +6,15 @@ VInputHandler::~VInputHandler()
 	axisInputs.clear();
 }
 
-void VInputHandler::AddButtonInput(sf::String name, int key, short gamepad, int mouse)
+void VInputHandler::AddButtonInput(sf::String name, int key, int gamepad, int mouse)
 {
 	ButtonInput button;
 	button.key = (sf::Keyboard::Key)key;
 	if (gamepad > 0)
-		button.gamepad = (sf::XInputDevice::XButton)((unsigned)gamepad);
+		button.gamepad = (sf::XInputDevice::XButton)((unsigned short)gamepad);
+	else
+		button.gamepad = sf::XInputDevice::NONE;
+
 	button.mouse = (sf::Mouse::Button)mouse;
 
 	button.down = false;

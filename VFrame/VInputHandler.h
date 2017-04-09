@@ -44,7 +44,7 @@ public:
 
 	int ControllerNo = 0;
 
-	void AddButtonInput(sf::String mame, int key = -1, short gamepad = -1, int mouse = -1);
+	void AddButtonInput(sf::String mame, int key = -1, int gamepad = -1, int mouse = -1);
 	void AddAxisInput(sf::String name, int keyA = -1, int keyB = -1, int gamepad = -1);
 
 	bool IsGamepadActive();
