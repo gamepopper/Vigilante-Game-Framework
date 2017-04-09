@@ -1,8 +1,8 @@
 #pragma once
 #include "VText.h"
 #include <functional>
-#include <SFML\Audio\Sound.hpp>
-#include <SFML\Audio\SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 
 class VTypedText : public VText
 {

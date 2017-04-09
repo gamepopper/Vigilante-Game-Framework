@@ -1,8 +1,8 @@
 #pragma once
 #include "VBase.h"
 
-#include <SFML\System\Vector2.hpp>
-#include <SFML\Graphics\RenderTarget.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 
 enum SidesTouching
 {

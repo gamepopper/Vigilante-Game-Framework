@@ -2,10 +2,10 @@
 
 BloomPostEffect::BloomPostEffect()
 {
-	brightness.loadFromFile("Example\\Assets\\FullPass.vert", "Example\\Assets\\Brightness.frag");
-	downSample.loadFromFile("Example\\Assets\\FullPass.vert", "Example\\Assets\\DownSample.frag");
-	gaussianBlur.loadFromFile("Example\\Assets\\FullPass.vert", "Example\\Assets\\GaussianBlur.frag");
-	addition.loadFromFile("Example\\Assets\\FullPass.vert", "Example\\Assets\\Add.frag");
+	brightness.loadFromFile("Example/Assets/FullPass.vert", "Example/Assets/Brightness.frag");
+	downSample.loadFromFile("Example/Assets/FullPass.vert", "Example/Assets/DownSample.frag");
+	gaussianBlur.loadFromFile("Example/Assets/FullPass.vert", "Example/Assets/GaussianBlur.frag");
+	addition.loadFromFile("Example/Assets/FullPass.vert", "Example/Assets/Add.frag");
 
 	SetBloomFactor(1.2f);
 }

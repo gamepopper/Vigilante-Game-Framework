@@ -1,8 +1,8 @@
 #pragma once
 #include "VGroup.h"
 #include "VPostEffect.h"
-#include <SFML\Graphics\Sprite.hpp>
-#include <SFML\Graphics\RenderTexture.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
 
 class VRenderLayer : public VGroup
 {

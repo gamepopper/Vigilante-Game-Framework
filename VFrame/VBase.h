@@ -1,5 +1,5 @@
 #pragma once
-#include <SFML\Graphics\RenderTarget.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 
 #if _DEBUG
 #include <iostream>

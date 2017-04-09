@@ -1,6 +1,6 @@
 #pragma once
-#include "..\VFrame\V3DModel.h"
-#include <SFML\Graphics.hpp>
+#include "../VFrame/V3DModel.h"
+#include <SFML/Graphics.hpp>
 
 #include <iostream>
 #include <vector>

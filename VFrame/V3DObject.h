@@ -1,8 +1,8 @@
 #pragma once
 #include "VBase.h"
 
-#include <SFML\System\Vector3.hpp>
-#include <SFML\Graphics\RenderTarget.hpp>
+#include <SFML/System/Vector3.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 
 class V3DObject : public VBase
 {

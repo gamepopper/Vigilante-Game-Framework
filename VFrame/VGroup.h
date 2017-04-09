@@ -3,7 +3,7 @@
 
 #if _DEBUG
 #include <iostream>
-#include <SFML\Graphics\RectangleShape.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #endif
 
 #include <vector>

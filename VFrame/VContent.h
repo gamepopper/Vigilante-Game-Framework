@@ -1,10 +1,10 @@
 #pragma once
 #include <map>
-#include <SFML\Graphics\Texture.hpp>
-#include <SFML\Graphics\Image.hpp>
-#include <SFML\Graphics\Font.hpp>
-#include <SFML\Audio\SoundBuffer.hpp>
-#include <SFML\System\String.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Image.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/System/String.hpp>
 #include "VBase.h"
 
 class VContent : public VBase

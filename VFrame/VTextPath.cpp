@@ -2,6 +2,7 @@
 #include "VInterpolate.h"
 #include "VGlobal.h"
 
+#include <limits>
 #include <sstream>
 
 using std::vector;
@@ -154,7 +155,7 @@ float vmodf(float x, float y)
 sf::Vector2f VTextPath::GetBezierPoint(float t)
 {
 	t = vmodf(t + pathOffset, 1.0f);
-	if (t < FLT_MIN)
+	if (t < std::numeric_limits<float>::min())
 	{
 		float ceiling = ceilf(-t);
 		t += ceiling;

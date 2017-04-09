@@ -44,7 +44,7 @@ void VSoundManager::Stop(sf::String id)
 
 void VSoundManager::StopAll()
 {
-	for each (std::pair<std::string, sf::Sound> pair in sounds)
+	for (std::pair<std::string, sf::Sound> pair : sounds)
 	{
 		sounds[pair.first].stop();
 	}

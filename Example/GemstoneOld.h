@@ -1,6 +1,6 @@
 #pragma once
-#include "..\VFrame\VObject.h"
-#include <SFML\Graphics.hpp>
+#include "../VFrame/VObject.h"
+#include <SFML/Graphics.hpp>
 
 #include <iostream>
 #include <vector>

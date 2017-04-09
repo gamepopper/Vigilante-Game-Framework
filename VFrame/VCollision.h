@@ -40,9 +40,6 @@ class VCircleCollision : public VCollision
 
 public:
 	VCircleCollision() {}
-	virtual ~VCircleCollision()
-	{
-		VCollision::~VCollision();
-	}
+	virtual ~VCircleCollision() {};
 };
 

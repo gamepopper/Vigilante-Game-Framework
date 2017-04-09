@@ -1,7 +1,7 @@
 #include "VPostEffect.h"
 #include "VGlobal.h"
 
-#include <SFML\Graphics\VertexArray.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
 
 void VPostEffectBase::applyShader(const sf::Shader& shader, sf::RenderTarget& output)
 {

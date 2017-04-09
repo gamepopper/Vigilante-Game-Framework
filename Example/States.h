@@ -1,28 +1,28 @@
 ﻿#pragma once
-#include "..\VFrame\VState.h"
-#include "..\VFrame\VBackdrop.h"
-#include "..\VFrame\VCamera.h"
-#include "..\VFrame\VColour.h"
-#include "..\VFrame\VContent.h"
-#include "..\VFrame\VEmitter.h"
-#include "..\VFrame\VGlobal.h"
-#include "..\VFrame\VInterpolate.h"
-#include "..\VFrame\VRenderGroup.h"
-#include "..\VFrame\VTiledSprite.h"
-#include "..\VFrame\VTilemap.h"
-#include "..\VFrame\VTrailArea.h"
-#include "..\VFrame\VTextPath.h"
-#include "..\VFrame\VTypedText.h"
-#include "..\VFrame\XInputDevice.h"
-#include "..\VFrame\V3DScene.h"
-#include "..\VFrame\V3DModel.h"
+#include "../VFrame/VState.h"
+#include "../VFrame/VBackdrop.h"
+#include "../VFrame/VCamera.h"
+#include "../VFrame/VColour.h"
+#include "../VFrame/VContent.h"
+#include "../VFrame/VEmitter.h"
+#include "../VFrame/VGlobal.h"
+#include "../VFrame/VInterpolate.h"
+#include "../VFrame/VRenderGroup.h"
+#include "../VFrame/VTiledSprite.h"
+#include "../VFrame/VTilemap.h"
+#include "../VFrame/VTrailArea.h"
+#include "../VFrame/VTextPath.h"
+#include "../VFrame/VTypedText.h"
+#include "../VFrame/XInputDevice.h"
+#include "../VFrame/V3DScene.h"
+#include "../VFrame/V3DModel.h"
 
 #include <iostream>
 #include <sstream>
 #include <vector>
 
-#include <SFML\System\Vector2.hpp>
-#include <SFML\System\String.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <SFML/System/String.hpp>
 
 using std::cout;
 using std::endl;

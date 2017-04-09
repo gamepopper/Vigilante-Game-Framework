@@ -1,11 +1,12 @@
 #include "XInputDevice.h"
 
-#ifdef _MINGW32_
+#ifdef __MINGW32__
 #define _in
 #define _out
 #define _reserved
 #endif
 
+#if defined _WIN32 || defined __MINGW32__
 #include <Windows.h>
 #include <XInput.h>
 
@@ -120,3 +121,30 @@ namespace sf
 		return 0.0f;
 	}
 }
+#else 
+namespace sf{
+	bool XInputDevice::isConnected(unsigned int joystick) {
+		return false;
+	}
+
+	bool XInputDevice::isAnyConnected() {
+		return false;
+	}
+
+	unsigned int XInputDevice::getButtonCount(unsigned int joystick) {
+		return 0;
+	}
+
+	bool XInputDevice::isAnyButtonPressed(unsigned int joystick) {
+		return false;
+	}
+
+	bool XInputDevice::isButtonPressed(unsigned int joystick, unsigned short button) {
+		return false;
+	}
+
+	float XInputDevice::getAxisPosition(unsigned int joystick, XAxis axis) {
+		return 0.0f;
+	}
+}
+#endif

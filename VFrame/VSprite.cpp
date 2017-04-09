@@ -85,8 +85,8 @@ VSprite* VSprite::LoadGraphicFromTexture(sf::Texture texture, bool animated, int
 	return this;
 }
 
-#include <SFML\Graphics\RenderTexture.hpp>
-#include <SFML\Graphics\Shape.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
+#include <SFML/Graphics/Shape.hpp>
 
 VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outline, sf::Color outlineColor)
 {

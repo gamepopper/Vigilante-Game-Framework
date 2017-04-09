@@ -1,16 +1,5 @@
-#if defined(_WIN32)
-#include <windows.h>
-
-extern int main();
-INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
-{
-	return main();
-}
-
-#endif
-
-#include "..\VFrame\VGame.h"
-#include "..\Example\States.h"
+#include "../VFrame/VGame.h"
+#include "../Example/States.h"
 
 int main()
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include "VAnimation.h"
-#include <SFML\System\String.hpp>
+#include <SFML/System/String.hpp>
 #include <iostream>
 #include <map>
 #include <vector>
@@ -160,7 +160,7 @@ public:
 
 	void Clear()
 	{
-		for each (std::pair<sf::String, VAnimation*> anim in animationList)
+		for (std::pair<sf::String, VAnimation*> anim : animationList)
 		{
 			delete anim.second;
 			anim.second = NULL;
