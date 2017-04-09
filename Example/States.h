@@ -67,8 +67,11 @@ public:
 		auto sprite2 = new VText(animatedSprite->Position.x, 50, animatedSprite->Size.x, "Animated Sprite", 16);
 		sprite2->Alignment = VTextAlign::ALIGNCENTRE;
 
+		auto text = new VText(standardSprite->Position.x, 200, 400, "Press 1: Start Animation\nPress 2: Shotgun Animation\nPress 3: Railgun Animation\nPress 4: Double Barrel Animation", 21);
+
 		Add(sprite1);
 		Add(sprite2);
+		Add(text);
 	}
 
 	virtual void HandleEvents(sf::Event event)
@@ -149,8 +152,11 @@ public:
 		auto sprite2 = new VText(animatedSprite->Position.x, 80, animatedSprite->Size.x, "Animated TiledSprite", 16);
 		sprite2->Alignment = VTextAlign::ALIGNCENTRE;
 
+		auto text = new VText(standardSprite->Position.x - 40, 300, 480, "Press WASD: Resize Standard Tiled Sprite\nPress IJKL: Resize Animated Tiled Sprite", 21);
+
 		Add(sprite1);
 		Add(sprite2);
+		Add(text);
 	}
 
 	virtual void Update(float dt)
@@ -168,6 +174,15 @@ public:
 			y1Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::PovY);
 			x2Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::Z);
 			y2Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::V);
+
+			if (x1Resize == 0)
+				x1Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::A) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::D) ? 100.0f : 0.0f;
+			if (y1Resize == 0)
+				y1Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::W) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::S) ? 100.0f : 0.0f;
+			if (x2Resize == 0)
+				x2Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::J) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::L) ? 100.0f : 0.0f;
+			if (y2Resize == 0)
+				y2Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::I) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::K) ? 100.0f : 0.0f;
 		}
 		else
 		{
@@ -797,9 +812,7 @@ public:
 			"InExpo",
 			"OutExpo",
 			"InOutExpo",
-			"InLinear",
-			"OutLinear",
-			"InOutLinear",
+			"Linear",
 			"InQuad",
 			"OutQuad",
 			"InOutQuad",
@@ -937,6 +950,7 @@ public:
 		{
 			backdrop[i]->CameraScroll = true;
 			backdrop[i]->Scale *= (float)(i + 1) / length;
+			backdrop[i]->Tint = VColour::HSVtoRGB(0.0f, 0.0f, (i * 0.1f) + (0.1f * length));
 			Add(backdrop[i]);
 		}
 
@@ -958,8 +972,8 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		ParentState->Cameras[0]->Position.x = 320.0f + (sinf(clock.getElapsedTime().asSeconds() * 0.8f) * 200.0f);
-		ParentState->Cameras[0]->Position.y = 180.0f + (cosf(clock.getElapsedTime().asSeconds() * 0.5f) * 40.0f);
+		ParentState->Cameras[0]->Position.x = 320.0f + (sinf(clock.getElapsedTime().asSeconds()) * 120.0f);
+		ParentState->Cameras[0]->Position.y = 180.0f + (cosf(clock.getElapsedTime().asSeconds()) * 80.0f);
 		ParentState->Cameras[0]->Zoom = 0.75f + (sinf(clock.getElapsedTime().asSeconds() * 0.5f) * 0.25f);
 	}
 };
@@ -1152,7 +1166,7 @@ public:
 		normalText->Text = L"LOADING MAP";
 		Add(normalText);
 
-		std::async(std::launch::async, &AsyncTestState::LoadMap, this);
+		VGlobal::p()->Async.LaunchAsyncFunction(std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this)));
 	}
 
 	void LoadMap()
