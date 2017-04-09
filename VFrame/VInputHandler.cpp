@@ -13,7 +13,7 @@ void VInputHandler::AddButtonInput(sf::String name, int key, int gamepad, int mo
 	if (gamepad > 0)
 		button.gamepad = (sf::XInputDevice::XButton)((unsigned short)gamepad);
 	else
-		button.gamepad = sf::XInputDevice::NONE;
+		button.gamepad = (sf::XInputDevice::XButton)0;
 
 	button.mouse = (sf::Mouse::Button)mouse;
 
@@ -99,6 +99,24 @@ float VInputHandler::LastAxisValue(sf::String name)
 	}
 
 	return 0;
+}
+
+int VInputHandler::ScrollWheelDelta()
+{
+	return scrollWheel;
+}
+
+void VInputHandler::ResetScrollWheel()
+{
+	scrollWheel = 0;
+}
+
+void VInputHandler::HandleEvents(const sf::Event& event)
+{
+	if (event.type == sf::Event::MouseWheelScrolled)
+	{
+		scrollWheel = event.mouseWheelScroll.delta;
+	}
 }
 
 void VInputHandler::Update(float dt)

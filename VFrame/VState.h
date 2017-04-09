@@ -42,7 +42,7 @@ public:
 	virtual void Cleanup();
 	virtual void Pause() {}
 	virtual void Resume() {}
-	virtual void HandleEvents(sf::Event event) {}
+	virtual void HandleEvents(const sf::Event& event) {}
 };
 
 class VSubState : public VGroup
@@ -73,7 +73,7 @@ public:
 
 	virtual void Initialise() {}
 	virtual void Cleanup();
-	virtual void HandleEvents(sf::Event event) {}
+	virtual void HandleEvents(const sf::Event& event) {}
 	virtual void Draw(sf::RenderTarget &RenderTarget);
 };
 
