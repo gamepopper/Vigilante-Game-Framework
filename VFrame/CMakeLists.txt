@@ -69,6 +69,17 @@ endif()
 include_directories(.)
 add_library(vigilante STATIC ${SOURCES_VGF})
 
+add_custom_command(TARGET vigilante POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/VFrame/depend $<TARGET_FILE_DIR:vigilante>/VFrame)
+					   
+add_custom_command(TARGET vigilante POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/Example/Assets $<TARGET_FILE_DIR:vigilante>/Example/Assets)
+
+set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES $<TARGET_FILE_DIR:vigilante>/Example/Assets)
+set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES $<TARGET_FILE_DIR:vigilante>/VFrame)
+
 if(${WIN32})
 	file( WRITE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.vcxproj.user" 
 	    "<?xml version=\"1.0\" encoding=\"utf-8\"?>     \
