@@ -10,11 +10,26 @@ VAsync::~VAsync()
 	}
 }
 
+bool VAsync::ActiveAsyncFunctions()
+{
+	return activeAsyncFunctions > 0;
+}
+
+void VAsync::LaunchAsyncFunction(std::future<void> &f)
+{
+	if (f.valid())
+		activeAsyncFunctions++;
+}
+
 void VAsync::SyncToMainLoop(std::function<void()> callback)
 {
-	syncMutex.lock();
-	syncQueue.push(callback);
-	syncMutex.unlock();
+	if (callback != NULL)
+	{
+		syncMutex.lock();
+		syncQueue.push(callback);
+		syncMutex.unlock();
+	}
+	activeAsyncFunctions--;
 }
 
 void VAsync::ProcessSyncRequests()

@@ -61,9 +61,12 @@ void VGlobal::ChangeState(VState* state)
 {
 	if (IfChangedState && state == NULL)
 	{
-		gsm->ChangeState(nextState);
-		nextState = NULL;
-		IfChangedState = false;
+		if (!Async.ActiveAsyncFunctions())
+		{
+			gsm->ChangeState(nextState);
+			nextState = NULL;
+			IfChangedState = false;
+		}
 	}
 	else if (nextState == NULL)
 	{

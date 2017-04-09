@@ -1,6 +1,7 @@
 #include "VState.h"
 #include "VCamera.h"
 #include "VGroup.h"
+#include "VGlobal.h"
 
 using std::vector;
 
@@ -26,6 +27,12 @@ void VState::Cleanup()
 
 void VState::OpenSubState(VSubState* subState)
 {
+	if (VGlobal::p()->Async.ActiveAsyncFunctions())
+	{
+		VLog("Cannot modify substate while async functions are active.\n");
+		return;
+	}
+
 	if (SubState) //If substate is already active, close it and reset the substate.
 	{
 		CloseSubState();
@@ -40,6 +47,12 @@ void VState::OpenSubState(VSubState* subState)
 
 void VState::CloseSubState()
 {
+	if (VGlobal::p()->Async.ActiveAsyncFunctions())
+	{
+		VLog("Cannot modify substate while async functions are active.\n");
+		return;
+	}
+
 	if (SubState)
 	{
 		if (SubState->OnClose)
