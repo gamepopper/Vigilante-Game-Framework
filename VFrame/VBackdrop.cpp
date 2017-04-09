@@ -1,4 +1,5 @@
 #include "VBackdrop.h"
+#include <cmath>
 
 void VBackdrop::updateTransform()
 {

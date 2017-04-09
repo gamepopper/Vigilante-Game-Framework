@@ -1,6 +1,6 @@
 #include "GemstoneOld.h"
-#include "..\VFrame\VGlobal.h"
-#include "..\VFrame\VRandom.h"
+#include "../VFrame/VGlobal.h"
+#include "../VFrame/VRandom.h"
 
 using std::vector;
 

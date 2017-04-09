@@ -4,6 +4,8 @@
 #include "VTilemap.h"
 #include "VRenderGroup.h"
 
+#include <cmath>
+
 using std::vector;
 
 void VCollision::AddToListA(VBase* item)
@@ -33,7 +35,7 @@ void VCollision::AddToListA(VBase* item)
 		{
 			vector<VTile*> tiles = tilemap->Tiles;
 
-			for each (VTile* t in tiles)
+			for (VTile* t : tiles)
 			{
 				AddToListA(t);
 			}
@@ -86,7 +88,7 @@ void VCollision::AddToListB(VBase* item)
 		{
 			vector<VTile*> tiles = tilemap->Tiles;
 
-			for each (VTile* t in tiles)
+			for (VTile* t : tiles)
 			{
 				AddToListB(t);
 			}
@@ -101,7 +103,7 @@ void VCollision::AddToListB(VBase* item)
 		{
 			vector<VTile*> tiles = tilemap->Tiles;
 
-			for each (VTile* t in tiles)
+			for (VTile* t : tiles)
 			{
 				AddToListB(t);
 			}

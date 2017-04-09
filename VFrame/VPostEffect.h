@@ -1,8 +1,8 @@
 #pragma once
-#include <SFML\Graphics\RenderTexture.hpp>
-#include <SFML\Graphics\Shader.hpp>
-#include <SFML\System\String.hpp>
-#include <SFML\Graphics\Glsl.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
+#include <SFML/Graphics/Shader.hpp>
+#include <SFML/System/String.hpp>
+#include <SFML/Graphics/Glsl.hpp>
 #include <vector>
 
 class VPostEffectBase

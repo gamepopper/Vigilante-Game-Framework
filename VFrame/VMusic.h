@@ -1,6 +1,6 @@
 #pragma once
-#include <SFML\Audio\Music.hpp>
-#include <SFML\System\String.hpp>
+#include <SFML/Audio/Music.hpp>
+#include <SFML/System/String.hpp>
 #include <iostream>
 
 class VMusic

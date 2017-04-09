@@ -1,4 +1,5 @@
 #include "V3DScene.h"
+#include <cstring>
 
 V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize)
 {

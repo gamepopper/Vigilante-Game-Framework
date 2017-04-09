@@ -2,11 +2,11 @@
 #include "VObject.h"
 #include "VTile.h"
 
-#include <SFML\Graphics\Texture.hpp>
-#include <SFML\Graphics\VertexArray.hpp>
-#include <SFML\Graphics\Transformable.hpp>
-#include <SFML\Graphics\Color.hpp>
-#include <SFML\System\String.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/Graphics/Transformable.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/System/String.hpp>
 
 #include <vector>
 #include <algorithm>
@@ -123,7 +123,7 @@ public:
 
 	void ChangeTile(const std::vector<sf::Vector2u>& positions, char ID)
 	{
-		for each (sf::Vector2u pos in positions)
+		for(sf::Vector2u pos : positions)
 		{
 			tilemap[(pos.y * mapWidth) + pos.x] = ID;
 		}

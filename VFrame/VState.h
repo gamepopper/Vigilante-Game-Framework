@@ -1,8 +1,8 @@
 #pragma once
 #include "VGroup.h"
 #include "VCamera.h"
-#include <SFML\Window\Event.hpp>
-#include <SFML\Graphics\RenderTarget.hpp>
+#include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 #include <functional>
 
 #if _DEBUG

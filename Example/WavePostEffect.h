@@ -1,5 +1,5 @@
 #pragma once
-#include "..\VFrame\VPostEffect.h"
+#include "../VFrame/VPostEffect.h"
 #include <array>
 
 class WavePostEffect : public VPostEffectBase

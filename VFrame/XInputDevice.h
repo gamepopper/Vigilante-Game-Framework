@@ -46,3 +46,6 @@ namespace sf
 		static float getAxisPosition(unsigned int joystick, XAxis axis);
 	};
 }
+#if !(defined _WIN32 || defined __MINGW32__)
+#warning "XInputDevice does not work on non-windows platforms"
+#endif

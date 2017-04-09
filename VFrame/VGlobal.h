@@ -1,9 +1,9 @@
 #pragma once
-#include <SFML\System.hpp>
-#include <SFML\Config.hpp>
-#include <SFML\Graphics.hpp>
-#include <SFML\Audio.hpp>
-#include <SFML\Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Config.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Window.hpp>
 #include "VState.h"
 #include "VContent.h"
 #include "VObject.h"

@@ -1,41 +1,41 @@
 #pragma once
-#include <SFML\Graphics\Color.hpp>
-#include <SFML\System\Vector2.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/System/Vector2.hpp>
 
 class VInterpolate
 {
 private:
-	static float VInterpolate::backIn(float t, float b, float c, float d);
-	static float VInterpolate::backOut(float t, float b, float c, float d);
-	static float VInterpolate::backInOut(float t, float b, float c, float d);
-	static float VInterpolate::bounceIn(float t, float b, float c, float d);
-	static float VInterpolate::bounceOut(float t, float b, float c, float d);
-	static float VInterpolate::bounceInOut(float t, float b, float c, float d);
-	static float VInterpolate::circIn(float t, float b, float c, float d);
-	static float VInterpolate::circOut(float t, float b, float c, float d);
-	static float VInterpolate::circInOut(float t, float b, float c, float d);
-	static float VInterpolate::cubicIn(float t, float b, float c, float d);
-	static float VInterpolate::cubicOut(float t, float b, float c, float d);
-	static float VInterpolate::cubicInOut(float t, float b, float c, float d);
-	static float VInterpolate::elasticIn(float t, float b, float c, float d);
-	static float VInterpolate::elasticOut(float t, float b, float c, float d);
-	static float VInterpolate::elasticInOut(float t, float b, float c, float d);
-	static float VInterpolate::expoIn(float t, float b, float c, float d);
-	static float VInterpolate::expoOut(float t, float b, float c, float d);
-	static float VInterpolate::expoInOut(float t, float b, float c, float d);
-	static float VInterpolate::linear(float t, float b, float c, float d);
-	static float VInterpolate::quadIn(float t, float b, float c, float d);
-	static float VInterpolate::quadOut(float t, float b, float c, float d);
-	static float VInterpolate::quadInOut(float t, float b, float c, float d);
-	static float VInterpolate::quartIn(float t, float b, float c, float d);
-	static float VInterpolate::quartOut(float t, float b, float c, float d);
-	static float VInterpolate::quartInOut(float t, float b, float c, float d);
-	static float VInterpolate::quintIn(float t, float b, float c, float d);
-	static float VInterpolate::quintOut(float t, float b, float c, float d);
-	static float VInterpolate::quintInOut(float t, float b, float c, float d);
-	static float VInterpolate::sineIn(float t, float b, float c, float d);
-	static float VInterpolate::sineOut(float t, float b, float c, float d);
-	static float VInterpolate::sineInOut(float t, float b, float c, float d);
+	static float backIn(float t, float b, float c, float d);
+	static float backOut(float t, float b, float c, float d);
+	static float backInOut(float t, float b, float c, float d);
+	static float bounceIn(float t, float b, float c, float d);
+	static float bounceOut(float t, float b, float c, float d);
+	static float bounceInOut(float t, float b, float c, float d);
+	static float circIn(float t, float b, float c, float d);
+	static float circOut(float t, float b, float c, float d);
+	static float circInOut(float t, float b, float c, float d);
+	static float cubicIn(float t, float b, float c, float d);
+	static float cubicOut(float t, float b, float c, float d);
+	static float cubicInOut(float t, float b, float c, float d);
+	static float elasticIn(float t, float b, float c, float d);
+	static float elasticOut(float t, float b, float c, float d);
+	static float elasticInOut(float t, float b, float c, float d);
+	static float expoIn(float t, float b, float c, float d);
+	static float expoOut(float t, float b, float c, float d);
+	static float expoInOut(float t, float b, float c, float d);
+	static float linear(float t, float b, float c, float d);
+	static float quadIn(float t, float b, float c, float d);
+	static float quadOut(float t, float b, float c, float d);
+	static float quadInOut(float t, float b, float c, float d);
+	static float quartIn(float t, float b, float c, float d);
+	static float quartOut(float t, float b, float c, float d);
+	static float quartInOut(float t, float b, float c, float d);
+	static float quintIn(float t, float b, float c, float d);
+	static float quintOut(float t, float b, float c, float d);
+	static float quintInOut(float t, float b, float c, float d);
+	static float sineIn(float t, float b, float c, float d);
+	static float sineOut(float t, float b, float c, float d);
+	static float sineInOut(float t, float b, float c, float d);
 
 public:
 	enum VInterpolateType

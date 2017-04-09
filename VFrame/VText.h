@@ -1,12 +1,12 @@
 #pragma once
 #include "VObject.h"
 
-#include <SFML\Graphics\Font.hpp>
-#include <SFML\Graphics\Text.hpp>
-#include <SFML\Graphics\VertexArray.hpp>
-#include <SFML\Graphics\Transformable.hpp>
-#include <SFML\Graphics\Color.hpp>
-#include <SFML\System\String.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/Graphics/Transformable.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/System/String.hpp>
 
 enum VTextAlign
 {

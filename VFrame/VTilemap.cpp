@@ -201,7 +201,7 @@ void VTilemap::updateCollisionBox()
 
 void VTilemap::clearTiles()
 {
-	for each (VTile* tile in Tiles)
+	for (VTile* tile : Tiles)
 	{
 		delete tile;
 		tile = NULL;
@@ -290,7 +290,7 @@ void VTilemap::Destroy()
 	clearTiles();
 	tilemap.clear();
 
-	for each (std::pair<char, VTileRenderInfo*> anim in renderDir)
+	for (std::pair<char, VTileRenderInfo*> anim : renderDir)
 	{
 		delete anim.second;
 		anim.second = NULL;

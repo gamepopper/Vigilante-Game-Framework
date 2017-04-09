@@ -1,7 +1,7 @@
 #pragma once
-#include <SFML\Window\Event.hpp>
-#include <SFML\Window\Keyboard.hpp>
-#include <SFML\Window\Mouse.hpp>
+#include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
 #include "XInputDevice.h"
 
 #include <map>

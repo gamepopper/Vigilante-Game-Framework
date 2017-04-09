@@ -1,6 +1,6 @@
 #pragma once
 #include "VRenderGroup.h"
-#include <SFML\System\Clock.hpp>
+#include <SFML/System/Clock.hpp>
 
 class VTrailArea : public VRenderGroup
 {

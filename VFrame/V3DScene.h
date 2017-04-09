@@ -1,6 +1,6 @@
 #pragma once
 #include "VRenderGroup.h"
-#include <SFML\OpenGL.hpp>
+#include <SFML/OpenGL.hpp>
 #include <array>
 
 struct V3DLight

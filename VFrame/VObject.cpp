@@ -1,4 +1,5 @@
 #include "VObject.h"
+#include <cmath>
 
 float VObject::SeparateBias = 4;
 

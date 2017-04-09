@@ -2,9 +2,9 @@
 #include "VObject.h"
 #include "VAnimationManager.h"
 
-#include <SFML\Graphics\Texture.hpp>
-#include <SFML\Graphics\Sprite.hpp>
-#include <SFML\Graphics\Color.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 class VSprite :	public VObject
 {

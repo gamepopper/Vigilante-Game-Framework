@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <ctype.h>
+#include <cstdio>
+#include <cstring>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -15,7 +17,7 @@ void VBase::VLog(const char* format, ...)
 	int     n;
 
 	va_start(args, format);
-	n = _vsnprintf(p, sizeof buf - 3, format, args); // buf-3 is room for CR/LF/NUL
+	n = vsnprintf(p, sizeof buf - 3, format, args); // buf-3 is room for CR/LF/NUL
 
 	int len = strlen(buf);
 	char* con = new char[len + 2];
@@ -38,10 +40,6 @@ void VBase::VLog(const char* format, ...)
 
 	wchar_t output[4096];
 	std::mbstowcs(output, buf, strlen(buf) + 1);
-
-#if defined(_WIN32)
-	OutputDebugString(output);
-#endif
 
 	delete[] con;
 }

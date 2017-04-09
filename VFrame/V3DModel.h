@@ -1,8 +1,8 @@
 #pragma once
 #include "V3DObject.h"
-#include <SFML\Graphics\Texture.hpp>
-#include <SFML\System\String.hpp>
-#include <SFML\OpenGL.hpp>
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/System/String.hpp>
+#include <SFML/OpenGL.hpp>
 #include <vector>
 
 struct V3DMaterial

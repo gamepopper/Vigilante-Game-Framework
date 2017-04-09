@@ -1,7 +1,7 @@
 #pragma once
 #include <random>
-#include <SFML\System\Vector2.hpp>
-#include <SFML\Graphics\Color.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 class VRandom
 {
