@@ -21,7 +21,7 @@ void VState::Cleanup()
 		Cameras.shrink_to_fit();
 
 		cleanup = true;
-		VLog("State cleanup successful\n");
+		VLog("State cleanup successful");
 	}
 }
 
@@ -29,7 +29,7 @@ void VState::OpenSubState(VSubState* subState)
 {
 	if (VGlobal::p()->Async.ActiveAsyncFunctions())
 	{
-		VLog("Cannot modify substate while async functions are active.\n");
+		VLog("Cannot modify substate while async functions are active.");
 		return;
 	}
 
@@ -42,14 +42,14 @@ void VState::OpenSubState(VSubState* subState)
 	SubState = subState;
 	openSubState = true;
 
-	VLog("Substate open\n");
+	VLog("Substate open.");
 }
 
 void VState::CloseSubState()
 {
 	if (VGlobal::p()->Async.ActiveAsyncFunctions())
 	{
-		VLog("Cannot modify substate while async functions are active.\n");
+		VLog("Cannot modify substate while async functions are active.");
 		return;
 	}
 
@@ -61,7 +61,7 @@ void VState::CloseSubState()
 		active = true;
 		closeSubstate = true;
 
-		VLog("Substate closed\n");
+		VLog("Substate closed.");
 	}
 }
 
@@ -94,7 +94,7 @@ void VSubState::Cleanup()
 	{
 		Destroy();
 		cleanup = true;
-		VLog("Substate cleanup successful\n");
+		VLog("Substate cleanup successful.");
 	}
 }
 
@@ -176,5 +176,5 @@ void VStateManager::Clear()
 	states.clear();
 	states.shrink_to_fit();
 
-	VBase::VLog("States cleared\n");
+	VBase::VLog("States cleared");
 }

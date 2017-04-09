@@ -12,7 +12,7 @@ VGame::~VGame()
 
 int VGame::Init()
 {
-	VLog("Calling Init()\n");
+	VLog("Calling Init()");
 
 	try
 	{
@@ -38,7 +38,7 @@ int VGame::Init()
 
 int VGame::Cleanup()
 {
-	VLog("Calling Cleanup()\n");
+	VLog("Calling Cleanup()");
 
 	try
 	{
@@ -89,7 +89,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	VGlobal::p()->ChangeState(NULL);
 
 	sf::Clock clock;
-	VLog("Initialisation finished\n");
+	VLog("Initialisation finished");
 
 	try
 	{
@@ -146,7 +146,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 		return error;
 	}
 
-	VLog("Cleanup Successful\n");
+	VLog("Cleanup Successful");
 
 	return EXIT_SUCCESS;
 }
