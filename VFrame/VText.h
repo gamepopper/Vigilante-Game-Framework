@@ -71,7 +71,7 @@ public:
 
 		Moves = false;
 
-		SetFormat("VFrame//Arial.ttf", charSize);
+		SetFormat("VFrame//depend//Arial.ttf", charSize);
 
 #if _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);
@@ -89,7 +89,7 @@ public:
 
 		Moves = false;
 
-		SetFormat("VFrame//Arial.ttf", charSize);
+		SetFormat("VFrame//depend//Arial.ttf", charSize);
 
 #if _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);
