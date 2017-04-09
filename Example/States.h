@@ -74,7 +74,7 @@ public:
 		Add(text);
 	}
 
-	virtual void HandleEvents(sf::Event event)
+	virtual void HandleEvents(const sf::Event& event)
 	{
 		if (event.type == event.KeyPressed)
 		{
@@ -1274,5 +1274,5 @@ public:
 
 	DemoStatesManager() : VState() {}
 	virtual void Initialise() override;
-	virtual void HandleEvents(sf::Event event) override;
+	virtual void HandleEvents(const sf::Event& event) override;
 };

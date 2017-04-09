@@ -107,7 +107,7 @@ void DemoStatesManager::Initialise()
 	VGlobal::p()->Input.AddAxisInput("vertical",	sf::Keyboard::S, sf::Keyboard::W, sf::XInputDevice::PovY); 
 }
 
-void DemoStatesManager::HandleEvents(sf::Event event)
+void DemoStatesManager::HandleEvents(const sf::Event& event)
 {
 	VSUPERCLASS::HandleEvents(event);
 
