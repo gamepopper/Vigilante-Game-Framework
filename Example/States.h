@@ -1115,6 +1115,10 @@ public:
 	virtual void Draw(sf::RenderTarget &RenderTarget)
 	{
 		VSUPERCLASS::Draw(RenderTarget);
+		sf::Transformable transformable;
+		transformable.setPosition(Position);
+		transformable.setRotation(Angle);
+		RenderState.transform = transformable.getTransform();
 		RenderTarget.draw(Vertices, RenderState);
 	}
 };
@@ -1171,12 +1175,13 @@ public:
 
 	void LoadMap()
 	{
-		int height = VGlobal::p()->Height;
-		int width = VGlobal::p()->Width; 
+		int height = VGlobal::p()->Height * 2;
+		int width = VGlobal::p()->Width * 2; 
 		
 		pixel->Vertices.setPrimitiveType(sf::Quads);
 		pixel->Vertices.resize(width * height * 4);
-		std::vector<float> map = PerlinNoise::GenerateFloat(width, VGlobal::p()->Height, 3.0f, 7, 0.5f, 42);
+		pixel->Size = sf::Vector2f(width, height);
+		std::vector<float> map = PerlinNoise::GenerateFloat(width, height, 3.0f, 7, 0.5f, 42);
 
 		int pixelCount = 0;
 		for (int y = 0; y < height; y++)
@@ -1221,6 +1226,11 @@ public:
 	{
 		normalText->SetFillTint(sf::Color::Black);
 		normalText->Text = "LOAD COMPLETE";
+
+		for (int i = 0; i < CircleCount; i++)
+		{
+			circle[i]->Kill();
+		}
 	}
 
 	virtual void Update(float dt)
@@ -1230,6 +1240,17 @@ public:
 		sf::Vector2f centrePosition = sf::Vector2f(VGlobal::p()->Width / 2.0f, VGlobal::p()->Height / 2.0f + 100.0f);
 		float offset = 3.1415926f / CircleCount;
 		float radius = 50.0f;
+
+		pixel->Velocity = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("horizontal"), VGlobal::p()->Input.CurrentAxisValue("vertical"));
+
+		if (pixel->Position.x > 0)
+			pixel->Position.x = 0;
+		if (pixel->Position.x + pixel->Size.x < VGlobal::p()->Width)
+			pixel->Position.x = VGlobal::p()->Width - pixel->Size.x;
+		if (pixel->Position.y > 0)
+			pixel->Position.y = 0;
+		if (pixel->Position.y + pixel->Size.y < VGlobal::p()->Height)
+			pixel->Position.y = VGlobal::p()->Height - pixel->Size.y;
 
 		for (int i = 0; i < CircleCount; i++)
 		{
