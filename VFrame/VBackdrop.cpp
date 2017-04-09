@@ -51,12 +51,15 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	Scroll.x *= RepeatX ? ScrollFactor.x : 0;
 	Scroll.y *= RepeatY ? ScrollFactor.y : 0;
 
-	sf::Vector2f texSize = scrollView.getSize();
+	sf::Vector2f texSize = renderTargetView.getSize();
 	texSize.x /= Scale.x;
 	texSize.y /= Scale.y;
 
-	sf::IntRect Rect = sf::IntRect(sf::FloatRect(Scroll, texSize));
+	sf::IntRect Rect = sf::IntRect(sf::FloatRect(Scroll - (texSize / 2.0f), texSize));
 	sprite.setTextureRect(Rect);
+
+	sf::Vector2f oldPosition = sprite.getPosition();
+	sprite.setPosition(oldPosition + (scrollView.getSize() / 2.0f - renderTargetView.getSize() / 2.0f));
 
 	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
 	scroll.x *= RepeatX ? 0 : ScrollFactor.x;
@@ -88,4 +91,6 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 		RenderTarget.draw(sprite, RenderState);
 		RenderTarget.setView(renderTargetView);
 	}
+
+	sprite.setPosition(oldPosition);
 }
