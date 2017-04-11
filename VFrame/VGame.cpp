@@ -78,7 +78,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	VGlobal::p()->RenderState = sf::RenderStates::Default;
 
 	int error = 0;
-	if (error = Init())
+	if ((error = Init()))
 	{
 		VLog("Error in Init(): %d", error);
 		return error;
@@ -94,7 +94,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	try
 	{
 		double end = 0.0;
-	
+
 		while (VGlobal::p()->App.isOpen())
 		{
 			VGlobal::p()->Async.ProcessSyncRequests();
@@ -140,7 +140,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 		return e;
 	}
 
-	if (error = Cleanup())
+	if ((error = Cleanup()))
 	{
 		VLog("Error in Cleanup(): %d", error);
 		return error;
@@ -277,7 +277,7 @@ void VGame::PostRender()
 		sf::Vector2f size = view.getSize();
 
 		float left = position.x / size.x;
-		float top = position.y / size.y;		
+		float top = position.y / size.y;
 		view.setViewport(sf::FloatRect(left, top, 1 - (left * 2), 1 - (top * 2)));
 
 		VGlobal::p()->PostProcess->Apply(RenderTarget, VGlobal::p()->App);

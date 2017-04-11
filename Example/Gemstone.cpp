@@ -140,7 +140,6 @@ bool Gemstone::Generate(std::vector<sf::Vector2f> &coordinates, float symmetry, 
 	if (slice > 0 && slice <= 1)
 		twoSymmetry *= 2;
 
-	int indexCount = 0;
 	for (int s = 0; s < twoSymmetry; s++)
 	{
 		int nextS = (s + 1) % twoSymmetry;

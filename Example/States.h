@@ -47,7 +47,7 @@ public:
 	{
 		VSUPERCLASS::Initialise();
 
-		standardSprite = new VSprite(0, 0, "Example//Assets//gp.png");
+		standardSprite = new VSprite(0, 0, "Example/Assets/gp.png");
 		standardSprite->SetPositionAtCentre(VGlobal::p()->Width / 3.0f, VGlobal::p()->Height / 2.0f - 50.0f);
 		Add(standardSprite);
 
@@ -55,7 +55,7 @@ public:
 		sprite1->Alignment = VTextAlign::ALIGNCENTRE;
 
 		animatedSprite = new VSprite(0, 0);
-		animatedSprite->LoadGraphic("Example//Assets//Turret.png", true, 128, 128);
+		animatedSprite->LoadGraphic("Example/Assets/Turret.png", true, 128, 128);
 		animatedSprite->SetPositionAtCentre(2 * VGlobal::p()->Width / 3.0f, VGlobal::p()->Height / 2.0f - 50.0f);
 		animatedSprite->Animation.AddAnimation("start",		{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 }, 15.0f);
 		animatedSprite->Animation.AddAnimation("shotgun",	{ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }, 15.0f, true);
@@ -133,7 +133,7 @@ public:
 	{
 		VSUPERCLASS::Initialise();
 
-		standardSprite = new VTiledSprite(0, 0, "Example//Assets//gp.png");
+		standardSprite = new VTiledSprite(0, 0, "Example/Assets/gp.png");
 		standardSprite->Size = sf::Vector2f(100, 100);
 		standardSprite->SetPositionAtCentre(VGlobal::p()->Width / 3.0f, VGlobal::p()->Height / 2.0f);
 		Add(standardSprite);
@@ -142,7 +142,7 @@ public:
 		sprite1->Alignment = VTextAlign::ALIGNCENTRE;
 
 		animatedSprite = new VTiledSprite(0, 0);
-		animatedSprite->LoadGraphic("Example//Assets//Waterfall.png", true, 32, 32);
+		animatedSprite->LoadGraphic("Example/Assets/Waterfall.png", true, 32, 32);
 		animatedSprite->Animation.AddAnimation("waterfall", { 0, 1, 2, 3 }, 15.0f, true);
 		animatedSprite->Animation.Play("waterfall");
 		animatedSprite->Size = sf::Vector2f(100, 100);
@@ -163,10 +163,10 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		float x1Resize = 0.0f; 
-		float y1Resize = 0.0f; 
-		float x2Resize = 0.0f; 
-		float y2Resize = 0.0f; 
+		float x1Resize = 0.0f;
+		float y1Resize = 0.0f;
+		float x2Resize = 0.0f;
+		float y2Resize = 0.0f;
 
 		if (sf::XInputDevice::isConnected(0))
 		{
@@ -217,13 +217,13 @@ public:
 		VSUPERCLASS::Initialise();
 
 		normalText = new VText(10.0f, 120.0f, VGlobal::p()->Width - 20.0f);
-		normalText->SetFormat("Example//Assets//DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNRIGHT, sf::Text::Italic | sf::Text::Underlined);
+		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNRIGHT, sf::Text::Italic | sf::Text::Underlined);
 		normalText->Text = L"!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬-®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſƒǺǻǼǽǾǿȘșȚțˆˇˉ˘˙˚˛˜˝;΄΅Ά·ΈΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώЁЂЃЄЅІЇЈЉЊЋЌЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяёђѓєѕіїјљњћќўџҐґẀẁẂẃẄẅỲỳ–—―‗‘’‚“”„†‡•…‰‹›‼‾⁄ⁿ₣₤₧€№™Ω⅛⅜⅝⅞←↑→↓↔↕↨∂∆∏∑−∙√∞∟∩∫≈≠≡≤≥⌂⌐⌠⌡─│┌┐└┘├┤┬┴┼═║╒╓╔╕╖╗╘╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬▀▄█▌▐░▒▓■▬▲►▼◄◊○◘◙☺☻☼♀♂♠♣♥♦♪♫ﬁﬂ";
 		normalText->Wrap = WRAPLETTER;
 		Add(normalText);
 
 		typedText = new VTypedText(10.0f, 50.0f, (float)VGlobal::p()->Width - 20.0f);
-		typedText->SetFormat("Example//Assets//DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNLEFT, sf::Text::Bold);
+		typedText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNLEFT, sf::Text::Bold);
 		typedText->ResetText("Religion and politics often make some people lose all perspective and give way to ranting and raving and carrying on like emotional children");
 		typedText->CursorChar = '_';
 		typedText->CursorBlinkSpeed = 0.5f;
@@ -267,7 +267,7 @@ public:
 		VSUPERCLASS::Initialise();
 
 		tilemap = new VTilemap();
-		tilemap->LoadFromCSV("Example//Assets//level.csv", "Example//Assets//Walls.png", 32, 32, true, { '.', '@', '~' });
+		tilemap->LoadFromCSV("Example/Assets/level.csv", "Example/Assets/Walls.png", 32, 32, true, { '.', '@', '~' });
 		tilemap->SetTileRenderID('#');
 		tilemap->SetTileRenderID('~', 0, 1);
 		Add(tilemap);
@@ -436,14 +436,14 @@ public:
 		render->RenderOutside = true;
 		render->Sprite->SetPositionAtCentre(320, 200);
 
-		VPostEffect* postEffect = new VPostEffect("Example//Assets//AlphaThreshold.frag", sf::Shader::Fragment);
+		VPostEffect* postEffect = new VPostEffect("Example/Assets/AlphaThreshold.frag", sf::Shader::Fragment);
 		postEffect->SetParameter("threshold", 0.85f);
 		postEffect->SetParameter("smoothness", 0.40f);
 		postEffect->SetParameter("unpremultiply", 1.0f);
 		render->PostEffect = postEffect;
 
 		emitter = new VEmitter(320, 280);
-		emitter->LoadParticlesFromFile(75, "Example//Assets//Smoke.png");
+		emitter->LoadParticlesFromFile(75, "Example/Assets/Smoke.png");
 		emitter->Circular = true;
 		emitter->Constant = true;
 		emitter->Size = sf::Vector2f(32, 8);
@@ -553,7 +553,7 @@ public:
 			L"                    ╥              |└└┴╜      ┼";
 
 		VTypedText* cLayer1 = new VTypedText(10.0f, 40.0f, (float)VGlobal::p()->Width);
-		cLayer1->SetFormat("Example//Assets//DejaVuSansMono.ttf", 13, sf::Color(255, 255, 255, 24), VTextAlign::ALIGNLEFT);
+		cLayer1->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(255, 255, 255, 24), VTextAlign::ALIGNLEFT);
 		cLayer1->ResetText(ws.str());
 		cLayer1->CharactersPerIteration = 4;
 		Add(cLayer1);
@@ -577,7 +577,7 @@ public:
 			L"                    ¦   ˝             |  ─┼           ¦                     ";
 
 		VTypedText* cLayer2 = new VTypedText(10.0f, 40.0f, (float)VGlobal::p()->Width);
-		cLayer2->SetFormat("Example//Assets//DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 64), VTextAlign::ALIGNLEFT);
+		cLayer2->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 64), VTextAlign::ALIGNLEFT);
 		cLayer2->ResetText(ws.str());
 		cLayer2->CharactersPerIteration = 4;
 		Add(cLayer2);
@@ -601,7 +601,7 @@ public:
 			L"";
 
 		VTypedText* cLayer3 = new VTypedText(10.0f, 40.0f, (float)VGlobal::p()->Width);
-		cLayer3->SetFormat("Example//Assets//DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 200), VTextAlign::ALIGNLEFT);
+		cLayer3->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 200), VTextAlign::ALIGNLEFT);
 		cLayer3->ResetText(ws.str());
 		cLayer3->CharactersPerIteration = 4;
 		Add(cLayer3);
@@ -650,9 +650,9 @@ public:
 	{
 		VSUPERCLASS::Initialise();
 
-		std::vector<GLfloat> cube = 
+		std::vector<GLfloat> cube =
 		{
-			// positions    // uv	// normals	
+			// positions    // uv	// normals
 			-80, 80, -80,	1, 0,	0, 1, 0,
 			-80, 80, 80,	1, 1,	0, 1, 0,
 			80, 80, 80,		0, 1,	0, 1, 0,
@@ -694,7 +694,7 @@ public:
 		model = new V3DModel();
 		model->LoadModelData(cube, 0, 5, 3);
 		model->SetMaterial(sf::Color::White, sf::Color::White, 30.0f);
-		model->LoadTexture("Example//Assets//texture.jpg", true);
+		model->LoadTexture("Example/Assets/texture.jpg", true);
 
 		scene = new V3DScene(0.0f, 0.0f, VGlobal::p()->Width, VGlobal::p()->Height);
 		scene->SetLight(GL_LIGHT0, sf::Color(0, 0, 0), sf::Color(255, 255, 255), sf::Color(255, 255, 255), sf::Vector3f(1, 1, -1));
@@ -826,7 +826,7 @@ public:
 			"OutSine",
 			"InOutSine",
 		};
-		
+
 		auto text = new VText(15.0f, 50.0f - 4, (float)VGlobal::p()->Width - 20.0f, "", 9);
 		text->Alignment = VTextAlign::ALIGNLEFT;
 		Add(text);
@@ -892,13 +892,13 @@ public:
 	{
 		VSUPERCLASS::Initialise();
 
-		sprite = new VSprite(0, 0, "Example//Assets//diffuse.png");
+		sprite = new VSprite(0, 0, "Example/Assets/diffuse.png");
 		sprite->SetPositionAtCentre(sf::Vector2f(320.0f, 180.0f));
 		Add(sprite);
 
-		normalTex.loadFromFile("Example//Assets//normal.png");
+		normalTex.loadFromFile("Example/Assets/normal.png");
 
-		lighting2DShader.loadFromFile("Example//Assets//Lighting.frag", sf::Shader::Fragment);
+		lighting2DShader.loadFromFile("Example/Assets/Lighting.frag", sf::Shader::Fragment);
 		lighting2DShader.setUniform("texture", sf::Shader::CurrentTexture);
 		lighting2DShader.setUniform("height", normalTex);
 		lighting2DShader.setUniform("light", sf::Vector3f(0.5f, 0.5f, 0.0f));
@@ -937,11 +937,11 @@ public:
 
 		VBackdrop* backdrop[] =
 		{
-			new VBackdrop(0.2f, 0.2f, true, true, "Example\\Assets\\Backdrop.png"),
-			new VBackdrop(0.4f, 0.4f, true, true, "Example\\Assets\\Backdrop.png"),
-			new VBackdrop(0.6f, 0.6f, true, true, "Example\\Assets\\Backdrop.png"),
-			new VBackdrop(0.8f, 0.8f, true, true, "Example\\Assets\\Backdrop.png"),
-			new VBackdrop(1.0f, 1.0f, true, true, "Example\\Assets\\Backdrop.png"),
+			new VBackdrop(0.2f, 0.2f, true, true, "Example/Assets/Backdrop.png"),
+			new VBackdrop(0.4f, 0.4f, true, true, "Example/Assets/Backdrop.png"),
+			new VBackdrop(0.6f, 0.6f, true, true, "Example/Assets/Backdrop.png"),
+			new VBackdrop(0.8f, 0.8f, true, true, "Example/Assets/Backdrop.png"),
+			new VBackdrop(1.0f, 1.0f, true, true, "Example/Assets/Backdrop.png"),
 		};
 
 		int length = sizeof(backdrop) / sizeof(VBackdrop*);
@@ -995,7 +995,7 @@ public:
 //	{
 //		VSUPERCLASS::Initialise();
 //
-//		postEffect = new VPostEffect("Example//Assets//Dissolve.frag", sf::Shader::Fragment);
+//		postEffect = new VPostEffect("Example/Assets/Dissolve.frag", sf::Shader::Fragment);
 //		postEffect->SetInputTextureName("texture");
 //		postEffect->SetParameter("textureSize", (float)VGlobal::p()->Width, (float)VGlobal::p()->Height);
 //		postEffect->SetParameter("minAcc", 60.0f);
@@ -1007,7 +1007,7 @@ public:
 //		vfx = new VRenderGroup(0, 0, VGlobal::p()->Width, VGlobal::p()->Height);
 //
 //		VSprite* background = new VSprite();
-//		background->LoadGraphic("Example//Assets//AWOO.png");
+//		background->LoadGraphic("Example/Assets/AWOO.png");
 //
 //		vfx->PostEffect = postEffect;
 //		vfx->Add(background);
@@ -1048,7 +1048,7 @@ public:
 		for (int i = 0; i < TEXT_COUNT; i++)
 		{
 			VTextPath* t = new VTextPath(0.0f, (i * 18) + 8.0f, 640.0f);
-			t->SetFormat("Example//Assets//DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNLEFT);
+			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNLEFT);
 			t->Text = "Pixelation Art Jam - GDC 2017 ";
 
 			if (i % 2)
@@ -1166,21 +1166,22 @@ public:
 		Add(pixel);
 
 		normalText = new VText(0.0f, VGlobal::p()->Height / 2.0f, VGlobal::p()->Width * 1.0f);
-		normalText->SetFormat("Example//Assets//DejaVuSansMono.ttf", 32, sf::Color::White, VTextAlign::ALIGNCENTER);
+		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 32, sf::Color::White, VTextAlign::ALIGNCENTER);
 		normalText->Text = L"LOADING MAP";
 		Add(normalText);
 
-		VGlobal::p()->Async.LaunchAsyncFunction(std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this)));
+        auto f = std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this));
+		VGlobal::p()->Async.LaunchAsyncFunction(f);
 	}
 
 	void LoadMap()
 	{
 		int height = VGlobal::p()->Height * 2;
-		int width = VGlobal::p()->Width * 2; 
-		
+		int width = VGlobal::p()->Width * 2;
+
 		pixel->Vertices.setPrimitiveType(sf::Quads);
 		pixel->Vertices.resize(width * height * 4);
-		pixel->Size = sf::Vector2f(width, height);
+		pixel->Size = sf::Vector2f(sf::Vector2i(width, height));
 		std::vector<float> map = PerlinNoise::GenerateFloat(width, height, 3.0f, 7, 0.5f, 42);
 
 		int pixelCount = 0;

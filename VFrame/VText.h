@@ -29,17 +29,17 @@ protected:
 	sf::VertexArray vertices;
 	sf::Transformable transformable;
 	sf::Font font;
-	sf::String helperText;
+	sf::String helperText = "";
 	sf::Vector2f helperOrigin;
 	VTextAlign helperAlignment = ALIGNLEFT;
-	int helperStyle = 0;
+	unsigned int helperStyle = 0;
 	int helperLineSpace = 0;
 	float helperOutlineThickness = 0;
 
 	sf::Vector2f origin;
 	sf::Color fillColour = sf::Color::White;
 	sf::Color outlineColour = sf::Color::White;
-	
+
 	virtual void updateTextRender(sf::String text);
 	virtual void updateTransform() override;
 
@@ -61,8 +61,8 @@ public:
 	float OutlineThickness = 0.0f;
 
 	VText(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8) : 	VObject(x,y),
-																										Text(text),
-																										helperText(text)
+																										helperText(text),
+																										Text(text)
 	{
 		Size.x = width;
 		FontSize = charSize;
@@ -71,7 +71,7 @@ public:
 
 		Moves = false;
 
-		SetFormat("VFrame//depend//Arial.ttf", charSize);
+		SetFormat("VFrame/depend/arial.ttf", charSize);
 
 #if _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);
@@ -79,8 +79,8 @@ public:
 	}
 
 	VText(sf::Vector2f position, float width = 0, const sf::String& text = "", int charSize = 8) : 	VObject(position),
-																									Text(text),
-																									helperText(text)
+																									helperText(text),
+																									Text(text)
 	{
 		Size.x = width;
 		FontSize = charSize;
@@ -89,7 +89,7 @@ public:
 
 		Moves = false;
 
-		SetFormat("VFrame//depend//Arial.ttf", charSize);
+		SetFormat("VFrame/depend/arial.ttf", charSize);
 
 #if _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);

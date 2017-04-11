@@ -66,8 +66,11 @@ void DemoStatesManager::SetNewPage()
 		case PAGE_TRAILAREA:
 			subState = new TrailAreaState();
 			break;
+		default:
+			subState = NULL;
+			break;
 	}
-	
+
 	auto stateText = new VGroup(3);
 	auto title = new VText(sf::Vector2f(0.0f, 2.0f), (float)VGlobal::p()->Width, "SFML VFrame", 24);
 	title->Alignment = VTextAlign::ALIGNCENTRE;
@@ -104,7 +107,7 @@ void DemoStatesManager::Initialise()
 	SetNewPage();
 
 	VGlobal::p()->Input.AddAxisInput("horizontal",	sf::Keyboard::D, sf::Keyboard::A, sf::XInputDevice::PovX);
-	VGlobal::p()->Input.AddAxisInput("vertical",	sf::Keyboard::S, sf::Keyboard::W, sf::XInputDevice::PovY); 
+	VGlobal::p()->Input.AddAxisInput("vertical",	sf::Keyboard::S, sf::Keyboard::W, sf::XInputDevice::PovY);
 }
 
 void DemoStatesManager::HandleEvents(const sf::Event& event)

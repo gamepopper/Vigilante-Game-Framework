@@ -77,16 +77,16 @@ public:
 
 		exists = false;
 	}
-	
+
 	VEmitter(sf::Vector2f Position, unsigned int MaxSize = 0) : 	VGroup(MaxSize),
 																	EmittingAngle(-180, 180),
 																	Lifespan(3),
 																	VelocityRange(sf::Vector2f(-100, -100), sf::Vector2f(100, 100)),
 																	SpeedRange(0, 100),
-																	AngleRange(0, 0),
 																	AngleVelocityRange(0, 0),
 																	AngleAccelerationRange(0, 0),
 																	AngleDragRange(0, 0),
+																	AngleRange(0, 0),
 																	DragRange(sf::Vector2f(), sf::Vector2f()),
 																	AccelerationRange(sf::Vector2f(), sf::Vector2f()),
 																	ElasticityRange(0, 0),
@@ -96,7 +96,7 @@ public:
 	{
 		this->Position = Position;
 		vertices.setPrimitiveType(sf::PrimitiveType::Quads);
-		
+
 		exists = false;
 	}
 	virtual ~VEmitter()

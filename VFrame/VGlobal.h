@@ -103,13 +103,13 @@ public:
 	bool FocusPause = true;
 
 	//VGame Area Width (Read Only)
-	int Width = 0;
+	unsigned int Width = 0;
 	//VGame Area Height (Read Only)
-	int Height = 0;
+	unsigned int Height = 0;
 	//Window Width
-	int WindowWidth = 0;
+	unsigned int WindowWidth = 0;
 	//Window Height
-	int WindowHeight = 0;
+	unsigned int WindowHeight = 0;
 	//World Bounds - used to bound camera to world area.
 	sf::FloatRect WorldBounds;
 	//Music - play streamed music (particularly between states).
@@ -158,8 +158,8 @@ public:
 	void Exit();
 
 	bool Overlaps(VBase* a, VBase* b = NULL, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
-	bool Collides(VBase* a, VBase* b = NULL, std::function<void(VObject*, VObject*)>const& responseCall = nullptr); 
-	
+	bool Collides(VBase* a, VBase* b = NULL, std::function<void(VObject*, VObject*)>const& responseCall = nullptr);
+
 	bool OverlapsCircle(VBase* a, VBase* b = NULL, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
 	bool CollidesCircle(VBase* a, VBase* b = NULL, std::function<void(VObject*, VObject*)>const& responseCall = nullptr);
 

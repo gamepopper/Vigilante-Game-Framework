@@ -135,8 +135,6 @@ void VPostEffectMultipass::Apply(const sf::RenderTexture& input, sf::RenderTarge
 	int inputRenderId = -1;
 	int outputRenderId = 0;
 
-	sf::RenderTarget* renderInput = NULL;
-
 	for (unsigned int i = 0; i < postEffects.size(); i++)
 	{
 		sf::RenderTarget& renderOutput = outputRenderId < (int)renderTextures.size() ? *renderTextures[outputRenderId] : output;

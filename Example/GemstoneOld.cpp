@@ -157,7 +157,6 @@ bool GemstoneOld::Generate(std::vector<sf::Vector2f> &coordinates, float symmetr
 
 	scale.y *= -1;
 
-	int indexCount = 0;
 	for (int s = 0; s < twoSymmetry; s++)
 	{
 		int nextS = (s + twoSymmetry + 1) % twoSymmetry;
@@ -241,10 +240,10 @@ bool GemstoneOld::Generate(std::vector<sf::Vector2f> &coordinates, float symmetr
 
 			vertices[i + 0].position = (Size / 2.0f) + sf::Vector2f(vert0.x, vert0.y);
 			vertices[i + 0].texCoords = sf::Vector2f(
-				gemTex[i + 0].x * texture.getSize().x, 
+				gemTex[i + 0].x * texture.getSize().x,
 				gemTex[i + 0].y * texture.getSize().y);
 			vertices[i + 0].color = sf::Color(
-				(ambient.r + diffuse.r + specular.r) / 3, 
+				(ambient.r + diffuse.r + specular.r) / 3,
 				(ambient.g + diffuse.g + specular.g) / 3,
 				(ambient.b + diffuse.b + specular.b) / 3,
 				ambient.a);

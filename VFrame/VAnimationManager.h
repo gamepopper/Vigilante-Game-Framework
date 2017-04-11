@@ -35,7 +35,7 @@ public:
 
 	void AddAnimation(sf::String name, std::vector<int> Frames, float FramesPerSecond = 6.0f, bool Looping = false, bool Reverse = false)
 	{
-		if (animationList.count(name) == NULL)
+		if (animationList.find(name) == animationList.end())
 		{
 			animationList.insert(std::pair<sf::String, VAnimation*>(name, new VAnimation(Frames, FramesPerSecond, Looping, Reverse)));
 		}
@@ -43,7 +43,7 @@ public:
 
 	void Play(sf::String name)
 	{
-		if (animationList.count(name) != NULL && 
+		if (animationList.find(name) != animationList.end() &&
 			currentAnim != name)
 		{
 			lastFrame = -1;
@@ -75,7 +75,7 @@ public:
 	void Update(float dt)
 	{
 		if (currentAnim != "" && !pause)
-		{ 
+		{
 			lastFrame = animationList[currentAnim]->GetCurrentFrame();
 			animationList[currentAnim]->Update(dt);
 		}

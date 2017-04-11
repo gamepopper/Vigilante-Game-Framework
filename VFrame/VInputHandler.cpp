@@ -101,7 +101,7 @@ float VInputHandler::LastAxisValue(sf::String name)
 	return 0;
 }
 
-int VInputHandler::ScrollWheelDelta()
+float VInputHandler::ScrollWheelDelta()
 {
 	return scrollWheel;
 }

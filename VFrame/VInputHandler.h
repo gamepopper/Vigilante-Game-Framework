@@ -35,7 +35,7 @@ protected:
 	std::map<sf::String, AxisInput> axisInputs;
 
 	bool isGamepadActive = false;
-	int scrollWheel = 0;
+	float scrollWheel = 0;
 	sf::Vector2i lastMousePos = sf::Vector2i();
 
 public:
@@ -57,7 +57,7 @@ public:
 	float CurrentAxisValue(sf::String name);
 	float LastAxisValue(sf::String name);
 
-	int ScrollWheelDelta();
+	float ScrollWheelDelta();
 	void ResetScrollWheel();
 
 	void HandleEvents(const sf::Event& event);

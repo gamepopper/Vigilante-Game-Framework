@@ -34,7 +34,7 @@ void VTextPath::updateTextRender(sf::String text)
 	sf::FloatRect xBounds = font.getGlyph(L'x', FontSize, bold).bounds;
 	float strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
 
-	float hspace = static_cast<float>(font.getGlyph(L' ', FontSize, bold).advance);
+	//float hspace = static_cast<float>(font.getGlyph(L' ', FontSize, bold).advance);
 
 	float left = (float)0xFFFFFF;
 	float top = (float)0xFFFFFF;
@@ -61,7 +61,7 @@ void VTextPath::updateTextRender(sf::String text)
 		float y = static_cast<float>(FontSize);
 
 		sf::VertexArray verts(sf::Triangles, outlined ? item.length() * 6 * 2 : item.length() * 6);
-		sf::Uint32 prevChar = 0;
+		//sf::Uint32 prevChar = 0;
 		int outlineOffset = item.length() * 6;
 
 		int textLength = item.length();

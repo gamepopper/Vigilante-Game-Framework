@@ -7,7 +7,7 @@ V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, un
 	postProcessTex.create(width, height, true);
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 
-	memset(lights.data(), NULL, sizeof(V3DLight*) * lights.size());
+	memset(lights.data(), 0, sizeof(V3DLight*) * lights.size());
 }
 
 V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize) : VRenderGroup(position, size, maxSize)
@@ -28,7 +28,12 @@ void V3DScene::SetLight(GLenum id, sf::Color Ambient, sf::Color Diffuse, sf::Col
 	l->Ambient[0] = Ambient.r / 255.0f;		l->Ambient[1] = Ambient.g / 255.0f;		l->Ambient[2] = Ambient.b / 255.0f;		l->Ambient[3] = Ambient.a / 255.0f;
 	l->Diffuse[0] = Diffuse.r / 255.0f;		l->Diffuse[1] = Diffuse.g / 255.0f;		l->Diffuse[2] = Diffuse.b / 255.0f;		l->Diffuse[3] = Diffuse.a / 255.0f;
 	l->Specular[0] = Specular.r / 255.0f;	l->Specular[1] = Diffuse.g / 255.0f;	l->Specular[2] = Diffuse.b / 255.0f;	l->Specular[3] = Diffuse.a / 255.0f;
+
+	#if !(defined _WIN32 || defined __MINGW32__)
+	l->Position[0] = -Position.x;			l->Position[1] = -Position.y;			l->Position[2] = -Position.z;
+	#else
 	l->Position[0] = Position.x;			l->Position[1] = Position.y;			l->Position[2] = Position.z;
+	#endif
 
 	lights[id - GL_LIGHT0] = l;
 }

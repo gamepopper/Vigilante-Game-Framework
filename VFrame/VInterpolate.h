@@ -5,37 +5,37 @@
 class VInterpolate
 {
 private:
-	static float backIn(float t, float b, float c, float d);
-	static float backOut(float t, float b, float c, float d);
-	static float backInOut(float t, float b, float c, float d);
-	static float bounceIn(float t, float b, float c, float d);
-	static float bounceOut(float t, float b, float c, float d);
-	static float bounceInOut(float t, float b, float c, float d);
-	static float circIn(float t, float b, float c, float d);
-	static float circOut(float t, float b, float c, float d);
-	static float circInOut(float t, float b, float c, float d);
-	static float cubicIn(float t, float b, float c, float d);
-	static float cubicOut(float t, float b, float c, float d);
-	static float cubicInOut(float t, float b, float c, float d);
-	static float elasticIn(float t, float b, float c, float d);
-	static float elasticOut(float t, float b, float c, float d);
-	static float elasticInOut(float t, float b, float c, float d);
-	static float expoIn(float t, float b, float c, float d);
-	static float expoOut(float t, float b, float c, float d);
-	static float expoInOut(float t, float b, float c, float d);
-	static float linear(float t, float b, float c, float d);
-	static float quadIn(float t, float b, float c, float d);
-	static float quadOut(float t, float b, float c, float d);
-	static float quadInOut(float t, float b, float c, float d);
-	static float quartIn(float t, float b, float c, float d);
-	static float quartOut(float t, float b, float c, float d);
-	static float quartInOut(float t, float b, float c, float d);
-	static float quintIn(float t, float b, float c, float d);
-	static float quintOut(float t, float b, float c, float d);
-	static float quintInOut(float t, float b, float c, float d);
-	static float sineIn(float t, float b, float c, float d);
-	static float sineOut(float t, float b, float c, float d);
-	static float sineInOut(float t, float b, float c, float d);
+	static float backIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float backOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float backInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float bounceIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float bounceOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float bounceInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float circIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float circOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float circInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float cubicIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float cubicOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float cubicInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float elasticIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float elasticOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float elasticInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float expoIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float expoOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float expoInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float linear(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float quadIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float quadOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float quadInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float quartIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float quartOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float quartInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float quintIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float quintOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float quintInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float sineIn(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float sineOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
+	static float sineInOut(float t = 0.0f, float b = 0.0f, float c = 1.0f, float d = 1.0f);
 
 public:
 	enum VInterpolateType
