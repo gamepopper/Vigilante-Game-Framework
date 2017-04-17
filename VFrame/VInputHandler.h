@@ -2,18 +2,41 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+
+#ifdef USE_GAMEPAD_API
+#define GAMEPAD_STATIC_LIB
+#include "gamepad.h"
+#else
 #include "XInputDevice.h"
+#endif
 
 #include <map>
 #include <iostream>
 
 class VInputHandler
 {
+#ifdef USE_GAMEPAD_API
+public:
+	enum XAxis
+	{
+		PovX,
+		PovY,
+		Z,
+		V,
+		L,
+		R
+	};
+#endif
+
 protected:
 	struct ButtonInput
 	{
 		sf::Keyboard::Key key;
+#ifdef USE_GAMEPAD_API
+		GAMEPAD_BUTTON gamepad;
+#else
 		sf::XInputDevice::XButton gamepad;
+#endif
 		sf::Mouse::Button mouse;
 
 		bool pressed;
@@ -25,7 +48,11 @@ protected:
 	{
 		sf::Keyboard::Key keyA;
 		sf::Keyboard::Key keyB;
+#ifdef USE_GAMEPAD_API
+		XAxis gamepad;
+#else
 		sf::XInputDevice::XAxis gamepad;
+#endif
 
 		float lastValue;
 		float value;
@@ -39,7 +66,16 @@ protected:
 	sf::Vector2i lastMousePos = sf::Vector2i();
 
 public:
+
+#ifdef USE_GAMEPAD_API
+	VInputHandler()
+	{
+		GamepadInit();
+	}
+#else
 	VInputHandler() = default;
+#endif
+
 	virtual ~VInputHandler();
 
 	int ControllerNo = 0;
