@@ -109,6 +109,9 @@
     <ClCompile Include="Example\PerlinNoise.cpp">
       <Filter>Example</Filter>
     </ClCompile>
+    <ClCompile Include="VFrame\gamepad.c">
+      <Filter>VFrame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\BloomPostEffect.h">
@@ -230,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="Example\PerlinNoise.h">
       <Filter>Example</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\gamepad.h">
+      <Filter>VFrame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
