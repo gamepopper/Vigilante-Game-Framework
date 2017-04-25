@@ -1,6 +1,4 @@
 #include "VState.h"
-#include "VCamera.h"
-#include "VGroup.h"
 #include "VGlobal.h"
 
 using std::vector;

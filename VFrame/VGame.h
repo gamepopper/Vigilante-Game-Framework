@@ -4,8 +4,9 @@
 #include <SFML/System/String.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <SFML/Window/ContextSettings.hpp>
+#include "VBase.h"
 
-#include "VState.h"
+class VState;
 
 class VGame : public VBase
 {

@@ -332,8 +332,6 @@ VEmitter* VEmitter::Start(int Amount)
 	return this;
 }
 
-#include "VGlobal.h"
-
 void VEmitter::EmitParticle()
 {
 	auto particle = static_cast<VParticle*>(FirstAvailable());

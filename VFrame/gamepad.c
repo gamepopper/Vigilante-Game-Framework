@@ -19,7 +19,8 @@
 #	undef UNICODE
 #	include "windows.h"
 #	include "xinput.h"
-#	pragma comment(lib, "xinput.lib")
+//#	pragma comment(lib, "XInput.lib")
+#	pragma comment(lib, "XInput9_1_0.lib")
 #elif defined(__linux__)
 #	include <linux/joystick.h>
 #	include <stdio.h>

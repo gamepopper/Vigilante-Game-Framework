@@ -1,5 +1,6 @@
 #include "VTilemap.h"
 #include "VGlobal.h"
+#include "VTile.h"
 
 #include <iostream>
 #include <sstream>

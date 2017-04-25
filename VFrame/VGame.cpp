@@ -1,6 +1,9 @@
 #include "VGame.h"
 #include "VCamera.h"
 #include "VGlobal.h"
+#include "VPostEffect.h"
+
+#include "VState.h"
 
 VGame::~VGame()
 {

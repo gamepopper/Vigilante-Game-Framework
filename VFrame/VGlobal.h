@@ -6,12 +6,10 @@
 #include <SFML/Window.hpp>
 #include "VState.h"
 #include "VContent.h"
-#include "VObject.h"
 #include "VMusic.h"
 #include "VSoundManager.h"
 #include "VRandom.h"
 #include "VInputHandler.h"
-#include "VPostEffect.h"
 #include "VAsync.h"
 #include <vector>
 #include <functional>
@@ -23,56 +21,26 @@
 
 #define VFRAME_VERSION "0.9.9.5"
 
+class VBase;
+class VObject;
+class VPostEffectBase;
+
 class VGlobal
 {
 private:
-	static VGlobal* instance;
-	VGlobal()
-	{
-		gsm = new VStateManager();
-		Content = new VContent();
-		Music = new VMusic();
-		Sound = new VSoundManager();
-	}
-
-	~VGlobal()
-	{
-		if (Content)
-		{
-			delete Content;
-			Content = NULL;
-		}
-		if (Music)
-		{
-			delete Music;
-			Music = NULL;
-		}
-		if (Sound)
-		{
-			delete Sound;
-			Sound = NULL;
-		}
-		if (PostProcess)
-		{
-			delete PostProcess;
-			PostProcess = NULL;
-		}
-		if (gsm)
-		{
-			delete gsm;
-			gsm = NULL;
-		}
-	}
+	static VGlobal* Instance;
+	VGlobal();
+	~VGlobal();
 
 public:
 	static VGlobal* p()
 	{
-		if (!instance)
+		if (!Instance)
 		{
-			instance = new VGlobal();
+			Instance = new VGlobal();
 		}
 
-		return instance;
+		return Instance;
 	}
 
 	//App that handles all rendering.

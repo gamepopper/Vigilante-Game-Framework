@@ -2,6 +2,7 @@
 
 #include "VGroup.h"
 #include "VTilemap.h"
+#include "VTile.h"
 #include "VRenderGroup.h"
 
 #include <cmath>

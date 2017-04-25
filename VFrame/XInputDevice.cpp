@@ -1,5 +1,6 @@
 #include "XInputDevice.h"
 
+#ifndef USE_GAMEPAD_API
 #ifdef __MINGW32__
 #define _in
 #define _out
@@ -147,4 +148,5 @@ namespace sf{
 		return 0.0f;
 	}
 }
+#endif
 #endif

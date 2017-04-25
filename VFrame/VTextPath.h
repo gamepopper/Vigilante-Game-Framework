@@ -5,6 +5,7 @@ class VTextPath : public VText
 {
 protected:
 	virtual void updateTextRender(sf::String text);
+	static float vmodf(float x, float y);
 
 public:
 	enum PathCurveType

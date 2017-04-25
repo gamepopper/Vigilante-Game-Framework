@@ -1,5 +1,6 @@
 #pragma once
 
+#ifndef USE_GAMEPAD_API
 namespace sf
 {
 	class XInputDevice
@@ -48,4 +49,5 @@ namespace sf
 }
 #if !(defined _WIN32 || defined __MINGW32__)
 #warning "XInputDevice does not work on non-windows platforms"
+#endif
 #endif

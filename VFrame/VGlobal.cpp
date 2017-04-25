@@ -1,6 +1,45 @@
 #include "VGlobal.h"
+#include "VObject.h"
+#include "VPostEffect.h"
 
-VGlobal* VGlobal::instance = NULL;
+VGlobal* VGlobal::Instance = NULL;
+
+VGlobal::VGlobal()
+{
+	gsm = new VStateManager();
+	Content = new VContent();
+	Music = new VMusic();
+	Sound = new VSoundManager();
+}
+
+VGlobal::~VGlobal()
+{
+	if (Content)
+	{
+		delete Content;
+		Content = NULL;
+	}
+	if (Music)
+	{
+		delete Music;
+		Music = NULL;
+	}
+	if (Sound)
+	{
+		delete Sound;
+		Sound = NULL;
+	}
+	if (PostProcess)
+	{
+		delete PostProcess;
+		PostProcess = NULL;
+	}
+	if (gsm)
+	{
+		delete gsm;
+		gsm = NULL;
+	}
+}
 
 void VGlobal::SetFullscreen(bool set)
 {
@@ -163,9 +202,9 @@ bool VGlobal::CollidesCircle(VBase* a, VBase* b, std::function<void(VObject*, VO
 
 void VGlobal::Cleanup()
 {
-	if (instance)
+	if (Instance)
 	{
-		delete instance;
-		instance = NULL;
+		delete Instance;
+		Instance = NULL;
 	}
 }

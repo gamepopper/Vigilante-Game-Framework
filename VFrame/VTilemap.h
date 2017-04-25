@@ -1,6 +1,5 @@
 #pragma once
 #include "VObject.h"
-#include "VTile.h"
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
@@ -17,6 +16,8 @@ struct VTileRenderInfo
 	int TileNumber;
 	int AutoTileLevel;
 };
+
+class VTile;
 
 class VTilemap : public VObject
 {

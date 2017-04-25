@@ -2,7 +2,9 @@
 #include "VGroup.h"
 #include "VParticle.h"
 
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/System/String.hpp>
 
 class VEmitter : public VGroup
 {

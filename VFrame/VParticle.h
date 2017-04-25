@@ -1,5 +1,5 @@
 #pragma once
-#include "VSprite.h"
+#include "VObject.h"
 #include "VRange.h"
 
 class VParticle : public VObject
