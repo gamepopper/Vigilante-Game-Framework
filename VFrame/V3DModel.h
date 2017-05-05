@@ -4,6 +4,7 @@
 #include <SFML/System/String.hpp>
 #include <SFML/OpenGL.hpp>
 #include <vector>
+#include <memory>
 
 struct V3DMaterial
 {
@@ -18,7 +19,7 @@ protected:
 	virtual void updateTransform();
 
 	sf::Texture texture;
-	V3DMaterial* material = NULL;
+	std::unique_ptr<V3DMaterial> material;
 
 	std::vector<GLfloat> modelData;
 	int vertexArrayOffset = 0;
@@ -33,7 +34,7 @@ public:
 	V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) :
 		V3DObject(position, rotation, scale)
 	{
-		
+		material = std::make_unique<V3DMaterial>();
 	}
 
 	V3DModel(float posX = 0, float posY = 0, float posZ = 0,
@@ -41,7 +42,7 @@ public:
 		float scaleX = 1, float scaleY = 1, float scaleZ = 1) :
 		V3DObject(posX, posY, posZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ)
 	{
-		
+		material = std::make_unique<V3DMaterial>();
 	}
 
 	virtual ~V3DModel()

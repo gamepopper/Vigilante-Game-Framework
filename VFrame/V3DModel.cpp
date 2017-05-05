@@ -64,13 +64,6 @@ bool V3DModel::LoadTexture(sf::Texture texture, bool mipmap)
 
 void V3DModel::SetMaterial(sf::Color Colour, sf::Color Specular, float Shininess)
 {
-	if (material)
-	{
-		delete material;
-		material = NULL;
-	}
-
-	material = new V3DMaterial();
 	material->Colour[0] = Colour.r / 255.0f;	material->Colour[1] = Colour.g / 255.0f;	material->Colour[2] = Colour.b / 255.0f;	material->Colour[3] = Colour.a / 255.0f;
 	material->Specular[0] = Specular.r/255.0f;	material->Specular[1] = Specular.g/255.0f;	material->Specular[2] = Specular.b/255.0f;	material->Specular[3] = Specular.a/255.0f;
 	material->Shininess = Shininess;
