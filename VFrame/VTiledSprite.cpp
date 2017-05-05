@@ -15,8 +15,7 @@ void VTiledSprite::updateTransform()
 
 void VTiledSprite::updateFrame()
 {
-	buffer.copy(image, 0, 0, sf::IntRect(Animation.GetU(), Animation.GetV(), FrameSize.x, FrameSize.y));
-	texture.update(buffer);
+	texture.loadFromImage(image, sf::IntRect(Animation.GetU(), Animation.GetV(), FrameSize.x, FrameSize.y));
 }
 
 VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
@@ -51,8 +50,6 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 	width = width == 0 ? texWidth : width;
 	height = height == 0 ? texHeight : height;
 
-	texture.create(width, height);
-	buffer.create(width, height);
 	sprite = sf::Sprite(texture);
 	texture.setRepeated(true);
 	updateFrame();
@@ -60,7 +57,7 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 	return this;
 }
 
-VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture texture, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
+VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture tex, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
 {
 	image = texture.copyToImage();
 
@@ -75,8 +72,6 @@ VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture texture, bool animated
 	width = width == 0 ? texWidth : width;
 	height = height == 0 ? texHeight : height;
 
-	this->texture.create(width, height);
-	buffer.create(width, height);
 	sprite = sf::Sprite(this->texture);
 	texture.setRepeated(true);
 	updateFrame();

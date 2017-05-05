@@ -4,7 +4,6 @@ class VTiledSprite : public VSprite
 {
 private:
 	sf::Image image;
-	sf::Image buffer;
 
 protected:
 	virtual void updateTransform() override;
