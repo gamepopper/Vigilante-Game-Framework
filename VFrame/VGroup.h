@@ -76,6 +76,7 @@ public:
 
 	void OrganiseNULLS();
 	void Swap(int a, int b);
+	void Sort(std::function<bool(VBase*, VBase*)> func);
 
 	void Reverse();
 

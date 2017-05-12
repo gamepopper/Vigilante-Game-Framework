@@ -340,6 +340,11 @@ void VGroup::Swap(int a, int b)
 	members[b] = temp;
 }
 
+void VGroup::Sort(std::function<bool(VBase*, VBase*)> func)
+{
+	std::sort(members.begin(), members.end(), func);
+}
+
 void VGroup::Reverse()
 {
 	std::reverse(members.begin(), members.end());
