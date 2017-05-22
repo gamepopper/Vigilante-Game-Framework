@@ -88,7 +88,8 @@
     <ClCompile Include="Example\PerlinNoise.cpp" />
     <ClCompile Include="Example\States.cpp" />
     <ClCompile Include="Example\main.cpp" />
-    <ClCompile Include="VFrame\gamepad.c" />
+    <ClCompile Include="VFrame\depend\gamepad.c" />
+    <ClCompile Include="VFrame\depend\glew.c" />
     <ClCompile Include="VFrame\V3DModel.cpp" />
     <ClCompile Include="VFrame\V3DObject.cpp" />
     <ClCompile Include="VFrame\V3DScene.cpp" />
@@ -126,7 +127,11 @@
     <ClInclude Include="Example\BloomPostEffect.h" />
     <ClInclude Include="Example\PerlinNoise.h" />
     <ClInclude Include="Example\States.h" />
-    <ClInclude Include="VFrame\gamepad.h" />
+    <ClInclude Include="VFrame\depend\eglew.h" />
+    <ClInclude Include="VFrame\depend\gamepad.h" />
+    <ClInclude Include="VFrame\depend\glew.h" />
+    <ClInclude Include="VFrame\depend\glxew.h" />
+    <ClInclude Include="VFrame\depend\wglew.h" />
     <ClInclude Include="VFrame\V3DModel.h" />
     <ClInclude Include="VFrame\V3DObject.h" />
     <ClInclude Include="VFrame\V3DScene.h" />
