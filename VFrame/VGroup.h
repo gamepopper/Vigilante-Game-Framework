@@ -41,10 +41,6 @@ public:
 		debuggingVertices.setPrimitiveType(sf::Lines);
 #endif
 	}
-	virtual ~VGroup()
-	{
-		Destroy();
-	}
 
 	int Length()
 	{

@@ -96,11 +96,6 @@ public:
 #endif
 	}
 
-	virtual ~VText()
-	{
-		Destroy();
-	}
-
 	VText* SetFormat(sf::String filename, int charSize = 8, sf::Color colour = sf::Color::White,
 		VTextAlign alignment = VTextAlign::ALIGNLEFT, int style = sf::Text::Regular);
 

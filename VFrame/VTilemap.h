@@ -65,10 +65,6 @@ public:
 		DebugColor = sf::Color(255, 0, 0, 128);
 #endif
 	}
-	virtual ~VTilemap()
-	{
-		Destroy();
-	}
 
 	void LoadFromCSV(sf::String mapData, sf::String graphicFile, 
 		int tileWidth = 0, int tileWeight = 0, bool autoTile = false,

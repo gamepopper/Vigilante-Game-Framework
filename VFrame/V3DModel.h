@@ -2,6 +2,7 @@
 #include "V3DObject.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/String.hpp>
+#include "depend/glew.h"
 #include <SFML/OpenGL.hpp>
 #include <vector>
 #include <memory>
@@ -34,7 +35,11 @@ public:
 	V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) :
 		V3DObject(position, rotation, scale)
 	{
+        #if WIN32
 		material = std::make_unique<V3DMaterial>();
+		#else
+		material = std::unique_ptr<V3DMaterial>(new V3DMaterial());
+		#endif
 	}
 
 	V3DModel(float posX = 0, float posY = 0, float posZ = 0,
@@ -42,12 +47,11 @@ public:
 		float scaleX = 1, float scaleY = 1, float scaleZ = 1) :
 		V3DObject(posX, posY, posZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ)
 	{
+		#if WIN32
 		material = std::make_unique<V3DMaterial>();
-	}
-
-	virtual ~V3DModel()
-	{
-		Destroy();
+		#else
+		material = std::unique_ptr<V3DMaterial>(new V3DMaterial());
+		#endif
 	}
 
 	bool LoadModelData(std::vector<GLfloat>& data, int vertexPos, int normalPos = -1, int texturePos = -1, int colourPos = -1);

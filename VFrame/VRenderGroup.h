@@ -24,10 +24,6 @@ public:
 
 	VRenderGroup(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize = 0);
 	VRenderGroup(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize = 0);
-	virtual ~VRenderGroup()
-	{
-		Destroy();
-	}
 
 	virtual void Resize(int width, int height);
 

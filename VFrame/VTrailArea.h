@@ -22,10 +22,6 @@ public:
 
 	VTrailArea(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize = 0);
 	VTrailArea(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize = 0);
-	virtual ~VTrailArea()
-	{
-		Destroy();
-	}
 
 	virtual void Update(float dt) override;
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;

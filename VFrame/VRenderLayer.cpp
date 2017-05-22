@@ -7,6 +7,17 @@ VRenderLayer::VRenderLayer(unsigned int maxSize) : VGroup(maxSize)
 	postProcessTex.create(VGlobal::p()->Width, VGlobal::p()->Height);
 }
 
+void VRenderLayer::Destroy()
+{
+	VSUPERCLASS::Destroy();
+
+	if (PostEffect != NULL)
+	{
+		delete PostEffect;
+		PostEffect = NULL;
+	}
+}
+
 void VRenderLayer::Update(float dt)
 {
 	VSUPERCLASS::Update(dt);

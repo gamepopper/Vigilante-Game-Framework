@@ -1,10 +1,11 @@
 #pragma once
-#include "VObject.h"
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Clock.hpp>
 #include <vector>
 #include <functional>
+
+class VObject;
 
 enum CameraFollowMethod
 {

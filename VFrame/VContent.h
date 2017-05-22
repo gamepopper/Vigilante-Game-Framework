@@ -16,27 +16,27 @@ public:
 		UnloadAll();
 	}
 
-	bool LoadTexture(sf::String name, sf::Texture &texture);
-	bool LoadImage(sf::String name, sf::Image &image);
-	bool LoadFont(sf::String name, sf::Font &font);
-	bool LoadSound(sf::String name, sf::SoundBuffer &sound);
+	bool LoadTexture(const sf::String& name, sf::Texture &texture);
+	bool LoadImage(const sf::String& name, sf::Image &image);
+	bool LoadFont(const sf::String& name, sf::Font &font);
+	bool LoadSound(const sf::String& name, sf::SoundBuffer &sound);
 
-	bool UnloadTexture(sf::String name);
-	bool UnloadImage(sf::String name);
-	bool UnloadFont(sf::String name);
-	bool UnloadSound(sf::String name);
+	bool UnloadTexture(const sf::String& name);
+	bool UnloadImage(const sf::String& name);
+	bool UnloadFont(const sf::String& name);
+	bool UnloadSound(const sf::String& name);
 
 	void UnloadAll();
 
-	bool StoreTexture(sf::String name, const sf::Texture& texture);
-	bool StoreImage(sf::String name, const sf::Image& image);
-	bool StoreFont(sf::String name, const sf::Font& font);
-	bool StoreSound(sf::String name, const sf::SoundBuffer& sound);
+	bool StoreTexture(const sf::String& name, const sf::Texture& texture);
+	bool StoreImage(const sf::String& name, const sf::Image& image);
+	bool StoreFont(const sf::String& name, const sf::Font& font);
+	bool StoreSound(const sf::String& name, const sf::SoundBuffer& sound);
 
-	bool FindTexture(sf::String name);
-	bool FindImage(sf::String name);
-	bool FindFont(sf::String name);
-	bool FindSound(sf::String name);
+	bool FindTexture(const sf::String& name);
+	bool FindImage(const sf::String& name);
+	bool FindFont(const sf::String& name);
+	bool FindSound(const sf::String& name);
 
 private:
 	std::map<sf::String, sf::Texture>		textureDir;

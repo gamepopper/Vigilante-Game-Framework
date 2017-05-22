@@ -19,11 +19,6 @@ public:
 	typedef VText VSUPERCLASS;
 	VTextPath(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8);
 
-	virtual ~VTextPath()
-	{
-		Destroy();
-	}
-
 	virtual void Update(float dt) override;
 
 	void AddPoint(const sf::Vector2f& point);

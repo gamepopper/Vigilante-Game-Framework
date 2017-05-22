@@ -1,27 +1,27 @@
 #include "VContent.h"
 #include "VGlobal.h"
 
-bool VContent::FindTexture(sf::String name)
+bool VContent::FindTexture(const sf::String& name)
 {
 	return textureDir.find(name) != textureDir.end();
 }
 
-bool VContent::FindImage(sf::String name)
+bool VContent::FindImage(const sf::String& name)
 {
 	return imageDir.find(name) != imageDir.end();
 }
 
-bool VContent::FindFont(sf::String name)
+bool VContent::FindFont(const sf::String& name)
 {
 	return fontDir.find(name) != fontDir.end();
 }
 
-bool VContent::FindSound(sf::String name)
+bool VContent::FindSound(const sf::String& name)
 {
 	return soundDir.find(name) != soundDir.end();
 }
 
-bool VContent::LoadTexture(sf::String name, sf::Texture &texture)
+bool VContent::LoadTexture(const sf::String& name, sf::Texture &texture)
 {
 	if (FindTexture(name))
 	{
@@ -43,7 +43,7 @@ bool VContent::LoadTexture(sf::String name, sf::Texture &texture)
 	return false;
 }
 
-bool VContent::LoadImage(sf::String name, sf::Image &image)
+bool VContent::LoadImage(const sf::String& name, sf::Image &image)
 {
 	if (FindImage(name))
 	{
@@ -65,7 +65,7 @@ bool VContent::LoadImage(sf::String name, sf::Image &image)
 	return false;
 }
 
-bool VContent::LoadFont(sf::String name, sf::Font &font)
+bool VContent::LoadFont(const sf::String& name, sf::Font &font)
 {
 	if (FindFont(name))
 	{
@@ -87,7 +87,7 @@ bool VContent::LoadFont(sf::String name, sf::Font &font)
 	return false;
 }
 
-bool VContent::LoadSound(sf::String name, sf::SoundBuffer &sound)
+bool VContent::LoadSound(const sf::String& name, sf::SoundBuffer &sound)
 {
 	if (FindSound(name))
 	{
@@ -110,7 +110,7 @@ bool VContent::LoadSound(sf::String name, sf::SoundBuffer &sound)
 	return false;
 }
 
-bool VContent::UnloadTexture(sf::String name)
+bool VContent::UnloadTexture(const sf::String& name)
 {
 	if (FindTexture(name))
 	{
@@ -124,7 +124,7 @@ bool VContent::UnloadTexture(sf::String name)
 	return false;
 }
 
-bool VContent::UnloadImage(sf::String name)
+bool VContent::UnloadImage(const sf::String& name)
 {
 	if (FindImage(name))
 	{
@@ -138,7 +138,7 @@ bool VContent::UnloadImage(sf::String name)
 	return false;
 }
 
-bool VContent::UnloadFont(sf::String name)
+bool VContent::UnloadFont(const sf::String& name)
 {
 	if (FindFont(name))
 	{
@@ -152,7 +152,7 @@ bool VContent::UnloadFont(sf::String name)
 	return false;
 }
 
-bool VContent::UnloadSound(sf::String name)
+bool VContent::UnloadSound(const sf::String& name)
 {
 	if (FindSound(name))
 	{
@@ -177,7 +177,7 @@ void VContent::UnloadAll()
 	VLog("All content directories cleared");
 }
 
-bool VContent::StoreTexture(sf::String name, const sf::Texture& texture)
+bool VContent::StoreTexture(const sf::String& name, const sf::Texture& texture)
 {
 	if (!FindTexture(name))
 	{
@@ -191,7 +191,7 @@ bool VContent::StoreTexture(sf::String name, const sf::Texture& texture)
 	return false;
 }
 
-bool VContent::StoreImage(sf::String name, const sf::Image& image)
+bool VContent::StoreImage(const sf::String& name, const sf::Image& image)
 {
 	if (!FindImage(name))
 	{
@@ -205,7 +205,7 @@ bool VContent::StoreImage(sf::String name, const sf::Image& image)
 	return false;
 }
 
-bool VContent::StoreFont(sf::String name, const sf::Font& font)
+bool VContent::StoreFont(const sf::String& name, const sf::Font& font)
 {
 	if (!FindFont(name))
 	{
@@ -219,7 +219,7 @@ bool VContent::StoreFont(sf::String name, const sf::Font& font)
 	return false;
 }
 
-bool VContent::StoreSound(sf::String name, const sf::SoundBuffer& sound)
+bool VContent::StoreSound(const sf::String& name, const sf::SoundBuffer& sound)
 {
 	if (!FindSound(name))
 	{

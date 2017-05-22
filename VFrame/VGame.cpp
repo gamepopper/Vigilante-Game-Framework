@@ -5,6 +5,9 @@
 
 #include "VState.h"
 
+#define GLEW_STATIC
+#include "depend/glew.h"
+
 VGame::~VGame()
 {
 	if (!cleaned)
@@ -79,6 +82,13 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 
 	VGlobal::p()->App.create(sf::VideoMode(windowwidth, windowheight), title, flags, settings);
 	VGlobal::p()->RenderState = sf::RenderStates::Default;
+
+	glewExperimental = GL_TRUE;
+	if (glewInit() != GLEW_OK)
+	{
+		VLog("Unable to initialise GLEW");
+		return EXIT_FAILURE;
+	}
 
 	int error = 0;
 	if ((error = Init()))

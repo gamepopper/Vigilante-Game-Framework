@@ -20,10 +20,6 @@ public:
 		Age = 0;
 		exists = false;
 	}
-	virtual ~VParticle()
-	{
-		Destroy();
-	}
 
 	virtual void Update(float dt) override;
 	virtual void Reset(float x, float y) override;

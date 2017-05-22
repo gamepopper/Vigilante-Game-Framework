@@ -28,11 +28,6 @@ public:
 		ScrollFactor.y = scrollY;
 	}
 
-	virtual ~VBackdrop()
-	{
-		Destroy();
-	}
-
 	virtual VSprite* LoadGraphic(sf::String filename, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0) override;
 	virtual VSprite* LoadGraphicFromTexture(sf::Texture texture, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0) override;
 

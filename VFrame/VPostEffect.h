@@ -86,13 +86,13 @@ public:
 			shader.setUniform(paramName, (sf::Glsl::Vec4)colour);
 	}
 
-	void SetParameter(sf::String paramName, sf::Vector3f& vec3)
+	void SetParameter(sf::String paramName, const sf::Vector3f& vec3)
 	{
 		if (paramName != sourceTextureName)
 			shader.setUniform(paramName, vec3);
 	}
 
-	void SetParameter(sf::String paramName, sf::Vector2f& vec2)
+	void SetParameter(sf::String paramName, const sf::Vector2f& vec2)
 	{
 		if (paramName != sourceTextureName)
 			shader.setUniform(paramName, vec2);

@@ -59,7 +59,7 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 
 VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture tex, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
 {
-	image = texture.copyToImage();
+	image = tex.copyToImage();
 
 	if (texWidth == 0)
 		texWidth = image.getSize().x;

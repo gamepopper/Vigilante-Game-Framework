@@ -17,8 +17,4 @@ public:
 		Moves = false;
 		type = OBJECT;
 	}
-	virtual ~VTile()
-	{
-		Destroy();
-	}
 };

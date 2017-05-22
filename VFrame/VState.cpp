@@ -5,7 +5,7 @@ using std::vector;
 
 void VState::Cleanup()
 {
-	if (!cleanup)
+	if (exists)
 	{
 		Destroy();
 
@@ -18,7 +18,6 @@ void VState::Cleanup()
 		Cameras.clear();
 		Cameras.shrink_to_fit();
 
-		cleanup = true;
 		VLog("State cleanup successful");
 	}
 }
@@ -88,10 +87,9 @@ void VState::ResetSubState()
 
 void VSubState::Cleanup()
 {
-	if (!cleanup)
+	if (exists)
 	{
 		Destroy();
-		cleanup = true;
 		VLog("Substate cleanup successful.");
 	}
 }

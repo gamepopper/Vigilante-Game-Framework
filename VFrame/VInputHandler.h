@@ -5,7 +5,7 @@
 
 #ifdef USE_GAMEPAD_API
 #define GAMEPAD_STATIC_LIB
-#include "gamepad.h"
+#include "depend/gamepad.h"
 #else
 #include "XInputDevice.h"
 #endif

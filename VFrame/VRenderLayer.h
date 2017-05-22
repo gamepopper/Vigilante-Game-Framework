@@ -18,17 +18,8 @@ public:
 	VPostEffectBase* PostEffect = NULL;
 
 	VRenderLayer(unsigned int maxSize = 0);
-	virtual ~VRenderLayer()
-	{
-		Destroy();
 
-		if (PostEffect != NULL)
-		{
-			delete PostEffect;
-			PostEffect = NULL;
-		}
-	}
-
+	virtual void Destroy() override;
 	virtual void Update(float dt) override;
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };

@@ -53,11 +53,6 @@ public:
 		type = VType::OBJECT;
 	}
 
-	virtual ~V3DObject()
-	{
-		Destroy();
-	}
-
 	virtual void Reset(sf::Vector3f newPos);
 	virtual void Reset(float x, float y, float z);
 	virtual void Hurt(float damage);

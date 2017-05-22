@@ -35,7 +35,7 @@ public:
 	float EraseDelay = 0.02f;
 	int CharactersPerIteration = 1;
 	bool ShowCursor = false;
-	char CursorChar = '_';
+	wchar_t CursorChar = '_';
 	float CursorBlinkSpeed = 0.5f;
 	sf::String Prefix = "";
 	float WaitTime = 1;
@@ -45,10 +45,6 @@ public:
 	VTypedText(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8) : VText(x, y, width, "", charSize)
 	{
 		ResetText(text);
-	}
-	virtual ~VTypedText()
-	{
-		Destroy();
 	}
 
 	void SetSound(sf::String id, float volume = 100.0f, sf::String filename = "");

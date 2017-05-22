@@ -380,6 +380,7 @@ void VGroup::Destroy()
 		{
 			if (members[i]->RefCount <= 1)
 			{
+				members[i]->Destroy();
 				delete members[i];
 				members[i] = nullptr;
 			}

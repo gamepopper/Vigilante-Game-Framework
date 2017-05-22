@@ -28,7 +28,8 @@ public:
 	VBase() = default;
 	virtual ~VBase()
 	{
-		Destroy();
+		if (exists)
+			Destroy();
 	}
 
 	virtual void Destroy()

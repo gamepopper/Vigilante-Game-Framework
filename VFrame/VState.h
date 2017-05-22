@@ -17,7 +17,6 @@ class VState : public VGroup
 private:
 	bool openSubState = false;
 	bool closeSubstate = false;
-	bool cleanup = false;
 
 public:
 	typedef VGroup VSUPERCLASS;
@@ -47,9 +46,6 @@ public:
 
 class VSubState : public VGroup
 {
-private:
-	bool cleanup = false;
-
 protected:
 	sf::RectangleShape bgRect;
 

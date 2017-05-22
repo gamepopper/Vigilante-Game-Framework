@@ -101,10 +101,6 @@ public:
 
 		exists = false;
 	}
-	virtual ~VEmitter()
-	{
-		Destroy();
-	}
 
 	VEmitter* LoadParticlesFromFile(int Amount, sf::String Filename, bool Animated = false, int Width = 1, int Height = 1, int TextureWidth = 0, bool RandomFrames = true);
 	VEmitter* LoadParticles(int Amount, sf::Texture Texture, bool Animated = false, int Width = 1, int Height = 1, int TextureWidth = 0, bool RandomFrames = true);

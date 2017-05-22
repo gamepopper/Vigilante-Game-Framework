@@ -1,5 +1,6 @@
 #pragma once
 #include "VRenderGroup.h"
+#include "depend/glew.h"
 #include <SFML/OpenGL.hpp>
 #include <array>
 
@@ -35,11 +36,6 @@ public:
 
 	V3DScene(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize = 0);
 	V3DScene(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize = 0);
-	
-	virtual ~V3DScene()
-	{
-		Destroy();
-	}
 
 	void SetLight(GLenum id, sf::Color Ambient, sf::Color Diffuse, sf::Color Specular, sf::Vector3f Position);
 	V3DLight* GetLight(GLenum id);

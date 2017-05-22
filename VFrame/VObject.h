@@ -63,8 +63,6 @@ public:
 	sf::Color DebugColor;
 #endif
 
-	static float SeparateBias;
-
 	VObject(sf::Vector2f position, sf::Vector2f size = sf::Vector2f()) : VBase()
 	{
 		Position = position;
@@ -89,11 +87,6 @@ public:
 		type = VType::OBJECT;
 
 		Radius = Size.x < Size.y ? Size.x / 2 : Size.y / 2;
-	}
-
-	virtual ~VObject()
-	{
-		Destroy();
 	}
 
 	static bool separate(VObject* a, VObject *b);
