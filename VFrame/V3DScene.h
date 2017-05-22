@@ -1,6 +1,5 @@
 #pragma once
 #include "VRenderGroup.h"
-#include "depend/glew.h"
 #include <SFML/OpenGL.hpp>
 #include <array>
 

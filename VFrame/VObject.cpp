@@ -1,7 +1,7 @@
 #include "VObject.h"
 #include <cmath>
 
-static const float SeparateBias = 4.0f;
+float VObject::SeparateBias = 4;
 
 bool VObject::separate(VObject* a, VObject *b)
 {

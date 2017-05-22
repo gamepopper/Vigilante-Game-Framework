@@ -187,11 +187,13 @@ void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
 				VGroup* group = dynamic_cast<VGroup*>(base);
 				if (group != NULL)
 				{
-					group->ForEach(function, recursive);
+					group->ForEachAlive(function, recursive);
 				}
 			}
-
-			function(base);
+			else
+			{
+				function(base);
+			}
 		}
 	}
 }
@@ -214,8 +216,10 @@ void VGroup::ForEachAlive(std::function<void(VBase*)> function, bool recursive)
 					group->ForEachAlive(function, recursive);
 				}
 			}
-
-			function(base);
+			else
+			{
+				function(base);
+			}
 		}
 	}
 }
@@ -235,11 +239,13 @@ void VGroup::ForEachDead(std::function<void(VBase*)> function, bool recursive)
 				VGroup* group = dynamic_cast<VGroup*>(base);
 				if (group != NULL)
 				{
-					group->ForEachDead(function, recursive);
+					group->ForEachAlive(function, recursive);
 				}
 			}
-
-			function(base);
+			else
+			{
+				function(base);
+			}
 		}
 	}
 }
@@ -259,11 +265,13 @@ void VGroup::ForEachExists(std::function<void(VBase*)> function, bool recursive)
 				VGroup* group = dynamic_cast<VGroup*>(base);
 				if (group != NULL)
 				{
-					group->ForEachExists(function, recursive);
+					group->ForEachAlive(function, recursive);
 				}
 			}
-
-			function(base);
+			else
+			{
+				function(base);
+			}
 		}
 	}
 }
@@ -287,11 +295,13 @@ void VGroup::ForEachType(void (*function)(T* object), bool recursive)
 					group->ForEachExists(function, recursive);
 				}
 			}
-
-			T* object = dynamic_cast<T*>(base);
-			if (object != NULL)
+			else
 			{
-				function(base);
+				T* object = dynamic_cast<T*>(base);
+				if (object != NULL)
+				{
+					function(base);
+				}
 			}
 		}
 	}

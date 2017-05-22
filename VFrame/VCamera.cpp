@@ -3,7 +3,6 @@
 sf::View VCameraList::Default;
 
 #include "VGlobal.h"
-#include "VObject.h"
 #include "VInterpolate.h"
 
 void VCamera::Reset()

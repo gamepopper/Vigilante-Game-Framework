@@ -1,12 +1,11 @@
+#define GLEW_STATIC
+#include "depend/glew.h"
+
 #include "VGame.h"
 #include "VCamera.h"
 #include "VGlobal.h"
 #include "VPostEffect.h"
-
 #include "VState.h"
-
-#define GLEW_STATIC
-#include "depend/glew.h"
 
 VGame::~VGame()
 {
