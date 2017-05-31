@@ -17,6 +17,8 @@ void VInputHandler::AddButtonInput(sf::String name, int key, int gamepad, int mo
 
 #ifdef USE_GAMEPAD_API
 	button.gamepad = (GAMEPAD_BUTTON)(gamepad);
+#elif defined(USE_SFML_JOYSTICK)
+	button.gamepad = (sf::Joystick::Axis)gamepad;
 #else
 	if (gamepad > 0)
 		button.gamepad = (sf::XInputDevice::XButton)((unsigned short)gamepad);
@@ -41,6 +43,8 @@ void VInputHandler::AddAxisInput(sf::String name, int keyA, int keyB, int gamepa
 
 #ifdef USE_GAMEPAD_API
 	axis.gamepad = (XAxis)gamepad;
+#elif defined(USE_SFML_JOYSTICK)
+	axis.gamepad = (sf::Joystick::Axis)gamepad;
 #else
 	axis.gamepad = (sf::XInputDevice::XAxis)gamepad;
 #endif
@@ -138,6 +142,16 @@ void VInputHandler::Update(float dt)
 {
 #ifdef USE_GAMEPAD_API
 	GamepadUpdate();
+#elif defined(USE_SFML_JOYSTICK)
+	int count = 0;
+	for (int i = 0; i < sf::Joystick::Count; i++)
+	{
+		JoystickID[i] = -1;
+		if (sf::Joystick::isConnected(i))
+		{
+			JoystickID[count++] = i;
+		}
+	}
 #endif
 
 	for (std::map<sf::String, ButtonInput>::iterator button = buttonInputs.begin(); button != buttonInputs.end(); ++button)
@@ -149,6 +163,8 @@ void VInputHandler::Update(float dt)
 
 #ifdef USE_GAMEPAD_API
 		if (sf::Keyboard::isKeyPressed(b.key) || GamepadButtonTriggered((GAMEPAD_DEVICE)ControllerNo, b.gamepad) || sf::Mouse::isButtonPressed(b.mouse))
+#elif defined(USE_SFML_JOYSTICK)
+		if (sf::Keyboard::isKeyPressed(b.key) || sf::Joystick::isButtonPressed(JoystickID[ControllerNo], b.gamepad) || sf::Mouse::isButtonPressed(b.mouse))
 #else
 		if (sf::Keyboard::isKeyPressed(b.key) || sf::XInputDevice::isButtonPressed(ControllerNo, b.gamepad) || sf::Mouse::isButtonPressed(b.mouse))
 #endif
@@ -239,6 +255,16 @@ void VInputHandler::Update(float dt)
 			{
 				a.value = val1;
 				isGamepadActive = true;
+			}
+#elif defined(USE_SFML_JOYSTICK)
+			if (abs(sf::Joystick::getAxisPosition(ControllerNo, a.gamepad)) > 20.0f) //Deadzone
+			{
+				a.value = sf::Joystick::getAxisPosition(JoystickID[ControllerNo], a.gamepad);
+				isGamepadActive = true;
+			}
+			else
+			{
+				a.value = 0;
 			}
 #else
 			if (sf::XInputDevice::getAxisPosition(ControllerNo, a.gamepad) != 0)

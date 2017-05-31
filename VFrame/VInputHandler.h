@@ -6,6 +6,8 @@
 #ifdef USE_GAMEPAD_API
 #define GAMEPAD_STATIC_LIB
 #include "depend/gamepad.h"
+#elif defined(USE_SFML_JOYSTICK)
+#include <SFML/Window/Joystick.hpp>
 #else
 #include "XInputDevice.h"
 #endif
@@ -26,6 +28,27 @@ public:
 		L,
 		R
 	};
+#elif defined(USE_SFML_JOYSTICK)
+	enum Button
+	{
+		BUTTON_A,
+		BUTTON_B,
+		BUTTON_X,
+		BUTTON_Y,
+		BUTTON_RIGHT_SHOULDER,
+		BUTTON_LEFT_SHOULDER,
+		BUTTON_LEFT_THUMB,
+		BUTTON_RIGHT_THUMB,
+		BUTTON_START,
+		BUTTON_BACK,
+		BUTTON_HOME,
+		BUTTON_DPAD_UP,
+		BUTTON_DPAD_DOWN,
+		BUTTON_DPAD_LEFT,
+		BUTTON_DPAD_RIGHT,
+	};
+
+	int JoystickID[sf::Joystick::Count];
 #endif
 
 protected:
@@ -34,6 +57,8 @@ protected:
 		sf::Keyboard::Key key;
 #ifdef USE_GAMEPAD_API
 		GAMEPAD_BUTTON gamepad;
+#elif defined(USE_SFML_JOYSTICK)
+		int gamepad;
 #else
 		sf::XInputDevice::XButton gamepad;
 #endif
@@ -50,6 +75,8 @@ protected:
 		sf::Keyboard::Key keyB;
 #ifdef USE_GAMEPAD_API
 		XAxis gamepad;
+#elif defined(USE_SFML_JOYSTICK)
+		sf::Joystick::Axis gamepad;
 #else
 		sf::XInputDevice::XAxis gamepad;
 #endif

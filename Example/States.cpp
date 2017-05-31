@@ -21,6 +21,12 @@ enum DemoPages
 
 void DemoStatesManager::SetNewPage()
 {
+	if (VGlobal::p()->PostProcess)
+	{
+		delete VGlobal::p()->PostProcess;
+		VGlobal::p()->PostProcess = NULL;
+	}
+
 	VSubState* subState;
 	switch (CurrentPage)
 	{
@@ -106,8 +112,8 @@ void DemoStatesManager::Initialise()
 	VSUPERCLASS::Initialise();
 	SetNewPage();
 
-	VGlobal::p()->Input.AddAxisInput("horizontal",	sf::Keyboard::D, sf::Keyboard::A, sf::XInputDevice::PovX);
-	VGlobal::p()->Input.AddAxisInput("vertical",	sf::Keyboard::S, sf::Keyboard::W, sf::XInputDevice::PovY);
+	VGlobal::p()->Input.AddAxisInput("horizontal",	sf::Keyboard::D, sf::Keyboard::A, sf::Joystick::Axis::X);
+	VGlobal::p()->Input.AddAxisInput("vertical",	sf::Keyboard::S, sf::Keyboard::W, sf::Joystick::Axis::Y);
 }
 
 void DemoStatesManager::HandleEvents(const sf::Event& event)
