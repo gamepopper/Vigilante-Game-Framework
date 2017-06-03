@@ -109,8 +109,9 @@
     <ClCompile Include="Example\PerlinNoise.cpp">
       <Filter>Example</Filter>
     </ClCompile>
-    <ClCompile Include="VFrame\gamepad.c">
-      <Filter>VFrame</Filter>
+    <ClCompile Include="VFrame\depend\gamepad.c">
+      <Filter>VFrame\depend</Filter>
+    </ClCompile>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,8 +235,9 @@
     <ClInclude Include="Example\PerlinNoise.h">
       <Filter>Example</Filter>
     </ClInclude>
-    <ClInclude Include="VFrame\gamepad.h">
-      <Filter>VFrame</Filter>
+    <ClInclude Include="VFrame\depend\gamepad.h">
+      <Filter>VFrame\depend</Filter>
+    </ClInclude>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -328,6 +330,9 @@
     </Filter>
     <Filter Include="VFrame">
       <UniqueIdentifier>{115f759b-597c-4839-bca5-3c31b0c1cb04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VFrame\depend">
+      <UniqueIdentifier>{874d7a92-aeae-42fe-b717-d19cd8bfb62b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
