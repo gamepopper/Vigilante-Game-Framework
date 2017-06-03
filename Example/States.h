@@ -57,9 +57,9 @@ public:
 		animatedSprite = new VSprite(0, 0);
 		animatedSprite->LoadGraphic("Example/Assets/Turret.png", true, 128, 128);
 		animatedSprite->SetPositionAtCentre(2 * VGlobal::p()->Width / 3.0f, VGlobal::p()->Height / 2.0f - 50.0f);
-		animatedSprite->Animation.AddAnimation("start",		{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 }, 15.0f);
-		animatedSprite->Animation.AddAnimation("shotgun",	{ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }, 15.0f, true);
-		animatedSprite->Animation.AddAnimation("railgun",	{ 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46 }, 15.0f, true);
+		animatedSprite->Animation.AddAnimation("start", { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 }, 15.0f);
+		animatedSprite->Animation.AddAnimation("shotgun", { 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 }, 15.0f, true);
+		animatedSprite->Animation.AddAnimation("railgun", { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46 }, 15.0f, true);
 		animatedSprite->Animation.AddAnimation("doublegun", { 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62 }, 15.0f, true);
 		animatedSprite->Animation.Play("start");
 		Add(animatedSprite);
@@ -104,10 +104,10 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		float x1Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::PovX);
-		float y1Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::PovY);
-		float x2Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::Z);
-		float y2Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::V);
+		float x1Resize = VGlobal::p()->Input.CurrentAxisValue("leftX");
+		float y1Resize = VGlobal::p()->Input.CurrentAxisValue("leftY");
+		float x2Resize = VGlobal::p()->Input.CurrentAxisValue("rightX");
+		float y2Resize = VGlobal::p()->Input.CurrentAxisValue("rightY");
 
 		standardSprite->Size += sf::Vector2f(x1Resize / 100, y1Resize / 100);
 		animatedSprite->Size += sf::Vector2f(x2Resize / 100, y2Resize / 100);
@@ -163,34 +163,10 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		float x1Resize = 0.0f;
-		float y1Resize = 0.0f;
-		float x2Resize = 0.0f;
-		float y2Resize = 0.0f;
-
-		if (sf::XInputDevice::isConnected(0))
-		{
-			x1Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::PovX);
-			y1Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::PovY);
-			x2Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::Z);
-			y2Resize = sf::XInputDevice::getAxisPosition(0, sf::XInputDevice::XAxis::V);
-
-			if (x1Resize == 0)
-				x1Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::A) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::D) ? 100.0f : 0.0f;
-			if (y1Resize == 0)
-				y1Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::W) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::S) ? 100.0f : 0.0f;
-			if (x2Resize == 0)
-				x2Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::J) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::L) ? 100.0f : 0.0f;
-			if (y2Resize == 0)
-				y2Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::I) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::K) ? 100.0f : 0.0f;
-		}
-		else
-		{
-			x1Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::A) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::D) ? 100.0f : 0.0f;
-			y1Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::W) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::S) ? 100.0f : 0.0f;
-			x2Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::J) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::L) ? 100.0f : 0.0f;
-			y2Resize = sf::Keyboard::isKeyPressed(sf::Keyboard::I) ? -100.0f : sf::Keyboard::isKeyPressed(sf::Keyboard::K) ? 100.0f : 0.0f;
-		}
+		float x1Resize = VGlobal::p()->Input.CurrentAxisValue("leftX");
+		float y1Resize = VGlobal::p()->Input.CurrentAxisValue("leftY");
+		float x2Resize = VGlobal::p()->Input.CurrentAxisValue("rightX");
+		float y2Resize = VGlobal::p()->Input.CurrentAxisValue("rightY");
 
 		standardSprite->Size += sf::Vector2f(x1Resize, y1Resize) * dt;
 		animatedSprite->Size += sf::Vector2f(x2Resize, y2Resize) * dt;
@@ -236,11 +212,11 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		if (sf::XInputDevice::isButtonPressed(0, sf::XInputDevice::LB))
+		if (VGlobal::p()->Input.IsButtonPressed("leftShoulder"))
 		{
 			typedText->Erase(0.02f);
 		}
-		if (sf::XInputDevice::isButtonPressed(0, sf::XInputDevice::RB))
+		if (VGlobal::p()->Input.IsButtonPressed("rightShoulder"))
 		{
 			typedText->Start(0.05f);
 		}
@@ -296,7 +272,7 @@ public:
 	virtual void Update(float dt)
 	{
 		VSUPERCLASS::Update(dt);
-		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("horizontal") * 3, VGlobal::p()->Input.CurrentAxisValue("vertical") * 3);
+		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("leftX") * 3, VGlobal::p()->Input.CurrentAxisValue("leftY") * 3);
 		VGlobal::p()->Collides(playerControl, tilemap);
 	}
 };
@@ -385,7 +361,7 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("horizontal") * 3, VGlobal::p()->Input.CurrentAxisValue("vertical") * 3);
+		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("leftX") * 3, VGlobal::p()->Input.CurrentAxisValue("leftY") * 3);
 
 		VGlobal::p()->BackgroundColor = sf::Color::Black;
 		using namespace std::placeholders;
@@ -405,6 +381,227 @@ public:
 	{
 		VSprite* sprite = dynamic_cast<VSprite*>(object);
 		VGlobal::p()->BackgroundColor = sprite->Tint;
+	}
+};
+
+//Controller
+/*
+Test controllers
+*/
+class ControllerState : public VSubState
+{
+	typedef VSubState VSUPERCLASS;
+
+	unsigned int buttonCount;
+	unsigned int axisCount;
+
+	VGroup* buttons;
+	VGroup* axis;
+	VGroup* text;
+
+public:
+	ControllerState() : VSubState() {}
+	~ControllerState() = default;
+
+	virtual void Initialise()
+	{
+		VSUPERCLASS::Initialise();
+
+#ifdef USE_GAMEPAD_API
+		buttonCount = BUTTON_COUNT;
+		axisCount = VInputHandler::R + 1;
+#elif defined(USE_SFML_JOYSTICK)
+		buttonCount = sf::Joystick::getButtonCount(VGlobal::p()->Input.GetJoystickID(0));
+		axisCount = sf::Joystick::Axis::PovY + 1;
+#else
+		buttonCount = 14;
+		axisCount = sf::XInputDevice::R + 1;
+#endif
+		buttons = new VGroup(buttonCount);
+		axis = new VGroup(axisCount);
+		text = new VGroup(buttonCount + axisCount);
+
+		for (unsigned int i = 0; i < buttonCount; i++)
+		{
+			float x = (i % 10) * 60.0f;
+			float y = (i / 10) * 60.0f;
+
+			VText* t = new VText(20.0f + x, 80.0f + y - 6, 20.0f, std::to_string(i) + ":", 12);
+			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VTextAlign::ALIGNLEFT);
+
+			VSprite* b = new VSprite(40.0f + x, 70.0f + y);
+
+			if (i == 0)
+			{
+				b->MakeGraphic(30, 30, sf::Color::White);
+			}
+			else
+			{
+				b->LoadGraphicFromTexture(dynamic_cast<VSprite*>(buttons->GetGroupItem(0))->GetTexture());
+			}
+
+			text->Add(t);
+			buttons->Add(b);
+		}
+
+		int buttonOffset = (buttonCount / 10) + 1;
+
+		for (unsigned int i = 0; i < axisCount; i++)
+		{
+			float x = (i % 10) * 60.0f;
+			float y = (i / 10) * 60.0f;
+
+			VText* t = new VText(20.0f + x, 120.0f + y + (buttonOffset * 60.0f) - 6.0f, 20.0f, std::to_string(i) + ":", 12);
+			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VTextAlign::ALIGNLEFT);
+
+			VSprite* a = new VSprite(40.0f + x, 120.0f + y + (buttonOffset * 60.0f));
+
+			if (i == 0)
+			{
+				a->MakeGraphic(30, 50, sf::Color::White);
+			}
+			else
+			{
+				a->LoadGraphicFromTexture(dynamic_cast<VSprite*>(axis->GetGroupItem(0))->GetTexture());
+			}
+
+			a->Origin = sf::Vector2f(0, 0);
+
+			text->Add(t);
+			axis->Add(a);
+		}
+
+		Add(buttons);
+		Add(axis);
+		Add(text);
+	}
+
+	virtual void Update(float dt)
+	{
+		VSUPERCLASS::Update(dt);
+
+#ifdef USE_GAMEPAD_API
+
+		for (unsigned int i = 0; i < buttonCount; i++)
+		{
+			VSprite* b = dynamic_cast<VSprite*>(buttons->GetGroupItem(i));
+
+			if (GamepadButtonDown(GAMEPAD_0, (GAMEPAD_BUTTON)i))
+			{
+				b->Tint = sf::Color::White;
+			}
+			else
+			{
+				b->Tint = VColour::HSVtoRGB(0.0f, 0.0f, 0.6f);
+			}
+		}
+
+		for (unsigned int i = 0; i < axisCount; i++)
+		{
+			VSprite* b = dynamic_cast<VSprite*>(axis->GetGroupItem(i));
+
+			float val1 = 0, val2 = 0;
+
+			switch (i)
+			{
+				case VInputHandler::PovX:
+				{
+					GamepadStickNormXY(GAMEPAD_0, STICK_LEFT, &val1, &val2);
+					break;
+				}
+				case VInputHandler::PovY:
+				{
+					GamepadStickNormXY(GAMEPAD_0, STICK_LEFT, &val2, &val1);
+					val1 *= -1;
+					break;
+				}
+				case VInputHandler::Z:
+				{
+					GamepadStickNormXY(GAMEPAD_0, STICK_RIGHT, &val1, &val2);
+					break;
+				}
+				case VInputHandler::V:
+				{
+					GamepadStickNormXY(GAMEPAD_0, STICK_RIGHT, &val2, &val1);
+					val1 *= -1;
+					break;
+				}
+				case VInputHandler::L:
+				{
+					val1 = GamepadTriggerValue(GAMEPAD_0, TRIGGER_LEFT) / 255;
+					break;
+				}
+				case VInputHandler::R:
+				{
+					val1 = GamepadTriggerValue(GAMEPAD_0, TRIGGER_RIGHT) / 255;
+					break;
+				}
+			}
+
+			b->Scale.y = val1;
+		}
+
+#elif defined(USE_SFML_JOYSTICK)
+
+		for (unsigned int i = 0; i < buttonCount; i++)
+		{
+			VSprite* b = dynamic_cast<VSprite*>(buttons->GetGroupItem(i));
+
+			if (sf::Joystick::isButtonPressed(VGlobal::p()->Input.GetJoystickID(0), i))
+			{
+				b->Tint = sf::Color::White;
+			}
+			else
+			{
+				b->Tint = VColour::HSVtoRGB(0.0f, 0.0f, 0.6f);
+			}
+		}
+
+		for (unsigned int i = 0; i < axisCount; i++)
+		{
+			VSprite* b = dynamic_cast<VSprite*>(axis->GetGroupItem(i));
+			b->Scale.y = sf::Joystick::getAxisPosition(VGlobal::p()->Input.GetJoystickID(0), (sf::Joystick::Axis)i) / 100.0f;
+		}
+#else
+		unsigned short buttonIDs[14] = 
+		{
+			sf::XInputDevice::XButton::DPAD_UP,
+			sf::XInputDevice::XButton::DPAD_DOWN,
+			sf::XInputDevice::XButton::DPAD_LEFT,
+			sf::XInputDevice::XButton::DPAD_RIGHT,
+			sf::XInputDevice::XButton::START,
+			sf::XInputDevice::XButton::BACK,
+			sf::XInputDevice::XButton::LEFT_THUMB,
+			sf::XInputDevice::XButton::RIGHT_THUMB,
+			sf::XInputDevice::XButton::LB,
+			sf::XInputDevice::XButton::RB,
+			sf::XInputDevice::XButton::A,
+			sf::XInputDevice::XButton::B,
+			sf::XInputDevice::XButton::X,
+			sf::XInputDevice::XButton::Y,
+		};
+
+		for (unsigned int i = 0; i < buttonCount; i++)
+		{
+			VSprite* b = dynamic_cast<VSprite*>(buttons->GetGroupItem(i));
+
+			if (sf::XInputDevice::isButtonPressed(0, buttonIDs[i]))
+			{
+				b->Tint = sf::Color::White;
+			}
+			else
+			{
+				b->Tint = VColour::HSVtoRGB(0.0f, 0.0f, 0.6f);
+			}
+		}
+
+		for (unsigned int i = 0; i < axisCount; i++)
+		{
+			VSprite* b = dynamic_cast<VSprite*>(axis->GetGroupItem(i));
+			b->Scale.y = sf::XInputDevice::getAxisPosition(0, (sf::XInputDevice::XAxis)i);
+			b->Scale.y = abs(b->Scale.y) > 1.0f ? b->Scale.y / 100.0f : b->Scale.y;
+		}
+#endif
 	}
 };
 
@@ -764,7 +961,7 @@ public:
 	virtual void Update(float dt)
 	{
 		VSUPERCLASS::Update(dt);
-		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("horizontal") * 3, VGlobal::p()->Input.CurrentAxisValue("vertical") * 3);
+		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("leftX") * 3, VGlobal::p()->Input.CurrentAxisValue("leftY") * 3);
 	}
 };
 
@@ -1242,7 +1439,7 @@ public:
 		float offset = 3.1415926f / CircleCount;
 		float radius = 50.0f;
 
-		pixel->Velocity = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("horizontal"), VGlobal::p()->Input.CurrentAxisValue("vertical"));
+		pixel->Velocity = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("leftX"), VGlobal::p()->Input.CurrentAxisValue("leftY"));
 
 		if (pixel->Position.x > 0)
 			pixel->Position.x = 0;

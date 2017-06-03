@@ -15,10 +15,12 @@
 #include <map>
 #include <iostream>
 
+#define CONTROLLER_COUNT 4
+
 class VInputHandler
 {
-#ifdef USE_GAMEPAD_API
 public:
+#ifdef USE_GAMEPAD_API
 	enum XAxis
 	{
 		PovX,
@@ -35,20 +37,19 @@ public:
 		BUTTON_B,
 		BUTTON_X,
 		BUTTON_Y,
-		BUTTON_RIGHT_SHOULDER,
 		BUTTON_LEFT_SHOULDER,
+		BUTTON_RIGHT_SHOULDER,
+		BUTTON_BACK,
+		BUTTON_START,
 		BUTTON_LEFT_THUMB,
 		BUTTON_RIGHT_THUMB,
-		BUTTON_START,
-		BUTTON_BACK,
 		BUTTON_HOME,
 		BUTTON_DPAD_UP,
 		BUTTON_DPAD_DOWN,
 		BUTTON_DPAD_LEFT,
 		BUTTON_DPAD_RIGHT,
+		BUTTON_COUNT,
 	};
-
-	int JoystickID[sf::Joystick::Count];
 #endif
 
 protected:
@@ -64,9 +65,9 @@ protected:
 #endif
 		sf::Mouse::Button mouse;
 
-		bool pressed;
-		bool down;
-		bool released;
+		bool pressed[CONTROLLER_COUNT];
+		bool down[CONTROLLER_COUNT];
+		bool released[CONTROLLER_COUNT];
 	};
 
 	struct AxisInput
@@ -81,8 +82,8 @@ protected:
 		sf::XInputDevice::XAxis gamepad;
 #endif
 
-		float lastValue;
-		float value;
+		float lastValue[CONTROLLER_COUNT];
+		float value[CONTROLLER_COUNT];
 	};
 
 	std::map<sf::String, ButtonInput> buttonInputs;
@@ -91,6 +92,10 @@ protected:
 	bool isGamepadActive = false;
 	float scrollWheel = 0;
 	sf::Vector2i lastMousePos = sf::Vector2i();
+	
+#ifdef USE_SFML_JOYSTICK
+	int JoystickID[CONTROLLER_COUNT];
+#endif
 
 public:
 
@@ -105,20 +110,22 @@ public:
 
 	virtual ~VInputHandler();
 
-	int ControllerNo = 0;
-
 	void AddButtonInput(sf::String mame, int key = -1, int gamepad = -1, int mouse = -1);
 	void AddAxisInput(sf::String name, int keyA = -1, int keyB = -1, int gamepad = -1);
 
 	bool IsGamepadActive();
 
-	bool IsButtonPressed(sf::String name);
-	bool IsButtonDown(sf::String name);
-	bool IsButtonUp(sf::String name);
-	bool IsButtonReleased(sf::String name);
+#ifdef USE_SFML_JOYSTICK
+	int GetJoystickID(int ControllerIndex);
+#endif
 
-	float CurrentAxisValue(sf::String name);
-	float LastAxisValue(sf::String name);
+	bool IsButtonPressed(sf::String name, int ControllerIndex = 0);
+	bool IsButtonDown(sf::String name, int ControllerIndex = 0);
+	bool IsButtonUp(sf::String name, int ControllerIndex = 0);
+	bool IsButtonReleased(sf::String name, int ControllerIndex = 0);
+
+	float CurrentAxisValue(sf::String name, int ControllerIndex = 0);
+	float LastAxisValue(sf::String name, int ControllerIndex = 0);
 
 	float ScrollWheelDelta();
 	void ResetScrollWheel();

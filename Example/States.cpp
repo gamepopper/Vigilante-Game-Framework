@@ -6,6 +6,7 @@ enum DemoPages
 	PAGE_TILED,
 	PAGE_TEXT,
 	PAGE_TEXTPATH,
+	PAGE_CONTROLLER,
 	PAGE_ASCII,
 	PAGE_TILEMAP,
 	PAGE_COLLISION,
@@ -41,6 +42,9 @@ void DemoStatesManager::SetNewPage()
 			break;
 		case PAGE_COLLISION:
 			subState = new CollisionState();
+			break;
+		case PAGE_CONTROLLER:
+			subState = new ControllerState();
 			break;
 		case PAGE_GRAPHICS3D:
 			subState = new Graphics3DState();
@@ -112,8 +116,59 @@ void DemoStatesManager::Initialise()
 	VSUPERCLASS::Initialise();
 	SetNewPage();
 
-	VGlobal::p()->Input.AddAxisInput("horizontal",	sf::Keyboard::D, sf::Keyboard::A, sf::Joystick::Axis::X);
-	VGlobal::p()->Input.AddAxisInput("vertical",	sf::Keyboard::S, sf::Keyboard::W, sf::Joystick::Axis::Y);
+#ifdef USE_GAMEPAD_API
+	VGlobal::p()->Input.AddAxisInput("leftX", sf::Keyboard::D, sf::Keyboard::A, VInputHandler::XAxis::PovX);
+	VGlobal::p()->Input.AddAxisInput("leftY", sf::Keyboard::S, sf::Keyboard::W, VInputHandler::XAxis::PovY);
+	VGlobal::p()->Input.AddAxisInput("rightX", sf::Keyboard::L, sf::Keyboard::K, VInputHandler::XAxis::Z);
+	VGlobal::p()->Input.AddAxisInput("rightY", sf::Keyboard::K, sf::Keyboard::I, VInputHandler::XAxis::V);
+	VGlobal::p()->Input.AddAxisInput("LT", sf::Keyboard::E, sf::Keyboard::Q, VInputHandler::XAxis::L);
+	VGlobal::p()->Input.AddAxisInput("RT", sf::Keyboard::O, sf::Keyboard::U, VInputHandler::XAxis::R);
+	VGlobal::p()->Input.AddButtonInput("A", sf::Keyboard::Z, BUTTON_A);
+	VGlobal::p()->Input.AddButtonInput("B", sf::Keyboard::X, BUTTON_B);
+	VGlobal::p()->Input.AddButtonInput("X", sf::Keyboard::C, BUTTON_X);
+	VGlobal::p()->Input.AddButtonInput("Y", sf::Keyboard::V, BUTTON_Y);
+	VGlobal::p()->Input.AddButtonInput("leftShoulder", sf::Keyboard::T, BUTTON_LEFT_SHOULDER);
+	VGlobal::p()->Input.AddButtonInput("rightShoulder", sf::Keyboard::Y, BUTTON_RIGHT_SHOULDER);
+	VGlobal::p()->Input.AddButtonInput("leftStick", sf::Keyboard::B, BUTTON_LEFT_THUMB);
+	VGlobal::p()->Input.AddButtonInput("rightStick", sf::Keyboard::N, BUTTON_RIGHT_THUMB);
+	VGlobal::p()->Input.AddButtonInput("Back", sf::Keyboard::BackSpace, BUTTON_BACK);
+	VGlobal::p()->Input.AddButtonInput("Start", sf::Keyboard::Return, BUTTON_START);
+#elif defined(USE_SFML_JOYSTICK)
+	VGlobal::p()->Input.AddAxisInput("leftX", sf::Keyboard::D, sf::Keyboard::A, sf::Joystick::Axis::X);
+	VGlobal::p()->Input.AddAxisInput("leftY", sf::Keyboard::S, sf::Keyboard::W, sf::Joystick::Axis::Y);
+	VGlobal::p()->Input.AddAxisInput("rightX", sf::Keyboard::L, sf::Keyboard::K, sf::Joystick::Axis::U);
+	VGlobal::p()->Input.AddAxisInput("rightY", sf::Keyboard::K, sf::Keyboard::I, sf::Joystick::Axis::V);
+	VGlobal::p()->Input.AddAxisInput("LT", sf::Keyboard::E, sf::Keyboard::Q, sf::Joystick::Axis::Z);
+	VGlobal::p()->Input.AddAxisInput("RT", sf::Keyboard::O, sf::Keyboard::U, sf::Joystick::Axis::R);
+	VGlobal::p()->Input.AddButtonInput("A", sf::Keyboard::Z, VInputHandler::BUTTON_A);
+	VGlobal::p()->Input.AddButtonInput("B", sf::Keyboard::X, VInputHandler::BUTTON_B);
+	VGlobal::p()->Input.AddButtonInput("X", sf::Keyboard::C, VInputHandler::BUTTON_X);
+	VGlobal::p()->Input.AddButtonInput("Y", sf::Keyboard::V, VInputHandler::BUTTON_Y);
+	VGlobal::p()->Input.AddButtonInput("leftShoulder", sf::Keyboard::T, VInputHandler::BUTTON_LEFT_SHOULDER);
+	VGlobal::p()->Input.AddButtonInput("rightShoulder", sf::Keyboard::Y, VInputHandler::BUTTON_RIGHT_SHOULDER);
+	VGlobal::p()->Input.AddButtonInput("leftStick", sf::Keyboard::B, VInputHandler::BUTTON_LEFT_THUMB);
+	VGlobal::p()->Input.AddButtonInput("rightStick", sf::Keyboard::N, VInputHandler::BUTTON_RIGHT_THUMB);
+	VGlobal::p()->Input.AddButtonInput("Back", sf::Keyboard::BackSpace, VInputHandler::BUTTON_BACK);
+	VGlobal::p()->Input.AddButtonInput("Start", sf::Keyboard::Return, VInputHandler::BUTTON_START);
+	VGlobal::p()->Input.AddButtonInput("Home", sf::Keyboard::Home, VInputHandler::BUTTON_HOME);
+#else
+	VGlobal::p()->Input.AddAxisInput("leftX", sf::Keyboard::D, sf::Keyboard::A, VInputHandler::XAxis::PovX);
+	VGlobal::p()->Input.AddAxisInput("leftY", sf::Keyboard::S, sf::Keyboard::W, VInputHandler::XAxis::PovY);
+	VGlobal::p()->Input.AddAxisInput("rightX", sf::Keyboard::L, sf::Keyboard::K, VInputHandler::XAxis::Z);
+	VGlobal::p()->Input.AddAxisInput("rightY", sf::Keyboard::K, sf::Keyboard::I, VInputHandler::XAxis::V);
+	VGlobal::p()->Input.AddAxisInput("LT", sf::Keyboard::E, sf::Keyboard::Q, VInputHandler::XAxis::L);
+	VGlobal::p()->Input.AddAxisInput("RT", sf::Keyboard::O, sf::Keyboard::U, VInputHandler::XAxis::R);
+	VGlobal::p()->Input.AddButtonInput("A", sf::Keyboard::Z, BUTTON_A);
+	VGlobal::p()->Input.AddButtonInput("B", sf::Keyboard::X, BUTTON_B);
+	VGlobal::p()->Input.AddButtonInput("X", sf::Keyboard::C, BUTTON_X);
+	VGlobal::p()->Input.AddButtonInput("Y", sf::Keyboard::V, BUTTON_Y);
+	VGlobal::p()->Input.AddButtonInput("leftShoulder", sf::Keyboard::T, BUTTON_LEFT_SHOULDER);
+	VGlobal::p()->Input.AddButtonInput("rightShoulder", sf::Keyboard::Y, BUTTON_RIGHT_SHOULDER);
+	VGlobal::p()->Input.AddButtonInput("leftStick", sf::Keyboard::B, BUTTON_LEFT_THUMB);
+	VGlobal::p()->Input.AddButtonInput("rightStick", sf::Keyboard::N, BUTTON_RIGHT_THUMB);
+	VGlobal::p()->Input.AddButtonInput("Back", sf::Keyboard::BackSpace, BUTTON_BACK);
+	VGlobal::p()->Input.AddButtonInput("Start", sf::Keyboard::Return, BUTTON_START);
+#endif
 }
 
 void DemoStatesManager::HandleEvents(const sf::Event& event)
