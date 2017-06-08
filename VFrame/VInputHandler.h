@@ -110,8 +110,11 @@ public:
 
 	virtual ~VInputHandler();
 
-	void AddButtonInput(sf::String mame, int key = -1, int gamepad = -1, int mouse = -1);
-	void AddAxisInput(sf::String name, int keyA = -1, int keyB = -1, int gamepad = -1);
+	void SetButtonInput(const sf::String& name, int key = -1, int gamepad = -1, int mouse = -1);
+	void SetAxisInput(const sf::String& name, int keyA = -1, int keyB = -1, int gamepad = -1);
+
+	bool GetButtonInput(const sf::String& name, ButtonInput& input);
+	bool GetAxisInput(const sf::String& name, AxisInput& input);
 
 	bool IsGamepadActive();
 
@@ -119,13 +122,13 @@ public:
 	int GetJoystickID(int ControllerIndex);
 #endif
 
-	bool IsButtonPressed(sf::String name, int ControllerIndex = 0);
-	bool IsButtonDown(sf::String name, int ControllerIndex = 0);
-	bool IsButtonUp(sf::String name, int ControllerIndex = 0);
-	bool IsButtonReleased(sf::String name, int ControllerIndex = 0);
+	bool IsButtonPressed(const sf::String& name, int ControllerIndex = 0);
+	bool IsButtonDown(const sf::String& name, int ControllerIndex = 0);
+	bool IsButtonUp(const sf::String& name, int ControllerIndex = 0);
+	bool IsButtonReleased(const sf::String& name, int ControllerIndex = 0);
 
-	float CurrentAxisValue(sf::String name, int ControllerIndex = 0);
-	float LastAxisValue(sf::String name, int ControllerIndex = 0);
+	float CurrentAxisValue(const sf::String& name, int ControllerIndex = 0);
+	float LastAxisValue(const sf::String& name, int ControllerIndex = 0);
 
 	float ScrollWheelDelta();
 	void ResetScrollWheel();

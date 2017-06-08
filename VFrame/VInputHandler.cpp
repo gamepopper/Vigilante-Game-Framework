@@ -10,7 +10,7 @@ VInputHandler::~VInputHandler()
 #endif
 }
 
-void VInputHandler::AddButtonInput(sf::String name, int key, int gamepad, int mouse)
+void VInputHandler::SetButtonInput(const sf::String& name, int key, int gamepad, int mouse)
 {
 	ButtonInput button;
 	button.key = (sf::Keyboard::Key)key;
@@ -36,7 +36,7 @@ void VInputHandler::AddButtonInput(sf::String name, int key, int gamepad, int mo
 	buttonInputs[name] = button;
 }
 
-void VInputHandler::AddAxisInput(sf::String name, int keyA, int keyB, int gamepad)
+void VInputHandler::SetAxisInput(const sf::String& name, int keyA, int keyB, int gamepad)
 {
 	AxisInput axis;
 	axis.keyA = (sf::Keyboard::Key)keyA;
@@ -57,6 +57,28 @@ void VInputHandler::AddAxisInput(sf::String name, int keyA, int keyB, int gamepa
 	axisInputs[name] = axis;
 }
 
+bool VInputHandler::GetButtonInput(const sf::String& name, ButtonInput& input)
+{
+	if (buttonInputs.find(name) != buttonInputs.end())
+	{
+		input = buttonInputs[name];
+		return true;
+	}
+
+	return false;
+}
+
+bool VInputHandler::GetAxisInput(const sf::String& name, AxisInput& input)
+{
+	if (axisInputs.find(name) != axisInputs.end())
+	{
+		input = axisInputs[name];
+		return true;
+	}
+
+	return false;
+}
+
 bool VInputHandler::IsGamepadActive()
 {
 	return isGamepadActive;
@@ -72,7 +94,7 @@ int VInputHandler::GetJoystickID(int ControllerIndex)
 }
 #endif
 
-bool VInputHandler::IsButtonPressed(sf::String name, int controller)
+bool VInputHandler::IsButtonPressed(const sf::String& name, int controller)
 {
 	if (buttonInputs.find(name) != buttonInputs.end())
 	{
@@ -82,7 +104,7 @@ bool VInputHandler::IsButtonPressed(sf::String name, int controller)
 	return false;
 }
 
-bool VInputHandler::IsButtonDown(sf::String name, int controller)
+bool VInputHandler::IsButtonDown(const sf::String& name, int controller)
 {
 	if (buttonInputs.find(name) != buttonInputs.end())
 	{
@@ -92,7 +114,7 @@ bool VInputHandler::IsButtonDown(sf::String name, int controller)
 	return false;
 }
 
-bool VInputHandler::IsButtonUp(sf::String name, int controller)
+bool VInputHandler::IsButtonUp(const sf::String& name, int controller)
 {
 	if (buttonInputs.find(name) != buttonInputs.end())
 	{
@@ -102,7 +124,7 @@ bool VInputHandler::IsButtonUp(sf::String name, int controller)
 	return false;
 }
 
-bool VInputHandler::IsButtonReleased(sf::String name, int controller)
+bool VInputHandler::IsButtonReleased(const sf::String& name, int controller)
 {
 	if (buttonInputs.find(name) != buttonInputs.end())
 	{
@@ -112,7 +134,7 @@ bool VInputHandler::IsButtonReleased(sf::String name, int controller)
 	return false;
 }
 
-float VInputHandler::CurrentAxisValue(sf::String name, int controller)
+float VInputHandler::CurrentAxisValue(const sf::String& name, int controller)
 {
 	if (axisInputs.find(name) != axisInputs.end())
 	{
@@ -122,7 +144,7 @@ float VInputHandler::CurrentAxisValue(sf::String name, int controller)
 	return 0;
 }
 
-float VInputHandler::LastAxisValue(sf::String name, int controller)
+float VInputHandler::LastAxisValue(const sf::String& name, int controller)
 {
 	if (axisInputs.find(name) != axisInputs.end())
 	{
