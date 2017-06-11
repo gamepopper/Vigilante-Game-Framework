@@ -345,6 +345,12 @@ void VGroup::OrganiseNULLS()
 
 void VGroup::Swap(int a, int b)
 {
+	if (a < 0 || a >= length)
+		return;
+
+	if (b < 0 || b >= length)
+		return;
+
 	VBase* temp = members[a];
 	members[a] = members[b];
 	members[b] = temp;
