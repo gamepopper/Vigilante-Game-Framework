@@ -233,6 +233,8 @@ class TilemapState : public VSubState
 
 	VTilemap* tilemap;
 	VSprite* playerControl;
+	VSprite* platform[2];
+	float timer = 0;
 
 public:
 	TilemapState() : VSubState() {}
@@ -248,17 +250,42 @@ public:
 		tilemap->SetTileRenderID('~', 0, 1);
 		Add(tilemap);
 
+		platform[0] = new VSprite();
+		platform[0]->MakeGraphic(64, 32, VColour::HSVtoRGB(0, 0.0f, 0.75f), 1.0f, sf::Color::Red);
+		platform[0]->SetPositionAtCentre(24.5f * 32, 10.5f * 32.0f);
+		platform[0]->Immovable = true;
+		Add(platform[0]);
+
+		platform[1] = new VSprite();
+		platform[1]->MakeGraphic(64, 32, VColour::HSVtoRGB(0, 0.0f, 0.75f), 1.0f, sf::Color::Red);
+		platform[1]->SetPositionAtCentre(42.5f * 32, 7.5f * 32.0f);
+		platform[1]->Immovable = true;
+		Add(platform[1]);
+
 		VGlobal::p()->WorldBounds.width = tilemap->Size.x;
 		VGlobal::p()->WorldBounds.height = tilemap->Size.y;
 
+		sf::Vector2f playerPos;
+		for (int y = 0; y < tilemap->Size.y / tilemap->TileSize.y; y++)
+		{
+			for (int x = 0; x < tilemap->Size.x / tilemap->TileSize.x; x++)
+			{
+				if (tilemap->GetTileID(x, y) == '@')
+				{
+					playerPos = (sf::Vector2f(x, y) * 32.0f) + sf::Vector2f(16, 16);
+					break;
+				}
+			}
+		}
+
 		playerControl = new VSprite();
 		playerControl->MakeGraphic(32, 32, sf::Color::White);
-		playerControl->SetPositionAtCentre(VGlobal::p()->Width / 2.0f, VGlobal::p()->Height / 2.0f);
+		playerControl->SetPositionAtCentre(playerPos);
 		playerControl->Drag = sf::Vector2f(500, 500);
-		playerControl->MaxVelocity = sf::Vector2f(200, 200);
+		playerControl->MaxVelocity = sf::Vector2f(300, 600);
 		Add(playerControl);
 
-		ParentState->Cameras[0]->Follow(playerControl, 0.5f, TOPDOWN, 0.8f, 0.05f);
+		ParentState->Cameras[0]->Follow(playerControl, 0.5f, PLATFORMER, 0.8f, 0.05f);
 		UseParentCamera = true;
 	}
 
@@ -272,8 +299,35 @@ public:
 	virtual void Update(float dt)
 	{
 		VSUPERCLASS::Update(dt);
-		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("leftX") * 3, VGlobal::p()->Input.CurrentAxisValue("leftY") * 3);
+
+		timer += dt;
+
+		platform[0]->Velocity.x = sinf(timer) * 32.0f;
+		platform[1]->Velocity.y = sinf(timer) * 32.0f;
+
+		playerControl->Velocity.x = 0;
+		if (VGlobal::p()->Input.CurrentAxisValue("leftX") < 0)
+			playerControl->Velocity.x -= 200.0f;
+		if (VGlobal::p()->Input.CurrentAxisValue("leftX") > 0)
+			playerControl->Velocity.x += 200.0f;
+
+		if (VGlobal::p()->Input.CurrentAxisValue("leftY") >= 0)
+			playerControl->Acceleration.y = 700.0f;
+		else
+			playerControl->Acceleration.y = 980.0f;
+
 		VGlobal::p()->Collides(playerControl, tilemap);
+		VGlobal::p()->Collides(playerControl, platform[0]);
+		VGlobal::p()->Collides(playerControl, platform[1]);
+
+		if (VGlobal::p()->Input.CurrentAxisValue("leftY") < 0)
+		{
+			bool touchFloor = playerControl->WasTouching & SidesTouching::TOUCHBOTTOM;
+			if (touchFloor && VGlobal::p()->Input.LastAxisValue("leftY") >= 0)
+			{
+				playerControl->Velocity.y = -600.0f;
+			}
+		}
 	}
 };
 
