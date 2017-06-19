@@ -1,6 +1,7 @@
 #include "VGlobal.h"
 #include "VObject.h"
 #include "VPostEffect.h"
+#include "VTimer.h"
 
 VGlobal* VGlobal::Instance = NULL;
 
@@ -102,6 +103,11 @@ void VGlobal::ChangeState(VState* state)
 	{
 		if (!Async.ActiveAsyncFunctions())
 		{
+			if (VTimeManager::AnyActiveTimers())
+			{
+				VTimeManager::p()->Clear();
+			}
+
 			gsm->ChangeState(nextState);
 			nextState = NULL;
 			IfChangedState = false;

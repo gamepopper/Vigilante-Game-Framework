@@ -16,6 +16,7 @@
 #include "../VFrame/XInputDevice.h"
 #include "../VFrame/V3DScene.h"
 #include "../VFrame/V3DModel.h"
+#include "../VFrame/VTimer.h"
 
 #include <iostream>
 #include <sstream>
@@ -234,7 +235,7 @@ class TilemapState : public VSubState
 	VTilemap* tilemap;
 	VSprite* playerControl;
 	VSprite* platform[2];
-	float timer = 0;
+	VTimer* timer;
 
 public:
 	TilemapState() : VSubState() {}
@@ -254,12 +255,14 @@ public:
 		platform[0]->MakeGraphic(64, 32, VColour::HSVtoRGB(0, 0.0f, 0.75f), 1.0f, sf::Color::Red);
 		platform[0]->SetPositionAtCentre(24.5f * 32, 10.5f * 32.0f);
 		platform[0]->Immovable = true;
+		platform[0]->Velocity.x = 32.0f;
 		Add(platform[0]);
 
 		platform[1] = new VSprite();
 		platform[1]->MakeGraphic(64, 32, VColour::HSVtoRGB(0, 0.0f, 0.75f), 1.0f, sf::Color::Red);
 		platform[1]->SetPositionAtCentre(42.5f * 32, 7.5f * 32.0f);
 		platform[1]->Immovable = true;
+		platform[1]->Velocity.y = 32.0f;
 		Add(platform[1]);
 
 		VGlobal::p()->WorldBounds.width = tilemap->Size.x;
@@ -272,7 +275,7 @@ public:
 			{
 				if (tilemap->GetTileID(x, y) == '@')
 				{
-					playerPos = (sf::Vector2f(x, y) * 32.0f) + sf::Vector2f(16, 16);
+					playerPos = (sf::Vector2f((float)x, (float)y) * 32.0f) + sf::Vector2f(16.0f, 16.0f);
 					break;
 				}
 			}
@@ -287,6 +290,8 @@ public:
 
 		ParentState->Cameras[0]->Follow(playerControl, 0.5f, PLATFORMER, 0.8f, 0.05f);
 		UseParentCamera = true;
+
+		timer = new VTimer();
 	}
 
 	virtual void Cleanup()
@@ -298,12 +303,23 @@ public:
 
 	virtual void Update(float dt)
 	{
+		if (VGlobal::p()->Input.IsButtonPressed("A"))
+		{
+			bool touchFloor = (playerControl->Touching & SidesTouching::TOUCHBOTTOM) > 0;
+			if (touchFloor)
+			{
+				playerControl->Velocity.y = -450.0f;
+			}
+		}
+
 		VSUPERCLASS::Update(dt);
 
-		timer += dt;
-
-		platform[0]->Velocity.x = sinf(timer) * 32.0f;
-		platform[1]->Velocity.y = sinf(timer) * 32.0f;
+		if (timer->Seconds() > 2.0f)
+		{
+			platform[0]->Velocity.x *= -1;
+			platform[1]->Velocity.y *= -1;
+			timer->Restart();
+		}
 
 		playerControl->Velocity.x = 0;
 		if (VGlobal::p()->Input.CurrentAxisValue("leftX") < 0)
@@ -311,7 +327,7 @@ public:
 		if (VGlobal::p()->Input.CurrentAxisValue("leftX") > 0)
 			playerControl->Velocity.x += 200.0f;
 
-		if (VGlobal::p()->Input.CurrentAxisValue("leftY") >= 0)
+		if (VGlobal::p()->Input.IsButtonDown("A"))
 			playerControl->Acceleration.y = 700.0f;
 		else
 			playerControl->Acceleration.y = 980.0f;
@@ -319,15 +335,6 @@ public:
 		VGlobal::p()->Collides(playerControl, tilemap);
 		VGlobal::p()->Collides(playerControl, platform[0]);
 		VGlobal::p()->Collides(playerControl, platform[1]);
-
-		if (VGlobal::p()->Input.CurrentAxisValue("leftY") < 0)
-		{
-			bool touchFloor = playerControl->WasTouching & SidesTouching::TOUCHBOTTOM;
-			if (touchFloor && VGlobal::p()->Input.LastAxisValue("leftY") >= 0)
-			{
-				playerControl->Velocity.y = -600.0f;
-			}
-		}
 	}
 };
 

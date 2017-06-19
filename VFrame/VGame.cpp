@@ -1,6 +1,7 @@
 #include "VGame.h"
 #include "VCamera.h"
 #include "VGlobal.h"
+#include "VTimer.h"
 #include "VPostEffect.h"
 #include "VState.h"
 
@@ -208,6 +209,11 @@ void VGame::ResizeCheck()
 
 void VGame::Update(float dt)
 {
+	if (VTimeManager::AnyActiveTimers())
+	{
+		VTimeManager::p()->Update(dt);
+	}
+
 	VGlobal::p()->Input.Update(dt);
 
 	if (VGlobal::p()->CurrentState()->active)
