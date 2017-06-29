@@ -164,6 +164,7 @@
     <ClInclude Include="VFrame\VPostEffect.h" />
     <ClInclude Include="VFrame\VSoundManager.h" />
     <ClInclude Include="VFrame\VTextPath.h" />
+    <ClInclude Include="VFrame\VTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="VFrame\arial.ttf" />

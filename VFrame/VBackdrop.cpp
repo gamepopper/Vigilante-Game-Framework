@@ -45,23 +45,48 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
 
-	if (CameraScroll)
-		Scroll = renderTargetView.getCenter() - scrollView.getCenter();
+	sf::Vector2f scroll = (renderTargetView.getCenter() - scrollView.getCenter());
+	if (!CameraScroll)
+		scroll = Scroll;
 
-	Scroll.x *= RepeatX ? ScrollFactor.x : 0;
-	Scroll.y *= RepeatY ? ScrollFactor.y : 0;
+	scroll.x *= ScrollFactor.x;
+	scroll.y *= ScrollFactor.y;
 
-	sf::Vector2f texSize = renderTargetView.getSize();
-	texSize.x /= Scale.x;
-	texSize.y /= Scale.y;
+	sf::Vector2f texSize = sf::Vector2f(texture.getSize());
 
-	sf::IntRect Rect = sf::IntRect(sf::FloatRect(Scroll - (texSize / 2.0f), texSize));
+	if (RepeatX)
+	{
+		texSize.x = renderTargetView.getSize().x;
+		texSize.x /= Scale.x;
+	}
+
+	if (RepeatY)
+	{
+		texSize.y = renderTargetView.getSize().y;
+		texSize.y /= Scale.y;
+	}
+
+	sf::IntRect Rect;
+	Rect.left = (scroll.x * (RepeatX ? 1 : 0)) - (texSize.x / 2.0f);
+	Rect.top = (scroll.y * (RepeatY ? 1 : 0)) - (texSize.y / 2.0f);
+	Rect.width = texSize.x;
+	Rect.height = texSize.y;
+
+	if (!CameraScroll)
+	{
+		Rect.left += texSize.x / 2.0f;
+		Rect.top += texSize.y / 2.0f;
+	}
+
 	sprite.setTextureRect(Rect);
 
 	sf::Vector2f oldPosition = sprite.getPosition();
-	sprite.setPosition(oldPosition + (scrollView.getSize() / 2.0f - renderTargetView.getSize() / 2.0f));
+	sf::Vector2f newPosition = oldPosition + (scrollView.getSize() / 2.0f - renderTargetView.getSize() / 2.0f);
+	newPosition.x -= RepeatX ? 0 : scroll.x;
+	newPosition.y -= RepeatY ? 0 : scroll.y;
+	sprite.setPosition(newPosition);
 
-	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
+	scroll = renderTargetView.getCenter() - scrollView.getCenter();
 	scroll.x *= RepeatX ? 0 : ScrollFactor.x;
 	scroll.y *= RepeatY ? 0 : ScrollFactor.y;
 

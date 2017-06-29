@@ -51,6 +51,11 @@ public:
 		return frames[currentFrame];
 	}
 
+	int GetFrameCount()
+	{
+		return totalFrames;
+	}
+
 	void SetLooping(bool Looping)
 	{
 		looping = Looping;

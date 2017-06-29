@@ -76,8 +76,11 @@ public:
 	{
 		if (currentAnim != "" && !pause)
 		{
-			lastFrame = animationList[currentAnim]->GetCurrentFrame();
-			animationList[currentAnim]->Update(dt);
+			if (animationList[currentAnim]->GetFrameCount() > 1)
+			{
+				lastFrame = animationList[currentAnim]->GetCurrentFrame();
+				animationList[currentAnim]->Update(dt);
+			}
 		}
 	}
 
