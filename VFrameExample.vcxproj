@@ -121,6 +121,7 @@
     <ClCompile Include="VFrame\VPostEffect.cpp" />
     <ClCompile Include="VFrame\VSoundManager.cpp" />
     <ClCompile Include="VFrame\VTextPath.cpp" />
+    <ClCompile Include="VFrame\VTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\BloomPostEffect.h" />
