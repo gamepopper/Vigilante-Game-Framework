@@ -50,11 +50,11 @@ public:
 	sf::Vector2f Drag;
 	sf::Vector2f MaxVelocity;
 	sf::Vector2f ScrollFactor;
-	float RotateFactor = 1;
-	float ZoomFactor = 1;
-	float Elasticity = 0;
-	float Mass = 1;
-	float Health = 100;
+	float RotateFactor = 1.0f;
+	float ZoomFactor = 1.0f;
+	float Elasticity = 0.0f;
+	float Mass = 1.0f;
+	float Health = 100.0f;
 	int Touching = SidesTouching::TOUCHNONE;
 	int WasTouching = SidesTouching::TOUCHNONE;
 	bool CollisionXDrag = true;

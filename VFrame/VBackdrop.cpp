@@ -67,10 +67,10 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	}
 
 	sf::IntRect Rect;
-	Rect.left = (scroll.x * (RepeatX ? 1 : 0)) - (texSize.x / 2.0f);
-	Rect.top = (scroll.y * (RepeatY ? 1 : 0)) - (texSize.y / 2.0f);
-	Rect.width = texSize.x;
-	Rect.height = texSize.y;
+	Rect.left = static_cast<int>((scroll.x * (RepeatX ? 1 : 0)) - (texSize.x / 2.0f));
+	Rect.top = static_cast<int>((scroll.y * (RepeatY ? 1 : 0)) - (texSize.y / 2.0f));
+	Rect.width = static_cast<int>(texSize.x);
+	Rect.height = static_cast<int>(texSize.y);
 
 	if (!CameraScroll)
 	{
