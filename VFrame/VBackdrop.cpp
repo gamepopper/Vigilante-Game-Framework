@@ -74,8 +74,8 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 
 	if (!CameraScroll)
 	{
-		Rect.left += texSize.x / 2.0f;
-		Rect.top += texSize.y / 2.0f;
+		Rect.left += static_cast<int>(texSize.x / 2.0f);
+		Rect.top += static_cast<int>(texSize.y / 2.0f);
 	}
 
 	sprite.setTextureRect(Rect);
