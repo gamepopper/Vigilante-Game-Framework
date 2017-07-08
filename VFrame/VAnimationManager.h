@@ -41,6 +41,11 @@ public:
 		}
 	}
 
+	sf::String CurrentAnimationName()
+	{
+		return currentAnim;
+	}
+
 	void Play(sf::String name)
 	{
 		if (animationList.find(name) != animationList.end() &&
