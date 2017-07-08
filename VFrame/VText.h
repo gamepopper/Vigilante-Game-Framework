@@ -35,6 +35,7 @@ protected:
 	unsigned int helperStyle = 0;
 	int helperLineSpace = 0;
 	float helperOutlineThickness = 0;
+	sf::Vector2f helperOutlineOffset;
 
 	sf::Vector2f origin;
 	sf::Color fillColour = sf::Color::White;
@@ -59,6 +60,7 @@ public:
 	VTextAlign Alignment = ALIGNLEFT;
 	sf::Vector2f Origin;
 	float OutlineThickness = 0.0f;
+	sf::Vector2f OutlineOffset;
 
 	VText(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8) : 	VObject(x,y),
 																										helperText(text),

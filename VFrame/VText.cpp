@@ -17,6 +17,7 @@ void VText::setDimensions()
 	helperStyle = Style;
 	helperOrigin = Origin;
 	helperOutlineThickness = OutlineThickness;
+	helperOutlineOffset = helperOutlineOffset;
 
 	bool bold = Style & sf::Text::Bold;
 	int newLineCount = 1;
@@ -133,7 +134,7 @@ void VText::updateTextRender(sf::String text)
 
 			if (outlined)
 			{
-				setCharacterRender(curChar, x, y, outlineColour, bold, italic, (i * 6), verts, OutlineThickness);
+				setCharacterRender(curChar, x + OutlineOffset.x, y + OutlineOffset.y, outlineColour, bold, italic, (i * 6), verts, OutlineThickness);
 				setCharacterRender(curChar, x, y, fillColour, bold, italic, outlineOffset + (i * 6), verts, 0.0f);
 			}
 			else
@@ -151,7 +152,7 @@ void VText::updateTextRender(sf::String text)
 
 			if (outlined)
 			{
-				setTextLine(x, y, outlineColour, underlineOffset, underlineThickness, vertOffset, verts, OutlineThickness);
+				setTextLine(x + OutlineOffset.x, y + OutlineOffset.y, outlineColour, underlineOffset, underlineThickness, vertOffset, verts, OutlineThickness);
 				setTextLine(x, y, fillColour, underlineOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
 			}
 			else
@@ -167,7 +168,7 @@ void VText::updateTextRender(sf::String text)
 
 			if (outlined)
 			{
-				setTextLine(x, y, outlineColour, strikeThroughOffset, underlineThickness, vertOffset, verts, OutlineThickness);
+				setTextLine(x + OutlineOffset.x, y + OutlineOffset.y, outlineColour, strikeThroughOffset, underlineThickness, vertOffset, verts, OutlineThickness);
 				setTextLine(x, y, fillColour, strikeThroughOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
 			}
 			else
@@ -303,7 +304,8 @@ void VText::Update(float dt)
 		LineSpaceModifier != helperLineSpace ||
 		Style != helperStyle ||
 		Origin != helperOrigin ||
-		OutlineThickness != helperOutlineThickness)
+		OutlineThickness != helperOutlineThickness ||
+		OutlineOffset != helperOutlineOffset)
 	{
 		setDimensions();
 	}
