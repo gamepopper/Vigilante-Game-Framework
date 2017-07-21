@@ -1,4 +1,5 @@
 #include "VObject.h"
+#include "VTile.h"
 #include <cmath>
 
 float VObject::SeparateBias = 4;
@@ -28,15 +29,21 @@ bool VObject::separateX(VObject* a, VObject *b)
 	}
 
 	//Tilemap
-	/*if (a->type == VType::TILE)
+	if (a->type == VType::TILE)
 	{
+		VTile* t = dynamic_cast<VTile*>(a);
 
+		if (t->Callback != nullptr)
+			t->Callback(b);
 	}
 
 	if (b->type == VType::TILE)
 	{
+		VTile* t = dynamic_cast<VTile*>(b);
 
-	}*/
+		if (t->Callback != nullptr)
+			t->Callback(a);
+	}
 
 	float overlap = overlapX(a, b);
 	if (overlap != 0)
@@ -86,15 +93,21 @@ bool VObject::separateY(VObject* a, VObject *b)
 	}
 
 	//Tilemap
-	/*if (a->type == VType::TILE)
+	if (a->type == VType::TILE)
 	{
+		VTile* t = dynamic_cast<VTile*>(a);
 
+		if (t->Callback != nullptr)
+			t->Callback(b);
 	}
 
 	if (b->type == VType::TILE)
 	{
+		VTile* t = dynamic_cast<VTile*>(b);
 
-	}*/
+		if (t->Callback != nullptr)
+			t->Callback(a);
+	}
 
 	float overlap = overlapY(a, b);
 	if (overlap != 0)
@@ -156,15 +169,21 @@ bool VObject::separateCircle(VObject* a, VObject *b)
 	}
 
 	//Tilemap
-	/*if (a->type == VType::TILE)
+	if (a->type == VType::TILE)
 	{
+		VTile* t = dynamic_cast<VTile*>(a);
 
+		if (t->Callback != nullptr)
+			t->Callback(b);
 	}
 
 	if (b->type == VType::TILE)
 	{
+		VTile* t = dynamic_cast<VTile*>(b);
 
-	}*/
+		if (t->Callback != nullptr)
+			t->Callback(a);
+	}
 
 	sf::Vector2f overlap = overlapCircle(a, b);
 	if (overlap.x != 0 || overlap.y != 0)
@@ -260,28 +279,28 @@ float VObject::overlapX(VObject* a, VObject *b, bool maxOverlap)
 			{
 				overlap = a->Position.x + a->Size.x - b->Position.x;
 
-				if ((maxOverlap && overlap > maxOverlapDist) || !a->Solid || !b->Solid)
+				if ((maxOverlap && overlap > maxOverlapDist) || (a->AllowCollisions & SidesTouching::TOUCHRIGHT) == 0 || (b->AllowCollisions & SidesTouching::TOUCHLEFT) == 0)
 				{
 					overlap = 0;
 				}
 				else
 				{
-					a->Touching |= SidesTouching::TOUCHRIGHT;
-					b->Touching |= SidesTouching::TOUCHLEFT;
+					a->Touching |= TOUCHRIGHT;
+					b->Touching |= TOUCHLEFT;
 				}
 			}
 			else if (aDiff < bDiff)
 			{
 				overlap = a->Position.x - b->Size.x - b->Position.x;
 				
-				if ((maxOverlap && -overlap > maxOverlapDist) || !a->Solid || !b->Solid)
+				if ((maxOverlap && -overlap > maxOverlapDist) || (a->AllowCollisions & SidesTouching::TOUCHLEFT) == 0 || (b->AllowCollisions & SidesTouching::TOUCHRIGHT) == 0)
 				{
 					overlap = 0;
 				}
 				else
 				{
-					a->Touching |= SidesTouching::TOUCHLEFT;
-					b->Touching |= SidesTouching::TOUCHRIGHT;
+					a->Touching |= TOUCHLEFT;
+					b->Touching |= TOUCHRIGHT;
 				}
 			}
 		}
@@ -309,28 +328,28 @@ float VObject::overlapY(VObject* a, VObject *b, bool maxOverlap)
 			{
 				overlap = a->Position.y + a->Size.y - b->Position.y;
 
-				if ((maxOverlap && overlap > maxOverlapDist) || !a->Solid || !b->Solid)
+				if ((maxOverlap && overlap > maxOverlapDist) || (a->AllowCollisions & TOUCHBOTTOM) == 0 || (b->AllowCollisions & TOUCHTOP) == 0)
 				{
 					overlap = 0;
 				}
 				else
 				{
-					a->Touching |= SidesTouching::TOUCHBOTTOM;
-					b->Touching |= SidesTouching::TOUCHTOP;
+					a->Touching |= TOUCHBOTTOM;
+					b->Touching |= TOUCHTOP;
 				}
 			}
 			else if (aDiff < bDiff)
 			{
 				overlap = a->Position.y - b->Size.y - b->Position.y;
 
-				if ((maxOverlap && -overlap > maxOverlapDist) || !a->Solid || !b->Solid)
+				if ((maxOverlap && -overlap > maxOverlapDist) || (a->AllowCollisions & TOUCHTOP) == 0 || (b->AllowCollisions & TOUCHBOTTOM) == 0)
 				{
 					overlap = 0;
 				}
 				else
 				{
-					a->Touching |= SidesTouching::TOUCHTOP;
-					b->Touching |= SidesTouching::TOUCHBOTTOM;
+					a->Touching |= TOUCHTOP;
+					b->Touching |= TOUCHBOTTOM;
 				}
 			}
 		}
@@ -358,7 +377,7 @@ sf::Vector2f VObject::overlapCircle(VObject* a, VObject *b, bool maxOverlap)
 			float maxOverlapDist = sqrtf((max.x * max.x) + (max.y * max.y));
 			float o = ceilf((a->Radius + b->Radius) - length);
 
-			if ((maxOverlap && o > maxOverlapDist) || !a->Solid || !b->Solid)
+			if ((maxOverlap && o > maxOverlapDist) || !a->IsSolid() || !b->IsSolid())
 			{
 				o = 0;
 			}
@@ -370,6 +389,11 @@ sf::Vector2f VObject::overlapCircle(VObject* a, VObject *b, bool maxOverlap)
 	}
 
 	return overlap;
+}
+
+bool VObject::IsSolid()
+{
+	return (AllowCollisions & TOUCHALL) > 0;
 }
 
 void VObject::SetPositionAtCentre(float x, float y)
@@ -410,6 +434,15 @@ void VObject::updateMotion(float dt)
 {
 	float deltaV;
 	float delta;
+
+	if (Velocity.x > MaxVelocity.x)
+		Velocity.x = MaxVelocity.x;
+	if (Velocity.x < -MaxVelocity.x)
+		Velocity.x = -MaxVelocity.x;
+	if (Velocity.y > MaxVelocity.y)
+		Velocity.y = MaxVelocity.y;
+	if (Velocity.y < -MaxVelocity.y)
+		Velocity.y = -MaxVelocity.y;
 
 	deltaV = 0.5f * (computeVelocity(AngleVelocity, AngleAcceleration, AngleDrag, AngleMax, dt) - AngleVelocity);
 	AngleVelocity += deltaV;
@@ -477,15 +510,6 @@ void VObject::Update(float dt)
 
 	if (Moves)
 	{
-		if (Velocity.x > MaxVelocity.x)
-			Velocity.x = MaxVelocity.x;
-		if (Velocity.x < -MaxVelocity.x)
-			Velocity.x = -MaxVelocity.x;
-		if (Velocity.y > MaxVelocity.y)
-			Velocity.y = MaxVelocity.y;
-		if (Velocity.y < -MaxVelocity.y)
-			Velocity.y = -MaxVelocity.y;
-
 		updateMotion(dt);
 	}
 

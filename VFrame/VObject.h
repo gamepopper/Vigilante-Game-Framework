@@ -7,11 +7,12 @@
 enum SidesTouching
 {
 	TOUCHNONE	= 0,
-	TOUCHLEFT = 1 << 0,
-	TOUCHRIGHT = 1 << 1,
-	TOUCHTOP = 1 << 2,
+	TOUCHLEFT	= 1 << 0,
+	TOUCHRIGHT	= 1 << 1,
+	TOUCHTOP	= 1 << 2,
 	TOUCHBOTTOM = 1 << 3,
-	TOUCHALL = TOUCHLEFT | TOUCHRIGHT | TOUCHTOP | TOUCHBOTTOM
+	TOUCHWALL	= TOUCHLEFT | TOUCHRIGHT,
+	TOUCHALL	= TOUCHLEFT | TOUCHRIGHT | TOUCHTOP | TOUCHBOTTOM
 };
 
 class VObject : public VBase
@@ -36,27 +37,34 @@ public:
 	sf::Vector2f Position;
 	sf::Vector2f Size;
 	sf::Vector2f Last;
+
 	float Radius;
 	float Angle = 0;
 	float AngleVelocity = 0;
 	float AngleAcceleration = 0;
 	float AngleDrag = 0;
 	float AngleMax = 10000;
+
 	bool Moves = true;
-	bool Immovable = false;
-	bool Solid = true;
+
 	sf::Vector2f Velocity;
 	sf::Vector2f Acceleration;
 	sf::Vector2f Drag;
 	sf::Vector2f MaxVelocity;
+
 	sf::Vector2f ScrollFactor;
-	float RotateFactor = 1.0f;
-	float ZoomFactor = 1.0f;
-	float Elasticity = 0.0f;
-	float Mass = 1.0f;
-	float Health = 100.0f;
+	float RotateFactor = 1;
+	float ZoomFactor = 1;
+
+	float Elasticity = 0;
+	float Mass = 1;
+
+	float Health = 100;
+
+	bool Immovable = false;
 	int Touching = SidesTouching::TOUCHNONE;
 	int WasTouching = SidesTouching::TOUCHNONE;
+	int AllowCollisions = SidesTouching::TOUCHALL;
 	bool CollisionXDrag = true;
 
 #if _DEBUG
@@ -100,6 +108,8 @@ public:
 
 	void SetPositionAtCentre(float x, float y);
 	void SetPositionAtCentre(sf::Vector2f newPos);
+
+	bool IsSolid();
 
 	virtual void Reset(sf::Vector2f newPos);
 	virtual void Reset(float x, float y);

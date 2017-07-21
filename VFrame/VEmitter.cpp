@@ -344,7 +344,7 @@ void VEmitter::EmitParticle()
 		particle->Reset(0, 0);
 
 		particle->Immovable = Immovable;
-		particle->Solid = Solid;
+		particle->AllowCollisions = AllowCollisions;
 
 		if (Circular)
 		{

@@ -32,7 +32,7 @@ public:
 	sf::Vector2f Size;
 	bool Moves = true;
 	bool Immovable = false;
-	bool Solid = false;
+	int AllowCollisions = SidesTouching::TOUCHALL;
 	sf::Vector2f ScrollFactor;
 	float RotateFactor = 1;
 	float ZoomFactor = 1;
