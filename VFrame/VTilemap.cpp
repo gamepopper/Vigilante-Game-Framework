@@ -11,7 +11,7 @@ using std::wifstream;
 using std::vector;
 
 void VTilemap::setupTilemap(sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
-	vector<char> collideFilter)
+	const std::vector<char>& collision)
 {
 	if (VGlobal::p()->Content->LoadTexture(graphicFile, texture))
 	{
@@ -19,15 +19,12 @@ void VTilemap::setupTilemap(sf::String graphicFile, int tileWidth, int tileHeigh
 		TileSize.y = tileHeight;
 		Size.x *= TileSize.x;
 		Size.y *= TileSize.y;
-		collisionFilter = collideFilter;
 
 		tileMapWidth = texture.getSize().x / TileSize.x;
 
 		AutoTile = autoTile;
 
-		updateCollisionBox();
-
-		dirty = true;
+		ResetCollision(collision);
 	}
 }
 
@@ -132,10 +129,24 @@ void VTilemap::updateCollisionBox()
 			//If already processed then skip.
 			if (processed[(y * mapWidth) + x]) continue;
 
+			char tile = tilemap[(y * mapWidth) + x];
+
 			//If tilemap is not a wall, process then skip.
-			if (find(collisionFilter.begin(), collisionFilter.end(), tilemap[(y * mapWidth) + x]) != collisionFilter.end())
+			if (collisionDir.find(tile) == collisionDir.end())
 			{
 				processed[(y * mapWidth) + x] = true;
+				continue;
+			}
+
+			//Any special collision conditions get their own VTile
+			if (collisionDir[tile]->AllowCollisions != SidesTouching::TOUCHALL ||
+				collisionDir[tile]->Callback != nullptr)
+			{
+				VTile* t = new VTile(static_cast<float>(x * TileSize.x) + Position.x, static_cast<float>(y * TileSize.y) + Position.y, static_cast<float>(TileSize.x), static_cast<float>(TileSize.y));
+				t->AllowCollisions = collisionDir[tile]->AllowCollisions;
+				t->Callback = collisionDir[tile]->Callback;
+				t->Update(0);
+				Tiles.push_back(t);
 				continue;
 			}
 
@@ -143,11 +154,21 @@ void VTilemap::updateCollisionBox()
 			int width = 1, height = 1;
 			for (int i = x + 1; i < mapWidth; i++)
 			{
+				char nextTile = tilemap[(y * mapWidth) + i];
+
 				//If not wall or already processed, stop here, else increase width.
-				if (find(collisionFilter.begin(), collisionFilter.end(), tilemap[(y * mapWidth) + i]) == collisionFilter.end() && !processed[(y * mapWidth) + i])
+				if (collisionDir.find(nextTile) != collisionDir.end() && !processed[(y * mapWidth) + i])
 				{
-					width++;
-					processed[(y * mapWidth) + i] = true;
+					if (collisionDir[nextTile]->AllowCollisions != SidesTouching::TOUCHALL ||
+						collisionDir[nextTile]->Callback != nullptr)
+					{
+						break;
+					}
+					else
+					{
+						width++;
+						processed[(y * mapWidth) + i] = true;
+					}
 				}
 				else
 				{
@@ -160,16 +181,25 @@ void VTilemap::updateCollisionBox()
 			{
 				for (int j = y + 1; j < mapHeight; j++)
 				{
-
 					bool clear = true;
 					for (int i = x; i < (x + width); i++)
 					{
-						if (find(collisionFilter.begin(), collisionFilter.end(), tilemap[(j * mapWidth) + i]) != collisionFilter.end() || processed[(j * mapWidth) + i] == true)
+						char nextTile = tilemap[(j * mapWidth) + i];
+						if (collisionDir.find(nextTile) == collisionDir.end() || processed[(j * mapWidth) + i] == true)
 						{
 							clear = false;
 							break;
 						}
-						processed[(j * mapWidth) + i] = true;
+						else if (collisionDir[nextTile]->AllowCollisions != SidesTouching::TOUCHALL ||
+							collisionDir[nextTile]->Callback != nullptr)
+						{
+							clear = false;
+							break;
+						}
+						else
+						{
+							processed[(j * mapWidth) + i] = true;
+						}
 					}
 
 					//If row is clear, increase height.
@@ -211,7 +241,7 @@ void VTilemap::clearTiles()
 }
 
 void VTilemap::LoadFromCSV(sf::String mapData, sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
-	vector<char> collideFilter)
+	const std::vector<char>& collision)
 {
 	tilemap.clear();
 	std::locale ulocale(std::locale(), new std::codecvt_utf8<wchar_t>);
@@ -233,12 +263,12 @@ void VTilemap::LoadFromCSV(sf::String mapData, sf::String graphicFile, int tileW
 	mapWidth = static_cast<int>(Size.x);
 	mapHeight = static_cast<int>(Size.y);
 
-	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collideFilter);
+	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision);
 }
 
 void VTilemap::LoadFromArray(vector<char> mapData, int mapWidth, int mapHeight,
 	sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
-	vector<char> collideFilter)
+	const std::vector<char>& collision)
 {
 	tilemap = mapData;
 
@@ -250,11 +280,11 @@ void VTilemap::LoadFromArray(vector<char> mapData, int mapWidth, int mapHeight,
 		Size.y = static_cast<float>(mapHeight);
 	}
 
-	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collideFilter);
+	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision);
 }
 
 void VTilemap::LoadFrom2DArray(vector<vector<char>> mapData, sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
-	vector<char> collideFilter)
+	const std::vector<char>& collision)
 {
 	mapWidth = mapData.size() ? mapData[0].size() : 0;
 	mapHeight = mapData.size();
@@ -271,7 +301,89 @@ void VTilemap::LoadFrom2DArray(vector<vector<char>> mapData, sf::String graphicF
 	Size.x = static_cast<float>(mapWidth);
 	Size.y = static_cast<float>(mapHeight);
 
-	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collideFilter);
+	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision);
+}
+
+void VTilemap::SetTileRenderID(char ID, int tileNumber, int autoTileNumber)
+{
+	VTileRenderInfo* tileInfo = new VTileRenderInfo();
+	tileInfo->TileNumber = tileNumber;
+	tileInfo->AutoTileLevel = autoTileNumber;
+
+	renderDir.insert(renderDir.begin(), std::pair<char, VTileRenderInfo*>(ID, tileInfo));
+	dirty = true;
+}
+
+void VTilemap::SetTileCollisionID(char ID, int AllowCollisions, std::function<void(VObject*, VObject*)> Callback)
+{
+	if (collisionDir.find(ID) == collisionDir.end())
+	{
+		collisionDir[ID] = new VTileCollisionInfo();
+	}
+
+	collisionDir[ID]->AllowCollisions = AllowCollisions;
+	collisionDir[ID]->Callback = Callback;
+
+	updateCollisionBox();
+	dirty = true;
+}
+
+char VTilemap::GetTileID(unsigned int x, unsigned int y)
+{
+	if ((y * mapWidth) + x < tilemap.size())
+	{
+		return tilemap[(y * mapWidth) + x];
+	}
+
+	return '\0';
+}
+
+char VTilemap::GetTileID(sf::Vector2i position)
+{
+	return GetTileID(position.x, position.y);
+}
+
+char VTilemap::GetTileIDFromPosition(sf::Vector2f tilemapPosition)
+{
+	return GetTileID((unsigned int)(tilemapPosition.x / TileSize.x), (unsigned int)(tilemapPosition.y / TileSize.y));
+}
+
+void VTilemap::ChangeTile(int x, int y, char ID)
+{
+	tilemap[(y * mapWidth) + x] = ID;
+
+	updateTilemap();
+	updateCollisionBox();
+	dirty = true;
+}
+
+void VTilemap::ChangeTile(const std::vector<sf::Vector2u>& positions, char ID)
+{
+	for (sf::Vector2u pos : positions)
+	{
+		tilemap[(pos.y * mapWidth) + pos.x] = ID;
+	}
+
+	updateTilemap();
+	updateCollisionBox();
+	dirty = true;
+}
+
+void VTilemap::ResetCollision(const std::vector<char>& collision)
+{
+	for (std::pair<char, VTileCollisionInfo*> t : collisionDir)
+	{
+		delete t.second;
+		t.second = NULL;
+	}
+
+	collisionDir.clear();
+	
+	for (unsigned int i = 0; i < collision.size(); i++)
+		collisionDir[collision[i]] = new VTileCollisionInfo();
+
+	updateCollisionBox();
+	dirty = true;
 }
 
 void VTilemap::SetTint(const sf::Color& color)
@@ -284,6 +396,11 @@ void VTilemap::SetTint(const sf::Color& color)
 			vertices[i].color = color;
 		}
 	}
+}
+
+sf::Color const& VTilemap::GetTint()
+{
+	return colour;
 }
 
 void VTilemap::Destroy()
@@ -354,5 +471,29 @@ void VTilemap::Draw(sf::RenderTarget& RenderTarget)
 		states.transform *= transformable.getTransform();
 		RenderTarget.draw(vertices, states);
 		RenderTarget.setView(renderTargetView);
+
+#if _DEBUG
+		if (VGlobal::p()->DrawDebug)
+		{
+			debuggingVertices.resize(Tiles.size() * 8);
+			for (unsigned int t = 0; t < Tiles.size(); t++)
+			{
+				VTile* tile = Tiles[t];
+				debuggingVertices[(t * 8) + 0] = sf::Vertex(tile->Position, tile->DebugColor);
+				debuggingVertices[(t * 8) + 1] = sf::Vertex(tile->Position + sf::Vector2f(tile->Size.x, 0), tile->DebugColor);
+				debuggingVertices[(t * 8) + 2] = sf::Vertex(tile->Position + sf::Vector2f(tile->Size.x, 0), tile->DebugColor);
+				debuggingVertices[(t * 8) + 3] = sf::Vertex(tile->Position + tile->Size, tile->DebugColor);
+				debuggingVertices[(t * 8) + 4] = sf::Vertex(tile->Position + tile->Size, tile->DebugColor);
+				debuggingVertices[(t * 8) + 5] = sf::Vertex(tile->Position + sf::Vector2f(0, tile->Size.y), tile->DebugColor);
+				debuggingVertices[(t * 8) + 6] = sf::Vertex(tile->Position + sf::Vector2f(0, tile->Size.y), tile->DebugColor);
+				debuggingVertices[(t * 8) + 7] = sf::Vertex(tile->Position, tile->DebugColor);
+			}
+			RenderTarget.draw(debuggingVertices);
+		}
+		else
+		{
+			debuggingVertices.clear();
+		}
+#endif
 	}
 }

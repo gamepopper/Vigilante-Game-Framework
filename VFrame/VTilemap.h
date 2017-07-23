@@ -10,11 +10,18 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+#include <functional>
 
 struct VTileRenderInfo
 {
 	int TileNumber;
 	int AutoTileLevel;
+};
+
+struct VTileCollisionInfo
+{
+	int AllowCollisions = SidesTouching::TOUCHALL;
+	std::function<void(VObject*, VObject*)> Callback = nullptr;
 };
 
 class VTile;
@@ -23,9 +30,9 @@ class VTilemap : public VObject
 {
 protected:
 	std::vector<char> tilemap;
+	std::map<char, VTileCollisionInfo*> collisionDir;
 	std::map<char, VTileRenderInfo*> renderDir;
 	std::vector<int> autotile;
-	std::vector<char> collisionFilter;
 	int tileMapWidth = 0;
 
 	int mapWidth = 0;
@@ -39,9 +46,13 @@ protected:
 	sf::Transformable transformable;
 	sf::Color colour = sf::Color::White;
 
+#if _DEBUG
+	sf::VertexArray debuggingVertices;
+#endif
+
 	void setupTilemap(sf::String graphicFile,
 		int tileWidth = 0, int tileWeight = 0, bool autoTile = false,
-		std::vector<char> collideFilter = { '.' });
+		const std::vector<char>& collision = { '#' });
 
 	virtual void updateTransform() override;
 	void updateTilemap();
@@ -59,89 +70,42 @@ public:
 
 	VTilemap()
 	{
-		type = VType::TILE; 
+		type = VType::TILEMAP; 
 		Moves = false;
 #if _DEBUG
-		DebugColor = sf::Color(255, 0, 0, 128);
+		DebugColor = sf::Color::Transparent;
+		debuggingVertices.setPrimitiveType(sf::Lines);
 #endif
 	}
 
 	void LoadFromCSV(sf::String mapData, sf::String graphicFile, 
 		int tileWidth = 0, int tileWeight = 0, bool autoTile = false,
-		std::vector<char> collideFilter = { '.' });
+		const std::vector<char>& collision = { '#' });
 
 	void LoadFromArray(std::vector<char> mapData, int mapWidth, int mapHeight,
 		sf::String graphicFile, int tileWidth = 0, int tileWeight = 0, bool autoTile = false,
-		std::vector<char> collideFilter = { '.' });
+		const std::vector<char>& collision = { '#' });
 
 	void LoadFrom2DArray(std::vector<std::vector<char>> mapData, sf::String graphicFile, 
 		int tileWidth = 0, int tileWeight = 0, bool autoTile = false,
-		std::vector<char> collideFilter = { '.' });
+		const std::vector<char>& collision = { '#' });
 
 	//Sets tile to render at specific char in tilemap (ignored if using autotile)
-	void SetTileRenderID(char ID, int tileNumber = 0, int autoTileNumber = 0)
-	{
-		VTileRenderInfo* tileInfo = new VTileRenderInfo();
-		tileInfo->TileNumber = tileNumber;
-		tileInfo->AutoTileLevel = autoTileNumber;
+	void SetTileRenderID(char ID, int tileNumber = 0, int autoTileNumber = 0);
+	
+	void SetTileCollisionID(char ID, int AllowCollisions = TOUCHALL, std::function<void(VObject*, VObject*)> Callback = nullptr);
 
-		renderDir.insert(renderDir.begin(), std::pair<char, VTileRenderInfo*>(ID, tileInfo));
-		dirty = true;
-	}
+	char GetTileID(unsigned int x, unsigned int y);
+	char GetTileID(sf::Vector2i position);
+	char GetTileIDFromPosition(sf::Vector2f tilemapPosition);
 
-	char GetTileID(unsigned int x, unsigned int y)
-	{
-		if ((y * mapWidth) + x < tilemap.size())
-		{
-			return tilemap[(y * mapWidth) + x];
-		}
+	void ChangeTile(int x, int y, char ID);
+	void ChangeTile(const std::vector<sf::Vector2u>& positions, char ID);
 
-		return '\0';
-	}
-
-	char GetTileID(sf::Vector2i position)
-	{
-		return GetTileID(position.x, position.y);
-	}
-
-	char GetTileIDFromPosition(sf::Vector2f tilemapPosition)
-	{
-		return GetTileID((unsigned int)(tilemapPosition.x / TileSize.x), (unsigned int)(tilemapPosition.y / TileSize.y));
-	}
-
-	void ChangeTile(int x, int y, char ID)
-	{
-		tilemap[(y * mapWidth) + x] = ID;
-
-		updateTilemap();
-		updateCollisionBox();
-		dirty = true;
-	}
-
-	void ChangeTile(const std::vector<sf::Vector2u>& positions, char ID)
-	{
-		for(sf::Vector2u pos : positions)
-		{
-			tilemap[(pos.y * mapWidth) + pos.x] = ID;
-		}
-
-		updateTilemap();
-		updateCollisionBox();
-		dirty = true;
-	}
-
-	void UpdateCollisionFilter(std::vector<char> collideFilter)
-	{
-		collisionFilter = collideFilter;
-		updateCollisionBox();
-		dirty = true;
-	}
+	void ResetCollision(const std::vector<char>& collision = { '#' });
 
 	void SetTint(const sf::Color& color);
-	sf::Color const& GetTint()
-	{
-		return colour;
-	}
+	sf::Color const& GetTint();
 
 	virtual void Reset(sf::Vector2f newPos) {}
 	virtual void Reset(float x, float y) {}

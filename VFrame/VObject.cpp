@@ -34,7 +34,7 @@ bool VObject::separateX(VObject* a, VObject *b)
 		VTile* t = dynamic_cast<VTile*>(a);
 
 		if (t->Callback != nullptr)
-			t->Callback(b);
+			t->Callback(t, b);
 	}
 
 	if (b->type == VType::TILE)
@@ -42,7 +42,7 @@ bool VObject::separateX(VObject* a, VObject *b)
 		VTile* t = dynamic_cast<VTile*>(b);
 
 		if (t->Callback != nullptr)
-			t->Callback(a);
+			t->Callback(t, a);
 	}
 
 	float overlap = overlapX(a, b);
@@ -98,7 +98,7 @@ bool VObject::separateY(VObject* a, VObject *b)
 		VTile* t = dynamic_cast<VTile*>(a);
 
 		if (t->Callback != nullptr)
-			t->Callback(b);
+			t->Callback(t, b);
 	}
 
 	if (b->type == VType::TILE)
@@ -106,7 +106,7 @@ bool VObject::separateY(VObject* a, VObject *b)
 		VTile* t = dynamic_cast<VTile*>(b);
 
 		if (t->Callback != nullptr)
-			t->Callback(a);
+			t->Callback(t, a);
 	}
 
 	float overlap = overlapY(a, b);
@@ -174,7 +174,7 @@ bool VObject::separateCircle(VObject* a, VObject *b)
 		VTile* t = dynamic_cast<VTile*>(a);
 
 		if (t->Callback != nullptr)
-			t->Callback(b);
+			t->Callback(t, b);
 	}
 
 	if (b->type == VType::TILE)
@@ -182,7 +182,7 @@ bool VObject::separateCircle(VObject* a, VObject *b)
 		VTile* t = dynamic_cast<VTile*>(b);
 
 		if (t->Callback != nullptr)
-			t->Callback(a);
+			t->Callback(t, a);
 	}
 
 	sf::Vector2f overlap = overlapCircle(a, b);

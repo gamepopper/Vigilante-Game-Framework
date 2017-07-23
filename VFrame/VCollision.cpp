@@ -27,7 +27,7 @@ void VCollision::AddToListA(VBase* item)
 			}
 		}
 	}
-	else if (item->type == TILE)
+	else if (item->type == TILEMAP)
 	{
 		//If Tilemap, add all tiles to list.
 		VTilemap* tilemap = dynamic_cast<VTilemap*>(item);
@@ -80,22 +80,7 @@ void VCollision::AddToListB(VBase* item)
 			}
 		}
 	}
-	else if (item->type == TILE)
-	{
-		//If Tilemap, add all tiles to list.
-		VTilemap* tilemap = dynamic_cast<VTilemap*>(item);
-
-		if (tilemap != NULL)
-		{
-			vector<VTile*> tiles = tilemap->Tiles;
-
-			for (VTile* t : tiles)
-			{
-				AddToListB(t);
-			}
-		}
-	}
-	else if (item->type == TILE)
+	else if (item->type == TILEMAP)
 	{
 		//If Tilemap, add all tiles to list.
 		VTilemap* tilemap = dynamic_cast<VTilemap*>(item);

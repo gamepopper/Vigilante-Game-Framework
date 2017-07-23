@@ -16,6 +16,7 @@
 #include "../VFrame/XInputDevice.h"
 #include "../VFrame/V3DScene.h"
 #include "../VFrame/V3DModel.h"
+#include "../VFrame/V3DObjModel.h"
 #include "../VFrame/VTimer.h"
 
 #include <iostream>
@@ -236,6 +237,7 @@ class TilemapState : public VSubState
 	VSprite* playerControl;
 	VSprite* platform[2];
 	VTimer* timer;
+	bool wallJump = false;
 
 public:
 	TilemapState() : VSubState() {}
@@ -246,9 +248,12 @@ public:
 		VSUPERCLASS::Initialise();
 
 		tilemap = new VTilemap();
-		tilemap->LoadFromCSV("Example/Assets/level.csv", "Example/Assets/Walls.png", 32, 32, true, { '.', '@', '~' });
+		tilemap->LoadFromCSV("Example/Assets/level.csv", "Example/Assets/Walls.png", 32, 32, true, { '#' });
 		tilemap->SetTileRenderID('#');
+		tilemap->SetTileRenderID('$');
 		tilemap->SetTileRenderID('~', 0, 1);
+		tilemap->SetTileCollisionID('$', SidesTouching::TOUCHALL, std::bind(&TilemapState::WallJump, this, std::placeholders::_1, std::placeholders::_2));
+
 		Add(tilemap);
 
 		platform[0] = new VSprite();
@@ -285,7 +290,7 @@ public:
 		playerControl->MakeGraphic(32, 32, sf::Color::White);
 		playerControl->SetPositionAtCentre(playerPos);
 		playerControl->Drag = sf::Vector2f(500, 500);
-		playerControl->MaxVelocity = sf::Vector2f(300, 600);
+		playerControl->MaxVelocity = sf::Vector2f(200, 600);
 		Add(playerControl);
 
 		ParentState->Cameras[0]->Follow(playerControl, 0.5f, PLATFORMER, 0.8f, 0.05f);
@@ -303,14 +308,51 @@ public:
 
 	virtual void Update(float dt)
 	{
-		if (VGlobal::p()->Input.IsButtonPressed("A"))
+		bool touchFloor = (playerControl->Touching & SidesTouching::TOUCHBOTTOM) > 0;
+
+		for (unsigned int i = 0; i < 2; i++)
 		{
-			bool touchFloor = (playerControl->Touching & SidesTouching::TOUCHBOTTOM) > 0;
-			if (touchFloor)
+			sf::Vector2f playerFeet = playerControl->Position + sf::Vector2f(0, playerControl->Size.y + 5.0f);
+
+			if (playerFeet.y > platform[i]->Position.y &&
+				playerFeet.y < platform[i]->Position.y + platform[1]->Size.y &&
+				playerFeet.x < platform[i]->Position.x + platform[1]->Size.x &&
+				playerFeet.x > platform[i]->Position.x - playerControl->Size.x)
 			{
-				playerControl->Velocity.y = -450.0f;
+				touchFloor = true;
 			}
 		}
+		
+		if (touchFloor)
+		{
+			if (VGlobal::p()->Input.IsButtonPressed("A"))
+			{
+				playerControl->Velocity.y = -450.0f;
+
+				if (wallJump)
+				{
+					if ((playerControl->Touching & SidesTouching::TOUCHLEFT) > 0)
+					{
+						playerControl->Velocity.x = playerControl->MaxVelocity.x;
+					}
+					else if ((playerControl->Touching & SidesTouching::TOUCHRIGHT) > 0)
+					{
+						playerControl->Velocity.x = -playerControl->MaxVelocity.x;
+					}
+				}
+			}
+		}
+
+		playerControl->Acceleration.x = 0;
+		if (VGlobal::p()->Input.CurrentAxisValue("leftX") < 0)
+			playerControl->Acceleration.x -= playerControl->MaxVelocity.x * (touchFloor ? 4 : 3);
+		if (VGlobal::p()->Input.CurrentAxisValue("leftX") > 0)
+			playerControl->Acceleration.x += playerControl->MaxVelocity.x * (touchFloor ? 4 : 3);
+
+		if (VGlobal::p()->Input.IsButtonDown("A"))
+			playerControl->Acceleration.y = 700.0f;
+		else
+			playerControl->Acceleration.y = 980.0f;
 
 		VSUPERCLASS::Update(dt);
 
@@ -321,20 +363,32 @@ public:
 			timer->Restart();
 		}
 
-		playerControl->Velocity.x = 0;
-		if (VGlobal::p()->Input.CurrentAxisValue("leftX") < 0)
-			playerControl->Velocity.x -= 200.0f;
-		if (VGlobal::p()->Input.CurrentAxisValue("leftX") > 0)
-			playerControl->Velocity.x += 200.0f;
-
-		if (VGlobal::p()->Input.IsButtonDown("A"))
-			playerControl->Acceleration.y = 700.0f;
-		else
-			playerControl->Acceleration.y = 980.0f;
-
+		wallJump = false;
 		VGlobal::p()->Collides(playerControl, tilemap);
-		VGlobal::p()->Collides(playerControl, platform[0]);
-		VGlobal::p()->Collides(playerControl, platform[1]);
+		VGlobal::p()->Collides(playerControl, platform[0], std::bind(&TilemapState::CloudPlatform, this, std::placeholders::_1, std::placeholders::_2));
+		VGlobal::p()->Collides(playerControl, platform[1], std::bind(&TilemapState::CloudPlatform, this, std::placeholders::_1, std::placeholders::_2));
+	}
+
+	void CloudPlatform(VBase* player, VBase* platform)
+	{
+		VObject* o = dynamic_cast<VObject*>(player);
+		VObject* p = dynamic_cast<VObject*>(platform);
+
+		if (VGlobal::p()->Input.CurrentAxisValue("leftY") > 20.0f)
+		{
+			p->AllowCollisions = SidesTouching::TOUCHNONE;
+		}
+		else if (o->Position.y < p->Position.y)
+		{
+			p->AllowCollisions = SidesTouching::TOUCHTOP;
+		}
+	}
+
+	void WallJump(VObject* tile, VObject* object)
+	{
+		object->Velocity *= 0.9f;
+		object->Touching |= SidesTouching::TOUCHBOTTOM;
+		wallJump = true;
 	}
 };
 

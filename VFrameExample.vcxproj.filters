@@ -113,6 +113,7 @@
       <Filter>VFrame\depend</Filter>
     </ClCompile>
     </ClCompile>
+    <ClCompile Include="VFrame\VTimer.cpp" />
     <ClCompile Include="VFrame\V3DObjModel.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +241,7 @@
       <Filter>VFrame\depend</Filter>
     </ClInclude>
     </ClInclude>
+    <ClInclude Include="VFrame\VTimer.h" />
     <ClInclude Include="VFrame\depend\tiny_obj_loader.h" />
     <ClInclude Include="VFrame\V3DObjModel.h" />
   </ItemGroup>
