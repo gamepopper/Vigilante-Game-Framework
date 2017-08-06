@@ -24,6 +24,7 @@ public:
 	sf::Vector2f Offset;
 	sf::Vector2f Scale;
 	sf::Vector2u FrameSize;
+	bool FlipX = false, FlipY = false;
 	VAnimationManager Animation;
 
 	VSprite(sf::Vector2f Position, const sf::String& Filename = "") : VObject(Position)

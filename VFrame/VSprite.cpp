@@ -30,7 +30,7 @@ void VSprite::updateTransform()
 	if (sprite.getRotation() != Angle) 
 		sprite.setRotation(Angle);
 	if (sprite.getScale() != Scale)	
-		sprite.setScale(Scale);
+		sprite.setScale(FlipX ? -Scale.x : Scale.x, FlipY ? -Scale.y : Scale.y);
 	if (sprite.getColor() != Tint) 
 		sprite.setColor(Tint);
 	if (sprite.getOrigin() != Origin) 
