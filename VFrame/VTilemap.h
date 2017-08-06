@@ -20,7 +20,7 @@ struct VTileRenderInfo
 
 struct VTileCollisionInfo
 {
-	int AllowCollisions = SidesTouching::TOUCHALL;
+	uint8_t AllowCollisions = SidesTouching::TOUCHALL;
 	std::function<void(VObject*, VObject*)> Callback = nullptr;
 };
 

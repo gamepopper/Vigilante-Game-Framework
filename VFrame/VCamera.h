@@ -6,7 +6,7 @@
 #include <vector>
 #include <functional>
 
-enum CameraFollowMethod
+enum CameraFollowMethod : unsigned char
 {
 	LOCKON,
 	TOPDOWN,

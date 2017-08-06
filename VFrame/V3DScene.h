@@ -26,7 +26,7 @@ protected:
 public:
 	typedef VRenderGroup VSUPERCLASS;
 
-	enum CameraType
+	enum CameraType : unsigned char
 	{
 		CAMERA_FRUSTUM,
 		CAMERA_ORTHO,

@@ -5,7 +5,7 @@
 
 #include <functional>
 
-enum VCollideList
+enum VCollideList : bool
 {
 	A,
 	B

@@ -2,6 +2,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <stdint.h>
 
 #ifdef USE_GAMEPAD_API
 #define GAMEPAD_STATIC_LIB
@@ -21,7 +22,7 @@ class VInputHandler
 {
 public:
 #ifdef USE_GAMEPAD_API
-	enum XAxis
+	enum XAxis : unsigned char
 	{
 		PovX,
 		PovY,
@@ -31,7 +32,7 @@ public:
 		R
 	};
 #elif defined(USE_SFML_JOYSTICK)
-	enum Button
+	enum Button : unsigned char
 	{
 		BUTTON_A,
 		BUTTON_B,

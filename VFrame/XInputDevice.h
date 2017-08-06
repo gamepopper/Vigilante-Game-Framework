@@ -6,12 +6,12 @@ namespace sf
 	class XInputDevice
 	{
 	public:
-		enum
+		enum : unsigned char
 		{
 			Count = 4
 		};
 
-		enum XButton
+		enum XButton : unsigned short
 		{
 			DPAD_UP		= 0x0001,
 			DPAD_DOWN	= 0x0002,
@@ -29,7 +29,7 @@ namespace sf
 			Y			= 0x8000
 		};
 
-		enum XAxis
+		enum XAxis : unsigned char
 		{
 			PovX,
 			PovY,

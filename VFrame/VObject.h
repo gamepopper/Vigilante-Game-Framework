@@ -4,7 +4,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-enum SidesTouching
+enum SidesTouching : unsigned char
 {
 	TOUCHNONE	= 0,
 	TOUCHLEFT	= 1 << 0,

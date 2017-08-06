@@ -8,7 +8,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/String.hpp>
 
-enum VTextAlign
+enum VTextAlign : unsigned char
 {
 	ALIGNLEFT	= 0,
 	ALIGNCENTER = 1,
@@ -16,7 +16,7 @@ enum VTextAlign
 	ALIGNRIGHT	= 2
 };
 
-enum VTextWrap
+enum VTextWrap : unsigned char
 {
 	WRAPNONE	= 0,
 	WRAPLETTER	= 1,
@@ -54,7 +54,7 @@ public:
 	sf::String Text = "";
 	unsigned int FontSize = 8;
 	unsigned int Style = sf::Text::Regular;
-	unsigned int Wrap = WRAPWORD;
+	VTextWrap Wrap = WRAPWORD;
 	int LineSpaceModifier = 0;
 	sf::Vector2f Scale = sf::Vector2f(1,1);
 	VTextAlign Alignment = ALIGNLEFT;

@@ -1,11 +1,12 @@
 #pragma once
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <stdint.h>
 
 #if _DEBUG
 #include <iostream>
 #endif
 
-enum VType
+enum VType : unsigned char
 {
 	NONE,
 	OBJECT,
@@ -24,7 +25,7 @@ public:
 	bool alive = true;
 	bool exists = true;
 	VType type = NONE;
-	int RefCount = 0;
+	uint32_t RefCount = 0;
 
 	VBase() = default;
 	virtual ~VBase()
