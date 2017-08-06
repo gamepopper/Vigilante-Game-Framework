@@ -1,5 +1,6 @@
 #include "VCollision.h"
 
+#include "VGlobal.h"
 #include "VGroup.h"
 #include "VTilemap.h"
 #include "VTile.h"
@@ -7,11 +8,75 @@
 
 #include <cmath>
 
-using std::vector;
-
-void VCollision::AddToListA(VBase* item)
+bool VQuadTree::checkBounds(VObject* object, VCollideList list)
 {
-	if (item == NULL)
+	sf::FloatRect objRect = sf::FloatRect(object->Position, object->Size);
+
+	if (bounds.intersects(objRect))
+	{
+		if (list == A)
+			listA.push_back(object);
+		else
+			listB.push_back(object);
+
+		return true;
+	}
+
+	return false;
+}
+
+void VQuadTree::clear()
+{
+	listA.clear();
+	listB.clear();
+
+	listA.shrink_to_fit();
+	listB.shrink_to_fit();
+}
+
+VCollision::VCollision()
+{
+	quads.resize(4);
+	quads[NORTHWEST] = new VQuadTree();
+	quads[NORTHWEST]->bounds = sf::FloatRect(
+		0.0f, 0.0f, 
+		VGlobal::p()->WorldBounds.width / 2, 
+		VGlobal::p()->WorldBounds.height / 2);
+	quads[NORTHEAST] = new VQuadTree();
+	quads[NORTHEAST]->bounds = sf::FloatRect(
+		VGlobal::p()->WorldBounds.width / 2, 0.0f, 
+		VGlobal::p()->WorldBounds.width / 2, 
+		VGlobal::p()->WorldBounds.height / 2);
+	quads[SOUTHWEST] = new VQuadTree();
+	quads[SOUTHWEST]->bounds = sf::FloatRect(
+		0.0f, 
+		VGlobal::p()->WorldBounds.height / 2, 
+		VGlobal::p()->WorldBounds.width / 2, 
+		VGlobal::p()->WorldBounds.height / 2);
+	quads[SOUTHEAST] = new VQuadTree();
+	quads[SOUTHEAST]->bounds = sf::FloatRect(
+		VGlobal::p()->WorldBounds.width / 2, 
+		VGlobal::p()->WorldBounds.height / 2, 
+		VGlobal::p()->WorldBounds.width / 2, 
+		VGlobal::p()->WorldBounds.height / 2);
+}
+
+VCollision::~VCollision()
+{
+	for (unsigned int i = 0; i < 4; i++)
+	{
+		quads[i]->clear();
+		delete quads[i];
+		quads[i] = nullptr;
+	}
+
+	quads.clear();
+	quads.shrink_to_fit();
+}
+
+void VCollision::AddToList(VBase* item, VCollideList list)
+{
+	if (item == nullptr)
 		return;
 	
 	if (item->type == GROUP)
@@ -19,36 +84,42 @@ void VCollision::AddToListA(VBase* item)
 		//If group, add all members to list.
 		VGroup* group = dynamic_cast<VGroup*>(item);
 
-		if (group != NULL)
+		if (group != nullptr)
 		{
 			for (int i = 0; i < group->Length(); i++)
 			{
-				AddToListA(group->GetGroupItem(i));
+				AddToList(group->GetGroupItem(i), list);
 			}
 		}
 	}
 	else if (item->type == TILEMAP)
 	{
-		//If Tilemap, add all tiles to list.
+		//If Tilemap, add to list. Tilemap object will handle individual tile collisions.
 		VTilemap* tilemap = dynamic_cast<VTilemap*>(item);
 
-		if (tilemap != NULL)
+		if (tilemap != nullptr)
 		{
-			vector<VTile*> tiles = tilemap->Tiles;
+			/*std::vector<VTile*> tiles = tilemap->Tiles;
 
 			for (VTile* t : tiles)
 			{
 				AddToListA(t);
-			}
+			}*/
+
+			quads[NORTHEAST]->checkBounds(tilemap, list);
+			quads[NORTHWEST]->checkBounds(tilemap, list);
+			quads[SOUTHEAST]->checkBounds(tilemap, list);
+			quads[SOUTHWEST]->checkBounds(tilemap, list);
 		}
 	}
 	else if (item->type == RENDERGROUP)
 	{
+		//If RenderGroup, add sprite object from renderGroup to list.
 		VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(item);
 
-		if (renderGroup != NULL)
+		if (renderGroup != nullptr)
 		{
-			AddToListA(renderGroup->Sprite);
+			AddToList(renderGroup->Sprite, list);
 		}
 	}
 	else
@@ -57,60 +128,10 @@ void VCollision::AddToListA(VBase* item)
 
 		if (object && object->alive)
 		{
-			listA.push_back(object);
-		}
-	}
-}
-
-void VCollision::AddToListB(VBase* item)
-{
-	if (item == NULL)
-		return;
-	
-	if (item->type == GROUP)
-	{
-		//If group, add all members to list.
-		VGroup* group = dynamic_cast<VGroup*>(item);
-
-		if (group != NULL)
-		{
-			for (int i = 0; i < group->Length(); i++)
-			{
-				AddToListB(group->GetGroupItem(i));
-			}
-		}
-	}
-	else if (item->type == TILEMAP)
-	{
-		//If Tilemap, add all tiles to list.
-		VTilemap* tilemap = dynamic_cast<VTilemap*>(item);
-
-		if (tilemap != NULL)
-		{
-			vector<VTile*> tiles = tilemap->Tiles;
-
-			for (VTile* t : tiles)
-			{
-				AddToListB(t);
-			}
-		}
-	}
-	else if (item->type == RENDERGROUP)
-	{
-		VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(item);
-
-		if (renderGroup != NULL)
-		{
-			AddToListB(renderGroup->Sprite);
-		}
-	}
-	else
-	{
-		VObject* object = dynamic_cast<VObject*>(item);
-
-		if (object && object->alive)
-		{
-			listB.push_back(object);
+			quads[NORTHEAST]->checkBounds(object, list);
+			quads[NORTHWEST]->checkBounds(object, list);
+			quads[SOUTHEAST]->checkBounds(object, list);
+			quads[SOUTHWEST]->checkBounds(object, list);
 		}
 	}
 }
@@ -119,53 +140,56 @@ bool VCollision::Run(std::function<void(VObject*, VObject*)>const& response, std
 {
 	bool overlapFound = false;
 
-	if (listB.size() != 0)
+	for (VQuadTree* tree : quads)
 	{
-		for (unsigned int a = 0; a < listA.size(); a++)
+		if (tree->listB.size() > 0)
 		{
-			for (unsigned int b = 0; b < listB.size(); b++)
+			for (unsigned int a = 0; a < tree->listA.size(); a++)
 			{
-				if (testOverlap(listA[a], listB[b]))
+				for (unsigned int b = 0; b < tree->listB.size(); b++)
 				{
-					if (process != NULL)
+					if (testOverlap(tree->listA[a], tree->listB[b]))
 					{
-						process(listA[a], listB[b]);
-					}
+						if (process != nullptr)
+						{
+							process(tree->listA[a], tree->listB[b]);
+						}
 
-					if (response != NULL)
-					{
-						response(listA[a], listB[b]);
-					}
+						if (response != nullptr)
+						{
+							response(tree->listA[a], tree->listB[b]);
+						}
 
-					overlapFound = true;
+						overlapFound = true;
+					}
 				}
 			}
 		}
-	}
-	else
-	{
-		for (unsigned int a = 0; a < listA.size(); a++)
+		else if (tree->listA.size() > 1)
 		{
-			for (unsigned int b = 0; b < listA.size(); b++)
+			for (unsigned int a = 0; a < tree->listA.size(); a++)
 			{
-				if (a == b)
-					continue;
-				else if (listA[a] == listA[b])
-					continue;
-
-				if (testOverlap(listA[a], listA[b]))
+				for (unsigned int b = 0; b < tree->listA.size(); b++)
 				{
-					if (process != NULL)
-					{
-						process(listA[a], listA[b]);
-					}
+					if (a == b)
+						continue;
+					else if (tree->listA[a] == tree->listA[b])
+						continue;
 
-					if (response != NULL)
+					if (testOverlap(tree->listA[a], tree->listA[b]))
 					{
-						response(listA[a], listA[b]);
-					}
+						if (process != nullptr)
+						{
+							process(tree->listA[a], tree->listA[b]);
+						}
 
-					overlapFound = true;
+						if (response != nullptr)
+						{
+							response(tree->listA[a], tree->listA[b]);
+						}
+
+						overlapFound = true;
+					}
 				}
 			}
 		}

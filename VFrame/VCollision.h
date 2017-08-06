@@ -11,26 +11,36 @@ enum VCollideList : bool
 	B
 };
 
-class VCollision
+struct VQuadTree
 {
 	std::vector<VObject*> listA;
 	std::vector<VObject*> listB;
+	sf::FloatRect bounds;
+
+	bool checkBounds(VObject* object, VCollideList list);
+
+	void clear();
+};
+
+class VCollision
+{
+	enum QuadTreeDir : unsigned char
+	{
+		NORTHWEST,
+		NORTHEAST,
+		SOUTHWEST,
+		SOUTHEAST,
+	};
+	std::vector<VQuadTree*> quads;
 
 	virtual bool testOverlap(VObject* a, VObject* b);
 
 public:
-	VCollision() {}
-	virtual ~VCollision()
-	{
-		listA.clear();
-		listB.clear();
+	VCollision();
+	virtual ~VCollision();
 
-		listA.shrink_to_fit();
-		listB.shrink_to_fit();
-	}
+	void AddToList(VBase* item, VCollideList List);
 
-	void AddToListA(VBase* item);
-	void AddToListB(VBase* item);
 	bool Run(std::function<void(VObject*, VObject*)>const& response, std::function<bool(VObject*, VObject*)>const& process);
 };
 
