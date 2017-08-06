@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/System/Vector3.hpp>
 
 class VInterpolate
 {
@@ -78,4 +79,5 @@ public:
 	static float Float(float a, float b, float t, float d = 1.0f, VInterpolateType type = Linear);
 	static sf::Color Color(sf::Color a, sf::Color b, float t, float d = 1.0f, VInterpolateType type = Linear);
 	static sf::Vector2f Vector2f(sf::Vector2f a, sf::Vector2f b, float t, float d = 1.0f, VInterpolateType type = Linear);
+	static sf::Vector3f Vector3f(sf::Vector3f a, sf::Vector3f b, float t, float d = 1.0f, VInterpolateType type = Linear);
 };

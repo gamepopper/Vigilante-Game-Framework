@@ -297,3 +297,8 @@ sf::Vector2f VInterpolate::Vector2f(sf::Vector2f a, sf::Vector2f b, float t, flo
 {
 	return sf::Vector2f(Float(a.x, b.x, t, d, type), Float(a.y, b.y, t, d, type));
 }
+
+sf::Vector3f VInterpolate::Vector3f(sf::Vector3f a, sf::Vector3f b, float t, float d, VInterpolateType type)
+{
+	return sf::Vector3f(Float(a.x, b.x, t, d, type), Float(a.y, b.y, t, d, type), Float(a.z, b.z, t, d, type));
+}
