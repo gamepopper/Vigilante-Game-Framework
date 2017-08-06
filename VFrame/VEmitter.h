@@ -102,8 +102,11 @@ public:
 		exists = false;
 	}
 
+	//Load set amount of particles from a file.
 	VEmitter* LoadParticlesFromFile(int Amount, sf::String Filename, bool Animated = false, int Width = 1, int Height = 1, int TextureWidth = 0, bool RandomFrames = true);
+	//Load set amount of particles from an sf::Texture object.
 	VEmitter* LoadParticles(int Amount, sf::Texture Texture, bool Animated = false, int Width = 1, int Height = 1, int TextureWidth = 0, bool RandomFrames = true);
+	//Make set amount of particles as rectangles.
 	VEmitter* MakeParticles(int Amount, int Width, int Height, sf::Color Color = sf::Color::White);
 	virtual void Kill() override;
 	virtual void Destroy() override;
@@ -111,7 +114,9 @@ public:
 	virtual void Update(float dt) override;
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 
+	//Start emitting either a specific amount or all particles.
 	VEmitter* Start(int Amount = 0);
+	//Emit single particle
 	virtual void EmitParticle();
 };
 

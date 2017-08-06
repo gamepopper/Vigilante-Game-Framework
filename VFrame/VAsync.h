@@ -15,6 +15,7 @@ public:
 	VAsync() = default;
 	virtual ~VAsync();
 
+	//Check if any active async functions are in scene.
 	bool ActiveAsyncFunctions();
 
 	//Pass in an std::future to process the asynchronous function call.
@@ -22,6 +23,8 @@ public:
 
 	//Must call this in order to tell the game that the function has ended
 	void SyncToMainLoop(std::function<void()> callback);
+
+	//VGame must call this to process the async function queue.
 	void ProcessSyncRequests();
 };
 

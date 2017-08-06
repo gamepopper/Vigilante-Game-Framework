@@ -75,9 +75,49 @@ public:
 		NumInterpolationTypes,
 	};
 
+	/*
+	Interpolates based on angle in degrees (0 - 360)
+	a: Start point.
+	b: Finish point.
+	t: Current point in time.
+	d: Total length of time.
+	type: Easing function.
+	*/
 	static float Angle(float a, float b, float t, float d = 1.0f, VInterpolateType type = Linear);
+	/*
+	Interpolates standard float variables.
+	a: Start point.
+	b: Finish point.
+	t: Current point in time.
+	d: Total length of time.
+	type: Easing function.
+	*/
 	static float Float(float a, float b, float t, float d = 1.0f, VInterpolateType type = Linear);
+	/*
+	Interpolates colour values.
+	a: Start point.
+	b: Finish point.
+	t: Current point in time.
+	d: Total length of time.
+	type: Easing function.
+	*/
 	static sf::Color Color(sf::Color a, sf::Color b, float t, float d = 1.0f, VInterpolateType type = Linear);
+	/*
+	Interpolates two-dimensional vectors.
+	a: Start point.
+	b: Finish point.
+	t: Current point in time.
+	d: Total length of time.
+	type: Easing function.
+	*/
 	static sf::Vector2f Vector2f(sf::Vector2f a, sf::Vector2f b, float t, float d = 1.0f, VInterpolateType type = Linear);
+	/*
+	Interpolates three-dimensional vectors.
+	a: Start point.
+	b: Finish point.
+	t: Current point in time.
+	d: Total length of time.
+	type: Easing function.
+	*/
 	static sf::Vector3f Vector3f(sf::Vector3f a, sf::Vector3f b, float t, float d = 1.0f, VInterpolateType type = Linear);
 };

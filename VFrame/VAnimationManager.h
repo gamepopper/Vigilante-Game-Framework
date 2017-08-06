@@ -33,6 +33,14 @@ public:
 		Clear();
 	}
 
+	/*
+	If animation under name does not exist, creates new VAnimation object for animation.
+	name: Name of animation.
+	Frames: Frame sequence of animation (based on sprite sheet atlas in order left to right).
+	FramesPerSecond: Amount of frames to show per seconds.
+	Looping: Whether animation should loop or not.
+	Reverse: Whether animation should be reversed or not.
+	*/
 	void AddAnimation(sf::String name, std::vector<int> Frames, float FramesPerSecond = 6.0f, bool Looping = false, bool Reverse = false)
 	{
 		if (animationList.find(name) == animationList.end())
@@ -41,11 +49,13 @@ public:
 		}
 	}
 
+	//Name of current playing animation.
 	sf::String CurrentAnimationName()
 	{
 		return currentAnim;
 	}
 
+	//Play an animation using its name.
 	void Play(sf::String name)
 	{
 		if (animationList.find(name) != animationList.end() &&
@@ -57,21 +67,25 @@ public:
 		}
 	}
 
-	void IsPaused(bool value)
+	//Set whether animation should be paused.
+	void SetPaused(bool value)
 	{
 		pause = value;
 	}
 
+	//Stop all animations.
 	void Stop()
 	{
 		currentAnim = "";
 	}
 
+	//Resets current animation.
 	void Reset()
 	{
 		Reset(currentAnim);
 	}
 
+	//Resets specific animations.
 	void Reset(sf::String name)
 	{
 		animationList[name]->Reset();
@@ -89,6 +103,7 @@ public:
 		}
 	}
 
+	//Set current frame in animation.
 	void SetCurrentFrame(int NewFrame)
 	{
 		if (currentAnim != "")
@@ -114,11 +129,13 @@ public:
 		return lastFrame;
 	}
 
+	//Gets the previous frame of animation.
 	int GetLastFrame()
 	{
 		return lastFrame;
 	}
 
+	//Sets current playing animation to looping or not.
 	void SetLooping(bool Looping)
 	{
 		if (currentAnim != "")
@@ -128,6 +145,7 @@ public:
 		}
 	}
 
+	//Sets current playing animation to be reversed or not.
 	void SetReverse(bool Reverse)
 	{
 		if (currentAnim != "")
@@ -137,6 +155,7 @@ public:
 		}
 	}
 
+	//Gets U (Texture X) coordinate.
 	int GetU()
 	{
 		current = GetCurrentFrame();
@@ -151,6 +170,7 @@ public:
 		return offsetX;
 	}
 
+	//Gets V (Texture Y) coordinate.
 	int GetV()
 	{
 		current = GetCurrentFrame();
@@ -166,17 +186,19 @@ public:
 		return offsetY;
 	}
 
+	//Clears entire animation list.
 	void Clear()
 	{
 		for (std::pair<sf::String, VAnimation*> anim : animationList)
 		{
 			delete anim.second;
-			anim.second = NULL;
+			anim.second = nullptr;
 		}
 		animationList.clear();
 		currentAnim = "";
 	}
 
+	//Returns total amount of animations.
 	int Count()
 	{
 		return animationList.size();

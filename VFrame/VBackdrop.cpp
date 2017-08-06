@@ -45,9 +45,8 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
 
-	sf::Vector2f scroll = (renderTargetView.getCenter() - scrollView.getCenter());
-	if (!CameraScroll)
-		scroll = Scroll;
+	sf::Vector2f scroll = CameraScroll ? (renderTargetView.getCenter() - scrollView.getCenter()) : sf::Vector2f();
+	scroll += Scroll;
 
 	scroll.x *= ScrollFactor.x;
 	scroll.y *= ScrollFactor.y;

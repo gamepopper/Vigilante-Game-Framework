@@ -12,7 +12,10 @@ protected:
 public:
 	typedef VSprite VSUPERCLASS;
 
+	//Scrolling Coordinates
 	sf::Vector2f Scroll;
+
+	//Overrides the scrolling coordinates to use the game's camera.
 	bool CameraScroll = true;
 
 	VBackdrop(float scrollX, float scrollY, bool repeatX, bool repeatY, const sf::String& filename) : VSprite(0, 0, filename)

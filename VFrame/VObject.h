@@ -18,7 +18,7 @@ enum SidesTouching : unsigned char
 class VObject : public VBase
 {
 protected:
-	void updateMotion(float dt);
+	virtual void updateMotion(float dt);
 	virtual void updateTransform() {};
 
 	static float overlapX(VObject* a, VObject *b, bool maxOverlap = true);
@@ -38,13 +38,14 @@ public:
 	sf::Vector2f Size;
 	sf::Vector2f Last;
 
-	float Radius;
+	float Radius = 0;
 	float Angle = 0;
 	float AngleVelocity = 0;
 	float AngleAcceleration = 0;
 	float AngleDrag = 0;
 	float AngleMax = 10000;
 
+	//Should object update it's position and angle.
 	bool Moves = true;
 
 	sf::Vector2f Velocity;
@@ -52,25 +53,40 @@ public:
 	sf::Vector2f Drag;
 	sf::Vector2f MaxVelocity;
 
+	//Set for parallax movement
 	sf::Vector2f ScrollFactor;
+	//Set for parallax rotation
 	float RotateFactor = 1;
+	//Set for parallax zoom
 	float ZoomFactor = 1;
 
+	//Bounciness of the object (0 assumes no bounce)
 	float Elasticity = 0;
+	//Mass of object in comparison to other objects in world.
 	float Mass = 1;
 
+	//Standard health value (object dies if health is <= 0)
 	float Health = 100;
 
+	//Effects how to respond to collisions with other objects.
 	bool Immovable = false;
-	int Touching = SidesTouching::TOUCHNONE;
-	int WasTouching = SidesTouching::TOUCHNONE;
-	int AllowCollisions = SidesTouching::TOUCHALL;
+
+	//Which sides are currently touching (is reset on each Update call!)
+	unsigned char Touching = SidesTouching::TOUCHNONE;
+	//Which sides on previous frame were touching (is reset on each Update call!)
+	unsigned char WasTouching = SidesTouching::TOUCHNONE;
+	
+	//Which sides are allowed to check collisions for.
+	unsigned char AllowCollisions = SidesTouching::TOUCHALL;
+	
+	//Useful for moving platforms.
 	bool CollisionXDrag = true;
 
 #if _DEBUG
 	sf::Color DebugColor;
 #endif
 
+	//Adds to the maximum overlap distance between objects.
 	static float SeparateBias;
 
 	VObject(sf::Vector2f position, sf::Vector2f size = sf::Vector2f()) : VBase()
@@ -99,20 +115,29 @@ public:
 		Radius = Size.x < Size.y ? Size.x / 2 : Size.y / 2;
 	}
 
+	//Separate objects that overlap based on rectangle collision.
 	static bool separate(VObject* a, VObject *b);
+	//Separate objects that overlap based on circle collision.
+	static bool separateCircle(VObject* a, VObject *b);
+	//Process touch test.
 	static bool touchFlag(VObject* a, VObject *b);
 
-	static bool separateCircle(VObject* a, VObject *b);
-
+	//Base function for calculating velocity.
 	static float computeVelocity(float v, float a, float d, float max, float dt);
 
+	//Sets object position based on the centre of it's circular area.
 	void SetPositionAtCentre(float x, float y);
+	//Sets object position based on the centre of it's circular area.
 	void SetPositionAtCentre(sf::Vector2f newPos);
 
+	//Returns true if collision is allowed on object on any side.
 	bool IsSolid();
 
+	//Resets object with new position.
 	virtual void Reset(sf::Vector2f newPos);
+	//Resets object with new position.
 	virtual void Reset(float x, float y);
+	//Reduces health and kills object if health is below 0.
 	virtual void Hurt(float damage);
 
 	virtual void Update(float dt) override;

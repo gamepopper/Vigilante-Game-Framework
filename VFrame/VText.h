@@ -98,21 +98,42 @@ public:
 #endif
 	}
 
+	/*
+	Sets up the main format of how the text will be rendered.
+	filename: Font file path.
+	charSize: Size of the text.
+	colour: Fill colour of the text.
+	alignment: How the text will be anchored line by line within the text area.
+	style: Text font styles (i.e. bold, italic, strikethrough, ect).
+	*/
 	VText* SetFormat(sf::String filename, int charSize = 8, sf::Color colour = sf::Color::White,
 		VTextAlign alignment = VTextAlign::ALIGNLEFT, int style = sf::Text::Regular);
 
+	/*
+	Sets up the main format of how the text will be rendered.
+	fontData: sf::Font object.
+	charSize: Size of the text.
+	colour: Fill colour of the text.
+	alignment: How the text will be anchored line by line within the text area.
+	style: Text font styles (i.e. bold, italic, strikethrough, ect).
+	*/
 	VText* SetFormat(sf::Font fontData, int charSize = 8, sf::Color colour = sf::Color::White,
 		VTextAlign alignment = VTextAlign::ALIGNLEFT, int style = sf::Text::Regular);
 
+	//Set font styles (i.e. bold, italic, strikethrough, ect).
 	void SetStyle(int style = sf::Text::Regular);
+	//Set the main colour of the text.
 	void SetFillTint(const sf::Color &colour);
+	//Set the colour of the text outline (requires OutlineThickness to be greater than 0).
 	void SetOutlineTint(const sf::Color &colour);
 
+	//Get the main text colour.
 	sf::Color const& GetFillTint()
 	{
 		return fillColour;
 	}
 
+	//Get the colour of the text outline.
 	sf::Color const& GetOutlineTint()
 	{
 		return outlineColour;

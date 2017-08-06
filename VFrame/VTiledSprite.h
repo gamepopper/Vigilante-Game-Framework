@@ -1,5 +1,8 @@
 #pragma once
 #include "VSprite.h"
+
+//Tiled Sprites display a regular texture in a tiled format, so instead of scaling it repeats.
+//This is good for backgrounds and also works with sprite animation!
 class VTiledSprite : public VSprite
 {
 private:

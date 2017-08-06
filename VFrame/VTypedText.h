@@ -4,6 +4,7 @@
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 
+//Special Text class that displays text in a typewriter effect.
 class VTypedText : public VText
 {
 private:
@@ -46,16 +47,26 @@ public:
 	{
 		ResetText(text);
 	}
-
+	
+	//Set a sound to play on each letter when they appear/disappear.
 	void SetSound(sf::String id, float volume = 100.0f, sf::String filename = "");
+	//Set a random delay when each letter is typed.
 	void SetTimingVariation(bool TypingVariation, float TypingVarPercent = 0.5f);
+	//Start a new text typeout.
 	void Start(float Delay, bool ForceRestart = false, bool AutoErase = false, std::function<void()> OnComplete = nullptr);
+	//Erase text like a reverse typeout.
 	void Erase(float Delay, bool ForceRestart = false, std::function<void()> OnErased = nullptr);
+	//Returns true if text is currently being processed.
 	bool IsActive() { return typing || waiting || erasing; }
+	//Reset the text that will be typed out, use this when changing text!
 	void ResetText(sf::String Text);
+	//Skip the current typing out process.
 	void Skip();
+	//Returns true if currently typing out.
 	bool IsTyping()		{ return typing; }
+	//Returns true if text is currently erasing.
 	bool IsErasing()	{ return erasing; }
+	//Returns true if text if currently waiting before erasing.
 	bool IsWaiting()	{ return waiting; }
 	virtual void Destroy() override;
 	virtual void Update(float dt) override;

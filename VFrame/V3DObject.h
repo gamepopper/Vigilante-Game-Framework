@@ -53,8 +53,19 @@ public:
 		type = VType::OBJECT;
 	}
 
+	/*
+	Resets object
+	newPos: Sets Position with sf::Vector3f.
+	*/
 	virtual void Reset(sf::Vector3f newPos);
+	/*
+	Resets object
+	x: Sets Position.x.
+	y: Sets Position.y.
+	z: Sets Position.z.
+	*/
 	virtual void Reset(float x, float y, float z);
+
 	virtual void Hurt(float damage);
 
 	virtual void Update(float dt) override;

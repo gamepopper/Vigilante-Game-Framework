@@ -5,6 +5,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 
+//Processes a group of objects and renders them all to a sprite object.
 class VRenderGroup : public VGroup
 {
 protected:
@@ -16,15 +17,16 @@ protected:
 public:
 	typedef VGroup VSUPERCLASS;
 
-	VSprite* Sprite = NULL;
+	VSprite* Sprite = nullptr;
 
-	VPostEffectBase* PostEffect = NULL;
+	VPostEffectBase* PostEffect = nullptr;
 	bool RenderViewTransform = true;
 	bool RenderOutside = false;
 
 	VRenderGroup(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize = 0);
 	VRenderGroup(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize = 0);
 
+	//Resize the scene.
 	virtual void Resize(int width, int height);
 
 	virtual const sf::Texture& GetTexture();

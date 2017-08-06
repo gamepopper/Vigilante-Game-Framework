@@ -2,6 +2,7 @@
 #include "VRenderGroup.h"
 #include <SFML/System/Clock.hpp>
 
+//Special VRenderGroup that applies a trail to objects it contains within the area.
 class VTrailArea : public VRenderGroup
 {
 private:

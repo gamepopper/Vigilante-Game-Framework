@@ -6,6 +6,7 @@ class VTile : public VObject
 {
 public:
 	std::function<void(VObject*, VObject*)> Callback = nullptr;
+	char MainTile = (char)0;
 
 	VTile(sf::Vector2f position, sf::Vector2f size) : VObject(position, size)
 	{

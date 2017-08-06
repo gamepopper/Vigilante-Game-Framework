@@ -111,27 +111,41 @@ public:
 
 	virtual ~VInputHandler();
 
+	//Set the input values for a game button.
 	void SetButtonInput(const sf::String& name, int key = -1, int gamepad = -1, int mouse = -1);
+	//Sets the input values for a game axis (i.e. analog sticks)
 	void SetAxisInput(const sf::String& name, int keyA = -1, int keyB = -1, int gamepad = -1);
 
+	//Gets specific Button input data.
 	bool GetButtonInput(const sf::String& name, ButtonInput& input);
+	//Gets specific Axis input data.
 	bool GetAxisInput(const sf::String& name, AxisInput& input);
 
+	//Checks if gamepad is active. Returns true if any gamepad input is recieved, returns false if other input is recieved.
 	bool IsGamepadActive();
 
 #ifdef USE_SFML_JOYSTICK
+	//Gets JoystickID when using sf::Joystick.
 	int GetJoystickID(int ControllerIndex);
 #endif
 
+	//Checks if a button has applied a press for a single frame.
 	bool IsButtonPressed(const sf::String& name, int ControllerIndex = 0);
+	//Checks if a button is pushed down.
 	bool IsButtonDown(const sf::String& name, int ControllerIndex = 0);
+	//Checks if a button is not pushed down.
 	bool IsButtonUp(const sf::String& name, int ControllerIndex = 0);
+	//Checks if a button has applied a release for a single frame.
 	bool IsButtonReleased(const sf::String& name, int ControllerIndex = 0);
 
+	//Gets the Axis with a range [-100, 100] of the current frame.
 	float CurrentAxisValue(const sf::String& name, int ControllerIndex = 0);
+	//Gets the Axis with a range [-100, 100] from the last frame.
 	float LastAxisValue(const sf::String& name, int ControllerIndex = 0);
 
+	//Gets the scroll wheel delta from the mouse.
 	float ScrollWheelDelta();
+	//Resets the scroll wheel delta to 0.
 	void ResetScrollWheel();
 
 	void HandleEvents(const sf::Event& event);

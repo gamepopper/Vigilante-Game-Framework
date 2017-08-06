@@ -34,33 +34,39 @@ public:
 		frames.shrink_to_fit();
 	};
 
+	//Resets animation.
 	void Reset()
 	{
 		currentFrame = 0;
 		frameTime = 0;
 	}
 
+	//Sets current frame in animation. If no animation is playing, sets the frame to display.
 	void SetCurrentFrame(int NewFrame)
 	{
 		if (NewFrame < totalFrames)
 			currentFrame = NewFrame;
 	}
 
+	//Gets the current frame of an animation.
 	int GetCurrentFrame()
 	{
 		return frames[currentFrame];
 	}
 
+	//Total amount of frames for animation.
 	int GetFrameCount()
 	{
 		return totalFrames;
 	}
 
+	//Set animation to loop or not.
 	void SetLooping(bool Looping)
 	{
 		looping = Looping;
 	}
 
+	//Sets animation to reverse or not.
 	void SetReverse(bool Reverse)
 	{
 		reverse = Reverse;

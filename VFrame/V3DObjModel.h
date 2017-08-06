@@ -42,6 +42,10 @@ public:
 
 	}
 
+	/*
+	Loads Object Model from filepath.
+	Any material and texture files should be placed relative to the .obj file.
+	*/
 	bool LoadModelData(const char* filename);
 
 	virtual void Destroy();

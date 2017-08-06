@@ -47,35 +47,57 @@ public:
 		return length;
 	}
 
+	//Add object to group.
 	VBase* Add(VBase* object);
+	//Remove object from group.
 	VBase* Remove(VBase* object, bool splice = false);
 
+	//Gets first object regardless of state.
 	VBase* FirstAvailable();
+	//Gets first index that is set to nullptr.
 	int FirstNULL();
+	//Gets first object that exists in scene.
 	VBase* FirstExisting();
+	//Gets first object that is alive.
 	VBase* FirstAlive();
+	//Gets first object that is dead.
 	VBase* FirstDead();
 
+	//Count alive objects.
 	int CountAlive();
+	//Count dead objects.
 	int CountDead();
+	//Gets random object from a set range. Min and Max will be clamped to 0 and maxSize.
 	VBase* GetRandom(int min = 0, int max = 0);
 
+	//Applies function for each object in group.
 	void ForEach(std::function<void(VBase*)> function, bool recursive = false);
+	//Applies function for each object in group that's alive.
 	void ForEachAlive(std::function<void(VBase*)> function, bool recursive = false);
+	//Applies function for each object in group that's dead.
 	void ForEachDead(std::function<void(VBase*)> function, bool recursive = false);
+	//Applies function for each object in group that exists.
 	void ForEachExists(std::function<void(VBase*)> function, bool recursive = false);
+	
 	template <class T>
+	//Applies function for each object in group of a specific type.
 	void ForEachType(void (*function)(T* object), bool recursive = false);
 
+	//Gets an object from a specified index in group.
 	VBase* GetGroupItem(int index);
+	//Gets the index of a specific object.
 	int GetIndexOfItem(VBase* object);
 
+	//Sort nullptr members to the bottom of the group.
 	void OrganiseNULLS();
+	//Swaps order of two groups.
 	void Swap(int a, int b);
+	//Sorts objects based on function.
 	void Sort(std::function<bool(VBase*, VBase*)> func);
 
+	//Reverse order of group.
 	void Reverse();
-
+	//Clear group.
 	void Clear();
 
 	virtual void Destroy() override;

@@ -9,6 +9,12 @@
 //c - change
 //d - destination time
 
+//Public function parameters are different because of my habits.
+//a - beginning
+//b - end
+//t - current time
+//d - destination time
+
 const float PI = 3.14159265f;
 
 float VInterpolate::backIn(float t, float b, float c, float d)

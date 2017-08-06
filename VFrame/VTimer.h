@@ -12,14 +12,22 @@ public:
 	~VTimer() = default;
 
 	float Update(float dt);
+
+	//Returns true if the timer is currently paused.
 	bool IsPaused();
 
+	//Restarts timer at 0.
 	float Restart();
+	//Pauses the timer.
 	void Pause();
+	//Resumes timer at current point.
 	void Resume();
 
+	//Gets time in seconds.
 	float Seconds();
+	//Gets time in milliseconds.
 	int Milliseconds();
+	//Gets time in microseconds.
 	int Microseconds();
 };
 

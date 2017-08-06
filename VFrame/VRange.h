@@ -1,5 +1,6 @@
 #pragma once
 
+//Class that holds two of the same object for min/max range.
 template <typename T>
 class VRange
 {
@@ -32,6 +33,7 @@ public:
 	}
 };
 
+//Class that holds four of the same object for min/max range. Best use this when storing objects with at least two properties (i.e. 2D vectors)
 template <typename T>
 class VRangeBounds
 {

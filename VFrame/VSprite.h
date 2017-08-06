@@ -61,13 +61,65 @@ public:
 #endif
 	}
 
+	/*
+	Load Graphic from filepath.
+	filename: Path of texture file.
+	animated: Sets if the graphic is part of an animation or not.
+	width: Width of sprite, ignored if animated is false.
+	height: Height of sprite, ignored if animated is false.
+	offsetX: X coordinate to start animation frames (if you don't want to use the entire texture), ignored if animated is false.
+	offsetY: Y coordinate to start animation frames (if you don't want to use the entire texture), ignored if animated is false.
+	texWidth: Width of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full width.
+	texWidth: Height of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full height.
+	*/
 	virtual VSprite* LoadGraphic(sf::String filename, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0);
+	/*
+	Load Graphic from sf::Texture object.
+	texture: Texture object.
+	animated: Sets if the graphic is part of an animation or not.
+	width: Width of sprite, ignored if animated is false.
+	height: Height of sprite, ignored if animated is false.
+	offsetX: X coordinate to start animation frames (if you don't want to use the entire texture), ignored if animated is false.
+	offsetY: Y coordinate to start animation frames (if you don't want to use the entire texture), ignored if animated is false.
+	texWidth: Width of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full width.
+	texWidth: Height of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full height.
+	*/
 	virtual VSprite* LoadGraphicFromTexture(sf::Texture texture, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0);
+	/*
+	Make sprite texture.
+	width: Width of sprite.
+	height: Height of sprite.
+	color: Fill Colour of sprite.
+	outline: Outline thickness.
+	outlineColor: colour of sprite outline.
+	*/
 	virtual VSprite* MakeGraphic(int width, int height, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
+	/*
+	Make sprite texture a circle.
+	radius: Radius of circle (width and height will be diameter of circle or radius * 2).
+	color: Fill Colour of sprite.
+	outline: Outline thickness.
+	outlineColor: colour of sprite outline.
+	*/
 	virtual VSprite* MakeGraphicCircle(int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
+	/*
+	Make sprite texture a shape of a specific number of sides.
+	radius: Radius of circle (width and height will be diameter of circle or radius * 2).
+	color: Fill Colour of sprite.
+	outline: Outline thickness.
+	outlineColor: colour of sprite outline.
+	*/
 	virtual VSprite* MakeGraphicSided(int radius, int sides, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
+	/*
+	Make sprite texture a custom convex shape.
+	points: Set of points that make the shape.
+	color: Fill Colour of sprite.
+	outline: Outline thickness.
+	outlineColor: colour of sprite outline.
+	*/
 	virtual VSprite* MakeGraphicConvex(std::vector<sf::Vector2f>& points, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
 
+	//Return texture of sprite.
 	sf::Texture& GetTexture()
 	{
 		return texture;

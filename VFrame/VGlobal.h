@@ -19,7 +19,7 @@
 #include <sstream>
 #endif
 
-#define VFRAME_VERSION "0.9.9.9"
+#define VFRAME_VERSION "0.9.9.10"
 
 class VBase;
 class VObject;
@@ -78,7 +78,7 @@ public:
 	unsigned int WindowWidth = 0;
 	//Window Height
 	unsigned int WindowHeight = 0;
-	//World Bounds - used to bound camera to world area.
+	//World Bounds - used to bound camera to world area and for quad tree collisions.
 	sf::FloatRect WorldBounds;
 	//Music - play streamed music (particularly between states).
 	VMusic* Music = nullptr;
@@ -106,10 +106,16 @@ public:
 	//Window Style
 	int WindowStyle;
 
+	//Set game to fullscreen or not.
 	void SetFullscreen(bool set);
+
+	//Toggles from fullscreen to window mode.
 	void ToggleFullscreen();
 
+	//Get mouse position relative to screen.
 	sf::Vector2f GetMousePosition();
+
+	//Sets mouse cursor to be visible or not, depending of if you want an in-game cursor.
 	void SetMouseCursorVisible(bool set);
 
 	//The Current Gameplay State
@@ -122,15 +128,20 @@ public:
 	void PopState();
 	//Clear all states from the stack.
 	void ClearState();
-
+	//Close window and close out game.
 	void Exit();
 
-	bool Overlaps(VBase* a, VBase* b = NULL, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
-	bool Collides(VBase* a, VBase* b = NULL, std::function<void(VObject*, VObject*)>const& responseCall = nullptr);
+	//Test if two objects are overlapping, use responseCall to handle overlap response, and processCall to process objects in event of overlap.
+	bool Overlaps(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
+	//Test if two objects are overlapping, and then separates objects when true, use responseCall to handle collision response.
+	bool Collides(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr);
 
-	bool OverlapsCircle(VBase* a, VBase* b = NULL, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
-	bool CollidesCircle(VBase* a, VBase* b = NULL, std::function<void(VObject*, VObject*)>const& responseCall = nullptr);
+	//Test if two objects are overlapping as a circle, use responseCall to handle overlap response, and processCall to process objects in event of overlap. Make sure objects have the Radius property set.
+	bool OverlapsCircle(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
+	//Test if two objects are overlapping as a circle, and then separates objects when true, use responseCall to handle collision response. Make sure objects have the Radius property set.
+	bool CollidesCircle(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr);
 
+	//Cleanups Global data.
 	static void Cleanup();
 
 private:

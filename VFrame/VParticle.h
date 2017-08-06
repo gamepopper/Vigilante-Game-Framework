@@ -23,6 +23,8 @@ public:
 
 	virtual void Update(float dt) override;
 	virtual void Reset(float x, float y) override;
+	
+	//Particle specific behaviour when emitted.
 	virtual void OnEmit() {}
 };
 

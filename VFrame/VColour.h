@@ -5,6 +5,7 @@
 class VColour
 {
 public:
+	//Converts parameters using HSVA (Hue: 0 - 360, Saturation: 0 - 1, Vibrance: 0 - 1, Alpha: 0 - 1) to sf::Color's RGBA format.
 	static const sf::Color HSVtoRGB(float h, float s, float v, float a = 1.0f)
 	{
 		float hh, p, q, t, ff;
@@ -69,6 +70,8 @@ public:
 			static_cast<unsigned int>(b * 255),
 			static_cast<unsigned int>(a * 255));
 	}
+
+	//Converts parameters using LABA (Lightness: 0 - 1, Red/Green: 0 - 1, Blue/Yellow: 0 - 1, Alpha: 0 - 1) to sf::Color's RGBA format.
 	static const sf::Color LABtoRGB(float l, float a, float b, float alpha = 1.0f)
 	{
 		float x, y, z;
@@ -96,6 +99,8 @@ public:
 			static_cast<unsigned int>(B * 255),
 			static_cast<unsigned int>(alpha * 255));
 	}
+
+	//Converts parameters using CMYKA (Cyan: 0 - 1, Magenta: 0 - 1, Yellow: 0 - 1, BlacK: 0 - 1, Alpha: 0 - 1) to sf::Color's RGBA format.
 	static const sf::Color CMYKtoRGB(float c, float m, float y, float k, float a = 1.0f)
 	{
 		float r, g, b;

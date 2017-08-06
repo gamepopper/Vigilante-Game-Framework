@@ -69,25 +69,34 @@ public:
 		OnFlashComplete = nullptr;
 	}
 
+	//Follow a game object.
 	void Follow(VObject* target, float deadzone = 0.5f, CameraFollowMethod followmethod = LOCKON, float lead = 0.0f, float lerp = 0.0f);
+
+	//Stop following a game object.
 	void StopFollow();
 
+	//Shake for a specific amount of time. Use OnComplete to call a function after shaking has completed.
 	bool Shake(float intensity, float time = 1.0f, std::function<void()> OnComplete = nullptr);
 	bool Shake(sf::Vector2f intensity, float time = 1.0f, std::function<void()> OnComplete = nullptr);
 
+	//Make Camera Fade in or out. Use OnComplete to call a function after shaking has completed.
 	bool Fade(sf::Color colour = sf::Color::Black, float time = 1.0f, bool fadein = false, std::function<void()> OnComplete = nullptr);
+	//Make Camera Flash a certain colour. Use OnComplete to call a function after shaking has completed.
 	bool Flash(sf::Color colour = sf::Color::Black, float time = 1.0f, std::function<void()> OnComplete = nullptr);
 
+	//Sets whether camera should bound to the FlxG::p()->WorldBounds
 	void SetToBounds(bool bound)
 	{
 		boundToWorld = bound;
 	}
 
+	//Sets camera to display from a specific section of the viewport (default is FloatRect(0, 0, 1, 1)).
 	void SetViewport(sf::FloatRect &viewport)
 	{
 		view.setViewport(viewport);
 	}
 
+	//Tests if a game object is in view.
 	bool IsObjectInView(VObject* object);
 
 	void Update(float ft);
