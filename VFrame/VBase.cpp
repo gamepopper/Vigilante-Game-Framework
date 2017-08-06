@@ -41,6 +41,10 @@ void VBase::VLog(const char* format, ...)
 	wchar_t output[4096];
 	std::mbstowcs(output, buf, strlen(buf) + 1);
 
+#ifdef _MSC_VER
+	OutputDebugString(output);
+#endif
+
 	delete[] con;
 }
 
