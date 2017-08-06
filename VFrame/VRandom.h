@@ -28,6 +28,7 @@ public:
 	bool GetBool(float chance = 50.0f);
 	sf::Color GetColor(sf::Color max, sf::Color min);
 	sf::Vector2f GetVector2f(sf::Vector2f max, sf::Vector2f min = sf::Vector2f());
+	sf::Vector2i GetVector2i(sf::Vector2i max, sf::Vector2i min = sf::Vector2i());
 	sf::Vector2u GetVector2u(sf::Vector2u max, sf::Vector2u min = sf::Vector2u());
 };
 

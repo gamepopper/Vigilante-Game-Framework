@@ -35,6 +35,11 @@ sf::Vector2f VRandom::GetVector2f(sf::Vector2f max, sf::Vector2f min)
 	return sf::Vector2f(GetFloat(max.x, min.x), GetFloat(max.y, min.y));
 }
 
+sf::Vector2i VRandom::GetVector2i(sf::Vector2i max, sf::Vector2i min)
+{
+	return sf::Vector2i(GetInt(max.x, min.x), GetInt(max.y, min.y));
+}
+
 sf::Vector2u VRandom::GetVector2u(sf::Vector2u max, sf::Vector2u min)
 {
 	return sf::Vector2u(GetInt(max.x, min.x), GetInt(max.y, min.y));
