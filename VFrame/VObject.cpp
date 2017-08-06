@@ -115,8 +115,8 @@ bool VObject::separateY(VObject* a, VObject *b)
 			a->Position.y -= overlap;
 			b->Position.y += overlap;
 
-			float aVel = a->Mass > 0 ? sqrtf((bV * bV * b->Mass) / a->Mass) * (bV > 0 ? 1 : -1) : 0;
-			float bVel = b->Mass > 0 ? sqrtf((aV * aV * a->Mass) / b->Mass) * (aV > 0 ? 1 : -1) : 0;
+			float aVel = a->Mass > 0 ? sqrtf((bV * bV * b->Mass)/a->Mass) * (bV > 0 ? 1 : -1) : 0;
+			float bVel = b->Mass > 0 ? sqrtf((aV * aV * a->Mass)/b->Mass) * (aV > 0 ? 1 : -1) : 0;
 			float avg = (aVel + bVel) / 2;
 			aVel -= avg;
 			bVel -= avg;
@@ -128,6 +128,7 @@ bool VObject::separateY(VObject* a, VObject *b)
 			a->Position.y -= overlap;
 			a->Velocity.y = (bV - aV) * a->Elasticity;
 
+			//For moving platforms
 			if (a->CollisionXDrag && b->active && b->Moves && aDelta > bDelta)
 			{
 				a->Position.x += b->Position.x - b->Last.x;
@@ -138,6 +139,7 @@ bool VObject::separateY(VObject* a, VObject *b)
 			b->Position.y -= overlap;
 			b->Velocity.y = (aV - bV) * b->Elasticity;
 
+			//For moving platforms
 			if (b->CollisionXDrag && a->active && a->Moves && bDelta > aDelta)
 			{
 				b->Position.x += a->Position.x - a->Last.x;
@@ -285,10 +287,12 @@ float VObject::overlapX(VObject* a, VObject *b, bool maxOverlap)
 		float aDiffAbs = (aDiff > 0) ? aDiff : -aDiff;
 		float bDiffAbs = (bDiff > 0) ? bDiff : -bDiff;
 
+		//Use the Last Y position instead of current to avoid floor collisions due to gravity.
 		sf::FloatRect aRect = sf::FloatRect(a->Position.x - ((aDiff > 0) ? aDiff : 0), a->Last.y, a->Size.x + aDiffAbs, a->Size.y);
 		sf::FloatRect bRect = sf::FloatRect(b->Position.x - ((bDiff > 0) ? bDiff : 0), b->Last.y, b->Size.x + bDiffAbs, b->Size.y);
-
-		if (aRect.intersects(bRect))
+		
+		if ((aRect.left + aRect.width > bRect.left) && (aRect.left < bRect.left + bRect.width) && 
+			(aRect.top + aRect.height > bRect.top) && (aRect.top < bRect.top + bRect.height))
 		{
 			float maxOverlapDist = maxOverlap ? (aDiffAbs + bDiffAbs + SeparateBias) : 0;
 
@@ -309,7 +313,7 @@ float VObject::overlapX(VObject* a, VObject *b, bool maxOverlap)
 			else if (aDiff < bDiff)
 			{
 				overlap = a->Position.x - b->Size.x - b->Position.x;
-
+				
 				if ((maxOverlap && -overlap > maxOverlapDist) || (a->AllowCollisions & SidesTouching::TOUCHLEFT) == 0 || (b->AllowCollisions & SidesTouching::TOUCHRIGHT) == 0)
 				{
 					overlap = 0;
@@ -340,7 +344,8 @@ float VObject::overlapY(VObject* a, VObject *b, bool maxOverlap)
 		sf::FloatRect aRect = sf::FloatRect(a->Position.x, a->Position.y - ((aDiff > 0) ? aDiff : 0), a->Size.x, a->Size.y + aDiffAbs);
 		sf::FloatRect bRect = sf::FloatRect(b->Position.x, b->Position.y - ((bDiff > 0) ? bDiff : 0), b->Size.x, b->Size.y + bDiffAbs);
 
-		if (aRect.intersects(bRect))
+		if ((aRect.left + aRect.width > bRect.left) && (aRect.left < bRect.left + bRect.width) &&
+			(aRect.top + aRect.height > bRect.top) && (aRect.top < bRect.top + bRect.height))
 		{
 			float maxOverlapDist = maxOverlap ? (aDiffAbs + bDiffAbs + SeparateBias) : 0;
 
