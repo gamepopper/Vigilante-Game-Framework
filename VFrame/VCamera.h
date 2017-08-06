@@ -20,7 +20,7 @@ protected:
 	sf::RectangleShape block;
 
 	bool isFollowing = false;
-	VObject* followObject = NULL;
+	VObject* followObject = nullptr;
 	CameraFollowMethod followMethod = LOCKON;
 	float followLead = 0;
 	float followLerp = 0;
@@ -63,7 +63,7 @@ public:
 	}
 	virtual ~VCamera()
 	{
-		followObject = NULL;
+		followObject = nullptr;
 		OnShakeComplete = nullptr;
 		OnFadeComplete = nullptr;
 		OnFlashComplete = nullptr;

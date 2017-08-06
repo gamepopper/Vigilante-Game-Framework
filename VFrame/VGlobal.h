@@ -81,12 +81,12 @@ public:
 	//World Bounds - used to bound camera to world area.
 	sf::FloatRect WorldBounds;
 	//Music - play streamed music (particularly between states).
-	VMusic* Music = NULL;
+	VMusic* Music = nullptr;
 	//Sound - play loaded sounds.
-	VSoundManager* Sound = NULL;
+	VSoundManager* Sound = nullptr;
 
-	VContent* Content = NULL;
-	VPostEffectBase* PostProcess = NULL;
+	VContent* Content = nullptr;
+	VPostEffectBase* PostProcess = nullptr;
 
 	//Frames Per Second - used to calculate average framerate
 	float FPS = 0;
@@ -134,8 +134,8 @@ public:
 	static void Cleanup();
 
 private:
-	VStateManager* gsm = NULL;
-	VState* nextState = NULL;
+	VStateManager* gsm = nullptr;
+	VState* nextState = nullptr;
 	bool fullscreen = false;
 	bool mouseCursorVisible = true;
 };
