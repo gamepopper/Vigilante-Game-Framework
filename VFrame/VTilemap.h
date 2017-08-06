@@ -103,6 +103,7 @@ public:
 	void ChangeTile(const std::vector<sf::Vector2u>& positions, char ID);
 
 	void ResetCollision(const std::vector<char>& collision = { '#' });
+	virtual bool OverlapWithCallback(VObject* object, std::function<bool(VObject*, VObject*)> Callback, bool FlipCallback = false);
 
 	void SetTint(const sf::Color& color);
 	sf::Color const& GetTint();

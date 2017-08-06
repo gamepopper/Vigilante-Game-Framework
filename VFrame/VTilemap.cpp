@@ -145,6 +145,7 @@ void VTilemap::updateCollisionBox()
 				VTile* t = new VTile(static_cast<float>(x * TileSize.x) + Position.x, static_cast<float>(y * TileSize.y) + Position.y, static_cast<float>(TileSize.x), static_cast<float>(TileSize.y));
 				t->AllowCollisions = collisionDir[tile]->AllowCollisions;
 				t->Callback = collisionDir[tile]->Callback;
+				t->MainTile = tile;
 				t->Update(0);
 				Tiles.push_back(t);
 				continue;
@@ -384,6 +385,50 @@ void VTilemap::ResetCollision(const std::vector<char>& collision)
 
 	updateCollisionBox();
 	dirty = true;
+}
+
+bool VTilemap::OverlapWithCallback(VObject* object, std::function<bool(VObject*, VObject*)> Callback, bool FlipCallback)
+{
+	bool results = false;
+	bool overlapFound = false;
+
+	for (unsigned int i = 0; i < Tiles.size(); i++)
+	{
+		VTile* t = Tiles[i];
+		overlapFound =
+			((object->Position.x + object->Size.x) > t->Position.x) &&
+			(object->Position.x < (t->Position.x + t->Size.x)) &&
+			((object->Position.y + object->Size.y) > t->Position.y) &&
+			(object->Position.y < (t->Position.y + t->Size.y));
+
+		if (t->AllowCollisions != SidesTouching::TOUCHNONE)
+		{
+			if (Callback != nullptr)
+			{
+				if (FlipCallback)
+				{
+					overlapFound = Callback(object, t);
+				}
+				else
+				{
+					overlapFound = Callback(t, object);
+				}
+			}
+		}
+
+		if (overlapFound)
+		{
+			if (t->Callback != nullptr)
+			{
+				t->Callback(t, object);
+			}
+
+			if (t->AllowCollisions != SidesTouching::TOUCHNONE)
+				results = true;
+		}
+	}
+
+	return results;
 }
 
 void VTilemap::SetTint(const sf::Color& color)

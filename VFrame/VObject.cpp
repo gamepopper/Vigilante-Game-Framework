@@ -1,5 +1,5 @@
 #include "VObject.h"
-#include "VTile.h"
+#include "VTilemap.h"
 #include <cmath>
 
 float VObject::SeparateBias = 4;
@@ -29,20 +29,16 @@ bool VObject::separateX(VObject* a, VObject *b)
 	}
 
 	//Tilemap
-	if (a->type == VType::TILE)
+	if (a->type == VType::TILEMAP)
 	{
-		VTile* t = dynamic_cast<VTile*>(a);
-
-		if (t->Callback != nullptr)
-			t->Callback(t, b);
+		VTilemap* t = dynamic_cast<VTilemap*>(a);
+		return t->OverlapWithCallback(b, std::bind(&VObject::separateX, std::placeholders::_1, std::placeholders::_2));
 	}
 
-	if (b->type == VType::TILE)
+	if (b->type == VType::TILEMAP)
 	{
-		VTile* t = dynamic_cast<VTile*>(b);
-
-		if (t->Callback != nullptr)
-			t->Callback(t, a);
+		VTilemap* t = dynamic_cast<VTilemap*>(b);
+		return t->OverlapWithCallback(a, std::bind(&VObject::separateX, std::placeholders::_1, std::placeholders::_2), true);
 	}
 
 	float overlap = overlapX(a, b);
@@ -93,20 +89,16 @@ bool VObject::separateY(VObject* a, VObject *b)
 	}
 
 	//Tilemap
-	if (a->type == VType::TILE)
+	if (a->type == VType::TILEMAP)
 	{
-		VTile* t = dynamic_cast<VTile*>(a);
-
-		if (t->Callback != nullptr)
-			t->Callback(t, b);
+		VTilemap* t = dynamic_cast<VTilemap*>(a);
+		return t->OverlapWithCallback(b, std::bind(&VObject::separateY, std::placeholders::_1, std::placeholders::_2));
 	}
 
-	if (b->type == VType::TILE)
+	if (b->type == VType::TILEMAP)
 	{
-		VTile* t = dynamic_cast<VTile*>(b);
-
-		if (t->Callback != nullptr)
-			t->Callback(t, a);
+		VTilemap* t = dynamic_cast<VTilemap*>(b);
+		return t->OverlapWithCallback(a, std::bind(&VObject::separateY, std::placeholders::_1, std::placeholders::_2), true);
 	}
 
 	float overlap = overlapY(a, b);
@@ -169,20 +161,16 @@ bool VObject::separateCircle(VObject* a, VObject *b)
 	}
 
 	//Tilemap
-	if (a->type == VType::TILE)
+	if (a->type == VType::TILEMAP)
 	{
-		VTile* t = dynamic_cast<VTile*>(a);
-
-		if (t->Callback != nullptr)
-			t->Callback(t, b);
+		VTilemap* t = dynamic_cast<VTilemap*>(a);
+		return t->OverlapWithCallback(b, std::bind(&VObject::separateCircle, std::placeholders::_1, std::placeholders::_2));
 	}
 
-	if (b->type == VType::TILE)
+	if (b->type == VType::TILEMAP)
 	{
-		VTile* t = dynamic_cast<VTile*>(b);
-
-		if (t->Callback != nullptr)
-			t->Callback(t, a);
+		VTilemap* t = dynamic_cast<VTilemap*>(b);
+		return t->OverlapWithCallback(a, std::bind(&VObject::separateCircle, std::placeholders::_1, std::placeholders::_2), true);
 	}
 
 	sf::Vector2f overlap = overlapCircle(a, b);
@@ -252,11 +240,37 @@ bool VObject::separateCircle(VObject* a, VObject *b)
 
 bool VObject::touchFlagX(VObject* a, VObject *b)
 {
+	//Tilemap
+	if (a->type == VType::TILEMAP)
+	{
+		VTilemap* t = dynamic_cast<VTilemap*>(a);
+		return t->OverlapWithCallback(b, std::bind(&VObject::touchFlagX, std::placeholders::_1, std::placeholders::_2));
+	}
+
+	if (b->type == VType::TILEMAP)
+	{
+		VTilemap* t = dynamic_cast<VTilemap*>(b);
+		return t->OverlapWithCallback(a, std::bind(&VObject::touchFlagX, std::placeholders::_1, std::placeholders::_2), true);
+	}
+
 	return overlapX(a, b, false) != 0;
 }
 
 bool VObject::touchFlagY(VObject* a, VObject *b)
 {
+	//Tilemap
+	if (a->type == VType::TILEMAP)
+	{
+		VTilemap* t = dynamic_cast<VTilemap*>(a);
+		return t->OverlapWithCallback(b, std::bind(&VObject::touchFlagY, std::placeholders::_1, std::placeholders::_2));
+	}
+
+	if (b->type == VType::TILEMAP)
+	{
+		VTilemap* t = dynamic_cast<VTilemap*>(b);
+		return t->OverlapWithCallback(a, std::bind(&VObject::touchFlagY, std::placeholders::_1, std::placeholders::_2), true);
+	}
+
 	return overlapY(a, b, false) != 0;
 }
 
