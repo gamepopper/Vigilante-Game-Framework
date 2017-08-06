@@ -57,7 +57,7 @@ sf::Sound* VSoundManager::GetSound(sf::String id)
 		return &sounds[id];
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 void VSoundManager::Cleanup()

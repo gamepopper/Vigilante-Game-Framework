@@ -81,7 +81,7 @@ VPostEffectMultipass::~VPostEffectMultipass()
 	for (unsigned int i = 0; i < postEffects.size(); i++)
 	{
 		delete postEffects[i];
-		postEffects[i] = NULL;
+		postEffects[i] = nullptr;
 	}
 
 	postEffects.clear();
@@ -93,7 +93,7 @@ VPostEffectMultipass::~VPostEffectMultipass()
 	for (unsigned int i = 0; i < renderTextures.size(); i++)
 	{
 		delete renderTextures[i];
-		renderTextures[i] = NULL;
+		renderTextures[i] = nullptr;
 	}
 
 	renderTextures.clear();
@@ -115,7 +115,7 @@ void VPostEffectMultipass::AddPostEffect(VPostEffectBase* post)
 VPostEffectBase* VPostEffectMultipass::GetPostEffect(unsigned int index)
 {
 	if (index >= postEffects.size())
-		return NULL;
+		return nullptr;
 
 	return postEffects[index];
 }

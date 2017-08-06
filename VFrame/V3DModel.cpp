@@ -154,5 +154,5 @@ void V3DModel::Draw(sf::RenderTarget& RenderTarget)
 
 	glPopMatrix();
 
-	sf::Texture::bind(NULL);
+	sf::Texture::bind(nullptr);
 }

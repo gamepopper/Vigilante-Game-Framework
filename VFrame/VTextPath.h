@@ -8,7 +8,7 @@ protected:
 	static float vmodf(float x, float y);
 
 public:
-	enum PathCurveType
+	enum PathCurveType : unsigned char
 	{
 		PATH_NONE,
 		PATH_ANCHOR,

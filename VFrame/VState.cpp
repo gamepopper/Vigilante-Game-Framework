@@ -12,7 +12,7 @@ void VState::Cleanup()
 		for (unsigned int i = 0; i < Cameras.size(); i++)
 		{
 			delete Cameras[i];
-			Cameras[i] = NULL;
+			Cameras[i] = nullptr;
 		}
 
 		Cameras.clear();
@@ -79,7 +79,7 @@ void VState::ResetSubState()
 		SubState->Cleanup();
 
 		delete SubState;
-		SubState = NULL;
+		SubState = nullptr;
 
 		closeSubstate = false;
 	}
@@ -166,7 +166,7 @@ void VStateManager::Clear()
 	{
 		states[i]->Cleanup();
 		delete states[i];
-		states[i] = NULL;
+		states[i] = nullptr;
 	}
 	
 	states.clear();

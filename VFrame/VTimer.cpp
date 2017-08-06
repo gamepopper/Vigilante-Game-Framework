@@ -1,6 +1,6 @@
 #include "VTimer.h"
 
-VTimeManager* VTimeManager::Instance = NULL;
+VTimeManager* VTimeManager::Instance = nullptr;
 
 VTimeManager::VTimeManager()
 {
@@ -14,7 +14,7 @@ VTimeManager::~VTimeManager()
 
 bool VTimeManager::AnyActiveTimers()
 {
-	if (Instance != NULL)
+	if (Instance != nullptr)
 	{
 		return Instance->Count() > 0;
 	}
@@ -50,7 +50,7 @@ void VTimeManager::Clear(bool destroy)
 		for (unsigned int i = 0; i < timers.size(); i++)
 		{
 			delete timers[i];
-			timers[i] = NULL;
+			timers[i] = nullptr;
 		}
 	}
 

@@ -13,7 +13,7 @@ void VCamera::Reset()
 	LastPosition = Position;
 	Rotation = view.getRotation();
 	Zoom = 1.0f;
-	followObject = NULL;
+	followObject = nullptr;
 	isFollowing = false;
 	isShaking = false;
 }
@@ -31,7 +31,7 @@ void VCamera::Follow(VObject* target, float deadzone, CameraFollowMethod followm
 
 void VCamera::StopFollow()
 {
-	followObject = NULL;
+	followObject = nullptr;
 	isFollowing = false;
 }
 

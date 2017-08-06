@@ -295,6 +295,6 @@ void V3DObjModel::Draw(sf::RenderTarget& RenderTarget)
 		VSUPERCLASS::Draw(RenderTarget);
 		glDrawArrays(GL_TRIANGLES, 0, 3 * md.triangleCount);
 		glPopMatrix();
-		sf::Texture::bind(NULL);
+		sf::Texture::bind(nullptr);
 	}
 }

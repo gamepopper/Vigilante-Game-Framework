@@ -58,7 +58,7 @@ void V3DScene::DeactivateLight(GLenum id)
 	if (lights[id - GL_LIGHT0])
 	{
 		delete lights[id - GL_LIGHT0];
-		lights[id - GL_LIGHT0] = NULL;
+		lights[id - GL_LIGHT0] = nullptr;
 	}
 }
 

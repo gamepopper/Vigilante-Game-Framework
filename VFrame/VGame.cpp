@@ -89,7 +89,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 
 	initialState->Cameras[0]->Reset();
 	VGlobal::p()->ChangeState(initialState);
-	VGlobal::p()->ChangeState(NULL);
+	VGlobal::p()->ChangeState(nullptr);
 
 	sf::Clock clock;
 	VLog("Initialisation finished");
@@ -112,12 +112,12 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 
 			if (VGlobal::p()->IfChangedState)
 			{
-				VGlobal::p()->ChangeState(NULL);
+				VGlobal::p()->ChangeState(nullptr);
 			}
 
 			if (VGlobal::p()->IfPushedState)
 			{
-				VGlobal::p()->PushState(NULL);
+				VGlobal::p()->PushState(nullptr);
 			}
 
 			HandleEvents();
@@ -235,7 +235,7 @@ void VGame::Update(float dt)
 
 	VGlobal::p()->Music->Update(dt);
 
-	if (VGlobal::p()->PostProcess != NULL && VPostEffectBase::isSupported())
+	if (VGlobal::p()->PostProcess != nullptr && VPostEffectBase::isSupported())
 	{
 		VGlobal::p()->PostProcess->Update(dt);
 	}
@@ -273,7 +273,7 @@ void VGame::PostRender()
 	VGlobal::p()->App.setVerticalSyncEnabled(VGlobal::p()->VSync);
 
 	sf::View view = VGlobal::p()->App.getView();
-	if (VGlobal::p()->PostProcess == NULL || !VPostEffectBase::isSupported())
+	if (VGlobal::p()->PostProcess == nullptr || !VPostEffectBase::isSupported())
 	{
 		view.setViewport(sf::FloatRect(0, 0, 1, 1));
 		VGlobal::p()->RenderSprite.setTexture(RenderTarget.getTexture());

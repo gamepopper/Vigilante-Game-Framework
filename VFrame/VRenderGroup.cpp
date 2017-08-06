@@ -80,16 +80,16 @@ void VRenderGroup::Destroy()
 {
 	VSUPERCLASS::Destroy();
 
-	if (Sprite != NULL)
+	if (Sprite != nullptr)
 	{
 		delete Sprite;
-		Sprite = NULL;
+		Sprite = nullptr;
 	}
 
-	if (PostEffect != NULL)
+	if (PostEffect != nullptr)
 	{
 		delete PostEffect;
-		PostEffect = NULL;
+		PostEffect = nullptr;
 	}
 }
 
@@ -108,7 +108,7 @@ void VRenderGroup::Update(float dt)
 	updateTransform();
 	Sprite->Update(dt);
 
-	if (PostEffect != NULL)
+	if (PostEffect != nullptr)
 	{
 		PostEffect->Update(dt);
 	}
@@ -125,7 +125,7 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 	
 	if (RenderOutside) VSUPERCLASS::Draw(RenderTarget);
 
-	if (PostEffect != NULL && VPostEffectBase::isSupported())
+	if (PostEffect != nullptr && VPostEffectBase::isSupported())
 	{
 		postProcessTex.clear(sf::Color::Transparent);
 		PostEffect->Apply(renderTex, postProcessTex);

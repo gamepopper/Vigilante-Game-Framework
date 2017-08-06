@@ -235,7 +235,7 @@ void VTilemap::clearTiles()
 	for (VTile* tile : Tiles)
 	{
 		delete tile;
-		tile = NULL;
+		tile = nullptr;
 	}
 	Tiles.clear();
 }
@@ -374,7 +374,7 @@ void VTilemap::ResetCollision(const std::vector<char>& collision)
 	for (std::pair<char, VTileCollisionInfo*> t : collisionDir)
 	{
 		delete t.second;
-		t.second = NULL;
+		t.second = nullptr;
 	}
 
 	collisionDir.clear();
@@ -411,7 +411,7 @@ void VTilemap::Destroy()
 	for (std::pair<char, VTileRenderInfo*> anim : renderDir)
 	{
 		delete anim.second;
-		anim.second = NULL;
+		anim.second = nullptr;
 	}
 	renderDir.clear();
 

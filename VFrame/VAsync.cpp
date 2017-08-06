@@ -23,7 +23,7 @@ void VAsync::LaunchAsyncFunction(std::future<void> &f)
 
 void VAsync::SyncToMainLoop(std::function<void()> callback)
 {
-	if (callback != NULL)
+	if (callback != nullptr)
 	{
 		syncMutex.lock();
 		syncQueue.push(callback);

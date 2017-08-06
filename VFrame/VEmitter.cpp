@@ -147,7 +147,7 @@ void VEmitter::Destroy()
 	if (ParticleInstance)
 	{
 		delete ParticleInstance;
-		ParticleInstance = NULL;
+		ParticleInstance = nullptr;
 	}
 
 	vertices.clear();
@@ -248,7 +248,7 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 	{
 		base = dynamic_cast<VParticle*>(members[i]);
 
-		if (base != NULL && base->exists && base->visible)
+		if (base != nullptr && base->exists && base->visible)
 		{
 			transformable.setOrigin(base->Size/2.0f);
 			transformable.setPosition(base->Position + transformable.getOrigin());

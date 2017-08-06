@@ -3,7 +3,7 @@
 #include "VPostEffect.h"
 #include "VTimer.h"
 
-VGlobal* VGlobal::Instance = NULL;
+VGlobal* VGlobal::Instance = nullptr;
 
 VGlobal::VGlobal()
 {
@@ -18,27 +18,27 @@ VGlobal::~VGlobal()
 	if (Content)
 	{
 		delete Content;
-		Content = NULL;
+		Content = nullptr;
 	}
 	if (Music)
 	{
 		delete Music;
-		Music = NULL;
+		Music = nullptr;
 	}
 	if (Sound)
 	{
 		delete Sound;
-		Sound = NULL;
+		Sound = nullptr;
 	}
 	if (PostProcess)
 	{
 		delete PostProcess;
-		PostProcess = NULL;
+		PostProcess = nullptr;
 	}
 	if (gsm)
 	{
 		delete gsm;
-		gsm = NULL;
+		gsm = nullptr;
 	}
 }
 
@@ -99,7 +99,7 @@ VState* VGlobal::CurrentState()
 
 void VGlobal::ChangeState(VState* state)
 {
-	if (IfChangedState && state == NULL)
+	if (IfChangedState && state == nullptr)
 	{
 		if (!Async.ActiveAsyncFunctions())
 		{
@@ -109,11 +109,11 @@ void VGlobal::ChangeState(VState* state)
 			}
 
 			gsm->ChangeState(nextState);
-			nextState = NULL;
+			nextState = nullptr;
 			IfChangedState = false;
 		}
 	}
-	else if (nextState == NULL)
+	else if (nextState == nullptr)
 	{
 		nextState = state;
 		IfChangedState = true;
@@ -122,13 +122,13 @@ void VGlobal::ChangeState(VState* state)
 
 void VGlobal::PushState(VState* state)
 {
-	if (IfPushedState && state == NULL)
+	if (IfPushedState && state == nullptr)
 	{
 		gsm->PushState(nextState);
-		nextState = NULL;
+		nextState = nullptr;
 		IfPushedState = false;
 	}
-	else if (nextState == NULL)
+	else if (nextState == nullptr)
 	{
 		nextState = state;
 		IfPushedState = true;
@@ -156,18 +156,18 @@ bool VGlobal::Overlaps(VBase* a, VBase* b, std::function<void(VObject*, VObject*
 {
 	bool result = false;
 
-	if (a == NULL)
+	if (a == nullptr)
 	{
 		a = CurrentState();
 	}
 	if (b == a)
 	{
-		b = NULL;
+		b = nullptr;
 	}
 
 	VCollision* collision = new VCollision();
-	if (b != NULL) collision->AddToListB(b);
-	collision->AddToListA(a);
+	if (b != nullptr) collision->AddToList(b, B);
+	collision->AddToList(a, A);
 	result = collision->Run(responseCall, processCall);
 	delete collision;
 
@@ -183,18 +183,18 @@ bool VGlobal::OverlapsCircle(VBase* a, VBase* b, std::function<void(VObject*, VO
 {
 	bool result = false;
 
-	if (a == NULL)
+	if (a == nullptr)
 	{
 		a = CurrentState();
 	}
 	if (b == a)
 	{
-		b = NULL;
+		b = nullptr;
 	}
 
 	VCircleCollision* collision = new VCircleCollision();
-	if (b != NULL) collision->AddToListB(b);
-	collision->AddToListA(a);
+	if (b != nullptr) collision->AddToList(b, B);
+	collision->AddToList(a, A);
 	result = collision->Run(responseCall, processCall);
 	delete collision;
 
@@ -211,6 +211,6 @@ void VGlobal::Cleanup()
 	if (Instance)
 	{
 		delete Instance;
-		Instance = NULL;
+		Instance = nullptr;
 	}
 }

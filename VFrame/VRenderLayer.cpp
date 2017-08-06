@@ -11,10 +11,10 @@ void VRenderLayer::Destroy()
 {
 	VSUPERCLASS::Destroy();
 
-	if (PostEffect != NULL)
+	if (PostEffect != nullptr)
 	{
 		delete PostEffect;
-		PostEffect = NULL;
+		PostEffect = nullptr;
 	}
 }
 
@@ -39,7 +39,7 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 
 	RenderTarget.setView(RenderTarget.getDefaultView());
 
-	if (PostEffect == NULL || !VPostEffectBase::isSupported())
+	if (PostEffect == nullptr || !VPostEffectBase::isSupported())
 	{
 		sprite.setTexture(renderTex.getTexture());
 	}

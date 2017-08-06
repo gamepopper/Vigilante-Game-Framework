@@ -5,14 +5,14 @@ using std::vector;
 
 VBase* VGroup::Add(VBase* object)
 {
-	if (object == NULL)
+	if (object == nullptr)
 	{
-		VLog("Cannot add NULL to a VGroup");
-		return NULL;
+		VLog("Cannot add nullptr to a VGroup");
+		return nullptr;
 	}
 
 	if (GetIndexOfItem(object) >= 0)
-		return NULL;
+		return nullptr;
 
 	if (MaxSize > 0 && length >= static_cast<int>(MaxSize))
 	{
@@ -38,12 +38,12 @@ VBase* VGroup::Add(VBase* object)
 VBase* VGroup::Remove(VBase* object, bool splice)
 {
 	if (members.size() == 0)
-		return NULL;
+		return nullptr;
 
 	auto pos = GetIndexOfItem(object);
 
 	if (pos < 0)
-		return NULL;
+		return nullptr;
 
 	if (splice)
 	{
@@ -51,7 +51,7 @@ VBase* VGroup::Remove(VBase* object, bool splice)
 	}
 	else
 	{
-		members[pos] = NULL;
+		members[pos] = nullptr;
 	}
 
 	object->RefCount--;
@@ -66,13 +66,13 @@ VBase* VGroup::FirstAvailable()
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && !base->exists)
+		if (base != nullptr && !base->exists)
 		{
 			return members[i];
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 int VGroup::FirstNULL()
@@ -81,7 +81,7 @@ int VGroup::FirstNULL()
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base == NULL)
+		if (base == nullptr)
 		{
 			return i;
 		}
@@ -96,13 +96,13 @@ VBase* VGroup::FirstExisting()
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && base->exists)
+		if (base != nullptr && base->exists)
 		{
 			return members[i];
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 VBase* VGroup::FirstAlive()
@@ -111,13 +111,13 @@ VBase* VGroup::FirstAlive()
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && base->exists && base->alive)
+		if (base != nullptr && base->exists && base->alive)
 		{
 			return members[i];
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 VBase* VGroup::FirstDead()
@@ -126,13 +126,13 @@ VBase* VGroup::FirstDead()
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && !base->alive)
+		if (base != nullptr && !base->alive)
 		{
 			return members[i];
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 int VGroup::CountAlive()
@@ -142,7 +142,7 @@ int VGroup::CountAlive()
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && base->exists && base->alive)
+		if (base != nullptr && base->exists && base->alive)
 		{
 			count++;
 		}
@@ -158,7 +158,7 @@ int VGroup::CountDead()
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && !base->alive)
+		if (base != nullptr && !base->alive)
 		{
 			count++;
 		}
@@ -169,23 +169,25 @@ int VGroup::CountDead()
 
 VBase* VGroup::GetRandom(int min, int max)
 {
+	min = min >= 0 ? min : 0;
+	max = max < (int)members.size() ? max : (int)members.size();
 	return members[VGlobal::p()->Random.GetInt(max, min)];
 }
 
 void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
 {
-	VBase* base = NULL;
+	VBase* base = nullptr;
 
 	for (int i = 0; i < length; i++)
 	{
 		base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL)
+		if (base != nullptr)
 		{
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
-				if (group != NULL)
+				if (group != nullptr)
 				{
 					group->ForEachAlive(function, recursive);
 				}
@@ -200,18 +202,18 @@ void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
 
 void VGroup::ForEachAlive(std::function<void(VBase*)> function, bool recursive)
 {
-	VBase* base = NULL;
+	VBase* base = nullptr;
 
 	for (int i = 0; i < length; i++)
 	{
 		base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && base->exists && base->alive)
+		if (base != nullptr && base->exists && base->alive)
 		{
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
-				if (group != NULL)
+				if (group != nullptr)
 				{
 					group->ForEachAlive(function, recursive);
 				}
@@ -226,18 +228,18 @@ void VGroup::ForEachAlive(std::function<void(VBase*)> function, bool recursive)
 
 void VGroup::ForEachDead(std::function<void(VBase*)> function, bool recursive)
 {
-	VBase* base = NULL;
+	VBase* base = nullptr;
 
 	for (int i = 0; i < length; i++)
 	{
 		base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && !base->alive)
+		if (base != nullptr && !base->alive)
 		{
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
-				if (group != NULL)
+				if (group != nullptr)
 				{
 					group->ForEachAlive(function, recursive);
 				}
@@ -252,18 +254,18 @@ void VGroup::ForEachDead(std::function<void(VBase*)> function, bool recursive)
 
 void VGroup::ForEachExists(std::function<void(VBase*)> function, bool recursive)
 {
-	VBase* base = NULL;
+	VBase* base = nullptr;
 
 	for (int i = 0; i < length; i++)
 	{
 		base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && base->exists)
+		if (base != nullptr && base->exists)
 		{
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
-				if (group != NULL)
+				if (group != nullptr)
 				{
 					group->ForEachAlive(function, recursive);
 				}
@@ -279,18 +281,18 @@ void VGroup::ForEachExists(std::function<void(VBase*)> function, bool recursive)
 template <class T>
 void VGroup::ForEachType(void (*function)(T* object), bool recursive)
 {
-	VBase* base = NULL;
+	VBase* base = nullptr;
 
 	for (int i = 0; i < length; i++)
 	{
 		base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && base->exists)
+		if (base != nullptr && base->exists)
 		{
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
-				if (group != NULL)
+				if (group != nullptr)
 				{
 					group->ForEachExists(function, recursive);
 				}
@@ -298,7 +300,7 @@ void VGroup::ForEachType(void (*function)(T* object), bool recursive)
 			else
 			{
 				T* object = dynamic_cast<T*>(base);
-				if (object != NULL)
+				if (object != nullptr)
 				{
 					function(base);
 				}
@@ -314,7 +316,7 @@ VBase* VGroup::GetGroupItem(int index)
 		return members[index];
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 int VGroup::GetIndexOfItem(VBase* object)
@@ -417,7 +419,7 @@ void VGroup::Kill()
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && base->exists)
+		if (base != nullptr && base->exists)
 			base->Kill();
 	}
 
@@ -430,7 +432,7 @@ void VGroup::Revive()
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && !base->exists)
+		if (base != nullptr && !base->exists)
 			base->Revive();
 	}
 
@@ -446,7 +448,7 @@ void VGroup::Update(float dt)
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && base->exists && base->active)
+		if (base != nullptr && base->exists && base->active)
 		{
 			base->Update(dt);
 		}
@@ -464,7 +466,7 @@ void VGroup::Draw(sf::RenderTarget& RenderTarget)
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
-		if (base != NULL && base->exists && base->visible)
+		if (base != nullptr && base->exists && base->visible)
 		{
 			base->Draw(RenderTarget);
 		}
@@ -479,13 +481,13 @@ void VGroup::Draw(sf::RenderTarget& RenderTarget)
 		{
 			VObject* object = dynamic_cast<VObject*>(members[i]);
 
-			if (object == NULL && members[i]->type == RENDERGROUP)
+			if (object == nullptr && members[i]->type == RENDERGROUP)
 			{
 				VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(members[i]);
 				object = dynamic_cast<VObject*>(renderGroup->Sprite);
 			}
 
-			if (object == NULL)
+			if (object == nullptr)
 				continue;
 
 			if (object->alive)
