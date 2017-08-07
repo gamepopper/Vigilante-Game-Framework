@@ -156,18 +156,19 @@ bool VGlobal::Overlaps(VBase* a, VBase* b, std::function<void(VObject*, VObject*
 {
 	bool result = false;
 
-	if (a == nullptr)
+	if (a == nullptr) //if a is null, then use the entirety of the state. Basically assume all objects will be checked.
 	{
 		a = CurrentState();
 	}
-	if (b == a)
+
+	if (b == nullptr) //if b is null, then use whatever is in A. This is so you can check all in a with themselves.
 	{
-		b = nullptr;
+		b = a;
 	}
 
 	VCollision* collision = new VCollision();
-	if (b != nullptr) collision->AddToList(b, B);
 	collision->AddToList(a, A);
+	collision->AddToList(b, B);
 	result = collision->Run(responseCall, processCall);
 	delete collision;
 
@@ -183,18 +184,19 @@ bool VGlobal::OverlapsCircle(VBase* a, VBase* b, std::function<void(VObject*, VO
 {
 	bool result = false;
 
-	if (a == nullptr)
+	if (a == nullptr) //if a is null, then use the entirety of the state. Basically assume all objects will be checked.
 	{
 		a = CurrentState();
 	}
-	if (b == a)
+
+	if (b == nullptr) //if b is null, then use whatever is in A. This is so you can check all in a with themselves.
 	{
-		b = nullptr;
+		b = a;
 	}
 
 	VCircleCollision* collision = new VCircleCollision();
-	if (b != nullptr) collision->AddToList(b, B);
 	collision->AddToList(a, A);
+	collision->AddToList(b, B);
 	result = collision->Run(responseCall, processCall);
 	delete collision;
 

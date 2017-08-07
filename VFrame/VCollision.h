@@ -26,18 +26,14 @@ struct VQuadTree
 	void clear();
 };
 
+static const int VQuadTreeSubsectionCount = 2;
+
 class VCollision
 {
-	enum QuadTreeDir : unsigned char
-	{
-		NORTHWEST,
-		NORTHEAST,
-		SOUTHWEST,
-		SOUTHEAST,
-	};
 	std::vector<VQuadTree*> quads;
 
 	virtual bool testOverlap(VObject* a, VObject* b);
+	void setupQuad(const sf::FloatRect& subsection, int remaining);
 
 public:
 	VCollision();

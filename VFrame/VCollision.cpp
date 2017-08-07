@@ -36,34 +36,13 @@ void VQuadTree::clear()
 
 VCollision::VCollision()
 {
-	quads.resize(4);
-	quads[NORTHWEST] = new VQuadTree();
-	quads[NORTHWEST]->bounds = sf::FloatRect(
-		0.0f, 0.0f, 
-		VGlobal::p()->WorldBounds.width / 2, 
-		VGlobal::p()->WorldBounds.height / 2);
-	quads[NORTHEAST] = new VQuadTree();
-	quads[NORTHEAST]->bounds = sf::FloatRect(
-		VGlobal::p()->WorldBounds.width / 2, 0.0f, 
-		VGlobal::p()->WorldBounds.width / 2, 
-		VGlobal::p()->WorldBounds.height / 2);
-	quads[SOUTHWEST] = new VQuadTree();
-	quads[SOUTHWEST]->bounds = sf::FloatRect(
-		0.0f, 
-		VGlobal::p()->WorldBounds.height / 2, 
-		VGlobal::p()->WorldBounds.width / 2, 
-		VGlobal::p()->WorldBounds.height / 2);
-	quads[SOUTHEAST] = new VQuadTree();
-	quads[SOUTHEAST]->bounds = sf::FloatRect(
-		VGlobal::p()->WorldBounds.width / 2, 
-		VGlobal::p()->WorldBounds.height / 2, 
-		VGlobal::p()->WorldBounds.width / 2, 
-		VGlobal::p()->WorldBounds.height / 2);
+	quads.reserve(pow(4, VQuadTreeSubsectionCount));
+	setupQuad(VGlobal::p()->WorldBounds, VQuadTreeSubsectionCount - 1);
 }
 
 VCollision::~VCollision()
 {
-	for (unsigned int i = 0; i < 4; i++)
+	for (unsigned int i = 0; i < quads.size(); i++)
 	{
 		quads[i]->clear();
 		delete quads[i];
@@ -72,6 +51,56 @@ VCollision::~VCollision()
 
 	quads.clear();
 	quads.shrink_to_fit();
+}
+
+void VCollision::setupQuad(const sf::FloatRect& subsection, int remaining)
+{
+	sf::FloatRect NW = sf::FloatRect(
+		subsection.left, 
+		subsection.top,
+		subsection.width / 2,
+		subsection.height / 2);
+
+	sf::FloatRect NE = sf::FloatRect(
+		subsection.left + (subsection.width / 2), 
+		subsection.top,
+		subsection.width / 2,
+		subsection.height / 2);
+
+	sf::FloatRect SW = sf::FloatRect(
+		subsection.left,
+		subsection.top + (subsection.height / 2),
+		subsection.width / 2,
+		subsection.height / 2);
+
+	sf::FloatRect SE = sf::FloatRect(
+		subsection.left + (subsection.width / 2),
+		subsection.top + (subsection.height / 2),
+		subsection.width / 2,
+		subsection.height / 2);
+
+	if (remaining <= 0)
+	{
+		VQuadTree* nwTree = new VQuadTree();
+		nwTree->bounds = NW;
+		VQuadTree* neTree = new VQuadTree();
+		neTree->bounds = NE;
+		VQuadTree* swTree = new VQuadTree();
+		swTree->bounds = SW;
+		VQuadTree* seTree = new VQuadTree();
+		seTree->bounds = SE;
+
+		quads.push_back(nwTree);
+		quads.push_back(neTree);
+		quads.push_back(swTree);
+		quads.push_back(seTree);
+		return;
+	}
+
+	setupQuad(NW, remaining - 1);
+	setupQuad(NE, remaining - 1);
+	setupQuad(SW, remaining - 1);
+	setupQuad(SE, remaining - 1);
 }
 
 void VCollision::AddToList(VBase* item, VCollideList list)
@@ -99,17 +128,10 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 
 		if (tilemap != nullptr)
 		{
-			/*std::vector<VTile*> tiles = tilemap->Tiles;
-
-			for (VTile* t : tiles)
+			for (unsigned int i = 0; i < quads.size(); i++)
 			{
-				AddToListA(t);
-			}*/
-
-			quads[NORTHEAST]->checkBounds(tilemap, list);
-			quads[NORTHWEST]->checkBounds(tilemap, list);
-			quads[SOUTHEAST]->checkBounds(tilemap, list);
-			quads[SOUTHWEST]->checkBounds(tilemap, list);
+				quads[i]->checkBounds(tilemap, list);
+			}
 		}
 	}
 	else if (item->type == RENDERGROUP)
@@ -128,10 +150,10 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 
 		if (object && object->alive)
 		{
-			quads[NORTHEAST]->checkBounds(object, list);
-			quads[NORTHWEST]->checkBounds(object, list);
-			quads[SOUTHEAST]->checkBounds(object, list);
-			quads[SOUTHWEST]->checkBounds(object, list);
+			for (unsigned int i = 0; i < quads.size(); i++)
+			{
+				quads[i]->checkBounds(object, list);
+			}
 		}
 	}
 }
@@ -142,54 +164,32 @@ bool VCollision::Run(std::function<void(VObject*, VObject*)>const& response, std
 
 	for (VQuadTree* tree : quads)
 	{
-		if (tree->listB.size() > 0)
+		unsigned int listASize = tree->listA.size();
+		unsigned int listBSize = tree->listB.size();
+
+		if (listASize == 0 || listBSize == 0)
+			continue;
+
+		for (unsigned int a = 0; a < listASize; a++)
 		{
-			for (unsigned int a = 0; a < tree->listA.size(); a++)
+			for (unsigned int b = 0; b < listBSize; b++)
 			{
-				for (unsigned int b = 0; b < tree->listB.size(); b++)
+				if (tree->listA[a] == tree->listB[b]) //Skip if both elements are the same object.
+					continue;
+
+				if (testOverlap(tree->listA[a], tree->listB[b]))
 				{
-					if (testOverlap(tree->listA[a], tree->listB[b]))
+					if (process != nullptr)
 					{
-						if (process != nullptr)
-						{
-							process(tree->listA[a], tree->listB[b]);
-						}
-
-						if (response != nullptr)
-						{
-							response(tree->listA[a], tree->listB[b]);
-						}
-
-						overlapFound = true;
+						process(tree->listA[a], tree->listB[b]);
 					}
-				}
-			}
-		}
-		else if (tree->listA.size() > 1)
-		{
-			for (unsigned int a = 0; a < tree->listA.size(); a++)
-			{
-				for (unsigned int b = 0; b < tree->listA.size(); b++)
-				{
-					if (a == b)
-						continue;
-					else if (tree->listA[a] == tree->listA[b])
-						continue;
 
-					if (testOverlap(tree->listA[a], tree->listA[b]))
+					if (response != nullptr)
 					{
-						if (process != nullptr)
-						{
-							process(tree->listA[a], tree->listA[b]);
-						}
-
-						if (response != nullptr)
-						{
-							response(tree->listA[a], tree->listA[b]);
-						}
-
-						overlapFound = true;
+						response(tree->listA[a], tree->listB[b]);
 					}
+
+					overlapFound = true;
 				}
 			}
 		}
