@@ -147,7 +147,7 @@ void VTilemap::updateCollisionBox()
 				t->Callback = collisionDir[tile]->Callback;
 				t->MainTile = tile;
 				t->Update(0);
-				Tiles.push_back(t);
+				tiles.push_back(t);
 				continue;
 			}
 
@@ -225,7 +225,7 @@ void VTilemap::updateCollisionBox()
 			{
 				VTile* tile = new VTile(static_cast<float>(x * TileSize.x) + Position.x, static_cast<float>(y * TileSize.y) + Position.y, static_cast<float>(width * TileSize.x), static_cast<float>(height * TileSize.y));
 				tile->Update(0);
-				Tiles.push_back(tile);
+				tiles.push_back(tile);
 			}
 		}
 	}
@@ -233,12 +233,12 @@ void VTilemap::updateCollisionBox()
 
 void VTilemap::clearTiles()
 {
-	for (VTile* tile : Tiles)
+	for (VTile* tile : tiles)
 	{
 		delete tile;
 		tile = nullptr;
 	}
-	Tiles.clear();
+	tiles.clear();
 }
 
 void VTilemap::LoadFromCSV(sf::String mapData, sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
@@ -325,7 +325,6 @@ void VTilemap::SetTileCollisionID(char ID, int AllowCollisions, std::function<vo
 	collisionDir[ID]->AllowCollisions = AllowCollisions;
 	collisionDir[ID]->Callback = Callback;
 
-	updateCollisionBox();
 	dirty = true;
 }
 
@@ -352,9 +351,6 @@ char VTilemap::GetTileIDFromPosition(sf::Vector2f tilemapPosition)
 void VTilemap::ChangeTile(int x, int y, char ID)
 {
 	tilemap[(y * mapWidth) + x] = ID;
-
-	updateTilemap();
-	updateCollisionBox();
 	dirty = true;
 }
 
@@ -365,8 +361,6 @@ void VTilemap::ChangeTile(const std::vector<sf::Vector2u>& positions, char ID)
 		tilemap[(pos.y * mapWidth) + pos.x] = ID;
 	}
 
-	updateTilemap();
-	updateCollisionBox();
 	dirty = true;
 }
 
@@ -383,19 +377,17 @@ void VTilemap::ResetCollision(const std::vector<char>& collision)
 	for (unsigned int i = 0; i < collision.size(); i++)
 		collisionDir[collision[i]] = new VTileCollisionInfo();
 
-	updateCollisionBox();
 	dirty = true;
 }
 
 bool VTilemap::OverlapWithCallback(VObject* object, std::function<bool(VObject*, VObject*)> Callback, bool FlipCallback)
 {
 	bool results = false;
-	bool overlapFound = false;
 
-	for (unsigned int i = 0; i < Tiles.size(); i++)
+	for (unsigned int i = 0; i < tiles.size(); i++)
 	{
-		VTile* t = Tiles[i];
-		overlapFound =
+		VTile* t = tiles[i];
+		bool overlapFound =
 			((object->Position.x + object->Size.x) > t->Position.x) &&
 			(object->Position.x < (t->Position.x + t->Size.x)) &&
 			((object->Position.y + object->Size.y) > t->Position.y) &&
@@ -423,8 +415,7 @@ bool VTilemap::OverlapWithCallback(VObject* object, std::function<bool(VObject*,
 				t->Callback(t, object);
 			}
 
-			if (t->AllowCollisions != SidesTouching::TOUCHNONE)
-				results = true;
+			results = true;
 		}
 	}
 
@@ -474,6 +465,7 @@ void VTilemap::Update(float dt)
 	if (dirty)
 	{
 		updateTilemap();
+		updateCollisionBox();
 	}
 }
 
@@ -520,10 +512,10 @@ void VTilemap::Draw(sf::RenderTarget& RenderTarget)
 #if _DEBUG
 		if (VGlobal::p()->DrawDebug)
 		{
-			debuggingVertices.resize(Tiles.size() * 8);
-			for (unsigned int t = 0; t < Tiles.size(); t++)
+			debuggingVertices.resize(tiles.size() * 8);
+			for (unsigned int t = 0; t < tiles.size(); t++)
 			{
-				VTile* tile = Tiles[t];
+				VTile* tile = tiles[t];
 				debuggingVertices[(t * 8) + 0] = sf::Vertex(tile->Position, tile->DebugColor);
 				debuggingVertices[(t * 8) + 1] = sf::Vertex(tile->Position + sf::Vector2f(tile->Size.x, 0), tile->DebugColor);
 				debuggingVertices[(t * 8) + 2] = sf::Vertex(tile->Position + sf::Vector2f(tile->Size.x, 0), tile->DebugColor);

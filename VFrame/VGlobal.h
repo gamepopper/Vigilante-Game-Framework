@@ -132,10 +132,14 @@ public:
 	void Exit();
 
 	//Test if two objects are overlapping, use responseCall to handle overlap response, and processCall to process objects in event of overlap.
+	bool OverlapAtPoint(const sf::Vector2f& point, VBase* a);
+	//Test if two objects are overlapping, use responseCall to handle overlap response, and processCall to process objects in event of overlap.
 	bool Overlaps(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
 	//Test if two objects are overlapping, and then separates objects when true, use responseCall to handle collision response.
 	bool Collides(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr);
 
+	//Test if two objects are overlapping, use responseCall to handle overlap response, and processCall to process objects in event of overlap.
+	bool OverlapCircleAtPoint(const sf::Vector2f& point, VBase* a);
 	//Test if two objects are overlapping as a circle, use responseCall to handle overlap response, and processCall to process objects in event of overlap. Make sure objects have the Radius property set.
 	bool OverlapsCircle(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
 	//Test if two objects are overlapping as a circle, and then separates objects when true, use responseCall to handle collision response. Make sure objects have the Radius property set.

@@ -11,6 +11,12 @@ VBase* VGroup::Add(VBase* object)
 		return nullptr;
 	}
 
+	if (object == this)
+	{
+		VLog("Cannot add itself to it's own list");
+		return nullptr;
+	}
+
 	if (GetIndexOfItem(object) >= 0)
 		return nullptr;
 
@@ -216,12 +222,11 @@ void VGroup::ForEachAlive(std::function<void(VBase*)> function, bool recursive)
 				if (group != nullptr)
 				{
 					group->ForEachAlive(function, recursive);
+					continue;
 				}
 			}
-			else
-			{
-				function(base);
-			}
+			
+			function(base);
 		}
 	}
 }
@@ -273,37 +278,6 @@ void VGroup::ForEachExists(std::function<void(VBase*)> function, bool recursive)
 			else
 			{
 				function(base);
-			}
-		}
-	}
-}
-
-template <class T>
-void VGroup::ForEachType(void (*function)(T* object), bool recursive)
-{
-	VBase* base = nullptr;
-
-	for (int i = 0; i < length; i++)
-	{
-		base = dynamic_cast<VBase*>(members[i]);
-
-		if (base != nullptr && base->exists)
-		{
-			if (recursive)
-			{
-				VGroup* group = dynamic_cast<VGroup*>(base);
-				if (group != nullptr)
-				{
-					group->ForEachExists(function, recursive);
-				}
-			}
-			else
-			{
-				T* object = dynamic_cast<T*>(base);
-				if (object != nullptr)
-				{
-					function(base);
-				}
 			}
 		}
 	}

@@ -15,7 +15,13 @@ void VTiledSprite::updateTransform()
 
 void VTiledSprite::updateFrame()
 {
-	texture.loadFromImage(image, sf::IntRect(Animation.GetU(), Animation.GetV(), FrameSize.x, FrameSize.y));
+	sf::IntRect rect = sprite.getTextureRect();
+	rect.left = FlipX ? Animation.GetU() + FrameSize.x : Animation.GetU();
+	rect.top = FlipY ? Animation.GetV() + FrameSize.y : Animation.GetV();
+	rect.width = FlipX ? -FrameSize.x : FrameSize.x;
+	rect.height = FlipY ? -FrameSize.y : FrameSize.y;
+
+	texture.loadFromImage(image, rect);
 }
 
 VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)

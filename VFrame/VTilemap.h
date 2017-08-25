@@ -45,6 +45,7 @@ protected:
 	sf::VertexArray vertices;
 	sf::Transformable transformable;
 	sf::Color colour = sf::Color::White;
+	std::vector<VTile*> tiles;
 
 #if _DEBUG
 	sf::VertexArray debuggingVertices;
@@ -63,7 +64,6 @@ public:
 	typedef VObject VSUPERCLASS;
 	sf::RenderStates RenderState = sf::RenderStates::Default;
 	sf::Vector2u TileSize;
-	std::vector<VTile*> Tiles;
 	sf::Vector2f Scale = sf::Vector2f(1, 1);
 
 	bool AutoTile = false;
@@ -114,7 +114,7 @@ public:
 	//Reset collision infomation to all colliding tiles having default collision properties.
 	void ResetCollision(const std::vector<char>& collision = { '#' });
 	//When object overlaps tilemap, this function goes through all tiles to test overlap with specified overlap.
-	virtual bool OverlapWithCallback(VObject* object, std::function<bool(VObject*, VObject*)> Callback, bool FlipCallback = false);
+	virtual bool OverlapWithCallback(VObject* object, std::function<bool(VObject*, VObject*)> Callback = nullptr, bool FlipCallback = false);
 
 	//Set overall tint of tilemap.
 	void SetTint(const sf::Color& color);

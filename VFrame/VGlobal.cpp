@@ -152,6 +152,15 @@ void VGlobal::Exit()
 
 #include "VCollision.h"
 
+bool VGlobal::OverlapAtPoint(const sf::Vector2f& point, VBase* a)
+{
+	VObject* o = new VObject(point, sf::Vector2f(1, 1));
+
+	bool r = Overlaps(o, a);
+	delete o;
+	return r;
+}
+
 bool VGlobal::Overlaps(VBase* a, VBase* b, std::function<void(VObject*, VObject*)>const& responseCall, std::function<bool(VObject*, VObject*)>const& processCall)
 {
 	bool result = false;
@@ -178,6 +187,15 @@ bool VGlobal::Overlaps(VBase* a, VBase* b, std::function<void(VObject*, VObject*
 bool VGlobal::Collides(VBase* a, VBase* b, std::function<void(VObject*, VObject*)>const& responseCall)
 {
 	return Overlaps(a, b, responseCall, VObject::separate);
+}
+
+bool VGlobal::OverlapCircleAtPoint(const sf::Vector2f& point, VBase* a)
+{
+	VObject* o = new VObject(point, sf::Vector2f(1, 1));
+
+	bool r = OverlapsCircle(o, a);
+	delete o;
+	return r;
 }
 
 bool VGlobal::OverlapsCircle(VBase* a, VBase* b, std::function<void(VObject*, VObject*)>const& responseCall, std::function<bool(VObject*, VObject*)>const& processCall)

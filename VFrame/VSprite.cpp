@@ -30,7 +30,7 @@ void VSprite::updateTransform()
 	if (sprite.getRotation() != Angle) 
 		sprite.setRotation(Angle);
 	if (sprite.getScale() != Scale)	
-		sprite.setScale(FlipX ? -Scale.x : Scale.x, FlipY ? -Scale.y : Scale.y);
+		sprite.setScale(Scale);
 	if (sprite.getColor() != Tint) 
 		sprite.setColor(Tint);
 	if (sprite.getOrigin() != Origin) 
@@ -40,10 +40,10 @@ void VSprite::updateTransform()
 void VSprite::updateFrame()
 {
 	sf::IntRect rect = sprite.getTextureRect();
-	rect.left = Animation.GetU();
-	rect.top = Animation.GetV();
-	rect.width = FrameSize.x;
-	rect.height = FrameSize.y;
+	rect.left		= FlipX ? Animation.GetU() + FrameSize.x : Animation.GetU();
+	rect.top		= FlipY ? Animation.GetV() + FrameSize.y : Animation.GetV();
+	rect.width		= FlipX ? -FrameSize.x : FrameSize.x;
+	rect.height		= FlipY ? -FrameSize.y : FrameSize.y;
 	if (sprite.getTextureRect() != rect) sprite.setTextureRect(rect);
 }
 
@@ -205,7 +205,18 @@ void VSprite::Update(float dt)
 	VSUPERCLASS::Update(dt);
 
 	Animation.Update(dt);
+	
+	bool updateTexture = false;
 	if (Animation.GetLastFrame() != Animation.GetCurrentFrame())
+		updateTexture = true;
+
+	if ((FlipX && sprite.getTextureRect().width < 0) || (!FlipX && sprite.getTextureRect().width > 0))
+		updateTexture = true;
+
+	if ((FlipY && sprite.getTextureRect().height < 0) || (!FlipY && sprite.getTextureRect().height > 0))
+		updateTexture = true;
+
+	if (updateTexture)
 	{
 		updateFrame();
 	}

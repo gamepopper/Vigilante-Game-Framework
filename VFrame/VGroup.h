@@ -78,10 +78,6 @@ public:
 	void ForEachDead(std::function<void(VBase*)> function, bool recursive = false);
 	//Applies function for each object in group that exists.
 	void ForEachExists(std::function<void(VBase*)> function, bool recursive = false);
-	
-	template <class T>
-	//Applies function for each object in group of a specific type.
-	void ForEachType(void (*function)(T* object), bool recursive = false);
 
 	//Gets an object from a specified index in group.
 	VBase* GetGroupItem(int index);
