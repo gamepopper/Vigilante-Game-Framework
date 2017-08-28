@@ -6,8 +6,8 @@ float VObject::SeparateBias = 4;
 
 bool VObject::separate(VObject* a, VObject *b)
 {
-	bool separatedX = separateX(a, b) != 0;
-	bool separatedY = separateY(a, b) != 0;
+	bool separatedX = separateX(a, b);
+	bool separatedY = separateY(a, b);
 	return separatedX || separatedY;
 }
 
@@ -284,8 +284,8 @@ float VObject::overlapX(VObject* a, VObject *b, bool maxOverlap)
 
 	if (aDiff != bDiff)
 	{
-		float aDiffAbs = (aDiff > 0) ? aDiff : -aDiff;
-		float bDiffAbs = (bDiff > 0) ? bDiff : -bDiff;
+		float aDiffAbs = (aDiff >= 0) ? aDiff : -aDiff;
+		float bDiffAbs = (bDiff >= 0) ? bDiff : -bDiff;
 
 		//Use the Last Y position instead of current to avoid floor collisions due to gravity.
 		sf::FloatRect aRect = sf::FloatRect(a->Position.x - ((aDiff > 0) ? aDiff : 0), a->Last.y, a->Size.x + aDiffAbs, a->Size.y);
@@ -338,8 +338,8 @@ float VObject::overlapY(VObject* a, VObject *b, bool maxOverlap)
 
 	if (aDiff != bDiff)
 	{
-		float aDiffAbs = (aDiff > 0) ? aDiff : -aDiff;
-		float bDiffAbs = (bDiff > 0) ? bDiff : -bDiff;
+		float aDiffAbs = (aDiff >= 0) ? aDiff : -aDiff;
+		float bDiffAbs = (bDiff >= 0) ? bDiff : -bDiff;
 
 		sf::FloatRect aRect = sf::FloatRect(a->Position.x, a->Position.y - ((aDiff > 0) ? aDiff : 0), a->Size.x, a->Size.y + aDiffAbs);
 		sf::FloatRect bRect = sf::FloatRect(b->Position.x, b->Position.y - ((bDiff > 0) ? bDiff : 0), b->Size.x, b->Size.y + bDiffAbs);
