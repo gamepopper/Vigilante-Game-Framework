@@ -52,6 +52,7 @@ public:
 	sf::Vector2f Position;
 	float Rotation = 0.0f;
 	float Zoom = 1.0f;
+	bool Active = true;
 
 	VCamera()
 	{

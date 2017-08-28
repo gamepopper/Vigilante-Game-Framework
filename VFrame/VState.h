@@ -20,12 +20,7 @@ private:
 
 public:
 	typedef VGroup VSUPERCLASS;
-	VState() : VGroup() 
-	{
-		Cameras.emplace_back();
-		Cameras[0] = new VCamera();
-		DefaultCamera = Cameras[0];
-	}
+	VState();
 	virtual ~VState() 
 	{
 		Cleanup();

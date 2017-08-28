@@ -7,6 +7,7 @@
 #include "VBase.h"
 
 class VState;
+class VCamera;
 
 class VGame : public VBase
 {
@@ -44,7 +45,7 @@ protected:
 	virtual void HandleEvents();
 	virtual void Update(float dt);
 	virtual void PreRender();
-	virtual void Render();
+	virtual void Render(VCamera* camera);
 	virtual void PostRender();
 	virtual int Cleanup();
 
@@ -53,9 +54,7 @@ private:
 	void ResizeCheck();
 
 	sf::RenderTexture RenderTarget;
-
 	bool cleaned = false;
 	bool focused = true;
-	int currentView = 0;
 };
 

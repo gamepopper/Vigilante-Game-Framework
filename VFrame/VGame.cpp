@@ -87,7 +87,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 		return error;
 	}
 
-	initialState->Cameras[0]->Reset();
+	initialState->DefaultCamera->Reset();
 	VGlobal::p()->ChangeState(initialState);
 	VGlobal::p()->ChangeState(nullptr);
 
@@ -131,8 +131,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 				PreRender();
 				for (unsigned int c = 0; c < VGlobal::p()->CurrentState()->Cameras.size(); c++)
 				{
-					currentView = c;
-					Render();
+					Render(VGlobal::p()->CurrentState()->Cameras[c]);
 				}
 				PostRender();
 			}
@@ -247,19 +246,23 @@ void VGame::PreRender()
 	VGlobal::p()->App.clear();
 }
 
-void VGame::Render()
+void VGame::Render(VCamera* camera)
 {
-	RenderTarget.setView(VGlobal::p()->CurrentState()->Cameras[currentView]->GetView());
+	if (!camera->Active)
+		return;
 
-	if (VGlobal::p()->CurrentState()->visible)
-		VGlobal::p()->CurrentState()->Draw(RenderTarget);
+	RenderTarget.setView(camera->GetView());
+	VState* currentState = VGlobal::p()->CurrentState();
 
-	if (VGlobal::p()->CurrentState()->SubState)
+	if (currentState->visible)
+		currentState->Draw(RenderTarget);
+
+	if (currentState->SubState)
 	{
-		VGlobal::p()->CurrentState()->SubState->Draw(RenderTarget);
+		currentState->SubState->Draw(RenderTarget);
 	}
 
-	VGlobal::p()->CurrentState()->Cameras[currentView]->Render(RenderTarget);
+	camera->Render(RenderTarget);
 }
 
 void VGame::PostRender()
