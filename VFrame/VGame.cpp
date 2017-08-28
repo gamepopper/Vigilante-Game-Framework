@@ -272,15 +272,18 @@ void VGame::PostRender()
 	{
 		RenderTarget.setSmooth(VGlobal::p()->Antialiasing);
 	}
-	VGlobal::p()->App.setActive(true);
-	VGlobal::p()->App.setVerticalSyncEnabled(VGlobal::p()->VSync);
 
-	sf::View view = VGlobal::p()->App.getView();
+	sf::RenderWindow& app = VGlobal::p()->App;
+
+	app.setActive(true);
+	app.setVerticalSyncEnabled(VGlobal::p()->VSync);
+
+	sf::View view = app.getView();
 	if (VGlobal::p()->PostProcess == nullptr || !VPostEffectBase::isSupported())
 	{
 		view.setViewport(sf::FloatRect(0, 0, 1, 1));
 		VGlobal::p()->RenderSprite.setTexture(RenderTarget.getTexture());
-		VGlobal::p()->App.draw(VGlobal::p()->RenderSprite, VGlobal::p()->RenderState);
+		app.draw(VGlobal::p()->RenderSprite, VGlobal::p()->RenderState);
 	}
 	else
 	{
@@ -291,9 +294,9 @@ void VGame::PostRender()
 		float top = position.y / size.y;
 		view.setViewport(sf::FloatRect(left, top, 1 - (left * 2), 1 - (top * 2)));
 
-		VGlobal::p()->PostProcess->Apply(RenderTarget, VGlobal::p()->App);
+		VGlobal::p()->PostProcess->Apply(RenderTarget, app);
 	}
 
-	VGlobal::p()->App.setView(view);
-	VGlobal::p()->App.display();
+	app.setView(view);
+	app.display();
 }
