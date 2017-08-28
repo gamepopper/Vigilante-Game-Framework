@@ -42,8 +42,8 @@ void VSprite::updateFrame()
 	sf::IntRect rect = sprite.getTextureRect();
 	rect.left		= FlipX ? Animation.GetU() + FrameSize.x : Animation.GetU();
 	rect.top		= FlipY ? Animation.GetV() + FrameSize.y : Animation.GetV();
-	rect.width		= FlipX ? -FrameSize.x : FrameSize.x;
-	rect.height		= FlipY ? -FrameSize.y : FrameSize.y;
+	rect.width		= FlipX ? -(int)FrameSize.x : FrameSize.x;
+	rect.height		= FlipY ? -(int)FrameSize.y : FrameSize.y;
 	if (sprite.getTextureRect() != rect) sprite.setTextureRect(rect);
 }
 
