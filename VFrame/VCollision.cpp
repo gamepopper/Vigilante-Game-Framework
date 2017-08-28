@@ -36,7 +36,7 @@ void VQuadTree::clear()
 
 VCollision::VCollision()
 {
-	quads.reserve(pow(4, VQuadTreeSubsectionCount));
+	quads.reserve((unsigned int)pow(4, VQuadTreeSubsectionCount));
 	setupQuad(VGlobal::p()->WorldBounds, VQuadTreeSubsectionCount - 1);
 }
 
