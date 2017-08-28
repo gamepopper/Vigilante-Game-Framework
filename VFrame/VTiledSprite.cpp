@@ -21,7 +21,8 @@ void VTiledSprite::updateFrame()
 	rect.width = FlipX ? -(int)FrameSize.x : FrameSize.x;
 	rect.height = FlipY ? -(int)FrameSize.y : FrameSize.y;
 
-	texture.loadFromImage(image, rect);
+	if (image.getSize().x > 0 && image.getSize().y > 0)
+		texture.loadFromImage(image, rect);
 }
 
 VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)

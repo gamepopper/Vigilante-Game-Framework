@@ -18,7 +18,7 @@ public:
 		texture.setRepeated(true);
 		Animation.GetCurrentFrame();
 	}
-	VTiledSprite(float x = 0, float y = 0, const sf::String& filename = "") : VSprite(x, y, filename) 
+	VTiledSprite(float x = 0, float y = 0, const sf::String& Filename = "") : VSprite(x, y, Filename) 
 	{ 
 		texture.setRepeated(true);
 		Animation.GetCurrentFrame();
