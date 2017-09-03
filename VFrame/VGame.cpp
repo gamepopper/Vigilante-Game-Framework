@@ -15,19 +15,21 @@ VGame::~VGame()
 
 int VGame::Init()
 {
-	VLog("Calling Init()");
+	VBase::VLog("Calling Init()");
 
 	try
 	{
-		if (!VGlobal::p()->App.isOpen())
+		if (!VGlobal::p()->App->isOpen())
 			return EXIT_FAILURE;
 
-		if (!RenderTarget.create(VGlobal::p()->Width, VGlobal::p()->Height))
+		RenderTarget = std::unique_ptr<sf::RenderTexture>(new sf::RenderTexture());
+		if (!RenderTarget->create(VGlobal::p()->Width, VGlobal::p()->Height))
 			return EXIT_FAILURE;
 
+		VGlobal::p()->RenderSprite->setTexture(RenderTarget->getTexture());
 		VGlobal::p()->WorldBounds = sf::FloatRect(0, 0, static_cast<float>(VGlobal::p()->Width), static_cast<float>(VGlobal::p()->Height));
-		VGlobal::p()->App.requestFocus();
-		VCameraList::Default = RenderTarget.getDefaultView();
+		VGlobal::p()->App->requestFocus();
+		VCameraList::Default = RenderTarget->getDefaultView();
 
 		ResizeCheck();
 	}
@@ -72,18 +74,18 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	VGlobal::p()->ContextSettings = settings;
 
 	std::random_device device{};
-	VGlobal::p()->Random.Reset(device());
+	VGlobal::p()->Random->Reset(device());
 
-	VLog("Welcome to the ViglanteFramework - Version:%s ", VFRAME_VERSION);
-	VLog("Starting Game: %s", title.toAnsiString().c_str());
+	VBase::VLog("Welcome to the ViglanteFramework - Version:%s ", VFRAME_VERSION);
+	VBase::VLog("Starting Game: %s", title.toAnsiString().c_str());
 
-	VGlobal::p()->App.create(sf::VideoMode(windowwidth, windowheight), title, flags, settings);
+	VGlobal::p()->App->create(sf::VideoMode(windowwidth, windowheight), title, flags, settings);
 	VGlobal::p()->RenderState = sf::RenderStates::Default;
 
 	int error = 0;
 	if ((error = Init()))
 	{
-		VLog("Error in Init(): %d", error);
+		VBase::VLog("Error in Init(): %d", error);
 		return error;
 	}
 
@@ -92,15 +94,15 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	VGlobal::p()->ChangeState(nullptr);
 
 	sf::Clock clock;
-	VLog("Initialisation finished");
+	VBase::VLog("Initialisation finished");
 
 	try
 	{
 		double end = 0.0;
 
-		while (VGlobal::p()->App.isOpen())
+		while (VGlobal::p()->App->isOpen())
 		{
-			VGlobal::p()->Async.ProcessSyncRequests();
+			VGlobal::p()->Async->ProcessSyncRequests();
 
 			float dt = 1.0f / VGlobal::p()->FPS;
 			double start = clock.getElapsedTime().asSeconds();
@@ -156,7 +158,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 void VGame::HandleEvents()
 {
 	sf::Event event;
-	while (VGlobal::p()->App.pollEvent(event))
+	while (VGlobal::p()->App->pollEvent(event))
 	{
 		if (VGlobal::p()->CurrentState()->SubState)
 		{
@@ -185,24 +187,24 @@ void VGame::HandleEvents()
 
 void VGame::ResizeCheck()
 {
-	sf::Vector2u windowSize = VGlobal::p()->App.getSize();
+	sf::Vector2u windowSize = VGlobal::p()->App->getSize();
 
 	if (windowSize.x != VGlobal::p()->WindowWidth || windowSize.y != VGlobal::p()->WindowHeight)
 	{
 		VGlobal::p()->WindowWidth = windowSize.x;
 		VGlobal::p()->WindowHeight = windowSize.y;
-		VGlobal::p()->App.setView(sf::View(sf::FloatRect(0, 0, (float)windowSize.x, (float)windowSize.y)));
+		VGlobal::p()->App->setView(sf::View(sf::FloatRect(0, 0, (float)windowSize.x, (float)windowSize.y)));
 
-		float sx = VGlobal::p()->App.getSize().x / (float)VGlobal::p()->Width;
-		float sy = VGlobal::p()->App.getSize().y / (float)VGlobal::p()->Height;
+		float sx = VGlobal::p()->App->getSize().x / (float)VGlobal::p()->Width;
+		float sy = VGlobal::p()->App->getSize().y / (float)VGlobal::p()->Height;
 		float scale = std::fminf(sx, sy);
 
 		float scaleW = VGlobal::p()->Width * scale;
 		float scaleH = VGlobal::p()->Height * scale;
-		float scaleX = (VGlobal::p()->App.getSize().x - scaleW) / 2;
-		float scaleY = (VGlobal::p()->App.getSize().y - scaleH) / 2;
-		VGlobal::p()->RenderSprite.setPosition(scaleX, scaleY);
-		VGlobal::p()->RenderSprite.setScale(scale, scale);
+		float scaleX = (VGlobal::p()->App->getSize().x - scaleW) / 2;
+		float scaleY = (VGlobal::p()->App->getSize().y - scaleH) / 2;
+		VGlobal::p()->RenderSprite->setPosition(scaleX, scaleY);
+		VGlobal::p()->RenderSprite->setScale(scale, scale);
 	}
 }
 
@@ -213,7 +215,7 @@ void VGame::Update(float dt)
 		VTimeManager::p()->Update(dt);
 	}
 
-	VGlobal::p()->Input.Update(dt);
+	VGlobal::p()->Input->Update(dt);
 
 	if (VGlobal::p()->CurrentState()->active)
 	{
@@ -242,8 +244,8 @@ void VGame::Update(float dt)
 
 void VGame::PreRender()
 {
-	RenderTarget.clear(VGlobal::p()->BackgroundColor);
-	VGlobal::p()->App.clear();
+	RenderTarget->clear(VGlobal::p()->BackgroundColor);
+	VGlobal::p()->App->clear();
 }
 
 void VGame::Render(VCamera* camera)
@@ -251,52 +253,51 @@ void VGame::Render(VCamera* camera)
 	if (!camera->Active)
 		return;
 
-	RenderTarget.setView(camera->GetView());
+	RenderTarget->setView(camera->GetView());
 	VState* currentState = VGlobal::p()->CurrentState();
 
 	if (currentState->visible)
-		currentState->Draw(RenderTarget);
+		currentState->Draw(*RenderTarget);
 
 	if (currentState->SubState)
 	{
-		currentState->SubState->Draw(RenderTarget);
+		currentState->SubState->Draw(*RenderTarget);
 	}
 
-	camera->Render(RenderTarget);
+	camera->Render(*RenderTarget);
 }
 
 void VGame::PostRender()
 {
-	RenderTarget.display();
-	if (RenderTarget.isSmooth() != VGlobal::p()->Antialiasing)
+	RenderTarget->display();
+	if (RenderTarget->isSmooth() != VGlobal::p()->Antialiasing)
 	{
-		RenderTarget.setSmooth(VGlobal::p()->Antialiasing);
+		RenderTarget->setSmooth(VGlobal::p()->Antialiasing);
 	}
 
-	sf::RenderWindow& app = VGlobal::p()->App;
+	sf::RenderWindow* app = VGlobal::p()->App.get();
 
-	app.setActive(true);
-	app.setVerticalSyncEnabled(VGlobal::p()->VSync);
+	app->setActive(true);
+	app->setVerticalSyncEnabled(VGlobal::p()->VSync);
 
-	sf::View view = app.getView();
+	sf::View view = app->getView();
 	if (VGlobal::p()->PostProcess == nullptr || !VPostEffectBase::isSupported())
 	{
 		view.setViewport(sf::FloatRect(0, 0, 1, 1));
-		VGlobal::p()->RenderSprite.setTexture(RenderTarget.getTexture());
-		app.draw(VGlobal::p()->RenderSprite, VGlobal::p()->RenderState);
+		app->draw(*VGlobal::p()->RenderSprite, VGlobal::p()->RenderState);
 	}
 	else
 	{
-		sf::Vector2f position = VGlobal::p()->RenderSprite.getPosition();
+		sf::Vector2f position = VGlobal::p()->RenderSprite->getPosition();
 		sf::Vector2f size = view.getSize();
 
 		float left = position.x / size.x;
 		float top = position.y / size.y;
 		view.setViewport(sf::FloatRect(left, top, 1 - (left * 2), 1 - (top * 2)));
 
-		VGlobal::p()->PostProcess->Apply(RenderTarget, app);
+		VGlobal::p()->PostProcess->Apply(*RenderTarget, *app);
 	}
 
-	app.setView(view);
-	app.display();
+	app->setView(view);
+	app->display();
 }

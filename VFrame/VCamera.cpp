@@ -219,7 +219,7 @@ void VCamera::Update(float dt)
 	{
 		HalfWidth.x *= shakeX;
 		HalfWidth.y *= shakeY;
-		position += VGlobal::p()->Random.GetVector2f(HalfWidth, -HalfWidth);
+		position += VGlobal::p()->Random->GetVector2f(HalfWidth, -HalfWidth);
 
 		float t = shakeTimer.getElapsedTime().asSeconds();
 

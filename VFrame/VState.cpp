@@ -32,7 +32,7 @@ void VState::Cleanup()
 
 void VState::OpenSubState(VSubState* subState)
 {
-	if (VGlobal::p()->Async.ActiveAsyncFunctions())
+	if (VGlobal::p()->Async->ActiveAsyncFunctions())
 	{
 		VLog("Cannot modify substate while async functions are active.");
 		return;
@@ -52,7 +52,7 @@ void VState::OpenSubState(VSubState* subState)
 
 void VState::CloseSubState()
 {
-	if (VGlobal::p()->Async.ActiveAsyncFunctions())
+	if (VGlobal::p()->Async->ActiveAsyncFunctions())
 	{
 		VLog("Cannot modify substate while async functions are active.");
 		return;

@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/System.hpp>
-#include <SFML/Config.hpp>
+#include <SFML/config.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
@@ -13,13 +13,14 @@
 #include "VAsync.h"
 #include <vector>
 #include <functional>
+#include <memory>
 
 #if _DEBUG
 #include <iostream>
 #include <sstream>
 #endif
 
-#define VFRAME_VERSION "0.9.9.11"
+#define VFRAME_VERSION "0.9.9.12"
 
 class VBase;
 class VObject;
@@ -44,19 +45,22 @@ public:
 	}
 
 	//App that handles all rendering.
-	sf::RenderWindow App;
+	std::unique_ptr<sf::RenderWindow> App;
 	//RenderState for entire rendered scene.
 	sf::RenderStates RenderState;
 	//Sprite object of the last rendered frame.
-	sf::Sprite RenderSprite;
+	std::unique_ptr<sf::Sprite> RenderSprite;
 	sf::ContextSettings ContextSettings;
 
 	//Whether the rendering will appear smooth or pixelated when scaling.
 	bool Antialiasing = false;
 	//VSync
 	bool VSync = false;
+
+#ifdef _DEBUG
 	//Whether to render collision boxes for debugging perposes
 	bool DrawDebug = false;
+#endif
 
 	//Colour of the background prior to rendering.
 	sf::Color BackgroundColor = sf::Color::Black;
@@ -65,7 +69,7 @@ public:
 	float TimeScale = 1.0f;
 
 	//VGame Title (Use Window->SetTitle to show it on window)
-	sf::String Title = "";
+	sf::String Title;
 
 	//Pause Game When it Looses Focused
 	bool FocusPause = true;
@@ -81,12 +85,12 @@ public:
 	//World Bounds - used to bound camera to world area and for quad tree collisions.
 	sf::FloatRect WorldBounds;
 	//Music - play streamed music (particularly between states).
-	VMusic* Music = nullptr;
+	std::unique_ptr<VMusic> Music;
 	//Sound - play loaded sounds.
-	VSoundManager* Sound = nullptr;
+	std::unique_ptr<VSoundManager> Sound;
 
-	VContent* Content = nullptr;
-	VPostEffectBase* PostProcess = nullptr;
+	std::unique_ptr<VContent> Content;
+	std::unique_ptr<VPostEffectBase> PostProcess;
 
 	//Frames Per Second - used to calculate average framerate
 	float FPS = 0;
@@ -95,13 +99,13 @@ public:
 	bool IfPushedState = false;
 
 	//Random Number Generator
-	VRandom Random;
+	std::unique_ptr<VRandom> Random;
 
 	//Access Keyboard, Mouse and Gamepad Input here
-	VInputHandler Input;
+	std::unique_ptr<VInputHandler> Input;
 
 	//Asynchronus Function Handling
-	VAsync Async;
+	std::unique_ptr<VAsync> Async;
 
 	//Window Style
 	int WindowStyle;
@@ -149,7 +153,7 @@ public:
 	static void Cleanup();
 
 private:
-	VStateManager* gsm = nullptr;
+	std::unique_ptr<VStateManager> gsm;
 	VState* nextState = nullptr;
 	bool fullscreen = false;
 	bool mouseCursorVisible = true;

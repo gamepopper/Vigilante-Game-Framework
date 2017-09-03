@@ -7,53 +7,46 @@ VGlobal* VGlobal::Instance = nullptr;
 
 VGlobal::VGlobal()
 {
-	gsm = new VStateManager();
-	Content = new VContent();
-	Music = new VMusic();
-	Sound = new VSoundManager();
+	if (App == nullptr) //RenderWindow is most required, so we check if this is NULL.
+	{
+		App = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow());
+		Input = std::unique_ptr<VInputHandler>(new VInputHandler());
+		Content = std::unique_ptr<VContent>(new VContent());
+		Music = std::unique_ptr<VMusic>(new VMusic());
+		Sound = std::unique_ptr<VSoundManager>(new VSoundManager());
+		RenderSprite = std::unique_ptr<sf::Sprite>(new sf::Sprite());
+		Random = std::unique_ptr<VRandom>(new VRandom());
+		Async = std::unique_ptr<VAsync>(new VAsync());
+		gsm = std::unique_ptr<VStateManager>(new VStateManager());
+	}
 }
 
 VGlobal::~VGlobal()
 {
-	if (Content)
-	{
-		delete Content;
-		Content = nullptr;
-	}
-	if (Music)
-	{
-		delete Music;
-		Music = nullptr;
-	}
-	if (Sound)
-	{
-		delete Sound;
-		Sound = nullptr;
-	}
-	if (PostProcess)
-	{
-		delete PostProcess;
-		PostProcess = nullptr;
-	}
-	if (gsm)
-	{
-		delete gsm;
-		gsm = nullptr;
-	}
+	App.reset();
+	Input.reset();
+	Content.reset();
+	Music.reset();
+	Sound.reset();
+	PostProcess.reset();
+	RenderSprite.reset();
+	Random.reset();
+	Async.reset();
+	gsm.reset();
 }
 
 void VGlobal::SetFullscreen(bool set)
 {
 	if (set && !fullscreen)
 	{
-		App.create(sf::VideoMode::getDesktopMode(), Title, sf::Style::Fullscreen);
-		App.setMouseCursorVisible(set);
+		App->create(sf::VideoMode::getDesktopMode(), Title, sf::Style::Fullscreen);
+		App->setMouseCursorVisible(set);
 		fullscreen = true;
 	}
 	else if (!set && fullscreen)
 	{
-		App.create(sf::VideoMode(WindowWidth, WindowHeight), Title, WindowStyle);
-		App.setMouseCursorVisible(set);
+		App->create(sf::VideoMode(WindowWidth, WindowHeight), Title, WindowStyle);
+		App->setMouseCursorVisible(set);
 		fullscreen = false;
 	}
 }
@@ -61,7 +54,7 @@ void VGlobal::SetFullscreen(bool set)
 void VGlobal::SetMouseCursorVisible(bool set)
 {
 	mouseCursorVisible = set;
-	App.setMouseCursorVisible(set);
+	App->setMouseCursorVisible(set);
 }
 
 void VGlobal::ToggleFullscreen()
@@ -71,10 +64,10 @@ void VGlobal::ToggleFullscreen()
 
 sf::Vector2f VGlobal::GetMousePosition()
 {
-	sf::Vector2f actualMousePos = sf::Vector2f(sf::Mouse::getPosition(App));
-	sf::Vector2f renderAreaOffset = VGlobal::p()->RenderSprite.getPosition();
-	float sx = App.getSize().x / (float)Width; 
-	float sy = App.getSize().y / (float)Height;
+	sf::Vector2f actualMousePos = sf::Vector2f(sf::Mouse::getPosition(*App));
+	sf::Vector2f renderAreaOffset = VGlobal::p()->RenderSprite->getPosition();
+	float sx = App->getSize().x / (float)Width; 
+	float sy = App->getSize().y / (float)Height;
 
 	actualMousePos -= renderAreaOffset;
 
@@ -101,7 +94,7 @@ void VGlobal::ChangeState(VState* state)
 {
 	if (IfChangedState && state == nullptr)
 	{
-		if (!Async.ActiveAsyncFunctions())
+		if (!Async->ActiveAsyncFunctions())
 		{
 			if (VTimeManager::AnyActiveTimers())
 			{
@@ -147,7 +140,7 @@ void VGlobal::ClearState()
 
 void VGlobal::Exit()
 {
-	App.close();
+	App->close();
 }
 
 #include "VCollision.h"
