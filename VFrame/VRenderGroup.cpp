@@ -116,8 +116,10 @@ void VRenderGroup::Update(float dt)
 
 void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 {
+#ifdef _DEBUG
 	bool drawDebug = VGlobal::p()->DrawDebug;
 	VGlobal::p()->DrawDebug = false;
+#endif
 
 	renderTex.clear(sf::Color::Transparent);
 	VSUPERCLASS::Draw(renderTex);
@@ -138,6 +140,8 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 		updateTexture(renderTex.getTexture());
 	}
 
+#ifdef _DEBUG
 	VGlobal::p()->DrawDebug = drawDebug;
+#endif
 	Sprite->Draw(RenderTarget);
 }
