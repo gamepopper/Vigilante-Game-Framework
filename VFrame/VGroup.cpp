@@ -177,7 +177,7 @@ VBase* VGroup::GetRandom(int min, int max)
 {
 	min = min >= 0 ? min : 0;
 	max = max < (int)members.size() ? max : (int)members.size();
-	return members[VGlobal::p()->Random.GetInt(max, min)];
+	return members[VGlobal::p()->Random->GetInt(max, min)];
 }
 
 void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
