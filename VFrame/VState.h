@@ -55,7 +55,7 @@ public:
 class VSubState : public VGroup
 {
 protected:
-	sf::RectangleShape bgRect;
+	sf::VertexArray vertices;
 
 public:
 	std::function<void()> OnClose = nullptr;
@@ -65,16 +65,24 @@ public:
 	typedef VGroup VSUPERCLASS;
 	VSubState(sf::Color colour = sf::Color::Transparent) : VGroup()
 	{
-		bgRect.setFillColor(colour);
+		vertices.setPrimitiveType(sf::Quads);
+		vertices.resize(4);
+		vertices[0].color = colour;
+		vertices[1].color = colour;
+		vertices[2].color = colour;
+		vertices[3].color = colour;
 	}
 	virtual ~VSubState()
 	{
 		Cleanup();
+		vertices.clear();
 		ParentState = nullptr;
 	}
 
 	//Closes the substate.
 	void Close();
+
+	void SetFillColour(const sf::Color& color);
 
 	virtual void Initialise() {}
 	virtual void Cleanup();

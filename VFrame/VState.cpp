@@ -102,6 +102,14 @@ void VSubState::Cleanup()
 	}
 }
 
+void VSubState::SetFillColour(const sf::Color& colour)
+{
+	vertices[0].color = colour;
+	vertices[1].color = colour;
+	vertices[2].color = colour;
+	vertices[3].color = colour;
+}
+
 void VSubState::Close()
 {
 	if (ParentState)
@@ -113,12 +121,15 @@ void VSubState::Draw(sf::RenderTarget &RenderTarget)
 	sf::View defaultView = RenderTarget.getDefaultView();
 	sf::View currentView = RenderTarget.getView();
 
-	if (!UseParentCamera)
-	{
-		RenderTarget.setView(defaultView);
-		bgRect.setSize(defaultView.getSize());
-		RenderTarget.draw(bgRect);
-	}
+	RenderTarget.setView(defaultView);
+	vertices[0].position = sf::Vector2f(0, 0);
+	vertices[1].position = sf::Vector2f(defaultView.getSize().x, 0);
+	vertices[2].position = defaultView.getSize();
+	vertices[3].position = sf::Vector2f(0, defaultView.getSize().y);
+	RenderTarget.draw(vertices);
+
+	if (UseParentCamera)
+		RenderTarget.setView(currentView);
 
 	VSUPERCLASS::Draw(RenderTarget);
 	RenderTarget.setView(currentView);
