@@ -9,7 +9,7 @@ class VAnimationManager
 {
 private:
 	std::map<sf::String, VAnimation*> animationList;
-	sf::String currentAnim = "";
+	sf::String currentAnim;
 	int current = 0;
 	int lastFrame = -1;
 	int animWidth = 0, animHeight = 0;
@@ -41,7 +41,7 @@ public:
 	Looping: Whether animation should loop or not.
 	Reverse: Whether animation should be reversed or not.
 	*/
-	void AddAnimation(sf::String name, std::vector<int> Frames, float FramesPerSecond = 6.0f, bool Looping = false, bool Reverse = false)
+	void AddAnimation(const sf::String& name, const std::vector<int>& Frames, float FramesPerSecond = 6.0f, bool Looping = false, bool Reverse = false)
 	{
 		if (animationList.find(name) == animationList.end())
 		{
@@ -56,7 +56,7 @@ public:
 	}
 
 	//Play an animation using its name.
-	void Play(sf::String name)
+	void Play(const sf::String& name)
 	{
 		if (animationList.find(name) != animationList.end() &&
 			currentAnim != name)
@@ -86,7 +86,7 @@ public:
 	}
 
 	//Resets specific animations.
-	void Reset(sf::String name)
+	void Reset(const sf::String& name)
 	{
 		animationList[name]->Reset();
 	}
