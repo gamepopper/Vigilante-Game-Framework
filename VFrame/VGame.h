@@ -4,12 +4,13 @@
 #include <SFML/System/String.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <SFML/Window/ContextSettings.hpp>
+#include <memory>
 #include "VBase.h"
 
 class VState;
 class VCamera;
 
-class VGame : public VBase
+class VGame
 {
 public:
 	VGame() = default;
@@ -24,7 +25,7 @@ public:
 	flags: Window style flags
 	context: OpenGL Context settings.
 	*/
-	int Run(const sf::String& title, VState* initialState, int windowwidth, int windowheight, float fps = 60, int flags = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings(32U));
+	int Run(const sf::String& title, VState* initialState, int windowwidth, int windowheight, float fps = 60, int flags = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
 
 	/*
 	Run a new game.
@@ -38,7 +39,7 @@ public:
 	flags: Window style flags
 	context: OpenGL Context settings.
 	*/
-	int Run(const sf::String& title, VState* initialState, int windowwidth, int windowheight, int screenwidth, int screenheight, float fps = 60, int flags = sf::Style::Default, const sf::ContextSettings& = sf::ContextSettings(32U));
+	int Run(const sf::String& title, VState* initialState, int windowwidth, int windowheight, int screenwidth, int screenheight, float fps = 60, int flags = sf::Style::Default, const sf::ContextSettings& = sf::ContextSettings());
 
 protected:
 	virtual int Init();
@@ -53,7 +54,7 @@ protected:
 private:
 	void ResizeCheck();
 
-	sf::RenderTexture RenderTarget;
+	std::unique_ptr<sf::RenderTexture> RenderTarget;
 	bool cleaned = false;
 	bool focused = true;
 };

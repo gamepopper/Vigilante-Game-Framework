@@ -21,6 +21,12 @@ public:
 		exists = false;
 	}
 
+	VParticle(const VParticle& src)
+	{
+		*this = src;
+		VBase();
+	}
+
 	virtual void Update(float dt) override;
 	virtual void Reset(float x, float y) override;
 	

@@ -19,6 +19,9 @@ enum VType : unsigned char
 
 class VBase
 {
+private:
+	bool destroyed = false;
+
 public:
 	bool active = true;
 	bool visible = true;
@@ -27,17 +30,32 @@ public:
 	VType type = NONE;
 	uint32_t RefCount = 0;
 
-	VBase() = default;
+#ifdef _DEBUG
+	static int DebugObjectCount;
+#endif
+
+	VBase()
+	{
+#ifdef _DEBUG
+		DebugObjectCount++;
+#endif
+	}
+
 	virtual ~VBase()
 	{
-		if (exists)
+		if (!destroyed)
 			Destroy();
 	}
 
 	//Destroys object and any data that must be destroyed.
 	virtual void Destroy()
 	{
+		destroyed = true;
 		exists = false;
+
+#ifdef _DEBUG
+		DebugObjectCount--;
+#endif
 	}
 
 	//Kills the object, so it's still in-scene but will not render or update.

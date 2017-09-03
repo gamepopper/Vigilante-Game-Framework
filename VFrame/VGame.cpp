@@ -43,7 +43,7 @@ int VGame::Init()
 
 int VGame::Cleanup()
 {
-	VLog("Calling Cleanup()");
+	VBase::VLog("Calling Cleanup()");
 
 	try
 	{
@@ -52,7 +52,7 @@ int VGame::Cleanup()
 	}
 	catch (int e)
 	{
-		VLog("Cleanup error: %d", e);
+		VBase::VLog("Cleanup error: %d", e);
 		return e;
 	}
 
@@ -146,11 +146,11 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 
 	if ((error = Cleanup()))
 	{
-		VLog("Error in Cleanup(): %d", error);
+		VBase::VLog("Error in Cleanup(): %d", error);
 		return error;
 	}
 
-	VLog("Cleanup Successful");
+	VBase::VLog("Cleanup Successful");
 
 	return EXIT_SUCCESS;
 }
