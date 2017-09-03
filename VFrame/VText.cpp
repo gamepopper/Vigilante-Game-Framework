@@ -11,13 +11,7 @@ void VText::setDimensions()
 	vertices.clear();
 	vertices.setPrimitiveType(sf::Triangles);
 
-	sf::String printText = Text;
-	helperText = Text;
-	helperAlignment = Alignment;
-	helperStyle = Style;
-	helperOrigin = Origin;
-	helperOutlineThickness = OutlineThickness;
-	helperOutlineOffset = helperOutlineOffset;
+	sf::String& printText = Text;
 
 	bool bold = Style & sf::Text::Bold;
 	int newLineCount = 1;
@@ -44,7 +38,7 @@ void VText::setDimensions()
 				firstWord = false;
 			}
 
-			sf::Glyph glyph = font.getGlyph(currentChar, FontSize, bold);
+			sf::Glyph glyph = font->getGlyph(currentChar, FontSize, bold);
 			currentOffset += static_cast<unsigned int>(glyph.advance);
 
 			if (Wrap == WRAPWORD)
@@ -70,7 +64,7 @@ void VText::setDimensions()
 		}
 	}
 
-	Size.y = font.getLineSpacing(FontSize) * (Wrap != WRAPNONE ? newLineCount : 1);
+	Size.y = font->getLineSpacing(FontSize) * (Wrap != WRAPNONE ? newLineCount : 1);
 	updateTextRender(printText);
 
 	origin = sf::Vector2f(Size.x * Origin.x, Size.y * Origin.y);
@@ -82,6 +76,9 @@ void VText::updateTransform()
 	transformable.setRotation(Angle);
 	transformable.setScale(Scale);
 	transformable.setOrigin(origin);
+
+	RenderState.transform = sf::Transform::Identity;
+	RenderState.transform *= transformable.getTransform();
 }
 
 void VText::updateTextRender(sf::String text)
@@ -92,14 +89,14 @@ void VText::updateTextRender(sf::String text)
 	bool  underlined = (Style & sf::Text::Underlined) != 0;
 	bool  strikeThrough = (Style & sf::Text::StrikeThrough) != 0;
 	float italic = (Style & sf::Text::Italic) ? 0.208f : 0.f;
-	float underlineOffset = font.getUnderlinePosition(FontSize);
-	float underlineThickness = font.getUnderlineThickness(FontSize);
+	float underlineOffset = font->getUnderlinePosition(FontSize);
+	float underlineThickness = font->getUnderlineThickness(FontSize);
 	bool outlined = OutlineThickness > 0.0f;
 
-	sf::FloatRect xBounds = font.getGlyph(L'x', FontSize, bold).bounds;
+	sf::FloatRect xBounds = font->getGlyph(L'x', FontSize, bold).bounds;
 	float strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
 
-	float hspace = static_cast<float>(font.getGlyph(L' ', FontSize, bold).advance);
+	float hspace = static_cast<float>(font->getGlyph(L' ', FontSize, bold).advance);
 
 	std::wstring item;
 	float y = static_cast<float>(FontSize);
@@ -115,7 +112,7 @@ void VText::updateTextRender(sf::String text)
 		{
 			sf::Uint32 curChar = item[i];
 
-			x += font.getKerning(prevChar, curChar, FontSize);
+			x += font->getKerning(prevChar, curChar, FontSize);
 			prevChar = curChar;
 
 			if ((curChar == L' ') || (curChar == L'\t'))
@@ -142,7 +139,7 @@ void VText::updateTextRender(sf::String text)
 				setCharacterRender(curChar, x, y, fillColour, bold, italic, (i * 6), verts, 0.0f);
 			}
 
-			x += font.getGlyph(curChar, FontSize, bold).advance;
+			x += font->getGlyph(curChar, FontSize, bold).advance;
 		}
 
 		if (underlined)
@@ -193,13 +190,13 @@ void VText::updateTextRender(sf::String text)
 			vertices[vertOffset + i] = verts[i];
 		}
 
-		y += font.getLineSpacing(FontSize) + LineSpaceModifier;
+		y += font->getLineSpacing(FontSize) + LineSpaceModifier;
 	}
 }
 
 void VText::setCharacterRender(sf::Uint32 character, float x, float y, sf::Color color, bool bold, float italic, int index, sf::VertexArray& vertices, float outline)
 {
-	sf::Glyph glyph = font.getGlyph(character, FontSize, bold);
+	sf::Glyph glyph = font->getGlyph(character, FontSize, bold);
 	color.a = fillColour.a;
 
 	float left		= std::floor(glyph.bounds.left - outline);
@@ -236,30 +233,28 @@ void VText::setTextLine(float x, float y, sf::Color color, float offset, float t
 	vertices[index + 5].position = sf::Vector2f(x, bottom);	vertices[index + 5].color = color; vertices[index + 5].texCoords = sf::Vector2f(1, 1);
 }
 
-VText* VText::SetFormat(sf::String filename, int charSize, sf::Color colour, VTextAlign alignment, int style)
+VText* VText::SetFormat(const sf::String& filename, int charSize, sf::Color colour, VTextAlign alignment, int style)
 {
-	if (VGlobal::p()->Content->LoadFont(filename, font))
-	{
-		Alignment = alignment;
-		FontSize = charSize;
-		Style = style;
-		SetStyle(style);
-		fillColour = colour;
-		setDimensions();
-	}
-
-	return this;
-}
-
-VText* VText::SetFormat(sf::Font font, int charSize, sf::Color colour, VTextAlign alignment, int style)
-{
-	this->font = font;
+	font = &VGlobal::p()->Content->LoadFont(filename);
 	Alignment = alignment;
 	FontSize = charSize;
 	Style = style;
 	SetStyle(style);
 	fillColour = colour;
-	setDimensions();
+	ApplyChanges();
+	
+	return this;
+}
+
+VText* VText::SetFormat(sf::Font& font, int charSize, sf::Color colour, VTextAlign alignment, int style)
+{
+	this->font = &font;
+	Alignment = alignment;
+	FontSize = charSize;
+	Style = style;
+	SetStyle(style);
+	fillColour = colour;
+	ApplyChanges();
 
 	return this;
 }
@@ -274,7 +269,7 @@ void VText::SetFillTint(const sf::Color &colour)
 	if (fillColour != colour)
 	{
 		fillColour = colour;
-		setDimensions();
+		ApplyChanges();
 	}
 }
 
@@ -285,8 +280,13 @@ void VText::SetOutlineTint(const sf::Color &colour)
 		outlineColour = colour;
 
 		if (OutlineThickness > 0)
-			setDimensions();
+			ApplyChanges();
 	}
+}
+
+void VText::ApplyChanges()
+{
+	dirty = true;
 }
 
 void VText::Destroy()
@@ -299,15 +299,11 @@ void VText::Update(float dt)
 {
 	VSUPERCLASS::Update(dt);
 
-	if (Text != helperText ||
-		Alignment != helperAlignment ||
-		LineSpaceModifier != helperLineSpace ||
-		Style != helperStyle ||
-		Origin != helperOrigin ||
-		OutlineThickness != helperOutlineThickness ||
-		OutlineOffset != helperOutlineOffset)
+	if (dirty)
 	{
 		setDimensions();
+		RenderState.texture = &font->getTexture(FontSize);
+		dirty = false;
 	}
 }
 
@@ -345,11 +341,7 @@ void VText::Draw(sf::RenderTarget& RenderTarget)
 		renderBox.top + renderBox.height > scrollBox.top)
 	{
 		RenderTarget.setView(scrollView);
-
-		sf::RenderStates states = sf::RenderStates(RenderState);
-		states.texture = &font.getTexture(FontSize);
-		states.transform *= transformable.getTransform();
-		RenderTarget.draw(vertices, states);
+		RenderTarget.draw(vertices, RenderState);
 		RenderTarget.setView(renderTargetView);
 	}
 }

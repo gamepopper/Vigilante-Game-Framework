@@ -27,14 +27,14 @@ void VTextPath::updateTextRender(sf::String text)
 	bool  underlined = (Style & sf::Text::Underlined) != 0;
 	bool  strikeThrough = (Style & sf::Text::StrikeThrough) != 0;
 	float italic = (Style & sf::Text::Italic) ? 0.208f : 0.f;
-	float underlineOffset = font.getUnderlinePosition(FontSize);
-	float underlineThickness = font.getUnderlineThickness(FontSize);
+	float underlineOffset = font->getUnderlinePosition(FontSize);
+	float underlineThickness = font->getUnderlineThickness(FontSize);
 	bool  outlined = OutlineThickness > 0.0f;
 
-	sf::FloatRect xBounds = font.getGlyph(L'x', FontSize, bold).bounds;
+	sf::FloatRect xBounds = font->getGlyph(L'x', FontSize, bold).bounds;
 	float strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
 
-	//float hspace = static_cast<float>(font.getGlyph(L' ', FontSize, bold).advance);
+	//float hspace = static_cast<float>(font->getGlyph(L' ', FontSize, bold).advance);
 
 	float left = (float)0xFFFFFF;
 	float top = (float)0xFFFFFF;
@@ -43,10 +43,10 @@ void VTextPath::updateTextRender(sf::String text)
 
 	for (unsigned int i = 0; i < pointList.size(); i++)
 	{
-		left	= pointList[i].x < left		? pointList[i].x : left;
-		right	= pointList[i].x > right	? pointList[i].x : right;
-		top		= pointList[i].y < top		? pointList[i].y : top;
-		bottom	= pointList[i].y > bottom	? pointList[i].y : bottom;
+		left = pointList[i].x < left ? pointList[i].x : left;
+		right = pointList[i].x > right ? pointList[i].x : right;
+		top = pointList[i].y < top ? pointList[i].y : top;
+		bottom = pointList[i].y > bottom ? pointList[i].y : bottom;
 	}
 
 	Size.x = right - left;
@@ -84,38 +84,38 @@ void VTextPath::updateTextRender(sf::String text)
 				setCharacterRender(curChar, x, y, fillColour, bold, italic, (i * 6), verts, 0.0f);
 			}
 
-			x += font.getGlyph(curChar, FontSize, bold).advance;
-		}
+			x += font->getGlyph(curChar, FontSize, bold).advance;
 
-		if (underlined)
-		{
-			int vertOffset = verts.getVertexCount();
-			verts.resize(vertOffset + (outlined ? 12 : 6));
-
-			if (outlined)
+			if (underlined)
 			{
-				setTextLine(x, y, outlineColour, underlineOffset, underlineThickness, vertOffset, verts, OutlineThickness);
-				setTextLine(x, y, fillColour, underlineOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
+				int vertOffset = verts.getVertexCount();
+				verts.resize(vertOffset + (outlined ? 12 : 6));
+
+				if (outlined)
+				{
+					setTextLine(x, y, outlineColour, underlineOffset, underlineThickness, vertOffset, verts, OutlineThickness);
+					setTextLine(x, y, fillColour, underlineOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
+				}
+				else
+				{
+					setTextLine(x, y, fillColour, underlineOffset, underlineThickness, vertOffset, verts, 0.0f);
+				}
 			}
-			else
-			{
-				setTextLine(x, y, fillColour, underlineOffset, underlineThickness, vertOffset, verts, 0.0f);
-			}
-		}
 
-		if (strikeThrough)
-		{
-			int vertOffset = verts.getVertexCount();
-			verts.resize(vertOffset + (outlined ? 12 : 6));
+			if (strikeThrough)
+			{
+				int vertOffset = verts.getVertexCount();
+				verts.resize(vertOffset + (outlined ? 12 : 6));
 
-			if (outlined)
-			{
-				setTextLine(x, y, outlineColour, strikeThroughOffset, underlineThickness, vertOffset, verts, OutlineThickness);
-				setTextLine(x, y, fillColour, strikeThroughOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
-			}
-			else
-			{
-				setTextLine(x, y, fillColour, strikeThroughOffset, underlineThickness, vertOffset, verts, 0.0f);
+				if (outlined)
+				{
+					setTextLine(x, y, outlineColour, strikeThroughOffset, underlineThickness, vertOffset, verts, OutlineThickness);
+					setTextLine(x, y, fillColour, strikeThroughOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
+				}
+				else
+				{
+					setTextLine(x, y, fillColour, strikeThroughOffset, underlineThickness, vertOffset, verts, 0.0f);
+				}
 			}
 		}
 
@@ -135,7 +135,7 @@ void VTextPath::updateTextRender(sf::String text)
 			vertices[vertOffset + i] = verts[i];
 		}
 
-		y += font.getLineSpacing(FontSize) + LineSpaceModifier;
+		y += font->getLineSpacing(FontSize) + LineSpaceModifier;
 	}
 }
 
@@ -284,7 +284,7 @@ sf::Vector2f VTextPath::GetBezierPoint(float t)
 void VTextPath::AddPoint(const sf::Vector2f& point)
 {
 	pointList.push_back(point);
-	setDimensions();
+	ApplyChanges();
 }
 
 void VTextPath::SetPoints(const std::vector<sf::Vector2f>& points)
@@ -293,8 +293,7 @@ void VTextPath::SetPoints(const std::vector<sf::Vector2f>& points)
 	pointList.shrink_to_fit();
 
 	pointList = points;
-
-	setDimensions();
+	ApplyChanges();
 }
 
 void VTextPath::UpdatePoint(unsigned int index, float x, float y)

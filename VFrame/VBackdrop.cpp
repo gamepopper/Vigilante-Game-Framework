@@ -15,23 +15,22 @@ void VBackdrop::updateTransform()
 
 void VBackdrop::updateFrame()
 {
-	if (sprite.getColor() != Tint)
-		sprite.setColor(Tint);
+	
 }
 
 VSprite* VBackdrop::LoadGraphic(sf::String filename, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
 {
 	VSUPERCLASS::LoadGraphic(filename);
-	texture.setRepeated(true);
+
 	Size.x = 0;
 	Size.y = 0;
 	return this;
 }
 
-VSprite* VBackdrop::LoadGraphicFromTexture(sf::Texture texture, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
+VSprite* VBackdrop::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
 {
 	VSUPERCLASS::LoadGraphicFromTexture(texture);
-	texture.setRepeated(true);
+
 	Size.x = 0;
 	Size.y = 0;
 	return this;
@@ -39,7 +38,9 @@ VSprite* VBackdrop::LoadGraphicFromTexture(sf::Texture texture, bool animated, i
 
 void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 {
-	VObject::Draw(RenderTarget);
+	updateTransform();
+
+	texture->setRepeated(true);
 
 	//Todo: Move this transform code to VObject, along with the line to restore the original transform.
 	sf::View renderTargetView = RenderTarget.getView();
@@ -51,7 +52,7 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	scroll.x *= ScrollFactor.x;
 	scroll.y *= ScrollFactor.y;
 
-	sf::Vector2f texSize = sf::Vector2f(texture.getSize());
+	sf::Vector2f texSize = sf::Vector2f(GetTexture()->getSize());
 
 	if (RepeatX)
 	{
@@ -117,4 +118,5 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	}
 
 	sprite.setPosition(oldPosition);
+	texture->setRepeated(false);
 }

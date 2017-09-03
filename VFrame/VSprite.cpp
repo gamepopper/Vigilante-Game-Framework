@@ -49,28 +49,25 @@ void VSprite::updateFrame()
 
 VSprite* VSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
 {
-	if (!VGlobal::p()->Content->LoadTexture(filename, texture))
-	{
-		return this;
-	}
-
+	texture = &VGlobal::p()->Content->LoadTexture(filename);
+	sprite.setTexture(*texture);
+	
 	if (texWidth == 0)
-		texWidth = texture.getSize().x;
+		texWidth = GetTexture()->getSize().x;
 
 	if (texHeight == 0)
-		texHeight = texture.getSize().y;
+		texHeight = GetTexture()->getSize().y;
 
-	sprite = sf::Sprite(texture);
 	setSize(texWidth, texHeight, animated, width, height, offsetX, offsetY);
 	updateFrame();
 
 	return this;
 }
 
-VSprite* VSprite::LoadGraphicFromTexture(sf::Texture texture, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
+VSprite* VSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
 {
-	this->texture = texture;
-	sprite = sf::Sprite(this->texture);
+	this->texture = &texture;
+	sprite = sf::Sprite(*this->texture);
 
 	if (texWidth == 0)
 		texWidth = texture.getSize().x;
@@ -101,9 +98,18 @@ VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outl
 	tex.create(width, height);
 	tex.draw(shape);
 	tex.display();
-	texture = tex.getTexture();
-	sprite = sf::Sprite(texture);
-	setSize(texture.getSize().x, texture.getSize().y, false, width, height);
+
+	if (disposible && texture)
+	{
+		delete texture;
+		texture = nullptr;
+		disposible = false;
+	}
+
+	texture = new sf::Texture(tex.getTexture());
+	disposible = true;
+	sprite = sf::Sprite(*texture);
+	setSize(width, height, false, width, height);
 
 	return this;
 }
@@ -120,9 +126,18 @@ VSprite* VSprite::MakeGraphicCircle(int radius, sf::Color color, float outline, 
 	tex.create(radius * 2, radius * 2);
 	tex.draw(shape);
 	tex.display();
-	texture = tex.getTexture();
-	sprite = sf::Sprite(texture);
-	setSize(texture.getSize().x, texture.getSize().y, false, radius * 2, radius * 2);
+
+	if (disposible && texture)
+	{
+		delete texture;
+		texture = nullptr;
+		disposible = false;
+	}
+
+	texture = new sf::Texture(tex.getTexture());
+	disposible = true;
+	sprite = sf::Sprite(*texture);
+	setSize(radius * 2, radius * 2, false, radius * 2, radius * 2);
 
 	return this;
 }
@@ -139,14 +154,23 @@ VSprite* VSprite::MakeGraphicSided(int radius, int sides, sf::Color color, float
 	tex.create(radius * 2, radius * 2);
 	tex.draw(shape);
 	tex.display();
-	texture = tex.getTexture();
-	sprite = sf::Sprite(texture);
-	setSize(texture.getSize().x, texture.getSize().y, false, radius * 2, radius * 2);
+
+	if (disposible && texture)
+	{
+		delete texture;
+		texture = nullptr;
+		disposible = false;
+	}
+
+	texture = new sf::Texture(tex.getTexture());
+	disposible = true;
+	sprite = sf::Sprite(*texture);
+	setSize(radius * 2, radius * 2, false, radius * 2, radius * 2);
 
 	return this;
 }
 
-VSprite* VSprite::MakeGraphicConvex(std::vector<sf::Vector2f>& points, sf::Color color, float outline, sf::Color outlineColor)
+VSprite* VSprite::MakeGraphicConvex(const std::vector<sf::Vector2f>& points, sf::Color color, float outline, sf::Color outlineColor)
 {
 	sf::ConvexShape shape;
 	shape.setPointCount(points.size());
@@ -163,6 +187,7 @@ VSprite* VSprite::MakeGraphicConvex(std::vector<sf::Vector2f>& points, sf::Color
 	int width	= static_cast<int>(ceil(right - left));
 	int height	= static_cast<int>(ceil(bottom - top));
 
+	std::vector<sf::Vector2f> outlinePoints(points.size());
 	for (unsigned int i = 0; i < points.size(); i++)
 	{
 		//Contract shape by outline amount
@@ -172,10 +197,13 @@ VSprite* VSprite::MakeGraphicConvex(std::vector<sf::Vector2f>& points, sf::Color
 			float length = sqrtf((diff.x * diff.x) + (diff.y * diff.y));
 			diff /= length;
 
-			points[i] += diff * outline;
+			outlinePoints[i] = points[i] + (diff * outline);
+			shape.setPoint(i, outlinePoints[i]);
 		}
-
-		shape.setPoint(i, points[i]);
+		else
+		{
+			shape.setPoint(i, points[i]);
+		}
 	}
 
 	shape.setFillColor(color);
@@ -187,9 +215,18 @@ VSprite* VSprite::MakeGraphicConvex(std::vector<sf::Vector2f>& points, sf::Color
 	tex.create(width, height);
 	tex.draw(shape);
 	tex.display();
-	texture = tex.getTexture();
-	sprite = sf::Sprite(texture);
-	setSize(texture.getSize().x, texture.getSize().y, false, width, height);
+
+	if (disposible && texture)
+	{
+		delete texture;
+		texture = nullptr;
+		disposible = false;
+	}
+
+	texture = new sf::Texture(tex.getTexture());
+	disposible = true;
+	sprite = sf::Sprite(*texture);
+	setSize(width, height, false, width, height);
 
 	return this;
 }
@@ -198,6 +235,13 @@ void VSprite::Destroy()
 {
 	VSUPERCLASS::Destroy();
 	Animation.Clear();
+
+	if (disposible && texture)
+	{
+		delete texture;
+		texture = nullptr;
+		disposible = false;
+	}
 }
 
 void VSprite::Update(float dt)
@@ -210,10 +254,10 @@ void VSprite::Update(float dt)
 	if (Animation.GetLastFrame() != Animation.GetCurrentFrame())
 		updateTexture = true;
 
-	if ((FlipX && sprite.getTextureRect().width < 0) || (!FlipX && sprite.getTextureRect().width > 0))
+	if ((FlipX && sprite.getTextureRect().width > 0) || (!FlipX && sprite.getTextureRect().width < 0))
 		updateTexture = true;
 
-	if ((FlipY && sprite.getTextureRect().height < 0) || (!FlipY && sprite.getTextureRect().height > 0))
+	if ((FlipY && sprite.getTextureRect().height > 0) || (!FlipY && sprite.getTextureRect().height < 0))
 		updateTexture = true;
 
 	if (updateTexture)

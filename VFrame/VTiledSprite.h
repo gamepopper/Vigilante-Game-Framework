@@ -6,25 +6,44 @@
 class VTiledSprite : public VSprite
 {
 private:
-	sf::Image image;
+	std::unique_ptr<sf::Image> image;
 
 protected:
 	virtual void updateTransform() override;
 	virtual void updateFrame() override;
 
 public:
-	VTiledSprite(sf::Vector2f Position, const sf::String& Filename = "") : VSprite(Position, Filename) 
-	{ 
-		texture.setRepeated(true);
+	typedef VSprite VSUPERCLASS;
+
+	VTiledSprite(sf::Vector2f Position, const sf::String& Filename = "") : VSprite(Position, "") 
+	{
+		if (Filename != "")
+		{
+			LoadGraphic(Filename);
+		}
+
 		Animation.GetCurrentFrame();
 	}
-	VTiledSprite(float x = 0, float y = 0, const sf::String& Filename = "") : VSprite(x, y, Filename) 
+	VTiledSprite(float x = 0, float y = 0, const sf::String& Filename = "") : VSprite(x, y, "") 
 	{ 
-		texture.setRepeated(true);
+		if (Filename != "")
+		{
+			LoadGraphic(Filename);
+		}
+
 		Animation.GetCurrentFrame();
 	}
 
+	virtual VSprite* MakeGraphic(int width, int height, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) { return this; }
+	virtual VSprite* MakeGraphicCircle(int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent)  { return this; }
+	virtual VSprite* MakeGraphicSided(int radius, int sides, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent)  { return this; }
+	virtual VSprite* MakeGraphicConvex(const std::vector<sf::Vector2f>& points, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent)  { return this; }
+
 	virtual VSprite* LoadGraphic(sf::String filename, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0) override;
-	virtual VSprite* LoadGraphicFromTexture(sf::Texture texture, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0) override;
+	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0) override;
+
+	virtual void Destroy() override;
+	virtual void Update(float dt) override;
+	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };
 

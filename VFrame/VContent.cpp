@@ -1,234 +1,229 @@
 #include "VContent.h"
 #include "VGlobal.h"
 
-bool VContent::FindTexture(const sf::String& name)
+bool VContent::TextureExists(const sf::String& name)
 {
 	return textureDir.find(name) != textureDir.end();
 }
 
-bool VContent::FindImage(const sf::String& name)
+bool VContent::ImageExists(const sf::String& name)
 {
 	return imageDir.find(name) != imageDir.end();
 }
 
-bool VContent::FindFont(const sf::String& name)
+bool VContent::FontExists(const sf::String& name)
 {
 	return fontDir.find(name) != fontDir.end();
 }
 
-bool VContent::FindSound(const sf::String& name)
+bool VContent::SoundExists(const sf::String& name)
 {
 	return soundDir.find(name) != soundDir.end();
 }
 
-bool VContent::LoadTexture(const sf::String& name, sf::Texture &texture)
+sf::Texture& VContent::LoadTexture(const sf::String& name)
 {
-	if (FindTexture(name))
+	auto found = textureDir.find(name);
+	if (found == textureDir.end())
 	{
-		texture = textureDir[name];
-		return true;
-	}
-	else
-	{
-		if (texture.loadFromFile(name))
+		std::unique_ptr<sf::Texture> texture = std::unique_ptr<sf::Texture>(new sf::Texture());
+		if (texture->loadFromFile(name))
 		{
-			VLog("%s loaded", name.toAnsiString().c_str());
-			textureDir.insert(textureDir.begin(), std::pair<sf::String, sf::Texture>(name, texture));
-			return true;
+			VBase::VLog("%s loaded", name.toAnsiString().c_str());
+			textureDir[name] = std::move(texture);
+		}
+		else
+		{
+			throw std::runtime_error("Error loading texture:" + name.toAnsiString());
 		}
 	}
 
-	VLog("Error loading texture: %s", name.toAnsiString().c_str());
-
-	return false;
+	return *textureDir[name];
 }
 
-bool VContent::LoadImage(const sf::String& name, sf::Image &image)
+sf::Image& VContent::LoadImage(const sf::String& name)
 {
-	if (FindImage(name))
+	auto found = imageDir.find(name);
+	if (found == imageDir.end())
 	{
-		image = imageDir[name];
-		return true;
-	}
-	else
-	{
-		if (image.loadFromFile(name))
+		std::unique_ptr<sf::Image> image = std::unique_ptr<sf::Image>(new sf::Image());
+		if (image->loadFromFile(name))
 		{
-			VLog("%s loaded", name.toAnsiString().c_str());
-			imageDir.insert(imageDir.begin(), std::pair<sf::String, sf::Image>(name, image));
-			return true;
+			VBase::VLog("%s loaded", name.toAnsiString().c_str());
+			imageDir[name] = std::move(image);
+		}
+		else
+		{
+			throw std::runtime_error("Error loading image:" + name.toAnsiString());
 		}
 	}
 
-	VLog("Error loading image: %s", name.toAnsiString().c_str());
-
-	return false;
+	return *imageDir[name];
 }
 
-bool VContent::LoadFont(const sf::String& name, sf::Font &font)
+sf::Font& VContent::LoadFont(const sf::String& name)
 {
-	if (FindFont(name))
+	auto found = fontDir.find(name);
+	if (found == fontDir.end())
 	{
-		font = fontDir[name];
-		return true;
-	}
-	else
-	{
-		if (font.loadFromFile(name))
+		std::unique_ptr<sf::Font> font = std::unique_ptr<sf::Font>(new sf::Font());
+		if (font->loadFromFile(name))
 		{
-			VLog("%s loaded", name.toAnsiString().c_str());
-			fontDir.insert(fontDir.begin(), std::pair<sf::String, sf::Font>(name, font));
-			return true;
+			VBase::VLog("%s loaded", name.toAnsiString().c_str());
+			fontDir[name] = std::move(font);
+		}
+		else
+		{
+			throw std::runtime_error("Error loading font:" + name.toAnsiString());
 		}
 	}
 
-	VLog("Error loading font: %s", name.toAnsiString().c_str());
-
-	return false;
+	return *fontDir[name];
 }
 
-bool VContent::LoadSound(const sf::String& name, sf::SoundBuffer &sound)
+sf::SoundBuffer& VContent::LoadSound(const sf::String& name)
 {
-	if (FindSound(name))
+	auto found = soundDir.find(name);
+	if (found == soundDir.end())
 	{
-		sound = soundDir[name];
-		return true;
-	}
-	else
-	{
-		if (sound.loadFromFile(name))
+		std::unique_ptr<sf::SoundBuffer> sound = std::unique_ptr<sf::SoundBuffer>(new sf::SoundBuffer());
+		if (sound->loadFromFile(name))
 		{
-
-			VLog("%s loaded", name.toAnsiString().c_str());
-			soundDir.insert(soundDir.begin(), std::pair<sf::String, sf::SoundBuffer>(name, sound));
-			return true;
+			VBase::VLog("%s loaded", name.toAnsiString().c_str());
+			soundDir[name] = std::move(sound);
+		}
+		else
+		{
+			throw std::runtime_error("Error loading sound:" + name.toAnsiString());
 		}
 	}
 
-	VLog("Error loading sound: %s", name.toAnsiString().c_str());
-
-	return false;
+	return *soundDir[name];
 }
 
 bool VContent::UnloadTexture(const sf::String& name)
 {
-	if (FindTexture(name))
+	auto found = textureDir.find(name);
+	if (found != textureDir.end())
 	{
-		textureDir[name].~Texture();
-		textureDir.erase(textureDir.find(name));
+		found->second.reset();
+		textureDir.erase(found);
 		return true;
 	}
 
-	VLog("Couldn't find texture: %s", name.toAnsiString().c_str());
-
+	VBase::VLog("Couldn't find texture: %s", name.toAnsiString().c_str());
 	return false;
 }
 
 bool VContent::UnloadImage(const sf::String& name)
 {
-	if (FindImage(name))
+	auto found = imageDir.find(name);
+	if (found != imageDir.end())
 	{
-		imageDir[name].~Image();
-		imageDir.erase(imageDir.find(name));
+		found->second.reset();
+		imageDir.erase(found);
 		return true;
 	}
 
-	VLog("Couldn't find image: %s", name.toAnsiString().c_str());
-
+	VBase::VLog("Couldn't find image: %s", name.toAnsiString().c_str());
 	return false;
 }
 
 bool VContent::UnloadFont(const sf::String& name)
 {
-	if (FindFont(name))
+	auto found = fontDir.find(name);
+	if (found != fontDir.end())
 	{
-		fontDir[name].~Font();
-		fontDir.erase(fontDir.find(name));
+		found->second.reset();
+		fontDir.erase(found);
 		return true;
 	}
 
-	VLog("Couldn't find font: %s", name.toAnsiString().c_str());
-
+	VBase::VLog("Couldn't find font: %s", name.toAnsiString().c_str());
 	return false;
 }
 
 bool VContent::UnloadSound(const sf::String& name)
 {
-	if (FindSound(name))
+	auto found = soundDir.find(name);
+	if (found != soundDir.end())
 	{
-		soundDir[name].~SoundBuffer();
-		soundDir.erase(soundDir.find(name));
+		found->second.reset();
+		soundDir.erase(found);
 		return true;
 	}
 
-	VLog("Couldn't find sound: %s", name.toAnsiString().c_str());
-
+	VBase::VLog("Couldn't find sound: %s", name.toAnsiString().c_str());
 	return false;
 }
 
 
 void VContent::UnloadAll()
 {
-	textureDir.clear();
-	imageDir.clear();
-	fontDir.clear();
-	soundDir.clear();
+	textureDir.swap(std::map<sf::String, std::unique_ptr<sf::Texture>>());
+	imageDir.swap(std::map<sf::String, std::unique_ptr<sf::Image>>());
+	fontDir.swap(std::map<sf::String, std::unique_ptr<sf::Font>>());
+	soundDir.swap(std::map<sf::String, std::unique_ptr<sf::SoundBuffer>>());
 
-	VLog("All content directories cleared");
+	VBase::VLog("All content directories cleared");
 }
 
 bool VContent::StoreTexture(const sf::String& name, const sf::Texture& texture)
 {
-	if (!FindTexture(name))
+	auto found = textureDir.find(name);
+	if (found == textureDir.end())
 	{
-		VLog("%s stored", name.toAnsiString().c_str());
-		textureDir.insert(textureDir.begin(), std::pair<sf::String, sf::Texture>(name, texture));		
+		VBase::VLog("%s stored", name.toAnsiString().c_str());
+		textureDir.insert(std::pair<sf::String, std::unique_ptr<sf::Texture>>(
+			name, std::unique_ptr<sf::Texture>(new sf::Texture(texture))));
 		return true;
 	}
 
-	VLog("Error storing texture: %s", name.toAnsiString().c_str());
-
+	VBase::VLog("Error storing texture: %s", name.toAnsiString().c_str());
 	return false;
 }
 
 bool VContent::StoreImage(const sf::String& name, const sf::Image& image)
 {
-	if (!FindImage(name))
+	auto found = imageDir.find(name);
+	if (found == imageDir.end())
 	{
-		VLog("%s stored", name.toAnsiString().c_str());
-		imageDir.insert(imageDir.begin(), std::pair<sf::String, sf::Image>(name, image));
+		VBase::VLog("%s stored", name.toAnsiString().c_str());
+		imageDir.insert(std::pair<sf::String, std::unique_ptr<sf::Image>>(
+			name, std::unique_ptr<sf::Image>(new sf::Image(image))));
 		return true;
 	}
 
-	VLog("Error storing image: %s", name.toAnsiString().c_str());
-
+	VBase::VLog("Error storing image: %s", name.toAnsiString().c_str());
 	return false;
 }
 
 bool VContent::StoreFont(const sf::String& name, const sf::Font& font)
 {
-	if (!FindFont(name))
+	auto found = fontDir.find(name);
+	if (found == fontDir.end())
 	{
-		VLog("%s stored", name.toAnsiString().c_str());
-		fontDir.insert(fontDir.begin(), std::pair<sf::String, sf::Font>(name, font));
+		VBase::VLog("%s stored", name.toAnsiString().c_str());
+		fontDir.insert(std::pair<sf::String, std::unique_ptr<sf::Font>>(
+			name, std::unique_ptr<sf::Font>(new sf::Font(font))));
 		return true;
 	}
 
-	VLog("Error storing font: %s", name.toAnsiString().c_str());
-
+	VBase::VLog("Error storing font: %s", name.toAnsiString().c_str());
 	return false;
 }
 
 bool VContent::StoreSound(const sf::String& name, const sf::SoundBuffer& sound)
 {
-	if (!FindSound(name))
+	auto found = soundDir.find(name);
+	if (found == soundDir.end())
 	{
-		VLog("%s stored", name.toAnsiString().c_str());
-		soundDir.insert(soundDir.begin(), std::pair<sf::String, sf::SoundBuffer>(name, sound));
+		VBase::VLog("%s stored", name.toAnsiString().c_str());
+		soundDir.insert(std::pair<sf::String, std::unique_ptr<sf::SoundBuffer>>(
+			name, std::unique_ptr<sf::SoundBuffer>(new sf::SoundBuffer(sound))));
 		return true;
 	}
 
-	VLog("Error storing sound: %s", name.toAnsiString().c_str());
-
+	VBase::VLog("Error storing sound: %s", name.toAnsiString().c_str());
 	return false;
 }

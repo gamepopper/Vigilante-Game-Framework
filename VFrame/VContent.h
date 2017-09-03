@@ -5,9 +5,10 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/System/String.hpp>
+#include <memory>
 #include "VBase.h"
 
-class VContent : public VBase
+class VContent
 {
 public:
 	VContent(){};
@@ -16,14 +17,28 @@ public:
 		UnloadAll();
 	}
 
+	bool TextureExists(const sf::String& name);
+	bool ImageExists(const sf::String& name);
+	bool FontExists(const sf::String& name);
+	bool SoundExists(const sf::String& name);
+
 	//Loads/Gets texture by name to sf::Texture object.
-	bool LoadTexture(const sf::String& name, sf::Texture &texture);
+	sf::Texture& LoadTexture(const sf::String& name);
 	//Loads/Gets image by name to sf::Image object.
-	bool LoadImage(const sf::String& name, sf::Image &image);
+	sf::Image& LoadImage(const sf::String& name);
 	//Loads/Gets font by name to sf::Font object.
-	bool LoadFont(const sf::String& name, sf::Font &font);
+	sf::Font& LoadFont(const sf::String& name);
 	//Loads/Gets sound by name to sf::SoundBuffer object.
-	bool LoadSound(const sf::String& name, sf::SoundBuffer &sound);
+	sf::SoundBuffer& LoadSound(const sf::String& name);
+
+	//Store preloaded Texture with a name.
+	bool StoreTexture(const sf::String& name, const sf::Texture& texture);
+	//Store preloaded Image with a name.
+	bool StoreImage(const sf::String& name, const sf::Image& image);
+	//Store preloaded Font with a name.
+	bool StoreFont(const sf::String& name, const sf::Font& font);
+	//Store preloaded Sound with a name.
+	bool StoreSound(const sf::String& name, const sf::SoundBuffer& sound);
 
 	//Unload Texture
 	bool UnloadTexture(const sf::String& name);
@@ -37,28 +52,10 @@ public:
 	//Unload All Content
 	void UnloadAll();
 
-	//Store preloaded Texture with a name.
-	bool StoreTexture(const sf::String& name, const sf::Texture& texture);
-	//Store preloaded Image with a name.
-	bool StoreImage(const sf::String& name, const sf::Image& image);
-	//Store preloaded Font with a name.
-	bool StoreFont(const sf::String& name, const sf::Font& font);
-	//Store preloaded Sound with a name.
-	bool StoreSound(const sf::String& name, const sf::SoundBuffer& sound);
-
-	//Check if specific Texture exists.
-	bool FindTexture(const sf::String& name);
-	//Check if specific Image exists.
-	bool FindImage(const sf::String& name);
-	//Check if specific Font exists.
-	bool FindFont(const sf::String& name);
-	//Check if specific Sound exists.
-	bool FindSound(const sf::String& name);
-
 private:
-	std::map<sf::String, sf::Texture>		textureDir;
-	std::map<sf::String, sf::Image>			imageDir;
-	std::map<sf::String, sf::Font>			fontDir;
-	std::map<sf::String, sf::SoundBuffer>	soundDir;
+	std::map<sf::String, std::unique_ptr<sf::Texture>>		textureDir;
+	std::map<sf::String, std::unique_ptr<sf::Image>>		imageDir;
+	std::map<sf::String, std::unique_ptr<sf::Font>>			fontDir;
+	std::map<sf::String, std::unique_ptr<sf::SoundBuffer>>	soundDir;
 };
 

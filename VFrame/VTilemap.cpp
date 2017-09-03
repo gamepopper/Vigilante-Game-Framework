@@ -13,19 +13,17 @@ using std::vector;
 void VTilemap::setupTilemap(sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
 	const std::vector<char>& collision)
 {
-	if (VGlobal::p()->Content->LoadTexture(graphicFile, texture))
-	{
-		TileSize.x = tileWidth;
-		TileSize.y = tileHeight;
-		Size.x *= TileSize.x;
-		Size.y *= TileSize.y;
+	RenderState.texture = &VGlobal::p()->Content->LoadTexture(graphicFile);
+	TileSize.x = tileWidth;
+	TileSize.y = tileHeight;
+	Size.x *= TileSize.x;
+	Size.y *= TileSize.y;
 
-		tileMapWidth = texture.getSize().x / TileSize.x;
+	tileMapWidth = RenderState.texture->getSize().x / TileSize.x;
 
-		AutoTile = autoTile;
+	AutoTile = autoTile;
 
-		ResetCollision(collision);
-	}
+	ResetCollision(collision);
 }
 
 void VTilemap::updateTransform()
@@ -504,7 +502,6 @@ void VTilemap::Draw(sf::RenderTarget& RenderTarget)
 	{
 		RenderTarget.setView(scrollView);
 		sf::RenderStates states = sf::RenderStates(RenderState);
-		states.texture = &texture;
 		states.transform *= transformable.getTransform();
 		RenderTarget.draw(vertices, states);
 		RenderTarget.setView(renderTargetView);

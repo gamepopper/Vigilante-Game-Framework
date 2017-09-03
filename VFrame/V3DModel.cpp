@@ -10,7 +10,7 @@ void V3DModel::updateTransform()
 	glScalef(Scale.x, Scale.y, Scale.z);
 }
 
-bool V3DModel::LoadModelData(std::vector<GLfloat>& data, int vertexPos, int normalPos, int texturePos, int colourPos)
+bool V3DModel::LoadModelData(const std::vector<GLfloat>& data, int vertexPos, int normalPos, int texturePos, int colourPos)
 {
 	modelData = data;
 	vertexArrayOffset = vertexPos;
@@ -34,7 +34,7 @@ bool V3DModel::LoadModelData(std::vector<GLfloat>& data, int vertexPos, int norm
 	return true;
 }
 
-bool V3DModel::LoadTexture(sf::String filename, bool mipmap)
+bool V3DModel::LoadTexture(const sf::String& filename, bool mipmap)
 {
 	if (mipmap)
 	{
@@ -52,7 +52,7 @@ bool V3DModel::LoadTexture(sf::String filename, bool mipmap)
 	}
 }
 
-bool V3DModel::LoadTexture(sf::Texture texture, bool mipmap)
+bool V3DModel::LoadTexture(const sf::Texture& texture, bool mipmap)
 {
 	this->texture = texture;
 

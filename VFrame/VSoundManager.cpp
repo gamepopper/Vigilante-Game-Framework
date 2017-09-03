@@ -13,12 +13,10 @@ void VSoundManager::SetMasterPitch(float pitch)
 
 bool VSoundManager::Load(sf::String filename, sf::String id)
 {
-	if (sounds.find(id) == sounds.end())
+	if (sounds.find(id) == sounds.end() || sounds[id].getBuffer() == nullptr)
 	{
-		if (VGlobal::p()->Content->LoadSound(filename, soundBuffers[id]))
-		{
-			sounds[id] = sf::Sound(soundBuffers[id]);
-		}
+		soundBuffers[id] = &VGlobal::p()->Content->LoadSound(filename);
+		sounds[id] = sf::Sound(*soundBuffers[id]);
 	}
 
 	return true;

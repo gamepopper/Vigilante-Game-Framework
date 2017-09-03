@@ -5,11 +5,11 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/System/String.hpp>
+#include <memory>
 
 class VEmitter : public VGroup
 {
 protected:
-	sf::Texture texture;
 	sf::VertexArray vertices;
 
 	bool running = false;
@@ -17,6 +17,8 @@ protected:
 	float timer = 0;
 	int counter = 0;
 	int amount = 0;
+
+	void setSize(int Amount, bool Animated, int Width, int Height, int TextureWidth, bool RandomFrames);
 
 public:
 	typedef VGroup VSUPERCLASS;
@@ -105,7 +107,7 @@ public:
 	//Load set amount of particles from a file.
 	VEmitter* LoadParticlesFromFile(int Amount, sf::String Filename, bool Animated = false, int Width = 1, int Height = 1, int TextureWidth = 0, bool RandomFrames = true);
 	//Load set amount of particles from an sf::Texture object.
-	VEmitter* LoadParticles(int Amount, sf::Texture Texture, bool Animated = false, int Width = 1, int Height = 1, int TextureWidth = 0, bool RandomFrames = true);
+	VEmitter* LoadParticles(int Amount, sf::Texture& Texture, bool Animated = false, int Width = 1, int Height = 1, int TextureWidth = 0, bool RandomFrames = true);
 	//Make set amount of particles as rectangles.
 	VEmitter* MakeParticles(int Amount, int Width, int Height, sf::Color Color = sf::Color::White);
 	virtual void Kill() override;

@@ -86,6 +86,8 @@ void VTypedText::Skip()
 	Paused = false;
 	waiting = false;
 	timer = 0;
+
+	ApplyChanges();
 }
 
 void VTypedText::onComplete()
@@ -172,12 +174,14 @@ void VTypedText::Update(float dt)
 		{
 			length += CharactersPerIteration;
 			if (soundId != "") VGlobal::p()->Sound->Play(soundId, soundVolume);
+			dirty = true;
 		}
 
 		if (erasing && timer >= EraseDelay)
 		{
 			length -= CharactersPerIteration;
 			if (soundId != "") VGlobal::p()->Sound->Play(soundId, soundVolume);
+			dirty = true;
 		}
 
 		if ((typing && timer >= Delay) || (erasing && timer >= EraseDelay))
@@ -186,11 +190,11 @@ void VTypedText::Update(float dt)
 			{
 				if (typing)
 				{
-					timer = VGlobal::p()->Random.GetFloat(Delay * typingVarPercent / 2, -Delay * typingVarPercent / 2);
+					timer = VGlobal::p()->Random->GetFloat(Delay * typingVarPercent / 2, -Delay * typingVarPercent / 2);
 				}
 				else
 				{
-					timer = VGlobal::p()->Random.GetFloat(EraseDelay * typingVarPercent / 2, -EraseDelay * typingVarPercent / 2);
+					timer = VGlobal::p()->Random->GetFloat(EraseDelay * typingVarPercent / 2, -EraseDelay * typingVarPercent / 2);
 				}
 			}
 			else
@@ -200,75 +204,33 @@ void VTypedText::Update(float dt)
 		}
 	}
 
-	std::wstringstream helperString;
-	helperString << Prefix.toWideString() << finalText.substr(0, length);
-
+	bool cursorBlink = false;
 	if (ShowCursor && length >= (int)finalText.size())
 	{
-		cursorTimer += dt;
+		float futureCursorTime = cursorTimer + dt;
 
-		if (cursorTimer > CursorBlinkSpeed / 2)
+		if (futureCursorTime > CursorBlinkSpeed / 2)
 		{
-			helperString << CursorChar;
+			cursorBlink = true;
+			dirty = cursorTimer <= CursorBlinkSpeed / 2;
 		}
 
-		if (cursorTimer > CursorBlinkSpeed)
+		if (futureCursorTime > CursorBlinkSpeed)
 		{
-			cursorTimer = 0;
+			dirty = cursorTimer <= CursorBlinkSpeed;
+			cursorBlink = false;
+			futureCursorTime = 0;
 		}
+
+		cursorTimer = futureCursorTime;
 	}
 
-	if (helperString.str() != Text)
+	if (dirty)
 	{
-		helperText = helperString.str();
-
-		Text = helperText;
-		helperText = { (char)0 };
-
-		if (Text.getSize() != finalText.size() && Text.getSize() > 0)
-		{
-			float advance = 0.0f;
-			int lastWord = 0;
-			bool bold = Style & sf::Text::Bold;
-			for (unsigned int i = 0; i < Text.getSize(); i++)
-			{
-				auto currentChar = Text[i];
-
-				if (currentChar == ' ')
-				{
-					lastWord = i;
-				}
-
-				if (currentChar == '\n')
-				{
-					advance = 0;
-				}
-
-				sf::Glyph glyph = font.getGlyph(currentChar, FontSize, bold);
-				advance += glyph.advance;
-
-				if (advance > Size.x)
-				{
-					advance = 0;
-				}
-			}
-
-			unsigned int nextWord = lastWord + 1;
-
-			while (Text[nextWord] != ' ' && nextWord < Text.getSize())
-			{
-				sf::Glyph glyph = font.getGlyph(Text[nextWord], FontSize, bold);
-				advance += glyph.advance;
-
-				nextWord++;
-			}
-
-			if (advance > Size.x)
-			{
-				Text[nextWord] = '\n';
-				advance = 0;
-			}
-		}
+		if (cursorBlink)
+			Text = Prefix + finalText.substr(0, length).append({ CursorChar });
+		else
+			Text = Prefix + finalText.substr(0, length);
 	}
 
 	if (length >= (int)finalText.size() && typing && !waiting && !erasing)

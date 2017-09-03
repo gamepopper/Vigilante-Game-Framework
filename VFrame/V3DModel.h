@@ -61,11 +61,11 @@ public:
 	colourPos: Point where colour data offset.
 	Setting to -1 ignores parameter.
 	*/
-	bool LoadModelData(std::vector<GLfloat>& data, int vertexPos, int normalPos = -1, int texturePos = -1, int colourPos = -1);
+	bool LoadModelData(const std::vector<GLfloat>& data, int vertexPos, int normalPos = -1, int texturePos = -1, int colourPos = -1);
 	/*Loads texture from filepath string*/
-	bool LoadTexture(sf::String filename, bool mipmap = false);
+	bool LoadTexture(const sf::String& filename, bool mipmap = false);
 	/*Loads texture from sf::Texture object*/
-	bool LoadTexture(sf::Texture texture, bool mipmap = false);
+	bool LoadTexture(const sf::Texture& texture, bool mipmap = false);
 	
 	/*Sets material data of model*/
 	void SetMaterial(sf::Color Colour, sf::Color Specular, float Shininess);

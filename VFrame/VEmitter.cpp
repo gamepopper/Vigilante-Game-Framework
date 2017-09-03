@@ -3,71 +3,53 @@
 
 VEmitter* VEmitter::LoadParticlesFromFile(int Amount, sf::String Filename, bool Animated, int Width, int Height, int TextureWidth, bool RandomFrames)
 {
-	MaxSize = Amount;
-	
-	VGlobal::p()->Content->LoadTexture(Filename, texture);
-	sf::Vector2f Size;
-	int FrameCount;
-	TextureWidth = TextureWidth == 0 ? texture.getSize().x : TextureWidth;
-
-	if (Animated)
-	{
-		Size = sf::Vector2f(static_cast<float>(Width), static_cast<float>(Height));
-		FrameCount = TextureWidth / Width;
-	}
-	else
-	{
-		Size = sf::Vector2f(texture.getSize());
-		FrameCount = 1;
-	}
-	
-	ParticleInstance->Size = Size;
-
-	vertices.clear();
-	vertices.resize(Amount * 4);
-
-	for (int i = 0; i < Amount; i++)
-	{
-		VParticle* particle = new VParticle(*ParticleInstance);
-		Add(particle);
-
-		int RandomFrame = RandomFrames ? VGlobal::p()->Random.GetInt(FrameCount - 1) : i % FrameCount;
-		int FrameX = RandomFrame % FrameCount;
-		int FrameY = RandomFrame / FrameCount;
-
-		vertices[0 + (i * 4)].texCoords = sf::Vector2f(FrameX * Size.x,			FrameY * Size.y);
-		vertices[1 + (i * 4)].texCoords = sf::Vector2f((FrameX + 1) * Size.x,	FrameY * Size.y);
-		vertices[2 + (i * 4)].texCoords = sf::Vector2f((FrameX + 1) * Size.x,	(FrameY + 1) * Size.y);
-		vertices[3 + (i * 4)].texCoords = sf::Vector2f(FrameX * Size.x,			(FrameY + 1) * Size.y);
-	}
-
-#if _DEBUG
-	debuggingVertices.clear();
-	debuggingVertices.resize(8);
-#endif
+	MaxSize = Amount;	
+	RenderState.texture = &VGlobal::p()->Content->LoadTexture(Filename);
+	setSize(Amount, Animated, Width, Height, TextureWidth, RandomFrames);
 
 	return this;
 }
 
-VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture Texture, bool Animated, int Width, int Height, int TextureWidth, bool RandomFrames)
+VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture& Texture, bool Animated, int Width, int Height, int TextureWidth, bool RandomFrames)
 {
 	MaxSize = Amount;
-	texture = Texture;
+	RenderState.texture = &Texture;
+	setSize(Amount, Animated, Width, Height, TextureWidth, RandomFrames);
 
+	return this;
+}
+
+VEmitter* VEmitter::MakeParticles(int Amount, int Width, int Height, sf::Color Color)
+{
+	MaxSize = Amount;
+
+	sf::RenderTexture renderTex;
+	renderTex.create(Width, Height);
+	renderTex.clear(Color);
+	RenderState.texture = &renderTex.getTexture();
+	ParticleInstance->Size = sf::Vector2f(sf::Vector2u(Width, Height));
+
+	setSize(Amount, false, Width, Height, Width, false);
+
+	return this;
+}
+
+void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, int TextureWidth, bool RandomFrames)
+{
 	sf::Vector2f Size;
 	int FrameCount;
 	int FrameCountY;
-	TextureWidth = TextureWidth == 0 ? texture.getSize().x : TextureWidth;
+	TextureWidth = TextureWidth == 0 ? RenderState.texture->getSize().x : TextureWidth;
 
 	if (Animated)
 	{
 		Size = sf::Vector2f(static_cast<float>(Width), static_cast<float>(Height));
 		FrameCount = TextureWidth / Width;
-		FrameCountY = texture.getSize().y / Height;
+		FrameCountY = RenderState.texture->getSize().y / Height;
 	}
 	else
 	{
-		Size = sf::Vector2f(texture.getSize());
+		Size = sf::Vector2f(RenderState.texture->getSize());
 		FrameCount = 1;
 		FrameCountY = 1;
 	}
@@ -82,7 +64,7 @@ VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture Texture, bool Animated
 		VParticle* particle = new VParticle(*ParticleInstance);
 		Add(particle);
 
-		int RandomFrame = RandomFrames ? VGlobal::p()->Random.GetInt((FrameCount * FrameCountY) - 1) : i;
+		int RandomFrame = RandomFrames ? VGlobal::p()->Random->GetInt((FrameCount * FrameCountY) - 1) : i;
 		int FrameX = RandomFrame % FrameCount;
 		int FrameY = RandomFrame / FrameCount;
 
@@ -96,48 +78,6 @@ VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture Texture, bool Animated
 	debuggingVertices.clear();
 	debuggingVertices.resize(8);
 #endif
-
-	return this;
-}
-
-VEmitter* VEmitter::MakeParticles(int Amount, int Width, int Height, sf::Color Color)
-{
-	MaxSize = Amount;
-
-	sf::RenderTexture renderTex;
-	renderTex.create(Width, Height);
-	renderTex.clear(Color);
-	texture = renderTex.getTexture();
-	ParticleInstance->Size = sf::Vector2f(sf::Vector2u(Width, Height));
-
-	vertices.clear();
-	vertices.resize(Amount * 4);
-
-	for (int i = 0; i < Amount; i++)
-	{
-		VParticle* particle = new VParticle(*ParticleInstance);
-		Add(particle);
-
-		vertices[0 + (i * 4)].texCoords = sf::Vector2f(0 * Size.x, 0 * Size.y);
-		vertices[1 + (i * 4)].texCoords = sf::Vector2f((0 + 1) * Size.x, 0 * Size.y);
-		vertices[2 + (i * 4)].texCoords = sf::Vector2f((0 + 1) * Size.x, (0 + 1) * Size.y);
-		vertices[3 + (i * 4)].texCoords = sf::Vector2f(0 * Size.x, (0 + 1) * Size.y);
-	}
-
-#if _DEBUG
-	debuggingVertices.clear();
-	debuggingVertices.resize(8);
-	debuggingVertices[0].color = sf::Color(0, 255, 0, 128);
-	debuggingVertices[1].color = sf::Color(0, 255, 0, 128);
-	debuggingVertices[2].color = sf::Color(0, 255, 0, 128);
-	debuggingVertices[3].color = sf::Color(0, 255, 0, 128);
-	debuggingVertices[4].color = sf::Color(0, 255, 0, 128);
-	debuggingVertices[5].color = sf::Color(0, 255, 0, 128);
-	debuggingVertices[6].color = sf::Color(0, 255, 0, 128);
-	debuggingVertices[7].color = sf::Color(0, 255, 0, 128);
-#endif
-
-	return this;
 }
 
 void VEmitter::Destroy()
@@ -290,9 +230,7 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 		renderBox.top + renderBox.height > scrollBox.top)
 	{
 		RenderTarget.setView(scrollView);
-		sf::RenderStates states = sf::RenderStates(RenderState);
-		states.texture = &texture;
-		RenderTarget.draw(vertices, states);
+		RenderTarget.draw(vertices, RenderState);
 
 #if _DEBUG
 		if (VGlobal::p()->DrawDebug)
@@ -354,33 +292,33 @@ void VEmitter::EmitParticle()
 		}
 		else
 		{
-			particle->Velocity = VGlobal::p()->Random.GetVector2f(VelocityRange.B, VelocityRange.A);
+			particle->Velocity = VGlobal::p()->Random->GetVector2f(VelocityRange.B, VelocityRange.A);
 		}
 
-		particle->AngleAcceleration = VGlobal::p()->Random.GetFloat(AngleAccelerationRange.B, AngleAccelerationRange.A);
-		particle->AngleDrag = VGlobal::p()->Random.GetFloat(AngleDragRange.B, AngleDragRange.A);
-		particle->AngleVelocity = VGlobal::p()->Random.GetFloat(AngleVelocityRange.B, AngleVelocityRange.A);
+		particle->AngleAcceleration = VGlobal::p()->Random->GetFloat(AngleAccelerationRange.B, AngleAccelerationRange.A);
+		particle->AngleDrag = VGlobal::p()->Random->GetFloat(AngleDragRange.B, AngleDragRange.A);
+		particle->AngleVelocity = VGlobal::p()->Random->GetFloat(AngleVelocityRange.B, AngleVelocityRange.A);
 
-		particle->Angle = VGlobal::p()->Random.GetFloat(AngleRange.B, AngleRange.A);
+		particle->Angle = VGlobal::p()->Random->GetFloat(AngleRange.B, AngleRange.A);
 
-		particle->Lifespan = VGlobal::p()->Random.GetFloat(Lifespan.B, Lifespan.A);
+		particle->Lifespan = VGlobal::p()->Random->GetFloat(Lifespan.B, Lifespan.A);
 
-		particle->ScaleRange.A = VGlobal::p()->Random.GetVector2f(ScaleRange.A.B, ScaleRange.A.A);
-		particle->ScaleRange.B = VGlobal::p()->Random.GetVector2f(ScaleRange.B.B, ScaleRange.B.A);
+		particle->ScaleRange.A = VGlobal::p()->Random->GetVector2f(ScaleRange.A.B, ScaleRange.A.A);
+		particle->ScaleRange.B = VGlobal::p()->Random->GetVector2f(ScaleRange.B.B, ScaleRange.B.A);
 
-		particle->ColourRange.A = VGlobal::p()->Random.GetColor(ColourRange.A.B, ColourRange.A.A);
-		particle->ColourRange.B = VGlobal::p()->Random.GetColor(ColourRange.B.B, ColourRange.B.A);
+		particle->ColourRange.A = VGlobal::p()->Random->GetColor(ColourRange.A.B, ColourRange.A.A);
+		particle->ColourRange.B = VGlobal::p()->Random->GetColor(ColourRange.B.B, ColourRange.B.A);
 		
-		particle->AlphaRange.A = VGlobal::p()->Random.GetFloat(AlphaRange.A.B, AlphaRange.A.A);
-		particle->AlphaRange.B = VGlobal::p()->Random.GetFloat(AlphaRange.B.B, AlphaRange.B.A);
+		particle->AlphaRange.A = VGlobal::p()->Random->GetFloat(AlphaRange.A.B, AlphaRange.A.A);
+		particle->AlphaRange.B = VGlobal::p()->Random->GetFloat(AlphaRange.B.B, AlphaRange.B.A);
 
-		particle->Drag = VGlobal::p()->Random.GetVector2f(DragRange.B, DragRange.A);
+		particle->Drag = VGlobal::p()->Random->GetVector2f(DragRange.B, DragRange.A);
 
-		particle->Acceleration = VGlobal::p()->Random.GetVector2f(AccelerationRange.B, AccelerationRange.A);
+		particle->Acceleration = VGlobal::p()->Random->GetVector2f(AccelerationRange.B, AccelerationRange.A);
 
-		particle->Elasticity = VGlobal::p()->Random.GetFloat(ElasticityRange.B, ElasticityRange.A);
+		particle->Elasticity = VGlobal::p()->Random->GetFloat(ElasticityRange.B, ElasticityRange.A);
 
-		particle->Position = VGlobal::p()->Random.GetVector2f(Position + Size, Position) - (Size / 2.0f);
+		particle->Position = VGlobal::p()->Random->GetVector2f(Position + Size, Position) - (Size / 2.0f);
 
 		particle->OnEmit();
 	}

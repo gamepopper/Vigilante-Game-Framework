@@ -5,11 +5,13 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <memory>
 
 class VSprite :	public VObject
 {
 protected:
-	sf::Texture texture;
+	sf::Texture* texture = nullptr;
+	bool disposible = false;
 	sf::Sprite sprite;
 
 	void setSize(unsigned int texWidth, unsigned int texHeight, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0);
@@ -84,7 +86,7 @@ public:
 	texWidth: Width of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full width.
 	texWidth: Height of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full height.
 	*/
-	virtual VSprite* LoadGraphicFromTexture(sf::Texture texture, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0);
+	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0);
 	/*
 	Make sprite texture.
 	width: Width of sprite.
@@ -117,10 +119,10 @@ public:
 	outline: Outline thickness.
 	outlineColor: colour of sprite outline.
 	*/
-	virtual VSprite* MakeGraphicConvex(std::vector<sf::Vector2f>& points, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
+	virtual VSprite* MakeGraphicConvex(const std::vector<sf::Vector2f>& points, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
 
 	//Return texture of sprite.
-	sf::Texture& GetTexture()
+	sf::Texture* GetTexture()
 	{
 		return texture;
 	}

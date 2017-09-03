@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <map>
 #include <functional>
+#include <memory>
 
 struct VTileRenderInfo
 {
@@ -41,7 +42,6 @@ protected:
 	bool dirty = true;
 	bool helperAutoTile = false;
 	
-	sf::Texture texture;
 	sf::VertexArray vertices;
 	sf::Transformable transformable;
 	sf::Color colour = sf::Color::White;

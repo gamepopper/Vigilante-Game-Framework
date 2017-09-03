@@ -28,14 +28,8 @@ class VText : public VObject
 protected:
 	sf::VertexArray vertices;
 	sf::Transformable transformable;
-	sf::Font font;
-	sf::String helperText = "";
-	sf::Vector2f helperOrigin;
-	VTextAlign helperAlignment = ALIGNLEFT;
-	unsigned int helperStyle = 0;
-	int helperLineSpace = 0;
-	float helperOutlineThickness = 0;
-	sf::Vector2f helperOutlineOffset;
+	sf::Font* font = nullptr;
+	bool dirty = false;
 
 	sf::Vector2f origin;
 	sf::Color fillColour = sf::Color::White;
@@ -51,7 +45,7 @@ protected:
 public:
 	typedef VObject VSUPERCLASS;
 	sf::RenderStates RenderState = sf::RenderStates::Default;
-	sf::String Text = "";
+	sf::String Text;
 	unsigned int FontSize = 8;
 	unsigned int Style = sf::Text::Regular;
 	VTextWrap Wrap = WRAPWORD;
@@ -63,7 +57,6 @@ public:
 	sf::Vector2f OutlineOffset;
 
 	VText(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8) : 	VObject(x,y),
-																										helperText(text),
 																										Text(text)
 	{
 		Size.x = width;
@@ -81,7 +74,6 @@ public:
 	}
 
 	VText(sf::Vector2f position, float width = 0, const sf::String& text = "", int charSize = 8) : 	VObject(position),
-																									helperText(text),
 																									Text(text)
 	{
 		Size.x = width;
@@ -106,7 +98,7 @@ public:
 	alignment: How the text will be anchored line by line within the text area.
 	style: Text font styles (i.e. bold, italic, strikethrough, ect).
 	*/
-	VText* SetFormat(sf::String filename, int charSize = 8, sf::Color colour = sf::Color::White,
+	VText* SetFormat(const sf::String& filename, int charSize = 8, sf::Color colour = sf::Color::White,
 		VTextAlign alignment = VTextAlign::ALIGNLEFT, int style = sf::Text::Regular);
 
 	/*
@@ -117,7 +109,7 @@ public:
 	alignment: How the text will be anchored line by line within the text area.
 	style: Text font styles (i.e. bold, italic, strikethrough, ect).
 	*/
-	VText* SetFormat(sf::Font fontData, int charSize = 8, sf::Color colour = sf::Color::White,
+	VText* SetFormat(sf::Font& fontData, int charSize = 8, sf::Color colour = sf::Color::White,
 		VTextAlign alignment = VTextAlign::ALIGNLEFT, int style = sf::Text::Regular);
 
 	//Set font styles (i.e. bold, italic, strikethrough, ect).
@@ -138,6 +130,9 @@ public:
 	{
 		return outlineColour;
 	}
+
+	//Applies the changes to the text format, calling this is required when changing properties.
+	void ApplyChanges();
 
 	virtual void Destroy() override;
 	virtual void Update(float dt) override;

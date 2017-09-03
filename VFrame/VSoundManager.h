@@ -7,7 +7,7 @@ class VSoundManager
 private:
 	float masterVolume = 100.0f;
 	float masterPitch = 1.0f;
-	std::map<sf::String, sf::SoundBuffer>	soundBuffers;
+	std::map<sf::String, sf::SoundBuffer*>	soundBuffers;
 	std::map<sf::String, sf::Sound>			sounds;
 
 public:
