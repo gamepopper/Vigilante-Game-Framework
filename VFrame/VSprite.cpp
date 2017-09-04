@@ -47,38 +47,34 @@ void VSprite::updateFrame()
 	if (sprite.getTextureRect() != rect) sprite.setTextureRect(rect);
 }
 
-VSprite* VSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
+VSprite* VSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, const sf::IntRect& area)
 {
 	texture = &VGlobal::p()->Content->LoadTexture(filename);
 	sprite.setTexture(*texture);
-	
-	if (texWidth == 0)
-		texWidth = GetTexture()->getSize().x;
 
-	if (texHeight == 0)
-		texHeight = GetTexture()->getSize().y;
+	setSize(
+		area.width == 0 ? GetTexture()->getSize().x : area.width, 
+		area.height == 0 ? GetTexture()->getSize().y : area.height,
+		animated, width, height, area.left, area.top
+		);
 
-	setSize(texWidth, texHeight, animated, width, height, offsetX, offsetY);
 	updateFrame();
 
 	return this;
 }
 
-VSprite* VSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
+VSprite* VSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, const sf::IntRect& area)
 {
 	this->texture = &texture;
 	sprite = sf::Sprite(*this->texture);
 
-	if (texWidth == 0)
-		texWidth = texture.getSize().x;
+	setSize(
+		area.width == 0 ? GetTexture()->getSize().x : area.width,
+		area.height == 0 ? GetTexture()->getSize().y : area.height,
+		animated, width, height, area.left, area.top
+		);
 
-	if (texHeight == 0)
-		texHeight = texture.getSize().y;
-
-	Size = sf::Vector2f(sf::Vector2u(width, height));
-	setSize(texWidth, texHeight, animated, width, height, offsetX, offsetY);
 	updateFrame();
-
 	return this;
 }
 

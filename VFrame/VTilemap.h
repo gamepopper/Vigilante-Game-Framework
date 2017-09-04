@@ -35,6 +35,7 @@ protected:
 	std::map<char, VTileRenderInfo*> renderDir;
 	std::vector<int> autotile;
 	int tileMapWidth = 0;
+	sf::Vector2u textureOffset;
 
 	int mapWidth = 0;
 	int mapHeight = 0;
@@ -53,7 +54,7 @@ protected:
 
 	void setupTilemap(sf::String graphicFile,
 		int tileWidth = 0, int tileWeight = 0, bool autoTile = false,
-		const std::vector<char>& collision = { '#' });
+		const std::vector<char>& collision = { '#' }, const sf::IntRect& graphicsArea = sf::IntRect());
 
 	virtual void updateTransform() override;
 	void updateTilemap();
@@ -82,17 +83,17 @@ public:
 	//The amount of tiles on each row makes up the width of the map, and amount of lines the height.
 	void LoadFromCSV(sf::String mapData, sf::String graphicFile, 
 		int tileWidth = 0, int tileWeight = 0, bool autoTile = false,
-		const std::vector<char>& collision = { '#' });
+		const std::vector<char>& collision = { '#' }, const sf::IntRect& graphicsArea = sf::IntRect());
 
 	//Load map from one-dimensional array.
 	void LoadFromArray(std::vector<char> mapData, int mapWidth, int mapHeight,
 		sf::String graphicFile, int tileWidth = 0, int tileWeight = 0, bool autoTile = false,
-		const std::vector<char>& collision = { '#' });
+		const std::vector<char>& collision = { '#' }, const sf::IntRect& graphicsArea = sf::IntRect());
 
 	//Load map from two-dimensional array.
 	void LoadFrom2DArray(std::vector<std::vector<char>> mapData, sf::String graphicFile, 
 		int tileWidth = 0, int tileWeight = 0, bool autoTile = false,
-		const std::vector<char>& collision = { '#' });
+		const std::vector<char>& collision = { '#' }, const sf::IntRect& graphicsArea = sf::IntRect());
 
 	//Sets tile to render at specific char in tilemap (ignored if using autotile)
 	void SetTileRenderID(char ID, int tileNumber = 0, int autoTileNumber = 0);

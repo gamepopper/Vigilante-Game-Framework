@@ -11,7 +11,7 @@ using std::wifstream;
 using std::vector;
 
 void VTilemap::setupTilemap(sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
-	const std::vector<char>& collision)
+	const std::vector<char>& collision, const sf::IntRect& graphicsArea)
 {
 	RenderState.texture = &VGlobal::p()->Content->LoadTexture(graphicFile);
 	TileSize.x = tileWidth;
@@ -19,7 +19,8 @@ void VTilemap::setupTilemap(sf::String graphicFile, int tileWidth, int tileHeigh
 	Size.x *= TileSize.x;
 	Size.y *= TileSize.y;
 
-	tileMapWidth = RenderState.texture->getSize().x / TileSize.x;
+	tileMapWidth = (graphicsArea.width == 0 ? RenderState.texture->getSize().x : graphicsArea.width) / TileSize.x;
+	textureOffset = sf::Vector2u(graphicsArea.left, graphicsArea.top);
 
 	AutoTile = autoTile;
 
@@ -95,10 +96,10 @@ void VTilemap::updateTilemap()
 				int u = TileID % tileMapWidth;
 				int v = TileID / tileMapWidth;
 
-				quad[0].texCoords = sf::Vector2f(sf::Vector2u(u * TileSize.x,		v * TileSize.y));
-				quad[1].texCoords = sf::Vector2f(sf::Vector2u((u + 1) * TileSize.x, v * TileSize.y));
-				quad[2].texCoords = sf::Vector2f(sf::Vector2u((u + 1) * TileSize.x, (v + 1) * TileSize.y));
-				quad[3].texCoords = sf::Vector2f(sf::Vector2u(u * TileSize.x,		(v + 1) * TileSize.y));
+				quad[0].texCoords = sf::Vector2f(textureOffset + sf::Vector2u(u * TileSize.x,		v * TileSize.y));
+				quad[1].texCoords = sf::Vector2f(textureOffset + sf::Vector2u((u + 1) * TileSize.x, v * TileSize.y));
+				quad[2].texCoords = sf::Vector2f(textureOffset + sf::Vector2u((u + 1) * TileSize.x, (v + 1) * TileSize.y));
+				quad[3].texCoords = sf::Vector2f(textureOffset + sf::Vector2u(u * TileSize.x, (v + 1) * TileSize.y));
 
 				quad[0].color = colour;
 				quad[1].color = colour;
@@ -240,7 +241,7 @@ void VTilemap::clearTiles()
 }
 
 void VTilemap::LoadFromCSV(sf::String mapData, sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
-	const std::vector<char>& collision)
+	const std::vector<char>& collision, const sf::IntRect& rect)
 {
 	tilemap.clear();
 	std::locale ulocale(std::locale(), new std::codecvt_utf8<wchar_t>);
@@ -262,12 +263,12 @@ void VTilemap::LoadFromCSV(sf::String mapData, sf::String graphicFile, int tileW
 	mapWidth = static_cast<int>(Size.x);
 	mapHeight = static_cast<int>(Size.y);
 
-	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision);
+	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision, rect);
 }
 
 void VTilemap::LoadFromArray(vector<char> mapData, int mapWidth, int mapHeight,
 	sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
-	const std::vector<char>& collision)
+	const std::vector<char>& collision, const sf::IntRect& rect)
 {
 	tilemap = mapData;
 
@@ -279,11 +280,11 @@ void VTilemap::LoadFromArray(vector<char> mapData, int mapWidth, int mapHeight,
 		Size.y = static_cast<float>(mapHeight);
 	}
 
-	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision);
+	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision, rect);
 }
 
 void VTilemap::LoadFrom2DArray(vector<vector<char>> mapData, sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
-	const std::vector<char>& collision)
+	const std::vector<char>& collision, const sf::IntRect& rect)
 {
 	mapWidth = mapData.size() ? mapData[0].size() : 0;
 	mapHeight = mapData.size();
@@ -300,7 +301,7 @@ void VTilemap::LoadFrom2DArray(vector<vector<char>> mapData, sf::String graphicF
 	Size.x = static_cast<float>(mapWidth);
 	Size.y = static_cast<float>(mapHeight);
 
-	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision);
+	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision, rect);
 }
 
 void VTilemap::SetTileRenderID(char ID, int tileNumber, int autoTileNumber)

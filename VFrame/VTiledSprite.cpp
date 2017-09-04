@@ -25,7 +25,7 @@ void VTiledSprite::updateFrame()
 		GetTexture()->loadFromImage(*image, rect);
 }
 
-VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
+VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, const sf::IntRect& area)
 {
 	if (texture)
 	{
@@ -38,16 +38,10 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 	sf::Texture* tex = &VGlobal::p()->Content->LoadTexture(filename);
 	image = std::make_unique<sf::Image>(tex->copyToImage());
 
-	if (texWidth == 0)
-		texWidth = image->getSize().x;
+	setSize(image->getSize().x, image->getSize().y, animated, width, height);
 
-	if (texHeight == 0)
-		texHeight = image->getSize().y;
-
-	setSize(texWidth, texHeight, animated, width, height, offsetX, offsetY);
-
-	width = width == 0 ? texWidth : width;
-	height = height == 0 ? texHeight : height;
+	width = width == 0 ? image->getSize().x : width;
+	height = height == 0 ? image->getSize().y : height;
 
 	sprite = sf::Sprite(*texture);
 	updateFrame();
@@ -55,7 +49,7 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 	return this;
 }
 
-VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
+VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, const sf::IntRect& area)
 {
 	if (this->texture)
 	{
@@ -66,16 +60,10 @@ VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animate
 	this->texture = new sf::Texture();
 	image = std::make_unique<sf::Image>(texture.copyToImage());
 
-	if (texWidth == 0)
-		texWidth = image->getSize().x;
+	setSize(image->getSize().x, image->getSize().y, animated, width, height);
 
-	if (texHeight == 0)
-		texHeight = image->getSize().y;
-
-	setSize(texWidth, texHeight, animated, width, height, offsetX, offsetY);
-
-	width = width == 0 ? texWidth : width;
-	height = height == 0 ? texHeight : height;
+	width = width == 0 ? image->getSize().x : width;
+	height = height == 0 ? image->getSize().y : height;
 
 	sprite = sf::Sprite(*this->texture);
 	updateFrame();

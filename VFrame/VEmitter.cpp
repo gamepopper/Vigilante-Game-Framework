@@ -1,20 +1,20 @@
 #include "VEmitter.h"
 #include "VGlobal.h"
 
-VEmitter* VEmitter::LoadParticlesFromFile(int Amount, sf::String Filename, bool Animated, int Width, int Height, int TextureWidth, bool RandomFrames)
+VEmitter* VEmitter::LoadParticlesFromFile(int Amount, sf::String Filename, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
 	MaxSize = Amount;	
 	RenderState.texture = &VGlobal::p()->Content->LoadTexture(Filename);
-	setSize(Amount, Animated, Width, Height, TextureWidth, RandomFrames);
+	setSize(Amount, Animated, Width, Height, Rect, RandomFrames);
 
 	return this;
 }
 
-VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture& Texture, bool Animated, int Width, int Height, int TextureWidth, bool RandomFrames)
+VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture& Texture, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
 	MaxSize = Amount;
 	RenderState.texture = &Texture;
-	setSize(Amount, Animated, Width, Height, TextureWidth, RandomFrames);
+	setSize(Amount, Animated, Width, Height, Rect, RandomFrames);
 
 	return this;
 }
@@ -29,17 +29,18 @@ VEmitter* VEmitter::MakeParticles(int Amount, int Width, int Height, sf::Color C
 	RenderState.texture = &renderTex.getTexture();
 	ParticleInstance->Size = sf::Vector2f(sf::Vector2u(Width, Height));
 
-	setSize(Amount, false, Width, Height, Width, false);
+	setSize(Amount, false, Width, Height, sf::IntRect(0, 0, Width, Height), false);
 
 	return this;
 }
 
-void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, int TextureWidth, bool RandomFrames)
+void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
 	sf::Vector2f Size;
 	int FrameCount;
 	int FrameCountY;
-	TextureWidth = TextureWidth == 0 ? RenderState.texture->getSize().x : TextureWidth;
+	int TextureWidth = Rect.width == 0 ? RenderState.texture->getSize().x : Rect.width;
+	sf::Vector2f Offset = sf::Vector2f(Rect.left, Rect.top);
 
 	if (Animated)
 	{
@@ -68,10 +69,10 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, int Tex
 		int FrameX = RandomFrame % FrameCount;
 		int FrameY = RandomFrame / FrameCount;
 
-		vertices[0 + (i * 4)].texCoords = sf::Vector2f(FrameX * Size.x, FrameY * Size.y);
-		vertices[1 + (i * 4)].texCoords = sf::Vector2f((FrameX + 1) * Size.x, FrameY * Size.y);
-		vertices[2 + (i * 4)].texCoords = sf::Vector2f((FrameX + 1) * Size.x, (FrameY + 1) * Size.y);
-		vertices[3 + (i * 4)].texCoords = sf::Vector2f(FrameX * Size.x, (FrameY + 1) * Size.y);
+		vertices[0 + (i * 4)].texCoords = Offset + sf::Vector2f(FrameX * Size.x, FrameY * Size.y);
+		vertices[1 + (i * 4)].texCoords = Offset + sf::Vector2f((FrameX + 1) * Size.x, FrameY * Size.y);
+		vertices[2 + (i * 4)].texCoords = Offset + sf::Vector2f((FrameX + 1) * Size.x, (FrameY + 1) * Size.y);
+		vertices[3 + (i * 4)].texCoords = Offset + sf::Vector2f(FrameX * Size.x, (FrameY + 1) * Size.y);
 	}
 
 #if _DEBUG

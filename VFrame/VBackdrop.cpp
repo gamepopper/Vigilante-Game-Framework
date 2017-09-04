@@ -18,7 +18,7 @@ void VBackdrop::updateFrame()
 	
 }
 
-VSprite* VBackdrop::LoadGraphic(sf::String filename, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
+VSprite* VBackdrop::LoadGraphic(sf::String filename, bool animated, int width, int height, const sf::IntRect& area)
 {
 	VSUPERCLASS::LoadGraphic(filename);
 
@@ -27,7 +27,7 @@ VSprite* VBackdrop::LoadGraphic(sf::String filename, bool animated, int width, i
 	return this;
 }
 
-VSprite* VBackdrop::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, int offsetX, int offsetY, int texWidth, int texHeight)
+VSprite* VBackdrop::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, const sf::IntRect& area)
 {
 	VSUPERCLASS::LoadGraphicFromTexture(texture);
 

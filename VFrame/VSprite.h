@@ -69,24 +69,18 @@ public:
 	animated: Sets if the graphic is part of an animation or not.
 	width: Width of sprite, ignored if animated is false.
 	height: Height of sprite, ignored if animated is false.
-	offsetX: X coordinate to start animation frames (if you don't want to use the entire texture), ignored if animated is false.
-	offsetY: Y coordinate to start animation frames (if you don't want to use the entire texture), ignored if animated is false.
-	texWidth: Width of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full width.
-	texWidth: Height of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full height.
+	rect: Only use a certain area of the texture, whether you are animated or not. Default value assumes whole texture is used. (Ignored if VTiledSprite or VBackdrop)
 	*/
-	virtual VSprite* LoadGraphic(sf::String filename, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0);
+	virtual VSprite* LoadGraphic(sf::String filename, bool animated = false, int width = 0, int height = 0, const sf::IntRect& area = sf::IntRect());
 	/*
 	Load Graphic from sf::Texture object.
 	texture: Texture object.
 	animated: Sets if the graphic is part of an animation or not.
 	width: Width of sprite, ignored if animated is false.
 	height: Height of sprite, ignored if animated is false.
-	offsetX: X coordinate to start animation frames (if you don't want to use the entire texture), ignored if animated is false.
-	offsetY: Y coordinate to start animation frames (if you don't want to use the entire texture), ignored if animated is false.
-	texWidth: Width of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full width.
-	texWidth: Height of Texture Area (if you don't want to use the entire texture), ignored if animated is false, defaults to Texture's full height.
+	rect: Only use a certain area of the texture, whether you are animated or not. Default value assumes whole texture is used. (Ignored if VTiledSprite or VBackdrop)
 	*/
-	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, int width = 0, int height = 0, int offsetX = 0, int offsetY = 0, int texWidth = 0, int texHeight = 0);
+	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, int width = 0, int height = 0, const sf::IntRect& area = sf::IntRect());
 	/*
 	Make sprite texture.
 	width: Width of sprite.
