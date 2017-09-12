@@ -1,5 +1,6 @@
 #include "VContent.h"
 #include "VGlobal.h"
+#include <stdexcept>
 
 bool VContent::TextureExists(const sf::String& name)
 {
@@ -34,7 +35,11 @@ sf::Texture& VContent::LoadTexture(const sf::String& name)
 		}
 		else
 		{
-			throw std::runtime_error("Error loading texture:" + name.toAnsiString());
+		#ifndef __linux__
+			throw std::exception(("Error loading texture: " + name.toAnsiString()).c_str());
+        #else
+            throw ("Error loading texture: " + name.toAnsiString());
+		#endif
 		}
 	}
 
@@ -54,7 +59,11 @@ sf::Image& VContent::LoadImage(const sf::String& name)
 		}
 		else
 		{
-			throw std::runtime_error("Error loading image:" + name.toAnsiString());
+        #ifndef __linux__
+			throw std::exception(("Error loading image: " + name.toAnsiString()).c_str());
+        #else
+            throw ("Error loading image: " + name.toAnsiString());
+		#endif
 		}
 	}
 
@@ -74,7 +83,11 @@ sf::Font& VContent::LoadFont(const sf::String& name)
 		}
 		else
 		{
-			throw std::runtime_error("Error loading font:" + name.toAnsiString());
+		#ifndef __linux__
+			throw std::exception(("Error loading font: " + name.toAnsiString()).c_str());
+        #else
+            throw ("Error loading front: " + name.toAnsiString());
+		#endif
 		}
 	}
 
@@ -94,7 +107,11 @@ sf::SoundBuffer& VContent::LoadSound(const sf::String& name)
 		}
 		else
 		{
-			throw std::runtime_error("Error loading sound:" + name.toAnsiString());
+		#ifndef __linux__
+			throw std::exception(("Error loading sound: " + name.toAnsiString()).c_str());
+        #else
+            throw ("Error loading texture: " + name.toAnsiString());
+		#endif
 		}
 	}
 
@@ -160,10 +177,10 @@ bool VContent::UnloadSound(const sf::String& name)
 
 void VContent::UnloadAll()
 {
-	textureDir.swap(std::map<sf::String, std::unique_ptr<sf::Texture>>());
-	imageDir.swap(std::map<sf::String, std::unique_ptr<sf::Image>>());
-	fontDir.swap(std::map<sf::String, std::unique_ptr<sf::Font>>());
-	soundDir.swap(std::map<sf::String, std::unique_ptr<sf::SoundBuffer>>());
+	textureDir.clear();
+	imageDir.clear();
+	fontDir.clear();
+	soundDir.clear();
 
 	VBase::VLog("All content directories cleared");
 }

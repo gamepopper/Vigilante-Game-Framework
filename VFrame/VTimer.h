@@ -1,6 +1,10 @@
 #pragma once
 #include <vector>
 
+#ifdef __linux__
+#include "stddef.h"
+#endif
+
 class VTimer
 {
 private:

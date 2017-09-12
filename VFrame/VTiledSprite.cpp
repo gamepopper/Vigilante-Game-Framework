@@ -3,13 +3,13 @@
 
 void VTiledSprite::updateTransform()
 {
-	if (sprite.getPosition() != Position) 
+	if (sprite.getPosition() != Position)
 		sprite.setPosition(Position);
-	if (sprite.getRotation() != Angle) 
+	if (sprite.getRotation() != Angle)
 		sprite.setRotation(Angle);
-	if (sprite.getColor() != Tint) 
+	if (sprite.getColor() != Tint)
 		sprite.setColor(Tint);
-	if (sprite.getTextureRect() != sf::IntRect(0, 0, static_cast<int>(Size.x), static_cast<int>(Size.y))) 
+	if (sprite.getTextureRect() != sf::IntRect(0, 0, static_cast<int>(Size.x), static_cast<int>(Size.y)))
 		sprite.setTextureRect(sf::IntRect(0, 0, static_cast<int>(Size.x), static_cast<int>(Size.y)));
 }
 
@@ -36,7 +36,7 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 	texture = new sf::Texture();
 
 	sf::Texture* tex = &VGlobal::p()->Content->LoadTexture(filename);
-	image = std::make_unique<sf::Image>(tex->copyToImage());
+	image = std::unique_ptr<sf::Image>(new sf::Image(tex->copyToImage()));
 
 	setSize(image->getSize().x, image->getSize().y, animated, width, height);
 
@@ -58,7 +58,7 @@ VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animate
 	}
 
 	this->texture = new sf::Texture();
-	image = std::make_unique<sf::Image>(texture.copyToImage());
+	image = std::unique_ptr<sf::Image>(new sf::Image(texture.copyToImage()));
 
 	setSize(image->getSize().x, image->getSize().y, animated, width, height);
 

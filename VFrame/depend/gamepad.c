@@ -140,8 +140,8 @@ void GamepadSetRumble(GAMEPAD_DEVICE gamepad, float left, float right) {
 #elif defined(__linux__)
 
 /* UDev handles */
-static struct udev* UDEV = nullptr;
-static struct udev_monitor* MON = nullptr;
+static struct udev* UDEV = NULL;
+static struct udev_monitor* MON = NULL;
 
 static void GamepadAddDevice(const char* devPath);
 static void GamepadRemoveDevice(const char* devPath);
@@ -162,7 +162,7 @@ static void GamepadAddDevice(const char* devPath) {
 
 	/* copy the device path */
 	STATE[i].device = strdup(devPath);
-	if (STATE[i].device == nullptr) {
+	if (STATE[i].device == NULL) {
 		return;
 	}
 
@@ -187,14 +187,14 @@ static void GamepadAddDevice(const char* devPath) {
 
 	/* could not open the device at all */
 	free(STATE[i].device);
-	STATE[i].device = nullptr;
+	STATE[i].device = NULL;
 }
 
 /* Helper to remove a device */
 static void GamepadRemoveDevice(const char* devPath) {
 	int i;
 	for (i = 0; i != GAMEPAD_COUNT; ++i) {
-		if (STATE[i].device != nullptr && strcmp(STATE[i].device, devPath) == 0) {
+		if (STATE[i].device != NULL && strcmp(STATE[i].device, devPath) == 0) {
 			if (STATE[i].fd != -1) {
 				close(STATE[i].fd);
 				STATE[i].fd = -1;
@@ -221,17 +221,17 @@ void GamepadInit(void) {
 
 	/* open the udev handle */
 	UDEV = udev_new();
-	if (UDEV == nullptr) {
+	if (UDEV == NULL) {
 		/* FIXME: flag error? */
 		return;
 	}
-	
+
 	/* open monitoring device (safe to fail) */
 	MON = udev_monitor_new_from_netlink(UDEV, "udev");
 	/* FIXME: flag error if hot-plugging can't be supported? */
-	if (MON != nullptr) {
+	if (MON != NULL) {
 		udev_monitor_enable_receiving(MON);
-		udev_monitor_filter_add_match_subsystem_devtype(MON, "input", nullptr);
+		udev_monitor_filter_add_match_subsystem_devtype(MON, "input", NULL);
 	}
 
 	/* enumerate joypad devices */
@@ -251,7 +251,7 @@ void GamepadInit(void) {
 		sysPath = udev_device_get_syspath(dev);
 		devPath = udev_device_get_devnode(dev);
 
-		if (sysPath != nullptr && devPath != nullptr && strstr(sysPath, "/js") != 0) {
+		if (sysPath != NULL && devPath != NULL && strstr(sysPath, "/js") != 0) {
 			GamepadAddDevice(devPath);
 		}
 
@@ -263,7 +263,7 @@ void GamepadInit(void) {
 }
 
 void GamepadUpdate(void) {
-	if (MON != nullptr) {
+	if (MON != NULL) {
 		fd_set r;
 		struct timeval tv;
 		int fd = udev_monitor_get_fd(MON);
@@ -332,7 +332,7 @@ static void GamepadUpdateDevice(GAMEPAD_DEVICE gamepad) {
 				} else {
 					STATE[gamepad].bCurrent ^= BUTTON_TO_FLAG(button);
 				}
-					
+
 				break;
 			case JS_EVENT_AXIS:
 				/* normalize and store the axis */
@@ -385,7 +385,7 @@ void GamepadShutdown(void) {
 
 	/* cleanup devices */
 	for (i = 0; i != GAMEPAD_COUNT; ++i) {
-		if (STATE[i].device != nullptr) {
+		if (STATE[i].device != NULL) {
 			free(STATE[i].device);
 		}
 

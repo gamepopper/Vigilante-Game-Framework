@@ -66,7 +66,21 @@ public:
 
 		Moves = false;
 
-		SetFormat("VFrame/depend/arial.ttf", charSize);
+		try
+		{
+			SetFormat("VFrame/depend/arial.ttf", charSize);
+		}
+		#ifndef __linux__
+		catch (std::exception e)
+		{
+			VLog(e.what());
+		}
+		#else
+		catch (std::string e)
+		{
+			VLog(e.c_str());
+		}
+		#endif
 
 #if _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);
@@ -83,7 +97,21 @@ public:
 
 		Moves = false;
 
-		SetFormat("VFrame/depend/arial.ttf", charSize);
+		try
+		{
+			SetFormat("VFrame/depend/arial.ttf", charSize);
+		}
+		#ifndef __linux__
+		catch (std::exception e)
+		{
+			VLog(e.what());
+		}
+		#else
+		catch (std::string e)
+		{
+			VLog(e.c_str());
+		}
+		#endif
 
 #if _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);

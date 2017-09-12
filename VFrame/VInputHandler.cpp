@@ -1,4 +1,5 @@
 #include "VInputHandler.h"
+#include <cstring>
 
 VInputHandler::~VInputHandler()
 {
