@@ -28,9 +28,15 @@ public:
 		offsetX = OffsetX;
 		offsetY = OffsetY;
 	}
+
 	virtual ~VAnimationManager()
 	{
 		Clear();
+	}
+
+	sf::IntRect GetTextureArea()
+	{
+		return sf::IntRect(offsetX, offsetY, frameWidth, frameHeight);
 	}
 
 	/*

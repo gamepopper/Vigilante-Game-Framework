@@ -40,7 +40,7 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const s
 	int FrameCount;
 	int FrameCountY;
 	int TextureWidth = Rect.width == 0 ? RenderState.texture->getSize().x : Rect.width;
-	sf::Vector2f Offset = sf::Vector2f(Rect.left, Rect.top);
+	sf::Vector2f Offset = sf::Vector2f((float)Rect.left, (float)Rect.top);
 
 	if (Animated)
 	{
@@ -233,7 +233,7 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 		RenderTarget.setView(scrollView);
 		RenderTarget.draw(vertices, RenderState);
 
-#if _DEBUG
+#ifdef _DEBUG
 		if (VGlobal::p()->DrawDebug)
 		{
 			debuggingVertices[0].position = sf::Vector2f(renderBox.left, renderBox.top);

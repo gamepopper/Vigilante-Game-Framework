@@ -116,6 +116,9 @@ public:
 	//Toggles from fullscreen to window mode.
 	void ToggleFullscreen();
 
+	//Returns true if set to fullscreen.
+	bool IsFullscreen();
+
 	//Get mouse position relative to screen.
 	sf::Vector2f GetMousePosition();
 

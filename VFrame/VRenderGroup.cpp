@@ -143,5 +143,6 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 #ifdef _DEBUG
 	VGlobal::p()->DrawDebug = drawDebug;
 #endif
+
 	Sprite->Draw(RenderTarget);
 }

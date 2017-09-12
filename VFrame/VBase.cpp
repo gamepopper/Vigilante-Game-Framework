@@ -21,14 +21,26 @@ void VBase::VLog(const char* format, ...)
 	int     n;
 
 	va_start(args, format);
-	n = vsnprintf_s(buf, _vscprintf(format, args), format, args); // buf-3 is room for CR/LF/NUL
+	n = vsnprintf(p, sizeof buf - 3, format, args); // buf-3 is room for CR/LF/NUL
 
 	int len = strlen(buf);
-	buf[len++] = '\n';
-	buf[len++] = '\0';
+	char* con = new char[len + 2];
 
-	printf(buf, args);
+	strcpy(con, buf);
+	con[len] = '\n';
+	con[len + 1] = '\0';
+
+	printf(con, args);
 	va_end(args);
+
+	p += (n < 0) ? sizeof buf - 3 : n;
+
+	while (p > buf  &&  isspace(p[-1]))
+		*--p = '\0';
+
+	*p++ = '\r';
+	*p++ = '\n';
+	*p = '\0';
 
 	wchar_t output[4096];
 	std::mbstowcs(output, buf, strlen(buf) + 1);
@@ -36,5 +48,7 @@ void VBase::VLog(const char* format, ...)
 #ifdef _MSC_VER
 	OutputDebugString(output);
 #endif
+
+	delete[] con;
 }
 

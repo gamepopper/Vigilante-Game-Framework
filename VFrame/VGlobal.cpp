@@ -45,7 +45,7 @@ void VGlobal::SetFullscreen(bool set)
 	}
 	else if (!set && fullscreen)
 	{
-		App->create(sf::VideoMode(WindowWidth, WindowHeight), Title, WindowStyle);
+		App->create(sf::VideoMode(Width, Height), Title, WindowStyle);
 		App->setMouseCursorVisible(set);
 		fullscreen = false;
 	}
@@ -60,6 +60,11 @@ void VGlobal::SetMouseCursorVisible(bool set)
 void VGlobal::ToggleFullscreen()
 {
 	SetFullscreen(!fullscreen);
+}
+
+bool VGlobal::IsFullscreen()
+{
+	return fullscreen;
 }
 
 sf::Vector2f VGlobal::GetMousePosition()
