@@ -69,18 +69,18 @@ float VInterpolate::bounceInOut(float t, float b, float c, float d)
 
 float VInterpolate::circIn(float t, float b, float c, float d)
 {
-	return -c * (sqrt(1 - (t /= d)*t) - 1) + b;
+	return -c * (sqrtf(1 - (t /= d)*t) - 1) + b;
 }
 
 float VInterpolate::circOut(float t, float b, float c, float d)
 {
-	return c * sqrt(1 - (t = t / d - 1)*t) + b;
+	return c * sqrtf(1 - (t = t / d - 1)*t) + b;
 }
 
 float VInterpolate::circInOut(float t, float b, float c, float d)
 {
-	if ((t /= d / 2) < 1) return -c / 2 * (sqrt(1 - t*t) - 1) + b;
-	return c / 2 * (sqrt(1 - t*(t -= 2)) + 1) + b;
+	if ((t /= d / 2) < 1) return -c / 2 * (sqrtf(1 - t*t) - 1) + b;
+	return c / 2 * (sqrtf(1 - t*(t -= 2)) + 1) + b;
 }
 
 float VInterpolate::cubicIn(float t, float b, float c, float d)
@@ -105,8 +105,8 @@ float VInterpolate::elasticIn(float t, float b, float c, float d)
 	float p = d*.3f;
 	float a = c;
 	float s = p / 4;
-	float postFix = a*pow(2, 10 * (t -= 1)); // this is a fix, again, with post-increment operators
-	return -(postFix * sin((t*d - s)*(2 * PI) / p)) + b;
+	float postFix = a*powf(2, 10 * (t -= 1)); // this is a fix, again, with post-increment operators
+	return -(postFix * sinf((t*d - s)*(2 * PI) / p)) + b;
 }
 
 float VInterpolate::elasticOut(float t, float b, float c, float d)
@@ -115,7 +115,7 @@ float VInterpolate::elasticOut(float t, float b, float c, float d)
 	float p = d*.3f;
 	float a = c;
 	float s = p / 4;
-	return (a*pow(2, -10 * t) * sin((t*d - s)*(2 * PI) / p) + c + b);
+	return (a*powf(2, -10 * t) * sinf((t*d - s)*(2 * PI) / p) + c + b);
 }
 
 float VInterpolate::elasticInOut(float t, float b, float c, float d)
@@ -126,29 +126,29 @@ float VInterpolate::elasticInOut(float t, float b, float c, float d)
 	float s = p / 4;
 
 	if (t < 1) {
-		float postFix = a*pow(2, 10 * (t -= 1)); // postIncrement is evil
+		float postFix = a*powf(2, 10 * (t -= 1)); // postIncrement is evil
 		return -.5f*(postFix* sin((t*d - s)*(2 * PI) / p)) + b;
 	}
-	float postFix = a*pow(2, -10 * (t -= 1)); // postIncrement is evil
-	return postFix * sin((t*d - s)*(2 * PI) / p)*.5f + c + b;
+	float postFix = a*powf(2, -10 * (t -= 1)); // postIncrement is evil
+	return postFix * sinf((t*d - s)*(2 * PI) / p)*.5f + c + b;
 }
 
 float VInterpolate::expoIn(float t, float b, float c, float d)
 {
-	return (t == 0) ? b : c * pow(2, 10 * (t / d - 1)) + b;
+	return (t == 0) ? b : c * powf(2, 10 * (t / d - 1)) + b;
 }
 
 float VInterpolate::expoOut(float t, float b, float c, float d)
 {
-	return (t == d) ? b + c : c * (-pow(2, -10 * t / d) + 1) + b;
+	return (t == d) ? b + c : c * (-powf(2, -10 * t / d) + 1) + b;
 }
 
 float VInterpolate::expoInOut(float t, float b, float c, float d)
 {
 	if (t == 0) return b;
 	if (t == d) return b + c;
-	if ((t /= d / 2) < 1) return c / 2 * pow(2, 10 * (t - 1)) + b;
-	return c / 2 * (-pow(2, -10 * --t) + 2) + b;
+	if ((t /= d / 2) < 1) return c / 2 * powf(2, 10 * (t - 1)) + b;
+	return c / 2 * (-powf(2, -10 * --t) + 2) + b;
 }
 
 float VInterpolate::linear(float t, float b, float c, float d)
@@ -214,17 +214,17 @@ float VInterpolate::quintInOut(float t, float b, float c, float d)
 
 float VInterpolate::sineIn(float t, float b, float c, float d)
 {
-	return -c * cos(t / d * (PI / 2)) + c + b;
+	return -c * cosf(t / d * (PI / 2)) + c + b;
 }
 
 float VInterpolate::sineOut(float t, float b, float c, float d)
 {
-	return c * sin(t / d * (PI / 2)) + b;
+	return c * sinf(t / d * (PI / 2)) + b;
 }
 
 float VInterpolate::sineInOut(float t, float b, float c, float d)
 {
-	return -c / 2 * (cos(PI*t / d) - 1) + b;
+	return -c / 2 * (cosf(PI*t / d) - 1) + b;
 }
 
 float VInterpolate::Angle(float a, float b, float t, float d, VInterpolateType type)
