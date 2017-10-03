@@ -22,6 +22,7 @@ public:
 			LoadGraphic(Filename);
 		}
 
+		Origin = sf::Vector2f();
 		Animation.GetCurrentFrame();
 	}
 	VTiledSprite(float x = 0, float y = 0, const sf::String& Filename = "") : VSprite(x, y, "") 
@@ -31,6 +32,7 @@ public:
 			LoadGraphic(Filename);
 		}
 
+		Origin = sf::Vector2f();
 		Animation.GetCurrentFrame();
 	}
 
