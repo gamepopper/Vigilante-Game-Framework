@@ -80,4 +80,7 @@ public:
 
 	//Outputs text for logging purposes (to Console, Output Window ect...).
 	static void VLog(const char* fmt, ...);
+
+	//Clears output log
+	static void VClearLog();
 };
