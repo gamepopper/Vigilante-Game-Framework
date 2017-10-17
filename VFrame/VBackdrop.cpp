@@ -1,94 +1,75 @@
 #include "VBackdrop.h"
+#include "VGlobal.h"
 #include <cmath>
 
 void VBackdrop::updateTransform()
 {
-	if (sprite.getPosition() != Position)
-		sprite.setPosition(Position);
-	if (sprite.getRotation() != Angle)
-		sprite.setRotation(Angle);
-	if (sprite.getScale() != Scale)
-		sprite.setScale(Scale);
-	if (sprite.getColor() != Tint)
-		sprite.setColor(Tint);
+	transform = sf::Transform::Identity;
+	transform.translate(Position);
+	//transform.rotate(Angle, Size / 2.0f);
+	transform.scale(Scale);
 }
 
-void VBackdrop::updateFrame()
+VBackdrop* VBackdrop::LoadGraphic(sf::String filename)
 {
-	
-}
-
-VSprite* VBackdrop::LoadGraphic(sf::String filename, bool animated, int width, int height, const sf::IntRect& area)
-{
-	VSUPERCLASS::LoadGraphic(filename);
-
-	Size.x = 0;
-	Size.y = 0;
+	texture = &VGlobal::p()->Content->LoadTexture(filename);
+	FrameSize = sf::Vector2f(texture->getSize());
 	return this;
 }
 
-VSprite* VBackdrop::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, const sf::IntRect& area)
+VBackdrop* VBackdrop::LoadGraphicFromTexture(sf::Texture& texture)
 {
-	VSUPERCLASS::LoadGraphicFromTexture(texture);
-
-	Size.x = 0;
-	Size.y = 0;
+	this->texture = &texture;
+	FrameSize = sf::Vector2f(this->texture->getSize());
 	return this;
+}
+
+void VBackdrop::SetTint(const sf::Color& tint)
+{
+	vertices[0].color = tint;
+	vertices[1].color = tint;
+	vertices[2].color = tint;
+	vertices[3].color = tint;
+}
+
+void VBackdrop::Update(float dt)
+{
+	VSUPERCLASS::Update(dt);
+
+	float deltaV;
+	float delta;
+	deltaV = 0.5f * (computeVelocity(ScrollVelocity.x, ScrollAcceleration.x, ScrollDrag.x, ScrollMaxVelocity.x, dt) - ScrollVelocity.x);
+	ScrollVelocity.x += deltaV;
+	delta = ScrollVelocity.x * dt;
+	ScrollVelocity.x += deltaV;
+	Scroll.x += delta;
+
+	deltaV = 0.5f * (computeVelocity(ScrollVelocity.y, ScrollAcceleration.y, ScrollDrag.y, ScrollMaxVelocity.y, dt) - ScrollVelocity.y);
+	ScrollVelocity.y += deltaV;
+	delta = ScrollVelocity.y * dt;
+	ScrollVelocity.y += deltaV;
+	Scroll.y += delta;
+}
+
+sf::Color& VBackdrop::GetTint()
+{
+	return vertices[0].color;
 }
 
 void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 {
-	updateTransform();
-
 	texture->setRepeated(true);
 
 	//Todo: Move this transform code to VObject, along with the line to restore the original transform.
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
 
-	sf::Vector2f scroll = CameraScroll ? (renderTargetView.getCenter() - scrollView.getCenter()) : sf::Vector2f();
-	scroll += Scroll;
+	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
+	sf::Vector2f bScroll = CameraScroll ? scroll : sf::Vector2f();
+	bScroll += Scroll;
 
-	scroll.x *= ScrollFactor.x;
-	scroll.y *= ScrollFactor.y;
-
-	sf::Vector2f texSize = sf::Vector2f(GetTexture()->getSize());
-
-	if (RepeatX)
-	{
-		texSize.x = renderTargetView.getSize().x;
-		texSize.x /= Scale.x;
-	}
-
-	if (RepeatY)
-	{
-		texSize.y = renderTargetView.getSize().y;
-		texSize.y /= Scale.y;
-	}
-
-	sf::IntRect Rect;
-	Rect.left = static_cast<int>((scroll.x * (RepeatX ? 1 : 0)) - (texSize.x / 2.0f));
-	Rect.top = static_cast<int>((scroll.y * (RepeatY ? 1 : 0)) - (texSize.y / 2.0f));
-	Rect.width = static_cast<int>(texSize.x);
-	Rect.height = static_cast<int>(texSize.y);
-
-	if (!CameraScroll)
-	{
-		Rect.left += static_cast<int>(texSize.x / 2.0f);
-		Rect.top += static_cast<int>(texSize.y / 2.0f);
-	}
-
-	sprite.setTextureRect(Rect);
-
-	sf::Vector2f oldPosition = sprite.getPosition();
-	sf::Vector2f newPosition = oldPosition + (scrollView.getSize() / 2.0f - renderTargetView.getSize() / 2.0f);
-	newPosition.x -= RepeatX ? 0 : scroll.x;
-	newPosition.y -= RepeatY ? 0 : scroll.y;
-	sprite.setPosition(newPosition);
-
-	scroll = renderTargetView.getCenter() - scrollView.getCenter();
-	scroll.x *= RepeatX ? 0 : ScrollFactor.x;
-	scroll.y *= RepeatY ? 0 : ScrollFactor.y;
+	bScroll.x *= ScrollFactor.x;
+	bScroll.y *= ScrollFactor.y;
 
 	float rotate = renderTargetView.getRotation() - scrollView.getRotation();
 	rotate *= RotateFactor;
@@ -98,12 +79,53 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	zoom *= ZoomFactor;
 	zoom++;
 
-	scrollView.move(scroll);
-	scrollView.rotate(rotate);
-	scrollView.zoom(zoom);
-	scrollView.setViewport(renderTargetView.getViewport());
+	sf::Vector2f texPos;
+	sf::Vector2f texSize = sf::Vector2f(texture->getSize());
+	Size = texSize;
 
-	sf::FloatRect renderBox = sprite.getGlobalBounds();
+	if (RepeatX)
+	{
+		texPos.x = bScroll.x;
+		texSize.x = (float)VGlobal::p()->Width;
+		texSize.x /= Scale.x;
+		texPos.x += (texSize.x / 2.0f) * (zoom - 1.0f);
+		texSize.x /= zoom;
+		Size.x = VGlobal::p()->Width / Scale.x;
+	}
+	else
+	{
+		Size.x *= zoom;
+	}
+
+	if (RepeatY)
+	{
+		texPos.y = bScroll.y;
+		texSize.y = (float)VGlobal::p()->Height;
+		texSize.y /= Scale.y;
+		texPos.y += (texSize.y / 2.0f) * (zoom - 1.0f);
+		texSize.y /= zoom;
+		Size.y = VGlobal::p()->Height / Scale.x;
+	}
+	else
+	{
+		Size.y *= zoom;
+	}
+
+	vertices[0].position = sf::Vector2f(0, 0);
+	vertices[0].texCoords = texPos + sf::Vector2f(0, 0);
+
+	vertices[1].position = sf::Vector2f(Size.x, 0);
+	vertices[1].texCoords = texPos + sf::Vector2f(texSize.x, 0);
+
+	vertices[2].position = sf::Vector2f(Size.x, Size.y);
+	vertices[2].texCoords = texPos + sf::Vector2f(texSize.x, texSize.y);
+
+	vertices[3].position = sf::Vector2f(0, Size.y);
+	vertices[3].texCoords = texPos + sf::Vector2f(0, texSize.y);
+
+	scrollView.setRotation(rotate);
+
+	sf::FloatRect renderBox(Position, Size);
 	float maxSize = fmaxf(scrollView.getSize().x, scrollView.getSize().y);
 	sf::FloatRect scrollBox = sf::FloatRect(scrollView.getCenter() - sf::Vector2f(maxSize, maxSize) / 2.0f, sf::Vector2f(maxSize, maxSize));
 
@@ -112,11 +134,17 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 		renderBox.top <	 scrollBox.top + scrollBox.height &&
 		renderBox.top + renderBox.height > scrollBox.top)
 	{
+		updateTransform();
+
+		RenderState.texture = texture;
+		RenderState.transform = transform;
+
 		RenderTarget.setView(scrollView);
-		RenderTarget.draw(sprite, RenderState);
+		RenderTarget.draw(vertices, RenderState);
 		RenderTarget.setView(renderTargetView);
 	}
 
-	sprite.setPosition(oldPosition);
+	Size = sf::Vector2f();
+
 	texture->setRepeated(false);
 }
