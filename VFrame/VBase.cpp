@@ -57,6 +57,7 @@ void VBase::VLog(const char* format, ...)
 	delete[] con;
 }
 
+//Source http://www.cplusplus.com/articles/4z18T05o/
 void VBase::VClearLog()
 {
 #if defined(_WIN32)
