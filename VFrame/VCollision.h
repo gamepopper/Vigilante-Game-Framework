@@ -2,8 +2,8 @@
 #include "VObject.h"
 
 #include <vector>
-
 #include <functional>
+#include <memory>
 
 enum VCollideList : bool
 {
@@ -27,32 +27,30 @@ struct VQuadTree
 };
 
 static const int VQuadTreeSubsectionCount = 2;
+static const int VQuadTreeListSize = 24;
 
 class VCollision
 {
-	std::vector<VQuadTree*> quads;
+	std::vector<std::unique_ptr<VQuadTree>> quads;
+	unsigned int quadCount = 0;
+	sf::FloatRect mainRect;
 
-	virtual bool testOverlap(VObject* a, VObject* b);
-	void setupQuad(const sf::FloatRect& subsection, int remaining);
+	void setupQuad(const sf::FloatRect& subsection, int remaining, bool create = true);
 
 public:
 	VCollision();
 	virtual ~VCollision();
 
+	//Initialises Quad Tree Collision System, required call for first use.
+	void Initialise(const sf::FloatRect& initialRect);
+
 	//Adds objects from first parameter to list specified in second parameter.
 	void AddToList(VBase* item, VCollideList List);
 
 	//Applies response and process functions to any object from list A that overlaps an object from List B.
-	bool Run(std::function<void(VObject*, VObject*)>const& response, std::function<bool(VObject*, VObject*)>const& process);
-};
+	bool Run(std::function<bool(VObject*, VObject*)> testOverlap, std::function<void(VObject*, VObject*)>const& response, std::function<bool(VObject*, VObject*)>const& process);
 
-//Special case that tests using a circle collision instead of rectangular.
-class VCircleCollision : public VCollision
-{
-	virtual bool testOverlap(VObject* a, VObject* b) override;
-
-public:
-	VCircleCollision() {}
-	virtual ~VCircleCollision() {};
+	//Cleans up Quad Tree List
+	void Cleanup();
 };
 

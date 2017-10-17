@@ -2,6 +2,7 @@
 #include "VObject.h"
 #include "VPostEffect.h"
 #include "VTimer.h"
+#include "VCollision.h"
 
 VGlobal* VGlobal::Instance = nullptr;
 
@@ -17,7 +18,38 @@ VGlobal::VGlobal()
 		RenderSprite = std::unique_ptr<sf::Sprite>(new sf::Sprite());
 		Random = std::unique_ptr<VRandom>(new VRandom());
 		Async = std::unique_ptr<VAsync>(new VAsync());
+
 		gsm = std::unique_ptr<VStateManager>(new VStateManager());
+		collision = std::unique_ptr<VCollision>(new VCollision());
+
+		rectCollision = [](VObject* a, VObject* b)
+		{
+			if (a->Position.x < b->Position.x + b->Size.x &&
+				a->Position.x + a->Size.x > b->Position.x &&
+				a->Position.y < b->Position.y + b->Size.y &&
+				a->Position.y + a->Size.y > b->Position.y)
+			{
+				return true;
+			}
+
+			return false;
+		};
+
+		circleCollision = [](VObject* a, VObject* b)
+		{
+			sf::Vector2f aCentre = a->Position + (a->Size / 2.0f);
+			sf::Vector2f bCentre = b->Position + (b->Size / 2.0f);
+
+			sf::Vector2f diff = aCentre - bCentre;
+			float length = sqrtf((diff.x * diff.x) + (diff.y * diff.y));
+
+			if (length < a->Radius + b->Radius)
+			{
+				return true;
+			}
+
+			return false;
+		};
 	}
 }
 
@@ -148,8 +180,6 @@ void VGlobal::Exit()
 	App->close();
 }
 
-#include "VCollision.h"
-
 bool VGlobal::OverlapAtPoint(const sf::Vector2f& point, VBase* a)
 {
 	VObject* o = new VObject(point, sf::Vector2f(1, 1));
@@ -173,11 +203,10 @@ bool VGlobal::Overlaps(VBase* a, VBase* b, std::function<void(VObject*, VObject*
 		b = a;
 	}
 
-	VCollision* collision = new VCollision();
+	collision->Initialise(WorldBounds);
 	collision->AddToList(a, A);
 	collision->AddToList(b, B);
-	result = collision->Run(responseCall, processCall);
-	delete collision;
+	result = collision->Run(rectCollision, responseCall, processCall);
 
 	return result;
 }
@@ -210,11 +239,10 @@ bool VGlobal::OverlapsCircle(VBase* a, VBase* b, std::function<void(VObject*, VO
 		b = a;
 	}
 
-	VCircleCollision* collision = new VCircleCollision();
+	collision->Initialise(WorldBounds);
 	collision->AddToList(a, A);
 	collision->AddToList(b, B);
-	result = collision->Run(responseCall, processCall);
-	delete collision;
+	result = collision->Run(circleCollision, responseCall, processCall);
 
 	return result;
 }

@@ -29,31 +29,47 @@ void VQuadTree::clear()
 {
 	listA.clear();
 	listB.clear();
-
-	listA.shrink_to_fit();
-	listB.shrink_to_fit();
 }
 
 VCollision::VCollision()
 {
-	quads.reserve((unsigned int)pow(4, VQuadTreeSubsectionCount));
-	setupQuad(VGlobal::p()->WorldBounds, VQuadTreeSubsectionCount - 1);
+	
 }
 
 VCollision::~VCollision()
 {
-	for (unsigned int i = 0; i < quads.size(); i++)
-	{
-		quads[i]->clear();
-		delete quads[i];
-		quads[i] = nullptr;
-	}
-
 	quads.clear();
 	quads.shrink_to_fit();
 }
 
-void VCollision::setupQuad(const sf::FloatRect& subsection, int remaining)
+void VCollision::Initialise(const sf::FloatRect& initialRect)
+{
+	if (mainRect != initialRect)
+	{
+		mainRect = initialRect;
+		quadCount = 0;
+
+		if (quads.size() == 0)
+		{
+			quads.reserve((unsigned int)pow(4, VQuadTreeSubsectionCount));
+			setupQuad(initialRect, VQuadTreeSubsectionCount - 1);
+		}
+		else
+		{
+			setupQuad(initialRect, VQuadTreeSubsectionCount - 1, false);
+		}
+	}
+}
+
+void VCollision::Cleanup()
+{
+	for (unsigned int i = 0; i < quads.size(); i++)
+	{
+		quads[i]->clear();
+	}
+}
+
+void VCollision::setupQuad(const sf::FloatRect& subsection, int remaining, bool create)
 {
 	sf::FloatRect NW = sf::FloatRect(
 		subsection.left, 
@@ -81,19 +97,27 @@ void VCollision::setupQuad(const sf::FloatRect& subsection, int remaining)
 
 	if (remaining <= 0)
 	{
-		VQuadTree* nwTree = new VQuadTree();
-		nwTree->bounds = NW;
-		VQuadTree* neTree = new VQuadTree();
-		neTree->bounds = NE;
-		VQuadTree* swTree = new VQuadTree();
-		swTree->bounds = SW;
-		VQuadTree* seTree = new VQuadTree();
-		seTree->bounds = SE;
+		if (create)
+		{
+			quads.push_back(std::make_unique<VQuadTree>());
+			quads.push_back(std::make_unique<VQuadTree>());
+			quads.push_back(std::make_unique<VQuadTree>());
+			quads.push_back(std::make_unique<VQuadTree>());
+		}
 
-		quads.push_back(nwTree);
-		quads.push_back(neTree);
-		quads.push_back(swTree);
-		quads.push_back(seTree);
+		quads[quadCount]->listA.reserve(VQuadTreeListSize);
+		quads[quadCount]->listB.reserve(VQuadTreeListSize);
+		quads[quadCount++]->bounds = NW;
+		quads[quadCount]->listA.reserve(VQuadTreeListSize);
+		quads[quadCount]->listB.reserve(VQuadTreeListSize);
+		quads[quadCount++]->bounds = NE;
+		quads[quadCount]->listA.reserve(VQuadTreeListSize);
+		quads[quadCount]->listB.reserve(VQuadTreeListSize);
+		quads[quadCount++]->bounds = SW;
+		quads[quadCount]->listA.reserve(VQuadTreeListSize);
+		quads[quadCount]->listB.reserve(VQuadTreeListSize);
+		quads[quadCount++]->bounds = SE;
+
 		return;
 	}
 
@@ -158,12 +182,14 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 	}
 }
 
-bool VCollision::Run(std::function<void(VObject*, VObject*)>const& response, std::function<bool(VObject*, VObject*)>const& process)
+bool VCollision::Run(std::function<bool(VObject*, VObject*)> testOverlap, std::function<void(VObject*, VObject*)>const& response, std::function<bool(VObject*, VObject*)>const& process)
 {
 	bool overlapFound = false;
 
-	for (VQuadTree* tree : quads)
+	for (unsigned int i = 0; i < quads.size(); i++)
 	{
+		VQuadTree* tree = quads[i].get();
+
 		unsigned int listASize = tree->listA.size();
 		unsigned int listBSize = tree->listB.size();
 
@@ -195,34 +221,7 @@ bool VCollision::Run(std::function<void(VObject*, VObject*)>const& response, std
 		}
 	}
 
+	Cleanup();
+
 	return overlapFound;
-}
-
-bool VCollision::testOverlap(VObject* a, VObject* b)
-{
-	if (a->Position.x < b->Position.x + b->Size.x &&
-		a->Position.x + a->Size.x > b->Position.x &&
-		a->Position.y < b->Position.y + b->Size.y &&
-		a->Position.y + a->Size.y > b->Position.y)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool VCircleCollision::testOverlap(VObject* a, VObject* b)
-{
-	sf::Vector2f aCentre = a->Position + (a->Size / 2.0f);
-	sf::Vector2f bCentre = b->Position + (b->Size / 2.0f);
-
-	sf::Vector2f diff = aCentre - bCentre;
-	float length = sqrtf((diff.x * diff.x) + (diff.y * diff.y));
-
-	if (length < a->Radius + b->Radius)
-	{
-		return true;
-	}
-
-	return false;
 }

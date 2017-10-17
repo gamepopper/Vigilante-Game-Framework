@@ -25,6 +25,7 @@
 class VBase;
 class VObject;
 class VPostEffectBase;
+class VCollision;
 
 class VGlobal
 {
@@ -160,5 +161,9 @@ private:
 	VState* nextState = nullptr;
 	bool fullscreen = false;
 	bool mouseCursorVisible = true;
+
+	std::unique_ptr<VCollision> collision;
+	std::function<bool(VObject*, VObject*)> rectCollision;
+	std::function<bool(VObject*, VObject*)> circleCollision;
 };
 
