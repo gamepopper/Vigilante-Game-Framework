@@ -58,18 +58,18 @@ bool VObject::separateX(VObject* a, VObject *b)
 			float avg = (aVel + bVel) / 2;
 			aVel -= avg;
 			bVel -= avg;
-			a->Velocity.x = (avg + aVel) * a->Elasticity;
-			b->Velocity.x = (avg + bVel) * b->Elasticity;
+			a->Velocity.x = avg + aVel * a->Elasticity;
+			b->Velocity.x = avg + bVel * b->Elasticity;
 		}
 		else if (!aImmovable)
 		{
 			a->Position.x -= overlap;
-			a->Velocity.x = (bV - aV) * a->Elasticity;
+			a->Velocity.x = bV - aV * a->Elasticity;
 		}
 		else if (!bImmovable)
 		{
 			b->Position.x -= overlap;
-			b->Velocity.x = (aV - bV) * b->Elasticity;
+			b->Velocity.x = aV - bV * b->Elasticity;
 		}
 
 		return true;
@@ -120,13 +120,13 @@ bool VObject::separateY(VObject* a, VObject *b)
 			float avg = (aVel + bVel) / 2;
 			aVel -= avg;
 			bVel -= avg;
-			a->Velocity.y = (avg + aVel) * a->Elasticity;
-			b->Velocity.y = (avg + bVel) * b->Elasticity;
+			a->Velocity.y = avg + aVel * a->Elasticity;
+			b->Velocity.y = avg + bVel * b->Elasticity;
 		}
 		else if (!aImmovable)
 		{
 			a->Position.y -= overlap;
-			a->Velocity.y = (bV - aV) * a->Elasticity;
+			a->Velocity.y = bV - aV * a->Elasticity;
 
 			//For moving platforms
 			if (a->CollisionXDrag && b->active && b->Moves && aDelta > bDelta)
@@ -137,7 +137,7 @@ bool VObject::separateY(VObject* a, VObject *b)
 		else if (!bImmovable)
 		{
 			b->Position.y -= overlap;
-			b->Velocity.y = (aV - bV) * b->Elasticity;
+			b->Velocity.y = aV - bV * b->Elasticity;
 
 			//For moving platforms
 			if (b->CollisionXDrag && a->active && a->Moves && bDelta > aDelta)
@@ -200,13 +200,13 @@ bool VObject::separateCircle(VObject* a, VObject *b)
 			sf::Vector2f avg = (aVel + bVel) / 2.0f;
 			aVel -= avg;
 			bVel -= avg;
-			a->Velocity = (avg + aVel) * a->Elasticity;
-			b->Velocity = (avg + bVel) * b->Elasticity;
+			a->Velocity = avg + aVel * a->Elasticity;
+			b->Velocity = avg + bVel * b->Elasticity;
 		}
 		else if (!aImmovable)
 		{
 			a->Position -= overlap;
-			a->Velocity = (bV - aV) * a->Elasticity;
+			a->Velocity = bV - aV * a->Elasticity;
 
 			if (a->CollisionXDrag && b->active && b->Moves && aDelta.x > bDelta.x)
 			{
@@ -221,7 +221,7 @@ bool VObject::separateCircle(VObject* a, VObject *b)
 		else if (!bImmovable)
 		{
 			b->Position -= overlap;
-			b->Velocity = (aV - bV) * b->Elasticity;
+			b->Velocity = aV - bV * b->Elasticity;
 
 			if (b->CollisionXDrag && a->active && a->Moves && bDelta.x > aDelta.x)
 			{
@@ -521,8 +521,7 @@ void VObject::Update(float dt)
 {
 	VSUPERCLASS::Update(dt);
 
-	Last.x = Position.x;
-	Last.y = Position.y;
+	Last = Position;
 
 	if (Moves)
 	{
