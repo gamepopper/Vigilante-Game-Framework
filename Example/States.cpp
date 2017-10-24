@@ -105,7 +105,6 @@ void DemoStatesManager::SetNewPage()
 void DemoStatesManager::Initialise()
 {
 	VSUPERCLASS::Initialise();
-	SetNewPage();
 
 	auto title = new VText(sf::Vector2f(0.0f, 2.0f), (float)VGlobal::p()->Width, "SFML VFrame", 24);
 	title->Alignment = VTextAlign::ALIGNCENTRE;
@@ -138,6 +137,8 @@ void DemoStatesManager::Initialise()
 	stateText->Add(title);
 	stateText->Add(version);
 	stateText->Add(debugMessages);
+
+	SetNewPage();
 	SubState->Add(stateText);
 
 #ifdef USE_GAMEPAD_API
