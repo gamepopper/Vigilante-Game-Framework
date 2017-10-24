@@ -200,6 +200,9 @@ void DemoStatesManager::Update(float dt)
 	VSUPERCLASS::Update(dt);
 
 #ifdef _DEBUG
+	if (debugMessages == nullptr)
+		return;
+
 	if (debugTimer->Seconds() > 1)
 	{
 		debugMessages->Text = "FPS: " + std::to_string(static_cast<int>(1.0f / dt)) + " - Objects: " + std::to_string(VBase::DebugObjectCount);

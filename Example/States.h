@@ -51,10 +51,10 @@ public:
 
 		standardSprite = new VSprite(0, 0, "Example/Assets/gp.png");
 		standardSprite->SetPositionAtCentre(VGlobal::p()->Width / 3.0f, VGlobal::p()->Height / 2.0f - 50.0f);
-		Add(standardSprite);
 
 		auto sprite1 = new VText(standardSprite->Position.x, 50, standardSprite->Size.x, "Regular Sprite", 16);
 		sprite1->Alignment = VTextAlign::ALIGNCENTRE;
+		sprite1->ApplyChanges();
 
 		animatedSprite = new VSprite(0, 0);
 		animatedSprite->LoadGraphic("Example/Assets/Turret.png", true, 128, 128);
@@ -64,13 +64,15 @@ public:
 		animatedSprite->Animation.AddAnimation("railgun", { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46 }, 15.0f, true);
 		animatedSprite->Animation.AddAnimation("doublegun", { 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62 }, 15.0f, true);
 		animatedSprite->Animation.Play("start");
-		Add(animatedSprite);
 
 		auto sprite2 = new VText(animatedSprite->Position.x, 50, animatedSprite->Size.x, "Animated Sprite", 16);
 		sprite2->Alignment = VTextAlign::ALIGNCENTRE;
+		sprite2->ApplyChanges();
 
 		auto text = new VText(standardSprite->Position.x, 200, 400, "Press 1: Start Animation\nPress 2: Shotgun Animation\nPress 3: Railgun Animation\nPress 4: Double Barrel Animation", 21);
 
+		Add(standardSprite);
+		Add(animatedSprite);
 		Add(sprite1);
 		Add(sprite2);
 		Add(text);
@@ -106,10 +108,10 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		float x1Resize = VGlobal::p()->Input.CurrentAxisValue("leftX");
-		float y1Resize = VGlobal::p()->Input.CurrentAxisValue("leftY");
-		float x2Resize = VGlobal::p()->Input.CurrentAxisValue("rightX");
-		float y2Resize = VGlobal::p()->Input.CurrentAxisValue("rightY");
+		float x1Resize = VGlobal::p()->Input->CurrentAxisValue("leftX");
+		float y1Resize = VGlobal::p()->Input->CurrentAxisValue("leftY");
+		float x2Resize = VGlobal::p()->Input->CurrentAxisValue("rightX");
+		float y2Resize = VGlobal::p()->Input->CurrentAxisValue("rightY");
 
 		standardSprite->Size += sf::Vector2f(x1Resize / 100, y1Resize / 100);
 		animatedSprite->Size += sf::Vector2f(x2Resize / 100, y2Resize / 100);
@@ -142,6 +144,7 @@ public:
 
 		auto sprite1 = new VText(standardSprite->Position.x, 80, standardSprite->Size.x, "Regular TiledSprite", 16);
 		sprite1->Alignment = VTextAlign::ALIGNCENTRE;
+		sprite1->ApplyChanges();
 
 		animatedSprite = new VTiledSprite(0, 0);
 		animatedSprite->LoadGraphic("Example/Assets/Waterfall.png", true, 32, 32);
@@ -153,6 +156,7 @@ public:
 
 		auto sprite2 = new VText(animatedSprite->Position.x, 80, animatedSprite->Size.x, "Animated TiledSprite", 16);
 		sprite2->Alignment = VTextAlign::ALIGNCENTRE;
+		sprite2->ApplyChanges();
 
 		auto text = new VText(standardSprite->Position.x - 40, 300, 480, "Press WASD: Resize Standard Tiled Sprite\nPress IJKL: Resize Animated Tiled Sprite", 21);
 
@@ -165,10 +169,10 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		float x1Resize = VGlobal::p()->Input.CurrentAxisValue("leftX");
-		float y1Resize = VGlobal::p()->Input.CurrentAxisValue("leftY");
-		float x2Resize = VGlobal::p()->Input.CurrentAxisValue("rightX");
-		float y2Resize = VGlobal::p()->Input.CurrentAxisValue("rightY");
+		float x1Resize = VGlobal::p()->Input->CurrentAxisValue("leftX");
+		float y1Resize = VGlobal::p()->Input->CurrentAxisValue("leftY");
+		float x2Resize = VGlobal::p()->Input->CurrentAxisValue("rightX");
+		float y2Resize = VGlobal::p()->Input->CurrentAxisValue("rightY");
 
 		standardSprite->Size += sf::Vector2f(x1Resize, y1Resize) * dt;
 		animatedSprite->Size += sf::Vector2f(x2Resize, y2Resize) * dt;
@@ -198,6 +202,7 @@ public:
 		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNRIGHT, sf::Text::Italic | sf::Text::Underlined);
 		normalText->Text = L"!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬-®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſƒǺǻǼǽǾǿȘșȚțˆˇˉ˘˙˚˛˜˝;΄΅Ά·ΈΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώЁЂЃЄЅІЇЈЉЊЋЌЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяёђѓєѕіїјљњћќўџҐґẀẁẂẃẄẅỲỳ–—―‗‘’‚“”„†‡•…‰‹›‼‾⁄ⁿ₣₤₧€№™Ω⅛⅜⅝⅞←↑→↓↔↕↨∂∆∏∑−∙√∞∟∩∫≈≠≡≤≥⌂⌐⌠⌡─│┌┐└┘├┤┬┴┼═║╒╓╔╕╖╗╘╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬▀▄█▌▐░▒▓■▬▲►▼◄◊○◘◙☺☻☼♀♂♠♣♥♦♪♫ﬁﬂ";
 		normalText->Wrap = WRAPLETTER;
+		normalText->ApplyChanges();
 		Add(normalText);
 
 		typedText = new VTypedText(10.0f, 50.0f, (float)VGlobal::p()->Width - 20.0f);
@@ -214,11 +219,11 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		if (VGlobal::p()->Input.IsButtonPressed("leftShoulder"))
+		if (VGlobal::p()->Input->IsButtonPressed("leftShoulder"))
 		{
 			typedText->Erase(0.02f);
 		}
-		if (VGlobal::p()->Input.IsButtonPressed("rightShoulder"))
+		if (VGlobal::p()->Input->IsButtonPressed("rightShoulder"))
 		{
 			typedText->Start(0.05f);
 		}
@@ -325,7 +330,7 @@ public:
 		
 		if (touchFloor)
 		{
-			if (VGlobal::p()->Input.IsButtonPressed("A"))
+			if (VGlobal::p()->Input->IsButtonPressed("A"))
 			{
 				playerControl->Velocity.y = -450.0f;
 
@@ -344,12 +349,12 @@ public:
 		}
 
 		playerControl->Acceleration.x = 0;
-		if (VGlobal::p()->Input.CurrentAxisValue("leftX") < 0)
+		if (VGlobal::p()->Input->CurrentAxisValue("leftX") < 0)
 			playerControl->Acceleration.x -= playerControl->MaxVelocity.x * (touchFloor ? 4 : 3);
-		if (VGlobal::p()->Input.CurrentAxisValue("leftX") > 0)
+		if (VGlobal::p()->Input->CurrentAxisValue("leftX") > 0)
 			playerControl->Acceleration.x += playerControl->MaxVelocity.x * (touchFloor ? 4 : 3);
 
-		if (VGlobal::p()->Input.IsButtonDown("A"))
+		if (VGlobal::p()->Input->IsButtonDown("A"))
 			playerControl->Acceleration.y = 700.0f;
 		else
 			playerControl->Acceleration.y = 980.0f;
@@ -374,7 +379,7 @@ public:
 		VObject* o = dynamic_cast<VObject*>(player);
 		VObject* p = dynamic_cast<VObject*>(platform);
 
-		if (VGlobal::p()->Input.CurrentAxisValue("leftY") > 20.0f)
+		if (VGlobal::p()->Input->CurrentAxisValue("leftY") > 20.0f)
 		{
 			p->AllowCollisions = SidesTouching::TOUCHNONE;
 		}
@@ -439,8 +444,8 @@ public:
 		sprite3->SetPositionAtCentre(384, VGlobal::p()->Height / 2.0f);
 		sprite3->Tint = sf::Color::Magenta;
 		sprite3->Drag = sf::Vector2f(250, 250);
-		auto sprite4 = new VSprite();
 
+		auto sprite4 = new VSprite();
 		std::vector<sf::Vector2f> starPoints;
 		starPoints.push_back(sf::Vector2f(16, 0));
 		starPoints.push_back(sf::Vector2f(22, 12));
@@ -476,7 +481,7 @@ public:
 	{
 		VSUPERCLASS::Update(dt);
 
-		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("leftX") * 3, VGlobal::p()->Input.CurrentAxisValue("leftY") * 3);
+		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input->CurrentAxisValue("leftX") * 3, VGlobal::p()->Input->CurrentAxisValue("leftY") * 3);
 
 		VGlobal::p()->BackgroundColor = sf::Color::Black;
 		using namespace std::placeholders;
@@ -526,7 +531,7 @@ public:
 		buttonCount = BUTTON_COUNT;
 		axisCount = VInputHandler::R + 1;
 #elif defined(USE_SFML_JOYSTICK)
-		buttonCount = sf::Joystick::getButtonCount(VGlobal::p()->Input.GetJoystickID(0));
+		buttonCount = sf::Joystick::getButtonCount(VGlobal::p()->Input->GetJoystickID(0));
 		axisCount = sf::Joystick::Axis::PovY + 1;
 #else
 		buttonCount = 14;
@@ -552,7 +557,7 @@ public:
 			}
 			else
 			{
-				b->LoadGraphicFromTexture(dynamic_cast<VSprite*>(buttons->GetGroupItem(0))->GetTexture());
+				b->LoadGraphicFromTexture(*dynamic_cast<VSprite*>(buttons->GetGroupItem(0))->GetTexture());
 			}
 
 			text->Add(t);
@@ -577,7 +582,7 @@ public:
 			}
 			else
 			{
-				a->LoadGraphicFromTexture(dynamic_cast<VSprite*>(axis->GetGroupItem(0))->GetTexture());
+				a->LoadGraphicFromTexture(*dynamic_cast<VSprite*>(axis->GetGroupItem(0))->GetTexture());
 			}
 
 			a->Origin = sf::Vector2f(0, 0);
@@ -662,7 +667,7 @@ public:
 		{
 			VSprite* b = dynamic_cast<VSprite*>(buttons->GetGroupItem(i));
 
-			if (sf::Joystick::isButtonPressed(VGlobal::p()->Input.GetJoystickID(0), i))
+			if (sf::Joystick::isButtonPressed(VGlobal::p()->Input->GetJoystickID(0), i))
 			{
 				b->Tint = sf::Color::White;
 			}
@@ -675,7 +680,7 @@ public:
 		for (unsigned int i = 0; i < axisCount; i++)
 		{
 			VSprite* b = dynamic_cast<VSprite*>(axis->GetGroupItem(i));
-			b->Scale.y = sf::Joystick::getAxisPosition(VGlobal::p()->Input.GetJoystickID(0), (sf::Joystick::Axis)i) / 100.0f;
+			b->Scale.y = sf::Joystick::getAxisPosition(VGlobal::p()->Input->GetJoystickID(0), (sf::Joystick::Axis)i) / 100.0f;
 		}
 #else
 		unsigned short buttonIDs[14] = 
@@ -926,14 +931,13 @@ public:
 
 		BloomPostEffect* bloom = new BloomPostEffect();
 		bloom->SetBloomFactor(0.8f);
-		VGlobal::p()->PostProcess = bloom;
+		VGlobal::p()->PostProcess = std::move(std::unique_ptr<VPostEffectBase>(bloom));
 	}
 
 	virtual void Cleanup()
 	{
 		VSUPERCLASS::Cleanup();
-		delete VGlobal::p()->PostProcess;
-		VGlobal::p()->PostProcess = NULL;
+		VGlobal::p()->PostProcess.reset();
 	}
 
 	virtual void Update(float dt)
@@ -1080,7 +1084,7 @@ public:
 	virtual void Update(float dt)
 	{
 		VSUPERCLASS::Update(dt);
-		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("leftX") * 3, VGlobal::p()->Input.CurrentAxisValue("leftY") * 3);
+		playerControl->Acceleration = sf::Vector2f(VGlobal::p()->Input->CurrentAxisValue("leftX") * 3, VGlobal::p()->Input->CurrentAxisValue("leftY") * 3);
 	}
 };
 
@@ -1153,7 +1157,7 @@ public:
 			if (i == 0)
 				ease[i]->MakeGraphic(6, 6, sf::Color::White);
 			else
-				ease[i]->LoadGraphicFromTexture(ease[0]->GetTexture());
+				ease[i]->LoadGraphicFromTexture(*ease[0]->GetTexture());
 
 			ease[i]->SetPositionAtCentre(100.0f, 50.0f + (i * 10.1f));
 			Add(ease[i]);
@@ -1253,10 +1257,15 @@ public:
 
 		VBackdrop* backdrop[] =
 		{
+			new VBackdrop(0.1f, 0.1f, true, true, "Example/Assets/Backdrop.png"),
 			new VBackdrop(0.2f, 0.2f, true, true, "Example/Assets/Backdrop.png"),
+			new VBackdrop(0.3f, 0.3f, true, true, "Example/Assets/Backdrop.png"),
 			new VBackdrop(0.4f, 0.4f, true, true, "Example/Assets/Backdrop.png"),
+			new VBackdrop(0.5f, 0.5f, true, true, "Example/Assets/Backdrop.png"),
 			new VBackdrop(0.6f, 0.6f, true, true, "Example/Assets/Backdrop.png"),
+			new VBackdrop(0.7f, 0.7f, true, true, "Example/Assets/Backdrop.png"),
 			new VBackdrop(0.8f, 0.8f, true, true, "Example/Assets/Backdrop.png"),
+			new VBackdrop(0.9f, 0.9f, true, true, "Example/Assets/Backdrop.png"),
 			new VBackdrop(1.0f, 1.0f, true, true, "Example/Assets/Backdrop.png"),
 		};
 
@@ -1265,8 +1274,8 @@ public:
 		for (int i = 0; i < length; i++)
 		{
 			backdrop[i]->CameraScroll = true;
-			backdrop[i]->Scale *= (float)(i + 1) / length;
-			backdrop[i]->Tint = VColour::HSVtoRGB(0.0f, 0.0f, (i * 0.1f) + (0.1f * length));
+			backdrop[i]->Scale *= backdrop[i]->ScrollFactor.x;
+			backdrop[i]->SetTint(VColour::HSVtoRGB(0.0f, 0.0f, (i + 1.0f) / (length + 1)));
 			Add(backdrop[i]);
 		}
 
@@ -1366,6 +1375,7 @@ public:
 			VTextPath* t = new VTextPath(0.0f, (i * 18) + 8.0f, 640.0f);
 			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNLEFT);
 			t->Text = "Pixelation Art Jam - GDC 2017 ";
+			t->ApplyChanges();
 
 			if (i % 2)
 				t->SetFillTint(VColour::HSVtoRGB(200.0f, 0.75f, 0.75f));
@@ -1384,14 +1394,13 @@ public:
 
 		BloomPostEffect* bloom = new BloomPostEffect();
 		bloom->SetBloomFactor(0.8f);
-		VGlobal::p()->PostProcess = bloom;
+		VGlobal::p()->PostProcess = std::move(std::unique_ptr<VPostEffectBase>(bloom));
 	}
 
 	virtual void Cleanup()
 	{
 		VSUPERCLASS::Cleanup();
-		delete VGlobal::p()->PostProcess;
-		VGlobal::p()->PostProcess = NULL;
+		VGlobal::p()->PostProcess.reset();
 	}
 
 	virtual void Update(float dt)
@@ -1471,7 +1480,7 @@ public:
 			}
 			else
 			{
-				c->LoadGraphicFromTexture(circle[0]->GetTexture());
+				c->LoadGraphicFromTexture(*circle[0]->GetTexture());
 			}
 
 			circle[i] = c;
@@ -1487,7 +1496,7 @@ public:
 		Add(normalText);
 
         auto f = std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this));
-		VGlobal::p()->Async.LaunchAsyncFunction(f);
+		VGlobal::p()->Async->LaunchAsyncFunction(f);
 	}
 
 	void LoadMap()
@@ -1536,7 +1545,7 @@ public:
 				pixelCount++;
 			}
 
-		VGlobal::p()->Async.SyncToMainLoop(std::bind(&AsyncTestState::OnLoadedMap, this));
+		VGlobal::p()->Async->SyncToMainLoop(std::bind(&AsyncTestState::OnLoadedMap, this));
 	}
 
 	void OnLoadedMap()
@@ -1558,7 +1567,7 @@ public:
 		float offset = 3.1415926f / CircleCount;
 		float radius = 50.0f;
 
-		pixel->Velocity = sf::Vector2f(VGlobal::p()->Input.CurrentAxisValue("leftX"), VGlobal::p()->Input.CurrentAxisValue("leftY"));
+		pixel->Velocity = sf::Vector2f(VGlobal::p()->Input->CurrentAxisValue("leftX"), VGlobal::p()->Input->CurrentAxisValue("leftY"));
 
 		if (pixel->Position.x > 0)
 			pixel->Position.x = 0;
