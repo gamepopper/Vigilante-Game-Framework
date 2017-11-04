@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/String.hpp>
@@ -58,4 +59,3 @@ private:
 	bool cleaned = false;
 	bool focused = true;
 };
-

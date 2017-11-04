@@ -960,8 +960,8 @@ public:
 
 	float timer = 0.0f;
 	V3DScene* scene;
-	//V3DModel* model;
-	V3DObjModel* model;
+	V3DObject* model;
+	V3DObject* moon;
 
 	virtual void Initialise()
 	{
@@ -1008,42 +1008,55 @@ public:
 		//	-80, 80, 80,	0, 0,	-1, 0, 0,	1, 1, 1, 1,
 		//};
 
-		//model = new V3DModel();
-		//model->LoadModelData(cube, 0, 5, 3, 8);
-		//model->SetMaterial(sf::Color::White, sf::Color::White, 30.0f);
-		//model->LoadTexture("Example/Assets/texture.jpg", true);
+		/*V3DModel* obj = new V3DModel();
+		obj->LoadModelData(cube, 0, 5, 3, 8);
+		obj->SetMaterial(sf::Color::White, sf::Color::White, 30.0f);
+		obj->LoadTexture("Example/Assets/texture.jpg", true);
+		obj->Scale = sf::Vector3f(0.01f, 0.01f, 0.01f);
+		model = obj;*/
 
 		model = new V3DObjModel();
 		model->LoadModelData("Example/Assets/Low-Poly-Racing-Car.obj");
 
 		scene = new V3DScene(0.0f, 0.0f, VGlobal::p()->Width, VGlobal::p()->Height);
-		scene->SetLight(GL_LIGHT0, sf::Color(0, 0, 0), sf::Color(255, 255, 255), sf::Color(255, 255, 255), sf::Vector3f(1, 1, -1));
+		scene->SetLight(GL_LIGHT0, sf::Color(0, 0, 0), sf::Color(255, 255, 255), sf::Color(255, 255, 255), sf::Vector3f(1.0f, 0.0f, -1.0f));
 		scene->SetGlobalLight(sf::Color(50, 50, 50));
-		scene->SetViewCamera(V3DScene::CAMERA_ORTHO, 1, 500);
+		scene->Camera = std::make_unique<V3DPerspectiveCamera>(45.0f, 1.0f, 700.0f);
 		scene->Add(model);
+		scene->Add(moon);
 		Add(scene);
-	}
 
-	virtual void Cleanup()
-	{
-		VSUPERCLASS::Cleanup();
-
-		if (VGlobal::p()->PostProcess)
-		{
-			delete VGlobal::p()->PostProcess;
-			VGlobal::p()->PostProcess = NULL;
-		}
+		VPostEffectMultipass* multipass = new VPostEffectMultipass(2);
+		ScoreboardEffect* scoreboard = new ScoreboardEffect();
+		scoreboard->SetPointSize(0.75f);
+		scoreboard->SetPointAmount(VGlobal::p()->Height / 10);
+		scoreboard->SetBlur(true, 0.3f);
+		multipass->AddPostEffect(scoreboard);
+		/*BloomPostEffect* bloom = new BloomPostEffect();
+		bloom->SetBloomFactor(0.4f);
+		multipass->AddPostEffect(bloom);
+		VGlobal::p()->PostProcess = scoreboard;*/
 	}
 
 	virtual void Update(float dt)
 	{
 		VSUPERCLASS::Update(dt);
-		timer += dt;
+		timer += dt * 15.0f;
 
-		float x = VGlobal::p()->Width / 2.0f;
-		float y = VGlobal::p()->Height / 2.0f;
-		model->Position = sf::Vector3f(x, y, -200.0f);
-		model->Rotation = sf::Vector3f(-30.0f, timer * 30.0f, 0);
+		float x = 0;
+		float y = 0;
+		model->Position = sf::Vector3f(x, y, -5.0f);
+		model->Rotation = sf::Vector3f(0.0f, -timer, 0);
+
+		x -= cosf(timer / 27.322f) * 5.655f;
+		float z = sinf(timer / 27.322f) * 5.655f;
+		moon->Position = sf::Vector3f(x, y, z - 5.0f);
+		moon->Rotation = sf::Vector3f(0.0f, -timer / 27, 0);
+
+		scene->Camera->Position.x += VGlobal::p()->Input->CurrentAxisValue("leftX") * 0.01f * dt;
+		scene->Camera->Position.y += VGlobal::p()->Input->CurrentAxisValue("leftY") * 0.01f * dt;
+		scene->Camera->Rotate.x += VGlobal::p()->Input->CurrentAxisValue("rightX") * dt;
+		scene->Camera->Rotate.y += VGlobal::p()->Input->CurrentAxisValue("rightY") * dt;
 	}
 };
 
