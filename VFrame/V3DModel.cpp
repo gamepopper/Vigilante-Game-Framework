@@ -1,3 +1,4 @@
+#include "depend/glew.h"
 #include "V3DModel.h"
 
 void V3DModel::updateTransform()
@@ -31,6 +32,12 @@ bool V3DModel::LoadModelData(const std::vector<GLfloat>& data, int vertexPos, in
 	if (colourArrayOffset >= 0)
 		dataLineLength += 4;
 
+	return true;
+}
+
+bool V3DModel::LoadModelIndices(const std::vector<unsigned int>& data)
+{
+	modelIndices = data;
 	return true;
 }
 
@@ -119,6 +126,16 @@ void V3DModel::Draw(sf::RenderTarget& RenderTarget)
 		glDisableClientState(GL_COLOR_ARRAY);
 	}
 
+	if (modelIndices.size())
+	{
+		glEnableClientState(GL_INDEX_ARRAY);
+		glIndexPointer(GL_UNSIGNED_INT, sizeof(unsigned int), modelIndices.data());
+	}
+	else
+	{
+		glDisableClientState(GL_INDEX_ARRAY);
+	}
+
 	glEnable(GL_TEXTURE_2D);
 	sf::Texture::bind(&texture);
 
@@ -150,7 +167,14 @@ void V3DModel::Draw(sf::RenderTarget& RenderTarget)
 	VSUPERCLASS::Draw(RenderTarget);
 
 	// Draw the model
-	glDrawArrays(GL_TRIANGLES, 0, modelData.size() / dataLineLength);
+	if (modelIndices.size())
+	{
+		glDrawElements(GL_TRIANGLES, modelIndices.size(), GL_UNSIGNED_INT, modelIndices.data());
+	}
+	else
+	{
+		glDrawArrays(GL_TRIANGLES, 0, modelData.size() / dataLineLength);
+	}
 
 	glPopMatrix();
 

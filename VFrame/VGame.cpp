@@ -1,3 +1,8 @@
+#pragma comment(lib, "VFrame/depend/glew32s.lib")
+
+#define GLEW_STATIC
+#include "depend/glew.h"
+
 #include "VGame.h"
 #include "VCamera.h"
 #include "VGlobal.h"
@@ -19,6 +24,9 @@ int VGame::Init()
 
 	try
 	{
+		if (glewInit() != GLEW_OK)
+			return EXIT_FAILURE;
+
 		if (!VGlobal::p()->App->isOpen())
 			return EXIT_FAILURE;
 
@@ -76,11 +84,13 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	std::random_device device{};
 	VGlobal::p()->Random->Reset(device());
 
-	VBase::VLog("Welcome to the ViglanteFramework - Version:%s ", VFRAME_VERSION);
-	VBase::VLog("Starting Game: %s", title.toAnsiString().c_str());
-
 	VGlobal::p()->App->create(sf::VideoMode(windowwidth, windowheight), title, flags, settings);
 	VGlobal::p()->RenderState = sf::RenderStates::Default;
+
+	VBase::VLog("Welcome to the ViglanteFramework - Version: %s ", VFRAME_VERSION);
+	VBase::VLog("SFML Version: %d.%d.%d", SFML_VERSION_MAJOR, SFML_VERSION_MINOR, SFML_VERSION_PATCH);
+	VBase::VLog("OpenGL Version: %s", glGetString(GL_VERSION));
+	VBase::VLog("Starting Game: %s", title.toAnsiString().c_str());
 
 	int error = 0;
 	if ((error = Init()))

@@ -1,3 +1,5 @@
+#include "depend/glew.h"
+
 #include "V3DObjModel.h"
 #include "VGlobal.h"
 
