@@ -111,6 +111,7 @@
     <ClCompile Include="VFrame\VRandom.cpp" />
     <ClCompile Include="VFrame\VRenderGroup.cpp" />
     <ClCompile Include="VFrame\VRenderLayer.cpp" />
+    <ClCompile Include="VFrame\VShape.cpp" />
     <ClCompile Include="VFrame\VSprite.cpp" />
     <ClCompile Include="VFrame\VState.cpp" />
     <ClCompile Include="VFrame\VText.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="VFrame\VRange.h" />
     <ClInclude Include="VFrame\VRenderGroup.h" />
     <ClInclude Include="VFrame\VRenderLayer.h" />
+    <ClInclude Include="VFrame\VShape.h" />
     <ClInclude Include="VFrame\VSprite.h" />
     <ClInclude Include="VFrame\VState.h" />
     <ClInclude Include="VFrame\VText.h" />

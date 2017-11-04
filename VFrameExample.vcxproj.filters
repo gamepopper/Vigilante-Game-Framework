@@ -115,6 +115,7 @@
     </ClCompile>
     <ClCompile Include="VFrame\VTimer.cpp" />
     <ClCompile Include="VFrame\V3DObjModel.cpp" />
+    <ClCompile Include="VFrame\VShape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\BloomPostEffect.h">
@@ -244,6 +245,7 @@
     <ClInclude Include="VFrame\VTimer.h" />
     <ClInclude Include="VFrame\depend\tiny_obj_loader.h" />
     <ClInclude Include="VFrame\V3DObjModel.h" />
+    <ClInclude Include="VFrame\VShape.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\Assets\Backdrop.png">
