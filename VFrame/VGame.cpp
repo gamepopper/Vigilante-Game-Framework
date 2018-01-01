@@ -1,8 +1,3 @@
-#pragma comment(lib, "VFrame/depend/glew32s.lib")
-
-#define GLEW_STATIC
-#include "depend/glew.h"
-
 #include "VGame.h"
 #include "VCamera.h"
 #include "VGlobal.h"
@@ -24,20 +19,29 @@ int VGame::Init()
 
 	try
 	{
-		if (glewInit() != GLEW_OK)
-			return EXIT_FAILURE;
-
 		if (!VGlobal::p()->App->isOpen())
 			return EXIT_FAILURE;
 
-		RenderTarget = std::unique_ptr<sf::RenderTexture>(new sf::RenderTexture());
-		if (!RenderTarget->create(VGlobal::p()->Width, VGlobal::p()->Height))
+		renderTarget = std::unique_ptr<sf::RenderTexture>(new sf::RenderTexture());
+		if (!renderTarget->create(VGlobal::p()->Width, VGlobal::p()->Height))
 			return EXIT_FAILURE;
 
-		VGlobal::p()->RenderSprite->setTexture(RenderTarget->getTexture());
 		VGlobal::p()->WorldBounds = sf::FloatRect(0, 0, static_cast<float>(VGlobal::p()->Width), static_cast<float>(VGlobal::p()->Height));
 		VGlobal::p()->App->requestFocus();
-		VCameraList::Default = RenderTarget->getDefaultView();
+		VCameraList::Default = renderTarget->getDefaultView();
+
+		vertexArray.resize(4);
+		vertexArray.setPrimitiveType(sf::Quads);
+		vertexArray[0] = sf::Vertex(sf::Vector2f(), sf::Color::White, sf::Vector2f());
+		vertexArray[1] = sf::Vertex(sf::Vector2f(VGlobal::p()->WorldBounds.width, 0.0f), 
+			sf::Color::White, 
+			sf::Vector2f(VGlobal::p()->WorldBounds.width, 0.0f));
+		vertexArray[2] = sf::Vertex(sf::Vector2f(VGlobal::p()->WorldBounds.width, VGlobal::p()->WorldBounds.height), 
+			sf::Color::White, 
+			sf::Vector2f(VGlobal::p()->WorldBounds.width, VGlobal::p()->WorldBounds.height));
+		vertexArray[3] = sf::Vertex(sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.height), 
+			sf::Color::White, 
+			sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.height));
 
 		ResizeCheck();
 	}
@@ -84,13 +88,11 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	std::random_device device{};
 	VGlobal::p()->Random->Reset(device());
 
+	VBase::VLog("Welcome to the ViglanteFramework - Version:%s ", VFRAME_VERSION);
+	VBase::VLog("Starting Game: %s", title.toAnsiString().c_str());
+
 	VGlobal::p()->App->create(sf::VideoMode(windowwidth, windowheight), title, flags, settings);
 	VGlobal::p()->RenderState = sf::RenderStates::Default;
-
-	VBase::VLog("Welcome to the ViglanteFramework - Version: %s ", VFRAME_VERSION);
-	VBase::VLog("SFML Version: %d.%d.%d", SFML_VERSION_MAJOR, SFML_VERSION_MINOR, SFML_VERSION_PATCH);
-	VBase::VLog("OpenGL Version: %s", glGetString(GL_VERSION));
-	VBase::VLog("Starting Game: %s", title.toAnsiString().c_str());
 
 	int error = 0;
 	if ((error = Init()))
@@ -213,8 +215,11 @@ void VGame::ResizeCheck()
 		float scaleH = VGlobal::p()->Height * scale;
 		float scaleX = (VGlobal::p()->App->getSize().x - scaleW) / 2;
 		float scaleY = (VGlobal::p()->App->getSize().y - scaleH) / 2;
-		VGlobal::p()->RenderSprite->setPosition(scaleX, scaleY);
-		VGlobal::p()->RenderSprite->setScale(scale, scale);
+		vertexArray[0].position = sf::Vector2f(scaleX, scaleY);
+		vertexArray[1].position = sf::Vector2f(scaleX + scaleW, scaleY);
+		vertexArray[2].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
+		vertexArray[3].position = sf::Vector2f(scaleX, scaleY + scaleH);
+		VGlobal::p()->ViewportOffset = vertexArray[0].position;
 	}
 }
 
@@ -254,7 +259,7 @@ void VGame::Update(float dt)
 
 void VGame::PreRender()
 {
-	RenderTarget->clear(VGlobal::p()->BackgroundColor);
+	renderTarget->clear(VGlobal::p()->BackgroundColor);
 	VGlobal::p()->App->clear();
 }
 
@@ -263,26 +268,26 @@ void VGame::Render(VCamera* camera)
 	if (!camera->Active)
 		return;
 
-	RenderTarget->setView(camera->GetView());
+	renderTarget->setView(camera->GetView());
 	VState* currentState = VGlobal::p()->CurrentState();
 
 	if (currentState->visible)
-		currentState->Draw(*RenderTarget);
+		currentState->Draw(*renderTarget);
 
 	if (currentState->SubState)
 	{
-		currentState->SubState->Draw(*RenderTarget);
+		currentState->SubState->Draw(*renderTarget);
 	}
 
-	camera->Render(*RenderTarget);
+	camera->Render(*renderTarget);
 }
 
 void VGame::PostRender()
 {
-	RenderTarget->display();
-	if (RenderTarget->isSmooth() != VGlobal::p()->Antialiasing)
+	renderTarget->display();
+	if (renderTarget->isSmooth() != VGlobal::p()->Antialiasing)
 	{
-		RenderTarget->setSmooth(VGlobal::p()->Antialiasing);
+		renderTarget->setSmooth(VGlobal::p()->Antialiasing);
 	}
 
 	sf::RenderWindow* app = VGlobal::p()->App.get();
@@ -294,18 +299,19 @@ void VGame::PostRender()
 	if (VGlobal::p()->PostProcess == nullptr || !VPostEffectBase::isSupported())
 	{
 		view.setViewport(sf::FloatRect(0, 0, 1, 1));
-		app->draw(*VGlobal::p()->RenderSprite, VGlobal::p()->RenderState);
+		VGlobal::p()->RenderState.texture = &renderTarget->getTexture();
+		app->draw(vertexArray, VGlobal::p()->RenderState);
 	}
 	else
 	{
-		sf::Vector2f position = VGlobal::p()->RenderSprite->getPosition();
+		sf::Vector2f position = VGlobal::p()->ViewportOffset;
 		sf::Vector2f size = view.getSize();
 
 		float left = position.x / size.x;
 		float top = position.y / size.y;
 		view.setViewport(sf::FloatRect(left, top, 1 - (left * 2), 1 - (top * 2)));
 
-		VGlobal::p()->PostProcess->Apply(*RenderTarget, *app);
+		VGlobal::p()->PostProcess->Apply(*renderTarget, *app);
 	}
 
 	app->setView(view);

@@ -15,7 +15,6 @@ VGlobal::VGlobal()
 		Content = std::unique_ptr<VContent>(new VContent());
 		Music = std::unique_ptr<VMusic>(new VMusic());
 		Sound = std::unique_ptr<VSoundManager>(new VSoundManager());
-		RenderSprite = std::unique_ptr<sf::Sprite>(new sf::Sprite());
 		Random = std::unique_ptr<VRandom>(new VRandom());
 		Async = std::unique_ptr<VAsync>(new VAsync());
 
@@ -61,7 +60,6 @@ VGlobal::~VGlobal()
 	Music.reset();
 	Sound.reset();
 	PostProcess.reset();
-	RenderSprite.reset();
 	Random.reset();
 	Async.reset();
 	gsm.reset();
@@ -102,7 +100,7 @@ bool VGlobal::IsFullscreen()
 sf::Vector2f VGlobal::GetMousePosition()
 {
 	sf::Vector2f actualMousePos = sf::Vector2f(sf::Mouse::getPosition(*App));
-	sf::Vector2f renderAreaOffset = VGlobal::p()->RenderSprite->getPosition();
+	sf::Vector2f renderAreaOffset = VGlobal::p()->ViewportOffset;
 	float sx = App->getSize().x / (float)Width; 
 	float sy = App->getSize().y / (float)Height;
 

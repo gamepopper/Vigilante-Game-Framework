@@ -39,7 +39,7 @@ protected:
 	virtual void updateTransform() override;
 
 	void setDimensions();
-	void setCharacterRender(sf::Uint32 character, float x, float y, sf::Color color, bool bold, float italic, int index, sf::VertexArray& vertices, float outline = 0);
+	void setCharacterRender(const sf::Glyph& glyph, float x, float y, sf::Color color, bool bold, float italic, int index, sf::VertexArray& vertices, float outline = 0);
 	void setTextLine(float x, float y, sf::Color color, float offset, float thickness, int index, sf::VertexArray& vertices, float outline = 0);
 
 public:
@@ -66,23 +66,10 @@ public:
 
 		Moves = false;
 
-		try
-		{
-			SetFormat("VFrame/depend/arial.ttf", charSize);
-		}
-		#ifndef __linux__
-		catch (std::exception e)
-		{
-			VLog(e.what());
-		}
-		#else
-		catch (std::string e)
-		{
-			VLog(e.c_str());
-		}
-		#endif
+		if (font->loadFromFile("arial.ttf"))
+			SetFormat(*font, charSize);
 
-#if _DEBUG
+#ifdef _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);
 #endif
 	}
@@ -97,23 +84,10 @@ public:
 
 		Moves = false;
 
-		try
-		{
-			SetFormat("VFrame/depend/arial.ttf", charSize);
-		}
-		#ifndef __linux__
-		catch (std::exception e)
-		{
-			VLog(e.what());
-		}
-		#else
-		catch (std::string e)
-		{
-			VLog(e.c_str());
-		}
-		#endif
+		if (font->loadFromFile("arial.ttf"))
+			SetFormat(*font, charSize);
 
-#if _DEBUG
+#ifdef _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);
 #endif
 	}

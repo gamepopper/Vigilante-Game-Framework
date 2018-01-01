@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <numeric>
 
 class VAnimationManager
 {
@@ -53,6 +54,22 @@ public:
 		{
 			animationList.insert(std::pair<sf::String, VAnimation*>(name, new VAnimation(Frames, FramesPerSecond, Looping, Reverse)));
 		}
+	}
+
+	/*
+	If animation under name does not exist, creates new VAnimation object for animation. This one sets up animation from a range of ints.
+	name: Name of animation.
+	Begin: Initial Frame of Range
+	End: Final Frame of Range
+	FramesPerSecond: Amount of frames to show per seconds.
+	Looping: Whether animation should loop or not.
+	Reverse: Whether animation should be reversed or not.
+	*/
+	void AddAnimation(const sf::String& name, int Begin, int Length, float FramesPerSecond = 6.0f, bool Looping = false, bool Reverse = false)
+	{
+		std::vector<int> frames(Length);
+		std::iota(frames.begin(), frames.end(), Begin);
+		AddAnimation(name, frames, FramesPerSecond, Looping, Reverse);
 	}
 
 	//Name of current playing animation.

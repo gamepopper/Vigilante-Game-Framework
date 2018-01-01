@@ -105,11 +105,18 @@ void VPostEffectMultipass::AddPostEffect(VPostEffectBase* post)
 	if (postEffects.size() >= maxSize)
 		return;
 
-	postEffects.reserve(postEffects.size() + 1);
-	enabled.reserve(postEffects.size() + 1);
-
 	postEffects.push_back(post);
 	enabled.push_back(true);
+}
+
+void VPostEffectMultipass::RemovePostEffect(unsigned int index)
+{
+	if (index >= maxSize)
+		return;
+
+	delete postEffects[index];
+	postEffects.erase(postEffects.begin() + index);
+	enabled.erase(enabled.begin() + index);
 }
 
 VPostEffectBase* VPostEffectMultipass::GetPostEffect(unsigned int index)
@@ -137,7 +144,7 @@ void VPostEffectMultipass::Apply(const sf::RenderTexture& input, sf::RenderTarge
 
 	for (unsigned int i = 0; i < postEffects.size(); i++)
 	{
-		sf::RenderTarget& renderOutput = outputRenderId < (int)renderTextures.size() ? *renderTextures[outputRenderId] : output;
+		sf::RenderTarget& renderOutput = outputRenderId < (int)postEffects.size() - 1 ? *renderTextures[outputRenderId] : output;
 
 		if (enabled[i])
 		{

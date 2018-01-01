@@ -153,7 +153,7 @@ void VShape::Draw(sf::RenderTarget& RenderTarget)
 	scrollView.setViewport(renderTargetView.getViewport());
 
 	sf::FloatRect renderBox = shape->getGlobalBounds();
-	float maxSize = fmaxf(scrollView.getSize().x, scrollView.getSize().y);
+	float maxSize = scrollView.getSize().x > scrollView.getSize().y ? scrollView.getSize().x : scrollView.getSize().y;
 	sf::FloatRect scrollBox = sf::FloatRect(scrollView.getCenter() - sf::Vector2f(maxSize, maxSize) / 2.0f, sf::Vector2f(maxSize, maxSize));
 
 	if (renderBox.left < scrollBox.left + scrollBox.width &&

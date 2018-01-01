@@ -20,7 +20,7 @@
 #include <sstream>
 #endif
 
-#define VFRAME_VERSION "0.9.9.13"
+#define VFRAME_VERSION "0.9.9.14"
 
 class VBase;
 class VObject;
@@ -49,8 +49,11 @@ public:
 	std::unique_ptr<sf::RenderWindow> App;
 	//RenderState for entire rendered scene.
 	sf::RenderStates RenderState;
-	//Sprite object of the last rendered frame.
-	std::unique_ptr<sf::Sprite> RenderSprite;
+
+	//Offset for the game's viewport, important when the window is resized.
+	sf::Vector2f ViewportOffset;
+
+	//Settings for the OpenGL Context
 	sf::ContextSettings ContextSettings;
 
 	//Whether the rendering will appear smooth or pixelated when scaling.

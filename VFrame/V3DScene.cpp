@@ -1,8 +1,5 @@
 #include "V3DScene.h"
 #include <cstring>
-#include <gl/GLU.h>
-
-#pragma comment(lib, "glu32.lib")
 
 V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize)
 {
@@ -20,7 +17,7 @@ V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, unsigned int maxSiz
 	Sprite->Size = sf::Vector2f(size);
 }
 
-void V3DScene::SetLight(GLenum id, sf::Color Ambient, sf::Color Diffuse, sf::Color Specular, sf::Vector3f Position, bool Directional)
+void V3DScene::SetLight(GLenum id, sf::Color Ambient, sf::Color Diffuse, sf::Color Specular, sf::Vector3f Position)
 {
 	if (lights[id - GL_LIGHT0])
 	{
@@ -37,11 +34,6 @@ void V3DScene::SetLight(GLenum id, sf::Color Ambient, sf::Color Diffuse, sf::Col
 	#else
 	l->Position[0] = Position.x;			l->Position[1] = Position.y;			l->Position[2] = Position.z;
 	#endif
-
-	if (Directional)
-		l->Position[3] = 0;
-	else
-		l->Position[3] = 1;
 
 	lights[id - GL_LIGHT0] = l;
 }
@@ -70,6 +62,13 @@ void V3DScene::DeactivateLight(GLenum id)
 	}
 }
 
+void V3DScene::SetViewCamera(CameraType type, float znear, float zfar)
+{
+	cameraType = type;
+	zNear = znear;
+	zFar = zfar;
+}
+
 void V3DScene::SetupScene()
 {
 	// Enable Z-buffer read and write
@@ -79,10 +78,7 @@ void V3DScene::SetupScene()
 
 	glEnable(GL_NORMALIZE);
 
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-
-	GL_ORDER;
+	glDisable(GL_CULL_FACE);
 
 	// Disable lighting
 	glDisable(GL_LIGHTING);
@@ -90,14 +86,35 @@ void V3DScene::SetupScene()
 	glViewport(0, 0, renderTex.getSize().x, renderTex.getSize().y);
 
 	glMatrixMode(GL_PROJECTION);
-
 	glLoadIdentity();
-	Camera->SetupView(sf::Vector2f(renderTex.getSize()));
+
+	if (cameraType == CAMERA_FRUSTUM)
+	{
+		GLfloat ratio = static_cast<float>(renderTex.getSize().x) / renderTex.getSize().y;
+		glFrustum(-ratio, ratio, -1.f, 1.f, zNear, zFar);
+	}
+	else if (cameraType == CAMERA_ORTHO)
+	{
+		glOrtho(0, renderTex.getSize().x, renderTex.getSize().y, 0, zNear, zFar);
+	}
 
 	if (globalLight)
 	{
 		glEnable(GL_LIGHTING);
 		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalLight);
+	}
+
+	for (int i = 0; i <= 7; i++)
+	{
+		if (lights[i])
+		{
+			glEnable(GL_LIGHTING);
+			glEnable(GL_LIGHT0 + i);
+		}
+		else
+		{
+			glDisable(GL_LIGHT0 + i);
+		}
 	}
 
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -107,16 +124,12 @@ void V3DScene::SetupScene()
 	{
 		if (lights[i])
 		{
-			glEnable(GL_LIGHTING);
+			glPushMatrix();
 			glLightfv(GL_LIGHT0 + i, GL_AMBIENT, lights[i]->Ambient);
 			glLightfv(GL_LIGHT0 + i, GL_DIFFUSE, lights[i]->Diffuse);
 			glLightfv(GL_LIGHT0 + i, GL_SPECULAR, lights[i]->Specular);
 			glLightfv(GL_LIGHT0 + i, GL_POSITION, lights[i]->Position);
-			glEnable(GL_LIGHT0 + i);
-		}
-		else
-		{
-			glDisable(GL_LIGHT0 + i);
+			glPopMatrix();
 		}
 	}
 }
@@ -146,7 +159,6 @@ const sf::Texture& V3DScene::GetTexture()
 	SetupScene();
 
 	renderTex.clear(sf::Color::Transparent);
-	Camera->UpdateTransform();
 	VSUPERCLASS::Draw(renderTex);
 	renderTex.display();
 
@@ -157,54 +169,13 @@ const sf::Texture& V3DScene::GetTexture()
 
 void V3DScene::Draw(sf::RenderTarget& RenderTarget)
 {
-	if (Camera == nullptr)
-	{
-		VLog("No V3DCamera set up!");
-		return;
-	}
-
 	sf::Texture::getMaximumSize();
 	renderTex.setActive(true);
 
 	SetupScene();
 
-	Camera->UpdateTransform();
 	VSUPERCLASS::Draw(RenderTarget);
 
 	renderTex.setActive(false);
 	RenderTarget.resetGLStates();
-}
-
-V3DCamera::V3DCamera(float Near, float Far)
-{
-	ZNear = Near;
-	ZFar = Far;
-}
-
-void V3DCamera::UpdateTransform()
-{
-	glLoadIdentity();
-	glRotatef(Rotate.y, 0.0f, 1.0f, 0.0f);
-	glRotatef(Rotate.x, 1.0f, 0.0f, 0.0f);
-	glRotatef(Rotate.z, 0.0f, 0.0f, 1.0f);
-	glTranslatef(-Position.x, -Position.y, -Position.z);
-}
-
-V3DOrthographicCamera::V3DOrthographicCamera(float Near, float Far) : V3DCamera(Near, Far)
-{
-}
-
-void V3DOrthographicCamera::SetupView(const sf::Vector2f& ViewSize)
-{
-	glOrtho(0.0f, ViewSize.x, ViewSize.y, 0.0f, ZNear, ZFar);
-}
-
-V3DPerspectiveCamera::V3DPerspectiveCamera(float POVAngle, float Near, float Far) : V3DCamera(Near, Far)
-{
-	POV = POVAngle;
-}
-
-void V3DPerspectiveCamera::SetupView(const sf::Vector2f& ViewSize)
-{
-	gluPerspective(POV, ViewSize.x / ViewSize.y, ZNear, ZFar);
 }

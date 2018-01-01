@@ -6,11 +6,11 @@
 class VRandom
 {
 	std::default_random_engine engine;
+	std::random_device device;
 
 public:
 	VRandom()
 	{
-		std::random_device device;
 		engine.seed(device());
 	}
 	VRandom(unsigned int seed)
@@ -20,7 +20,7 @@ public:
 	~VRandom() = default;
 
 	//Reset RNG.
-	void Reset() { std::random_device device; Reset(device()); }
+	void Reset() { Reset(device()); }
 	//Reset RNG seed.
 	void Reset(unsigned int seed) { engine.seed(seed); }
 	//Reset RNG device.

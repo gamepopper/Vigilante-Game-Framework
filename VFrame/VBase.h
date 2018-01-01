@@ -81,6 +81,9 @@ public:
 	//Outputs text for logging purposes (to Console, Output Window ect...).
 	static void VLog(const char* fmt, ...);
 
+	//Outputs text with VLog, then throws an error message to let the user know this is serious.
+	static void VLogError(const char* fmt, ...);
+
 	//Clears output log
 	static void VClearLog();
 };

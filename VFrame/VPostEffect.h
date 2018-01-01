@@ -37,6 +37,8 @@ public:
 
 	//Add a post effect.
 	void AddPostEffect(VPostEffectBase* post);
+	//Remove post effect at index.
+	void RemovePostEffect(unsigned int index);
 	//Get post effect at index.
 	VPostEffectBase* GetPostEffect(unsigned int index);
 	//Enable/disable effect at index.

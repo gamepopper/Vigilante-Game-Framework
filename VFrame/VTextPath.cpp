@@ -69,6 +69,7 @@ void VTextPath::updateTextRender(sf::String text)
 		for (size_t i = 0; i < item.length(); ++i)
 		{
 			sf::Uint32 curChar = item[i];
+			const sf::Glyph& glyph = font->getGlyph(curChar, FontSize, bold);
 
 			sf::Vector2f p = GetBezierPoint((float)i / textLength);
 			x = p.x;
@@ -76,12 +77,13 @@ void VTextPath::updateTextRender(sf::String text)
 
 			if (outlined)
 			{
-				setCharacterRender(curChar, x, y, outlineColour, bold, italic, (i * 6), verts, OutlineThickness);
-				setCharacterRender(curChar, x, y, fillColour, bold, italic, outlineOffset + (i * 6), verts, 0.0f);
+				const sf::Glyph& outlineGlyph = font->getGlyph(curChar, FontSize, bold, OutlineThickness);
+				setCharacterRender(outlineGlyph, x, y, outlineColour, bold, italic, (i * 6), verts, OutlineThickness);
+				setCharacterRender(glyph, x, y, fillColour, bold, italic, outlineOffset + (i * 6), verts, 0.0f);
 			}
 			else
 			{
-				setCharacterRender(curChar, x, y, fillColour, bold, italic, (i * 6), verts, 0.0f);
+				setCharacterRender(glyph, x, y, fillColour, bold, italic, (i * 6), verts, 0.0f);
 			}
 
 			x += font->getGlyph(curChar, FontSize, bold).advance;

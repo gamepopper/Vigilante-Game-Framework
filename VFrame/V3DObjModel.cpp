@@ -1,5 +1,3 @@
-#include "depend/glew.h"
-
 #include "V3DObjModel.h"
 #include "VGlobal.h"
 
@@ -37,7 +35,7 @@ bool V3DObjModel::LoadModelData(const char* filename)
 
 	if (r)
 	{
-		materials.push_back(tinyobj::material_t());
+		materials.emplace_back();
 		tinyobj::InitMaterial(&materials.back());
 
 		for (unsigned int i = 0; i < materials.size(); i++)

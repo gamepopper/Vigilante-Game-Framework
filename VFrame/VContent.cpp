@@ -35,11 +35,7 @@ sf::Texture& VContent::LoadTexture(const sf::String& name)
 		}
 		else
 		{
-		#ifndef __linux__
-			throw std::exception(("Error loading texture: " + name.toAnsiString()).c_str());
-        #else
-            throw ("Error loading texture: " + name.toAnsiString());
-		#endif
+			VBase::VLogError("Error loading texture: %s", name.toAnsiString());
 		}
 	}
 
@@ -59,11 +55,7 @@ sf::Image& VContent::LoadImage(const sf::String& name)
 		}
 		else
 		{
-        #ifndef __linux__
-			throw std::exception(("Error loading image: " + name.toAnsiString()).c_str());
-        #else
-            throw ("Error loading image: " + name.toAnsiString());
-		#endif
+			VBase::VLogError("Error loading image: %s", name.toAnsiString());
 		}
 	}
 
@@ -83,11 +75,7 @@ sf::Font& VContent::LoadFont(const sf::String& name)
 		}
 		else
 		{
-		#ifndef __linux__
-			throw std::exception(("Error loading font: " + name.toAnsiString()).c_str());
-        #else
-            throw ("Error loading front: " + name.toAnsiString());
-		#endif
+			VBase::VLogError("Error loading font: %s", name.toAnsiString());
 		}
 	}
 
@@ -107,11 +95,7 @@ sf::SoundBuffer& VContent::LoadSound(const sf::String& name)
 		}
 		else
 		{
-		#ifndef __linux__
-			throw std::exception(("Error loading sound: " + name.toAnsiString()).c_str());
-        #else
-            throw ("Error loading texture: " + name.toAnsiString());
-		#endif
+			VBase::VLogError("Error loading sound: %s", name.toAnsiString());
 		}
 	}
 

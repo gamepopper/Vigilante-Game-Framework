@@ -111,6 +111,7 @@ void VText::updateTextRender(sf::String text)
 		for (size_t i = 0; i < item.length(); ++i)
 		{
 			sf::Uint32 curChar = item[i];
+			const sf::Glyph& glyph = font->getGlyph(curChar, FontSize, bold);
 
 			x += font->getKerning(prevChar, curChar, FontSize);
 			prevChar = curChar;
@@ -131,15 +132,16 @@ void VText::updateTextRender(sf::String text)
 
 			if (outlined)
 			{
-				setCharacterRender(curChar, x + OutlineOffset.x, y + OutlineOffset.y, outlineColour, bold, italic, (i * 6), verts, OutlineThickness);
-				setCharacterRender(curChar, x, y, fillColour, bold, italic, outlineOffset + (i * 6), verts, 0.0f);
+				const sf::Glyph& outlineGlyph = font->getGlyph(curChar, FontSize, bold, OutlineThickness);
+				setCharacterRender(outlineGlyph, x + OutlineOffset.x, y + OutlineOffset.y, outlineColour, bold, italic, (i * 6), verts, OutlineThickness);
+				setCharacterRender(glyph, x, y, fillColour, bold, italic, outlineOffset + (i * 6), verts, 0.0f);
 			}
 			else
 			{
-				setCharacterRender(curChar, x, y, fillColour, bold, italic, (i * 6), verts, 0.0f);
+				setCharacterRender(glyph, x, y, fillColour, bold, italic, (i * 6), verts, 0.0f);
 			}
 
-			x += font->getGlyph(curChar, FontSize, bold).advance;
+			x += glyph.advance;
 		}
 
 		if (underlined)
@@ -194,27 +196,26 @@ void VText::updateTextRender(sf::String text)
 	}
 }
 
-void VText::setCharacterRender(sf::Uint32 character, float x, float y, sf::Color color, bool bold, float italic, int index, sf::VertexArray& vertices, float outline)
+void VText::setCharacterRender(const sf::Glyph& glyph, float x, float y, sf::Color color, bool bold, float italic, int index, sf::VertexArray& vertices, float outline)
 {
-	sf::Glyph glyph = font->getGlyph(character, FontSize, bold);
 	color.a = fillColour.a;
 
-	float left		= std::floor(glyph.bounds.left - outline);
-	float top		= std::floor(glyph.bounds.top - outline);
-	float right		= std::ceil(glyph.bounds.left + glyph.bounds.width + outline);
-	float bottom	= std::ceil(glyph.bounds.top + glyph.bounds.height + outline);
+	float left		= std::floor(glyph.bounds.left);
+	float top		= std::floor(glyph.bounds.top);
+	float right		= std::ceil(glyph.bounds.left + glyph.bounds.width);
+	float bottom	= std::ceil(glyph.bounds.top + glyph.bounds.height);
 
 	float u1 = static_cast<float>(glyph.textureRect.left);
 	float v1 = static_cast<float>(glyph.textureRect.top);
 	float u2 = static_cast<float>(glyph.textureRect.left + glyph.textureRect.width);
 	float v2 = static_cast<float>(glyph.textureRect.top + glyph.textureRect.height);
 
-	vertices[index + 0].position = sf::Vector2f(x + left - italic * top, y + top);			vertices[index + 0].color = color; vertices[index + 0].texCoords = sf::Vector2f(u1, v1);
-	vertices[index + 1].position = sf::Vector2f(x + right - italic * top, y + top);			vertices[index + 1].color = color; vertices[index + 1].texCoords = sf::Vector2f(u2, v1);
-	vertices[index + 2].position = sf::Vector2f(x + left - italic * bottom, y + bottom);	vertices[index + 2].color = color; vertices[index + 2].texCoords = sf::Vector2f(u1, v2);
-	vertices[index + 3].position = sf::Vector2f(x + left - italic * bottom, y + bottom);	vertices[index + 3].color = color; vertices[index + 3].texCoords = sf::Vector2f(u1, v2);
-	vertices[index + 4].position = sf::Vector2f(x + right - italic * top, y + top);			vertices[index + 4].color = color; vertices[index + 4].texCoords = sf::Vector2f(u2, v1);
-	vertices[index + 5].position = sf::Vector2f(x + right - italic * bottom, y + bottom);	vertices[index + 5].color = color; vertices[index + 5].texCoords = sf::Vector2f(u2, v2);
+	vertices[index + 0].position = sf::Vector2f(x + left	- italic * top		- OutlineThickness, y + top		- OutlineThickness);	vertices[index + 0].color = color; vertices[index + 0].texCoords = sf::Vector2f(u1, v1);
+	vertices[index + 1].position = sf::Vector2f(x + right	- italic * top		- OutlineThickness, y + top		- OutlineThickness);	vertices[index + 1].color = color; vertices[index + 1].texCoords = sf::Vector2f(u2, v1);
+	vertices[index + 2].position = sf::Vector2f(x + left	- italic * bottom	- OutlineThickness, y + bottom	- OutlineThickness);	vertices[index + 2].color = color; vertices[index + 2].texCoords = sf::Vector2f(u1, v2);
+	vertices[index + 3].position = sf::Vector2f(x + left	- italic * bottom	- OutlineThickness, y + bottom	- OutlineThickness);	vertices[index + 3].color = color; vertices[index + 3].texCoords = sf::Vector2f(u1, v2);
+	vertices[index + 4].position = sf::Vector2f(x + right	- italic * top		- OutlineThickness, y + top		- OutlineThickness);	vertices[index + 4].color = color; vertices[index + 4].texCoords = sf::Vector2f(u2, v1);
+	vertices[index + 5].position = sf::Vector2f(x + right	- italic * bottom	- OutlineThickness, y + bottom	- OutlineThickness);	vertices[index + 5].color = color; vertices[index + 5].texCoords = sf::Vector2f(u2, v2);
 }
 
 void VText::setTextLine(float x, float y, sf::Color color, float offset, float thickness, int index, sf::VertexArray& vertices, float outline)
