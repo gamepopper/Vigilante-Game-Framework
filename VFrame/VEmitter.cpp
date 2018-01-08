@@ -3,7 +3,7 @@
 
 VEmitter* VEmitter::LoadParticlesFromFile(int Amount, sf::String Filename, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
-	MaxSize = Amount;	
+	MaxSize = Amount;
 	RenderState.texture = &VGlobal::p()->Content->LoadTexture(Filename);
 	setSize(Amount, Animated, Width, Height, Rect, RandomFrames);
 
@@ -163,7 +163,7 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
-	
+
 	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
 	float rotate = renderTargetView.getRotation() - scrollView.getRotation();
 	float zoom = renderTargetView.getSize().x / scrollView.getSize().x;
@@ -213,7 +213,7 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 			vertices[1 + (i * 4)].position = Position;
 			vertices[2 + (i * 4)].position = Position;
 			vertices[3 + (i * 4)].position = Position;
-			
+
 			vertices[0 + (i * 4)].color.a = 0;
 			vertices[1 + (i * 4)].color.a = 0;
 			vertices[2 + (i * 4)].color.a = 0;
@@ -275,7 +275,7 @@ void VEmitter::EmitParticle()
 {
 	auto particle = static_cast<VParticle*>(FirstAvailable());
 
-	VRandom random;
+	VRandom random((unsigned int)((uint64_t)particle) + (unsigned int)(time(NULL)));
 
 	if (particle)
 	{
@@ -309,7 +309,7 @@ void VEmitter::EmitParticle()
 
 		particle->ColourRange.A = VGlobal::p()->Random->GetColor(ColourRange.A.B, ColourRange.A.A);
 		particle->ColourRange.B = VGlobal::p()->Random->GetColor(ColourRange.B.B, ColourRange.B.A);
-		
+
 		particle->AlphaRange.A = VGlobal::p()->Random->GetFloat(AlphaRange.A.B, AlphaRange.A.A);
 		particle->AlphaRange.B = VGlobal::p()->Random->GetFloat(AlphaRange.B.B, AlphaRange.B.A);
 

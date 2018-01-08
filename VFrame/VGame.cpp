@@ -85,11 +85,8 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	VGlobal::p()->WindowStyle = flags;
 	VGlobal::p()->ContextSettings = settings;
 
-	std::random_device device{};
-	VGlobal::p()->Random->Reset(device());
-
 	VBase::VLog("Welcome to the ViglanteFramework - Version:%s ", VFRAME_VERSION);
-	VBase::VLog("Starting Game: %s", title.toAnsiString().c_str());
+	VBase::VLog("Starting Game: %s", title.toUtf8().c_str());
 
 	VGlobal::p()->App->create(sf::VideoMode(windowwidth, windowheight), title, flags, settings);
 	VGlobal::p()->RenderState = sf::RenderStates::Default;
@@ -97,7 +94,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	int error = 0;
 	if ((error = Init()))
 	{
-		VBase::VLog("Error in Init(): %d", error);
+		VBase::VLogError("Error in Init(): %d", error);
 		return error;
 	}
 
@@ -158,7 +155,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 
 	if ((error = Cleanup()))
 	{
-		VBase::VLog("Error in Cleanup(): %d", error);
+		VBase::VLogError("Error in Cleanup(): %d", error);
 		return error;
 	}
 

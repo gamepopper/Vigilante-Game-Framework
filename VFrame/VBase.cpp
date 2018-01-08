@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <term.h>
 #include <curses.h>
-#include <gtk/gtk.h>
+//#include <gtk/gtk.h>
 #endif
 
 #include <stdarg.h>
@@ -93,7 +93,7 @@ void VBase::VLogError(const char* format, ...)
 #endif
 
 #ifdef __linux__
-	if (gtk_init_check(0, NULL))
+	/*if (gtk_init_check(0, NULL))
 	{
 		GtkWidget *dialog = gtk_message_dialog_new(NULL,
 			GTK_DIALOG_MODAL,
@@ -106,7 +106,7 @@ void VBase::VLogError(const char* format, ...)
 
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		while (g_main_context_iteration(NULL, false));
-	}
+	}*/
 	throw output;
 #else
 	MessageBoxW(NULL, output, NULL, MB_TASKMODAL | MB_ICONERROR | MB_OK);

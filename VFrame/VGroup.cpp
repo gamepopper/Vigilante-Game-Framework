@@ -13,7 +13,7 @@ VBase* VGroup::Add(VBase* object)
 
 	if (object == this)
 	{
-		VLog("Cannot add itself to it's own list");
+		VLogError("Cannot add itself to it's own list");
 		return nullptr;
 	}
 

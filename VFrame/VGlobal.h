@@ -20,7 +20,7 @@
 #include <sstream>
 #endif
 
-#define VFRAME_VERSION "0.9.9.14"
+#define VFRAME_VERSION "0.9.9.15"
 
 class VBase;
 class VObject;
