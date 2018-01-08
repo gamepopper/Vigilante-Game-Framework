@@ -22,6 +22,7 @@ protected:
 	std::unique_ptr<V3DMaterial> material;
 
 	std::vector<GLfloat> modelData;
+	std::vector<unsigned int> modelIndices;
 	int vertexArrayOffset = 0;
 	int normalArrayOffset = -1;
 	int textureArrayOffset = -1;
@@ -62,6 +63,10 @@ public:
 	Setting to -1 ignores parameter.
 	*/
 	bool LoadModelData(const std::vector<GLfloat>& data, int vertexPos, int normalPos = -1, int texturePos = -1, int colourPos = -1);
+	/*
+	Loads model indices, used if model array requires index rendering.
+	*/
+	bool LoadModelIndices(const std::vector<unsigned int>& data);
 	/*Loads texture from filepath string*/
 	bool LoadTexture(const sf::String& filename, bool mipmap = false);
 	/*Loads texture from sf::Texture object*/
