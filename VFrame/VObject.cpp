@@ -429,6 +429,7 @@ void VObject::SetPositionAtCentre(float x, float y)
 void VObject::SetPositionAtCentre(sf::Vector2f newPos)
 {
 	Position = newPos - (sf::Vector2f(Size) / 2.0f);
+	Last = Position;
 }
 
 void VObject::Reset(sf::Vector2f newPos)
