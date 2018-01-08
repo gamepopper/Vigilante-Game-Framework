@@ -12,7 +12,7 @@ void VText::setDimensions()
 	{
 		font = new sf::Font();
 		if (font->loadFromFile("arial.ttf"))
-			SetFormat(*font, FontSize);
+			SetFormat(*font, FontSize, GetFillTint(), Alignment, Style);
 
 		disposible = true;
 	}
