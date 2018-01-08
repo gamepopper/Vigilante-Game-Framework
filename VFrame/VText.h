@@ -30,6 +30,7 @@ protected:
 	sf::Transformable transformable;
 	sf::Font* font = nullptr;
 	bool dirty = false;
+	bool disposible = false;
 
 	sf::Vector2f origin;
 	sf::Color fillColour = sf::Color::White;
@@ -66,9 +67,6 @@ public:
 
 		Moves = false;
 
-		if (font->loadFromFile("arial.ttf"))
-			SetFormat(*font, charSize);
-
 #ifdef _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);
 #endif
@@ -83,9 +81,6 @@ public:
 		transformable.setPosition(position);
 
 		Moves = false;
-
-		if (font->loadFromFile("arial.ttf"))
-			SetFormat(*font, charSize);
 
 #ifdef _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);

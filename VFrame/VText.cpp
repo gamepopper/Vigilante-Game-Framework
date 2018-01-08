@@ -8,6 +8,15 @@ using std::getline;
 
 void VText::setDimensions()
 {
+	if (font == nullptr)
+	{
+		font = new sf::Font();
+		if (font->loadFromFile("arial.ttf"))
+			SetFormat(*font, FontSize);
+
+		disposible = true;
+	}
+
 	vertices.clear();
 	vertices.setPrimitiveType(sf::Triangles);
 
@@ -236,6 +245,13 @@ void VText::setTextLine(float x, float y, sf::Color color, float offset, float t
 
 VText* VText::SetFormat(const sf::String& filename, int charSize, sf::Color colour, VTextAlign alignment, int style)
 {
+	if (disposible)
+	{
+		delete font;
+		font = nullptr;
+		disposible = false;
+	}
+
 	font = &VGlobal::p()->Content->LoadFont(filename);
 	Alignment = alignment;
 	FontSize = charSize;
@@ -249,6 +265,13 @@ VText* VText::SetFormat(const sf::String& filename, int charSize, sf::Color colo
 
 VText* VText::SetFormat(sf::Font& font, int charSize, sf::Color colour, VTextAlign alignment, int style)
 {
+	if (disposible)
+	{
+		delete this->font;
+		this->font = nullptr;
+		disposible = false;
+	}
+
 	this->font = &font;
 	Alignment = alignment;
 	FontSize = charSize;
@@ -294,6 +317,13 @@ void VText::Destroy()
 {
 	VSUPERCLASS::Destroy();
 	vertices.clear();
+
+	if (disposible)
+	{
+		delete font;
+		font = nullptr;
+		disposible = false;
+	}
 }
 
 void VText::Update(float dt)
