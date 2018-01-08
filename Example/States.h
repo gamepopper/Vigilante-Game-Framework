@@ -70,6 +70,7 @@ public:
 		sprite2->ApplyChanges();
 
 		auto text = new VText(standardSprite->Position.x, 200, 400, "Press 1: Start Animation\nPress 2: Shotgun Animation\nPress 3: Railgun Animation\nPress 4: Double Barrel Animation", 21);
+		text->ApplyChanges();
 
 		Add(standardSprite);
 		Add(animatedSprite);
@@ -159,6 +160,7 @@ public:
 		sprite2->ApplyChanges();
 
 		auto text = new VText(standardSprite->Position.x - 40, 300, 480, "Press WASD: Resize Standard Tiled Sprite\nPress IJKL: Resize Animated Tiled Sprite", 21);
+		text->ApplyChanges();
 
 		Add(sprite1);
 		Add(sprite2);
@@ -470,8 +472,10 @@ public:
 
 		auto overlapText = new VText(sprite1->Position.x, 100.0f, 160, "Overlap These", 16);
 		overlapText->Alignment = VTextAlign::ALIGNCENTER;
+		overlapText->ApplyChanges();
 		auto collideText = new VText(sprite3->Position.x, 100.0f, 160, "Collide These", 16);
 		collideText->Alignment = VTextAlign::ALIGNCENTER;
+		collideText->ApplyChanges();
 
 		Add(overlapText);
 		Add(collideText);
@@ -1162,6 +1166,7 @@ public:
 
 		auto text = new VText(15.0f, 50.0f - 4, (float)VGlobal::p()->Width - 20.0f, "", 9);
 		text->Alignment = VTextAlign::ALIGNLEFT;
+		text->ApplyChanges();
 		Add(text);
 
 		for (int i = 0; i < VInterpolate::NumInterpolationTypes; i++)
@@ -1504,8 +1509,8 @@ public:
 		Add(pixel);
 
 		normalText = new VText(0.0f, VGlobal::p()->Height / 2.0f, VGlobal::p()->Width * 1.0f);
-		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 32, sf::Color::White, VTextAlign::ALIGNCENTER);
 		normalText->Text = L"LOADING MAP";
+		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 32, sf::Color::White, VTextAlign::ALIGNCENTER);
 		Add(normalText);
 
         auto f = std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this));
