@@ -22,8 +22,12 @@ public:
 	VAnimationManager() {}
 	VAnimationManager(int TextureWidth, int TextureHeight, int FrameWidth, int FrameHeight, int OffsetX, int OffsetY)
 	{
-		animWidth = TextureWidth / FrameWidth;
-		animHeight = TextureHeight / FrameHeight;
+        if (FrameWidth > 0 && FrameHeight > 0)
+        {
+            animWidth = TextureWidth / FrameWidth;
+            animHeight = TextureHeight / FrameHeight;
+		}
+
 		frameWidth = FrameWidth;
 		frameHeight = FrameHeight;
 		offsetX = OffsetX;
