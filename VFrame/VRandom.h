@@ -1,30 +1,34 @@
 #pragma once
 #include <random>
+#include <chrono>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Color.hpp>
 
 class VRandom
 {
-	std::default_random_engine engine;
-	std::random_device device;
+	std::mt19937 engine;
 
 public:
 	VRandom()
 	{
-		engine.seed(device());
+		Reset();
 	}
 	VRandom(unsigned int seed)
 	{
-		engine.seed(seed);
+		Reset(seed);
 	}
 	~VRandom() = default;
 
 	//Reset RNG.
-	void Reset() { Reset(device()); }
+	void Reset() 
+	{
+		unsigned int now = static_cast<unsigned int>(
+			std::chrono::duration_cast<std::chrono::milliseconds>
+			(std::chrono::system_clock::now().time_since_epoch()).count());
+		Reset(now); 
+	}
 	//Reset RNG seed.
-	void Reset(unsigned int seed) { engine.seed(seed); }
-	//Reset RNG device.
-	void Reset(std::random_device device) { engine.seed(device()); }
+	void Reset(unsigned int seed) { engine = std::mt19937(seed); }
 
 	//Get random float.
 	float GetFloat(float max, float min = 0);
