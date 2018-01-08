@@ -29,13 +29,15 @@ void VTiledSprite::updateFrame()
 
 VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, const sf::IntRect& area)
 {
-	if (texture)
+	if (texture && disposible)
 	{
 		delete texture;
 		texture = nullptr;
+		disposible = false;
 	}
 
 	texture = new sf::Texture();
+	disposible = true;
 
 	sf::Texture* tex = &VGlobal::p()->Content->LoadTexture(filename);
 	image = std::unique_ptr<sf::Image>(new sf::Image(tex->copyToImage()));
@@ -52,16 +54,18 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 	return this;
 }
 
-VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, const sf::IntRect& area)
+VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& tex, bool animated, int width, int height, const sf::IntRect& area)
 {
-	if (this->texture)
+	if (texture && disposible)
 	{
-		delete this->texture;
-		this->texture = nullptr;
+		delete texture;
+		texture = nullptr;
+		disposible = false;
 	}
 
 	this->texture = new sf::Texture();
-	image = std::unique_ptr<sf::Image>(new sf::Image(texture.copyToImage()));
+	disposible = true;
+	image = std::unique_ptr<sf::Image>(new sf::Image(tex.copyToImage()));
 
 	setSize(image->getSize().x, image->getSize().y, animated, width, height);
 	Origin = sf::Vector2f();
@@ -69,7 +73,7 @@ VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animate
 	width = width == 0 ? image->getSize().x : width;
 	height = height == 0 ? image->getSize().y : height;
 
-	sprite = sf::Sprite(*this->texture);
+	sprite = sf::Sprite(*texture);
 	updateFrame();
 
 	return this;
@@ -79,12 +83,6 @@ void VTiledSprite::Destroy()
 {
 	VSUPERCLASS::Destroy();
 	image.reset();
-
-	if (texture)
-	{
-		delete texture;
-		texture = nullptr;
-	}
 }
 
 void VTiledSprite::Update(float dt)
