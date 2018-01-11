@@ -144,11 +144,11 @@ bool V3DObjModel::LoadModelData(const char* filename)
 				for (int k = 0; k < 3; k++) 
 				{
 					vb.push_back(v[k][0]);
-					vb.push_back(-v[k][1]);
+					vb.push_back(v[k][1]);
 					vb.push_back(v[k][2]);
-					vb.push_back(n[k][0]);
-					vb.push_back(-n[k][1]);
-					vb.push_back(n[k][2]);
+					vb.push_back(-n[k][0]);
+					vb.push_back(n[k][1]);
+					vb.push_back(-n[k][2]);
 					// Combine normal and diffuse to get color.
 					float c[3] = {
 						diffuse[0],
@@ -224,12 +224,13 @@ void V3DObjModel::CalcNormal(float N[3], float v0[3], float v1[3], float v2[3])
 	N[1] = v20[2] * v10[0] - v20[0] * v10[2];
 	N[2] = v20[0] * v10[1] - v20[1] * v10[0];
 
-	float len2 = N[0] * N[0] + N[1] * N[1] + N[2] * N[2];
+	float len2 = (N[0] * N[0]) + (N[1] * N[1]) + (N[2] * N[2]);
 	if (len2 > 0.0f) {
 		float len = sqrtf(len2);
 
 		N[0] /= len;
 		N[1] /= len;
+		N[2] /= len;
 	}
 }
 

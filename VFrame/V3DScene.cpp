@@ -77,8 +77,6 @@ void V3DScene::SetupScene()
 	glDepthMask(GL_TRUE);
 	glClearDepth(1.f);
 
-	glEnable(GL_NORMALIZE);
-
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
@@ -102,6 +100,8 @@ void V3DScene::SetupScene()
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
+
+	glEnable(GL_NORMALIZE);
 
 	for (int i = 0; i <= 7; i++)
 	{
