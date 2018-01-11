@@ -950,6 +950,8 @@ public:
 	}
 };
 
+#include "ScoreboardEffect.h"
+
 //3D Graphics
 /*
 OpenGL 3D Graphics rendering. Limited but possible for 2.5D projects if I get around to writing a better model renderer.
@@ -965,69 +967,72 @@ public:
 	float timer = 0.0f;
 	V3DScene* scene;
 	V3DObject* model;
-	V3DObject* moon;
 
 	virtual void Initialise()
 	{
 		VSUPERCLASS::Initialise();
 
-		//std::vector<GLfloat> cube =
-		//{
-		//	// positions    // uv	// normals	//colors
-		//	-80, 80, -80,	1, 0,	0, 1, 0,	1, 1, 1, 1,
-		//	-80, 80, 80,	1, 1,	0, 1, 0,	1, 1, 1, 1,
-		//	80, 80, 80,		0, 1,	0, 1, 0,	1, 1, 1, 1,
-		//	80, 80, 80,		0, 1,	0, 1, 0,	1, 1, 1, 1,
-		//	80, 80, -80,	0, 0,	0, 1, 0,	1, 1, 1, 1,
-		//	-80, 80, -80,	1, 0,	0, 1, 0,	1, 1, 1, 1,
-		//	-80, -80, -80,	0, 0,	0, -1, 0,	1, 1, 1, 1,
-		//	80, -80, -80,	1, 0,	0, -1, 0,	1, 1, 1, 1,
-		//	80, -80, 80,	1, 1,	0, -1, 0,	1, 1, 1, 1,
-		//	80, -80, 80,	1, 1,	0, -1, 0,	1, 1, 1, 1,
-		//	-80, -80, 80,	0, 1,	0, -1, 0,	1, 1, 1, 1,
-		//	-80, -80, -80,	0, 0,	0, -1, 0,	1, 1, 1, 1,
-		//	-80, 80, -80,	0, 0,	0, 0, -1,	1, 1, 1, 1,
-		//	80, 80, -80,	1, 0,	0, 0, -1,	1, 1, 1, 1,
-		//	80, -80, -80,	1, 1,	0, 0, -1,	1, 1, 1, 1,
-		//	80, -80, -80,	1, 1,	0, 0, -1,	1, 1, 1, 1,
-		//	-80, -80, -80,	0, 1,	0, 0, -1,	1, 1, 1, 1,
-		//	-80, 80, -80,	0, 0,	0, 0, -1,	1, 1, 1, 1,
-		//	80, 80, -80,	0, 0,	1, 0, 0,	1, 1, 1, 1,
-		//	80, 80, 80,		1, 0,	1, 0, 0,	1, 1, 1, 1,
-		//	80, -80, 80,	1, 1,	1, 0, 0,	1, 1, 1, 1,
-		//	80, -80, 80,	1, 1,	1, 0, 0,	1, 1, 1, 1,
-		//	80, -80, -80,	0, 1,	1, 0, 0,	1, 1, 1, 1,
-		//	80, 80, -80,	0, 0,	1, 0, 0,	1, 1, 1, 1,
-		//	80, 80, 80,		0, 0,	0, 0, 1,	1, 1, 1, 1,
-		//	-80, 80, 80,	1, 0,	0, 0, 1,	1, 1, 1, 1,
-		//	-80, -80, 80,	1, 1,	0, 0, 1,	1, 1, 1, 1,
-		//	-80, -80, 80,	1, 1,	0, 0, 1,	1, 1, 1, 1,
-		//	80, -80, 80,	0, 1,	0, 0, 1,	1, 1, 1, 1,
-		//	80, 80, 80,		0, 0,	0, 0, 1,	1, 1, 1, 1,
-		//	-80, 80, 80,	0, 0,	-1, 0, 0,	1, 1, 1, 1,
-		//	-80, 80, -80,	1, 0,	-1, 0, 0,	1, 1, 1, 1,
-		//	-80, -80, -80,	1, 1,	-1, 0, 0,	1, 1, 1, 1,
-		//	-80, -80, -80,	1, 1,	-1, 0, 0,	1, 1, 1, 1,
-		//	-80, -80, 80,	0, 1,	-1, 0, 0,	1, 1, 1, 1,
-		//	-80, 80, 80,	0, 0,	-1, 0, 0,	1, 1, 1, 1,
-		//};
+		std::vector<GLfloat> cube =
+		{
+			// positions    // uv	// normals	//colors
+			-80, 80, -80,	1, 0,	0, 1, 0,	1, 1, 1, 1,
+			-80, 80, 80,	1, 1,	0, 1, 0,	1, 1, 1, 1,
+			80, 80, 80,		0, 1,	0, 1, 0,	1, 1, 1, 1,
+			80, 80, 80,		0, 1,	0, 1, 0,	1, 1, 1, 1,
+			80, 80, -80,	0, 0,	0, 1, 0,	1, 1, 1, 1,
+			-80, 80, -80,	1, 0,	0, 1, 0,	1, 1, 1, 1,
+			-80, -80, -80,	0, 0,	0, -1, 0,	1, 1, 1, 1,
+			80, -80, -80,	1, 0,	0, -1, 0,	1, 1, 1, 1,
+			80, -80, 80,	1, 1,	0, -1, 0,	1, 1, 1, 1,
+			80, -80, 80,	1, 1,	0, -1, 0,	1, 1, 1, 1,
+			-80, -80, 80,	0, 1,	0, -1, 0,	1, 1, 1, 1,
+			-80, -80, -80,	0, 0,	0, -1, 0,	1, 1, 1, 1,
+			-80, 80, -80,	0, 0,	0, 0, -1,	1, 1, 1, 1,
+			80, 80, -80,	1, 0,	0, 0, -1,	1, 1, 1, 1,
+			80, -80, -80,	1, 1,	0, 0, -1,	1, 1, 1, 1,
+			80, -80, -80,	1, 1,	0, 0, -1,	1, 1, 1, 1,
+			-80, -80, -80,	0, 1,	0, 0, -1,	1, 1, 1, 1,
+			-80, 80, -80,	0, 0,	0, 0, -1,	1, 1, 1, 1,
+			80, 80, -80,	0, 0,	1, 0, 0,	1, 1, 1, 1,
+			80, 80, 80,		1, 0,	1, 0, 0,	1, 1, 1, 1,
+			80, -80, 80,	1, 1,	1, 0, 0,	1, 1, 1, 1,
+			80, -80, 80,	1, 1,	1, 0, 0,	1, 1, 1, 1,
+			80, -80, -80,	0, 1,	1, 0, 0,	1, 1, 1, 1,
+			80, 80, -80,	0, 0,	1, 0, 0,	1, 1, 1, 1,
+			80, 80, 80,		0, 0,	0, 0, 1,	1, 1, 1, 1,
+			-80, 80, 80,	1, 0,	0, 0, 1,	1, 1, 1, 1,
+			-80, -80, 80,	1, 1,	0, 0, 1,	1, 1, 1, 1,
+			-80, -80, 80,	1, 1,	0, 0, 1,	1, 1, 1, 1,
+			80, -80, 80,	0, 1,	0, 0, 1,	1, 1, 1, 1,
+			80, 80, 80,		0, 0,	0, 0, 1,	1, 1, 1, 1,
+			-80, 80, 80,	0, 0,	-1, 0, 0,	1, 1, 1, 1,
+			-80, 80, -80,	1, 0,	-1, 0, 0,	1, 1, 1, 1,
+			-80, -80, -80,	1, 1,	-1, 0, 0,	1, 1, 1, 1,
+			-80, -80, -80,	1, 1,	-1, 0, 0,	1, 1, 1, 1,
+			-80, -80, 80,	0, 1,	-1, 0, 0,	1, 1, 1, 1,
+			-80, 80, 80,	0, 0,	-1, 0, 0,	1, 1, 1, 1,
+		};
 
-		/*V3DModel* obj = new V3DModel();
-		obj->LoadModelData(cube, 0, 5, 3, 8);
-		obj->SetMaterial(sf::Color::White, sf::Color::White, 30.0f);
-		obj->LoadTexture("Example/Assets/texture.jpg", true);
-		obj->Scale = sf::Vector3f(0.01f, 0.01f, 0.01f);
-		model = obj;*/
+		V3DModel* obj2 = new V3DModel();
+		obj2->LoadModelData(cube, 0, 5, 3, 8);
+		obj2->SetMaterial(sf::Color::White, sf::Color::White, 30.0f);
+		obj2->LoadTexture("Example/Assets/texture.jpg", true);
+		obj2->Position = sf::Vector3f(2.0f, 0.0f, -7.5f);
+		obj2->Scale = sf::Vector3f(0.01f, 0.01f, 0.01f);
+		model = obj2;
 
-		model = new V3DObjModel();
-		model->LoadModelData("Example/Assets/Low-Poly-Racing-Car.obj");
+		V3DObjModel* obj1 = new V3DObjModel();
+		obj1->LoadModelData("Example/Assets/Low-Poly-Racing-Car.obj");
+		obj1->Position = sf::Vector3f(-2.0f, -1.0f, -7.5f);
+		obj1->AngleVelocity = sf::Vector3f(0.0f, 20.0f, 0.0f);
+		obj1->Scale = sf::Vector3f(0.01f, 0.01f, 0.01f);
 
 		scene = new V3DScene(0.0f, 0.0f, VGlobal::p()->Width, VGlobal::p()->Height);
-		scene->SetLight(GL_LIGHT0, sf::Color(0, 0, 0), sf::Color(255, 255, 255), sf::Color(255, 255, 255), sf::Vector3f(1.0f, 0.0f, -1.0f));
+		scene->SetLight(GL_LIGHT0, sf::Color(0, 0, 0), sf::Color(255, 255, 255), sf::Color(255, 255, 255), sf::Vector3f(1.0f, 0.0f, 1.0f));
 		scene->SetGlobalLight(sf::Color(50, 50, 50));
 		scene->Camera = std::make_unique<V3DPerspectiveCamera>(45.0f, 1.0f, 700.0f);
-		scene->Add(model);
-		scene->Add(moon);
+		scene->Add(obj1);
+		scene->Add(obj2);
 		Add(scene);
 
 		VPostEffectMultipass* multipass = new VPostEffectMultipass(2);
@@ -1047,15 +1052,7 @@ public:
 		VSUPERCLASS::Update(dt);
 		timer += dt * 15.0f;
 
-		float x = 0;
-		float y = 0;
-		model->Position = sf::Vector3f(x, y, -5.0f);
-		model->Rotation = sf::Vector3f(0.0f, -timer, 0);
-
-		x -= cosf(timer / 27.322f) * 5.655f;
-		float z = sinf(timer / 27.322f) * 5.655f;
-		moon->Position = sf::Vector3f(x, y, z - 5.0f);
-		moon->Rotation = sf::Vector3f(0.0f, -timer / 27, 0);
+		model->Rotation = sf::Vector3f(sinf(timer * 0.15f) * 20.0f, -timer, 45.0f + cosf(timer * 0.15f) * 30.0f);
 
 		scene->Camera->Position.x += VGlobal::p()->Input->CurrentAxisValue("leftX") * 0.01f * dt;
 		scene->Camera->Position.y += VGlobal::p()->Input->CurrentAxisValue("leftY") * 0.01f * dt;
@@ -1321,49 +1318,6 @@ public:
 	}
 };
 
-//class DissolveState : public VSubState
-//{
-//	typedef VSubState VSUPERCLASS;
-//
-//public:
-//	DissolveState() : VSubState() {}
-//	~DissolveState() = default;
-//
-//	VPostEffect* postEffect;
-//	VRenderGroup* vfx;
-//
-//	sf::Clock clock;
-//
-//	virtual void Initialise()
-//	{
-//		VSUPERCLASS::Initialise();
-//
-//		postEffect = new VPostEffect("Example/Assets/Dissolve.frag", sf::Shader::Fragment);
-//		postEffect->SetInputTextureName("texture");
-//		postEffect->SetParameter("textureSize", (float)VGlobal::p()->Width, (float)VGlobal::p()->Height);
-//		postEffect->SetParameter("minAcc", 60.0f);
-//		postEffect->SetParameter("maxAcc", 80.0f);
-//		postEffect->SetParameter("sectionWidth", 1);
-//		postEffect->SetParameter("seed", 0);
-//		postEffect->SetParameter("bgColor", sf::Color::Red);
-//
-//		vfx = new VRenderGroup(0, 0, VGlobal::p()->Width, VGlobal::p()->Height);
-//
-//		VSprite* background = new VSprite();
-//		background->LoadGraphic("Example/Assets/AWOO.png");
-//
-//		vfx->PostEffect = postEffect;
-//		vfx->Add(background);
-//		Add(vfx);
-//	}
-//
-//	virtual void Update(float dt)
-//	{
-//		VSUPERCLASS::Update(dt);
-//		postEffect->SetParameter("time", clock.getElapsedTime().asSeconds());
-//	}
-//};
-
 #define TWOPI 6.283185307f
 
 //Text Path
@@ -1607,11 +1561,12 @@ public:
 	}
 };
 
-
 class DemoStatesManager : public VState
 {
 public:
 	typedef VState VSUPERCLASS;
+
+	VGroup* stateText = nullptr;
 
 	int CurrentPage = 0;
 	void SetNewPage();

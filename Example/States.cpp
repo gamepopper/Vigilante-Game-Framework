@@ -13,9 +13,9 @@ enum DemoPages
 	PAGE_INTERPOLATE,
 	PAGE_PARTICLES,
 	PAGE_TRAILAREA,
-	PAGE_BACKDROP,
 	PAGE_LIGHTING2D,
 	PAGE_GRAPHICS3D,
+	PAGE_BACKDROP,
 	PAGE_ASYNC,
 	NUM_DEMOPAGES,
 };
@@ -94,9 +94,6 @@ void DemoStatesManager::SetNewPage()
 	{
 		VTimeManager::p()->Clear();
 	}
-	
-	debugTimer = new VTimer(false);
-	VTimeManager::p()->AddTimer(debugTimer);
 
 	ResetSubState();
 	subState->Add(stateText);
@@ -125,18 +122,10 @@ void DemoStatesManager::Initialise()
 	header->ScrollFactor = sf::Vector2f();
 	header->ZoomFactor = 0;
 
-	auto debug = new VText(5.0f, 10.0f, (float)VGlobal::p()->Width - 10.0f, "", 12);
-	debug->Alignment = VTextAlign::ALIGNLEFT;
-	debug->ScrollFactor = sf::Vector2f();
-	debug->ZoomFactor = 0;
-	debug->ApplyChanges();
-	debugMessages = debug;
-
-	stateText = new VGroup(4);
+	stateText = new VGroup(3);
 	stateText->Add(header);
 	stateText->Add(title);
 	stateText->Add(version);
-	stateText->Add(debugMessages);
 
 	SetNewPage();
 	SubState->Add(stateText);
@@ -193,23 +182,6 @@ void DemoStatesManager::Initialise()
 	VGlobal::p()->Input->SetButtonInput("rightStick", sf::Keyboard::N, sf::XInputDevice::RIGHT_THUMB);
 	VGlobal::p()->Input->SetButtonInput("Back", sf::Keyboard::BackSpace, sf::XInputDevice::BACK);
 	VGlobal::p()->Input->SetButtonInput("Start", sf::Keyboard::Return, sf::XInputDevice::START);
-#endif
-}
-
-void DemoStatesManager::Update(float dt)
-{
-	VSUPERCLASS::Update(dt);
-
-#ifdef _DEBUG
-	if (debugMessages == nullptr)
-		return;
-
-	if (debugTimer->Seconds() > 1)
-	{
-		debugMessages->Text = "FPS: " + std::to_string(static_cast<int>(1.0f / dt)) + " - Objects: " + std::to_string(VBase::DebugObjectCount);
-		debugMessages->ApplyChanges();
-		debugTimer->Restart();
-	}
 #endif
 }
 
