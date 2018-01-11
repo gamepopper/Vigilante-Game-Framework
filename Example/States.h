@@ -1035,13 +1035,13 @@ public:
 		scene->Add(obj2);
 		Add(scene);
 
-		VPostEffectMultipass* multipass = new VPostEffectMultipass(2);
+		/*VPostEffectMultipass* multipass = new VPostEffectMultipass(2);
 		ScoreboardEffect* scoreboard = new ScoreboardEffect();
 		scoreboard->SetPointSize(0.75f);
 		scoreboard->SetPointAmount(VGlobal::p()->Height / 10);
 		scoreboard->SetBlur(true, 0.3f);
 		multipass->AddPostEffect(scoreboard);
-		/*BloomPostEffect* bloom = new BloomPostEffect();
+		BloomPostEffect* bloom = new BloomPostEffect();
 		bloom->SetBloomFactor(0.4f);
 		multipass->AddPostEffect(bloom);
 		VGlobal::p()->PostProcess = scoreboard;*/

@@ -112,10 +112,18 @@
     <ClCompile Include="VFrame\depend\gamepad.c">
       <Filter>VFrame\depend</Filter>
     </ClCompile>
+    <ClCompile Include="Example\ScoreboardEffect.cpp">
+      <Filter>Example</Filter>
     </ClCompile>
-    <ClCompile Include="VFrame\VTimer.cpp" />
-    <ClCompile Include="VFrame\V3DObjModel.cpp" />
-    <ClCompile Include="VFrame\VShape.cpp" />
+    <ClCompile Include="VFrame\V3DObjModel.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VShape.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\VTimer.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\BloomPostEffect.h">
@@ -241,11 +249,18 @@
     <ClInclude Include="VFrame\depend\gamepad.h">
       <Filter>VFrame\depend</Filter>
     </ClInclude>
+    <ClInclude Include="Example\ScoreboardEffect.h">
+      <Filter>Example</Filter>
     </ClInclude>
-    <ClInclude Include="VFrame\VTimer.h" />
-    <ClInclude Include="VFrame\depend\tiny_obj_loader.h" />
-    <ClInclude Include="VFrame\V3DObjModel.h" />
-    <ClInclude Include="VFrame\VShape.h" />
+    <ClInclude Include="VFrame\V3DObjModel.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VShape.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\VTimer.h">
+      <Filter>VFrame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\Assets\Backdrop.png">

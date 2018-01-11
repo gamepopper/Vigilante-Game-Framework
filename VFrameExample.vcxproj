@@ -14,18 +14,19 @@
     <ProjectGuid>{4E9AE9B7-0431-431F-AE5E-E6F15CC09C4B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SFMLPractice</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -41,9 +42,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\Intermediate\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\Intermediate\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="Example\BloomPostEffect.cpp" />
     <ClCompile Include="Example\PerlinNoise.cpp" />
+    <ClCompile Include="Example\ScoreboardEffect.cpp" />
     <ClCompile Include="Example\States.cpp" />
     <ClCompile Include="Example\main.cpp" />
     <ClCompile Include="VFrame\V3DObjModel.cpp" />
@@ -128,10 +134,10 @@
   <ItemGroup>
     <ClInclude Include="Example\BloomPostEffect.h" />
     <ClInclude Include="Example\PerlinNoise.h" />
+    <ClInclude Include="Example\ScoreboardEffect.h" />
     <ClInclude Include="Example\States.h" />
     <ClInclude Include="VFrame\V3DObjModel.h" />
     <ClInclude Include="VFrame\depend\gamepad.h" />
-    <ClInclude Include="VFrame\depend\tiny_obj_loader.h" />
     <ClInclude Include="VFrame\V3DModel.h" />
     <ClInclude Include="VFrame\V3DObject.h" />
     <ClInclude Include="VFrame\V3DScene.h" />
