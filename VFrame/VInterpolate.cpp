@@ -127,7 +127,7 @@ float VInterpolate::elasticInOut(float t, float b, float c, float d)
 
 	if (t < 1) {
 		float postFix = a*powf(2, 10 * (t -= 1)); // postIncrement is evil
-		return -.5f*(postFix* sin((t*d - s)*(2 * PI) / p)) + b;
+		return -.5f*(postFix* sinf((t*d - s)*(2 * PI) / p)) + b;
 	}
 	float postFix = a*powf(2, -10 * (t -= 1)); // postIncrement is evil
 	return postFix * sinf((t*d - s)*(2 * PI) / p)*.5f + c + b;

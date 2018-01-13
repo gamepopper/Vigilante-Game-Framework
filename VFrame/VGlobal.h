@@ -49,7 +49,6 @@ public:
 	std::unique_ptr<sf::RenderWindow> App;
 	//RenderState for entire rendered scene.
 	sf::RenderStates RenderState;
-
 	//Offset for the game's viewport, important when the window is resized.
 	sf::Vector2f ViewportOffset;
 
