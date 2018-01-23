@@ -15,6 +15,7 @@
 #include "../VFrame/VTypedText.h"
 #include "../VFrame/XInputDevice.h"
 #include "../VFrame/V3DScene.h"
+#include "../VFrame/V3DLightShader.h"
 #include "../VFrame/V3DModel.h"
 #include "../VFrame/V3DObjModel.h"
 #include "../VFrame/VTimer.h"
@@ -966,73 +967,99 @@ public:
 
 	float timer = 0.0f;
 	V3DScene* scene;
-	V3DObject* model;
+	V3DLightShader* lightShader;
+	V3DModel* lightModel;
+	sf::Vector3f lightPos;
 
 	virtual void Initialise()
 	{
 		VSUPERCLASS::Initialise();
 
-		std::vector<GLfloat> cube =
-		{
-			// positions    // uv	// normals	//colors
-			-80, 80, -80,	1, 0,	0, 1, 0,	1, 1, 1, 1,
-			-80, 80, 80,	1, 1,	0, 1, 0,	1, 1, 1, 1,
-			80, 80, 80,		0, 1,	0, 1, 0,	1, 1, 1, 1,
-			80, 80, 80,		0, 1,	0, 1, 0,	1, 1, 1, 1,
-			80, 80, -80,	0, 0,	0, 1, 0,	1, 1, 1, 1,
-			-80, 80, -80,	1, 0,	0, 1, 0,	1, 1, 1, 1,
-			-80, -80, -80,	0, 0,	0, -1, 0,	1, 1, 1, 1,
-			80, -80, -80,	1, 0,	0, -1, 0,	1, 1, 1, 1,
-			80, -80, 80,	1, 1,	0, -1, 0,	1, 1, 1, 1,
-			80, -80, 80,	1, 1,	0, -1, 0,	1, 1, 1, 1,
-			-80, -80, 80,	0, 1,	0, -1, 0,	1, 1, 1, 1,
-			-80, -80, -80,	0, 0,	0, -1, 0,	1, 1, 1, 1,
-			-80, 80, -80,	0, 0,	0, 0, -1,	1, 1, 1, 1,
-			80, 80, -80,	1, 0,	0, 0, -1,	1, 1, 1, 1,
-			80, -80, -80,	1, 1,	0, 0, -1,	1, 1, 1, 1,
-			80, -80, -80,	1, 1,	0, 0, -1,	1, 1, 1, 1,
-			-80, -80, -80,	0, 1,	0, 0, -1,	1, 1, 1, 1,
-			-80, 80, -80,	0, 0,	0, 0, -1,	1, 1, 1, 1,
-			80, 80, -80,	0, 0,	1, 0, 0,	1, 1, 1, 1,
-			80, 80, 80,		1, 0,	1, 0, 0,	1, 1, 1, 1,
-			80, -80, 80,	1, 1,	1, 0, 0,	1, 1, 1, 1,
-			80, -80, 80,	1, 1,	1, 0, 0,	1, 1, 1, 1,
-			80, -80, -80,	0, 1,	1, 0, 0,	1, 1, 1, 1,
-			80, 80, -80,	0, 0,	1, 0, 0,	1, 1, 1, 1,
-			80, 80, 80,		0, 0,	0, 0, 1,	1, 1, 1, 1,
-			-80, 80, 80,	1, 0,	0, 0, 1,	1, 1, 1, 1,
-			-80, -80, 80,	1, 1,	0, 0, 1,	1, 1, 1, 1,
-			-80, -80, 80,	1, 1,	0, 0, 1,	1, 1, 1, 1,
-			80, -80, 80,	0, 1,	0, 0, 1,	1, 1, 1, 1,
-			80, 80, 80,		0, 0,	0, 0, 1,	1, 1, 1, 1,
-			-80, 80, 80,	0, 0,	-1, 0, 0,	1, 1, 1, 1,
-			-80, 80, -80,	1, 0,	-1, 0, 0,	1, 1, 1, 1,
-			-80, -80, -80,	1, 1,	-1, 0, 0,	1, 1, 1, 1,
-			-80, -80, -80,	1, 1,	-1, 0, 0,	1, 1, 1, 1,
-			-80, -80, 80,	0, 1,	-1, 0, 0,	1, 1, 1, 1,
-			-80, 80, 80,	0, 0,	-1, 0, 0,	1, 1, 1, 1,
-		};
-
-		V3DModel* obj2 = new V3DModel();
-		obj2->LoadModelData(cube, 0, 5, 3, 8);
-		obj2->SetMaterial(sf::Color::White, sf::Color::White, 30.0f);
-		obj2->LoadTexture("Example/Assets/texture.jpg", true);
-		obj2->Position = sf::Vector3f(2.0f, 0.0f, -7.5f);
-		obj2->Scale = sf::Vector3f(0.01f, 0.01f, 0.01f);
-		model = obj2;
-
-		V3DObjModel* obj1 = new V3DObjModel();
-		obj1->LoadModelData("Example/Assets/Low-Poly-Racing-Car.obj");
-		obj1->Position = sf::Vector3f(-2.0f, -1.0f, -7.5f);
-		obj1->AngleVelocity = sf::Vector3f(0.0f, 20.0f, 0.0f);
-		obj1->Scale = sf::Vector3f(0.01f, 0.01f, 0.01f);
+		float aspectRatio = VGlobal::p()->Width / (float)VGlobal::p()->Height;
 
 		scene = new V3DScene(0.0f, 0.0f, VGlobal::p()->Width, VGlobal::p()->Height);
-		scene->SetLight(GL_LIGHT0, sf::Color(0, 0, 0), sf::Color(255, 255, 255), sf::Color(255, 255, 255), sf::Vector3f(1.0f, 0.0f, 1.0f));
-		scene->SetGlobalLight(sf::Color(50, 50, 50));
-		scene->Camera = std::make_unique<V3DPerspectiveCamera>(45.0f, 1.0f, 700.0f);
-		scene->Add(obj1);
-		scene->Add(obj2);
+		scene->Camera = std::make_unique<V3DPerspectiveCamera>(sf::Vector3f(0.0f, 0.0f, 0.0f), 50.0f, aspectRatio, 0.1f, 100.0f);
+		scene->Camera->LookAt(sf::Vector3f(0.0f, 0.0f, 10.0f));
+		//scene->Shader = std::make_unique<V3DShader>();
+
+		scene->Shader = std::make_unique<V3DLightShader>(scene->Camera.get());
+		lightShader = dynamic_cast<V3DLightShader*>(scene->Shader.get());
+		if (lightShader)
+		{
+			lightShader->Lights[0] = std::make_unique<V3DLight>(LightType::SPOT, lightPos, sf::Vector3f(), sf::Vector3f(0, 1, 0), 20.0f, 0.1f, 0.001f);
+			lightShader->Lights[1] = std::make_unique<V3DLight>(LightType::DIRECTION, sf::Vector3f(-1, 1, 0), sf::Vector3f(), sf::Vector3f(1, 1, 1), 20.0f, 0.2f, 0.005f);
+		}
+
+		V3DVertexArray vertices;
+		std::vector<unsigned int> indices = 
+		{	
+			2, 1, 0, 3, 2, 0, //front
+			4, 5, 6, 4, 6, 7, //right
+			8, 9, 10, 8, 10, 11, //back
+			14, 13, 12, 15, 14, 12, //left
+			16, 17, 18, 16, 18, 19, //upper
+			22, 21, 20, 23, 22, 20  //bottom
+		};
+
+		//front
+		vertices.emplace_back(glm::vec3(-0.5f, -0.5f, -0.5f),	glm::vec3(0.0, 0.0, -1.0),	glm::vec4(1, 1, 1, 1), glm::vec2(0, 0));
+		vertices.emplace_back(glm::vec3(0.5f, -0.5f, -0.5f),	glm::vec3(0.0, 0.0, -1.0),	glm::vec4(1, 1, 1, 1), glm::vec2(1, 0));
+		vertices.emplace_back(glm::vec3(0.5f, 0.5f, -0.5f),		glm::vec3(0.0, 0.0, -1.0),	glm::vec4(1, 1, 1, 1), glm::vec2(1, 1));
+		vertices.emplace_back(glm::vec3(-0.5f, 0.5f, -0.5f),	glm::vec3(0.0, 0.0, -1.0),	glm::vec4(1, 1, 1, 1), glm::vec2(0, 1));
+
+		//right
+		vertices.emplace_back(glm::vec3(0.5f, 0.5f, -0.5f),		glm::vec3(1.0, 0.0, 0.0),	glm::vec4(1, 0, 0, 1), glm::vec2(1, 1));
+		vertices.emplace_back(glm::vec3(0.5f, 0.5f, 0.5f),		glm::vec3(1.0, 0.0, 0.0),	glm::vec4(1, 0, 0, 1), glm::vec2(0, 1));
+		vertices.emplace_back(glm::vec3(0.5f, -0.5f, 0.5f),		glm::vec3(1.0, 0.0, 0.0),	glm::vec4(1, 0, 0, 1), glm::vec2(0, 0));
+		vertices.emplace_back(glm::vec3(0.5f, -0.5f, -0.5f),	glm::vec3(1.0, 0.0, 0.0),	glm::vec4(1, 0, 0, 1), glm::vec2(1, 0));
+
+		//back
+		vertices.emplace_back(glm::vec3(-0.5f, -0.5f, 0.5f),	glm::vec3(0.0, 0.0, 1.0),	glm::vec4(0, 1, 0, 1), glm::vec2(0, 0));
+		vertices.emplace_back(glm::vec3(0.5f, -0.5f, 0.5f),		glm::vec3(0.0, 0.0, 1.0),	glm::vec4(0, 1, 0, 1), glm::vec2(1, 0));
+		vertices.emplace_back(glm::vec3(0.5f, 0.5f, 0.5f),		glm::vec3(0.0, 0.0, 1.0),	glm::vec4(0, 1, 0, 1), glm::vec2(1, 1));
+		vertices.emplace_back(glm::vec3(-0.5f, 0.5f, 0.5f),		glm::vec3(0.0, 0.0, 1.0),	glm::vec4(0, 1, 0, 1), glm::vec2(0, 1));
+
+		//left
+		vertices.emplace_back(glm::vec3(-0.5f, -0.5f, 0.5f),	glm::vec3(-1.0, 0.0, 0.0),	glm::vec4(0, 0, 1, 1), glm::vec2(0, 0));
+		vertices.emplace_back(glm::vec3(-0.5f, -0.5f, -0.5f),	glm::vec3(-1.0, 0.0, 0.0),	glm::vec4(0, 0, 1, 1), glm::vec2(1, 0));
+		vertices.emplace_back(glm::vec3(-0.5f, 0.5f, -0.5f),	glm::vec3(-1.0, 0.0, 0.0),	glm::vec4(0, 0, 1, 1), glm::vec2(1, 1));
+		vertices.emplace_back(glm::vec3(-0.5f, 0.5f, 0.5f),		glm::vec3(-1.0, 0.0, 0.0),	glm::vec4(0, 0, 1, 1), glm::vec2(0, 1));
+
+		//upper
+		vertices.emplace_back(glm::vec3(0.5f, -0.5f, 0.5f),		glm::vec3(0.0, -1.0, 0.0),	glm::vec4(1, 1, 0, 1), glm::vec2(0, 1));
+		vertices.emplace_back(glm::vec3(-0.5f, -0.5f, 0.5f),	glm::vec3(0.0, -1.0, 0.0),	glm::vec4(1, 1, 0, 1), glm::vec2(1, 1));
+		vertices.emplace_back(glm::vec3(-0.5f, -0.5f, -0.5f),	glm::vec3(0.0, -1.0, 0.0),	glm::vec4(1, 1, 0, 1), glm::vec2(1, 0));
+		vertices.emplace_back(glm::vec3(0.5f, -0.5f, -0.5f),	glm::vec3(0.0, -1.0, 0.0),	glm::vec4(1, 1, 0, 1), glm::vec2(0, 0));
+
+		//bottom
+		vertices.emplace_back(glm::vec3(-0.5f, 0.5f, -0.5f),	glm::vec3(0.0, 1.0, 0.0),	glm::vec4(0, 1, 1, 1), glm::vec2(0, 1));
+		vertices.emplace_back(glm::vec3(0.5f, 0.5f, -0.5f),		glm::vec3(0.0, 1.0, 0.0),	glm::vec4(0, 1, 1, 1), glm::vec2(1, 1));
+		vertices.emplace_back(glm::vec3(0.5f, 0.5f, 0.5f),		glm::vec3(0.0, 1.0, 0.0),	glm::vec4(0, 1, 1, 1), glm::vec2(1, 0));
+		vertices.emplace_back(glm::vec3(-0.5f, 0.5f, 0.5f),		glm::vec3(0.0, 1.0, 0.0),	glm::vec4(0, 1, 1, 1), glm::vec2(0, 0));
+
+		V3DModel* model = new V3DModel(1.0f, 0.0f, 5.0f);
+		model->LoadTexture("Example/Assets/texture.jpg");
+		model->Material->Specular = sf::Vector3f(1.0f, 1.0f, 1.0f);
+		model->Material->Shininess = 80.0f;
+		model->LoadModelData(vertices, indices);
+		model->Rotation.x = -20.0f;
+		model->AngleVelocity.y = 22.5f;
+		scene->Add(model);
+
+		V3DObjModel* obj = new V3DObjModel(-1.0f, -1.0f, 5.0f);
+		obj->LoadModelData("Example/Assets/Low-Poly-Racing-Car.obj");
+		obj->Scale = sf::Vector3f(0.01f, 0.01f, 0.01f);
+		obj->AngleVelocity.y = -45.0f;
+		scene->Add(obj);
+
+		lightModel = new V3DModel();
+		lightModel->LoadModelData(vertices, indices);
+		lightModel->Position = lightPos;
+		lightModel->Scale = sf::Vector3f(0.2f, 0.2f, 0.2f);
+		lightModel->Material->Specular = sf::Vector3f(1.0f, 1.0f, 1.0f);
+		lightModel->Material->Shininess = 80.0f;
+		scene->Add(lightModel);
+
 		Add(scene);
 
 		/*VPostEffectMultipass* multipass = new VPostEffectMultipass(2);
@@ -1050,14 +1077,22 @@ public:
 	virtual void Update(float dt)
 	{
 		VSUPERCLASS::Update(dt);
-		timer += dt * 15.0f;
+		timer += dt;
 
-		model->Rotation = sf::Vector3f(sinf(timer * 0.15f) * 20.0f, -timer, 45.0f + cosf(timer * 0.15f) * 30.0f);
+		lightPos.x = sinf(timer) * 2.5f;
+		lightPos.y = -sinf(timer) * 2.5f;
+		lightPos.z = cosf(timer) * 2.5f;
 
-		scene->Camera->Position.x += VGlobal::p()->Input->CurrentAxisValue("leftX") * 0.01f * dt;
-		scene->Camera->Position.y += VGlobal::p()->Input->CurrentAxisValue("leftY") * 0.01f * dt;
-		scene->Camera->Rotate.x += VGlobal::p()->Input->CurrentAxisValue("rightX") * dt;
-		scene->Camera->Rotate.y += VGlobal::p()->Input->CurrentAxisValue("rightY") * dt;
+		if (lightShader)
+		{
+			if (lightShader->Lights[0]->Type == LightType::DIRECTION)
+				lightShader->Lights[0]->Position = lightPos;
+			else
+				lightShader->Lights[0]->Position = lightPos + sf::Vector3f(0.0f, 0.0f, 5.0f);
+
+			lightShader->Lights[0]->Dir = -lightPos;
+		}
+		lightModel->Position = lightPos + sf::Vector3f(0.0f, 0.0f, 5.0f);
 	}
 };
 

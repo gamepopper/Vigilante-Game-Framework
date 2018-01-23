@@ -1,181 +1,168 @@
+#define GLEW_STATIC
 #include "depend/glew.h"
+
 #include "V3DModel.h"
+#include "V3DShader.h"
+#include "V3DCamera.h"
+#include "V3DLight.h"
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include "depend/glm/glm.hpp" 
+#include "depend/glm/gtx/transform.hpp"
+
+GLuint V3DModel::DefaultTexture = 0;
+
+V3DModel::V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) :
+	V3DObject(position, rotation, scale), vao(0), vertexVBO(0), indexVBO(0) 
+{
+	Material = new V3DMaterial();
+}
+
+V3DModel::V3DModel(float posX, float posY, float posZ,
+	float rotX, float rotY, float rotZ,
+	float scaleX, float scaleY, float scaleZ) :
+	V3DObject(posX, posY, posZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ), vao(0), vertexVBO(0), indexVBO(0) 
+{
+	Material = new V3DMaterial();
+}
 
 void V3DModel::updateTransform()
 {
 	//S * R * T
-	glTranslatef(Position.x, Position.y, Position.z);
-	glRotatef(Rotation.z, 0.0f, 0.0f, 1.0f);
-	glRotatef(Rotation.x, 1.0f, 0.0f, 0.0f);
-	glRotatef(Rotation.y, 0.0f, 1.0f, 0.0f);
-	glScalef(Scale.x, Scale.y, Scale.z);
+	glm::mat4 matrix_pos = glm::translate(glm::vec3(Position.x, Position.y, Position.z));
+	glm::mat4 matrix_scale = glm::scale(glm::vec3(Scale.x, Scale.y, Scale.z));
+	// Represent each stored rotation as a different matrix, because 
+	// we store angles. 
+	//          x  y  z 
+	glm::mat4 matrix_rotX = glm::rotate(Rotation.x * (3.1415926f / 180.0f), glm::vec3(1, 0, 0));
+	glm::mat4 matrix_rotY = glm::rotate(Rotation.y * (3.1415926f / 180.0f),	glm::vec3(0, 1, 0));
+	glm::mat4 matrix_rotZ = glm::rotate(Rotation.z * (3.1415926f / 180.0f),	glm::vec3(0, 0, 1));
+	// Create a rotation matrix. 
+	// Multiply in reverse order it needs to be applied. 
+	glm::mat4 matrix_rotation = matrix_rotZ * matrix_rotY * matrix_rotX;
+	// Apply transforms in reverse order they need to be applied in. 
+	transform = matrix_pos * matrix_rotation * matrix_scale;
 }
 
-bool V3DModel::LoadModelData(const std::vector<GLfloat>& data, int vertexPos, int normalPos, int texturePos, int colourPos)
+bool V3DModel::LoadModelData(const V3DVertexArray& vertexArray, const std::vector<unsigned int>& indexArray)
 {
-	modelData = data;
-	vertexArrayOffset = vertexPos;
-	normalArrayOffset = normalPos;
-	textureArrayOffset = texturePos;
-	colourArrayOffset = colourPos;
+	drawCount = indexArray.size() > 0 ? indexArray.size() : vertexArray.size();
 
-	dataLineLength = 0;
-	if (vertexArrayOffset >= 0)
-		dataLineLength += 3;
+	auto stride = sizeof(vertexArray[0]);
+	auto normalOffset = sizeof(vertexArray[0].position);
+	auto colorOffset = normalOffset + sizeof(vertexArray[0].normal);
+	auto texCoordOffset = colorOffset + sizeof(vertexArray[0].color);
 
-	if (textureArrayOffset >= 0)
-		dataLineLength += 2;
-
-	if (normalArrayOffset >= 0)
-		dataLineLength += 3;
-
-	if (colourArrayOffset >= 0)
-		dataLineLength += 4;
-
-	return true;
-}
-
-bool V3DModel::LoadModelIndices(const std::vector<unsigned int>& data)
-{
-	modelIndices = data;
-	return true;
-}
-bool V3DModel::LoadTexture(const sf::String& filename, bool mipmap)
-{
-	if (mipmap)
+	if (vertexVBO)
 	{
-		if (texture.loadFromFile(filename))
-		{
-			texture.generateMipmap();
-			return true;
-		}
+		glDeleteBuffers(1, &vertexVBO);
+		glDeleteVertexArrays(1, &vao);
+	}
 
-		return false;
+	glGenVertexArrays(1, &vao); 
+	glBindVertexArray(vao); 
+	glGenBuffers(1, &vertexVBO); 
+
+	glBindBuffer(GL_ARRAY_BUFFER, vertexVBO); 
+	glBufferData(GL_ARRAY_BUFFER, drawCount * stride, vertexArray.data(), GL_STATIC_DRAW); 
+	glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Position)); 
+	glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Position),	3, GL_FLOAT, GL_FALSE,	stride, 0); 
+	glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Normal));
+	glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Normal),		3, GL_FLOAT, GL_TRUE,	stride, (void*)normalOffset);
+	glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Color));
+	glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Color),		4, GL_FLOAT, GL_FALSE,	stride, (void*)colorOffset);
+	glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::TexCoord));
+	glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::TexCoord),	2, GL_FLOAT, GL_FALSE,	stride, (void*)texCoordOffset);
+
+	if (indexArray.size() > 0)
+	{
+		if (indexVBO)
+			glDeleteBuffers(1, &indexVBO);
+
+		glGenBuffers(1, &indexVBO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, drawCount * sizeof(indexArray[0]), indexArray.data(), GL_STATIC_DRAW);
+	}
+
+	glBindVertexArray(0);
+	return true;
+}
+
+bool V3DModel::LoadTexture(const sf::String& filename)
+{
+	return texture.loadFromFile(filename);
+}
+
+void V3DModel::UpdateShader(V3DShader* shader, V3DCamera* camera)
+{
+	if (camera)
+	{
+		glm::mat4 viewProj = camera->PVMatrix() * transform;
+		shader->UpdateUniform(UniformType::TransformPVM, &viewProj[0][0]);
+		shader->UpdateUniform(UniformType::TransformVM, &camera->ViewMatrix()[0][0]);
+		shader->UpdateUniform(UniformType::TransformM, &transform[0][0]);
 	}
 	else
 	{
-		return texture.loadFromFile(filename);
+		glm::mat4 identity;
+		shader->UpdateUniform(UniformType::TransformPVM, &transform[0][0]);
+		shader->UpdateUniform(UniformType::TransformVM, &identity[0][0]);
+		shader->UpdateUniform(UniformType::TransformM, &transform[0][0]);
 	}
-}
 
-bool V3DModel::LoadTexture(const sf::Texture& texture, bool mipmap)
-{
-	this->texture = texture;
+	shader->UpdateUniform(UniformType::Material, Material);
 
-	if (mipmap)
-		this->texture.generateMipmap();
-
-	return true;
-}
-
-void V3DModel::SetMaterial(sf::Color Colour, sf::Color Specular, float Shininess)
-{
-	material->Colour[0] = Colour.r / 255.0f;	material->Colour[1] = Colour.g / 255.0f;	material->Colour[2] = Colour.b / 255.0f;	material->Colour[3] = Colour.a / 255.0f;
-	material->Specular[0] = Specular.r/255.0f;	material->Specular[1] = Specular.g/255.0f;	material->Specular[2] = Specular.b/255.0f;	material->Specular[3] = Specular.a/255.0f;
-	material->Shininess = Shininess;
+	if (texture.getSize().x == 0 || texture.getSize().y == 0)
+	{
+		GenerateDefaultTexture();
+	}
 }
 
 void V3DModel::Destroy()
 {
 	VSUPERCLASS::Destroy();
-	modelData.clear();
-	modelData.shrink_to_fit();
+	glDeleteBuffers(1, &vertexVBO);
+	glDeleteBuffers(1, &indexVBO);
+	glDeleteVertexArrays(1, &vao);
+
+	delete Material;
 }
 
 void V3DModel::Draw(sf::RenderTarget& RenderTarget)
 {
-	// Enable position and texture coordinates vertex components
-	if (vertexArrayOffset >= 0)
-	{
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, dataLineLength * sizeof(GLfloat), modelData.data() + vertexArrayOffset);
-	}
+	if (texture.getSize().x == 0 || texture.getSize().y == 0)
+		glBindTexture(GL_TEXTURE_2D, DefaultTexture);
 	else
-	{
-		glDisableClientState(GL_VERTEX_ARRAY);
-	}
+		sf::Texture::bind(&texture);
 
-	if (textureArrayOffset >= 0)
-	{
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(2, GL_FLOAT, dataLineLength * sizeof(GLfloat), modelData.data() + textureArrayOffset);
-	}
+	glBindVertexArray(vao);
+
+	if (indexVBO)
+		glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0);
 	else
-	{
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	}
+		glDrawArrays(GL_TRIANGLES, 0, drawCount);
 
-	if (normalArrayOffset >= 0)
-	{
-		glEnableClientState(GL_NORMAL_ARRAY);
-		glNormalPointer(GL_FLOAT, dataLineLength * sizeof(GLfloat), modelData.data() + normalArrayOffset);
-	}
-	else
-	{
-		glDisableClientState(GL_NORMAL_ARRAY);
-	}
+	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
 
-	if (colourArrayOffset >= 0)
+void V3DModel::GenerateDefaultTexture()
+{
+	if (DefaultTexture == 0)
 	{
-		glEnableClientState(GL_NORMAL_ARRAY);
-		glColorPointer(4, GL_FLOAT, dataLineLength * sizeof(GLfloat), modelData.data() + colourArrayOffset);
+		glGenTextures(1, &DefaultTexture);
+
+		GLubyte data[] = { 255, 255, 255, 255 };
+
+		glBindTexture(GL_TEXTURE_2D, DefaultTexture);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	else
-	{
-		glDisableClientState(GL_COLOR_ARRAY);
-	}
-
-	if (modelIndices.size())
-	{
-		glEnableClientState(GL_INDEX_ARRAY);
-		glIndexPointer(GL_UNSIGNED_INT, sizeof(unsigned int), modelIndices.data());
-	}
-	else
-	{
-		glDisableClientState(GL_INDEX_ARRAY);
-	}
-
-	glEnable(GL_TEXTURE_2D);
-	sf::Texture::bind(&texture);
-
-	if (material)
-	{
-		glEnable(GL_COLOR_MATERIAL);
-		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-
-		glColor4f(material->Colour[0], material->Colour[1], material->Colour[2], material->Colour[3]);
-		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, material->Specular);
-		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, material->Shininess);
-
-		if (material->Colour[3] < 1.0f)
-		{
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		}
-		else
-		{
-			glDisable(GL_BLEND);
-		}
-	}
-	else
-	{
-		glDisable(GL_COLOR_MATERIAL);
-	}
-
-	glPushMatrix();
-	VSUPERCLASS::Draw(RenderTarget);
-
-	// Draw the model
-	if (modelIndices.size())
-	{
-		glDrawElements(GL_TRIANGLES, modelIndices.size(), GL_UNSIGNED_INT, modelIndices.data());
-	}
-	else
-	{
-		glDrawArrays(GL_TRIANGLES, 0, modelData.size() / dataLineLength);
-	}
-
-	glPopMatrix();
-
-	sf::Texture::bind(nullptr);
 }

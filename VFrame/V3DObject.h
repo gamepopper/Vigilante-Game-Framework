@@ -4,6 +4,8 @@
 #include <SFML/System/Vector3.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
+class V3DShader;
+class V3DCamera;
 class V3DObject : public VBase
 {
 protected:
@@ -68,6 +70,7 @@ public:
 
 	virtual void Hurt(float damage);
 
+	virtual void UpdateShader(V3DShader* shader, V3DCamera* camera);
 	virtual void Update(float dt) override;
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };

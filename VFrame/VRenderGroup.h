@@ -19,6 +19,8 @@ public:
 
 	VSprite* Sprite = nullptr;
 
+	sf::Color BackgroundTint = sf::Color::Transparent;
+
 	VPostEffectBase* PostEffect = nullptr;
 	bool RenderViewTransform = true;
 	bool RenderOutside = false;

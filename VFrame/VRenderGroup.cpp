@@ -121,7 +121,7 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 	VGlobal::p()->DrawDebug = false;
 #endif
 
-	renderTex.clear(sf::Color::Transparent);
+	renderTex.clear(BackgroundTint);
 	VSUPERCLASS::Draw(renderTex);
 	renderTex.display();
 	

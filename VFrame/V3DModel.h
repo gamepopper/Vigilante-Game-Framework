@@ -2,80 +2,68 @@
 #include "V3DObject.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/String.hpp>
-#include <SFML/OpenGL.hpp>
 #include <vector>
 #include <memory>
 
-struct V3DMaterial
+#include "depend/glm/vec2.hpp"
+#include "depend/glm/vec3.hpp"
+#include "depend/glm/vec4.hpp"
+#include "depend/glm/matrix.hpp"
+
+enum class V3DVertexAttribute { Position, Normal, Color, TexCoord, COUNT };
+
+struct V3DVertex
 {
-	GLfloat Colour[4];
-	GLfloat Specular[4];
-	GLfloat Shininess;
+	V3DVertex(const glm::vec3& pos) : position(pos), color(1,1,1,1) {}
+	V3DVertex(glm::vec3& pos, glm::vec3& norm) : position(pos), normal(norm), color(1, 1, 1, 1) {}
+	V3DVertex(glm::vec3& pos, glm::vec2& tex) : position(pos), color(1, 1, 1, 1), texCoord(tex) {}
+	V3DVertex(glm::vec3& pos, glm::vec4& tint) : position(pos), color(tint) {}
+
+	V3DVertex(glm::vec3& pos, glm::vec3& norm, glm::vec2& tex) : position(pos), normal(norm), color(1, 1, 1, 1), texCoord(tex) {}
+	V3DVertex(glm::vec3& pos, glm::vec3& norm, glm::vec4& tint) : position(pos), normal(norm), color(tint) {}
+	V3DVertex(glm::vec3& pos, glm::vec2& tex,  glm::vec4& tint) : position(pos), texCoord(tex), color(tint) {}
+
+	V3DVertex(glm::vec3& pos, glm::vec3& norm, glm::vec4& tint, glm::vec2& tex) : position(pos), normal(norm), color(tint), texCoord(tex) {}
+
+	glm::vec3 position;
+	glm::vec3 normal;
+	glm::vec4 color;
+	glm::vec2 texCoord;
 };
 
+typedef std::vector<V3DVertex> V3DVertexArray;
+
+struct V3DMaterial;
 class V3DModel : public V3DObject
 {
 protected:
 	virtual void updateTransform();
+	GLuint vao;
+	GLuint vertexVBO;
+	GLuint indexVBO;
+	unsigned int drawCount;
 
 	sf::Texture texture;
-	std::unique_ptr<V3DMaterial> material;
-
-	std::vector<GLfloat> modelData;
-	std::vector<unsigned int> modelIndices;
-	int vertexArrayOffset = 0;
-	int normalArrayOffset = -1;
-	int textureArrayOffset = -1;
-	int colourArrayOffset = -1;
-	int dataLineLength = 3;
+	glm::mat4 transform;
 
 public:
 	typedef V3DObject VSUPERCLASS;
 
-	V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) :
-		V3DObject(position, rotation, scale)
-	{
-        #if WIN32
-		material = std::make_unique<V3DMaterial>();
-		#else
-		material = std::unique_ptr<V3DMaterial>(new V3DMaterial());
-		#endif
-	}
+	V3DMaterial* Material;
+
+	V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale);
 
 	V3DModel(float posX = 0, float posY = 0, float posZ = 0,
 		float rotX = 0, float rotY = 0, float rotZ = 0,
-		float scaleX = 1, float scaleY = 1, float scaleZ = 1) :
-		V3DObject(posX, posY, posZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ)
-	{
-		#if WIN32
-		material = std::make_unique<V3DMaterial>();
-		#else
-		material = std::unique_ptr<V3DMaterial>(new V3DMaterial());
-		#endif
-	}
+		float scaleX = 1, float scaleY = 1, float scaleZ = 1);
 
-	/*
-	Loads model from single array.
-	vertexPos: Point where Vertex data offsets.
-	normalPos: Point where Normal data offsets.
-	texturePos: Point where Texture UV data offsets.
-	colourPos: Point where colour data offset.
-	Setting to -1 ignores parameter.
-	*/
-	bool LoadModelData(const std::vector<GLfloat>& data, int vertexPos, int normalPos = -1, int texturePos = -1, int colourPos = -1);
-	/*
-	Loads model indices, used if model array requires index rendering.
-	*/
-	bool LoadModelIndices(const std::vector<unsigned int>& data);
-	/*Loads texture from filepath string*/
-	bool LoadTexture(const sf::String& filename, bool mipmap = false);
-	/*Loads texture from sf::Texture object*/
-	bool LoadTexture(const sf::Texture& texture, bool mipmap = false);
-	
-	/*Sets material data of model*/
-	void SetMaterial(sf::Color Colour, sf::Color Specular, float Shininess);
+	bool LoadModelData(const V3DVertexArray& vertexArray, const std::vector<unsigned int>& indexArray = std::vector<unsigned int>());
+	bool LoadTexture(const sf::String& filename);
+	virtual void UpdateShader(V3DShader* shader, V3DCamera* camera);
 
 	virtual void Destroy();
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
-};
 
+	static GLuint DefaultTexture;
+	static void GenerateDefaultTexture();
+};

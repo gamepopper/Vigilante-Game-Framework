@@ -1,19 +1,49 @@
+#define GLEW_STATIC
 #include "depend/glew.h"
 
 #include "V3DObjModel.h"
-#include "VGlobal.h"
+#include "V3DShader.h"
+#include "V3DLight.h"
+#include "V3DCamera.h"
+#include "V3DModel.h"
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include "depend/glm/glm.hpp" 
+#include "depend/glm/gtx/transform.hpp"
 
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "depend/tiny_obj_loader.h"
 
+V3DObjModel::V3DObjModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) :
+	V3DObject(position, rotation, scale)
+{
+	material = new V3DMaterial();
+}
+
+V3DObjModel::V3DObjModel(float posX, float posY, float posZ,
+	float rotX, float rotY, float rotZ,
+	float scaleX, float scaleY, float scaleZ) :
+	V3DObject(posX, posY, posZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ)
+{
+	material = new V3DMaterial();
+}
+
 void V3DObjModel::updateTransform()
 {
 	//S * R * T
-	glTranslatef(Position.x, Position.y, Position.z);
-	glRotatef(Rotation.z, 0.0f, 0.0f, 1.0f);
-	glRotatef(Rotation.x, 1.0f, 0.0f, 0.0f);
-	glRotatef(Rotation.y, 0.0f, 1.0f, 0.0f);
-	glScalef(Scale.x, Scale.y, Scale.z);
+	glm::mat4 matrix_pos = glm::translate(glm::vec3(Position.x, Position.y, Position.z));
+	glm::mat4 matrix_scale = glm::scale(glm::vec3(Scale.x, Scale.y, Scale.z));
+	// Represent each stored rotation as a different matrix, because 
+	// we store angles. 
+	//          x  y  z 
+	glm::mat4 matrix_rotX = glm::rotate(Rotation.x * (3.1415926f / 180.0f), glm::vec3(1, 0, 0));
+	glm::mat4 matrix_rotY = glm::rotate(Rotation.y * (3.1415926f / 180.0f), glm::vec3(0, 1, 0));
+	glm::mat4 matrix_rotZ = glm::rotate(Rotation.z * (3.1415926f / 180.0f), glm::vec3(0, 0, 1));
+	// Create a rotation matrix. 
+	// Multiply in reverse order it needs to be applied. 
+	glm::mat4 matrix_rotation = matrix_rotZ * matrix_rotY * matrix_rotX;
+	// Apply transforms in reverse order they need to be applied in. 
+	transform = matrix_pos * matrix_rotation * matrix_scale;
 }
 
 bool V3DObjModel::LoadModelData(const char* filename)
@@ -63,7 +93,7 @@ bool V3DObjModel::LoadModelData(const char* filename)
 		for (unsigned int s = 0; s < shapes.size(); s++)
 		{
 			V3DModelData md;
-			std::vector<float> &vb = md.vb; // pos(3float), normal(3float), color(3float)
+			std::vector<float> vb; // pos(3float), normal(3float), color(4float)
 			for (unsigned int f = 0; f < shapes[s].mesh.indices.size() / 3; f++)
 			{
 				tinyobj::index_t idx0 = shapes[s].mesh.indices[3 * f + 0];
@@ -166,6 +196,7 @@ bool V3DObjModel::LoadModelData(const char* filename)
 					vb.push_back(c[0] * 0.5f + 0.5f);
 					vb.push_back(c[1] * 0.5f + 0.5f);
 					vb.push_back(c[2] * 0.5f + 0.5f);
+					vb.push_back(1.0f);
 
 					vb.push_back(tc[k][0]);
 					vb.push_back(tc[k][1]);
@@ -176,7 +207,27 @@ bool V3DObjModel::LoadModelData(const char* filename)
 
 			if (vb.size() > 0)
 			{
-				md.triangleCount = vb.size() / (3 + 3 + 3 + 2) / 3; // 3:vtx, 3:normal, 3:col, 2:texcoord
+				md.triangleCount = vb.size() / (3 + 3 + 4 + 2) / 3; // 3:vtx, 3:normal, 3:col, 2:texcoord
+				glGenVertexArrays(1, &md.vao);
+				glBindVertexArray(md.vao);
+				glGenBuffers(1, &md.vb);
+
+				auto stride = (3 + 3 + 4 + 2) * sizeof(float);
+				auto normalOffset = 3 * sizeof(float);
+				auto colorOffset = normalOffset + (3 * sizeof(float));
+				auto texCoordOffset = colorOffset + (4 * sizeof(float));
+
+				glBindBuffer(GL_ARRAY_BUFFER, md.vb);
+				glBufferData(GL_ARRAY_BUFFER, md.triangleCount * 3 * stride, vb.data(), GL_STATIC_DRAW);
+				glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Position));
+				glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Position), 3, GL_FLOAT, GL_FALSE, stride, 0);
+				glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Normal));
+				glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Normal), 3, GL_FLOAT, GL_TRUE, stride, (void*)normalOffset);
+				glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Color));
+				glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Color), 4, GL_FLOAT, GL_FALSE, stride, (void*)colorOffset);
+				glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::TexCoord));
+				glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::TexCoord), 2, GL_FLOAT, GL_FALSE, stride, (void*)texCoordOffset);
+				glBindVertexArray(0);
 			}
 
 			// OpenGL viewer does not support texturing with per-face material.
@@ -234,70 +285,77 @@ void V3DObjModel::CalcNormal(float N[3], float v0[3], float v1[3], float v2[3])
 	}
 }
 
+void V3DObjModel::UpdateShader(V3DShader* shader, V3DCamera* camera)
+{
+	if (camera)
+	{
+		glm::mat4 viewProj = camera->PVMatrix() * transform;
+		shader->UpdateUniform(UniformType::TransformPVM, &viewProj[0][0]);
+		shader->UpdateUniform(UniformType::TransformVM, &camera->ViewMatrix()[0][0]);
+		shader->UpdateUniform(UniformType::TransformM, &transform[0][0]);
+	}
+	else
+	{
+		glm::mat4 identity;
+		shader->UpdateUniform(UniformType::TransformPVM, &transform[0][0]);
+		shader->UpdateUniform(UniformType::TransformVM, &identity[0][0]);
+		shader->UpdateUniform(UniformType::TransformM, &transform[0][0]);
+	}
+
+	this->shader = shader;
+
+	if (textures.size() == 0)
+		V3DModel::GenerateDefaultTexture();
+}
+
 void V3DObjModel::Destroy()
 {
 	VSUPERCLASS::Destroy();
+
+	for (unsigned int i = 0; i < modelData.size(); i++)
+	{
+		glDeleteBuffers(1, &modelData[i].vb);
+		glDeleteVertexArrays(1, &modelData[i].vao);
+	}
+
 	modelData.clear();
 	modelData.shrink_to_fit();
 	materials.clear();
 	materials.shrink_to_fit();
 
+	delete material;
 }
 
 void V3DObjModel::Draw(sf::RenderTarget& RenderTarget)
 {
-	GLsizei stride = (3 + 3 + 3 + 2) * sizeof(float);
-
-	// Enable position and texture coordinates vertex components
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
 	for (unsigned int i = 0; i < modelData.size(); i++)
 	{
 		V3DModelData &md = modelData[i];
-		std::vector<float> &vb = md.vb;
-
-		glVertexPointer(3, GL_FLOAT, stride, vb.data());
-		glNormalPointer(GL_FLOAT, stride, vb.data() + 3);
-		glColorPointer(3, GL_FLOAT, stride, vb.data() + 6);
-		glTexCoordPointer(2, GL_FLOAT, stride, vb.data() + 9);
 
 		if ((md.materialID < materials.size()))
 		{
 			tinyobj::material_t &mat = materials[md.materialID];
 
-			glEnable(GL_COLOR_MATERIAL);
-			glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-
-			glColor4f(mat.diffuse[0], mat.diffuse[1], mat.diffuse[2], mat.dissolve);
-			glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat.specular);
-			glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, mat.shininess);
-
-			if (mat.dissolve < 1.0f)
-			{
-				glEnable(GL_BLEND);
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			}
-			else
-			{
-				glDisable(GL_BLEND);
-			}
-
+			//Set texture
 			std::string diffuse_texname = mat.diffuse_texname;
-			if (textures.find(diffuse_texname) != textures.end())
-			{
-				glEnable(GL_TEXTURE_2D);
+			if (textures.find(diffuse_texname) == textures.end())
+				glBindTexture(GL_TEXTURE_2D, V3DModel::DefaultTexture);
+			else
 				sf::Texture::bind(&textures[diffuse_texname]);
-			}
+
+			material->Specular.x = mat.specular[0];
+			material->Specular.y = mat.specular[1];
+			material->Specular.z = mat.specular[2];
+			material->Shininess = mat.shininess;
+
+			shader->UpdateUniform(UniformType::Material, material);
 		}
 
 		// Draw the model
-		glPushMatrix();
-		VSUPERCLASS::Draw(RenderTarget);
+		glBindVertexArray(md.vao);
 		glDrawArrays(GL_TRIANGLES, 0, 3 * md.triangleCount);
-		glPopMatrix();
-		sf::Texture::bind(nullptr);
+
+		glBindVertexArray(0);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

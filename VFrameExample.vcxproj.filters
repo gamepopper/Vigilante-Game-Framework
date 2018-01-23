@@ -124,6 +124,11 @@
     <ClCompile Include="VFrame\VTimer.cpp">
       <Filter>VFrame</Filter>
     </ClCompile>
+    <ClCompile Include="VFrame\V3DShader.cpp">
+      <Filter>VFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="VFrame\V3DCamera.cpp" />
+    <ClCompile Include="VFrame\V3DLightShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Example\BloomPostEffect.h">
@@ -261,6 +266,79 @@
     <ClInclude Include="VFrame\VTimer.h">
       <Filter>VFrame</Filter>
     </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\common.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\exponential.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\ext.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\fwd.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\geometric.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\glm.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\integer.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\mat2x2.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\mat2x3.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\mat2x4.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\mat3x2.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\mat3x3.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\mat3x4.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\mat4x2.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\mat4x3.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\mat4x4.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\matrix.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\packing.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\trigonometric.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\vec2.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\vec3.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\vec4.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\depend\glm\vector_relational.hpp">
+      <Filter>VFrame\depend\glm</Filter>
+    </ClInclude>
+    <ClInclude Include="VFrame\V3DShader.h" />
+    <ClInclude Include="VFrame\V3DCamera.h" />
+    <ClInclude Include="VFrame\V3DLight.h" />
+    <ClInclude Include="VFrame\V3DLightShader.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\Assets\Backdrop.png">
@@ -347,6 +425,9 @@
     </Filter>
     <Filter Include="VFrame\depend">
       <UniqueIdentifier>{874d7a92-aeae-42fe-b717-d19cd8bfb62b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VFrame\depend\glm">
+      <UniqueIdentifier>{19ba4aa0-4283-4733-9255-cb1ce23279c4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

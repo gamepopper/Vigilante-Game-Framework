@@ -7,10 +7,10 @@ int main()
 
 	sf::ContextSettings settings;
 	settings.depthBits = 32;
-	settings.stencilBits = 0;
+	settings.stencilBits = 8;
 	settings.antialiasingLevel = 0;
-	settings.majorVersion = 2;
-	settings.minorVersion = 1;
+	settings.majorVersion = 4;
+	settings.minorVersion = 5;
 
 	int r = game->Run("VFrame Stuff", new DemoStatesManager(), 640, 360, 60.0f, 7, settings);
 	delete game;

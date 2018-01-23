@@ -36,16 +36,19 @@ void V3DObject::updateMotion(float dt)
 	AngleVelocity.x += deltaV;
 	Rotation.x += AngleVelocity.x * dt;
 	AngleVelocity.x += deltaV;
+	Rotation.x = fmodf(Rotation.x + 360.0f, 360.0f);
 
 	deltaV = 0.5f * (VObject::computeVelocity(AngleVelocity.y, AngleAcceleration.y, AngleDrag.y, AngleMax.y, dt) - AngleVelocity.y);
 	AngleVelocity.y += deltaV;
 	Rotation.y += AngleVelocity.y * dt;
 	AngleVelocity.y += deltaV;
+	Rotation.y = fmodf(Rotation.y + 360.0f, 360.0f);
 
 	deltaV = 0.5f * (VObject::computeVelocity(AngleVelocity.z, AngleAcceleration.z, AngleDrag.z, AngleMax.z, dt) - AngleVelocity.z);
 	AngleVelocity.z += deltaV;
 	Rotation.z += AngleVelocity.z * dt;
 	AngleVelocity.z += deltaV;
+	Rotation.z = fmodf(Rotation.z + 360.0f, 360.0f);
 
 	deltaV = 0.5f * (VObject::computeVelocity(Velocity.x, Acceleration.x, Drag.x, MaxVelocity.x, dt) - Velocity.x);
 	Velocity.x += deltaV;
@@ -64,6 +67,11 @@ void V3DObject::updateMotion(float dt)
 	delta = Velocity.z * dt;
 	Velocity.z += deltaV;
 	Position.z += delta;
+}
+
+void V3DObject::UpdateShader(V3DShader* shader, V3DCamera* camera)
+{
+
 }
 
 void V3DObject::Update(float dt)
@@ -91,10 +99,11 @@ void V3DObject::Update(float dt)
 
 		updateMotion(dt);
 	}
+
+	updateTransform();
 }
 
 void V3DObject::Draw(sf::RenderTarget &RenderTarget)
 {
-	updateTransform();
 	VSUPERCLASS::Draw(RenderTarget);
 }
