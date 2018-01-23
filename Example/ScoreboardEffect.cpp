@@ -3,9 +3,9 @@
 
 ScoreboardEffect::ScoreboardEffect()
 {
-	downSample.loadFromFile("Example/Assets/FullPass.vert", "Example/Assets/DownSample.frag");
-	maskSample.loadFromFile("Example/Assets/FullPass.vert", "Example/Assets/CircleMask.frag");
-	gaussianBlur.loadFromFile("Example/Assets/FullPass.vert", "Example/Assets/GaussianBlur.frag");
+	downSample.loadFromFile("Example/Assets/DownSample.frag", sf::Shader::Fragment);
+	maskSample.loadFromFile("Example/Assets/CircleMask.frag", sf::Shader::Fragment);
+	gaussianBlur.loadFromFile("Example/Assets/GaussianBlur.frag", sf::Shader::Fragment);
 
 	SetPointSize(1.0f);
 	SetPointAmount(1);

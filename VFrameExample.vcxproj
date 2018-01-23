@@ -198,16 +198,14 @@
     <None Include="Example\Assets\AlphaThreshold.frag" />
     <None Include="Example\Assets\bloom.frag" />
     <None Include="Example\Assets\Brightness.frag" />
+    <None Include="Example\Assets\CircleMask.frag" />
     <None Include="Example\Assets\Dissolve.frag" />
     <None Include="Example\Assets\DownSample.frag" />
-    <None Include="Example\Assets\FullPass.vert" />
     <None Include="Example\Assets\Glitch.frag" />
     <None Include="Example\Assets\GaussianBlur.frag" />
     <None Include="Example\Assets\level.csv" />
     <None Include="Example\Assets\Lighting.frag" />
     <None Include="Example\Assets\LinedWave.frag" />
-    <None Include="Example\Assets\HorizontalWave.frag" />
-    <None Include="Example\Assets\VerticalWave.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

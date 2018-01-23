@@ -318,16 +318,10 @@
     <None Include="Example\Assets\DownSample.frag">
       <Filter>Example\Assets</Filter>
     </None>
-    <None Include="Example\Assets\FullPass.vert">
-      <Filter>Example\Assets</Filter>
-    </None>
     <None Include="Example\Assets\GaussianBlur.frag">
       <Filter>Example\Assets</Filter>
     </None>
     <None Include="Example\Assets\Glitch.frag">
-      <Filter>Example\Assets</Filter>
-    </None>
-    <None Include="Example\Assets\HorizontalWave.frag">
       <Filter>Example\Assets</Filter>
     </None>
     <None Include="Example\Assets\level.csv">
@@ -339,9 +333,7 @@
     <None Include="Example\Assets\LinedWave.frag">
       <Filter>Example\Assets</Filter>
     </None>
-    <None Include="Example\Assets\VerticalWave.frag">
-      <Filter>Example\Assets</Filter>
-    </None>
+    <None Include="Example\Assets\CircleMask.frag" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Example">
