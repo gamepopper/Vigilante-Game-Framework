@@ -1,7 +1,7 @@
 #pragma once
+
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
-#include <SFML/System/Clock.hpp>
 #include <SFML/System/String.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <SFML/Window/ContextSettings.hpp>
@@ -57,7 +57,7 @@ private:
 
 	std::unique_ptr<sf::RenderTexture> renderTarget;
 	sf::VertexArray vertexArray;
+
 	bool cleaned = false;
 	bool focused = true;
 };
-

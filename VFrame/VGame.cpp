@@ -1,9 +1,16 @@
+#pragma comment(lib, "VFrame/depend/glew32s.lib")
+
+#define GLEW_STATIC
+#include "depend/glew.h"
+
 #include "VGame.h"
 #include "VCamera.h"
 #include "VGlobal.h"
 #include "VTimer.h"
 #include "VPostEffect.h"
 #include "VState.h"
+
+#include <SFML/System/Clock.hpp>
 
 VGame::~VGame()
 {
@@ -19,12 +26,16 @@ int VGame::Init()
 
 	try
 	{
+		glewExperimental = GL_TRUE;
+		if (glewInit() != GLEW_OK)
+			return 2;
+
 		if (!VGlobal::p()->App->isOpen())
-			return EXIT_FAILURE;
+			return 3;
 
 		renderTarget = std::unique_ptr<sf::RenderTexture>(new sf::RenderTexture());
 		if (!renderTarget->create(VGlobal::p()->Width, VGlobal::p()->Height))
-			return EXIT_FAILURE;
+			return 4;
 
 		VGlobal::p()->WorldBounds = sf::FloatRect(0, 0, static_cast<float>(VGlobal::p()->Width), static_cast<float>(VGlobal::p()->Height));
 		VGlobal::p()->App->requestFocus();
@@ -84,12 +95,11 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	VGlobal::p()->FPS = fps;
 	VGlobal::p()->WindowStyle = flags;
 	VGlobal::p()->ContextSettings = settings;
-
-	VBase::VLog("Welcome to the ViglanteFramework - Version:%s ", VFRAME_VERSION);
-	VBase::VLog("Starting Game: %s", title.toUtf8().c_str());
+	VGlobal::p()->RenderState = sf::RenderStates::Default;
 
 	VGlobal::p()->App->create(sf::VideoMode(windowwidth, windowheight), title, flags, settings);
-	VGlobal::p()->RenderState = sf::RenderStates::Default;
+
+	VBase::VLog("Welcome to the ViglanteFramework - Version: %s ", VFRAME_VERSION);
 
 	int error = 0;
 	if ((error = Init()))
@@ -97,6 +107,8 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 		VBase::VLogError("Error in Init(): %d", error);
 		return error;
 	}
+	VBase::VLog("OpenGL Version: %s", glGetString(GL_VERSION));
+	VBase::VLog("\nStarting Game: %s", title.toUtf8().c_str());
 
 	initialState->DefaultCamera->Reset();
 	VGlobal::p()->ChangeState(initialState);
