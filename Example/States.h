@@ -1444,6 +1444,12 @@ public:
 	sf::VertexArray Vertices;
 	sf::RenderStates RenderState = sf::RenderStates::Default;
 
+	virtual void Destroy()
+	{
+		VSUPERCLASS::Destroy();
+		Vertices.clear();
+	}
+
 	virtual void Draw(sf::RenderTarget &RenderTarget)
 	{
 		VSUPERCLASS::Draw(RenderTarget);
@@ -1469,6 +1475,8 @@ private:
 	VSprite* circle[CircleCount];
 
 	sf::Clock timer;
+
+	std::future<void> future;
 
 public:
 	AsyncTestState() : VSubState() {}
@@ -1498,59 +1506,47 @@ public:
 		Add(pixel);
 
 		normalText = new VText(0.0f, VGlobal::p()->Height / 2.0f, VGlobal::p()->Width * 1.0f);
-		normalText->Text = L"LOADING MAP";
+		normalText->Text = "GENERATING MAP";
 		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 32, sf::Color::White, VTextAlign::ALIGNCENTER);
 		Add(normalText);
 
-        auto f = std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this));
-		VGlobal::p()->Async->LaunchAsyncFunction(f);
+        future = std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this));
+		VGlobal::p()->Async->LaunchAsyncFunction(future);
 	}
 
 	void LoadMap()
 	{
-		int height = VGlobal::p()->Height * 2;
-		int width = VGlobal::p()->Width * 2;
+		int height = VGlobal::p()->Height;
+		int width = VGlobal::p()->Width;
 
-		pixel->Vertices.setPrimitiveType(sf::Quads);
-		pixel->Vertices.resize(width * height * 4);
+		pixel->Vertices.setPrimitiveType(sf::Points);
+		pixel->Vertices.resize(width * height);
 		pixel->Size = sf::Vector2f(sf::Vector2i(width, height));
 		std::vector<float> map = PerlinNoise::GenerateFloat(width, height, 3.0f, 7, 0.5f, 42);
 
 		int pixelCount = 0;
 		for (int y = 0; y < height; y++)
+		{
 			for (int x = 0; x < width; x++)
 			{
 				int index = (y * width) + x;
 				float value = map[index];
 
-				int p = pixelCount * 4;
-				pixel->Vertices[p + 0].position = sf::Vector2f(sf::Vector2i(x + 0, y + 0));
-				pixel->Vertices[p + 0].color = sf::Color(
+				pixel->Vertices[pixelCount].position = sf::Vector2f(x + 0.5f, y + 0.5f);
+				pixel->Vertices[pixelCount].color = sf::Color(
 					sf::Uint8(255 * value),
 					sf::Uint8(255 * value),
 					sf::Uint8(255 * value),
 					255);
-				pixel->Vertices[p + 1].position = sf::Vector2f(sf::Vector2i(x + 1, y + 0));
-				pixel->Vertices[p + 1].color = sf::Color(
-					sf::Uint8(255 * value),
-					sf::Uint8(255 * value),
-					sf::Uint8(255 * value),
-					255);
-				pixel->Vertices[p + 2].position = sf::Vector2f(sf::Vector2i(x + 1, y + 1));
-				pixel->Vertices[p + 2].color = sf::Color(
-					sf::Uint8(255 * value),
-					sf::Uint8(255 * value),
-					sf::Uint8(255 * value),
-					255);
-				pixel->Vertices[p + 3].position = sf::Vector2f(sf::Vector2i(x + 0, y + 1));
-				pixel->Vertices[p + 3].color = sf::Color(
-					sf::Uint8(255 * value),
-					sf::Uint8(255 * value),
-					sf::Uint8(255 * value),
-					255);
-
 				pixelCount++;
+
+				normalText->Text = "LOADING MAP " + std::to_string(pixelCount * 100 / (width * height)) + "%";
+				normalText->ApplyChanges();
 			}
+		}
+
+		map.clear();
+		map.shrink_to_fit();
 
 		VGlobal::p()->Async->SyncToMainLoop(std::bind(&AsyncTestState::OnLoadedMap, this));
 	}
