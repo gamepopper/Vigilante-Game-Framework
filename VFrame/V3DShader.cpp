@@ -222,14 +222,16 @@ void V3DShader::checkError(GLuint l_shader, GLuint l_flag, bool l_program, const
 	else {
 		glGetShaderInfoLog(l_shader, sizeof(error), nullptr, error);
 	}
-	std::cout << l_errorMsg << error << std::endl;
+
+	VBase::VLogError(l_errorMsg.c_str());
 }
 
 GLuint V3DShader::buildShader(const std::string& l_src, unsigned int l_type)
 {
 	GLuint shaderID = glCreateShader(l_type);
 	if (!shaderID) {
-		std::cout << "Bad shader type!" << std::endl; return 0;
+		VBase::VLogError("Bad shader type!"); 
+		return 0;
 	}
 	const GLchar* sources[1];
 	GLint lengths[1];
