@@ -1,4 +1,5 @@
 #pragma once
+#ifndef VFRAME_NO_3D
 #include "VBase.h"
 
 #include <SFML/System/Vector3.hpp>
@@ -74,4 +75,4 @@ public:
 	virtual void Update(float dt) override;
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };
-
+#endif

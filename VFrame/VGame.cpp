@@ -1,7 +1,9 @@
+#ifndef VFRAME_NO_3D
 #pragma comment(lib, "VFrame/depend/glew32s.lib")
 
 #define GLEW_STATIC
 #include "depend/glew.h"
+#endif
 
 #include "VGame.h"
 #include "VCamera.h"
@@ -26,9 +28,11 @@ int VGame::Init()
 
 	try
 	{
+		#ifndef VFRAME_NO_3D
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
 			return 2;
+		#endif
 
 		if (!VGlobal::p()->App->isOpen())
 			return 3;
@@ -107,7 +111,10 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 		VBase::VLogError("Error in Init(): %d", error);
 		return error;
 	}
+
+	#ifndef VFRAME_NO_3D
 	VBase::VLog("OpenGL Version: %s", glGetString(GL_VERSION));
+	#endif
 	VBase::VLog("\nStarting Game: %s", title.toUtf8().c_str());
 
 	initialState->DefaultCamera->Reset();

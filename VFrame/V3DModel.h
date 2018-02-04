@@ -1,4 +1,6 @@
 #pragma once
+
+#ifndef VFRAME_NO_3D
 #include "V3DObject.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/String.hpp>
@@ -67,3 +69,4 @@ public:
 	static GLuint DefaultTexture;
 	static void GenerateDefaultTexture();
 };
+#endif

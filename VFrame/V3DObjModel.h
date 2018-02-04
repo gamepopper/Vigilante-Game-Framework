@@ -1,4 +1,5 @@
 #pragma once
+#ifndef VFRAME_NO_3D
 #include "V3DObject.h"
 #include "depend/tiny_obj_loader.h"
 
@@ -53,4 +54,4 @@ public:
 	virtual void Destroy();
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };
-
+#endif

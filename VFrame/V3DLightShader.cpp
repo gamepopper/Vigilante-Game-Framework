@@ -1,3 +1,5 @@
+#ifndef VFRAME_NO_3D
+
 #define GLEW_STATIC
 #include "depend/glew.h"
 
@@ -157,3 +159,4 @@ void V3DLightShader::Update()
 	if (loc >= 0)
 		glUniform3f(loc, cam->Position.x, cam->Position.y, cam->Position.z);
 }
+#endif

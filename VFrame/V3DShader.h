@@ -1,4 +1,5 @@
 #pragma once
+#ifndef VFRAME_NO_3D
 #include <SFML/OpenGL.hpp>
 #include <SFML/System/String.hpp>
 
@@ -41,3 +42,4 @@ private:
 	static void checkError(GLuint l_shader, GLuint l_flag, bool l_program, const std::string& l_errorMsg);
 	static GLuint buildShader(const std::string& l_src, unsigned int l_type);
 };
+#endif

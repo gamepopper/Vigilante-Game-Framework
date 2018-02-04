@@ -1,3 +1,4 @@
+#ifndef VFRAME_NO_3D
 #include "V3DObject.h"
 #include "VObject.h"
 
@@ -107,3 +108,4 @@ void V3DObject::Draw(sf::RenderTarget &RenderTarget)
 {
 	VSUPERCLASS::Draw(RenderTarget);
 }
+#endif

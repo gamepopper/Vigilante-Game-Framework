@@ -1,4 +1,6 @@
 #pragma once
+
+#ifndef VFRAME_NO_3D
 #include "V3DObject.h"
 #include "depend/glm/matrix.hpp"
 
@@ -61,3 +63,4 @@ public:
 private:
 	sf::Vector2f viewDimensions;
 };
+#endif

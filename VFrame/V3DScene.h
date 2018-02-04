@@ -1,4 +1,5 @@
 #pragma once
+#ifndef VFRAME_NO_3D
 #include "VRenderGroup.h"
 #include <SFML/OpenGL.hpp>
 #include "V3DCamera.h"
@@ -22,4 +23,4 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };
-
+#endif

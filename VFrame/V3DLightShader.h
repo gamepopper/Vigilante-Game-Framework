@@ -1,4 +1,6 @@
 #pragma once
+
+#ifndef VFRAME_NO_3D
 #include "V3DShader.h"
 #include "V3DLight.h"
 
@@ -17,4 +19,4 @@ public:
 private:
 	V3DCamera* cam;
 };
-
+#endif

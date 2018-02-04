@@ -1,3 +1,4 @@
+#ifndef VFRAME_NO_3D
 #include "V3DCamera.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
@@ -112,3 +113,4 @@ void V3DOrthographicCamera::SetViewDimensions(const sf::Vector2f& value)
 {
 	viewDimensions = value;
 }
+#endif

@@ -1,3 +1,5 @@
+#ifndef VFRAME_NO_3D
+
 #define GLEW_STATIC
 #include "depend/glew.h"
 
@@ -166,3 +168,4 @@ void V3DModel::GenerateDefaultTexture()
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }
+#endif

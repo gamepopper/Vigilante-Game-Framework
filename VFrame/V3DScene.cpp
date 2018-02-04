@@ -1,3 +1,4 @@
+#ifndef VFRAME_NO_3D
 #include "V3DScene.h"
 #include "V3DObject.h"
 #include "V3DShader.h"
@@ -100,3 +101,4 @@ void V3DScene::Draw(sf::RenderTarget& RenderTarget)
 	Sprite->Draw(RenderTarget);
 	RenderTarget.resetGLStates();
 }
+#endif

@@ -1,4 +1,6 @@
 #pragma once
+
+#ifndef VFRAME_NO_3D
 #include <SFML/System/Vector3.hpp>
 #include <SFML/Graphics/Color.hpp>
 
@@ -30,3 +32,4 @@ struct V3DMaterial
 	sf::Vector3f Specular;
 	float Shininess;
 };
+#endif

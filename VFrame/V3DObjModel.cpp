@@ -1,3 +1,5 @@
+#ifndef VFRAME_NO_3D
+
 #define GLEW_STATIC
 #include "depend/glew.h"
 
@@ -359,3 +361,4 @@ void V3DObjModel::Draw(sf::RenderTarget& RenderTarget)
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }
+#endif

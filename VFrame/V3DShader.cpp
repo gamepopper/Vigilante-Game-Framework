@@ -1,3 +1,5 @@
+#ifndef VFRAME_NO_3D
+
 #define GLEW_STATIC
 #include "depend/glew.h"
 
@@ -242,3 +244,4 @@ GLuint V3DShader::buildShader(const std::string& l_src, unsigned int l_type)
 	checkError(shaderID, GL_COMPILE_STATUS, false, "Shader compile error: ");
 	return shaderID;
 }
+#endif
