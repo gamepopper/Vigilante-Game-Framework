@@ -18,6 +18,7 @@ protected:
 	float fadeTimer = 0;
 	float startVolume = 100.0f;
 	float finishVolume = 0.0f;
+	float masterVolume = 100.0f;
 
 public:
 	VMusic() {}

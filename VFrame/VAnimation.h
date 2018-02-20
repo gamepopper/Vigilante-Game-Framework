@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <functional>
 
 class VAnimation
 {
@@ -11,6 +12,7 @@ private:
 	float frameTime = 0;
 
 	std::vector<int> frames;
+	std::function<void()> onCompleteCallback;
 
 	bool looping = false;
 	bool reverse = false;
@@ -35,10 +37,11 @@ public:
 	};
 
 	//Resets animation.
-	void Reset()
+	void Reset(std::function<void()> onComplete = nullptr)
 	{
 		currentFrame = 0;
 		frameTime = 0;
+		onCompleteCallback = onComplete;
 	}
 
 	//Sets current frame in animation. If no animation is playing, sets the frame to display.
@@ -96,6 +99,16 @@ public:
 				}
 				else
 				{
+					if (onCompleteCallback != nullptr)
+					{
+						if ((reverse && currentFrame == 0) ||
+							(!reverse && currentFrame == totalFrames - 1))
+						{
+							onCompleteCallback();
+							onCompleteCallback = nullptr;
+						}
+					}
+
 					currentFrame = currentFrame + amount < 0 ? 
 						0 : currentFrame + amount >= totalFrames ? 
 						totalFrames - 1 : currentFrame + amount;

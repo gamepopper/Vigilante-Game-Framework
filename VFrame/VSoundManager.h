@@ -22,6 +22,10 @@ public:
 	void SetMasterVolume(float volume);
 	//Sets pitch that will be applied to all sound effects (0 will play all sounds at 0 pitch, 2 will play all sounds at double of individual pitch ect)
 	void SetMasterPitch(float pitch);
+	//Gets Master Volume
+	float MasterVolume();
+	//Gets Master Pitch
+	float MasterPitch();
 	//Load sound at set to specific id.
 	bool Load(sf::String filename, sf::String id);
 	//Play sound with specific id, with specified volume and pitch.

@@ -43,6 +43,12 @@ public:
 	VRange<T> B;
 
 	VRangeBounds() = default;
+	VRangeBounds(T val) :	A(val),
+							B(val)
+	{
+
+	}
+
 	VRangeBounds(T AA, T AB, T BA, T BB) : 	A(AA,AB),
 											B(BA,BB)
 	{

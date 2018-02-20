@@ -83,14 +83,14 @@ public:
 	}
 
 	//Play an animation using its name.
-	void Play(const sf::String& name)
+	void Play(const sf::String& name, std::function<void()> onComplete = nullptr)
 	{
 		if (animationList.find(name) != animationList.end() &&
 			currentAnim != name)
 		{
 			lastFrame = -1;
 			currentAnim = name;
-			Reset();
+			Reset(onComplete);
 		}
 	}
 
@@ -107,15 +107,15 @@ public:
 	}
 
 	//Resets current animation.
-	void Reset()
+	void Reset(std::function<void()> onComplete = nullptr)
 	{
-		Reset(currentAnim);
+		Reset(currentAnim, onComplete);
 	}
 
 	//Resets specific animations.
-	void Reset(const sf::String& name)
+	void Reset(const sf::String& name, std::function<void()> onComplete = nullptr)
 	{
-		animationList[name]->Reset();
+		animationList[name]->Reset(onComplete);
 	}
 
 	void Update(float dt)

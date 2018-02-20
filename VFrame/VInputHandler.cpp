@@ -119,7 +119,7 @@ bool VInputHandler::IsButtonUp(const sf::String& name, int controller)
 {
 	if (buttonInputs.find(name) != buttonInputs.end())
 	{
-		return IsButtonDown(name);
+		return !IsButtonDown(name);
 	}
 
 	return false;
@@ -199,7 +199,7 @@ void VInputHandler::Update(float dt)
 			b.released[i] = false;
 
 #ifdef USE_GAMEPAD_API
-			if (sf::Keyboard::isKeyPressed(b.key) || GamepadButtonTriggered((GAMEPAD_DEVICE)i, b.gamepad) || sf::Mouse::isButtonPressed(b.mouse))
+			if (sf::Keyboard::isKeyPressed(b.key) || GamepadButtonDown((GAMEPAD_DEVICE)i, b.gamepad) || sf::Mouse::isButtonPressed(b.mouse))
 #elif defined(USE_SFML_JOYSTICK)
 			if (sf::Keyboard::isKeyPressed(b.key) || (JoystickID[i] >= 0 && b.gamepad >= 0 && sf::Joystick::isButtonPressed(JoystickID[i], b.gamepad)) || sf::Mouse::isButtonPressed(b.mouse))
 #else

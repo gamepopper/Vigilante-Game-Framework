@@ -11,6 +11,16 @@ void VSoundManager::SetMasterPitch(float pitch)
 	masterPitch = pitch;
 }
 
+float VSoundManager::MasterVolume()
+{
+	return masterVolume;
+}
+
+float VSoundManager::MasterPitch()
+{
+	return masterPitch;
+}
+
 bool VSoundManager::Load(sf::String filename, sf::String id)
 {
 	if (sounds.find(id) == sounds.end() || sounds[id].getBuffer() == nullptr)

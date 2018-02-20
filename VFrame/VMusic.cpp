@@ -11,7 +11,7 @@ void VMusic::Update(float dt)
 		if (fadein)
 		{
 			fadeTimer += dt / fadeTime;
-			SetVolume(VInterpolate::Float(startVolume, finishVolume, fadeTimer));
+			music.setVolume(VInterpolate::Float(startVolume, finishVolume, fadeTimer) * (masterVolume / 100.0f));
 
 			if (fadeTimer > 1.0f)
 			{
@@ -23,7 +23,7 @@ void VMusic::Update(float dt)
 		if (fadeout)
 		{
 			fadeTimer += dt / fadeTime;
-			SetVolume(VInterpolate::Float(startVolume, finishVolume, fadeTimer));
+			music.setVolume(VInterpolate::Float(startVolume, finishVolume, fadeTimer) * (masterVolume / 100.0f));
 
 			if (fadeTimer > 1.0f)
 			{
@@ -84,7 +84,7 @@ void VMusic::Fade(bool fadeIn, float fadeLength, float maxVolume, float minVolum
 			finishVolume = maxVolume;
 			fadein = true;
 			fadeout = false;
-			SetVolume(minVolume);
+			music.setVolume(minVolume * (masterVolume / 100.0f));
 		}
 		else
 		{
@@ -92,7 +92,7 @@ void VMusic::Fade(bool fadeIn, float fadeLength, float maxVolume, float minVolum
 			finishVolume = minVolume;
 			fadein = false;
 			fadeout = true;
-			SetVolume(maxVolume);
+			music.setVolume(maxVolume * (masterVolume / 100.0f));
 		}
 	}
 }
@@ -158,7 +158,7 @@ float VMusic::Volume()
 	if (!valid)
 		return 0;
 
-	return music.getVolume();
+	return masterVolume;
 }
 
 sf::Vector3f VMusic::Position()
@@ -251,7 +251,8 @@ void VMusic::SetVolume(float volume)
 	if (volume < 0) 
 		volume = 0;
 
-	music.setVolume(volume);
+	masterVolume = volume;
+	music.setVolume(masterVolume);
 }
 
 void VMusic::SetPosition(float x, float y, float z)

@@ -28,6 +28,11 @@ void VRenderLayer::Update(float dt)
 	}
 }
 
+const sf::Texture& VRenderLayer::GetTexture()
+{
+	return *sprite.getTexture();
+}
+
 void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 {
 	sf::View MainView = RenderTarget.getView();

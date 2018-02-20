@@ -37,7 +37,7 @@ void V3DObjModel::updateTransform()
 	glm::mat4 matrix_scale = glm::scale(glm::vec3(Scale.x, Scale.y, Scale.z));
 	// Represent each stored rotation as a different matrix, because 
 	// we store angles. 
-	//          x  y  z 
+	// x  y  z 
 	glm::mat4 matrix_rotX = glm::rotate(Rotation.x * (3.1415926f / 180.0f), glm::vec3(1, 0, 0));
 	glm::mat4 matrix_rotY = glm::rotate(Rotation.y * (3.1415926f / 180.0f), glm::vec3(0, 1, 0));
 	glm::mat4 matrix_rotZ = glm::rotate(Rotation.z * (3.1415926f / 180.0f), glm::vec3(0, 0, 1));
@@ -59,11 +59,7 @@ bool V3DObjModel::LoadModelData(const char* filename)
 	textures.clear();
 
 	std::string path = GetBaseDir(filename);
-#ifdef _WIN32
-	path += "\\";
-#else
 	path += "/";
-#endif
 
 	bool r = tinyobj::LoadObj(&attrib, &shapes, &materials, &err, filename, path.c_str());
 
@@ -76,12 +72,12 @@ bool V3DObjModel::LoadModelData(const char* filename)
 		{
 			tinyobj::material_t* mp = &materials[i];
 
-			if (mp->diffuse_texname.length() > 0)
+			if (mp->diffuse_texname != "")
 			{
 				if (textures.find(mp->diffuse_texname) == textures.end())
 				{
 					sf::Texture tex;
-					if (!tex.loadFromFile(mp->diffuse_texname))
+					if (!tex.loadFromFile(path + mp->diffuse_texname))
 					{
 						VLog("Unable to find texture %s", mp->diffuse_texname);
 						return false;
@@ -233,10 +229,10 @@ bool V3DObjModel::LoadModelData(const char* filename)
 			}
 
 			// OpenGL viewer does not support texturing with per-face material.
-			if (shapes[s].mesh.material_ids.size() > 0 && shapes[s].mesh.material_ids.size() > s) 
+			if (shapes[s].mesh.material_ids.size() > 0) 
 			{
 				// Base case
-				md.materialID = shapes[s].mesh.material_ids[s];
+				md.materialID = shapes[s].mesh.material_ids[shapes[s].mesh.material_ids.size() - 1];
 			}
 			else 
 			{

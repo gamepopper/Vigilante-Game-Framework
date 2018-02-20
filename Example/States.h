@@ -966,9 +966,9 @@ public:
 	~Graphics3DState() = default;
 
 	float timer = 0.0f;
-	V3DScene* scene;
-	V3DLightShader* lightShader;
-	V3DModel* lightModel;
+	V3DScene* scene = nullptr;
+	V3DLightShader* lightShader = nullptr;
+	V3DModel* lightModel = nullptr;
 	sf::Vector3f lightPos;
 
 	virtual void Initialise()
@@ -987,7 +987,7 @@ public:
 		if (lightShader)
 		{
 			lightShader->Lights[0] = std::make_unique<V3DLight>(LightType::SPOT, lightPos, sf::Vector3f(), sf::Vector3f(0, 1, 0), 20.0f, 0.1f, 0.001f);
-			lightShader->Lights[1] = std::make_unique<V3DLight>(LightType::DIRECTION, sf::Vector3f(-1, 1, 0), sf::Vector3f(), sf::Vector3f(1, 1, 1), 20.0f, 0.2f, 0.005f);
+			lightShader->Lights[1] = std::make_unique<V3DLight>(LightType::DIRECTION, sf::Vector3f(-1, 1, 0), sf::Vector3f(), sf::Vector3f(1, 1, 1), 20.0f, 0.2f, 0.002f);
 		}
 
 		V3DVertexArray vertices;
@@ -1046,10 +1046,11 @@ public:
 		model->AngleVelocity.y = 22.5f;
 		scene->Add(model);
 
-		V3DObjModel* obj = new V3DObjModel(-1.0f, -1.0f, 5.0f);
-		obj->LoadModelData("Example/Assets/Low-Poly-Racing-Car.obj");
-		obj->Scale = sf::Vector3f(0.01f, 0.01f, 0.01f);
+		V3DObjModel* obj = new V3DObjModel(-1.0f, 0.0f, 5.0f);
+		obj->LoadModelData("Example/Assets/Nimrud/nimrud.obj");
+		obj->Scale = sf::Vector3f(0.2f, 0.2f, 0.2f);
 		obj->AngleVelocity.y = -45.0f;
+		obj->Rotation.x = -90.0f;
 		scene->Add(obj);
 
 		lightModel = new V3DModel();
