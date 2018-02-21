@@ -13,15 +13,13 @@ Vigilante Framework (or VFrame for short) is a high level framework built to run
 ## Structure
 The framework itself is found in the **VFrame** directory, the **Example** directory contains an example project which uses multiple substates to demonstrate the various features of the engine.
 
-![3D Graphics](https://i.imgur.com/wOBjAiu.gif)
+![3D Object Rendering](https://i.imgur.com/Q5rFUf9.gif)
 
 ![Particle Effects](https://i.imgur.com/SsmpZqM.gif)
 
 ![Easing Functions](https://i.imgur.com/jABi5k5.gif)
 
-![Berzerkatron](https://i.imgur.com/iq3BJ8y.gif)
-
-![Gemstone Keeper](https://i.imgur.com/pgNCdRP.gif)
+<img src="https://i.imgur.com/hx5WrbM.gif" width="640">
 
 ## Games Featured
 * [Gemstone Keeper](http://gemstonekeeper.co.uk/)
