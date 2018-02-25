@@ -141,7 +141,7 @@ void VTextPath::updateTextRender(sf::String text)
 	}
 }
 
-float VTextPath::vmodf(float x, float y)
+float vmodf(float x, float y)
 {
 	if (x < 0)
 	{

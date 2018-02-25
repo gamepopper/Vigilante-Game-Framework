@@ -6,7 +6,6 @@ void V3DObject::Reset(sf::Vector3f newPos)
 {
 	Position = newPos;
 	Rotation = sf::Vector3f();
-	Scale = sf::Vector3f(1, 1, 1);
 	Last = Position;
 	Velocity = sf::Vector3f();
 	Revive();

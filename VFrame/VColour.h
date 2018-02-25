@@ -1,11 +1,52 @@
+/**
+* @file    VColour.h
+* @author  Tim Stoddard <tim@gamepopper.co.uk>
+*
+* @section LICENSE
+*
+* MIT License
+*
+* Copyright (c) 2018 Tim Stoddard
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+* @section DESCRIPTION
+*
+* Helper class for converting certain colour formats to an sf::Color object.
+*/
+
 #pragma once
 #include <SFML/Graphics/Color.hpp>
 #include <cmath>
 
+///A seies of static functions for converting colour formats to sf::Color's RGB.
 class VColour
 {
 public:
-	//Converts parameters using HSVA (Hue: 0 - 360, Saturation: 0 - 1, Vibrance: 0 - 1, Alpha: 0 - 1) to sf::Color's RGBA format.
+
+	/**
+	* Converts a colour from HSV to the sf::Color RGB.
+	* @param h Hue value. (Range 0 - 360)
+	* @param s Saturation value. (Range 0 - 1)
+	* @param v Vibrance/Brightness value. (Range 0 - 1)
+	* @param a Alpha value. (Range 0 - 1)
+	*/
 	static const sf::Color HSVtoRGB(float h, float s, float v, float a = 1.0f)
 	{
 		float hh, p, q, t, ff;
@@ -71,7 +112,13 @@ public:
 			static_cast<unsigned int>(a * 255));
 	}
 
-	//Converts parameters using LABA (Lightness: 0 - 1, Red/Green: 0 - 1, Blue/Yellow: 0 - 1, Alpha: 0 - 1) to sf::Color's RGBA format.
+	/**
+	* Converts a colour from LAB to the sf::Color RGB.
+	* @param l Luminesence value. (Range 0 - 1)
+	* @param a Red/Green value. (Range 0 - 1)
+	* @param b Blue/Yellow value. (Range 0 - 1)
+	* @param alpha Alpha value. (Range 0 - 1)
+	*/
 	static const sf::Color LABtoRGB(float l, float a, float b, float alpha = 1.0f)
 	{
 		float x, y, z;
@@ -100,7 +147,14 @@ public:
 			static_cast<unsigned int>(alpha * 255));
 	}
 
-	//Converts parameters using CMYKA (Cyan: 0 - 1, Magenta: 0 - 1, Yellow: 0 - 1, BlacK: 0 - 1, Alpha: 0 - 1) to sf::Color's RGBA format.
+	/**
+	* Converts a colour from CMYK to the sf::Color RGB.
+	* @param c Cyan value. (Range 0 - 1)
+	* @param m Magenta value. (Range 0 - 1)
+	* @param y Yellow value. (Range 0 - 1)
+	* @param k BlacK value. (Range 0 - 1)
+	* @param a Alpha value. (Range 0 - 1)
+	*/
 	static const sf::Color CMYKtoRGB(float c, float m, float y, float k, float a = 1.0f)
 	{
 		float r, g, b;

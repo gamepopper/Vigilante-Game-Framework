@@ -139,6 +139,8 @@
     <ClInclude Include="Example\PerlinNoise.h" />
     <ClInclude Include="Example\ScoreboardEffect.h" />
     <ClInclude Include="Example\States.h" />
+    <ClInclude Include="VFrame\depend\glew.h" />
+    <ClInclude Include="VFrame\depend\tiny_obj_loader.h" />
     <ClInclude Include="VFrame\V3DLightShader.h" />
     <ClInclude Include="VFrame\V3DLight.h" />
     <ClInclude Include="VFrame\V3DCamera.h" />

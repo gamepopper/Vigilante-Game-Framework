@@ -339,6 +339,8 @@
     <ClInclude Include="VFrame\V3DCamera.h" />
     <ClInclude Include="VFrame\V3DLight.h" />
     <ClInclude Include="VFrame\V3DLightShader.h" />
+    <ClInclude Include="VFrame\depend\tiny_obj_loader.h" />
+    <ClInclude Include="VFrame\depend\glew.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Example\Assets\Backdrop.png">

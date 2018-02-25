@@ -15,7 +15,7 @@
 GLuint V3DModel::DefaultTexture = 0;
 
 V3DModel::V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) :
-	V3DObject(position, rotation, scale), vao(0), vertexVBO(0), indexVBO(0) 
+	V3DObject(position, rotation), vao(0), vertexVBO(0), indexVBO(0), Scale(scale)
 {
 	Material = new V3DMaterial();
 }
@@ -23,7 +23,7 @@ V3DModel::V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f sc
 V3DModel::V3DModel(float posX, float posY, float posZ,
 	float rotX, float rotY, float rotZ,
 	float scaleX, float scaleY, float scaleZ) :
-	V3DObject(posX, posY, posZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ), vao(0), vertexVBO(0), indexVBO(0) 
+	V3DObject(posX, posY, posZ, rotX, rotY, rotZ), vao(0), vertexVBO(0), indexVBO(0), Scale(scaleX, scaleY, scaleZ)
 {
 	Material = new V3DMaterial();
 }

@@ -17,7 +17,7 @@
 #include "depend/tiny_obj_loader.h"
 
 V3DObjModel::V3DObjModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) :
-	V3DObject(position, rotation, scale)
+	V3DObject(position, rotation), Scale(scale)
 {
 	material = new V3DMaterial();
 }
@@ -25,7 +25,7 @@ V3DObjModel::V3DObjModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vecto
 V3DObjModel::V3DObjModel(float posX, float posY, float posZ,
 	float rotX, float rotY, float rotZ,
 	float scaleX, float scaleY, float scaleZ) :
-	V3DObject(posX, posY, posZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ)
+	V3DObject(posX, posY, posZ, rotX, rotY, rotZ), Scale(scaleX, scaleY, scaleZ)
 {
 	material = new V3DMaterial();
 }

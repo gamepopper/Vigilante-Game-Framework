@@ -1,3 +1,36 @@
+/**
+* @file    VGlobal.h
+* @author  Tim Stoddard <tim@gamepopper.co.uk>
+*
+* @section LICENSE
+*
+* MIT License
+*
+* Copyright (c) 2018 Tim Stoddard
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+* @section DESCRIPTION
+*
+* A Singleton that contains the global properties for the game.
+*/
+
 #pragma once
 #include <SFML/System.hpp>
 #include <SFML/Config.hpp>
@@ -20,22 +53,23 @@
 #include <sstream>
 #endif
 
-#define VFRAME_VERSION "1.0.0.0"
+#define VFRAME_VERSION "1.0.0.0" ///VFrame Version
 
 class VBase;
 class VObject;
 class VPostEffectBase;
 class VCollision;
 
+///A singleton class that holds a lot of global properties other object require.
 class VGlobal
 {
 private:
-	static VGlobal* Instance;
+	static VGlobal* Instance; ///Singleton Instance of VGlobal
 	VGlobal();
 	~VGlobal();
 
 public:
-	static VGlobal* p()
+	static VGlobal* p() ///Access and creation of VGlobal
 	{
 		if (!Instance)
 		{
@@ -44,128 +78,151 @@ public:
 
 		return Instance;
 	}
-
-	//App that handles all rendering.
+ 
+	///Window the game is rendered on.
 	std::unique_ptr<sf::RenderWindow> App;
-	//RenderState for entire rendered scene.
+	 ///sf::RenderStates object used for rendering the target to the scene with additional features like transform and blend mode.
 	sf::RenderStates RenderState;
-	//Offset for the game's viewport, important when the window is resized.
-	sf::Vector2f ViewportOffset;
-
-	//Settings for the OpenGL Context
-	sf::ContextSettings ContextSettings;
-
-	//Whether the rendering will appear smooth or pixelated when scaling.
+	///Offset for the main game's viewport, important for the game window being resized and the screen needing to be repositioned in the window.
+	sf::Vector2f ViewportOffset; 
+	///The OpenGL Context Settings
+	sf::ContextSettings ContextSettings; 
+	///Should pixels be smooth or pixellated when the screen is resized?
 	bool Antialiasing = false;
-	//VSync
+	///Should the game use Verticle Syncing (where the framerate is based on the monitor refresh rate) instead of the variable framerate?
 	bool VSync = false;
-
 #ifdef _DEBUG
-	//Whether to render collision boxes for debugging perposes
+	///Show the rectangle collision area of each collideable object.
 	bool DrawDebug = false;
 #endif
-
-	//Colour of the background prior to rendering.
+	///Colour of the Window's background prior to rendering.
 	sf::Color BackgroundColor = sf::Color::Black;
-
-	//Speed of GameTime (1 is default speed, 2 is 2x speed)
+	///Speed of GameTime by manipulating the Delta Time. (e.g. 1 is default speed, 2 is 2x speed)
 	float TimeScale = 1.0f;
-
-	//VGame Title (Use Window->SetTitle to show it on window)
+	///Title displayed on the Window (updating the Window title should be done using App->SetTitle().
 	sf::String Title;
-
-	//Pause Game When it Looses Focused
+	///Set the game to pause when going out of focus.
 	bool FocusPause = true;
-
-	//VGame Area Width (Read Only)
+	///VGame Area Width (Read Only)	
 	unsigned int Width = 0;
-	//VGame Area Height (Read Only)
+	///VGame Area Height (Read Only)
 	unsigned int Height = 0;
-	//Window Width
+	///Width of the game's Window
 	unsigned int WindowWidth = 0;
-	//Window Height
+	///Height of the game's Window
 	unsigned int WindowHeight = 0;
-	//World Bounds - used to bound camera to world area and for quad tree collisions.
-	sf::FloatRect WorldBounds;
-	//Music - play streamed music (particularly between states).
-	std::unique_ptr<VMusic> Music;
-	//Sound - play loaded sounds.
+	///Bounderies of the game world regardless of state. Especially important for collision handling.
+	sf::FloatRect WorldBounds; 
+	///Allows streamed audio files to be played between states (typically for music).
+	std::unique_ptr<VMusic> Music; 
+	///Allows loaded audio files to be played between states (typically for sound effects).
 	std::unique_ptr<VSoundManager> Sound;
-
+	///Content Management System for handling asset files (i.e. Textures, Fonts ect)
 	std::unique_ptr<VContent> Content;
+	///PostEffect used for the entire game, applied after the state is drawn.
 	std::unique_ptr<VPostEffectBase> PostProcess;
-
-	//Frames Per Second - used to calculate average framerate
+	///Frames Per Second - used to calculate average framerate
 	float FPS = 0;
-
+	///Value is true if the current VState is being changed in the state manager.
 	bool IfChangedState = false;
+	///Value is true if the a new VState is being pushed onto the stack in the state manager.
 	bool IfPushedState = false;
-
-	//Random Number Generator
+	///Random Number Generator
 	std::unique_ptr<VRandom> Random;
-
-	//Access Keyboard, Mouse and Gamepad Input here
+	///Input Handling for Keyboard, Mouse and Controllers.
 	std::unique_ptr<VInputHandler> Input;
-
-	//Asynchronus Function Handling
+	///Asynchronous Function Handler for Multithreaded Functionality.
 	std::unique_ptr<VAsync> Async;
-
-	//Window Style
+	///Current Window Style being used (set with sf::Style).
 	int WindowStyle;
-
-	//Set game to fullscreen or not.
+	///@param set Set the game to fullscreen mode or not.
 	void SetFullscreen(bool set);
-
-	//Toggles from fullscreen to window mode.
+	///Toggles from fullscreen to window mode.
 	void ToggleFullscreen();
-
-	//Returns true if set to fullscreen.
+	///@return If the game is in fullscreen mode, function returns true.
 	bool IsFullscreen();
-
-	//Get mouse position relative to screen.
+	///@return Position of the mouse relative to the game screen (even when resized).
 	sf::Vector2f GetMousePosition();
-
-	//Sets mouse cursor to be visible or not, depending of if you want an in-game cursor.
+	/// @param set Sets mouse cursor to be visible or not, depending of if you want an in-game cursor.
 	void SetMouseCursorVisible(bool set);
-
-	//The Current Gameplay State
+	/// @return The Current Gameplay State.
 	VState* CurrentState();
-	//Change the current state
+	/// @param state The new VState to change to.
 	void ChangeState(VState* state);
-	//Push a new state onto the stack to run without changing the current one.
+	/// @param state A new VState to push onto the stack to run without changing the current one.
 	void PushState(VState* state);
-	//Pop the current state from the stack.
+	/// Pop the current state from the stack.
 	void PopState();
-	//Clear all states from the stack.
+	/// Clear all states from the stack.
 	void ClearState();
-	//Close window and close out game.
+	/// Close window and close out game.
 	void Exit();
 
-	//Test if two objects are overlapping, use responseCall to handle overlap response, and processCall to process objects in event of overlap.
+	/**
+	* Test if an object is overlapping at a specified point.
+	* @param point The position in the game world to test with.
+	* @param a The base object to test overlap with.
+	* @return True if there is an overlap.
+	*/
 	bool OverlapAtPoint(const sf::Vector2f& point, VBase* a);
-	//Test if two objects are overlapping, use responseCall to handle overlap response, and processCall to process objects in event of overlap.
+
+	/**
+	* Test if two objects are overlapping.
+	* @param a The base object to test overlap with.
+	* @param b The other base object to test overlap with. If you only want to test overlap with a itself (like in a VGroup), set this to null.	
+	* @param responseCall An optional response callback if an overlap is found. Only gets called if an overlap is true.
+	* @param processCall An optional process callback if an overlap is found and there is a need to handle further tests and changes to the objects. Only gets called if an overlap is true, and should return true further collision tests are true.
+	* @return Function returns true if an overlap has been found to be true.
+	*/
 	bool Overlaps(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
-	//Test if two objects are overlapping, and then separates objects when true, use responseCall to handle collision response.
+
+	/**
+	* Test if two objects are colliding by testing an overlap and applying the VObject::separate function as a process call to separate the objects.
+	* @param a The base object to test overlap with.
+	* @param b The other base object to test overlap with. If you only want to test overlap with a itself (like in a VGroup), set this to null.
+	* @param responseCall An optional response callback if an overlap is found. Only gets called if an overlap is true.
+	* @return Function returns true if an overlap has been found to be true.
+	*/
 	bool Collides(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr);
 
-	//Test if two objects are overlapping, use responseCall to handle overlap response, and processCall to process objects in event of overlap.
+	/**
+	* Test if an object is overlapping at a specified point using circle overlap testing.
+	* @param point The position in the game world to test with.
+	* @param a The base object to test overlap with.
+	* @return True if there is an overlap.
+	*/
 	bool OverlapCircleAtPoint(const sf::Vector2f& point, VBase* a);
-	//Test if two objects are overlapping as a circle, use responseCall to handle overlap response, and processCall to process objects in event of overlap. Make sure objects have the Radius property set.
+
+	/**
+	* Test if two objects are overlapping using circle overlap testing.
+	* @param a The base object to test overlap with.
+	* @param b The other base object to test overlap with. If you only want to test overlap with a itself (like in a VGroup), set this to null.
+	* @param responseCall An optional response callback if an overlap is found. Only gets called if an overlap is true.
+	* @param processCall An optional process callback if an overlap is found and there is a need to handle further tests and changes to the objects. Only gets called if an overlap is true, and should return true further collision tests are true.
+	* @return Function returns true if an overlap has been found to be true.
+	*/
 	bool OverlapsCircle(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr, std::function<bool(VObject*, VObject*)>const& processCall = nullptr);
-	//Test if two objects are overlapping as a circle, and then separates objects when true, use responseCall to handle collision response. Make sure objects have the Radius property set.
+
+	/**
+	* Test if two objects are colliding by testing an overlap with circle overlap testing and applying the VObject::separateCircle function as a process call to separate the objects.
+	* @param a The base object to test overlap with.
+	* @param b The other base object to test overlap with. If you only want to test overlap with a itself (like in a VGroup), set this to null.
+	* @param responseCall An optional response callback if an overlap is found. Only gets called if an overlap is true.
+	* @return Function returns true if an overlap has been found to be true.
+	*/
 	bool CollidesCircle(VBase* a, VBase* b = nullptr, std::function<void(VObject*, VObject*)>const& responseCall = nullptr);
 
-	//Cleanups Global data.
+	///Cleans up all data in VGlobal to NULL.
 	static void Cleanup();
 
 private:
-	std::unique_ptr<VStateManager> gsm;
-	VState* nextState = nullptr;
-	bool fullscreen = false;
-	bool mouseCursorVisible = true;
+	std::unique_ptr<VStateManager> gsm; ///The game's state manager.
+	VState* nextState = nullptr; ///Store the next state to apply until the current state has finished processing.
+	bool fullscreen = false; ///Sets for when the game is in fullscreen mode or not.
+	bool mouseCursorVisible = true; ///Sets for when the system mouse cursor is visible.
 
-	std::unique_ptr<VCollision> collision;
-	std::function<bool(VObject*, VObject*)> rectCollision;
-	std::function<bool(VObject*, VObject*)> circleCollision;
+	std::unique_ptr<VCollision> collision; ///The game's collision handling system.
+	std::function<bool(VObject*, VObject*)> rectCollision; ///Function for handling rectangle collisions.
+	std::function<bool(VObject*, VObject*)> circleCollision; ///Function for handling circle collisions.
 };
 

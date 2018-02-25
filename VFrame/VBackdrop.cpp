@@ -6,21 +6,18 @@ void VBackdrop::updateTransform()
 {
 	transform = sf::Transform::Identity;
 	transform.translate(Position);
-	//transform.rotate(Angle, Size / 2.0f);
 	transform.scale(Scale);
 }
 
 VBackdrop* VBackdrop::LoadGraphic(sf::String filename)
 {
 	texture = &VGlobal::p()->Content->LoadTexture(filename);
-	FrameSize = sf::Vector2f(texture->getSize());
 	return this;
 }
 
 VBackdrop* VBackdrop::LoadGraphicFromTexture(sf::Texture& texture)
 {
 	this->texture = &texture;
-	FrameSize = sf::Vector2f(this->texture->getSize());
 	return this;
 }
 

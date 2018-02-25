@@ -1,6 +1,7 @@
 #include "VRenderGroup.h"
 #include "VGlobal.h"
 
+///A regular VSprite that allows instant updates of the texture.
 class VRenderSprite : public VSprite
 {
 public:
@@ -10,6 +11,7 @@ public:
 	void SetTexture(const sf::Texture& texture)
 	{
 		sprite.setTexture(texture, true);
+		disposible = true;
 	}
 };
 
