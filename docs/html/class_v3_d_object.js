@@ -1,0 +1,27 @@
+var class_v3_d_object =
+[
+    [ "VSUPERCLASS", "class_v3_d_object.html#aafad7b295780bd0ea30042656e1c510c", null ],
+    [ "V3DObject", "class_v3_d_object.html#a05731f900cae1823a9f8c918f0c4943e", null ],
+    [ "V3DObject", "class_v3_d_object.html#ad31c7f1b37dd293fbec65d9eda174a0b", null ],
+    [ "Draw", "class_v3_d_object.html#ae1abf5caee4103931a513aa58fc4be2e", null ],
+    [ "Hurt", "class_v3_d_object.html#a833c04b92381c3fc6027d0cb4f20ab05", null ],
+    [ "Reset", "class_v3_d_object.html#a7a6dc1ca2a9e30aba96541f719d80cd9", null ],
+    [ "Reset", "class_v3_d_object.html#a334f806003ebe3b25018d72146b98193", null ],
+    [ "Update", "class_v3_d_object.html#ae4729e50f60a636420d86553cd59e459", null ],
+    [ "updateMotion", "class_v3_d_object.html#ac1f7262f0ffdfd5b1446a58ee978ecc9", null ],
+    [ "UpdateShader", "class_v3_d_object.html#a87dda60667080c5c86109225d80aaf81", null ],
+    [ "updateTransform", "class_v3_d_object.html#a2002d11f5bef66b82825e0e5a8b67af6", null ],
+    [ "Acceleration", "class_v3_d_object.html#a7634db780e947191ce5064ae7ae418fe", null ],
+    [ "AngleAcceleration", "class_v3_d_object.html#a3a784ba2b93a91eaaaec834e6ed0f965", null ],
+    [ "AngleDrag", "class_v3_d_object.html#a295b3b1a228811e85ee32579463881ae", null ],
+    [ "AngleMax", "class_v3_d_object.html#a58be86d97dd5f4c48e2b116647bd14fc", null ],
+    [ "AngleVelocity", "class_v3_d_object.html#a9488f3c70060383d1a74896954e98740", null ],
+    [ "Drag", "class_v3_d_object.html#a475bdfb20ca318fbc5020ec4f7c89506", null ],
+    [ "Health", "class_v3_d_object.html#aaa0f142a334a21f6ef4bd506a619944f", null ],
+    [ "Last", "class_v3_d_object.html#a44115b10e48d2dbfd5d4eafc3ddf9a6d", null ],
+    [ "MaxVelocity", "class_v3_d_object.html#aeb1cf4ba89091640a14bb3896de1562a", null ],
+    [ "Moves", "class_v3_d_object.html#af1aecb730235a5a7dc373da4bad32600", null ],
+    [ "Position", "class_v3_d_object.html#ad4652d6f32e3dd44d4c17affbf78bf4b", null ],
+    [ "Rotation", "class_v3_d_object.html#a3ad54ca3295571a57d6206b910c3e657", null ],
+    [ "Velocity", "class_v3_d_object.html#acca1cf55d337f9fad11f009a881159a2", null ]
+];
