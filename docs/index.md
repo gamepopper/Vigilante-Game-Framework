@@ -11,7 +11,7 @@ Vigilante Framework (or VFrame for short) is a high level framework built to run
 * Multipass Post Process Effects
 
 ## Guides and Info
-Documentation for the Vigilante Framework can be found ![on this link](https://gamepopper.github.io/Vigilante-Game-Framework/html/index.html). You can also refer to the GitHub Repository's Wiki page for tutorials on how to use some of the features of the framework.
+Documentation for the Vigilante Framework can be found [on this link](https://gamepopper.github.io/Vigilante-Game-Framework/html/index.html). You can also refer to the GitHub Repository's Wiki page for tutorials on how to use some of the features of the framework.
 
 ![3D Object Rendering](https://i.imgur.com/Q5rFUf9.gif)
 
