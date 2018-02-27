@@ -10,6 +10,10 @@ Vigilante Framework (or VFrame for short) is a high level framework built to run
 * Game State and Substate Management
 * Multipass Post Process Effects
 
+## Prerequisites
+* SFML (Preferably 2.4.0 or Higher) and all the required external libraries needed to build projects with it.
+* GLEW (If you want to use the 3D rendering capabilities, otherwise you need to define the VFRAME_NO_3D preprocessor to disable it)
+
 ## Guides and Info
 Documentation for the Vigilante Framework can be found [on this link](https://gamepopper.github.io/Vigilante-Game-Framework/html/). You can also refer to the GitHub Repository's Wiki page for tutorials on how to use some of the features of the framework.
 
