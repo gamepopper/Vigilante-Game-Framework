@@ -1,7 +1,6 @@
 #ifndef VFRAME_NO_3D
 
-#define GLEW_STATIC
-#include "depend/glew.h"
+#include <GL/glew.h>
 
 #include "V3DObjModel.h"
 #include "V3DShader.h"

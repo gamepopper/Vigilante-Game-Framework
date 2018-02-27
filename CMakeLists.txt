@@ -1,5 +1,6 @@
-project(VigilanteGameFramework)
 cmake_minimum_required(VERSION 3.1.0)
+project(VigilanteGameFramework)
+
 if(${WIN32})
 	add_compile_options(/Zc:rvalueCast)
 	if(${VGF_LTO})

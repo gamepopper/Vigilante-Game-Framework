@@ -66,6 +66,13 @@ if (UNIX)
 	link_libraries(${X11_LIBRARIES})
 endif()
 
+
+find_package(GLEW)
+if (GLEW_FOUND)
+	include_directories(${GLEW_INCLUDE_DIR})
+	link_libraries(${GLEW_LIBRARY})
+endif()
+
 include_directories(.)
 add_library(vigilante STATIC ${SOURCES_VGF})
 
@@ -100,5 +107,13 @@ if(${WIN32})
 	        <LocalDebuggerWorkingDirectory>$(OutDir)</LocalDebuggerWorkingDirectory>
 	        <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
 	    </PropertyGroup>
+		<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|Win32'\">
+			<LocalDebuggerWorkingDirectory>$(SolutionDir)</LocalDebuggerWorkingDirectory>
+			<DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+		</PropertyGroup>
+		<PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Debug|Win32'\">
+			<LocalDebuggerWorkingDirectory>$(SolutionDir)</LocalDebuggerWorkingDirectory>
+			<DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+		</PropertyGroup>
 	    </Project>")
 endif(${WIN32})

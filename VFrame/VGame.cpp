@@ -1,8 +1,5 @@
 #ifndef VFRAME_NO_3D
-#pragma comment(lib, "VFrame/depend/glew32s.lib")
-
-#define GLEW_STATIC
-#include "depend/glew.h"
+#include <GL/glew.h>
 #endif
 
 #include "VGame.h"

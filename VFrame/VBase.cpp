@@ -51,7 +51,7 @@ void VBase::VLog(const char* format, ...)
 	std::mbstowcs(output, buf, strlen(buf) + 1);
 
 #ifdef _MSC_VER
-	OutputDebugString(output);
+	OutputDebugStringW(output);
 #endif
 
 	delete[] con;
@@ -89,7 +89,7 @@ void VBase::VLogError(const char* format, ...)
 	std::mbstowcs(output, buf, strlen(buf) + 1);
 
 #ifdef _MSC_VER
-	OutputDebugString(output);
+	OutputDebugStringW(output);
 #endif
 
 #ifdef __linux__

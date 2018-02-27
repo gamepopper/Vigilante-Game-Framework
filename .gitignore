@@ -22,7 +22,17 @@ bld/
 [Oo]bj/
 [Ll]og/
 build/
+
 CMakeSettings.json
+cmake_install.cmake
+generate.stamp
+generate.stamp.depend
+
+*.sln
+*.vcxproj
+*.filters
+/CMakeFiles/
+CMakeCache.txt
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -251,5 +261,3 @@ paket-files/
 
 # JetBrains Rider
 .idea/
-*.sln.iml
-Template/

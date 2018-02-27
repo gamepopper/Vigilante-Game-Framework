@@ -130,6 +130,18 @@ void DemoStatesManager::Initialise()
 	SetNewPage();
 	SubState->Add(stateText);
 
+	if (VGlobal::p()->Music->Status() != sf::Music::Playing)
+	{
+		VGlobal::p()->Music->OpenMusicFile("Example/Assets/game.ogg");
+		VGlobal::p()->Music->SetLoop(true);
+		VGlobal::p()->Music->SetVolume(50.0f);
+		VGlobal::p()->Music->SetPitch(0.5f);
+		VGlobal::p()->Music->Play();
+	}
+
+	VGlobal::p()->Sound->Load("Example/Assets/menuSelect.ogg", "select");
+	VGlobal::p()->Sound->Load("Example/Assets/menuSwitch.ogg", "switch");
+
 #ifdef USE_GAMEPAD_API
 	VGlobal::p()->Input->SetAxisInput("leftX", sf::Keyboard::D, sf::Keyboard::A, VInputHandler::XAxis::PovX);
 	VGlobal::p()->Input->SetAxisInput("leftY", sf::Keyboard::S, sf::Keyboard::W, VInputHandler::XAxis::PovY);
@@ -200,6 +212,8 @@ void DemoStatesManager::HandleEvents(const sf::Event& event)
 				if (CurrentPage < 0)
 					CurrentPage = NUM_DEMOPAGES - 1;
 
+				VGlobal::p()->Sound->Play("switch");
+
 				SetNewPage();
 			}
 
@@ -207,6 +221,8 @@ void DemoStatesManager::HandleEvents(const sf::Event& event)
 			{
 				CurrentPage++;
 				CurrentPage %= NUM_DEMOPAGES;
+
+				VGlobal::p()->Sound->Play("switch");
 
 				SetNewPage();
 			}
@@ -216,17 +232,20 @@ void DemoStatesManager::HandleEvents(const sf::Event& event)
 		if (event.key.code == sf::Keyboard::Q)
 		{
 			VGlobal::p()->DrawDebug = !VGlobal::p()->DrawDebug;
+			VGlobal::p()->Sound->Play("select");
 		}
 #endif
 
 		if (event.key.code == sf::Keyboard::E)
 		{
 			VGlobal::p()->Antialiasing = !VGlobal::p()->Antialiasing;
+			VGlobal::p()->Sound->Play("select");
 		}
 
 		if (event.key.code == sf::Keyboard::F)
 		{
 			VGlobal::p()->ToggleFullscreen();
+			VGlobal::p()->Sound->Play("select");
 		}
 	}
 }

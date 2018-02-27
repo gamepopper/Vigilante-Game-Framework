@@ -87,21 +87,25 @@ public:
 			if (event.key.code == sf::Keyboard::Num1)
 			{
 				animatedSprite->Animation.Play("start");
+				VGlobal::p()->Sound->Play("select");
 			}
 
 			if (event.key.code == sf::Keyboard::Num2)
 			{
 				animatedSprite->Animation.Play("shotgun");
+				VGlobal::p()->Sound->Play("select");
 			}
 
 			if (event.key.code == sf::Keyboard::Num3)
 			{
 				animatedSprite->Animation.Play("railgun");
+				VGlobal::p()->Sound->Play("select");
 			}
 
 			if (event.key.code == sf::Keyboard::Num4)
 			{
 				animatedSprite->Animation.Play("doublegun");
+				VGlobal::p()->Sound->Play("select");
 			}
 		}
 	}
@@ -225,10 +229,12 @@ public:
 		if (VGlobal::p()->Input->IsButtonPressed("leftShoulder"))
 		{
 			typedText->Erase(0.02f);
+			VGlobal::p()->Sound->Play("select");
 		}
 		if (VGlobal::p()->Input->IsButtonPressed("rightShoulder"))
 		{
 			typedText->Start(0.05f);
+			VGlobal::p()->Sound->Play("select");
 		}
 	}
 };
@@ -878,6 +884,7 @@ public:
 		cLayer1->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(255, 255, 255, 24), VTextAlign::ALIGNLEFT);
 		cLayer1->ResetText(ws.str());
 		cLayer1->CharactersPerIteration = 4;
+		cLayer1->SetSound("type", 20.0f, "Example/Assets/type.ogg");
 		Add(cLayer1);
 
 		ws = std::wstringstream();
