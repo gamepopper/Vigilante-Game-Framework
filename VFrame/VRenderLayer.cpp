@@ -30,7 +30,11 @@ void VRenderLayer::Update(float dt)
 
 const sf::Texture& VRenderLayer::GetTexture()
 {
-	return *sprite.getTexture();
+	renderTex.clear(sf::Color::Transparent);
+	VSUPERCLASS::Draw(renderTex);
+	renderTex.display();
+
+	return renderTex.getTexture();
 }
 
 void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
