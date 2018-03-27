@@ -4,7 +4,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 link_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-find_package(SFML 2.4.2 REQUIRED system window graphics network audio)
+find_package(SFML 2.4 REQUIRED system window graphics network audio main)
 if (SFML_FOUND)
 	include_directories(${SFML_INCLUDE_DIR})
 	link_libraries(${SFML_LIBRARIES})
@@ -62,6 +62,8 @@ find_package(GLEW)
 if (GLEW_FOUND)
 	include_directories(${GLEW_INCLUDE_DIR})
 	link_libraries(${GLEW_LIBRARY})
+else()
+	add_definitions(-DVFRAME_NO_3D)
 endif()
 
 if (UNIX)
@@ -78,14 +80,6 @@ endif()
 
 include_directories(.)
 add_library(vigilante STATIC ${SOURCES_VGF})
-
-add_custom_command(TARGET vigilante POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/VFrame/depend $<TARGET_FILE_DIR:vigilante>/VFrame)
-					   
-add_custom_command(TARGET vigilante POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/Example/Assets $<TARGET_FILE_DIR:vigilante>/Example/Assets)
 
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES $<TARGET_FILE_DIR:vigilante>/Example/Assets)
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES $<TARGET_FILE_DIR:vigilante>/VFrame)
