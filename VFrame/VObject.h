@@ -201,6 +201,7 @@ public:
 		RotateFactor = 1;
 		ZoomFactor = 1;
 		type = VType::OBJECT;
+		Last = Position;
 
 		Radius = Size.x < Size.y ? Size.x / 2 : Size.y / 2;
 	}
@@ -220,6 +221,7 @@ public:
 		RotateFactor = 1;
 		ZoomFactor = 1;
 		type = VType::OBJECT;
+		Last = Position;
 
 		Radius = Size.x < Size.y ? Size.x / 2 : Size.y / 2;
 	}
