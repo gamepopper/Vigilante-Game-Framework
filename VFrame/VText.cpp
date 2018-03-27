@@ -219,12 +219,12 @@ void VText::setCharacterRender(const sf::Glyph& glyph, float x, float y, sf::Col
 	float u2 = static_cast<float>(glyph.textureRect.left + glyph.textureRect.width);
 	float v2 = static_cast<float>(glyph.textureRect.top + glyph.textureRect.height);
 
-	vertices[index + 0].position = sf::Vector2f(x + left	- italic * top		- OutlineThickness, y + top		- OutlineThickness);	vertices[index + 0].color = color; vertices[index + 0].texCoords = sf::Vector2f(u1, v1);
-	vertices[index + 1].position = sf::Vector2f(x + right	- italic * top		- OutlineThickness, y + top		- OutlineThickness);	vertices[index + 1].color = color; vertices[index + 1].texCoords = sf::Vector2f(u2, v1);
-	vertices[index + 2].position = sf::Vector2f(x + left	- italic * bottom	- OutlineThickness, y + bottom	- OutlineThickness);	vertices[index + 2].color = color; vertices[index + 2].texCoords = sf::Vector2f(u1, v2);
-	vertices[index + 3].position = sf::Vector2f(x + left	- italic * bottom	- OutlineThickness, y + bottom	- OutlineThickness);	vertices[index + 3].color = color; vertices[index + 3].texCoords = sf::Vector2f(u1, v2);
-	vertices[index + 4].position = sf::Vector2f(x + right	- italic * top		- OutlineThickness, y + top		- OutlineThickness);	vertices[index + 4].color = color; vertices[index + 4].texCoords = sf::Vector2f(u2, v1);
-	vertices[index + 5].position = sf::Vector2f(x + right	- italic * bottom	- OutlineThickness, y + bottom	- OutlineThickness);	vertices[index + 5].color = color; vertices[index + 5].texCoords = sf::Vector2f(u2, v2);
+	vertices[index + 0].position = sf::Vector2f(x + left	- italic * top		- outline, y + top		- outline);	vertices[index + 0].color = color; vertices[index + 0].texCoords = sf::Vector2f(u1, v1);
+	vertices[index + 1].position = sf::Vector2f(x + right	- italic * top		- outline, y + top		- outline);	vertices[index + 1].color = color; vertices[index + 1].texCoords = sf::Vector2f(u2, v1);
+	vertices[index + 2].position = sf::Vector2f(x + left	- italic * bottom	- outline, y + bottom	- outline);	vertices[index + 2].color = color; vertices[index + 2].texCoords = sf::Vector2f(u1, v2);
+	vertices[index + 3].position = sf::Vector2f(x + left	- italic * bottom	- outline, y + bottom	- outline);	vertices[index + 3].color = color; vertices[index + 3].texCoords = sf::Vector2f(u1, v2);
+	vertices[index + 4].position = sf::Vector2f(x + right	- italic * top		- outline, y + top		- outline);	vertices[index + 4].color = color; vertices[index + 4].texCoords = sf::Vector2f(u2, v1);
+	vertices[index + 5].position = sf::Vector2f(x + right	- italic * bottom	- outline, y + bottom	- outline);	vertices[index + 5].color = color; vertices[index + 5].texCoords = sf::Vector2f(u2, v2);
 }
 
 void VText::setTextLine(float x, float y, sf::Color color, float offset, float thickness, int index, sf::VertexArray& vertices, float outline)
