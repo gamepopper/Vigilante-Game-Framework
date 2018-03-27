@@ -42,7 +42,7 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 	sf::Texture* tex = &VGlobal::p()->Content->LoadTexture(filename);
 	image = std::unique_ptr<sf::Image>(new sf::Image(tex->copyToImage()));
 
-	setSize(image->getSize().x, image->getSize().y, animated, width, height);
+	setSize(area.width == 0 ? image->getSize().x : area.width, area.height == 0 ? image->getSize().y : area.height, animated, width, height, area.left, area.top);
 	Origin = sf::Vector2f();
 
 	width = width == 0 ? image->getSize().x : width;
@@ -67,7 +67,7 @@ VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& tex, bool animated, i
 	disposible = true;
 	image = std::unique_ptr<sf::Image>(new sf::Image(tex.copyToImage()));
 
-	setSize(image->getSize().x, image->getSize().y, animated, width, height);
+	setSize(area.width == 0 ? image->getSize().x : area.width, area.height == 0 ? image->getSize().y : area.height, animated, width, height, area.left, area.top);
 	Origin = sf::Vector2f();
 
 	width = width == 0 ? image->getSize().x : width;
@@ -87,14 +87,14 @@ void VTiledSprite::Destroy()
 
 void VTiledSprite::Update(float dt)
 {
+	VSUPERCLASS::Update(dt);
+
 	sf::IntRect rect = sprite.getTextureRect();
 	rect.left = FlipX ? Animation.GetU() + FrameSize.x : Animation.GetU();
 	rect.top = FlipY ? Animation.GetV() + FrameSize.y : Animation.GetV();
 	rect.width = FlipX ? -(int)FrameSize.x : FrameSize.x;
 	rect.height = FlipY ? -(int)FrameSize.y : FrameSize.y;
 	sprite.setTextureRect(rect);
-
-	VSUPERCLASS::Update(dt);
 }
 
 void VTiledSprite::Draw(sf::RenderTarget& RenderTarget)
