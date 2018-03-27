@@ -47,7 +47,11 @@ enum CameraFollowMethod : unsigned char
 	///Locks onto the VObject with lerp and lead, best if a game has a top-down perspective.
 	TOPDOWN,
 	///Locks onto the VObject with lerp and lead, but with no dead zone restrictions for moving up. Best if a game is a side-scrolling platformer.
-	PLATFORMER
+	PLATFORMER,
+	///Fixes to positions like a grid. best used for grid based levels where the screen size is evenly divisible to the world size.
+	ROOM,
+	///Same as Room, however instead of instantly changing positions, the camera will lerp to the next position.
+	ROOMLERP,
 };
 
 ///The 2D camera that renders the scene.

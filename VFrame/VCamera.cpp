@@ -195,6 +195,18 @@ void VCamera::Update(float dt)
 
 			position = FollowPos - relativePos;
 		}
+		else if (followMethod == ROOM || followMethod == ROOMLERP)
+		{
+			sf::Vector2f relativePos;
+			relativePos.x = floorf(FollowPos.x / VGlobal::p()->Width) * VGlobal::p()->Width;
+			relativePos.y = floorf(FollowPos.y / VGlobal::p()->Height) * VGlobal::p()->Height;
+			relativePos += sf::Vector2f(VGlobal::p()->Width, VGlobal::p()->Height) / 2.0f;
+
+			if (followMethod == ROOM)
+				position = relativePos;
+			else
+				position = VInterpolate::Vector2f(position, relativePos, 1 - powf(followLerp, dt));
+		}
 	}
 
 	//Constrain Bounderies
