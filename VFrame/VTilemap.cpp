@@ -43,6 +43,12 @@ void VTilemap::updateTilemap()
 {
 	autotile.clear();
 
+	vertices.clear();
+	vertices.setPrimitiveType(sf::Quads);
+
+	if (renderDir.empty())
+		return;
+
 	if (AutoTile)
 	{
 		autotile = vector<int>(mapWidth * mapHeight);
@@ -71,9 +77,6 @@ void VTilemap::updateTilemap()
 			}
 		}
 	}
-
-	vertices.clear();
-	vertices.setPrimitiveType(sf::Quads);
 
 	for (int y = 0; y < mapHeight; y++)
 		for (int x = 0; x < mapWidth; x++)
@@ -120,6 +123,9 @@ void VTilemap::updateCollisionBox()
 {
 	vector<bool> processed(mapWidth * mapHeight);
 	clearTiles();
+
+	if (collisionDir.empty())
+		return;
 
 	for (int y = 0; y < mapHeight; y++)
 	{
