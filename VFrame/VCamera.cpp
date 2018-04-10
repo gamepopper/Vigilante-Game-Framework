@@ -96,40 +96,12 @@ bool VCamera::Flash(sf::Color colour, float time, std::function<void()> OnComple
 	return false;
 }
 
-bool VCamera::IsObjectInView(VObject* object)
+sf::View VCamera::GetDefaultView()
 {
-	sf::View renderTargetView = view;
-	sf::View scrollView = VCameraList::Default;
+	sf::View default;
+	default.reset(sf::FloatRect(0.0f, 0.0f, view.getSize().x, view.getSize().y));
 
-	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
-	scroll.x *= object->ScrollFactor.x;
-	scroll.y *= object->ScrollFactor.y;
-
-	float rotate = renderTargetView.getRotation() - scrollView.getRotation();
-	rotate *= object->RotateFactor;
-
-	float zoom = renderTargetView.getSize().x / scrollView.getSize().x;
-	zoom--;
-	zoom *= object->ZoomFactor;
-	zoom++;
-
-	scrollView.move(scroll);
-	scrollView.rotate(rotate);
-	scrollView.zoom(zoom);
-	scrollView.setViewport(renderTargetView.getViewport());
-
-	sf::FloatRect renderBox = sf::FloatRect(object->Position, object->Size);
-	sf::FloatRect scrollBox = sf::FloatRect(scrollView.getCenter() - sf::Vector2f(scrollView.getSize().x, scrollView.getSize().y) / 2.0f, sf::Vector2f(scrollView.getSize().x, scrollView.getSize().y));
-
-	if (renderBox.left < scrollBox.left + scrollBox.width &&
-		renderBox.left + renderBox.width > scrollBox.left &&
-		renderBox.top <	 scrollBox.top + scrollBox.height &&
-		renderBox.top + renderBox.height > scrollBox.top)
-	{
-		return true;
-	}
-
-	return false;
+	return default;
 }
 
 void VCamera::Update(float dt)

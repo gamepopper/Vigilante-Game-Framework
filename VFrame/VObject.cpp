@@ -518,6 +518,37 @@ float VObject::computeVelocity(float v, float a, float d, float max, float dt)
 	return v;
 }
 
+bool VObject::TestInView(const sf::View& renderTargetView, sf::View& defaultView, VObject* o, sf::FloatRect& renderBox)
+{
+	sf::View scrollView = defaultView;
+
+	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
+	scroll.x *= o->ScrollFactor.x;
+	scroll.y *= o->ScrollFactor.y;
+
+	float rotate = renderTargetView.getRotation() - scrollView.getRotation();
+	rotate *= o->RotateFactor;
+
+	float zoom = renderTargetView.getSize().x / scrollView.getSize().x;
+	zoom--;
+	zoom *= o->ZoomFactor;
+	zoom++;
+
+	scrollView.move(scroll);
+	scrollView.rotate(rotate);
+	scrollView.zoom(zoom);
+	scrollView.setViewport(renderTargetView.getViewport());
+
+	sf::FloatRect box = renderBox.width > 0 || renderBox.height > 0 ? renderBox : sf::FloatRect(o->Position, o->Size);
+	float maxSize = scrollView.getSize().x > scrollView.getSize().y ? scrollView.getSize().x : scrollView.getSize().y;
+	sf::FloatRect scrollBox = sf::FloatRect(scrollView.getCenter() - sf::Vector2f(maxSize, maxSize) / 2.0f, sf::Vector2f(maxSize, maxSize));
+
+	return	box.left < scrollBox.left + scrollBox.width &&
+			box.left + box.width > scrollBox.left &&
+			box.top < scrollBox.top + scrollBox.height &&
+			box.top + box.height > scrollBox.top;
+}
+
 void VObject::Update(float dt)
 {
 	VSUPERCLASS::Update(dt);

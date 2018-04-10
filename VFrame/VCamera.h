@@ -201,12 +201,6 @@ public:
 	}
 
 	/**
-	* Helper function to test if a VObject is currently in view.
-	* @param object VObject to test if it's in view of the camera.
-	*/
-	bool IsObjectInView(VObject* object);
-
-	/**
 	* Updates the camera's position, rotation and zoom.
 	* @param dt Delta Time between the current and previous frame in the game.
 	*/
@@ -231,10 +225,10 @@ public:
 	bool IsShaking()	{ return isShaking;		}
 
 	/// @return The camera's current sf::View.
-	sf::View const& GetView()
-	{
-		return view;
-	}
+	sf::View const& GetView() { return view; }
+
+	/// @return The camera's current sf::View with default parameters.
+	sf::View GetDefaultView();
 };
 
 ///A basic class to access the default view.

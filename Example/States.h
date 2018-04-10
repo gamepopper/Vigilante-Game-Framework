@@ -500,7 +500,7 @@ public:
 		VGlobal::p()->Collides(playerControl, collideGroup, std::bind(&CollisionState::overlapResponse, this, _1, _2));
 		VGlobal::p()->Collides(collideGroup);
 
-		if (!ParentState->Cameras[0]->IsObjectInView(playerControl))
+		if (!VObject::TestInView(ParentState->DefaultCamera->GetView(), ParentState->DefaultCamera->GetDefaultView(), playerControl))
 		{
 			VGlobal::p()->BackgroundColor = sf::Color::White;
 		}

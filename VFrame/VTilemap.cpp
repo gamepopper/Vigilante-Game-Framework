@@ -481,31 +481,7 @@ void VTilemap::Draw(sf::RenderTarget& RenderTarget)
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
 
-	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
-	scroll.x *= ScrollFactor.x;
-	scroll.y *= ScrollFactor.y;
-
-	float rotate = renderTargetView.getRotation() - scrollView.getRotation();
-	rotate *= RotateFactor;
-
-	float zoom = renderTargetView.getSize().x / scrollView.getSize().x;
-	zoom--;
-	zoom *= ZoomFactor;
-	zoom++;
-
-	scrollView.move(scroll);
-	scrollView.rotate(rotate);
-	scrollView.zoom(zoom);
-	scrollView.setViewport(renderTargetView.getViewport());
-
-	sf::FloatRect renderBox = sf::FloatRect(Position, Size);
-	float maxSize = fmaxf(scrollView.getSize().x, scrollView.getSize().y);
-	sf::FloatRect scrollBox = sf::FloatRect(scrollView.getCenter() - sf::Vector2f(maxSize, maxSize) / 2.0f, sf::Vector2f(maxSize, maxSize));
-
-	if (renderBox.left < scrollBox.left + scrollBox.width &&
-		renderBox.left + renderBox.width > scrollBox.left &&
-		renderBox.top <	 scrollBox.top + scrollBox.height &&
-		renderBox.top + renderBox.height > scrollBox.top)
+	if (TestInView(renderTargetView, scrollView, this))
 	{
 		RenderTarget.setView(scrollView);
 		sf::RenderStates states = sf::RenderStates(RenderState);
