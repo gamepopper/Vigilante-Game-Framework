@@ -960,6 +960,7 @@ public:
 
 #include "ScoreboardEffect.h"
 
+#ifndef VFRAME_NO_3D
 //3D Graphics
 /*
 OpenGL 3D Graphics rendering. Limited but possible for 2.5D projects if I get around to writing a better model renderer.
@@ -1103,6 +1104,7 @@ public:
 		lightModel->Position = lightPos + sf::Vector3f(0.0f, 0.0f, 5.0f);
 	}
 };
+#endif
 
 class TrailAreaState : public VSubState
 {

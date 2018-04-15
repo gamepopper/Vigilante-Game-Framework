@@ -13,7 +13,9 @@ enum DemoPages
 	PAGE_INTERPOLATE,
 	PAGE_PARTICLES,
 	PAGE_TRAILAREA,
+#ifndef VFRAME_NO_3D
 	PAGE_GRAPHICS3D,
+#endif
 	PAGE_LIGHTING2D,
 	PAGE_BACKDROP,
 	PAGE_ASYNC,
@@ -42,9 +44,11 @@ void DemoStatesManager::SetNewPage()
 		case PAGE_CONTROLLER:
 			subState = new ControllerState();
 			break;
+#ifndef VFRAME_NO_3D
 		case PAGE_GRAPHICS3D:
 			subState = new Graphics3DState();
 			break;
+#endif
 		case PAGE_INTERPOLATE:
 			subState = new InterpolateState();
 			break;
