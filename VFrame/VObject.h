@@ -267,7 +267,7 @@ public:
 	/**
 	* Function used to for testing if VObject is in view of the camera, useful to test if a VObject should be rendered if in view of the a Camera.
 	* @param renderTargetView The sf::View to test the VObject with. You can get this from a VCamera or sf::RenderTarget in the Draw function.
-	* @param scrollView A modifiable sf::View that has the same size as the renderTargetView, but is transformed to factor in parallax (e.g. ScrollFactor, RotateFactor and ZoomFactor). This property is modified in the function.
+	* @param defaultView A modifiable sf::View that has the same size as the renderTargetView, but is transformed to factor in parallax (e.g. ScrollFactor, RotateFactor and ZoomFactor). This property is modified in the function, but the size and position should be default values.
 	* @param o The VObject to test with, must not be NULL.
 	* @param renderBox The render area of the object. Default is the Position and Size of the VObject, but this parameter can use whatever custom one is provided.
 	* @return If the VObject is within the rectangle of the view (factoring in ScrollFactor, RotateFactor and ZoomFactor), then returns true.

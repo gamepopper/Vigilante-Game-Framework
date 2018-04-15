@@ -3,7 +3,7 @@ var searchData=
   ['a',['A',['../class_v_range.html#a13769db6e822e63b125c45c250c64bfb',1,'VRange::A()'],['../class_v_range_bounds.html#ad79b1e7733625b00da0ea9380999567f',1,'VRangeBounds::A()']]],
   ['acceleration',['Acceleration',['../class_v3_d_object.html#a7634db780e947191ce5064ae7ae418fe',1,'V3DObject::Acceleration()'],['../class_v_object.html#a4d79c34e5a5ccae1efc62188e3476371',1,'VObject::Acceleration()']]],
   ['accelerationrange',['AccelerationRange',['../class_v_emitter.html#adec2a26a49106321b0ccdb93c82ac3bf',1,'VEmitter']]],
-  ['active',['Active',['../class_v_camera.html#a999f2bc7195de88c48ea8f9bbb8b01fc',1,'VCamera::Active()'],['../class_v_base.html#aa771f52f4fa755fb64b8dc8cc563250c',1,'VBase::active()']]],
+  ['active',['active',['../class_v_base.html#aa771f52f4fa755fb64b8dc8cc563250c',1,'VBase::active()'],['../class_v_camera.html#a999f2bc7195de88c48ea8f9bbb8b01fc',1,'VCamera::Active()']]],
   ['activeasyncfunctions',['ActiveAsyncFunctions',['../class_v_async.html#a63da78583837f9fde383a1191e684b64',1,'VAsync']]],
   ['add',['Add',['../class_v_group.html#a17aae86a34926d85de448827c485947e',1,'VGroup']]],
   ['addanimation',['AddAnimation',['../class_v_animation_manager.html#a4929bc33132b0df254667690d2e1491c',1,'VAnimationManager::AddAnimation(const sf::String &amp;name, const std::vector&lt; int &gt; &amp;Frames, float FramesPerSecond=6.0f, bool Looping=false, bool Reverse=false)'],['../class_v_animation_manager.html#a9522881e3c4d8082ab76a41dc033572f',1,'VAnimationManager::AddAnimation(const sf::String &amp;name, int Begin, int Length, float FramesPerSecond=6.0f, bool Looping=false, bool Reverse=false)']]],

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gamepad',['gamepad',['../struct_v_input_handler_1_1_button_input.html#a29e77a2ffa52c887140e7a2afadd3def',1,'VInputHandler::ButtonInput::gamepad()'],['../struct_v_input_handler_1_1_button_input.html#acdc0b545e13ebb51c61a1ae6afe37548',1,'VInputHandler::ButtonInput::gamepad()'],['../struct_v_input_handler_1_1_button_input.html#add5f47d6c5254b70176babb8a7f3ec41',1,'VInputHandler::ButtonInput::gamepad()'],['../struct_v_input_handler_1_1_axis_input.html#adad0430f8b2aaa36e65bb35830256f63',1,'VInputHandler::AxisInput::gamepad()'],['../struct_v_input_handler_1_1_axis_input.html#a45de89e2bee31d19a21ad4601c35b709',1,'VInputHandler::AxisInput::gamepad()'],['../struct_v_input_handler_1_1_axis_input.html#a03ddc06fd6b4a09b0e1b36dcd5782962',1,'VInputHandler::AxisInput::gamepad()']]],
+  ['gamepad',['gamepad',['../struct_v_input_handler_1_1_button_input.html#add5f47d6c5254b70176babb8a7f3ec41',1,'VInputHandler::ButtonInput::gamepad()'],['../struct_v_input_handler_1_1_axis_input.html#a03ddc06fd6b4a09b0e1b36dcd5782962',1,'VInputHandler::AxisInput::gamepad()']]],
   ['generatedefaulttexture',['GenerateDefaultTexture',['../class_v3_d_model.html#adf130f94a34baf0f4caa0e28efb6aba8',1,'V3DModel']]],
   ['getaspectratio',['GetAspectRatio',['../class_v3_d_perspective_camera.html#a53df6d708451c30f541175304c8288d0',1,'V3DPerspectiveCamera']]],
   ['getaxisinput',['GetAxisInput',['../class_v_input_handler.html#a61382502edaf9c2017d50f8e9716e3de',1,'VInputHandler']]],
@@ -12,6 +12,7 @@ var searchData=
   ['getcolor',['GetColor',['../class_v_random.html#a6ba3680d8aa4b5c7d3b6de36235f9841',1,'VRandom']]],
   ['getcurrentframe',['GetCurrentFrame',['../class_v_animation.html#aafce2f78a15032f74471ec7718a42c6f',1,'VAnimation::GetCurrentFrame()'],['../class_v_animation_manager.html#a2078909d136dd5d1cd59b3a03f8cbe45',1,'VAnimationManager::GetCurrentFrame()']]],
   ['getcurvetype',['GetCurveType',['../class_v_text_path.html#adc12369ea027f6306d8210567e35ba5d',1,'VTextPath']]],
+  ['getdefaultview',['GetDefaultView',['../class_v_camera.html#a97137b287508b3eb104e01ab68a059c3',1,'VCamera']]],
   ['getfilltint',['GetFillTint',['../class_v_shape.html#a85345223a0de3a629250f4b2d4e6c4e9',1,'VShape::GetFillTint()'],['../class_v_text.html#a1cdae953a25c09381f8d9b538da54f76',1,'VText::GetFillTint()']]],
   ['getfloat',['GetFloat',['../class_v_random.html#ab6cf74aff6b79b8a6e44cd400fd8713b',1,'VRandom']]],
   ['getfov',['GetFOV',['../class_v3_d_perspective_camera.html#a2fbf7025ba0ed05ab82503bec87e0d36',1,'V3DPerspectiveCamera']]],
@@ -19,7 +20,6 @@ var searchData=
   ['getgroupitem',['GetGroupItem',['../class_v_group.html#a89032075a3434ea39ca431da86a231cb',1,'VGroup']]],
   ['getindexofitem',['GetIndexOfItem',['../class_v_group.html#a6fa144c3d24a75018a818dc5a95eab55',1,'VGroup']]],
   ['getint',['GetInt',['../class_v_random.html#a2e083880d440512679c2bc289572bcac',1,'VRandom']]],
-  ['getjoystickid',['GetJoystickID',['../class_v_input_handler.html#a533a5f6dbb6a0cac0833c98d13486698',1,'VInputHandler']]],
   ['getlastframe',['GetLastFrame',['../class_v_animation_manager.html#af4c3962670cbc021a5576f13868fa44b',1,'VAnimationManager']]],
   ['getmouseposition',['GetMousePosition',['../class_v_global.html#aa159bc5f7e582cb488584abd1c25d4f2',1,'VGlobal']]],
   ['getoutlinethickness',['GetOutlineThickness',['../class_v_shape.html#a610b92bf5864b7eedf6ce9940f3aeabc',1,'VShape']]],

@@ -1,9 +1,6 @@
 var searchData=
 [
   ['deadzone',['deadZone',['../class_v_camera.html#a93e30d52593df27ab747f90804cc36ef',1,'VCamera']]],
-  ['debugcolor',['DebugColor',['../class_v_object.html#a4b93c7d80dfb90c52fb3a5d618673f6b',1,'VObject']]],
-  ['debuggingvertices',['debuggingVertices',['../class_v_group.html#aac07f2769ab7f7181d523e8e1fadfcf3',1,'VGroup::debuggingVertices()'],['../class_v_tilemap.html#a461d3d81ee6d538e5f4bab9e1848adef',1,'VTilemap::debuggingVertices()']]],
-  ['debugobjectcount',['DebugObjectCount',['../class_v_base.html#ac6c4336ce20ac0ada53eaaa5a01c6f7a',1,'VBase']]],
   ['default',['Default',['../class_v_camera_list.html#a468a823035452b24a50c99741907fc33',1,'VCameraList']]],
   ['defaultcamera',['DefaultCamera',['../class_v_state.html#a26e483488575a4c4e09fb5fef1b69e2c',1,'VState']]],
   ['defaulttexture',['DefaultTexture',['../class_v3_d_model.html#a1bf24bc457aa144045406401596a4d27',1,'V3DModel']]],
@@ -17,6 +14,5 @@ var searchData=
   ['dragrange',['DragRange',['../class_v_emitter.html#ab24844d6fddfb3a7f4eddb9939425dab',1,'VEmitter']]],
   ['draw',['Draw',['../class_v3_d_model.html#a7bac9e376dd8c91cb5950a93525b3a51',1,'V3DModel::Draw()'],['../class_v3_d_object.html#ae1abf5caee4103931a513aa58fc4be2e',1,'V3DObject::Draw()'],['../class_v3_d_obj_model.html#a2ee224234ab64fb9504f37127b991b18',1,'V3DObjModel::Draw()'],['../class_v3_d_scene.html#a1f79edc2c4416e6e1e86b5bc642ef8a1',1,'V3DScene::Draw()'],['../class_v_backdrop.html#af806ecd39dc7c6ee8206a156ea6e79da',1,'VBackdrop::Draw()'],['../class_v_base.html#a1e21ec17d7d5cdf6cc8fd2283703c0e4',1,'VBase::Draw()'],['../class_v_emitter.html#a11d0da26b3d5fe1768de9e3b9c922507',1,'VEmitter::Draw()'],['../class_v_group.html#af157774a90025a5cf35a3e3fec431455',1,'VGroup::Draw()'],['../class_v_object.html#a20b4da39a4a1ec552cef2c618fcb9f7e',1,'VObject::Draw()'],['../class_v_render_group.html#af2f90447e04bba5cb2aa50c5482266bf',1,'VRenderGroup::Draw()'],['../class_v_render_layer.html#a6b101678a697475c024934206929df76',1,'VRenderLayer::Draw()'],['../class_v_shape.html#a7d8df410a3fe58ba75e50b96818ef8b9',1,'VShape::Draw()'],['../class_v_sprite.html#a421bc7aedc683200c2033dcf2854f954',1,'VSprite::Draw()'],['../class_v_sub_state.html#a981d41d45e410037d3725ac5b2d45633',1,'VSubState::Draw()'],['../class_v_text.html#aa1eff3228052e62d063aa3a6b17b1e52',1,'VText::Draw()'],['../class_v_tiled_sprite.html#a17c03c13c098cd57ef2b2c0d0948d282',1,'VTiledSprite::Draw()'],['../class_v_tilemap.html#a6952b646b00ddcc4d872995718e3b98e',1,'VTilemap::Draw()'],['../class_v_trail_area.html#a057095117e22a3dd85202e6014bfdc6b',1,'VTrailArea::Draw()']]],
   ['drawcount',['drawCount',['../class_v3_d_model.html#a20d7e71ce3d6948b4cee56bc44757624',1,'V3DModel']]],
-  ['drawdebug',['DrawDebug',['../class_v_global.html#a53b0f099ec895ad0b2e85e1c77029f7c',1,'VGlobal']]],
   ['duration',['Duration',['../class_v_music.html#ada9115721b8790c8e7f4ae404e75cd0d',1,'VMusic']]]
 ];

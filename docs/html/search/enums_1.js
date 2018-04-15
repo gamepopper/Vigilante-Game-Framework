@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['camerafollowmethod',['CameraFollowMethod',['../_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5c',1,'VCamera.h']]]
+  ['lighttype',['LightType',['../_v3_d_light_8h.html#adc3ec8293e6a97ebe43f0196b9a7f638',1,'V3DLight.h']]]
 ];

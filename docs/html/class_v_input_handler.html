@@ -5,18 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Vigilante-Game-Framework: VInputHandler Class Reference</title>
+<title>Vigilante Game Framework: VInputHandler Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(initResizable);
-/* @license-end */</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -29,8 +21,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Vigilante-Game-Framework
-   &#160;<span id="projectnumber">1.0.0.0</span>
+   <div id="projectname">Vigilante Game Framework
+   &#160;<span id="projectnumber">1.0.0.1</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -55,23 +47,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('class_v_input_handler.html','');});
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -86,10 +61,10 @@ $(document).ready(function(){initNavTree('class_v_input_handler.html','');});
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_v_input_handler-members.html">List of all members</a>  </div>
@@ -112,45 +87,6 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Button Input Data.  <a href="struct_v_input_handler_1_1_button_input.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:ac0974abffd3e44f19e92ca97a003c26f"><td class="memItemLeft" align="right" valign="top"><a id="ac0974abffd3e44f19e92ca97a003c26f"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_input_handler.html#ac0974abffd3e44f19e92ca97a003c26f">XAxis</a> : unsigned char { <br />
-&#160;&#160;<b>PovX</b>, 
-<b>PovY</b>, 
-<b>Z</b>, 
-<b>V</b>, 
-<br />
-&#160;&#160;<b>L</b>, 
-<b>R</b>
-<br />
- }</td></tr>
-<tr class="memdesc:ac0974abffd3e44f19e92ca97a003c26f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gamepad Axis Properties. <br /></td></tr>
-<tr class="separator:ac0974abffd3e44f19e92ca97a003c26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d52bd749e387c2051a316f28cf04984"><td class="memItemLeft" align="right" valign="top"><a id="a2d52bd749e387c2051a316f28cf04984"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_input_handler.html#a2d52bd749e387c2051a316f28cf04984">Button</a> : unsigned char { <br />
-&#160;&#160;<b>BUTTON_A</b>, 
-<b>BUTTON_B</b>, 
-<b>BUTTON_X</b>, 
-<b>BUTTON_Y</b>, 
-<br />
-&#160;&#160;<b>BUTTON_LEFT_SHOULDER</b>, 
-<b>BUTTON_RIGHT_SHOULDER</b>, 
-<b>BUTTON_BACK</b>, 
-<b>BUTTON_START</b>, 
-<br />
-&#160;&#160;<b>BUTTON_LEFT_THUMB</b>, 
-<b>BUTTON_RIGHT_THUMB</b>, 
-<b>BUTTON_HOME</b>, 
-<b>BUTTON_DPAD_UP</b>, 
-<br />
-&#160;&#160;<b>BUTTON_DPAD_DOWN</b>, 
-<b>BUTTON_DPAD_LEFT</b>, 
-<b>BUTTON_DPAD_RIGHT</b>, 
-<b>BUTTON_COUNT</b>
-<br />
- }</td></tr>
-<tr class="memdesc:a2d52bd749e387c2051a316f28cf04984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Button Types. <br /></td></tr>
-<tr class="separator:a2d52bd749e387c2051a316f28cf04984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8823e964ef7c4e9c9f36495a384d7a8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_input_handler.html#a8823e964ef7c4e9c9f36495a384d7a8c">SetButtonInput</a> (const sf::String &amp;name, int key=-1, int gamepad=-1, int mouse=-1)</td></tr>
@@ -163,8 +99,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a61382502edaf9c2017d50f8e9716e3de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ebc4e3ed3f3f20f05423d22245465a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_input_handler.html#a9ebc4e3ed3f3f20f05423d22245465a6">IsGamepadActive</a> ()</td></tr>
 <tr class="separator:a9ebc4e3ed3f3f20f05423d22245465a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a533a5f6dbb6a0cac0833c98d13486698"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_input_handler.html#a533a5f6dbb6a0cac0833c98d13486698">GetJoystickID</a> (int ControllerIndex)</td></tr>
-<tr class="separator:a533a5f6dbb6a0cac0833c98d13486698"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c972bebc7cbe9f5186a7690f61aa505"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_input_handler.html#a8c972bebc7cbe9f5186a7690f61aa505">IsButtonPressed</a> (const sf::String &amp;name, int ControllerIndex=0)</td></tr>
 <tr class="separator:a8c972bebc7cbe9f5186a7690f61aa505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65c1004b86fa205cf40bfc17fcf0094b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_input_handler.html#a65c1004b86fa205cf40bfc17fcf0094b">IsButtonDown</a> (const sf::String &amp;name, int ControllerIndex=0)</td></tr>
@@ -210,10 +144,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 sf::Vector2i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_input_handler.html#ade35539a82770eb511c2fc377f48b28d">lastMousePos</a> = sf::Vector2i()</td></tr>
 <tr class="memdesc:ade35539a82770eb511c2fc377f48b28d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Previous mouse position, useful for testing mouse movement. <br /></td></tr>
 <tr class="separator:ade35539a82770eb511c2fc377f48b28d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9e9b0279ed00f61c800b233862a7fc2"><td class="memItemLeft" align="right" valign="top"><a id="ac9e9b0279ed00f61c800b233862a7fc2"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_input_handler.html#ac9e9b0279ed00f61c800b233862a7fc2">JoystickID</a> [CONTROLLER_COUNT]</td></tr>
-<tr class="memdesc:ac9e9b0279ed00f61c800b233862a7fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">SFML requires you to keep record of the joystick ID for each player. <br /></td></tr>
-<tr class="separator:ac9e9b0279ed00f61c800b233862a7fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Processes inputs from keyboard, mouse and gamepad controllers. </p>
@@ -323,25 +253,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if reference has been found and set to the input parameter. </dd></dl>
-
-</div>
-</div>
-<a id="a533a5f6dbb6a0cac0833c98d13486698"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a533a5f6dbb6a0cac0833c98d13486698">&#9670;&nbsp;</a></span>GetJoystickID()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int VInputHandler::GetJoystickID </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ControllerIndex</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Gets JoystickID when using sf::Joystick. </p>
 
 </div>
 </div>
@@ -708,18 +619,14 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="_v_input_handler_8h_source.html">VInputHandler.h</a></li>
+<li>D:/Development/Libs/Vigilante-Game-Framework/VFrame/<a class="el" href="_v_input_handler_8h_source.html">VInputHandler.h</a></li>
 </ul>
 </div><!-- contents -->
-</div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="class_v_input_handler.html">VInputHandler</a></li>
-    <li class="footer">Generated by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.14 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
 </body>
 </html>

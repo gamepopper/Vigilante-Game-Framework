@@ -1,9 +1,6 @@
 var searchData=
 [
   ['deadzone',['deadZone',['../class_v_camera.html#a93e30d52593df27ab747f90804cc36ef',1,'VCamera']]],
-  ['debugcolor',['DebugColor',['../class_v_object.html#a4b93c7d80dfb90c52fb3a5d618673f6b',1,'VObject']]],
-  ['debuggingvertices',['debuggingVertices',['../class_v_group.html#aac07f2769ab7f7181d523e8e1fadfcf3',1,'VGroup::debuggingVertices()'],['../class_v_tilemap.html#a461d3d81ee6d538e5f4bab9e1848adef',1,'VTilemap::debuggingVertices()']]],
-  ['debugobjectcount',['DebugObjectCount',['../class_v_base.html#ac6c4336ce20ac0ada53eaaa5a01c6f7a',1,'VBase']]],
   ['default',['Default',['../class_v_camera_list.html#a468a823035452b24a50c99741907fc33',1,'VCameraList']]],
   ['defaultcamera',['DefaultCamera',['../class_v_state.html#a26e483488575a4c4e09fb5fef1b69e2c',1,'VState']]],
   ['defaulttexture',['DefaultTexture',['../class_v3_d_model.html#a1bf24bc457aa144045406401596a4d27',1,'V3DModel']]],
@@ -14,6 +11,5 @@ var searchData=
   ['down',['down',['../struct_v_input_handler_1_1_button_input.html#add6c876c99c973f2305011ea3ce1e6d2',1,'VInputHandler::ButtonInput']]],
   ['drag',['Drag',['../class_v3_d_object.html#a475bdfb20ca318fbc5020ec4f7c89506',1,'V3DObject::Drag()'],['../class_v_object.html#a593f297077bae51f3846a0722141295d',1,'VObject::Drag()']]],
   ['dragrange',['DragRange',['../class_v_emitter.html#ab24844d6fddfb3a7f4eddb9939425dab',1,'VEmitter']]],
-  ['drawcount',['drawCount',['../class_v3_d_model.html#a20d7e71ce3d6948b4cee56bc44757624',1,'V3DModel']]],
-  ['drawdebug',['DrawDebug',['../class_v_global.html#a53b0f099ec895ad0b2e85e1c77029f7c',1,'VGlobal']]]
+  ['drawcount',['drawCount',['../class_v3_d_model.html#a20d7e71ce3d6948b4cee56bc44757624',1,'V3DModel']]]
 ];

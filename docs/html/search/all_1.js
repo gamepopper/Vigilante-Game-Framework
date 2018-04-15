@@ -8,7 +8,6 @@ var searchData=
   ['bluemultiplier',['BlueMultiplier',['../class_v_trail_area.html#ac8da436dc2a176d62881e7ae7672e659',1,'VTrailArea']]],
   ['bounds',['bounds',['../struct_v_quad_tree.html#a9338bf964bf25197858892ad0e1056c5',1,'VQuadTree']]],
   ['boundtoworld',['boundToWorld',['../class_v_camera.html#a86ad4ec81b7d4587f3d222f608ea6c7d',1,'VCamera']]],
-  ['button',['Button',['../class_v_input_handler.html#a2d52bd749e387c2051a316f28cf04984',1,'VInputHandler']]],
   ['buttoninput',['ButtonInput',['../struct_v_input_handler_1_1_button_input.html',1,'VInputHandler']]],
   ['buttoninputs',['buttonInputs',['../class_v_input_handler.html#a62bc9e61d2abac4615a8e480e7f0089a',1,'VInputHandler']]]
 ];

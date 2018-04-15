@@ -16,7 +16,6 @@ var searchData=
   ['isflashing',['IsFlashing',['../class_v_camera.html#a3fee73adacd683900298761adfeb02c3',1,'VCamera']]],
   ['isfullscreen',['IsFullscreen',['../class_v_global.html#aa6373d7a5065c0a140a48efb7189213c',1,'VGlobal']]],
   ['isgamepadactive',['IsGamepadActive',['../class_v_input_handler.html#a9ebc4e3ed3f3f20f05423d22245465a6',1,'VInputHandler']]],
-  ['isobjectinview',['IsObjectInView',['../class_v_camera.html#ab61b2135a03e6b971ff14bfd83b5df76',1,'VCamera']]],
   ['ispaused',['IsPaused',['../class_v_timer.html#a030877a6c9c2e2ce2277543ff5726ad7',1,'VTimer']]],
   ['isshaking',['IsShaking',['../class_v_camera.html#a798daeb8a4e21ce55f474f14ada785b2',1,'VCamera']]],
   ['issolid',['IsSolid',['../class_v_object.html#ad94a8aabc3efd92bb73c9712b067ea02',1,'VObject']]],
