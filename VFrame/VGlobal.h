@@ -53,7 +53,8 @@
 #include <sstream>
 #endif
 
-#define VFRAME_VERSION "1.0.0.0" ///VFrame Version
+///Currently defined build version of the Vigilante Game Framework
+#define VFRAME_VERSION "1.0.0.1"
 
 class VBase;
 class VObject;
