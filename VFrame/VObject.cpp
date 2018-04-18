@@ -518,10 +518,8 @@ float VObject::computeVelocity(float v, float a, float d, float max, float dt)
 	return v;
 }
 
-bool VObject::TestInView(const sf::View& renderTargetView, sf::View& defaultView, VObject* o, sf::FloatRect& renderBox)
+bool VObject::TestInView(const sf::View& renderTargetView, sf::View& scrollView, VObject* o, sf::FloatRect& renderBox)
 {
-	sf::View scrollView = defaultView;
-
 	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
 	scroll.x *= o->ScrollFactor.x;
 	scroll.y *= o->ScrollFactor.y;
