@@ -108,18 +108,16 @@ void DemoStatesManager::Initialise()
 	VSUPERCLASS::Initialise();
 
 	auto title = new VText(sf::Vector2f(0.0f, 2.0f), (float)VGlobal::p()->Width, "SFML VFrame", 24);
-	title->Alignment = VTextAlign::ALIGNCENTRE;
+	title->SetAlignment(VTextAlign::ALIGNCENTRE);
 	title->ScrollFactor = sf::Vector2f();
 	title->ZoomFactor = 0;
-	title->ApplyChanges();
 
 	std::stringstream ss;
 	ss << "Version: " << VFRAME_VERSION;
 	auto version = new VText(5.0f, 10.0f, (float)VGlobal::p()->Width - 10.0f, ss.str(), 12);
-	version->Alignment = VTextAlign::ALIGNRIGHT;
+	version->SetAlignment(VTextAlign::ALIGNRIGHT);
 	version->ScrollFactor = sf::Vector2f();
 	version->ZoomFactor = 0;
-	version->ApplyChanges();
 
 	auto header = new VSprite();
 	header->MakeGraphic(VGlobal::p()->Width, (int)(title->Position.y + 32), sf::Color::Black);
