@@ -15,7 +15,7 @@ VTextPath::VTextPath(float x, float y, float width, const sf::String& text, int 
 
 void VTextPath::Update(float dt)
 {
-	Wrap = WRAPNONE;
+	wrap = WRAPNONE;
 	VSUPERCLASS::Update(dt);
 }
 
@@ -23,18 +23,18 @@ void VTextPath::updateTextRender(sf::String text)
 {
 	std::wstringstream ss(text);
 
-	bool  bold = (Style & sf::Text::Bold) != 0;
-	bool  underlined = (Style & sf::Text::Underlined) != 0;
-	bool  strikeThrough = (Style & sf::Text::StrikeThrough) != 0;
-	float italic = (Style & sf::Text::Italic) ? 0.208f : 0.f;
-	float underlineOffset = font->getUnderlinePosition(FontSize);
-	float underlineThickness = font->getUnderlineThickness(FontSize);
-	bool  outlined = OutlineThickness > 0.0f;
+	bool  bold = (style & sf::Text::Bold) != 0;
+	bool  underlined = (style & sf::Text::Underlined) != 0;
+	bool  strikeThrough = (style & sf::Text::StrikeThrough) != 0;
+	float italic = (style & sf::Text::Italic) ? 0.208f : 0.f;
+	float underlineOffset = font->getUnderlinePosition(fontSize);
+	float underlineThickness = font->getUnderlineThickness(fontSize);
+	bool  outlined = outlineThickness > 0.0f;
 
-	sf::FloatRect xBounds = font->getGlyph(L'x', FontSize, bold).bounds;
+	sf::FloatRect xBounds = font->getGlyph(L'x', fontSize, bold).bounds;
 	float strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
 
-	//float hspace = static_cast<float>(font->getGlyph(L' ', FontSize, bold).advance);
+	//float hspace = static_cast<float>(font->getGlyph(L' ', fontSize, bold).advance);
 
 	float left = (float)0xFFFFFF;
 	float top = (float)0xFFFFFF;
@@ -58,7 +58,7 @@ void VTextPath::updateTextRender(sf::String text)
 	while (std::getline(ss, item, L'\n'))
 	{
 		float x = 0, xOffset = 0;
-		float y = static_cast<float>(FontSize);
+		float y = static_cast<float>(fontSize);
 
 		sf::VertexArray verts(sf::Triangles, outlined ? item.length() * 6 * 2 : item.length() * 6);
 		//sf::Uint32 prevChar = 0;
@@ -69,7 +69,7 @@ void VTextPath::updateTextRender(sf::String text)
 		for (size_t i = 0; i < item.length(); ++i)
 		{
 			sf::Uint32 curChar = item[i];
-			const sf::Glyph& glyph = font->getGlyph(curChar, FontSize, bold);
+			const sf::Glyph& glyph = font->getGlyph(curChar, fontSize, bold);
 
 			sf::Vector2f p = GetBezierPoint((float)i / textLength);
 			x = p.x;
@@ -77,8 +77,8 @@ void VTextPath::updateTextRender(sf::String text)
 
 			if (outlined)
 			{
-				const sf::Glyph& outlineGlyph = font->getGlyph(curChar, FontSize, bold, OutlineThickness);
-				setCharacterRender(outlineGlyph, x, y, outlineColour, bold, italic, (i * 6), verts, OutlineThickness);
+				const sf::Glyph& outlineGlyph = font->getGlyph(curChar, fontSize, bold, outlineThickness);
+				setCharacterRender(outlineGlyph, x, y, outlineColour, bold, italic, (i * 6), verts, outlineThickness);
 				setCharacterRender(glyph, x, y, fillColour, bold, italic, outlineOffset + (i * 6), verts, 0.0f);
 			}
 			else
@@ -86,7 +86,7 @@ void VTextPath::updateTextRender(sf::String text)
 				setCharacterRender(glyph, x, y, fillColour, bold, italic, (i * 6), verts, 0.0f);
 			}
 
-			x += font->getGlyph(curChar, FontSize, bold).advance;
+			x += font->getGlyph(curChar, fontSize, bold).advance;
 
 			if (underlined)
 			{
@@ -95,7 +95,7 @@ void VTextPath::updateTextRender(sf::String text)
 
 				if (outlined)
 				{
-					setTextLine(x, y, outlineColour, underlineOffset, underlineThickness, vertOffset, verts, OutlineThickness);
+					setTextLine(x, y, outlineColour, underlineOffset, underlineThickness, vertOffset, verts, outlineThickness);
 					setTextLine(x, y, fillColour, underlineOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
 				}
 				else
@@ -111,7 +111,7 @@ void VTextPath::updateTextRender(sf::String text)
 
 				if (outlined)
 				{
-					setTextLine(x, y, outlineColour, strikeThroughOffset, underlineThickness, vertOffset, verts, OutlineThickness);
+					setTextLine(x, y, outlineColour, strikeThroughOffset, underlineThickness, vertOffset, verts, outlineThickness);
 					setTextLine(x, y, fillColour, strikeThroughOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
 				}
 				else
@@ -122,9 +122,9 @@ void VTextPath::updateTextRender(sf::String text)
 		}
 
 		float textWidth = verts.getBounds().width;
-		if (Alignment == VTextAlign::ALIGNCENTRE)
+		if (alignment == VTextAlign::ALIGNCENTRE)
 			xOffset = (Size.x / 2) - (textWidth / 2);
-		else if (Alignment == VTextAlign::ALIGNRIGHT)
+		else if (alignment == VTextAlign::ALIGNRIGHT)
 			xOffset = Size.x - textWidth;
 		else
 			xOffset = 0;
@@ -137,7 +137,7 @@ void VTextPath::updateTextRender(sf::String text)
 			vertices[vertOffset + i] = verts[i];
 		}
 
-		y += font->getLineSpacing(FontSize) + LineSpaceModifier;
+		y += font->getLineSpacing(fontSize) + lineSpaceModifier;
 	}
 }
 
@@ -286,7 +286,7 @@ sf::Vector2f VTextPath::GetBezierPoint(float t)
 void VTextPath::AddPoint(const sf::Vector2f& point)
 {
 	pointList.push_back(point);
-	ApplyChanges();
+	dirty = true;
 }
 
 void VTextPath::SetPoints(const std::vector<sf::Vector2f>& points)
@@ -295,7 +295,7 @@ void VTextPath::SetPoints(const std::vector<sf::Vector2f>& points)
 	pointList.shrink_to_fit();
 
 	pointList = points;
-	ApplyChanges();
+	dirty = true;
 }
 
 void VTextPath::UpdatePoint(unsigned int index, float x, float y)

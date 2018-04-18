@@ -33,7 +33,7 @@ void VTypedText::Start(float Delay, bool ForceRestart, bool AutoErase, std::func
 
 	if (ForceRestart)
 	{
-		Text = "";
+		text = "";
 		length = 0;
 	}
 
@@ -60,7 +60,7 @@ void VTypedText::Erase(float Delay, bool ForceRestart, std::function<void()> OnE
 
 	if (ForceRestart)
 	{
-		Text = finalText;
+		text = finalText;
 		length = finalText.size();
 	}
 
@@ -69,7 +69,7 @@ void VTypedText::Erase(float Delay, bool ForceRestart, std::function<void()> OnE
 
 void VTypedText::ResetText(sf::String text)
 {
-	Text = "";
+	this->text = "";
 	finalText = text;
 	typing = false;
 	erasing = false;
@@ -87,7 +87,7 @@ void VTypedText::Skip()
 	waiting = false;
 	timer = 0;
 
-	ApplyChanges();
+	dirty = true;
 }
 
 void VTypedText::onComplete()
@@ -217,8 +217,8 @@ void VTypedText::Update(float dt)
 
 		if (futureCursorTime > CursorBlinkSpeed)
 		{
-			dirty = cursorTimer <= CursorBlinkSpeed;
 			cursorBlink = false;
+			dirty = cursorTimer <= CursorBlinkSpeed;
 			futureCursorTime = 0;
 		}
 
@@ -228,9 +228,9 @@ void VTypedText::Update(float dt)
 	if (dirty)
 	{
 		if (cursorBlink)
-			Text = Prefix + finalText.substr(0, length).append({ CursorChar });
+			text = Prefix + finalText + CursorChar;
 		else
-			Text = Prefix + finalText.substr(0, length);
+			text = Prefix + finalText;
 	}
 
 	if (length >= (int)finalText.size() && typing && !waiting && !erasing)

@@ -12,7 +12,7 @@ void VText::setDimensions()
 	{
 		font = new sf::Font();
 		if (font->loadFromFile("arial.ttf"))
-			SetFormat(*font, FontSize, GetFillTint(), Alignment, Style);
+			SetFormat(*font, fontSize, GetFillTint(), alignment, style);
 
 		disposible = true;
 	}
@@ -20,20 +20,20 @@ void VText::setDimensions()
 	vertices.clear();
 	vertices.setPrimitiveType(sf::Triangles);
 
-	sf::String& printText = Text;
+	sf::String& printText = text;
 
-	bool bold = Style & sf::Text::Bold;
+	bool bold = style & sf::Text::Bold;
 	int newLineCount = 1;
 
-	if (Wrap)
+	if (wrap != VTextWrap::WRAPNONE)
 	{
 		unsigned int currentOffset = 0;
 		bool firstWord = true;
 		size_t wordBeginning = 0;
 	
-		for (size_t p(0); p < Text.getSize(); ++p)
+		for (size_t p(0); p < text.getSize(); ++p)
 		{
-			auto currentChar = Text[p];
+			auto currentChar = text[p];
 			if (currentChar == '\n')
 			{
 				newLineCount++;
@@ -47,10 +47,10 @@ void VText::setDimensions()
 				firstWord = false;
 			}
 
-			sf::Glyph glyph = font->getGlyph(currentChar, FontSize, bold);
+			sf::Glyph glyph = font->getGlyph(currentChar, fontSize, bold);
 			currentOffset += static_cast<unsigned int>(glyph.advance);
 
-			if (Wrap == WRAPWORD)
+			if (wrap == WRAPWORD)
 			{
 				if (!firstWord && currentOffset > Size.x)
 				{
@@ -61,7 +61,7 @@ void VText::setDimensions()
 					currentOffset = 0;
 				}
 			}
-			else if (Wrap == WRAPLETTER)
+			else if (wrap == WRAPLETTER)
 			{
 				if (currentOffset > Size.x)
 				{
@@ -73,7 +73,7 @@ void VText::setDimensions()
 		}
 	}
 
-	Size.y = font->getLineSpacing(FontSize) * (Wrap != WRAPNONE ? newLineCount : 1);
+	Size.y = font->getLineSpacing(fontSize) * (wrap != WRAPNONE ? newLineCount : 1);
 	updateTextRender(printText);
 
 	origin = sf::Vector2f(Size.x * Origin.x, Size.y * Origin.y);
@@ -94,35 +94,41 @@ void VText::updateTextRender(sf::String text)
 {
 	std::wstringstream ss(text);
 
-	bool  bold = (Style & sf::Text::Bold) != 0;
-	bool  underlined = (Style & sf::Text::Underlined) != 0;
-	bool  strikeThrough = (Style & sf::Text::StrikeThrough) != 0;
-	float italic = (Style & sf::Text::Italic) ? 0.208f : 0.f;
-	float underlineOffset = font->getUnderlinePosition(FontSize);
-	float underlineThickness = font->getUnderlineThickness(FontSize);
-	bool outlined = OutlineThickness > 0.0f;
+	bool  bold = (style & sf::Text::Bold) != 0;
+	bool  underlined = (style & sf::Text::Underlined) != 0;
+	bool  strikeThrough = (style & sf::Text::StrikeThrough) != 0;
+	float italic = (style & sf::Text::Italic) ? 0.208f : 0.f;
+	float underlineOffset = font->getUnderlinePosition(fontSize);
+	float underlineThickness = font->getUnderlineThickness(fontSize);
+	bool outlined = outlineThickness > 0.0f;
 
-	sf::FloatRect xBounds = font->getGlyph(L'x', FontSize, bold).bounds;
+	sf::FloatRect xBounds = font->getGlyph(L'x', fontSize, bold).bounds;
 	float strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
 
-	float hspace = static_cast<float>(font->getGlyph(L' ', FontSize, bold).advance);
+	float hspace = static_cast<float>(font->getGlyph(L' ', fontSize, bold).advance);
+
+	unsigned int letterCount = 0;
 
 	std::wstring item;
-	float y = static_cast<float>(FontSize);
+	float y = static_cast<float>(fontSize);
 	while (std::getline(ss, item, L'\n'))
 	{
 		float x = 0, xOffset = 0;
 
 		sf::VertexArray verts(sf::Triangles, outlined ? item.length() * 6 * 2 : item.length() * 6);
 		sf::Uint32 prevChar = 0;
-		int outlineOffset = item.length() * 6;
+		int outlineVertOffset = item.length() * 6;
 
 		for (size_t i = 0; i < item.length(); ++i)
 		{
-			sf::Uint32 curChar = item[i];
-			const sf::Glyph& glyph = font->getGlyph(curChar, FontSize, bold);
+			letterCount++;
+			if (letterCount > length)
+				break;
 
-			x += font->getKerning(prevChar, curChar, FontSize);
+			sf::Uint32 curChar = item[i];
+			const sf::Glyph& glyph = font->getGlyph(curChar, fontSize, bold);
+
+			x += font->getKerning(prevChar, curChar, fontSize);
 			prevChar = curChar;
 
 			if ((curChar == L' ') || (curChar == L'\t'))
@@ -141,9 +147,9 @@ void VText::updateTextRender(sf::String text)
 
 			if (outlined)
 			{
-				const sf::Glyph& outlineGlyph = font->getGlyph(curChar, FontSize, bold, OutlineThickness);
-				setCharacterRender(outlineGlyph, x + OutlineOffset.x, y + OutlineOffset.y, outlineColour, bold, italic, (i * 6), verts, OutlineThickness);
-				setCharacterRender(glyph, x, y, fillColour, bold, italic, outlineOffset + (i * 6), verts, 0.0f);
+				const sf::Glyph& outlineGlyph = font->getGlyph(curChar, fontSize, bold, outlineThickness);
+				setCharacterRender(outlineGlyph, x + outlineOffset.x, y + outlineOffset.y, outlineColour, bold, italic, (i * 6), verts, outlineThickness);
+				setCharacterRender(glyph, x, y, fillColour, bold, italic, outlineVertOffset + (i * 6), verts, 0.0f);
 			}
 			else
 			{
@@ -160,7 +166,7 @@ void VText::updateTextRender(sf::String text)
 
 			if (outlined)
 			{
-				setTextLine(x + OutlineOffset.x, y + OutlineOffset.y, outlineColour, underlineOffset, underlineThickness, vertOffset, verts, OutlineThickness);
+				setTextLine(x + outlineOffset.x, y + outlineOffset.y, outlineColour, underlineOffset, underlineThickness, vertOffset, verts, outlineThickness);
 				setTextLine(x, y, fillColour, underlineOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
 			}
 			else
@@ -176,7 +182,7 @@ void VText::updateTextRender(sf::String text)
 
 			if (outlined)
 			{
-				setTextLine(x + OutlineOffset.x, y + OutlineOffset.y, outlineColour, strikeThroughOffset, underlineThickness, vertOffset, verts, OutlineThickness);
+				setTextLine(x + outlineOffset.x, y + outlineOffset.y, outlineColour, strikeThroughOffset, underlineThickness, vertOffset, verts, outlineThickness);
 				setTextLine(x, y, fillColour, strikeThroughOffset, underlineThickness, vertOffset + 6, verts, 0.0f);
 			}
 			else
@@ -186,9 +192,9 @@ void VText::updateTextRender(sf::String text)
 		}
 
 		float textWidth = verts.getBounds().width;
-		if (Alignment == VTextAlign::ALIGNCENTRE)
+		if (alignment == VTextAlign::ALIGNCENTRE)
 			xOffset = (Size.x / 2) - (textWidth / 2);
-		else if (Alignment == VTextAlign::ALIGNRIGHT)
+		else if (alignment == VTextAlign::ALIGNRIGHT)
 			xOffset = Size.x - textWidth;
 		else
 			xOffset = 0;
@@ -201,7 +207,7 @@ void VText::updateTextRender(sf::String text)
 			vertices[vertOffset + i] = verts[i];
 		}
 
-		y += font->getLineSpacing(FontSize) + LineSpaceModifier;
+		y += font->getLineSpacing(fontSize) + lineSpaceModifier;
 	}
 }
 
@@ -253,12 +259,11 @@ VText* VText::SetFormat(const sf::String& filename, int charSize, sf::Color colo
 	}
 
 	font = &VGlobal::p()->Content->LoadFont(filename);
-	Alignment = alignment;
-	FontSize = charSize;
-	Style = style;
+	SetAlignment(alignment);
+	SetFontSize(charSize);
 	SetStyle(style);
-	fillColour = colour;
-	ApplyChanges();
+	SetFillTint(colour);
+	dirty = true;
 	
 	return this;
 }
@@ -273,19 +278,32 @@ VText* VText::SetFormat(sf::Font& font, int charSize, sf::Color colour, VTextAli
 	}
 
 	this->font = &font;
-	Alignment = alignment;
-	FontSize = charSize;
-	Style = style;
+	SetAlignment(alignment);
+	SetFontSize(charSize);
 	SetStyle(style);
-	fillColour = colour;
-	ApplyChanges();
+	SetFillTint(colour);
+	dirty = true;
 
 	return this;
 }
 
+void VText::SetText(const sf::String& text)
+{
+	if (this->text != text)
+	{
+		this->text = text;
+		length = text.getSize();
+		dirty = true;
+	}
+}
+
 void VText::SetStyle(int style)
 {
-	Style = style;
+	if (this->style != style)
+	{
+		this->style = style;
+		dirty = true;
+	}
 }
 
 void VText::SetFillTint(const sf::Color &colour)
@@ -293,7 +311,7 @@ void VText::SetFillTint(const sf::Color &colour)
 	if (fillColour != colour)
 	{
 		fillColour = colour;
-		ApplyChanges();
+		dirty = true;
 	}
 }
 
@@ -303,14 +321,63 @@ void VText::SetOutlineTint(const sf::Color &colour)
 	{
 		outlineColour = colour;
 
-		if (OutlineThickness > 0)
-			ApplyChanges();
+		if (outlineThickness > 0)
+			dirty = true;
 	}
 }
 
-void VText::ApplyChanges()
+void VText::SetFontSize(unsigned int size)
 {
-	dirty = true;
+	if (fontSize != size)
+	{
+		fontSize = size;
+		dirty = true;
+	}
+}
+
+void VText::SetWrap(const VTextWrap& wrapMode)
+{
+	if (wrap != wrapMode)
+	{
+		wrap = wrapMode;
+		dirty = true;
+	}
+}
+
+void VText::SetLineSpaceModifier(float lineSpacing)
+{
+	if (lineSpaceModifier != lineSpacing)
+	{
+		lineSpaceModifier = lineSpacing;
+		dirty = true;
+	}
+}
+
+void VText::SetAlignment(const VTextAlign& align)
+{
+	if (alignment != align)
+	{
+		alignment = align;
+		dirty = true;
+	}
+}
+
+void VText::SetOutlineThickness(float thickness)
+{
+	if (outlineThickness != thickness)
+	{
+		outlineThickness = thickness;
+		dirty = true;
+	}
+}
+
+void VText::SetOutlineOffset(const sf::Vector2f& offset)
+{
+	if (outlineOffset != offset)
+	{
+		outlineOffset = offset;
+		dirty = true;
+	}
 }
 
 void VText::Destroy()
@@ -333,7 +400,7 @@ void VText::Update(float dt)
 	if (dirty)
 	{
 		setDimensions();
-		RenderState.texture = &font->getTexture(FontSize);
+		RenderState.texture = &font->getTexture(fontSize);
 		dirty = false;
 	}
 }

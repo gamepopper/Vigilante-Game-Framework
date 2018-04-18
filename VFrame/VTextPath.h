@@ -82,12 +82,12 @@ public:
 	void UpdatePoint(unsigned int index, float x, float y);
 
 	///@param curve The type of curve that the points to follow.
-	void SetCurveType(PathCurveType curve) { curveType = curve; ApplyChanges(); }
+	void SetCurveType(PathCurveType curve) { curveType = curve; dirty = true; }
 	///@return The current curve type set.
 	PathCurveType GetCurveType() { return curveType; }
 
 	///@param offset The offset that the text should start rendering on the curve (wrapped to 1.0f). Text wraps along path.
-	void SetPathOffset(float offset) { pathOffset = offset; ApplyChanges(); }
+	void SetPathOffset(float offset) { pathOffset = offset; dirty = true; }
 	///@return Current path offset.
 	float GetPathOffset() { return pathOffset; }
 

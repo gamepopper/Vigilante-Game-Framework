@@ -49,8 +49,6 @@ private:
 	float cursorTimer = 0;
 	///Timer for the wait between text being typed and text being erased.
 	float waitTimer = 0;
-	///Current length of text.
-	int length = 0;
 	///Flag if the text is being typed.
 	bool typing = false;
 	///Flag if the text is being erased.

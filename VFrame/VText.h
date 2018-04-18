@@ -68,6 +68,24 @@ protected:
 	sf::Transformable transformable;
 	///Font object.
 	sf::Font* font = nullptr;
+	///String of text that will be rendered.
+	sf::String text;
+	///Current length of text.
+	int length = 0;
+	///Size of the text per character.
+	unsigned int fontSize = 8;
+	///Flags for setting a text's display style.
+	unsigned int style = sf::Text::Regular;
+	///Text wrapping mode.
+	VTextWrap wrap = WRAPWORD;
+	///Used for adjusting the distance between lines different to the default.
+	int lineSpaceModifier = 0;
+	///Text alignment property.
+	VTextAlign alignment = ALIGNLEFT;
+	///The thickness of the outline.
+	float outlineThickness = 0.0f;
+	///The position offset of the outline. Good to modify if you want to display the outline like a shadow.
+	sf::Vector2f outlineOffset;
 	///If true, the text vertex data is rebuilt for all the new properties.
 	bool dirty = false;
 	///If true, the font is disposed by the Text object (in case the font isn't loaded from VContent).
@@ -121,26 +139,12 @@ public:
 
 	///RenderState for the vertex data.
 	sf::RenderStates RenderState = sf::RenderStates::Default;
-	///String of text that will be rendered.
-	sf::String Text;
-	///Size of the text per character.
-	unsigned int FontSize = 8;
-	///Flags for setting a text's display style.
-	unsigned int Style = sf::Text::Regular;
-	///Text wrapping mode.
-	VTextWrap Wrap = WRAPWORD;
-	///Used for adjusting the distance between lines different to the default.
-	int LineSpaceModifier = 0;
-	///Scale transform.
-	sf::Vector2f Scale = sf::Vector2f(1,1);
-	///Text alignment property.
-	VTextAlign Alignment = ALIGNLEFT;
+
 	///Origin point as percentage.
 	sf::Vector2f Origin;
-	///The thickness of the outline.
-	float OutlineThickness = 0.0f;
-	///The position offset of the outline. Good to modify if you want to display the outline like a shadow.
-	sf::Vector2f OutlineOffset;
+
+	///Scale transform.
+	sf::Vector2f Scale = sf::Vector2f(1, 1);
 
 	/**
 	* @param x X position coordinate.
@@ -150,13 +154,15 @@ public:
 	* @param charSize The font size the text will be displayed at.
 	*/
 	VText(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8) : 	VObject(x,y),
-																										Text(text),
-																										FontSize(charSize)
+																										text(text),
+																										length(text.getSize()),
+																										fontSize(charSize)
 	{
 		Size.x = width;
 		transformable.setPosition(Position);
 
 		Moves = false;
+		dirty = true;
 
 #ifdef _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);
@@ -170,14 +176,16 @@ public:
 	* @param charSize The font size the text will be displayed at.
 	*/
 	VText(sf::Vector2f position, float width = 0, const sf::String& text = "", int charSize = 8) : 	VObject(position),
-																									Text(text)
+																									text(text),
+																									length(text.getSize())
 	{
 		Size.x = width;
-		FontSize = charSize;
+		fontSize = charSize;
 
 		transformable.setPosition(position);
 
 		Moves = false;
+		dirty = true;
 
 #ifdef _DEBUG
 		DebugColor = sf::Color(0, 0, 255, 128);
@@ -206,19 +214,48 @@ public:
 	VText* SetFormat(sf::Font& fontData, int charSize = 8, sf::Color colour = sf::Color::White,
 		VTextAlign alignment = VTextAlign::ALIGNLEFT, int style = sf::Text::Regular);
 
+	///@param sf::String of text that will be rendered.
+	void SetText(const sf::String& text);
 	///@param style Font styles flags (i.e. Bold, Italic, Strikethrough, ect).
 	void SetStyle(int style = sf::Text::Regular);
 	///@param colour The main colour of the text.
 	void SetFillTint(const sf::Color &colour);
 	///@param colour The text outline (requires OutlineThickness to be greater than 0).
 	void SetOutlineTint(const sf::Color &colour);
+	///@return Size of the text per character.
+	void SetFontSize(unsigned int size);
+	///@return Text wrapping mode.
+	void SetWrap(const VTextWrap& wrapMode);
+	///@return Used for adjusting the distance between lines different to the default.
+	void SetLineSpaceModifier(float lineSpacing);
+	///@return Text alignment property.
+	void SetAlignment(const VTextAlign& align);
+	///@return The thickness of the outline.
+	void SetOutlineThickness(float thickness);
+	///@return The position offset of the outline. Good to modify if you want to display the outline like a shadow.
+	void SetOutlineOffset(const sf::Vector2f& offset);
+
+	///@return The text that will be rendered.
+	const sf::String& GetText() { return text; }
+	///@return Flags for setting a text's display style.
+	unsigned int GetStyle() { return style; }
 	///@return The main text colour.
 	sf::Color const& GetFillTint() { return fillColour; }
 	///@return The colour of the text outline.
 	sf::Color const& GetOutlineTint() {	return outlineColour; }
+	///@return Size of the text per character.
+	unsigned int GetFontSize() { return fontSize; }
+	///@return Text wrapping mode.
+	VTextWrap const&  GetWrap() { return wrap; }
+	///@return Used for adjusting the distance between lines different to the default.
+	int GetLineSpaceModifier() { return lineSpaceModifier; }
+	///@return Text alignment property.
+	VTextAlign const&  GetAlignment() { return alignment; }
+	///@return The thickness of the outline.
+	float GetOutlineThickness() { return outlineThickness; }
+	///@return The position offset of the outline. Good to modify if you want to display the outline like a shadow.
+	sf::Vector2f const&  GetOutlineOffset() { return outlineOffset; }
 
-	///Applies the changes to the text format, calling this is required when changing any public properties (including Text).
-	void ApplyChanges();
 	///Destroys the text rendering data (and font if disposable is set for true).
 	virtual void Destroy() override;
 
