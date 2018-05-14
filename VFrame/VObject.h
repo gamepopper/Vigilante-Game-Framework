@@ -37,18 +37,6 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
-///Flags for which sides are allowed to check if being overlapped for collision purposes.
-enum SidesTouching : unsigned char
-{
-	TOUCHNONE	= 0,
-	TOUCHLEFT	= 1 << 0,
-	TOUCHRIGHT	= 1 << 1,
-	TOUCHTOP	= 1 << 2,
-	TOUCHBOTTOM = 1 << 3,
-	TOUCHWALL	= TOUCHLEFT | TOUCHRIGHT,
-	TOUCHALL	= TOUCHLEFT | TOUCHRIGHT | TOUCHTOP | TOUCHBOTTOM
-};
-
 ///Base object class that handles movement, rotation and collisions.
 class VObject : public VBase
 {
@@ -168,6 +156,18 @@ public:
 	float Health = 100;
 	///If true, the object will not change its velocity on collision.
 	bool Immovable = false;
+
+	///Flags for which sides are allowed to check if being overlapped for collision purposes.
+	enum SidesTouching : unsigned char
+	{
+		TOUCHNONE = 0,
+		TOUCHLEFT = 1 << 0,
+		TOUCHRIGHT = 1 << 1,
+		TOUCHTOP = 1 << 2,
+		TOUCHBOTTOM = 1 << 3,
+		TOUCHWALL = TOUCHLEFT | TOUCHRIGHT,
+		TOUCHALL = TOUCHLEFT | TOUCHRIGHT | TOUCHTOP | TOUCHBOTTOM
+	};
 
 	///Which sides are currently touching (is reset on each Update call!)
 	unsigned char Touching = SidesTouching::TOUCHNONE;

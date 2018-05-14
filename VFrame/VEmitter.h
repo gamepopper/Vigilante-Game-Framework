@@ -91,7 +91,7 @@ public:
 	///If true, when particles have collided, their velocity or position cannot be effected.
 	bool Immovable = false;
 	///Which sides are allowed to be collided with.
-	int AllowCollisions = SidesTouching::TOUCHALL;
+	int AllowCollisions = VObject::TOUCHALL;
 	///The amount the object will appear to move when the camera scrolls (1.0f = Scrolls as fast as the camera, 0.5f = Scrolls half as fast as the camera). Good for parallax scrolling.
 	sf::Vector2f ScrollFactor;
 	///The amount the object will appear to rotate when the camera rotates (1.0f = Rotates as fast as the camera, 0.5f = Rotates half as fast as the camera). Good for parallax scrolling.

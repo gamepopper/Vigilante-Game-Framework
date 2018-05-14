@@ -59,7 +59,7 @@ struct VTileRenderInfo
 struct VTileCollisionInfo
 {
 	///Filters the sides of a tile that allows collisions.
-	uint8_t AllowCollisions = SidesTouching::TOUCHALL;
+	uint8_t AllowCollisions = VObject::TOUCHALL;
 	///Callback function if an object collides the tile.
 	std::function<void(VObject*, VObject*)> Callback = nullptr;
 };
