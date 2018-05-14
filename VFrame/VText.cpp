@@ -122,7 +122,7 @@ void VText::updateTextRender(sf::String text)
 		for (size_t i = 0; i < item.length(); ++i)
 		{
 			letterCount++;
-			if (letterCount > length)
+			if (letterCount > (unsigned)length)
 				break;
 
 			sf::Uint32 curChar = item[i];
