@@ -83,6 +83,12 @@ public:
 	virtual void Resume() {}
 	///@param event The current event that can be processed.
 	virtual void HandleEvents(const sf::Event& event) {}
+
+	/**
+	* If overridden, allows the opportunity to render objects directly to the window, instead of the scene itself.
+	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
+	*/
+	virtual void PostDraw(sf::RenderTarget& renderTarget) {}
 };
 
 ///A different kind of state class that would update and render over the top of the main state. Good for pause screens, menus, battle screens and even GUI.
@@ -138,6 +144,12 @@ public:
 	* @param RenderTarget The game's sf::RenderTarget object to render data onto.
 	*/
 	virtual void Draw(sf::RenderTarget &RenderTarget);
+
+	/**
+	* If overridden, allows the opportunity to render objects directly to the window, instead of the scene itself.
+	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
+	*/
+	virtual void PostDraw(sf::RenderTarget& renderTarget) {}
 };
 
 ///Manager class for VStates, allows switching current states or adding states to a stack.
