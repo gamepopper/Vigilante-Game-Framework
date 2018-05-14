@@ -42,12 +42,12 @@ void VTilemap::updateTransform()
 void VTilemap::updateTilemap()
 {
 	autotile.clear();
-
-	vertices.clear();
 	vertices.setPrimitiveType(sf::Quads);
 
 	if (renderDir.empty())
 		return;
+
+	int vertexOffset = 0;
 
 	if (AutoTile)
 	{
@@ -109,12 +109,26 @@ void VTilemap::updateTilemap()
 				quad[2].color = colour;
 				quad[3].color = colour;
 
-				vertices.append(quad[0]);
-				vertices.append(quad[1]);
-				vertices.append(quad[2]);
-				vertices.append(quad[3]);
+				if (vertexOffset < vertices.getVertexCount())
+				{
+					vertices[vertexOffset + 0] = quad[0];
+					vertices[vertexOffset + 1] = quad[1];
+					vertices[vertexOffset + 2] = quad[2];
+					vertices[vertexOffset + 3] = quad[3];
+				}
+				else
+				{
+					vertices.append(quad[0]);
+					vertices.append(quad[1]);
+					vertices.append(quad[2]);
+					vertices.append(quad[3]);
+				}
+
+				vertexOffset += 4;
 			}
 		}
+
+	vertices.resize(vertexOffset);
 
 	dirty = false;
 }
