@@ -284,13 +284,11 @@ void VGame::Render(VCamera* camera)
 	renderTarget->setView(camera->GetView());
 	VState* currentState = VGlobal::p()->CurrentState();
 
-	if (currentState->visible)
+	if (currentState && currentState->visible)
 		currentState->Draw(*renderTarget);
 
-	if (currentState->SubState)
-	{
+	if (currentState->SubState && currentState->SubState->visible)
 		currentState->SubState->Draw(*renderTarget);
-	}
 
 	camera->Render(*renderTarget);
 }
@@ -328,5 +326,14 @@ void VGame::PostRender()
 	}
 
 	app->setView(view);
+
+	VState* currentState = VGlobal::p()->CurrentState();
+
+	if (currentState && currentState->visible)
+		currentState->PostDraw(*VGlobal::p()->App);
+
+	if (currentState->SubState && currentState->SubState->visible)
+		currentState->SubState->PostDraw(*VGlobal::p()->App);
+
 	app->display();
 }
