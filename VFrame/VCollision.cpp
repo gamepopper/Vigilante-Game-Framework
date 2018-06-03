@@ -165,7 +165,7 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 
 		if (renderGroup != nullptr)
 		{
-			AddToList(renderGroup->Sprite, list);
+			AddToList(renderGroup->Sprite.get(), list);
 		}
 	}
 	else
