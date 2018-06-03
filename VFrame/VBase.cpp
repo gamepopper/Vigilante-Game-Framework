@@ -13,7 +13,7 @@
 #include <ctype.h>
 #include <cstdio>
 #include <cstring>
-
+#include <fstream>
 
 #ifdef _DEBUG
 int VBase::DebugObjectCount = 0;
@@ -87,6 +87,12 @@ void VBase::VLogError(const char* format, ...)
 
 	wchar_t output[4096];
 	std::mbstowcs(output, buf, strlen(buf) + 1);
+
+	std::ofstream outfile;
+
+	outfile.open("error.txt");
+	outfile << output << std::endl;
+	outfile.close();
 
 #ifdef _MSC_VER
 	OutputDebugStringW(output);
