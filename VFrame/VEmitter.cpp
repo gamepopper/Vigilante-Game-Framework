@@ -23,12 +23,20 @@ VEmitter* VEmitter::MakeParticles(int Amount, int Width, int Height, sf::Color C
 {
 	MaxSize = Amount;
 
-	sf::RenderTexture renderTex;
-	renderTex.create(Width, Height);
-	renderTex.clear(Color);
-	RenderState.texture = &renderTex.getTexture();
-	ParticleInstance->Size = sf::Vector2f(sf::Vector2u(Width, Height));
+	if (disposible)
+	{
+		delete RenderState.texture;
+		RenderState.texture = nullptr;
+	}
 
+	sf::Image image;
+	image.create(Width, Height, Color);
+
+	sf::Texture* tex = new sf::Texture();
+	tex->loadFromImage(image);
+	disposible = true;
+
+	RenderState.texture = tex;
 	setSize(Amount, false, Width, Height, sf::IntRect(0, 0, Width, Height), false);
 
 	return this;
@@ -84,6 +92,12 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const s
 void VEmitter::Destroy()
 {
 	VSUPERCLASS::Destroy();
+
+	if (disposible)
+	{
+		delete RenderState.texture;
+		RenderState.texture = nullptr;
+	}
 
 	if (ParticleInstance)
 	{

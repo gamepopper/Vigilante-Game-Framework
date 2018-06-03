@@ -46,6 +46,10 @@ class VEmitter : public VGroup
 protected:
 	///All particles are rendered from a single set of vertices rendering a Quad.
 	sf::VertexArray vertices;
+	///If true, texture will be destroyed within VSprite. Important if texture isn't loaded from VContent.
+	bool disposible = false;
+	///Tint for all particles, particularly used for creating particles with the MakeParticles function.
+	sf::Color mainTint;
 	///Allows the particles processed while running if true.
 	bool running = false;
 	///Particles will be killed when the timer exceeds the emitter's timespan.
@@ -158,6 +162,7 @@ public:
 	{
 		exists = false;
 		vertices.setPrimitiveType(sf::PrimitiveType::Quads);
+		mainTint = sf::Color::White;
 	}
 
 	/**
@@ -183,6 +188,7 @@ public:
 	{
 		vertices.setPrimitiveType(sf::PrimitiveType::Quads);
 		exists = false;
+		mainTint = sf::Color::White;
 	}
 
 	/**
