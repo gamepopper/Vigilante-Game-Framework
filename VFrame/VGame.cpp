@@ -322,7 +322,7 @@ void VGame::PostRender()
 		float top = position.y / size.y;
 		view.setViewport(sf::FloatRect(left, top, 1 - (left * 2), 1 - (top * 2)));
 
-		VGlobal::p()->PostProcess->Apply(*renderTarget, *app);
+		VGlobal::p()->PostProcess->Apply(renderTarget->getTexture(), *app);
 	}
 
 	app->setView(view);
