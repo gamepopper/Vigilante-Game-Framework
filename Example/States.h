@@ -8,11 +8,13 @@
 #include "../VFrame/VGlobal.h"
 #include "../VFrame/VInterpolate.h"
 #include "../VFrame/VRenderGroup.h"
+#include "../VFrame/VRenderLayer.h"
 #include "../VFrame/VTiledSprite.h"
 #include "../VFrame/VTilemap.h"
 #include "../VFrame/VTrailArea.h"
 #include "../VFrame/VTextPath.h"
 #include "../VFrame/VTypedText.h"
+#include "../VFrame/VShape.h"
 #include "../VFrame/XInputDevice.h"
 #include "../VFrame/V3DScene.h"
 #include "../VFrame/V3DLightShader.h"
@@ -242,8 +244,8 @@ class TilemapState : public VSubState
 	typedef VSubState VSUPERCLASS;
 
 	VTilemap* tilemap;
-	VSprite* playerControl;
-	VSprite* platform[2];
+	VShape* playerControl;
+	VShape* platform[2];
 	VTimer* timer;
 	bool wallJump = false;
 
@@ -260,19 +262,25 @@ public:
 		tilemap->SetTileRenderID('#');
 		tilemap->SetTileRenderID('$');
 		tilemap->SetTileRenderID('~', 0, 1);
-		tilemap->SetTileCollisionID('$', SidesTouching::TOUCHALL, std::bind(&TilemapState::WallJump, this, std::placeholders::_1, std::placeholders::_2));
+		tilemap->SetTileCollisionID('$', VObject::TOUCHALL, std::bind(&TilemapState::WallJump, this, std::placeholders::_1, std::placeholders::_2));
 
 		Add(tilemap);
 
-		platform[0] = new VSprite();
-		platform[0]->MakeGraphic(64, 32, VColour::HSVtoRGB(0, 0.0f, 0.75f), 1.0f, sf::Color::Red);
+		platform[0] = new VShape();
+		platform[0]->SetRectangle(64, 32);
+		platform[0]->SetFillTint(VColour::HSVtoRGB(0, 0.0f, 0.75f));
+		platform[0]->SetOutlineThickness(1.0f);
+		platform[0]->SetOutlineTint(sf::Color::Red);
 		platform[0]->SetPositionAtCentre(24.5f * 32, 10.5f * 32.0f);
 		platform[0]->Immovable = true;
 		platform[0]->Velocity.x = 32.0f;
 		Add(platform[0]);
 
-		platform[1] = new VSprite();
-		platform[1]->MakeGraphic(64, 32, VColour::HSVtoRGB(0, 0.0f, 0.75f), 1.0f, sf::Color::Red);
+		platform[1] = new VShape();
+		platform[1]->SetRectangle(64, 32);
+		platform[1]->SetFillTint(VColour::HSVtoRGB(0, 0.0f, 0.75f));
+		platform[1]->SetOutlineThickness(1.0f);
+		platform[1]->SetOutlineTint(sf::Color::Red);
 		platform[1]->SetPositionAtCentre(42.5f * 32, 7.5f * 32.0f);
 		platform[1]->Immovable = true;
 		platform[1]->Velocity.y = 32.0f;
@@ -294,8 +302,8 @@ public:
 			}
 		}
 
-		playerControl = new VSprite();
-		playerControl->MakeGraphic(32, 32, sf::Color::White);
+		playerControl = new VShape();
+		playerControl->SetRectangle(32, 32);
 		playerControl->SetPositionAtCentre(playerPos);
 		playerControl->Drag = sf::Vector2f(500, 500);
 		playerControl->MaxVelocity = sf::Vector2f(200, 600);
@@ -316,7 +324,7 @@ public:
 
 	virtual void Update(float dt)
 	{
-		bool touchFloor = (playerControl->Touching & SidesTouching::TOUCHBOTTOM) > 0;
+		bool touchFloor = (playerControl->Touching & VObject::TOUCHBOTTOM) > 0;
 
 		for (unsigned int i = 0; i < 2; i++)
 		{
@@ -339,11 +347,11 @@ public:
 
 				if (wallJump)
 				{
-					if ((playerControl->Touching & SidesTouching::TOUCHLEFT) > 0)
+					if ((playerControl->Touching & VObject::TOUCHLEFT) > 0)
 					{
 						playerControl->Velocity.x = playerControl->MaxVelocity.x;
 					}
-					else if ((playerControl->Touching & SidesTouching::TOUCHRIGHT) > 0)
+					else if ((playerControl->Touching & VObject::TOUCHRIGHT) > 0)
 					{
 						playerControl->Velocity.x = -playerControl->MaxVelocity.x;
 					}
@@ -384,18 +392,18 @@ public:
 
 		if (VGlobal::p()->Input->CurrentAxisValue("leftY") > 20.0f)
 		{
-			p->AllowCollisions = SidesTouching::TOUCHNONE;
+			p->AllowCollisions = VObject::TOUCHNONE;
 		}
 		else if (o->Position.y < p->Position.y)
 		{
-			p->AllowCollisions = SidesTouching::TOUCHTOP;
+			p->AllowCollisions = VObject::TOUCHTOP;
 		}
 	}
 
 	void WallJump(VObject* tile, VObject* object)
 	{
 		object->Velocity *= 0.9f;
-		object->Touching |= SidesTouching::TOUCHBOTTOM;
+		object->Touching |= VObject::TOUCHBOTTOM;
 		wallJump = true;
 	}
 };
@@ -408,7 +416,7 @@ class CollisionState : public VSubState
 {
 	typedef VSubState VSUPERCLASS;
 
-	VSprite* playerControl;
+	VShape* playerControl;
 	VGroup* overlapGroup;
 	VGroup* collideGroup;
 
@@ -422,33 +430,41 @@ public:
 	{
 		VSUPERCLASS::Initialise();
 
-		playerControl = new VSprite();
-		playerControl->MakeGraphic(32, 32, sf::Color::White);
+		VRenderLayer* layer = new VRenderLayer();
+
+		playerControl = new VShape();
+		playerControl->SetRectangle(32, 32);
 		playerControl->SetPositionAtCentre(VGlobal::p()->Width / 2.0f, 300.0f);
 		playerControl->Drag = sf::Vector2f(500, 500);
 		playerControl->MaxVelocity = sf::Vector2f(200, 200);
-		Add(playerControl);
+		layer->Add(playerControl);
 
 		overlapGroup = new VGroup(2);
-		auto sprite1 = new VSprite();
-		sprite1->MakeGraphic(32, 32, sf::Color::Transparent, 2, sf::Color::White);
-		sprite1->Tint = sf::Color::Cyan;
+		auto sprite1 = new VShape();
+		sprite1->SetRectangle(32, 32);
+		sprite1->SetFillTint(sf::Color::Black);
+		sprite1->SetOutlineThickness(2.0f);
+		sprite1->SetOutlineTint(sf::Color::Cyan);
 		sprite1->SetPositionAtCentre(128, VGlobal::p()->Height / 2.0f);
-		auto sprite2 = new VSprite();
-		sprite2->MakeGraphicCircle(16, sf::Color::Transparent, 2, sf::Color::White);
+		auto sprite2 = new VShape();
+		sprite2->SetCircle(16);
+		sprite2->SetFillTint(sf::Color::Black);
+		sprite2->SetOutlineThickness(2.0f);
+		sprite2->SetOutlineTint(sf::Color::Green);
 		sprite2->SetPositionAtCentre(256, VGlobal::p()->Height / 2.0f);
-		sprite2->Tint = sf::Color::Green;
 		overlapGroup->Add(sprite1);
 		overlapGroup->Add(sprite2);
 
 		collideGroup = new VGroup(2);
-		auto sprite3 = new VSprite();
-		sprite3->MakeGraphicSided(16, 6, sf::Color::Black, 2, sf::Color::White);
+		auto sprite3 = new VShape();
+		sprite3->SetCircle(16, 6); //Use second parameter to make a specified equilateral sided shape.
+		sprite3->SetFillTint(sf::Color::Black);
+		sprite3->SetOutlineThickness(2.0f);
+		sprite3->SetOutlineTint(sf::Color::Magenta);
 		sprite3->SetPositionAtCentre(384, VGlobal::p()->Height / 2.0f);
-		sprite3->Tint = sf::Color::Magenta;
 		sprite3->Drag = sf::Vector2f(250, 250);
 
-		auto sprite4 = new VSprite();
+		auto sprite4 = new VShape();
 		std::vector<sf::Vector2f> starPoints;
 		starPoints.push_back(sf::Vector2f(16, 0));
 		starPoints.push_back(sf::Vector2f(22, 12));
@@ -460,24 +476,28 @@ public:
 		starPoints.push_back(sf::Vector2f(8, 20));
 		starPoints.push_back(sf::Vector2f(0, 12));
 		starPoints.push_back(sf::Vector2f(10, 12));
-		sprite4->MakeGraphicConvex(starPoints, sf::Color::Black, 2, sf::Color::White);
+		sprite4->SetConvex(starPoints);
+		sprite4->SetFillTint(sf::Color::Black);
+		sprite4->SetOutlineThickness(2.0f);
+		sprite4->SetOutlineTint(sf::Color::Yellow);
 		sprite4->SetPositionAtCentre(512, VGlobal::p()->Height / 2.0f);
-		sprite4->Tint = sf::Color::Yellow;
 		sprite4->Immovable = true;
 
 		collideGroup->Add(sprite3);
 		collideGroup->Add(sprite4);
 
-		Add(overlapGroup);
-		Add(collideGroup);
+		layer->Add(overlapGroup);
+		layer->Add(collideGroup);
 
 		auto overlapText = new VText(sprite1->Position.x, 100.0f, 160, "Overlap These", 16);
 		overlapText->SetAlignment(VTextAlign::ALIGNCENTRE);
 		auto collideText = new VText(sprite3->Position.x, 100.0f, 160, "Collide These", 16);
 		collideText->SetAlignment(VTextAlign::ALIGNCENTRE);
 
-		Add(overlapText);
-		Add(collideText);
+		layer->Add(overlapText);
+		layer->Add(collideText);
+
+		Add(layer);
 	}
 
 	virtual void Update(float dt)
@@ -502,8 +522,8 @@ public:
 
 	void overlapResponse(VObject* player, VObject* object)
 	{
-		VSprite* sprite = dynamic_cast<VSprite*>(object);
-		VGlobal::p()->BackgroundColor = sprite->Tint;
+		VShape* sprite = dynamic_cast<VShape*>(object);
+		VGlobal::p()->BackgroundColor = sprite->GetOutlineTint();
 	}
 };
 
@@ -552,16 +572,8 @@ public:
 			VText* t = new VText(20.0f + x, 80.0f + y - 6, 20.0f, std::to_string(i) + ":", 12);
 			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VTextAlign::ALIGNLEFT);
 
-			VSprite* b = new VSprite(40.0f + x, 70.0f + y);
-
-			if (i == 0)
-			{
-				b->MakeGraphic(30, 30, sf::Color::White);
-			}
-			else
-			{
-				b->LoadGraphicFromTexture(*dynamic_cast<VSprite*>(buttons->GetGroupItem(0))->GetTexture());
-			}
+			VShape* b = new VShape(40.0f + x, 70.0f + y);
+			b->SetRectangle(30, 30);
 
 			text->Add(t);
 			buttons->Add(b);
@@ -577,16 +589,8 @@ public:
 			VText* t = new VText(20.0f + x, 120.0f + y + (buttonOffset * 60.0f) - 6.0f, 20.0f, std::to_string(i) + ":", 12);
 			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VTextAlign::ALIGNLEFT);
 
-			VSprite* a = new VSprite(40.0f + x, 120.0f + y + (buttonOffset * 60.0f));
-
-			if (i == 0)
-			{
-				a->MakeGraphic(30, 50, sf::Color::White);
-			}
-			else
-			{
-				a->LoadGraphicFromTexture(*dynamic_cast<VSprite*>(axis->GetGroupItem(0))->GetTexture());
-			}
+			VShape* a = new VShape(40.0f + x, 120.0f + y + (buttonOffset * 60.0f));
+			a->SetRectangle(30, 50);
 
 			a->Origin = sf::Vector2f(0, 0);
 
@@ -607,21 +611,21 @@ public:
 
 		for (unsigned int i = 0; i < buttonCount; i++)
 		{
-			VSprite* b = dynamic_cast<VSprite*>(buttons->GetGroupItem(i));
+			VShape* b = dynamic_cast<VShape*>(buttons->GetGroupItem(i));
 
 			if (GamepadButtonDown(GAMEPAD_0, (GAMEPAD_BUTTON)i))
 			{
-				b->Tint = sf::Color::White;
+				b->SetFillTint(sf::Color::White);
 			}
 			else
 			{
-				b->Tint = VColour::HSVtoRGB(0.0f, 0.0f, 0.6f);
+				b->SetFillTint(VColour::HSVtoRGB(0.0f, 0.0f, 0.6f));
 			}
 		}
 
 		for (unsigned int i = 0; i < axisCount; i++)
 		{
-			VSprite* b = dynamic_cast<VSprite*>(axis->GetGroupItem(i));
+			VShape* b = dynamic_cast<VShape*>(axis->GetGroupItem(i));
 
 			float val1 = 0, val2 = 0;
 
@@ -668,21 +672,21 @@ public:
 
 		for (unsigned int i = 0; i < buttonCount; i++)
 		{
-			VSprite* b = dynamic_cast<VSprite*>(buttons->GetGroupItem(i));
+			VShape* b = dynamic_cast<VShape*>(buttons->GetGroupItem(i));
 
 			if (sf::Joystick::isButtonPressed(VGlobal::p()->Input->GetJoystickID(0), i))
 			{
-				b->Tint = sf::Color::White;
+				b->SetFillTint(sf::Color::White);
 			}
 			else
 			{
-				b->Tint = VColour::HSVtoRGB(0.0f, 0.0f, 0.6f);
+				b->SetFillTint(VColour::HSVtoRGB(0.0f, 0.0f, 0.6f));
 			}
 		}
 
 		for (unsigned int i = 0; i < axisCount; i++)
 		{
-			VSprite* b = dynamic_cast<VSprite*>(axis->GetGroupItem(i));
+			VShape* b = dynamic_cast<VShape*>(axis->GetGroupItem(i));
 			b->Scale.y = sf::Joystick::getAxisPosition(VGlobal::p()->Input->GetJoystickID(0), (sf::Joystick::Axis)i) / 100.0f;
 		}
 #else
@@ -706,21 +710,21 @@ public:
 
 		for (unsigned int i = 0; i < buttonCount; i++)
 		{
-			VSprite* b = dynamic_cast<VSprite*>(buttons->GetGroupItem(i));
+			VShape* b = dynamic_cast<VShape*>(buttons->GetGroupItem(i));
 
 			if (sf::XInputDevice::isButtonPressed(0, buttonIDs[i]))
 			{
-				b->Tint = sf::Color::White;
+				b->SetFillTint(sf::Color::White);
 			}
 			else
 			{
-				b->Tint = VColour::HSVtoRGB(0.0f, 0.0f, 0.6f);
+				b->SetFillTint(VColour::HSVtoRGB(0.0f, 0.0f, 0.6f));
 			}
 		}
 
 		for (unsigned int i = 0; i < axisCount; i++)
 		{
-			VSprite* b = dynamic_cast<VSprite*>(axis->GetGroupItem(i));
+			VShape* b = dynamic_cast<VShape*>(axis->GetGroupItem(i));
 			b->Scale.y = sf::XInputDevice::getAxisPosition(0, (sf::XInputDevice::XAxis)i);
 			b->Scale.y = abs(b->Scale.y) > 1.0f ? b->Scale.y / 100.0f : b->Scale.y;
 		}
@@ -760,7 +764,7 @@ public:
 		postEffect->SetParameter("threshold", 0.85f);
 		postEffect->SetParameter("smoothness", 0.40f);
 		postEffect->SetParameter("unpremultiply", 1.0f);
-		render->PostEffect = postEffect;
+		render->PostEffect = std::move(std::unique_ptr<VPostEffect>(postEffect));
 
 		emitter = new VEmitter(320, 280);
 		emitter->LoadParticlesFromFile(75, "Example/Assets/Smoke.png");
@@ -941,7 +945,7 @@ public:
 	virtual void Cleanup()
 	{
 		VSUPERCLASS::Cleanup();
-		VGlobal::p()->PostProcess.reset();
+		VGlobal::p()->PostProcess = nullptr;
 	}
 
 	virtual void Update(float dt)
@@ -977,7 +981,10 @@ public:
 
 		float aspectRatio = VGlobal::p()->Width / (float)VGlobal::p()->Height;
 
-		scene = new V3DScene(0.0f, 0.0f, VGlobal::p()->Width, VGlobal::p()->Height);
+		sf::ContextSettings settings;
+		settings.depthBits = 24;
+
+		scene = new V3DScene(0.0f, 0.0f, VGlobal::p()->Width, VGlobal::p()->Height, settings);
 		scene->Camera = std::make_unique<V3DPerspectiveCamera>(sf::Vector3f(0.0f, 0.0f, 0.0f), 50.0f, aspectRatio, 0.1f, 100.0f);
 		scene->Camera->LookAt(sf::Vector3f(0.0f, 0.0f, 10.0f));
 		//scene->Shader = std::make_unique<V3DShader>();
@@ -1104,15 +1111,15 @@ class TrailAreaState : public VSubState
 public:
 	TrailAreaState() : VSubState() {}
 	~TrailAreaState() = default;
-	VSprite* playerControl;
+	VShape* playerControl;
 	VTrailArea* render;
 
 	virtual void Initialise()
 	{
 		VSUPERCLASS::Initialise();
 
-		playerControl = new VSprite();
-		playerControl->MakeGraphic(32, 32, sf::Color::White);
+		playerControl = new VShape();
+		playerControl->SetRectangle(32, 32);
 		playerControl->SetPositionAtCentre(VGlobal::p()->Width / 2.0f, VGlobal::p()->Height / 2.0f);
 		playerControl->Drag = sf::Vector2f(500, 500);
 		playerControl->MaxVelocity = sf::Vector2f(200, 200);
@@ -1126,8 +1133,8 @@ public:
 		render->RenderOutside = true;
 		Add(render);
 
-		VSprite* separator = new VSprite();
-		separator->MakeGraphic(2, 320, sf::Color::White);
+		VShape* separator = new VShape();
+		separator->SetRectangle(2, 320);
 		separator->SetPositionAtCentre(VGlobal::p()->Width / 2.0f, 190.0f);
 		Add(separator);
 	}
@@ -1150,7 +1157,7 @@ public:
 	InterpolateState() : VSubState() {}
 	~InterpolateState() = default;
 
-	VSprite* ease[VInterpolate::NumInterpolationTypes];
+	VShape* ease[VInterpolate::NumInterpolationTypes];
 
 	float a = 200.0f;						//Start
 	float b = VGlobal::p()->Width - 200.0f; //Destination
@@ -1204,12 +1211,8 @@ public:
 
 		for (int i = 0; i < VInterpolate::NumInterpolationTypes; i++)
 		{
-			ease[i] = new VSprite();
-			if (i == 0)
-				ease[i]->MakeGraphic(6, 6, sf::Color::White);
-			else
-				ease[i]->LoadGraphicFromTexture(*ease[0]->GetTexture());
-
+			ease[i] = new VShape();
+			ease[i]->SetRectangle(6, 6);
 			ease[i]->SetPositionAtCentre(100.0f, 50.0f + (i * 10.1f));
 			Add(ease[i]);
 
@@ -1407,7 +1410,7 @@ public:
 	virtual void Cleanup()
 	{
 		VSUPERCLASS::Cleanup();
-		VGlobal::p()->PostProcess.reset();
+		VGlobal::p()->PostProcess = nullptr;
 	}
 
 	virtual void Update(float dt)
@@ -1472,7 +1475,7 @@ private:
 	VText* normalText;
 
 	static const int CircleCount = 10;
-	VSprite* circle[CircleCount];
+	VShape* circle[CircleCount];
 
 	sf::Clock timer;
 
@@ -1488,15 +1491,8 @@ public:
 
 		for (int i = 0; i < CircleCount; i++)
 		{
-			VSprite* c = new VSprite();
-			if (i == 0)
-			{
-				c->MakeGraphicCircle(5, sf::Color::White);
-			}
-			else
-			{
-				c->LoadGraphicFromTexture(*circle[0]->GetTexture());
-			}
+			VShape* c = new VShape();
+			c->SetCircle(5);
 
 			circle[i] = c;
 			Add(c);

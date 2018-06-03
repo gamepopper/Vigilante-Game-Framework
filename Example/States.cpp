@@ -119,8 +119,9 @@ void DemoStatesManager::Initialise()
 	version->ScrollFactor = sf::Vector2f();
 	version->ZoomFactor = 0;
 
-	auto header = new VSprite();
-	header->MakeGraphic(VGlobal::p()->Width, (int)(title->Position.y + 32), sf::Color::Black);
+	auto header = new VShape();
+	header->SetRectangle((float)VGlobal::p()->Width, (float)(title->Position.y + 32));
+	header->SetFillTint(sf::Color::Black);
 	header->ScrollFactor = sf::Vector2f();
 	header->ZoomFactor = 0;
 
