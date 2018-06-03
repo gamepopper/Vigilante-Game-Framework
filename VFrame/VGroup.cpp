@@ -458,7 +458,7 @@ void VGroup::Draw(sf::RenderTarget& RenderTarget)
 			if (object == nullptr && members[i]->type == RENDERGROUP)
 			{
 				VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(members[i]);
-				object = renderGroup->Sprite;
+				object = renderGroup->Sprite.get();
 			}
 
 			if (object == nullptr)
