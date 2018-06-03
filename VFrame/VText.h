@@ -214,7 +214,7 @@ public:
 	VText* SetFormat(sf::Font& fontData, int charSize = 8, sf::Color colour = sf::Color::White,
 		VTextAlign alignment = VTextAlign::ALIGNLEFT, int style = sf::Text::Regular);
 
-	///@param sf::String of text that will be rendered.
+	///@param text sf::String of text that will be rendered.
 	void SetText(const sf::String& text);
 	///@param style Font styles flags (i.e. Bold, Italic, Strikethrough, ect).
 	void SetStyle(int style = sf::Text::Regular);

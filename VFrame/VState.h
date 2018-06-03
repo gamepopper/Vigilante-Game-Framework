@@ -88,7 +88,7 @@ public:
 	* If overridden, allows the opportunity to render objects directly to the window, instead of the scene itself.
 	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
 	*/
-	virtual void PostDraw(sf::RenderTarget& renderTarget) {}
+	virtual void PostDraw(sf::RenderTarget& RenderTarget) {}
 };
 
 ///A different kind of state class that would update and render over the top of the main state. Good for pause screens, menus, battle screens and even GUI.
@@ -149,7 +149,7 @@ public:
 	* If overridden, allows the opportunity to render objects directly to the window, instead of the scene itself.
 	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
 	*/
-	virtual void PostDraw(sf::RenderTarget& renderTarget) {}
+	virtual void PostDraw(sf::RenderTarget& RenderTarget) {}
 };
 
 ///Manager class for VStates, allows switching current states or adding states to a stack.
