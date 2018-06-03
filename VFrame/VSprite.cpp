@@ -78,23 +78,8 @@ VSprite* VSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, in
 	return this;
 }
 
-#include <SFML/Graphics/RenderTexture.hpp>
-#include <SFML/Graphics/Shape.hpp>
-
 VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outline, sf::Color outlineColor)
 {
-	sf::RectangleShape shape(sf::Vector2f(width - (outline * 2), height - (outline * 2)));
-	shape.setFillColor(color);
-	shape.setOutlineThickness(outline);
-	shape.setOutlineColor(outlineColor);
-	shape.setOrigin(shape.getSize() / 2.0f);
-	shape.setPosition(width / 2.0f, height / 2.0f);
-
-	sf::RenderTexture tex;
-	tex.create(width, height);
-	tex.draw(shape);
-	tex.display();
-
 	if (disposible && texture)
 	{
 		delete texture;
@@ -102,8 +87,24 @@ VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outl
 		disposible = false;
 	}
 
-	texture = new sf::Texture(tex.getTexture());
+	sf::Image image;
+	image.create(width, height, color);
+
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			if (x < outline || y < outline || x > width - outline || y > height - outline)
+			{
+				image.setPixel(x, y, outlineColor);
+			}
+		}
+	}
+
+	texture = new sf::Texture();
+	texture->loadFromImage(image);
 	disposible = true;
+
 	sprite = sf::Sprite(*texture);
 	setSize(width, height, false, width, height);
 
@@ -112,17 +113,6 @@ VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outl
 
 VSprite* VSprite::MakeGraphicCircle(int radius, sf::Color color, float outline, sf::Color outlineColor)
 {
-	sf::CircleShape shape(radius - outline);
-	shape.setFillColor(color);
-	shape.setOutlineThickness(outline);
-	shape.setOutlineColor(outlineColor);
-	shape.setPosition(outline, outline);
-
-	sf::RenderTexture tex;
-	tex.create(radius * 2, radius * 2);
-	tex.draw(shape);
-	tex.display();
-
 	if (disposible && texture)
 	{
 		delete texture;
@@ -130,114 +120,37 @@ VSprite* VSprite::MakeGraphicCircle(int radius, sf::Color color, float outline, 
 		disposible = false;
 	}
 
-	texture = new sf::Texture(tex.getTexture());
+	unsigned int diameter = radius * 2;
+
+	sf::Image image;
+	image.create(diameter, diameter, sf::Color::Transparent);
+
+	for (unsigned int y = 0; y < diameter; y++)
+	{
+		for (unsigned int x = 0; x < diameter; x++)
+		{
+			int dx = radius - x;
+			int dy = radius - y;
+			int length = (dx * dx) + (dy * dy);
+
+			if (length <= (radius * radius))
+			{
+				if (outline <= 0 || length <= ((radius - outline) * (radius - outline)))
+					image.setPixel(x, y, color);
+				else
+					image.setPixel(x, y, outlineColor);
+			}
+		}
+	}
+
+	texture = new sf::Texture();
+	texture->loadFromImage(image);
 	disposible = true;
+
 	sprite = sf::Sprite(*texture);
 	setSize(radius * 2, radius * 2, false, radius * 2, radius * 2);
 
 	return this;
-}
-
-VSprite* VSprite::MakeGraphicSided(int radius, int sides, sf::Color color, float outline, sf::Color outlineColor)
-{
-	sf::CircleShape shape(radius - outline, sides);
-	shape.setFillColor(color);
-	shape.setOutlineThickness(outline);
-	shape.setOutlineColor(outlineColor);
-	shape.setPosition(outline, outline);
-
-	sf::RenderTexture tex;
-	tex.create(radius * 2, radius * 2);
-	tex.draw(shape);
-	tex.display();
-
-	if (disposible && texture)
-	{
-		delete texture;
-		texture = nullptr;
-		disposible = false;
-	}
-
-	texture = new sf::Texture(tex.getTexture());
-	disposible = true;
-	sprite = sf::Sprite(*texture);
-	setSize(radius * 2, radius * 2, false, radius * 2, radius * 2);
-
-	return this;
-}
-
-VSprite* VSprite::MakeGraphicConvex(const std::vector<sf::Vector2f>& points, sf::Color color, float outline, sf::Color outlineColor)
-{
-	sf::ConvexShape shape;
-	shape.setPointCount(points.size());
-
-	float top = 0xFFFFFF, bottom = -0xFFFFFF, left = 0xFFFFFF, right = -0xFFFFFF;
-	for (unsigned int i = 0; i < points.size(); i++)
-	{
-		top		= top		> points[i].y ? points[i].y : top;
-		left	= left		> points[i].y ? points[i].y : left;
-		bottom	= bottom	< points[i].y ? points[i].y : bottom;
-		right	= right		< points[i].y ? points[i].y : right;
-	}
-
-	int width	= static_cast<int>(ceil(right - left));
-	int height	= static_cast<int>(ceil(bottom - top));
-
-	std::vector<sf::Vector2f> outlinePoints(points.size());
-	for (unsigned int i = 0; i < points.size(); i++)
-	{
-		//Contract shape by outline amount
-		if (outline > 0)
-		{
-			sf::Vector2f diff = sf::Vector2f(width / 2.0f, height / 2.0f) - points[i];
-			float length = sqrtf((diff.x * diff.x) + (diff.y * diff.y));
-			diff /= length;
-
-			outlinePoints[i] = points[i] + (diff * outline);
-			shape.setPoint(i, outlinePoints[i]);
-		}
-		else
-		{
-			shape.setPoint(i, points[i]);
-		}
-	}
-
-	shape.setFillColor(color);
-	shape.setOutlineThickness(outline);
-	shape.setOutlineColor(outlineColor);
-	shape.setOrigin(0, 0);
-
-	sf::RenderTexture tex;
-	tex.create(width, height);
-	tex.draw(shape);
-	tex.display();
-
-	if (disposible && texture)
-	{
-		delete texture;
-		texture = nullptr;
-		disposible = false;
-	}
-
-	texture = new sf::Texture(tex.getTexture());
-	disposible = true;
-	sprite = sf::Sprite(*texture);
-	setSize(width, height, false, width, height);
-
-	return this;
-}
-
-void VSprite::Destroy()
-{
-	VSUPERCLASS::Destroy();
-	Animation.Clear();
-
-	if (disposible && texture)
-	{
-		delete texture;
-		texture = nullptr;
-		disposible = false;
-	}
 }
 
 void VSprite::Update(float dt)

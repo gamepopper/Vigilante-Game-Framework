@@ -155,7 +155,7 @@ public:
 	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect());
 	
 	/**
-	* Make sprite texture.
+	* Make sprite texture as a primitive rectangle. This should be used mainly for testing purposes with VSprites. For more permanent use of primitive shapes, look at the VShape class.
 	* @param width Width of sprite.
 	* @param height Height of sprite.
 	* @param color Fill Colour of sprite.
@@ -165,32 +165,13 @@ public:
 	virtual VSprite* MakeGraphic(int width, int height, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
 	
 	/**
-	* Make sprite texture a circle.
+	* Make sprite texture a circle. This should be used mainly for testing purposes with VSprites. For more permanent use of primitive shapes, look at the VShape class.
 	* @param radius Radius of the circle.
 	* @param color Fill Colour of sprite.
 	* @param outline Outline thickness.
 	* @param outlineColor colour of sprite outline.
 	*/
 	virtual VSprite* MakeGraphicCircle(int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
-	
-	/**
-	* Make sprite texture a multisided shape.
-	* @param radius Radius of the circle.
-	* @param sides Number of sides of the shape.
-	* @param color Fill Colour of sprite.
-	* @param outline Outline thickness.
-	* @param outlineColor colour of sprite outline.
-	*/
-	virtual VSprite* MakeGraphicSided(int radius, int sides, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
-	
-	/**
-	* Make sprite texture a convex shape.
-	* @param points List of points that make out the shape.
-	* @param color Fill Colour of sprite.
-	* @param outline Outline thickness.
-	* @param outlineColor colour of sprite outline.
-	*/
-	virtual VSprite* MakeGraphicConvex(const std::vector<sf::Vector2f>& points, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
 
 	///@return Texture of sprite.
 	sf::Texture* GetTexture()
