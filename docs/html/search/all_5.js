@@ -25,7 +25,7 @@ var searchData=
   ['followobject',['followObject',['../class_v_camera.html#a19a1e0d2b72ed38108daca3e397fa89b',1,'VCamera']]],
   ['font',['font',['../class_v_text.html#a7e4a450740059e52aa29a01cb137cac6',1,'VText']]],
   ['fontexists',['FontExists',['../class_v_content.html#ac6019cf233f38b5333e52e2a057e9102',1,'VContent']]],
-  ['fontsize',['FontSize',['../class_v_text.html#a57988e662b989d9a22f849f30ce33868',1,'VText']]],
+  ['fontsize',['fontSize',['../class_v_text.html#aa0bf9eea7422a3b56c418bcaa6997d24',1,'VText']]],
   ['foreach',['ForEach',['../class_v_group.html#a4c0c6c1fa6e672b299a4d288a1c7d52b',1,'VGroup']]],
   ['foreachalive',['ForEachAlive',['../class_v_group.html#abc6b1f03a6d9eeb1d98d0f1f9bebe33f',1,'VGroup']]],
   ['foreachdead',['ForEachDead',['../class_v_group.html#a5b172d2e9da9f143cb938814af275ce1',1,'VGroup']]],

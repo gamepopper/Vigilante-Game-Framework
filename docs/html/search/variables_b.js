@@ -1,6 +1,7 @@
 var searchData=
 [
   ['maintile',['MainTile',['../class_v_tile.html#a12b87a3fe76217fe3a1d3d3d6c7d2819',1,'VTile']]],
+  ['maintint',['mainTint',['../class_v_emitter.html#a9f47249edc720fcbff14284f4b623328',1,'VEmitter']]],
   ['mapheight',['mapHeight',['../class_v_tilemap.html#a8c8438373e096bd561321afe8090401a',1,'VTilemap']]],
   ['mapwidth',['mapWidth',['../class_v_tilemap.html#aa121159daadb17437aa3e32dc3e3c403',1,'VTilemap']]],
   ['mass',['Mass',['../class_v_object.html#ad8cca6d32d58c38c9dc48b51da99d2c9',1,'VObject']]],

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.1</span>
+   &#160;<span id="projectnumber">1.0.0.2</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -101,6 +101,19 @@ typedef <a class="el" href="class_v_object.html">VObject</a>&#160;</td><td class
 <tr class="memdesc:a92e1c30e74208eecaba095e4f40eb90f inherit pub_types_class_v_sprite"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to call parent class functions when they are overrided in class. <br /></td></tr>
 <tr class="separator:a92e1c30e74208eecaba095e4f40eb90f inherit pub_types_class_v_sprite"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_class_v_object"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_v_object')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_v_object.html">VObject</a></td></tr>
+<tr class="memitem:a20898dbea7f47fc05919dcadb5b1f3a6 inherit pub_types_class_v_object"><td class="memItemLeft" align="right" valign="top"><a id="a20898dbea7f47fc05919dcadb5b1f3a6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a20898dbea7f47fc05919dcadb5b1f3a6">SidesTouching</a> : unsigned char { <br />
+&#160;&#160;<b>TOUCHNONE</b> = 0, 
+<b>TOUCHLEFT</b> = 1 &lt;&lt; 0, 
+<b>TOUCHRIGHT</b> = 1 &lt;&lt; 1, 
+<b>TOUCHTOP</b> = 1 &lt;&lt; 2, 
+<br />
+&#160;&#160;<b>TOUCHBOTTOM</b> = 1 &lt;&lt; 3, 
+<b>TOUCHWALL</b> = TOUCHLEFT | TOUCHRIGHT, 
+<b>TOUCHALL</b> = TOUCHLEFT | TOUCHRIGHT | TOUCHTOP | TOUCHBOTTOM
+<br />
+ }</td></tr>
+<tr class="memdesc:a20898dbea7f47fc05919dcadb5b1f3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags for which sides are allowed to check if being overlapped for collision purposes. <br /></td></tr>
+<tr class="separator:a20898dbea7f47fc05919dcadb5b1f3a6 inherit pub_types_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20cd6103377054addfa29c34dbebc3c1 inherit pub_types_class_v_object"><td class="memItemLeft" align="right" valign="top"><a id="a20cd6103377054addfa29c34dbebc3c1"></a>
 typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a20cd6103377054addfa29c34dbebc3c1">VSUPERCLASS</a></td></tr>
 <tr class="memdesc:a20cd6103377054addfa29c34dbebc3c1 inherit pub_types_class_v_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to call parent class functions when they are overrided in class. <br /></td></tr>
@@ -826,8 +839,6 @@ sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_v_sprite.html#acca89a2a4b0cbc512e92e9fac0fedb57">VSprite</a>.</p>
-
 </div>
 </div>
 <a id="a85ff1fea5fdf98638822b8f8343dc726"></a>
@@ -891,8 +902,6 @@ sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </table>
   </dd>
 </dl>
-
-<p>Reimplemented from <a class="el" href="class_v_sprite.html#a23b3b08ae165771dfa972c0e92d812ec">VSprite</a>.</p>
 
 </div>
 </div>

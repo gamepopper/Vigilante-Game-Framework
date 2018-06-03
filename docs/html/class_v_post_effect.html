@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.1</span>
+   &#160;<span id="projectnumber">1.0.0.2</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -115,8 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a14666357368c8442695c84a6da5f8b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a420458a03b304b49613550d3473f8ce4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect.html#a420458a03b304b49613550d3473f8ce4">SetParameter</a> (sf::String paramName, float x)</td></tr>
 <tr class="separator:a420458a03b304b49613550d3473f8ce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b46092459e5a23852efc40e18989b6f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect.html#a2b46092459e5a23852efc40e18989b6f">Apply</a> (const sf::RenderTexture &amp;input, sf::RenderTarget &amp;output)</td></tr>
-<tr class="separator:a2b46092459e5a23852efc40e18989b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d7e2b13989bd7d2e899aba52e64a3ce"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect.html#a9d7e2b13989bd7d2e899aba52e64a3ce">Apply</a> (const sf::Texture &amp;input, sf::RenderTarget &amp;output)</td></tr>
+<tr class="separator:a9d7e2b13989bd7d2e899aba52e64a3ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_post_effect_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_post_effect_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_post_effect_base.html">VPostEffectBase</a></td></tr>
 <tr class="memitem:a0cfe375478122f1ce5080a000bc3d5ec inherit pub_methods_class_v_post_effect_base"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_base.html#a0cfe375478122f1ce5080a000bc3d5ec">Update</a> (float dt)</td></tr>
 <tr class="separator:a0cfe375478122f1ce5080a000bc3d5ec inherit pub_methods_class_v_post_effect_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,8 +129,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_static_methods_class_v_post_effect_base"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_class_v_post_effect_base')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="class_v_post_effect_base.html">VPostEffectBase</a></td></tr>
 <tr class="memitem:a019b8a7e3ed678c2853e473657d024e3 inherit pro_static_methods_class_v_post_effect_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_base.html#a019b8a7e3ed678c2853e473657d024e3">applyShader</a> (const sf::Shader &amp;shader, sf::RenderTarget &amp;output)</td></tr>
 <tr class="separator:a019b8a7e3ed678c2853e473657d024e3 inherit pro_static_methods_class_v_post_effect_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a293fd22cc6965637208e10cb647bc507 inherit pro_static_methods_class_v_post_effect_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_base.html#a293fd22cc6965637208e10cb647bc507">passThrough</a> (const sf::RenderTexture &amp;input, sf::RenderTarget &amp;output)</td></tr>
-<tr class="separator:a293fd22cc6965637208e10cb647bc507 inherit pro_static_methods_class_v_post_effect_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a169e37362a75497d8229b59ffb130e49 inherit pro_static_methods_class_v_post_effect_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_base.html#a169e37362a75497d8229b59ffb130e49">passThrough</a> (const sf::Texture &amp;input, sf::RenderTarget &amp;output)</td></tr>
+<tr class="separator:a169e37362a75497d8229b59ffb130e49 inherit pro_static_methods_class_v_post_effect_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A basic Post Processing effect that uses a single shader object and allows setting different kinds of Uniform parameters. </p>
@@ -272,8 +272,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2b46092459e5a23852efc40e18989b6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b46092459e5a23852efc40e18989b6f">&#9670;&nbsp;</a></span>Apply()</h2>
+<a id="a9d7e2b13989bd7d2e899aba52e64a3ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d7e2b13989bd7d2e899aba52e64a3ce">&#9670;&nbsp;</a></span>Apply()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -284,7 +284,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">virtual void VPostEffect::Apply </td>
           <td>(</td>
-          <td class="paramtype">const sf::RenderTexture &amp;&#160;</td>
+          <td class="paramtype">const sf::Texture &amp;&#160;</td>
           <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>
@@ -313,7 +313,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_v_post_effect_base.html#a0977f58448892fcb529f2f537f5c9b34">VPostEffectBase</a>.</p>
+<p>Implements <a class="el" href="class_v_post_effect_base.html#a903ccb40e14ae1659afcdf2e8a9346b9">VPostEffectBase</a>.</p>
 
 </div>
 </div>

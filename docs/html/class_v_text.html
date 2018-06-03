@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.1</span>
+   &#160;<span id="projectnumber">1.0.0.2</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -99,6 +99,19 @@ typedef <a class="el" href="class_v_object.html">VObject</a>&#160;</td><td class
 <tr class="memdesc:a4ffa40d463751cae089a193a47f3f60e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to call parent class functions when they are overrided in class. <br /></td></tr>
 <tr class="separator:a4ffa40d463751cae089a193a47f3f60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_class_v_object"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_v_object')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_v_object.html">VObject</a></td></tr>
+<tr class="memitem:a20898dbea7f47fc05919dcadb5b1f3a6 inherit pub_types_class_v_object"><td class="memItemLeft" align="right" valign="top"><a id="a20898dbea7f47fc05919dcadb5b1f3a6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a20898dbea7f47fc05919dcadb5b1f3a6">SidesTouching</a> : unsigned char { <br />
+&#160;&#160;<b>TOUCHNONE</b> = 0, 
+<b>TOUCHLEFT</b> = 1 &lt;&lt; 0, 
+<b>TOUCHRIGHT</b> = 1 &lt;&lt; 1, 
+<b>TOUCHTOP</b> = 1 &lt;&lt; 2, 
+<br />
+&#160;&#160;<b>TOUCHBOTTOM</b> = 1 &lt;&lt; 3, 
+<b>TOUCHWALL</b> = TOUCHLEFT | TOUCHRIGHT, 
+<b>TOUCHALL</b> = TOUCHLEFT | TOUCHRIGHT | TOUCHTOP | TOUCHBOTTOM
+<br />
+ }</td></tr>
+<tr class="memdesc:a20898dbea7f47fc05919dcadb5b1f3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags for which sides are allowed to check if being overlapped for collision purposes. <br /></td></tr>
+<tr class="separator:a20898dbea7f47fc05919dcadb5b1f3a6 inherit pub_types_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20cd6103377054addfa29c34dbebc3c1 inherit pub_types_class_v_object"><td class="memItemLeft" align="right" valign="top"><a id="a20cd6103377054addfa29c34dbebc3c1"></a>
 typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a20cd6103377054addfa29c34dbebc3c1">VSUPERCLASS</a></td></tr>
 <tr class="memdesc:a20cd6103377054addfa29c34dbebc3c1 inherit pub_types_class_v_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to call parent class functions when they are overrided in class. <br /></td></tr>
@@ -106,28 +119,54 @@ typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="me
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abbd95e3ab8e8d53be3a816e24e52583f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#abbd95e3ab8e8d53be3a816e24e52583f">VText</a> (float x=0, float y=0, float width=0, const sf::String &amp;text=&quot;&quot;, int charSize=8)</td></tr>
+<tr class="memitem:abbd95e3ab8e8d53be3a816e24e52583f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#abbd95e3ab8e8d53be3a816e24e52583f">VText</a> (float x=0, float y=0, float width=0, const sf::String &amp;<a class="el" href="class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed">text</a>=&quot;&quot;, int charSize=8)</td></tr>
 <tr class="separator:abbd95e3ab8e8d53be3a816e24e52583f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a926423b0d2e28aed5f56f65dfa8d9739"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a926423b0d2e28aed5f56f65dfa8d9739">VText</a> (sf::Vector2f position, float width=0, const sf::String &amp;text=&quot;&quot;, int charSize=8)</td></tr>
+<tr class="memitem:a926423b0d2e28aed5f56f65dfa8d9739"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a926423b0d2e28aed5f56f65dfa8d9739">VText</a> (sf::Vector2f position, float width=0, const sf::String &amp;<a class="el" href="class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed">text</a>=&quot;&quot;, int charSize=8)</td></tr>
 <tr class="separator:a926423b0d2e28aed5f56f65dfa8d9739"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8524145ab161eadaaefb51b5bb9b6728"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_text.html">VText</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a8524145ab161eadaaefb51b5bb9b6728">SetFormat</a> (const sf::String &amp;filename, int charSize=8, sf::Color colour=sf::Color::White, <a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a> alignment=VTextAlign::ALIGNLEFT, int style=sf::Text::Regular)</td></tr>
+<tr class="memitem:a8524145ab161eadaaefb51b5bb9b6728"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_text.html">VText</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a8524145ab161eadaaefb51b5bb9b6728">SetFormat</a> (const sf::String &amp;filename, int charSize=8, sf::Color colour=sf::Color::White, <a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a> <a class="el" href="class_v_text.html#aedab30419b833a2f1b3337d64c0906b1">alignment</a>=VTextAlign::ALIGNLEFT, int <a class="el" href="class_v_text.html#aa0c3f41b1569a5fc147e13e4f729d9c3">style</a>=sf::Text::Regular)</td></tr>
 <tr class="separator:a8524145ab161eadaaefb51b5bb9b6728"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af35f3be6691b1c5f05f3675ac6b2c251"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_text.html">VText</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#af35f3be6691b1c5f05f3675ac6b2c251">SetFormat</a> (sf::Font &amp;fontData, int charSize=8, sf::Color colour=sf::Color::White, <a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a> alignment=VTextAlign::ALIGNLEFT, int style=sf::Text::Regular)</td></tr>
+<tr class="memitem:af35f3be6691b1c5f05f3675ac6b2c251"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_text.html">VText</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#af35f3be6691b1c5f05f3675ac6b2c251">SetFormat</a> (sf::Font &amp;fontData, int charSize=8, sf::Color colour=sf::Color::White, <a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a> <a class="el" href="class_v_text.html#aedab30419b833a2f1b3337d64c0906b1">alignment</a>=VTextAlign::ALIGNLEFT, int <a class="el" href="class_v_text.html#aa0c3f41b1569a5fc147e13e4f729d9c3">style</a>=sf::Text::Regular)</td></tr>
 <tr class="separator:af35f3be6691b1c5f05f3675ac6b2c251"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a5ff14301918be1fabdba2afb6bdf37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a5a5ff14301918be1fabdba2afb6bdf37">SetStyle</a> (int style=sf::Text::Regular)</td></tr>
+<tr class="memitem:a39d103864e96257956da3cb87d0d0e21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a39d103864e96257956da3cb87d0d0e21">SetText</a> (const sf::String &amp;<a class="el" href="class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed">text</a>)</td></tr>
+<tr class="separator:a39d103864e96257956da3cb87d0d0e21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a5ff14301918be1fabdba2afb6bdf37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a5a5ff14301918be1fabdba2afb6bdf37">SetStyle</a> (int <a class="el" href="class_v_text.html#aa0c3f41b1569a5fc147e13e4f729d9c3">style</a>=sf::Text::Regular)</td></tr>
 <tr class="separator:a5a5ff14301918be1fabdba2afb6bdf37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fa603eee49130de26320ac841ed65dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a0fa603eee49130de26320ac841ed65dc">SetFillTint</a> (const sf::Color &amp;colour)</td></tr>
 <tr class="separator:a0fa603eee49130de26320ac841ed65dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afeb34f8f3137c5da2c7a241ee17fc07e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#afeb34f8f3137c5da2c7a241ee17fc07e">SetOutlineTint</a> (const sf::Color &amp;colour)</td></tr>
 <tr class="separator:afeb34f8f3137c5da2c7a241ee17fc07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41728af8f9410ac235479a1bff6917f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a41728af8f9410ac235479a1bff6917f2">SetFontSize</a> (unsigned int size)</td></tr>
+<tr class="separator:a41728af8f9410ac235479a1bff6917f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a416d9f7137e29248f49fc75f93bed136"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a416d9f7137e29248f49fc75f93bed136">SetWrap</a> (const <a class="el" href="_v_text_8h.html#a77fe27e741dd08d61bb5d6148ddd0b5b">VTextWrap</a> &amp;wrapMode)</td></tr>
+<tr class="separator:a416d9f7137e29248f49fc75f93bed136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a944398386aa1bed717b6bfcbd80c0771"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a944398386aa1bed717b6bfcbd80c0771">SetLineSpaceModifier</a> (float lineSpacing)</td></tr>
+<tr class="separator:a944398386aa1bed717b6bfcbd80c0771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a691e09b6468cdf53f83a6e8688984c05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a691e09b6468cdf53f83a6e8688984c05">SetAlignment</a> (const <a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a> &amp;align)</td></tr>
+<tr class="separator:a691e09b6468cdf53f83a6e8688984c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62a3c486276a2ad4a87ff6298fc59011"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a62a3c486276a2ad4a87ff6298fc59011">SetOutlineThickness</a> (float thickness)</td></tr>
+<tr class="separator:a62a3c486276a2ad4a87ff6298fc59011"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3245b905f98699d69c2ad2a321e553f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a3245b905f98699d69c2ad2a321e553f7">SetOutlineOffset</a> (const sf::Vector2f &amp;offset)</td></tr>
+<tr class="separator:a3245b905f98699d69c2ad2a321e553f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae786d2434cba19afd5a04f09ccf0b9e2"><td class="memItemLeft" align="right" valign="top">const sf::String &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ae786d2434cba19afd5a04f09ccf0b9e2">GetText</a> ()</td></tr>
+<tr class="separator:ae786d2434cba19afd5a04f09ccf0b9e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac26041c1ca96ce78351896975543b3fa"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ac26041c1ca96ce78351896975543b3fa">GetStyle</a> ()</td></tr>
+<tr class="separator:ac26041c1ca96ce78351896975543b3fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cdae953a25c09381f8d9b538da54f76"><td class="memItemLeft" align="right" valign="top">sf::Color const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a1cdae953a25c09381f8d9b538da54f76">GetFillTint</a> ()</td></tr>
 <tr class="separator:a1cdae953a25c09381f8d9b538da54f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39dbfa445d466c6b76c6b0ba7710316a"><td class="memItemLeft" align="right" valign="top">sf::Color const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a39dbfa445d466c6b76c6b0ba7710316a">GetOutlineTint</a> ()</td></tr>
 <tr class="separator:a39dbfa445d466c6b76c6b0ba7710316a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad61f0cce89e2dca902c43bec0b963f02"><td class="memItemLeft" align="right" valign="top"><a id="ad61f0cce89e2dca902c43bec0b963f02"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ad61f0cce89e2dca902c43bec0b963f02">ApplyChanges</a> ()</td></tr>
-<tr class="memdesc:ad61f0cce89e2dca902c43bec0b963f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the changes to the text format, calling this is required when changing any public properties (including Text). <br /></td></tr>
-<tr class="separator:ad61f0cce89e2dca902c43bec0b963f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c8f580a9c18b929c047593219d6fc81"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a9c8f580a9c18b929c047593219d6fc81">GetFontSize</a> ()</td></tr>
+<tr class="separator:a9c8f580a9c18b929c047593219d6fc81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ca48c72dd534e94e662a51d5c60cf5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_v_text_8h.html#a77fe27e741dd08d61bb5d6148ddd0b5b">VTextWrap</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a1ca48c72dd534e94e662a51d5c60cf5c">GetWrap</a> ()</td></tr>
+<tr class="separator:a1ca48c72dd534e94e662a51d5c60cf5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad7c12557dd8265382b96bd4e4829aad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aad7c12557dd8265382b96bd4e4829aad">GetLineSpaceModifier</a> ()</td></tr>
+<tr class="separator:aad7c12557dd8265382b96bd4e4829aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a830bdccd15809b3ec5ed0915f140be5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a830bdccd15809b3ec5ed0915f140be5e">GetAlignment</a> ()</td></tr>
+<tr class="separator:a830bdccd15809b3ec5ed0915f140be5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb52145097f6bc3a314c316fb3c48c96"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#acb52145097f6bc3a314c316fb3c48c96">GetOutlineThickness</a> ()</td></tr>
+<tr class="separator:acb52145097f6bc3a314c316fb3c48c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade7f2ff28f6c43a3df8378ab8bf5166b"><td class="memItemLeft" align="right" valign="top">sf::Vector2f const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ade7f2ff28f6c43a3df8378ab8bf5166b">GetOutlineOffset</a> ()</td></tr>
+<tr class="separator:ade7f2ff28f6c43a3df8378ab8bf5166b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dade3762187842fceb98e9a7450399f"><td class="memItemLeft" align="right" valign="top"><a id="a6dade3762187842fceb98e9a7450399f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a6dade3762187842fceb98e9a7450399f">Destroy</a> () override</td></tr>
 <tr class="memdesc:a6dade3762187842fceb98e9a7450399f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the text rendering data (and font if disposable is set for true). <br /></td></tr>
@@ -167,46 +206,14 @@ Public Attributes</h2></td></tr>
 sf::RenderStates&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a82f87f1acbf5a1b872e9c1312f45a539">RenderState</a> = sf::RenderStates::Default</td></tr>
 <tr class="memdesc:a82f87f1acbf5a1b872e9c1312f45a539"><td class="mdescLeft">&#160;</td><td class="mdescRight">RenderState for the vertex data. <br /></td></tr>
 <tr class="separator:a82f87f1acbf5a1b872e9c1312f45a539"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace0c3601e9bec51d465f48e9e2d1f29f"><td class="memItemLeft" align="right" valign="top"><a id="ace0c3601e9bec51d465f48e9e2d1f29f"></a>
-sf::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ace0c3601e9bec51d465f48e9e2d1f29f">Text</a></td></tr>
-<tr class="memdesc:ace0c3601e9bec51d465f48e9e2d1f29f"><td class="mdescLeft">&#160;</td><td class="mdescRight">String of text that will be rendered. <br /></td></tr>
-<tr class="separator:ace0c3601e9bec51d465f48e9e2d1f29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57988e662b989d9a22f849f30ce33868"><td class="memItemLeft" align="right" valign="top"><a id="a57988e662b989d9a22f849f30ce33868"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a57988e662b989d9a22f849f30ce33868">FontSize</a> = 8</td></tr>
-<tr class="memdesc:a57988e662b989d9a22f849f30ce33868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the text per character. <br /></td></tr>
-<tr class="separator:a57988e662b989d9a22f849f30ce33868"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafa472e3d37fd182538a618b737e35e3"><td class="memItemLeft" align="right" valign="top"><a id="aafa472e3d37fd182538a618b737e35e3"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aafa472e3d37fd182538a618b737e35e3">Style</a> = sf::Text::Regular</td></tr>
-<tr class="memdesc:aafa472e3d37fd182538a618b737e35e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags for setting a text's display style. <br /></td></tr>
-<tr class="separator:aafa472e3d37fd182538a618b737e35e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23838920d9d87f8a1f7377a187014789"><td class="memItemLeft" align="right" valign="top"><a id="a23838920d9d87f8a1f7377a187014789"></a>
-<a class="el" href="_v_text_8h.html#a77fe27e741dd08d61bb5d6148ddd0b5b">VTextWrap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a23838920d9d87f8a1f7377a187014789">Wrap</a> = WRAPWORD</td></tr>
-<tr class="memdesc:a23838920d9d87f8a1f7377a187014789"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text wrapping mode. <br /></td></tr>
-<tr class="separator:a23838920d9d87f8a1f7377a187014789"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad40811f0173b375d46fedd84f63fc762"><td class="memItemLeft" align="right" valign="top"><a id="ad40811f0173b375d46fedd84f63fc762"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ad40811f0173b375d46fedd84f63fc762">LineSpaceModifier</a> = 0</td></tr>
-<tr class="memdesc:ad40811f0173b375d46fedd84f63fc762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for adjusting the distance between lines different to the default. <br /></td></tr>
-<tr class="separator:ad40811f0173b375d46fedd84f63fc762"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4d640fb2306c585817c405c8c8c21e9"><td class="memItemLeft" align="right" valign="top"><a id="af4d640fb2306c585817c405c8c8c21e9"></a>
-sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#af4d640fb2306c585817c405c8c8c21e9">Scale</a> = sf::Vector2f(1,1)</td></tr>
-<tr class="memdesc:af4d640fb2306c585817c405c8c8c21e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale transform. <br /></td></tr>
-<tr class="separator:af4d640fb2306c585817c405c8c8c21e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a970dd7e6a4e624ee7538c4a96c0bb154"><td class="memItemLeft" align="right" valign="top"><a id="a970dd7e6a4e624ee7538c4a96c0bb154"></a>
-<a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a970dd7e6a4e624ee7538c4a96c0bb154">Alignment</a> = ALIGNLEFT</td></tr>
-<tr class="memdesc:a970dd7e6a4e624ee7538c4a96c0bb154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text alignment property. <br /></td></tr>
-<tr class="separator:a970dd7e6a4e624ee7538c4a96c0bb154"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b6b8fb5932478f194629d6643178d9e"><td class="memItemLeft" align="right" valign="top"><a id="a2b6b8fb5932478f194629d6643178d9e"></a>
 sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a2b6b8fb5932478f194629d6643178d9e">Origin</a></td></tr>
 <tr class="memdesc:a2b6b8fb5932478f194629d6643178d9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Origin point as percentage. <br /></td></tr>
 <tr class="separator:a2b6b8fb5932478f194629d6643178d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa40286b97e3f34afc7d4986bc854ece8"><td class="memItemLeft" align="right" valign="top"><a id="aa40286b97e3f34afc7d4986bc854ece8"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aa40286b97e3f34afc7d4986bc854ece8">OutlineThickness</a> = 0.0f</td></tr>
-<tr class="memdesc:aa40286b97e3f34afc7d4986bc854ece8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thickness of the outline. <br /></td></tr>
-<tr class="separator:aa40286b97e3f34afc7d4986bc854ece8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9e91a45f8440bac45433d8f34db2b6a"><td class="memItemLeft" align="right" valign="top"><a id="af9e91a45f8440bac45433d8f34db2b6a"></a>
-sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#af9e91a45f8440bac45433d8f34db2b6a">OutlineOffset</a></td></tr>
-<tr class="memdesc:af9e91a45f8440bac45433d8f34db2b6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position offset of the outline. Good to modify if you want to display the outline like a shadow. <br /></td></tr>
-<tr class="separator:af9e91a45f8440bac45433d8f34db2b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4d640fb2306c585817c405c8c8c21e9"><td class="memItemLeft" align="right" valign="top"><a id="af4d640fb2306c585817c405c8c8c21e9"></a>
+sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#af4d640fb2306c585817c405c8c8c21e9">Scale</a> = sf::Vector2f(1, 1)</td></tr>
+<tr class="memdesc:af4d640fb2306c585817c405c8c8c21e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale transform. <br /></td></tr>
+<tr class="separator:af4d640fb2306c585817c405c8c8c21e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_v_object"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v_object')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v_object.html">VObject</a></td></tr>
 <tr class="memitem:a6c6e1312cd20cb56b5396fde6a38db26 inherit pub_attribs_class_v_object"><td class="memItemLeft" align="right" valign="top"><a id="a6c6e1312cd20cb56b5396fde6a38db26"></a>
 sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a6c6e1312cd20cb56b5396fde6a38db26">Position</a></td></tr>
@@ -336,7 +343,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae85d1eb5d563409cfc6cef5d6ee4d421"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ae85d1eb5d563409cfc6cef5d6ee4d421">updateTextRender</a> (sf::String text)</td></tr>
+<tr class="memitem:ae85d1eb5d563409cfc6cef5d6ee4d421"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ae85d1eb5d563409cfc6cef5d6ee4d421">updateTextRender</a> (sf::String <a class="el" href="class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed">text</a>)</td></tr>
 <tr class="separator:ae85d1eb5d563409cfc6cef5d6ee4d421"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa294ad800e31c5106b2e74affbb07784"><td class="memItemLeft" align="right" valign="top"><a id="aa294ad800e31c5106b2e74affbb07784"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aa294ad800e31c5106b2e74affbb07784">updateTransform</a> () override</td></tr>
@@ -368,6 +375,42 @@ sf::Transformable&#160;</td><td class="memItemRight" valign="bottom"><a class="e
 sf::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a7e4a450740059e52aa29a01cb137cac6">font</a> = nullptr</td></tr>
 <tr class="memdesc:a7e4a450740059e52aa29a01cb137cac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Font object. <br /></td></tr>
 <tr class="separator:a7e4a450740059e52aa29a01cb137cac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a003eec729bf16ba005f8729ae5bcd2ed"><td class="memItemLeft" align="right" valign="top"><a id="a003eec729bf16ba005f8729ae5bcd2ed"></a>
+sf::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed">text</a></td></tr>
+<tr class="memdesc:a003eec729bf16ba005f8729ae5bcd2ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">String of text that will be rendered. <br /></td></tr>
+<tr class="separator:a003eec729bf16ba005f8729ae5bcd2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacd154e72fb50e514cce5ffd47990b86"><td class="memItemLeft" align="right" valign="top"><a id="aacd154e72fb50e514cce5ffd47990b86"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aacd154e72fb50e514cce5ffd47990b86">length</a> = 0</td></tr>
+<tr class="memdesc:aacd154e72fb50e514cce5ffd47990b86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current length of text. <br /></td></tr>
+<tr class="separator:aacd154e72fb50e514cce5ffd47990b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0bf9eea7422a3b56c418bcaa6997d24"><td class="memItemLeft" align="right" valign="top"><a id="aa0bf9eea7422a3b56c418bcaa6997d24"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aa0bf9eea7422a3b56c418bcaa6997d24">fontSize</a> = 8</td></tr>
+<tr class="memdesc:aa0bf9eea7422a3b56c418bcaa6997d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the text per character. <br /></td></tr>
+<tr class="separator:aa0bf9eea7422a3b56c418bcaa6997d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c3f41b1569a5fc147e13e4f729d9c3"><td class="memItemLeft" align="right" valign="top"><a id="aa0c3f41b1569a5fc147e13e4f729d9c3"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aa0c3f41b1569a5fc147e13e4f729d9c3">style</a> = sf::Text::Regular</td></tr>
+<tr class="memdesc:aa0c3f41b1569a5fc147e13e4f729d9c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags for setting a text's display style. <br /></td></tr>
+<tr class="separator:aa0c3f41b1569a5fc147e13e4f729d9c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6415ee1c4ef7b7d886c622a60527e6f"><td class="memItemLeft" align="right" valign="top"><a id="ad6415ee1c4ef7b7d886c622a60527e6f"></a>
+<a class="el" href="_v_text_8h.html#a77fe27e741dd08d61bb5d6148ddd0b5b">VTextWrap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ad6415ee1c4ef7b7d886c622a60527e6f">wrap</a> = WRAPWORD</td></tr>
+<tr class="memdesc:ad6415ee1c4ef7b7d886c622a60527e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text wrapping mode. <br /></td></tr>
+<tr class="separator:ad6415ee1c4ef7b7d886c622a60527e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c8aea7c9c4fd86c5eff5474fde8ae44"><td class="memItemLeft" align="right" valign="top"><a id="a8c8aea7c9c4fd86c5eff5474fde8ae44"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a8c8aea7c9c4fd86c5eff5474fde8ae44">lineSpaceModifier</a> = 0</td></tr>
+<tr class="memdesc:a8c8aea7c9c4fd86c5eff5474fde8ae44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for adjusting the distance between lines different to the default. <br /></td></tr>
+<tr class="separator:a8c8aea7c9c4fd86c5eff5474fde8ae44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedab30419b833a2f1b3337d64c0906b1"><td class="memItemLeft" align="right" valign="top"><a id="aedab30419b833a2f1b3337d64c0906b1"></a>
+<a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aedab30419b833a2f1b3337d64c0906b1">alignment</a> = ALIGNLEFT</td></tr>
+<tr class="memdesc:aedab30419b833a2f1b3337d64c0906b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text alignment property. <br /></td></tr>
+<tr class="separator:aedab30419b833a2f1b3337d64c0906b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee4023b2b78a094b5d525ef76567223b"><td class="memItemLeft" align="right" valign="top"><a id="aee4023b2b78a094b5d525ef76567223b"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aee4023b2b78a094b5d525ef76567223b">outlineThickness</a> = 0.0f</td></tr>
+<tr class="memdesc:aee4023b2b78a094b5d525ef76567223b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thickness of the outline. <br /></td></tr>
+<tr class="separator:aee4023b2b78a094b5d525ef76567223b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab43c3736f125f4709d77fe6217c3694b"><td class="memItemLeft" align="right" valign="top"><a id="ab43c3736f125f4709d77fe6217c3694b"></a>
+sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ab43c3736f125f4709d77fe6217c3694b">outlineOffset</a></td></tr>
+<tr class="memdesc:ab43c3736f125f4709d77fe6217c3694b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position offset of the outline. Good to modify if you want to display the outline like a shadow. <br /></td></tr>
+<tr class="separator:ab43c3736f125f4709d77fe6217c3694b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a6648b1e800c0bb2808e8c08488acd1"><td class="memItemLeft" align="right" valign="top"><a id="a3a6648b1e800c0bb2808e8c08488acd1"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a3a6648b1e800c0bb2808e8c08488acd1">dirty</a> = false</td></tr>
 <tr class="memdesc:a3a6648b1e800c0bb2808e8c08488acd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the text vertex data is rebuilt for all the new properties. <br /></td></tr>
@@ -574,6 +617,32 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
+<a id="a830bdccd15809b3ec5ed0915f140be5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a830bdccd15809b3ec5ed0915f140be5e">&#9670;&nbsp;</a></span>GetAlignment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a> const&amp; VText::GetAlignment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Text alignment property. </dd></dl>
+
+</div>
+</div>
 <a id="a1cdae953a25c09381f8d9b538da54f76"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1cdae953a25c09381f8d9b538da54f76">&#9670;&nbsp;</a></span>GetFillTint()</h2>
 
@@ -600,6 +669,110 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
+<a id="a9c8f580a9c18b929c047593219d6fc81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c8f580a9c18b929c047593219d6fc81">&#9670;&nbsp;</a></span>GetFontSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int VText::GetFontSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Size of the text per character. </dd></dl>
+
+</div>
+</div>
+<a id="aad7c12557dd8265382b96bd4e4829aad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad7c12557dd8265382b96bd4e4829aad">&#9670;&nbsp;</a></span>GetLineSpaceModifier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int VText::GetLineSpaceModifier </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Used for adjusting the distance between lines different to the default. </dd></dl>
+
+</div>
+</div>
+<a id="ade7f2ff28f6c43a3df8378ab8bf5166b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade7f2ff28f6c43a3df8378ab8bf5166b">&#9670;&nbsp;</a></span>GetOutlineOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Vector2f const&amp; VText::GetOutlineOffset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The position offset of the outline. Good to modify if you want to display the outline like a shadow. </dd></dl>
+
+</div>
+</div>
+<a id="acb52145097f6bc3a314c316fb3c48c96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb52145097f6bc3a314c316fb3c48c96">&#9670;&nbsp;</a></span>GetOutlineThickness()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float VText::GetOutlineThickness </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The thickness of the outline. </dd></dl>
+
+</div>
+</div>
 <a id="a39dbfa445d466c6b76c6b0ba7710316a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a39dbfa445d466c6b76c6b0ba7710316a">&#9670;&nbsp;</a></span>GetOutlineTint()</h2>
 
@@ -623,6 +796,103 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The colour of the text outline. </dd></dl>
+
+</div>
+</div>
+<a id="ac26041c1ca96ce78351896975543b3fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac26041c1ca96ce78351896975543b3fa">&#9670;&nbsp;</a></span>GetStyle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int VText::GetStyle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Flags for setting a text's display style. </dd></dl>
+
+</div>
+</div>
+<a id="ae786d2434cba19afd5a04f09ccf0b9e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae786d2434cba19afd5a04f09ccf0b9e2">&#9670;&nbsp;</a></span>GetText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::String&amp; VText::GetText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The text that will be rendered. </dd></dl>
+
+</div>
+</div>
+<a id="a1ca48c72dd534e94e662a51d5c60cf5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ca48c72dd534e94e662a51d5c60cf5c">&#9670;&nbsp;</a></span>GetWrap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_v_text_8h.html#a77fe27e741dd08d61bb5d6148ddd0b5b">VTextWrap</a> const&amp; VText::GetWrap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Text wrapping mode. </dd></dl>
+
+</div>
+</div>
+<a id="a691e09b6468cdf53f83a6e8688984c05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a691e09b6468cdf53f83a6e8688984c05">&#9670;&nbsp;</a></span>SetAlignment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VText::SetAlignment </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a> &amp;&#160;</td>
+          <td class="paramname"><em>align</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Text alignment property. </dd></dl>
 
 </div>
 </div>
@@ -742,6 +1012,25 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
+<a id="a41728af8f9410ac235479a1bff6917f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41728af8f9410ac235479a1bff6917f2">&#9670;&nbsp;</a></span>SetFontSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VText::SetFontSize </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Size of the text per character. </dd></dl>
+
+</div>
+</div>
 <a id="a8524145ab161eadaaefb51b5bb9b6728"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8524145ab161eadaaefb51b5bb9b6728">&#9670;&nbsp;</a></span>SetFormat() <span class="overload">[1/2]</span></h2>
 
@@ -854,6 +1143,63 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
+<a id="a944398386aa1bed717b6bfcbd80c0771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a944398386aa1bed717b6bfcbd80c0771">&#9670;&nbsp;</a></span>SetLineSpaceModifier()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VText::SetLineSpaceModifier </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>lineSpacing</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Used for adjusting the distance between lines different to the default. </dd></dl>
+
+</div>
+</div>
+<a id="a3245b905f98699d69c2ad2a321e553f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3245b905f98699d69c2ad2a321e553f7">&#9670;&nbsp;</a></span>SetOutlineOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VText::SetOutlineOffset </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>offset</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The position offset of the outline. Good to modify if you want to display the outline like a shadow. </dd></dl>
+
+</div>
+</div>
+<a id="a62a3c486276a2ad4a87ff6298fc59011"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62a3c486276a2ad4a87ff6298fc59011">&#9670;&nbsp;</a></span>SetOutlineThickness()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VText::SetOutlineThickness </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thickness</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The thickness of the outline. </dd></dl>
+
+</div>
+</div>
 <a id="afeb34f8f3137c5da2c7a241ee17fc07e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afeb34f8f3137c5da2c7a241ee17fc07e">&#9670;&nbsp;</a></span>SetOutlineTint()</h2>
 
@@ -896,6 +1242,30 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">style</td><td>Font styles flags (i.e. Bold, Italic, Strikethrough, ect). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a39d103864e96257956da3cb87d0d0e21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39d103864e96257956da3cb87d0d0e21">&#9670;&nbsp;</a></span>SetText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VText::SetText </td>
+          <td>(</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
+          <td class="paramname"><em>text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">text</td><td>sf::String of text that will be rendered. </td></tr>
   </table>
   </dd>
 </dl>
@@ -984,6 +1354,25 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a416d9f7137e29248f49fc75f93bed136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a416d9f7137e29248f49fc75f93bed136">&#9670;&nbsp;</a></span>SetWrap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VText::SetWrap </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="_v_text_8h.html#a77fe27e741dd08d61bb5d6148ddd0b5b">VTextWrap</a> &amp;&#160;</td>
+          <td class="paramname"><em>wrapMode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Text wrapping mode. </dd></dl>
 
 </div>
 </div>

@@ -15,7 +15,7 @@ var searchData=
   ['followmethod',['followMethod',['../class_v_camera.html#a610f84c5c3eb330453eb99338e5fb3ed',1,'VCamera']]],
   ['followobject',['followObject',['../class_v_camera.html#a19a1e0d2b72ed38108daca3e397fa89b',1,'VCamera']]],
   ['font',['font',['../class_v_text.html#a7e4a450740059e52aa29a01cb137cac6',1,'VText']]],
-  ['fontsize',['FontSize',['../class_v_text.html#a57988e662b989d9a22f849f30ce33868',1,'VText']]],
+  ['fontsize',['fontSize',['../class_v_text.html#aa0bf9eea7422a3b56c418bcaa6997d24',1,'VText']]],
   ['fps',['FPS',['../class_v_global.html#a577c23481b1a2269a25afe4f8de803ea',1,'VGlobal']]],
   ['framesize',['FrameSize',['../class_v_sprite.html#aeefb012d54a7d951636553e0e0458b5f',1,'VSprite']]],
   ['frequency',['Frequency',['../class_v_emitter.html#a9d5c924d0c44616901c49cd97caa6bc0',1,'VEmitter']]]

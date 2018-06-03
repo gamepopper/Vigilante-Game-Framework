@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.1</span>
+   &#160;<span id="projectnumber">1.0.0.2</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -98,6 +98,19 @@ typedef <a class="el" href="class_v_object.html">VObject</a>&#160;</td><td class
 <tr class="memdesc:a92e1c30e74208eecaba095e4f40eb90f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to call parent class functions when they are overrided in class. <br /></td></tr>
 <tr class="separator:a92e1c30e74208eecaba095e4f40eb90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_class_v_object"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_v_object')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_v_object.html">VObject</a></td></tr>
+<tr class="memitem:a20898dbea7f47fc05919dcadb5b1f3a6 inherit pub_types_class_v_object"><td class="memItemLeft" align="right" valign="top"><a id="a20898dbea7f47fc05919dcadb5b1f3a6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a20898dbea7f47fc05919dcadb5b1f3a6">SidesTouching</a> : unsigned char { <br />
+&#160;&#160;<b>TOUCHNONE</b> = 0, 
+<b>TOUCHLEFT</b> = 1 &lt;&lt; 0, 
+<b>TOUCHRIGHT</b> = 1 &lt;&lt; 1, 
+<b>TOUCHTOP</b> = 1 &lt;&lt; 2, 
+<br />
+&#160;&#160;<b>TOUCHBOTTOM</b> = 1 &lt;&lt; 3, 
+<b>TOUCHWALL</b> = TOUCHLEFT | TOUCHRIGHT, 
+<b>TOUCHALL</b> = TOUCHLEFT | TOUCHRIGHT | TOUCHTOP | TOUCHBOTTOM
+<br />
+ }</td></tr>
+<tr class="memdesc:a20898dbea7f47fc05919dcadb5b1f3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags for which sides are allowed to check if being overlapped for collision purposes. <br /></td></tr>
+<tr class="separator:a20898dbea7f47fc05919dcadb5b1f3a6 inherit pub_types_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20cd6103377054addfa29c34dbebc3c1 inherit pub_types_class_v_object"><td class="memItemLeft" align="right" valign="top"><a id="a20cd6103377054addfa29c34dbebc3c1"></a>
 typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a20cd6103377054addfa29c34dbebc3c1">VSUPERCLASS</a></td></tr>
 <tr class="memdesc:a20cd6103377054addfa29c34dbebc3c1 inherit pub_types_class_v_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to call parent class functions when they are overrided in class. <br /></td></tr>
@@ -117,10 +130,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a71a87036258418524b1ed15413ba484d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d7317320ca3619b80927c2b7ab649a8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a4d7317320ca3619b80927c2b7ab649a8">MakeGraphicCircle</a> (int radius, sf::Color color, float outline=0, sf::Color outlineColor=sf::Color::Transparent)</td></tr>
 <tr class="separator:a4d7317320ca3619b80927c2b7ab649a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23b3b08ae165771dfa972c0e92d812ec"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a23b3b08ae165771dfa972c0e92d812ec">MakeGraphicSided</a> (int radius, int sides, sf::Color color, float outline=0, sf::Color outlineColor=sf::Color::Transparent)</td></tr>
-<tr class="separator:a23b3b08ae165771dfa972c0e92d812ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acca89a2a4b0cbc512e92e9fac0fedb57"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#acca89a2a4b0cbc512e92e9fac0fedb57">MakeGraphicConvex</a> (const std::vector&lt; sf::Vector2f &gt; &amp;points, sf::Color color, float outline=0, sf::Color outlineColor=sf::Color::Transparent)</td></tr>
-<tr class="separator:acca89a2a4b0cbc512e92e9fac0fedb57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af540a17011d8502995d8f34965cb546e"><td class="memItemLeft" align="right" valign="top">sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#af540a17011d8502995d8f34965cb546e">GetTexture</a> ()</td></tr>
 <tr class="separator:af540a17011d8502995d8f34965cb546e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae81d8f0c97c3bcc6ece9037e16098b10"><td class="memItemLeft" align="right" valign="top"><a id="ae81d8f0c97c3bcc6ece9037e16098b10"></a>
@@ -720,7 +729,7 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Make sprite texture. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Make sprite texture as a primitive rectangle. This should be used mainly for testing purposes with VSprites. For more permanent use of primitive shapes, look at the <a class="el" href="class_v_shape.html" title="An object class that renders primitive shapes. Arguably more optimal than creating a VSprite and call...">VShape</a> class. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">width</td><td>Width of sprite. </td></tr>
     <tr><td class="paramname">height</td><td>Height of sprite. </td></tr>
@@ -780,7 +789,7 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Make sprite texture a circle. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Make sprite texture a circle. This should be used mainly for testing purposes with VSprites. For more permanent use of primitive shapes, look at the <a class="el" href="class_v_shape.html" title="An object class that renders primitive shapes. Arguably more optimal than creating a VSprite and call...">VShape</a> class. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">radius</td><td>Radius of the circle. </td></tr>
     <tr><td class="paramname">color</td><td>Fill Colour of sprite. </td></tr>
@@ -791,131 +800,6 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </dl>
 
 <p>Reimplemented in <a class="el" href="class_v_tiled_sprite.html#adf2b8b1d3fa77579b6fdafc6f2e4a4ee">VTiledSprite</a>.</p>
-
-</div>
-</div>
-<a id="acca89a2a4b0cbc512e92e9fac0fedb57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acca89a2a4b0cbc512e92e9fac0fedb57">&#9670;&nbsp;</a></span>MakeGraphicConvex()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="class_v_sprite.html">VSprite</a>* VSprite::MakeGraphicConvex </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; sf::Vector2f &gt; &amp;&#160;</td>
-          <td class="paramname"><em>points</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Color&#160;</td>
-          <td class="paramname"><em>color</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>outline</em> = <code>0</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Color&#160;</td>
-          <td class="paramname"><em>outlineColor</em> = <code>sf::Color::Transparent</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Make sprite texture a convex shape. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">points</td><td>List of points that make out the shape. </td></tr>
-    <tr><td class="paramname">color</td><td>Fill Colour of sprite. </td></tr>
-    <tr><td class="paramname">outline</td><td>Outline thickness. </td></tr>
-    <tr><td class="paramname">outlineColor</td><td>colour of sprite outline. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented in <a class="el" href="class_v_tiled_sprite.html#a71dcec8f7efcb324ebc7f0ea80f207ac">VTiledSprite</a>.</p>
-
-</div>
-</div>
-<a id="a23b3b08ae165771dfa972c0e92d812ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23b3b08ae165771dfa972c0e92d812ec">&#9670;&nbsp;</a></span>MakeGraphicSided()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="class_v_sprite.html">VSprite</a>* VSprite::MakeGraphicSided </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>radius</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>sides</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Color&#160;</td>
-          <td class="paramname"><em>color</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>outline</em> = <code>0</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">sf::Color&#160;</td>
-          <td class="paramname"><em>outlineColor</em> = <code>sf::Color::Transparent</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Make sprite texture a multisided shape. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">radius</td><td>Radius of the circle. </td></tr>
-    <tr><td class="paramname">sides</td><td>Number of sides of the shape. </td></tr>
-    <tr><td class="paramname">color</td><td>Fill Colour of sprite. </td></tr>
-    <tr><td class="paramname">outline</td><td>Outline thickness. </td></tr>
-    <tr><td class="paramname">outlineColor</td><td>colour of sprite outline. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented in <a class="el" href="class_v_tiled_sprite.html#a85ff1fea5fdf98638822b8f8343dc726">VTiledSprite</a>.</p>
 
 </div>
 </div>

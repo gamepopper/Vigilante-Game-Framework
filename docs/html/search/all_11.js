@@ -2,7 +2,7 @@ var searchData=
 [
   ['testinview',['TestInView',['../class_v_object.html#a5654758fad84f7db9f130adea48724e0',1,'VObject']]],
   ['texcoord',['texCoord',['../struct_v3_d_vertex.html#a24e8e16b98aba9dce62a83c23e400ef2',1,'V3DVertex']]],
-  ['text',['Text',['../class_v_text.html#ace0c3601e9bec51d465f48e9e2d1f29f',1,'VText']]],
+  ['text',['text',['../class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed',1,'VText']]],
   ['texture',['texture',['../class_v3_d_model.html#a4167384145e00786f86db06cf7830459',1,'V3DModel::texture()'],['../class_v_backdrop.html#a1185cf94fe1706b4897dd833bca5b3b8',1,'VBackdrop::texture()'],['../class_v_sprite.html#a4769ac7e61ee128e55a5c5ac82c9f347',1,'VSprite::texture()']]],
   ['textureexists',['TextureExists',['../class_v_content.html#a571f12eca71d3aebf6f21047037d5ed5',1,'VContent']]],
   ['textureoffset',['textureOffset',['../class_v_tilemap.html#a269a6ce93c7c393d9b4e163ea20b0968',1,'VTilemap']]],

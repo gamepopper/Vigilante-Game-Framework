@@ -9,8 +9,7 @@ var searchData=
   ['addtolist',['AddToList',['../class_v_collision.html#af26c4df38b7f4f08bbc87ecc8dd72dc1',1,'VCollision']]],
   ['angle',['Angle',['../class_v_interpolate.html#aa14b7d7e53c33d2ab58269ce920ddf86',1,'VInterpolate']]],
   ['anyactivetimers',['AnyActiveTimers',['../class_v_time_manager.html#a7d6c904e90ff43cd43ee54bebd7aae11',1,'VTimeManager']]],
-  ['apply',['Apply',['../class_v_post_effect_base.html#a0977f58448892fcb529f2f537f5c9b34',1,'VPostEffectBase::Apply()'],['../class_v_post_effect_multipass.html#a1fabc20eafbf6029eaca377362b59289',1,'VPostEffectMultipass::Apply()'],['../class_v_post_effect.html#a2b46092459e5a23852efc40e18989b6f',1,'VPostEffect::Apply()']]],
-  ['applychanges',['ApplyChanges',['../class_v_text.html#ad61f0cce89e2dca902c43bec0b963f02',1,'VText']]],
+  ['apply',['Apply',['../class_v_post_effect_base.html#a903ccb40e14ae1659afcdf2e8a9346b9',1,'VPostEffectBase::Apply()'],['../class_v_post_effect_multipass.html#a00ba18012151f0a82bf94b3108825385',1,'VPostEffectMultipass::Apply()'],['../class_v_post_effect.html#a9d7e2b13989bd7d2e899aba52e64a3ce',1,'VPostEffect::Apply()']]],
   ['applyshader',['applyShader',['../class_v_post_effect_base.html#a019b8a7e3ed678c2853e473657d024e3',1,'VPostEffectBase']]],
   ['attenuation',['Attenuation',['../class_v_music.html#a039439604d5e1079e94772c376edd5bf',1,'VMusic']]]
 ];

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.1</span>
+   &#160;<span id="projectnumber">1.0.0.2</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -117,6 +117,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a057095117e22a3dd85202e6014bfdc6b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_trail_area.html#a057095117e22a3dd85202e6014bfdc6b">Draw</a> (sf::RenderTarget &amp;RenderTarget) override</td></tr>
 <tr class="separator:a057095117e22a3dd85202e6014bfdc6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_render_group"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_render_group')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_render_group.html">VRenderGroup</a></td></tr>
+<tr class="memitem:a87e5c03613cec1d72fa8c5f3612bf29f inherit pub_methods_class_v_render_group"><td class="memItemLeft" align="right" valign="top"><a id="a87e5c03613cec1d72fa8c5f3612bf29f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a87e5c03613cec1d72fa8c5f3612bf29f">VRenderGroup</a> (unsigned int maxSize=0)</td></tr>
+<tr class="memdesc:a87e5c03613cec1d72fa8c5f3612bf29f inherit pub_methods_class_v_render_group"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor for <a class="el" href="class_v_render_group.html" title="Processes a group of objects and renders them all to a sprite object. ">VRenderGroup</a>. <br /></td></tr>
+<tr class="separator:a87e5c03613cec1d72fa8c5f3612bf29f inherit pub_methods_class_v_render_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cb68693168e28bed3c35ad98873498d inherit pub_methods_class_v_render_group"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a6cb68693168e28bed3c35ad98873498d">VRenderGroup</a> (float x, float y, unsigned int width, unsigned int height, unsigned int maxSize=0)</td></tr>
 <tr class="separator:a6cb68693168e28bed3c35ad98873498d inherit pub_methods_class_v_render_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91d3ed3ece3435309c3120d4ddf84774 inherit pub_methods_class_v_render_group"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a91d3ed3ece3435309c3120d4ddf84774">VRenderGroup</a> (sf::Vector2f position, sf::Vector2u size, unsigned int maxSize=0)</td></tr>
@@ -214,18 +218,18 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="memdesc:aa85d6a870b630327fcbb6648c654c1d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of alpha to remove in the next swap (done as 255 - (255 * Multiplier * 0.0039f). <br /></td></tr>
 <tr class="separator:aa85d6a870b630327fcbb6648c654c1d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_v_render_group"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v_render_group')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v_render_group.html">VRenderGroup</a></td></tr>
-<tr class="memitem:a2d005cd452b8c2df946e91f9a6d24ebf inherit pub_attribs_class_v_render_group"><td class="memItemLeft" align="right" valign="top"><a id="a2d005cd452b8c2df946e91f9a6d24ebf"></a>
-<a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a2d005cd452b8c2df946e91f9a6d24ebf">Sprite</a> = nullptr</td></tr>
-<tr class="memdesc:a2d005cd452b8c2df946e91f9a6d24ebf inherit pub_attribs_class_v_render_group"><td class="mdescLeft">&#160;</td><td class="mdescRight">The sprite that the group will render to. Refer to this if you want to transform the render output. <br /></td></tr>
-<tr class="separator:a2d005cd452b8c2df946e91f9a6d24ebf inherit pub_attribs_class_v_render_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1da609bd10bbaac2c89fa2af87b64f89 inherit pub_attribs_class_v_render_group"><td class="memItemLeft" align="right" valign="top"><a id="a1da609bd10bbaac2c89fa2af87b64f89"></a>
+std::unique_ptr&lt; <a class="el" href="class_v_sprite.html">VSprite</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a1da609bd10bbaac2c89fa2af87b64f89">Sprite</a> = nullptr</td></tr>
+<tr class="memdesc:a1da609bd10bbaac2c89fa2af87b64f89 inherit pub_attribs_class_v_render_group"><td class="mdescLeft">&#160;</td><td class="mdescRight">The sprite that the group will render to. Refer to this if you want to transform the render output. <br /></td></tr>
+<tr class="separator:a1da609bd10bbaac2c89fa2af87b64f89 inherit pub_attribs_class_v_render_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bb5d7fe6aefb4cf91397834e42934a1 inherit pub_attribs_class_v_render_group"><td class="memItemLeft" align="right" valign="top"><a id="a4bb5d7fe6aefb4cf91397834e42934a1"></a>
 sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a4bb5d7fe6aefb4cf91397834e42934a1">BackgroundTint</a> = sf::Color::Transparent</td></tr>
 <tr class="memdesc:a4bb5d7fe6aefb4cf91397834e42934a1 inherit pub_attribs_class_v_render_group"><td class="mdescLeft">&#160;</td><td class="mdescRight">The background colour the sprite will have. <br /></td></tr>
 <tr class="separator:a4bb5d7fe6aefb4cf91397834e42934a1 inherit pub_attribs_class_v_render_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76b9e93dec47bc3ec5689d4faef6c115 inherit pub_attribs_class_v_render_group"><td class="memItemLeft" align="right" valign="top"><a id="a76b9e93dec47bc3ec5689d4faef6c115"></a>
-<a class="el" href="class_v_post_effect_base.html">VPostEffectBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a76b9e93dec47bc3ec5689d4faef6c115">PostEffect</a> = nullptr</td></tr>
-<tr class="memdesc:a76b9e93dec47bc3ec5689d4faef6c115 inherit pub_attribs_class_v_render_group"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post Process (Shader) Effect to apply to the sprite. <br /></td></tr>
-<tr class="separator:a76b9e93dec47bc3ec5689d4faef6c115 inherit pub_attribs_class_v_render_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45325fa672c0c85231330990f5463b54 inherit pub_attribs_class_v_render_group"><td class="memItemLeft" align="right" valign="top"><a id="a45325fa672c0c85231330990f5463b54"></a>
+std::unique_ptr&lt; <a class="el" href="class_v_post_effect_base.html">VPostEffectBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a45325fa672c0c85231330990f5463b54">PostEffect</a> = nullptr</td></tr>
+<tr class="memdesc:a45325fa672c0c85231330990f5463b54 inherit pub_attribs_class_v_render_group"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post Process (Shader) Effect to apply to the sprite. <br /></td></tr>
+<tr class="separator:a45325fa672c0c85231330990f5463b54 inherit pub_attribs_class_v_render_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a938623c35e32110a5bea33fb0cadf248 inherit pub_attribs_class_v_render_group"><td class="memItemLeft" align="right" valign="top"><a id="a938623c35e32110a5bea33fb0cadf248"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a938623c35e32110a5bea33fb0cadf248">RenderViewTransform</a> = true</td></tr>
 <tr class="memdesc:a938623c35e32110a5bea33fb0cadf248 inherit pub_attribs_class_v_render_group"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the sprite's render view will be transformed based on the sprite's current transform, else it will use the default view. <br /></td></tr>

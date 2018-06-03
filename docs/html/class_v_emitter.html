@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.1</span>
+   &#160;<span id="projectnumber">1.0.0.2</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -229,7 +229,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:aa84190bda4dbd32697c13553ccd496a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, when particles have collided, their velocity or position cannot be effected. <br /></td></tr>
 <tr class="separator:aa84190bda4dbd32697c13553ccd496a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a969cf678791d6ea87617062e8b659b8b"><td class="memItemLeft" align="right" valign="top"><a id="a969cf678791d6ea87617062e8b659b8b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#a969cf678791d6ea87617062e8b659b8b">AllowCollisions</a> = SidesTouching::TOUCHALL</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#a969cf678791d6ea87617062e8b659b8b">AllowCollisions</a> = VObject::TOUCHALL</td></tr>
 <tr class="memdesc:a969cf678791d6ea87617062e8b659b8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which sides are allowed to be collided with. <br /></td></tr>
 <tr class="separator:a969cf678791d6ea87617062e8b659b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42d59f7e641258d3adadf3b27b7f45dd"><td class="memItemLeft" align="right" valign="top"><a id="a42d59f7e641258d3adadf3b27b7f45dd"></a>
@@ -345,6 +345,14 @@ Protected Attributes</h2></td></tr>
 sf::VertexArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#a110d25a619beb6199fb98b188056c99d">vertices</a></td></tr>
 <tr class="memdesc:a110d25a619beb6199fb98b188056c99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">All particles are rendered from a single set of vertices rendering a Quad. <br /></td></tr>
 <tr class="separator:a110d25a619beb6199fb98b188056c99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a4a6fe5d2659b1b9d2e3a2e5ab0cba0"><td class="memItemLeft" align="right" valign="top"><a id="a2a4a6fe5d2659b1b9d2e3a2e5ab0cba0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#a2a4a6fe5d2659b1b9d2e3a2e5ab0cba0">disposible</a> = false</td></tr>
+<tr class="memdesc:a2a4a6fe5d2659b1b9d2e3a2e5ab0cba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, texture will be destroyed within <a class="el" href="class_v_sprite.html" title="A sprite rendering object class. ">VSprite</a>. Important if texture isn't loaded from <a class="el" href="class_v_content.html" title="Content Management System for loading and storing Textures, Fonts and Sound Effects. ">VContent</a>. <br /></td></tr>
+<tr class="separator:a2a4a6fe5d2659b1b9d2e3a2e5ab0cba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f47249edc720fcbff14284f4b623328"><td class="memItemLeft" align="right" valign="top"><a id="a9f47249edc720fcbff14284f4b623328"></a>
+sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#a9f47249edc720fcbff14284f4b623328">mainTint</a></td></tr>
+<tr class="memdesc:a9f47249edc720fcbff14284f4b623328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tint for all particles, particularly used for creating particles with the MakeParticles function. <br /></td></tr>
+<tr class="separator:a9f47249edc720fcbff14284f4b623328"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad54f979437f4a8d892a4952c93faefec"><td class="memItemLeft" align="right" valign="top"><a id="ad54f979437f4a8d892a4952c93faefec"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#ad54f979437f4a8d892a4952c93faefec">running</a> = false</td></tr>
 <tr class="memdesc:ad54f979437f4a8d892a4952c93faefec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows the particles processed while running if true. <br /></td></tr>

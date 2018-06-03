@@ -8,5 +8,5 @@ var searchData=
   ['windowstyle',['WindowStyle',['../class_v_global.html#a904ed525dc62aa6ae1de8c5f6470f7ad',1,'VGlobal']]],
   ['windowwidth',['WindowWidth',['../class_v_global.html#a221cc797649981fdf9bfe8a9c9769f08',1,'VGlobal']]],
   ['worldbounds',['WorldBounds',['../class_v_global.html#a733798b74b40e4739d8c07eba545ac43',1,'VGlobal']]],
-  ['wrap',['Wrap',['../class_v_text.html#a23838920d9d87f8a1f7377a187014789',1,'VText']]]
+  ['wrap',['wrap',['../class_v_text.html#ad6415ee1c4ef7b7d886c622a60527e6f',1,'VText']]]
 ];

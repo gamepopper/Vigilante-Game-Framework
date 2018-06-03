@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.1</span>
+   &#160;<span id="projectnumber">1.0.0.2</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -106,6 +106,10 @@ typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="me
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a87e5c03613cec1d72fa8c5f3612bf29f"><td class="memItemLeft" align="right" valign="top"><a id="a87e5c03613cec1d72fa8c5f3612bf29f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a87e5c03613cec1d72fa8c5f3612bf29f">VRenderGroup</a> (unsigned int maxSize=0)</td></tr>
+<tr class="memdesc:a87e5c03613cec1d72fa8c5f3612bf29f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Constructor for <a class="el" href="class_v_render_group.html" title="Processes a group of objects and renders them all to a sprite object. ">VRenderGroup</a>. <br /></td></tr>
+<tr class="separator:a87e5c03613cec1d72fa8c5f3612bf29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cb68693168e28bed3c35ad98873498d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a6cb68693168e28bed3c35ad98873498d">VRenderGroup</a> (float x, float y, unsigned int width, unsigned int height, unsigned int maxSize=0)</td></tr>
 <tr class="separator:a6cb68693168e28bed3c35ad98873498d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91d3ed3ece3435309c3120d4ddf84774"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a91d3ed3ece3435309c3120d4ddf84774">VRenderGroup</a> (sf::Vector2f position, sf::Vector2u size, unsigned int maxSize=0)</td></tr>
@@ -186,18 +190,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a2d005cd452b8c2df946e91f9a6d24ebf"><td class="memItemLeft" align="right" valign="top"><a id="a2d005cd452b8c2df946e91f9a6d24ebf"></a>
-<a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a2d005cd452b8c2df946e91f9a6d24ebf">Sprite</a> = nullptr</td></tr>
-<tr class="memdesc:a2d005cd452b8c2df946e91f9a6d24ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The sprite that the group will render to. Refer to this if you want to transform the render output. <br /></td></tr>
-<tr class="separator:a2d005cd452b8c2df946e91f9a6d24ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1da609bd10bbaac2c89fa2af87b64f89"><td class="memItemLeft" align="right" valign="top"><a id="a1da609bd10bbaac2c89fa2af87b64f89"></a>
+std::unique_ptr&lt; <a class="el" href="class_v_sprite.html">VSprite</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a1da609bd10bbaac2c89fa2af87b64f89">Sprite</a> = nullptr</td></tr>
+<tr class="memdesc:a1da609bd10bbaac2c89fa2af87b64f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">The sprite that the group will render to. Refer to this if you want to transform the render output. <br /></td></tr>
+<tr class="separator:a1da609bd10bbaac2c89fa2af87b64f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bb5d7fe6aefb4cf91397834e42934a1"><td class="memItemLeft" align="right" valign="top"><a id="a4bb5d7fe6aefb4cf91397834e42934a1"></a>
 sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a4bb5d7fe6aefb4cf91397834e42934a1">BackgroundTint</a> = sf::Color::Transparent</td></tr>
 <tr class="memdesc:a4bb5d7fe6aefb4cf91397834e42934a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The background colour the sprite will have. <br /></td></tr>
 <tr class="separator:a4bb5d7fe6aefb4cf91397834e42934a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76b9e93dec47bc3ec5689d4faef6c115"><td class="memItemLeft" align="right" valign="top"><a id="a76b9e93dec47bc3ec5689d4faef6c115"></a>
-<a class="el" href="class_v_post_effect_base.html">VPostEffectBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a76b9e93dec47bc3ec5689d4faef6c115">PostEffect</a> = nullptr</td></tr>
-<tr class="memdesc:a76b9e93dec47bc3ec5689d4faef6c115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post Process (Shader) Effect to apply to the sprite. <br /></td></tr>
-<tr class="separator:a76b9e93dec47bc3ec5689d4faef6c115"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45325fa672c0c85231330990f5463b54"><td class="memItemLeft" align="right" valign="top"><a id="a45325fa672c0c85231330990f5463b54"></a>
+std::unique_ptr&lt; <a class="el" href="class_v_post_effect_base.html">VPostEffectBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a45325fa672c0c85231330990f5463b54">PostEffect</a> = nullptr</td></tr>
+<tr class="memdesc:a45325fa672c0c85231330990f5463b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post Process (Shader) Effect to apply to the sprite. <br /></td></tr>
+<tr class="separator:a45325fa672c0c85231330990f5463b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a938623c35e32110a5bea33fb0cadf248"><td class="memItemLeft" align="right" valign="top"><a id="a938623c35e32110a5bea33fb0cadf248"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a938623c35e32110a5bea33fb0cadf248">RenderViewTransform</a> = true</td></tr>
 <tr class="memdesc:a938623c35e32110a5bea33fb0cadf248"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the sprite's render view will be transformed based on the sprite's current transform, else it will use the default view. <br /></td></tr>
@@ -411,7 +415,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_v_group.html#af157774a90025a5cf35a3e3fec431455">VGroup</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_v_trail_area.html#a057095117e22a3dd85202e6014bfdc6b">VTrailArea</a>, and <a class="el" href="class_v3_d_scene.html#a1f79edc2c4416e6e1e86b5bc642ef8a1">V3DScene</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v3_d_scene.html#a1f79edc2c4416e6e1e86b5bc642ef8a1">V3DScene</a>, and <a class="el" href="class_v_trail_area.html#a057095117e22a3dd85202e6014bfdc6b">VTrailArea</a>.</p>
 
 </div>
 </div>
@@ -520,7 +524,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_v_group.html#ad450bfb3735d2f0f8ee4dba034aab1a1">VGroup</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_v_trail_area.html#ad3e42907adde46a21cde5a129c0f1d2e">VTrailArea</a>, and <a class="el" href="class_v3_d_scene.html#afa5fc701053604e24ef72172916f6459">V3DScene</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v3_d_scene.html#afa5fc701053604e24ef72172916f6459">V3DScene</a>, and <a class="el" href="class_v_trail_area.html#ad3e42907adde46a21cde5a129c0f1d2e">VTrailArea</a>.</p>
 
 </div>
 </div>

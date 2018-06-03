@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.1</span>
+   &#160;<span id="projectnumber">1.0.0.2</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -98,8 +98,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4569aedba6a1db6b5d67cd31d732f781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14a87fc03db916f2aefea25a43f736ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_multipass.html#a14a87fc03db916f2aefea25a43f736ec">EnableEffect</a> (unsigned int index, bool enable)</td></tr>
 <tr class="separator:a14a87fc03db916f2aefea25a43f736ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fabc20eafbf6029eaca377362b59289"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_multipass.html#a1fabc20eafbf6029eaca377362b59289">Apply</a> (const sf::RenderTexture &amp;input, sf::RenderTarget &amp;output)</td></tr>
-<tr class="separator:a1fabc20eafbf6029eaca377362b59289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00ba18012151f0a82bf94b3108825385"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_multipass.html#a00ba18012151f0a82bf94b3108825385">Apply</a> (const sf::Texture &amp;input, sf::RenderTarget &amp;output)</td></tr>
+<tr class="separator:a00ba18012151f0a82bf94b3108825385"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f5df680f8a72ec6b45f962566ce3406"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_multipass.html#a6f5df680f8a72ec6b45f962566ce3406">Update</a> (float dt)</td></tr>
 <tr class="separator:a6f5df680f8a72ec6b45f962566ce3406"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -113,10 +113,10 @@ std::vector&lt; <a class="el" href="class_v_post_effect_base.html">VPostEffectBa
 std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_multipass.html#ac09b57cfbf958f44c59e723c517a78a6">enabled</a></td></tr>
 <tr class="memdesc:ac09b57cfbf958f44c59e723c517a78a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">List to determine which post effects are enabled. <br /></td></tr>
 <tr class="separator:ac09b57cfbf958f44c59e723c517a78a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac272648f6ebf447f0d59ddf9dff7fd5d"><td class="memItemLeft" align="right" valign="top"><a id="ac272648f6ebf447f0d59ddf9dff7fd5d"></a>
-std::vector&lt; sf::RenderTexture * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_multipass.html#ac272648f6ebf447f0d59ddf9dff7fd5d">renderTextures</a></td></tr>
-<tr class="memdesc:ac272648f6ebf447f0d59ddf9dff7fd5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of render textures to apply post effects to. <br /></td></tr>
-<tr class="separator:ac272648f6ebf447f0d59ddf9dff7fd5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa574b46ab67cdf6c68279b7ba07e17c"><td class="memItemLeft" align="right" valign="top"><a id="aaa574b46ab67cdf6c68279b7ba07e17c"></a>
+std::vector&lt; std::unique_ptr&lt; sf::RenderTexture &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_multipass.html#aaa574b46ab67cdf6c68279b7ba07e17c">renderTextures</a></td></tr>
+<tr class="memdesc:aaa574b46ab67cdf6c68279b7ba07e17c"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of render textures to apply post effects to. <br /></td></tr>
+<tr class="separator:aaa574b46ab67cdf6c68279b7ba07e17c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a497bbf0bee10517c44025112bff89067"><td class="memItemLeft" align="right" valign="top"><a id="a497bbf0bee10517c44025112bff89067"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_multipass.html#a497bbf0bee10517c44025112bff89067">maxSize</a> = 0</td></tr>
 <tr class="memdesc:a497bbf0bee10517c44025112bff89067"><td class="mdescLeft">&#160;</td><td class="mdescRight">The fixed size of post process effects. <br /></td></tr>
@@ -130,8 +130,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_static_methods_class_v_post_effect_base"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_class_v_post_effect_base')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="class_v_post_effect_base.html">VPostEffectBase</a></td></tr>
 <tr class="memitem:a019b8a7e3ed678c2853e473657d024e3 inherit pro_static_methods_class_v_post_effect_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_base.html#a019b8a7e3ed678c2853e473657d024e3">applyShader</a> (const sf::Shader &amp;shader, sf::RenderTarget &amp;output)</td></tr>
 <tr class="separator:a019b8a7e3ed678c2853e473657d024e3 inherit pro_static_methods_class_v_post_effect_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a293fd22cc6965637208e10cb647bc507 inherit pro_static_methods_class_v_post_effect_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_base.html#a293fd22cc6965637208e10cb647bc507">passThrough</a> (const sf::RenderTexture &amp;input, sf::RenderTarget &amp;output)</td></tr>
-<tr class="separator:a293fd22cc6965637208e10cb647bc507 inherit pro_static_methods_class_v_post_effect_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a169e37362a75497d8229b59ffb130e49 inherit pro_static_methods_class_v_post_effect_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_post_effect_base.html#a169e37362a75497d8229b59ffb130e49">passThrough</a> (const sf::Texture &amp;input, sf::RenderTarget &amp;output)</td></tr>
+<tr class="separator:a169e37362a75497d8229b59ffb130e49 inherit pro_static_methods_class_v_post_effect_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Special class that allows the application of multiple Post Effects, and enable/disable specific ones at runtime. </p>
@@ -185,8 +185,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a1fabc20eafbf6029eaca377362b59289"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fabc20eafbf6029eaca377362b59289">&#9670;&nbsp;</a></span>Apply()</h2>
+<a id="a00ba18012151f0a82bf94b3108825385"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00ba18012151f0a82bf94b3108825385">&#9670;&nbsp;</a></span>Apply()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,7 +197,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">virtual void VPostEffectMultipass::Apply </td>
           <td>(</td>
-          <td class="paramtype">const sf::RenderTexture &amp;&#160;</td>
+          <td class="paramtype">const sf::Texture &amp;&#160;</td>
           <td class="paramname"><em>input</em>, </td>
         </tr>
         <tr>
@@ -226,7 +226,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_v_post_effect_base.html#a0977f58448892fcb529f2f537f5c9b34">VPostEffectBase</a>.</p>
+<p>Implements <a class="el" href="class_v_post_effect_base.html#a903ccb40e14ae1659afcdf2e8a9346b9">VPostEffectBase</a>.</p>
 
 </div>
 </div>
