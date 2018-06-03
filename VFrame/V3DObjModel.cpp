@@ -205,26 +205,26 @@ bool V3DObjModel::LoadModelData(const char* filename)
 			if (vb.size() > 0)
 			{
 				md.triangleCount = vb.size() / (3 + 3 + 4 + 2) / 3; // 3:vtx, 3:normal, 3:col, 2:texcoord
-				glGenVertexArrays(1, &md.vao);
-				glBindVertexArray(md.vao);
-				glGenBuffers(1, &md.vb);
+				glCheck(glGenVertexArrays(1, &md.vao));
+				glCheck(glBindVertexArray(md.vao));
+				glCheck(glGenBuffers(1, &md.vb));
 
 				auto stride = (3 + 3 + 4 + 2) * sizeof(float);
 				auto normalOffset = 3 * sizeof(float);
 				auto colorOffset = normalOffset + (3 * sizeof(float));
 				auto texCoordOffset = colorOffset + (4 * sizeof(float));
 
-				glBindBuffer(GL_ARRAY_BUFFER, md.vb);
-				glBufferData(GL_ARRAY_BUFFER, md.triangleCount * 3 * stride, vb.data(), GL_STATIC_DRAW);
-				glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Position));
-				glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Position), 3, GL_FLOAT, GL_FALSE, stride, 0);
-				glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Normal));
-				glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Normal), 3, GL_FLOAT, GL_TRUE, stride, (void*)normalOffset);
-				glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Color));
-				glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Color), 4, GL_FLOAT, GL_FALSE, stride, (void*)colorOffset);
-				glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::TexCoord));
-				glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::TexCoord), 2, GL_FLOAT, GL_FALSE, stride, (void*)texCoordOffset);
-				glBindVertexArray(0);
+				glCheck(glBindBuffer(GL_ARRAY_BUFFER, md.vb));
+				glCheck(glBufferData(GL_ARRAY_BUFFER, md.triangleCount * 3 * stride, vb.data(), GL_STATIC_DRAW));
+				glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Position)));
+				glCheck(glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Position), 3, GL_FLOAT, GL_FALSE, stride, 0));
+				glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Normal)));
+				glCheck(glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Normal), 3, GL_FLOAT, GL_TRUE, stride, (void*)normalOffset));
+				glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Color)));
+				glCheck(glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Color), 4, GL_FLOAT, GL_FALSE, stride, (void*)colorOffset));
+				glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::TexCoord)));
+				glCheck(glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::TexCoord), 2, GL_FLOAT, GL_FALSE, stride, (void*)texCoordOffset));
+				glCheck(glBindVertexArray(0));
 			}
 
 			// OpenGL viewer does not support texturing with per-face material.
@@ -311,8 +311,8 @@ void V3DObjModel::Destroy()
 
 	for (unsigned int i = 0; i < modelData.size(); i++)
 	{
-		glDeleteBuffers(1, &modelData[i].vb);
-		glDeleteVertexArrays(1, &modelData[i].vao);
+		glCheck(glDeleteBuffers(1, &modelData[i].vb));
+		glCheck(glDeleteVertexArrays(1, &modelData[i].vao));
 	}
 
 	modelData.clear();
@@ -336,7 +336,7 @@ void V3DObjModel::Draw(sf::RenderTarget& RenderTarget)
 			//Set texture
 			std::string diffuse_texname = mat.diffuse_texname;
 			if (textures.find(diffuse_texname) == textures.end())
-				glBindTexture(GL_TEXTURE_2D, V3DModel::DefaultTexture);
+				glCheck(glBindTexture(GL_TEXTURE_2D, V3DModel::DefaultTexture));
 			else
 				sf::Texture::bind(&textures[diffuse_texname]);
 
@@ -349,11 +349,11 @@ void V3DObjModel::Draw(sf::RenderTarget& RenderTarget)
 		}
 
 		// Draw the model
-		glBindVertexArray(md.vao);
-		glDrawArrays(GL_TRIANGLES, 0, 3 * md.triangleCount);
+		glCheck(glBindVertexArray(md.vao));
+		glCheck(glDrawArrays(GL_TRIANGLES, 0, 3 * md.triangleCount));
 
-		glBindVertexArray(0);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		glCheck(glBindVertexArray(0));
+		glCheck(glBindTexture(GL_TEXTURE_2D, 0));
 	}
 }
 #endif

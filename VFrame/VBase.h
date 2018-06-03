@@ -148,4 +148,14 @@ public:
 	* Helper function that clears out the command line/terminal.
 	*/
 	static void VClearLog();
+
+#ifndef VFRAME_NO_3D
+#ifdef _DEBUG
+#define glCheck(expr) do { expr; VBase::VCheckGLError(__FILE__, __LINE__, #expr); } while (false)
+	static void VCheckGLError(const char* file, unsigned int line, const char* expression);
+#else
+#define glCheck(expr) (expr)
+#endif
+
+#endif
 };

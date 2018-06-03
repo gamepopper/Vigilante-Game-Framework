@@ -132,30 +132,30 @@ void V3DLightShader::Update()
 		{
 			if (Lights[i].get() == nullptr)
 			{
-				glUniform1i(loc, 0);
+				glCheck(glUniform1i(loc, 0));
 				continue;
 			}
 
-			glUniform1i(loc, Lights[i]->Enabled ? 1 : 0);
-			glUniform1i(glGetUniformLocation(GetProgram(), ("lights[" + index + "].type").c_str()),
-				static_cast<GLint>(Lights[i]->Type));
-			glUniform3f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].pos").c_str()),
-				Lights[i]->Position.x, Lights[i]->Position.y, Lights[i]->Position.z);
-			glUniform3f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].dir").c_str()),
-				Lights[i]->Dir.x, Lights[i]->Dir.y, Lights[i]->Dir.z);
-			glUniform3f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].tint").c_str()),
-				Lights[i]->Tint.x, Lights[i]->Tint.y, Lights[i]->Tint.z);
-			glUniform1f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].att").c_str()),
-				Lights[i]->Attenuation);
-			glUniform1f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].cutOff").c_str()),
-				Lights[i]->CutOff);
-			glUniform1f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].ambientCo").c_str()),
-				Lights[i]->Coefficient);
+			glCheck(glUniform1i(loc, Lights[i]->Enabled ? 1 : 0));
+			glCheck(glUniform1i(glGetUniformLocation(GetProgram(), ("lights[" + index + "].type").c_str()),
+				static_cast<GLint>(Lights[i]->Type)));
+			glCheck(glUniform3f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].pos").c_str()),
+				Lights[i]->Position.x, Lights[i]->Position.y, Lights[i]->Position.z));
+			glCheck(glUniform3f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].dir").c_str()),
+				Lights[i]->Dir.x, Lights[i]->Dir.y, Lights[i]->Dir.z));
+			glCheck(glUniform3f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].tint").c_str()),
+				Lights[i]->Tint.x, Lights[i]->Tint.y, Lights[i]->Tint.z));
+			glCheck(glUniform1f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].att").c_str()),
+				Lights[i]->Attenuation));
+			glCheck(glUniform1f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].cutOff").c_str()),
+				Lights[i]->CutOff));
+			glCheck(glUniform1f(glGetUniformLocation(GetProgram(), ("lights[" + index + "].ambientCo").c_str()),
+				Lights[i]->Coefficient));
 		}
 	}
 
 	GLint loc = glGetUniformLocation(GetProgram(), "camPos");
 	if (loc >= 0)
-		glUniform3f(loc, cam->Position.x, cam->Position.y, cam->Position.z);
+		glCheck(glUniform3f(loc, cam->Position.x, cam->Position.y, cam->Position.z));
 }
 #endif

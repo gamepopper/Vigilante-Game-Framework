@@ -45,16 +45,19 @@ V3DShader::~V3DShader()
 {
 	for (unsigned int i = 0; i < static_cast<unsigned int>(ShaderType::Count); i++)
 	{
-		glDetachShader(program, shader[i]);
-		glDeleteShader(shader[i]);
+		if (shader[i] > 0)
+		{
+			glCheck(glDetachShader(program, shader[i]));
+			glCheck(glDeleteShader(shader[i]));
+		}
 	}
 
-	glDeleteProgram(program);
+	glCheck(glDeleteProgram(program));
 }
 
 void V3DShader::Bind() const
 {
-	glUseProgram(program);
+	glCheck(glUseProgram(program));
 }
 
 void V3DShader::LoadFromFile(const sf::String& filename, ShaderType type)
@@ -90,8 +93,8 @@ void V3DShader::LoadFromMemory(const std::string& shaderData, ShaderType type)
 
 	if (shader[static_cast<unsigned int>(type)])
 	{
-		glDetachShader(program, shader[static_cast<unsigned int>(type)]);
-		glDeleteShader(shader[static_cast<unsigned int>(type)]);
+		glCheck(glDetachShader(program, shader[static_cast<unsigned int>(type)]));
+		glCheck(glDeleteShader(shader[static_cast<unsigned int>(type)]));
 	}
 
 	switch (type)
@@ -115,15 +118,15 @@ void V3DShader::LoadFromMemory(const std::string& shaderData, ShaderType type)
 		program = glCreateProgram();
 	}
 
-	glAttachShader(program, shader[static_cast<unsigned int>(type)]);
-	glBindAttribLocation(program, static_cast<GLuint>(V3DVertexAttribute::Position), "position");
-	glBindAttribLocation(program, static_cast<GLuint>(V3DVertexAttribute::Normal), "normal");
-	glBindAttribLocation(program, static_cast<GLuint>(V3DVertexAttribute::Color), "color");
-	glBindAttribLocation(program, static_cast<GLuint>(V3DVertexAttribute::TexCoord), "texCoord");
+	glCheck(glAttachShader(program, shader[static_cast<unsigned int>(type)]));
+	glCheck(glBindAttribLocation(program, static_cast<GLuint>(V3DVertexAttribute::Position), "position"));
+	glCheck(glBindAttribLocation(program, static_cast<GLuint>(V3DVertexAttribute::Normal), "normal"));
+	glCheck(glBindAttribLocation(program, static_cast<GLuint>(V3DVertexAttribute::Color), "color"));
+	glCheck(glBindAttribLocation(program, static_cast<GLuint>(V3DVertexAttribute::TexCoord), "texCoord"));
 
-	glLinkProgram(program);
+	glCheck(glLinkProgram(program));
 	checkError(program, GL_LINK_STATUS, true, "Shader link error:");
-	glValidateProgram(program);
+	glCheck(glValidateProgram(program));
 	checkError(program, GL_VALIDATE_STATUS, true, "Invalid shader:");
 
 	uniform[static_cast<unsigned int>(UniformType::TransformPVM)] = glGetUniformLocation(program, "pvm");
@@ -147,7 +150,7 @@ void V3DShader::LoadFromMemory(const std::string& vertexShader, const std::strin
 
 void V3DShader::SetAttribute(V3DVertexAttribute Attribute, const std::string& name)
 {
-	glBindAttribLocation(program, static_cast<GLuint>(Attribute), name.c_str());
+	glCheck(glBindAttribLocation(program, static_cast<GLuint>(Attribute), name.c_str()));
 }
 
 void V3DShader::Update()
@@ -164,18 +167,18 @@ void V3DShader::UpdateUniform(UniformType type, void* data)
 	switch (type)
 	{
 	case UniformType::TransformPVM:
-		glUniformMatrix4fv(uniform[static_cast<int>(type)], 1, GL_FALSE, static_cast<GLfloat*>(data));
+		glCheck(glUniformMatrix4fv((unsigned int)uniform[static_cast<int>(type)], 1, GL_FALSE, static_cast<GLfloat*>(data)));
 		break;
 	case UniformType::TransformVM:
-		glUniformMatrix4fv(uniform[static_cast<int>(type)], 1, GL_FALSE, static_cast<GLfloat*>(data));
+		glCheck(glUniformMatrix4fv((unsigned int)uniform[static_cast<int>(type)], 1, GL_FALSE, static_cast<GLfloat*>(data)));
 		break;
 	case UniformType::TransformM:
-		glUniformMatrix4fv(uniform[static_cast<int>(type)], 1, GL_FALSE, static_cast<GLfloat*>(data));
+		glCheck(glUniformMatrix4fv((unsigned int)uniform[static_cast<int>(type)], 1, GL_FALSE, static_cast<GLfloat*>(data)));
 		break;
 	case UniformType::Material:
 		V3DMaterial* mat = static_cast<V3DMaterial*>(data);
-		glUniform3f(uniform[static_cast<int>(type)], mat->Specular.x, mat->Specular.y, mat->Specular.z);
-		glUniform1f(glGetUniformLocation(program, "material.shininess"), mat->Shininess);
+		glCheck(glUniform3f((unsigned int)uniform[static_cast<int>(type)], mat->Specular.x, mat->Specular.y, mat->Specular.z));
+		glCheck(glUniform1f(glGetUniformLocation(program, "material.shininess"), mat->Shininess));
 		break;
 	}
 }
@@ -213,15 +216,15 @@ void V3DShader::checkError(GLuint l_shader, GLuint l_flag, bool l_program, const
 {
 	GLint success = 0;
 	GLchar error[1024] = { 0 };
-	if (l_program) { glGetProgramiv(l_shader, l_flag, &success); }
-	else { glGetShaderiv(l_shader, l_flag, &success); }
+	if (l_program) { glCheck(glGetProgramiv(l_shader, l_flag, &success)); }
+	else { glCheck(glGetShaderiv(l_shader, l_flag, &success)); }
 
 	if (success) { return; }
 	if (l_program) {
-		glGetProgramInfoLog(l_shader, sizeof(error), nullptr, error);
+		glCheck(glGetProgramInfoLog(l_shader, sizeof(error), nullptr, error));
 	}
 	else {
-		glGetShaderInfoLog(l_shader, sizeof(error), nullptr, error);
+		glCheck(glGetShaderInfoLog(l_shader, sizeof(error), nullptr, error));
 	}
 
 	VBase::VLogError(l_errorMsg.c_str());
@@ -238,8 +241,8 @@ GLuint V3DShader::buildShader(const std::string& l_src, unsigned int l_type)
 	GLint lengths[1];
 	sources[0] = l_src.c_str();
 	lengths[0] = l_src.length();
-	glShaderSource(shaderID, 1, sources, lengths);
-	glCompileShader(shaderID);
+	glCheck(glShaderSource(shaderID, 1, sources, lengths));
+	glCheck(glCompileShader(shaderID));
 	checkError(shaderID, GL_COMPILE_STATUS, false, "Shader compile error: ");
 	return shaderID;
 }

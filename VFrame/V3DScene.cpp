@@ -7,17 +7,17 @@
 
 #pragma comment(lib, "glu32.lib")
 
-V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize)
+V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize), contextSettings(settings)
 {
 	postProcessTex.create(width, height);
-	renderTex.create(width, height, true);
+	renderTex.create(width, height, settings);
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 }
 
-V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize) : VRenderGroup(position, size, maxSize)
+V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(position, size, maxSize), contextSettings(settings)
 {
 	postProcessTex.create(size.x, size.y);
-	renderTex.create(size.x, size.y, true);
+	renderTex.create(size.x, size.y, settings);
 	Sprite->Size = sf::Vector2f(size);
 }
 
@@ -36,7 +36,7 @@ void V3DScene::Destroy()
 void V3DScene::Resize(int width, int height)
 {
 	postProcessTex.create(width, height);
-	renderTex.create(width, height, true);
+	renderTex.create(width, height, contextSettings);
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 }
 
@@ -48,15 +48,15 @@ void V3DScene::Update(float dt)
 const sf::Texture& V3DScene::GetTexture()
 {
 	sf::Texture::getMaximumSize();
+
 	renderTex.setActive(true);
-
 	renderTex.clear(BackgroundTint);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0, renderTex.getSize().x, renderTex.getSize().y);
+	glCheck(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+	glCheck(glViewport(0, 0, renderTex.getSize().x, renderTex.getSize().y));
 
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	glCheck(glEnable(GL_DEPTH_TEST));
+	glCheck(glEnable(GL_CULL_FACE));
+	glCheck(glCullFace(GL_BACK));
 
 	Shader->Bind();
 	Shader->Update();
@@ -83,22 +83,22 @@ void V3DScene::Draw(sf::RenderTarget& RenderTarget)
 	if (!visible)
 		return;
 
-	GetTexture();
+	sf::Texture texture = GetTexture();
 
 	if (PostEffect != nullptr && VPostEffectBase::isSupported())
 	{
 		postProcessTex.clear(sf::Color::Transparent);
-		PostEffect->Apply(renderTex, postProcessTex);
+		PostEffect->Apply(renderTex.getTexture(), postProcessTex);
 		postProcessTex.display();
 
 		updateTexture(postProcessTex.getTexture());
 	}
 	else
 	{
-		updateTexture(renderTex.getTexture());
+		updateTexture(texture);
 	}
 
-	Sprite->Draw(RenderTarget);
 	RenderTarget.resetGLStates();
+	Sprite->Draw(RenderTarget);
 }
 #endif

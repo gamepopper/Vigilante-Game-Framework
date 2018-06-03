@@ -56,36 +56,36 @@ bool V3DModel::LoadModelData(const V3DVertexArray& vertexArray, const std::vecto
 
 	if (vertexVBO)
 	{
-		glDeleteBuffers(1, &vertexVBO);
-		glDeleteVertexArrays(1, &vao);
+		glCheck(glDeleteBuffers(1, &vertexVBO));
+		glCheck(glDeleteVertexArrays(1, &vao));
 	}
 
-	glGenVertexArrays(1, &vao); 
-	glBindVertexArray(vao); 
-	glGenBuffers(1, &vertexVBO); 
+	glCheck(glGenVertexArrays(1, &vao));
+	glCheck(glBindVertexArray(vao));
+	glCheck(glGenBuffers(1, &vertexVBO));
 
-	glBindBuffer(GL_ARRAY_BUFFER, vertexVBO); 
-	glBufferData(GL_ARRAY_BUFFER, drawCount * stride, vertexArray.data(), GL_STATIC_DRAW); 
-	glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Position)); 
-	glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Position),	3, GL_FLOAT, GL_FALSE,	stride, 0); 
-	glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Normal));
-	glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Normal),		3, GL_FLOAT, GL_TRUE,	stride, (void*)normalOffset);
-	glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Color));
-	glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Color),		4, GL_FLOAT, GL_FALSE,	stride, (void*)colorOffset);
-	glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::TexCoord));
-	glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::TexCoord),	2, GL_FLOAT, GL_FALSE,	stride, (void*)texCoordOffset);
+	glCheck(glBindBuffer(GL_ARRAY_BUFFER, vertexVBO));
+	glCheck(glBufferData(GL_ARRAY_BUFFER, drawCount * stride, vertexArray.data(), GL_STATIC_DRAW));
+	glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Position)));
+	glCheck(glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Position),	3, GL_FLOAT, GL_FALSE,	stride, 0));
+	glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Normal)));
+	glCheck(glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Normal),		3, GL_FLOAT, GL_TRUE,	stride, (void*)normalOffset));
+	glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Color)));
+	glCheck(glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Color),		4, GL_FLOAT, GL_FALSE,	stride, (void*)colorOffset));
+	glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::TexCoord)));
+	glCheck(glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::TexCoord),	2, GL_FLOAT, GL_FALSE,	stride, (void*)texCoordOffset));
 
 	if (indexArray.size() > 0)
 	{
 		if (indexVBO)
-			glDeleteBuffers(1, &indexVBO);
+			glCheck(glDeleteBuffers(1, &indexVBO));
 
-		glGenBuffers(1, &indexVBO);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, drawCount * sizeof(indexArray[0]), indexArray.data(), GL_STATIC_DRAW);
+		glCheck(glGenBuffers(1, &indexVBO));
+		glCheck(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO));
+		glCheck(glBufferData(GL_ELEMENT_ARRAY_BUFFER, drawCount * sizeof(indexArray[0]), indexArray.data(), GL_STATIC_DRAW));
 	}
 
-	glBindVertexArray(0);
+	glCheck(glBindVertexArray(0));
 	return true;
 }
 
@@ -122,9 +122,9 @@ void V3DModel::UpdateShader(V3DShader* shader, V3DCamera* camera)
 void V3DModel::Destroy()
 {
 	VSUPERCLASS::Destroy();
-	glDeleteBuffers(1, &vertexVBO);
-	glDeleteBuffers(1, &indexVBO);
-	glDeleteVertexArrays(1, &vao);
+	glCheck(glDeleteBuffers(1, &vertexVBO));
+	glCheck(glDeleteBuffers(1, &indexVBO));
+	glCheck(glDeleteVertexArrays(1, &vao));
 
 	delete Material;
 }
@@ -132,39 +132,39 @@ void V3DModel::Destroy()
 void V3DModel::Draw(sf::RenderTarget& RenderTarget)
 {
 	if (texture.getSize().x == 0 || texture.getSize().y == 0)
-		glBindTexture(GL_TEXTURE_2D, DefaultTexture);
+		glCheck(glBindTexture(GL_TEXTURE_2D, DefaultTexture));
 	else
 		sf::Texture::bind(&texture);
 
-	glBindVertexArray(vao);
+	glCheck(glBindVertexArray(vao));
 
 	if (indexVBO)
-		glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0);
+		glCheck(glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0));
 	else
-		glDrawArrays(GL_TRIANGLES, 0, drawCount);
+		glCheck(glDrawArrays(GL_TRIANGLES, 0, drawCount));
 
-	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glCheck(glBindVertexArray(0));
+	glCheck(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
 void V3DModel::GenerateDefaultTexture()
 {
 	if (DefaultTexture == 0)
 	{
-		glGenTextures(1, &DefaultTexture);
+		glCheck(glGenTextures(1, &DefaultTexture));
 
 		GLubyte data[] = { 255, 255, 255, 255 };
 
-		glBindTexture(GL_TEXTURE_2D, DefaultTexture);
+		glCheck(glBindTexture(GL_TEXTURE_2D, DefaultTexture));
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, data));
 
-		glBindTexture(GL_TEXTURE_2D, 0);
+		glCheck(glBindTexture(GL_TEXTURE_2D, 0));
 	}
 }
 #endif

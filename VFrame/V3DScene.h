@@ -35,6 +35,7 @@
 #ifndef VFRAME_NO_3D
 #include "VRenderGroup.h"
 #include <SFML/OpenGL.hpp>
+#include <SFML/Window/ContextSettings.hpp>
 #include "V3DCamera.h"
 #include <array>
 
@@ -42,6 +43,9 @@ class V3DShader;
 ///A special VRenderGroup for Rendering 3D scenes.
 class V3DScene : public VRenderGroup
 {
+private:
+	sf::ContextSettings contextSettings;
+
 public:
 	///Used to call parent class functions when they are overrided in class.
 	typedef VRenderGroup VSUPERCLASS;
@@ -53,14 +57,14 @@ public:
 	* @param height Height of the sprite (also sets the height of the render area).
 	* @param maxSize The fixed length of the group. If 0, then the VGroup has no limit in size.
 	*/
-	V3DScene(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize = 0);
+	V3DScene(float x, float y, unsigned int width, unsigned int height, sf::ContextSettings& settings = sf::ContextSettings(), unsigned int maxSize = 0);
 	
 	/**
 	* @param position Position of the sprite.
 	* @param size Size of the sprite (also sets the size of the render area).
 	* @param maxSize The fixed length of the group. If 0, then the VGroup has no limit in size.
 	*/
-	V3DScene(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize = 0);
+	V3DScene(sf::Vector2f position, sf::Vector2u size, sf::ContextSettings& settings = sf::ContextSettings(), unsigned int maxSize = 0);
 
 	///OpenGL Shader for the entire scene.
 	std::unique_ptr<V3DShader> Shader;
