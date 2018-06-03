@@ -56,15 +56,18 @@ public:
 	typedef VGroup VSUPERCLASS;
 
 	///The sprite that the group will render to. Refer to this if you want to transform the render output.
-	VSprite* Sprite = nullptr;
+	std::unique_ptr<VSprite> Sprite = nullptr;
 	///The background colour the sprite will have.
 	sf::Color BackgroundTint = sf::Color::Transparent;
 	///Post Process (Shader) Effect to apply to the sprite.
-	VPostEffectBase* PostEffect = nullptr;
+	std::unique_ptr<VPostEffectBase> PostEffect = nullptr;
 	///If true, the sprite's render view will be transformed based on the sprite's current transform, else it will use the default view.
 	bool RenderViewTransform = true;
 	///If true, the content data would also be rendered outside of the sprite area. Used if you want an effect to apply to a specific area.
 	bool RenderOutside = false;
+
+	///Default Constructor for VRenderGroup
+	VRenderGroup(unsigned int maxSize = 0);
 
 	/**
 	* @param x X position of the sprite.

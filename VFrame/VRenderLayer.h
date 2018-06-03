@@ -37,6 +37,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 
+#include <memory>
+
 ///Processes group of objects to a sprite. Unlike the VRenderGroup, the sprite cannot be moved and will always render to the size of the screen.
 class VRenderLayer : public VGroup
 {
@@ -55,7 +57,7 @@ public:
 	///RenderState for the layer.
 	sf::RenderStates RenderState;
 	///Post Effect to apply to the layer.
-	VPostEffectBase* PostEffect = nullptr;
+	std::unique_ptr<VPostEffectBase> PostEffect = nullptr;
 
 	///@param maxSize The fixed size of the layer. 0 assumes the size is not fixed.
 	VRenderLayer(unsigned int maxSize = 0);

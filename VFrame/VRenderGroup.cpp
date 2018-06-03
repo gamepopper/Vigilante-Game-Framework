@@ -15,26 +15,32 @@ public:
 	}
 };
 
+VRenderGroup::VRenderGroup(unsigned int maxSize) : VGroup(maxSize)
+{
+	Sprite = std::make_unique<VRenderSprite>(0.0f, 0.0f);
+	type = RENDERGROUP;
+}
+
 VRenderGroup::VRenderGroup(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize) : VGroup(maxSize)
 {
-	Sprite = new VRenderSprite(x, y);
-	renderTex.create(width, height);
-	postProcessTex.create(width, height);
+	Sprite = std::make_unique<VRenderSprite>(x, y);
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
-
 	Sprite->Radius = Sprite->Size.x < Sprite->Size.y ? Sprite->Size.x / 2 : Sprite->Size.y / 2;
+
+	postProcessTex.create(width, height);
+	renderTex.create(width, height);
 
 	type = RENDERGROUP;
 }
 
 VRenderGroup::VRenderGroup(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize) : VGroup(maxSize)
 {
-	Sprite = new VRenderSprite(position);
-	renderTex.create(size.x, size.y);
-	postProcessTex.create(size.x, size.y);
+	Sprite = std::make_unique<VRenderSprite>(position);
 	Sprite->Size = sf::Vector2f(size);
-
 	Sprite->Radius = Sprite->Size.x < Sprite->Size.y ? Sprite->Size.x / 2 : Sprite->Size.y / 2;
+
+	postProcessTex.create(size.x, size.y);
+	renderTex.create(size.x, size.y);
 
 	type = RENDERGROUP;
 }
@@ -55,14 +61,14 @@ void VRenderGroup::updateTransform()
 
 void VRenderGroup::updateTexture(const sf::Texture& texture)
 {
-	VRenderSprite* render = dynamic_cast<VRenderSprite*>(Sprite);
+	VRenderSprite* render = dynamic_cast<VRenderSprite*>(Sprite.get());
 	render->SetTexture(texture);
 }
 
 void VRenderGroup::Resize(int width, int height)
 {
-	renderTex.create(width, height);
 	postProcessTex.create(width, height);
+	renderTex.create(width, height);
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 }
 
@@ -82,17 +88,8 @@ void VRenderGroup::Destroy()
 {
 	VSUPERCLASS::Destroy();
 
-	if (Sprite != nullptr)
-	{
-		delete Sprite;
-		Sprite = nullptr;
-	}
-
-	if (PostEffect != nullptr)
-	{
-		delete PostEffect;
-		PostEffect = nullptr;
-	}
+	Sprite = nullptr;
+	PostEffect = nullptr;
 }
 
 const sf::Texture& VRenderGroup::GetTexture()

@@ -10,12 +10,7 @@ VRenderLayer::VRenderLayer(unsigned int maxSize) : VGroup(maxSize)
 void VRenderLayer::Destroy()
 {
 	VSUPERCLASS::Destroy();
-
-	if (PostEffect != nullptr)
-	{
-		delete PostEffect;
-		PostEffect = nullptr;
-	}
+	PostEffect = nullptr;
 }
 
 void VRenderLayer::Update(float dt)
