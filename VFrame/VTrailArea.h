@@ -40,11 +40,8 @@ class VTrailArea : public VRenderGroup
 {
 private:
 	sf::Sprite trailSprite;
-	sf::RenderTexture trailTex;
-	sf::RenderTexture trailTex2;
-	sf::Clock swapTimer;
+	sf::Texture trailTexture;
 	sf::Clock fadeTimer;
-	float alphaTrack = 0;
 
 public:
 	///Used to call parent class functions when they are overrided in class.
