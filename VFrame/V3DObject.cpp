@@ -2,6 +2,8 @@
 #include "V3DObject.h"
 #include "VObject.h"
 
+#include <cmath>
+
 void V3DObject::Reset(sf::Vector3f newPos)
 {
 	Position = newPos;

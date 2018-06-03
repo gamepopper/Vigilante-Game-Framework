@@ -38,6 +38,7 @@ void VTimeManager::AddTimer(VTimer* timer)
 	timers.push_back(timer);
 }
 
+#include <algorithm>
 void VTimeManager::RemoveTimer(VTimer* timer)
 {
 	std::vector<VTimer*>::iterator i = std::find(timers.begin(), timers.end(), timer);
