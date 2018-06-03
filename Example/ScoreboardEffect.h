@@ -8,7 +8,7 @@ public:
 	ScoreboardEffect();
 	~ScoreboardEffect() = default;
 
-	virtual void Apply(const sf::RenderTexture& input, sf::RenderTarget& output);
+	virtual void Apply(const sf::Texture& input, sf::RenderTarget& output);
 	void SetPointSize(float size);
 	void SetPointAmount(unsigned int amount);
 	void SetBlur(bool value, float amount);
@@ -17,10 +17,10 @@ private:
 	typedef std::array<sf::RenderTexture, 2> RenderArray;
 
 	void prepareTextures(sf::Vector2u size);
-	void downsample(const sf::RenderTexture& input, sf::RenderTexture& output);
-	void mask(const sf::RenderTexture& source, sf::RenderTarget& target);
+	void downsample(const sf::Texture& input, sf::RenderTarget& output);
+	void mask(const sf::Texture& source, sf::RenderTarget& target);
 	void blurMultipass(RenderArray& renderTextures);
-	void blur(const sf::RenderTexture& input, sf::RenderTexture& output, sf::Vector2f offsetFactor);
+	void blur(const sf::Texture& input, sf::RenderTarget& output, sf::Vector2f offsetFactor);
 
 	unsigned int pointAmount;
 	bool blurEffect;

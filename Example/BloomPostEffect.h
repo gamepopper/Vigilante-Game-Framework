@@ -8,7 +8,7 @@ public:
 	BloomPostEffect();
 	~BloomPostEffect() = default;
 
-	virtual void Apply(const sf::RenderTexture& input, sf::RenderTarget& output);
+	virtual void Apply(const sf::Texture& input, sf::RenderTarget& output);
 	void SetBloomFactor(float factor);
 
 private:
@@ -16,11 +16,11 @@ private:
 
 	void	prepareTextures(sf::Vector2u size);
 
-	void	filterBright(const sf::RenderTexture& input, sf::RenderTexture& output);
+	void	filterBright(const sf::Texture& input, sf::RenderTarget& output);
 	void	blurMultipass(RenderArray& renderTextures);
-	void	blur(const sf::RenderTexture& input, sf::RenderTexture& output, sf::Vector2f offsetFactor);
-	void	downsample(const sf::RenderTexture& input, sf::RenderTexture& output);
-	void	add(const sf::RenderTexture& source, const sf::RenderTexture& bloom, sf::RenderTarget& target);
+	void	blur(const sf::Texture& input, sf::RenderTarget& output, sf::Vector2f offsetFactor);
+	void	downsample(const sf::Texture& input, sf::RenderTarget& output);
+	void	add(const sf::Texture& source, const sf::Texture& bloom, sf::RenderTarget& target);
 
 	sf::Shader brightness;
 	sf::Shader downSample;

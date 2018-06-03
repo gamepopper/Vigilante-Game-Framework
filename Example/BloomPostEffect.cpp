@@ -10,21 +10,22 @@ BloomPostEffect::BloomPostEffect()
 	SetBloomFactor(1.2f);
 }
 
-void BloomPostEffect::Apply(const sf::RenderTexture& input, sf::RenderTarget& output)
+void BloomPostEffect::Apply(const sf::Texture& input, sf::RenderTarget& output)
 {
 	prepareTextures(input.getSize());
 
 	filterBright(input, mBrightnessTexture);
+	mBrightnessTexture.display();
 
-	downsample(mBrightnessTexture, mFirstPassTextures[0]);
+	downsample(mBrightnessTexture.getTexture(), mFirstPassTextures[0]);
 	blurMultipass(mFirstPassTextures);
 
-	downsample(mFirstPassTextures[0], mSecondPassTextures[0]);
+	downsample(mFirstPassTextures[0].getTexture(), mSecondPassTextures[0]);
 	blurMultipass(mSecondPassTextures);
 
-	add(mFirstPassTextures[0], mSecondPassTextures[0], mFirstPassTextures[1]);
+	add(mFirstPassTextures[0].getTexture(), mSecondPassTextures[0].getTexture(), mFirstPassTextures[1]);
 	mFirstPassTextures[1].display();
-	add(input, mFirstPassTextures[1], output);
+	add(input, mFirstPassTextures[1].getTexture(), output);
 }
 
 void BloomPostEffect::SetBloomFactor(float factor)
@@ -51,11 +52,10 @@ void BloomPostEffect::prepareTextures(sf::Vector2u size)
 	}
 }
 
-void BloomPostEffect::filterBright(const sf::RenderTexture& input, sf::RenderTexture& output)
+void BloomPostEffect::filterBright(const sf::Texture& input, sf::RenderTarget& output)
 {
-	brightness.setUniform("texture", input.getTexture());
+	brightness.setUniform("texture", input);
 	applyShader(brightness, output);
-	output.display();
 }
 
 void BloomPostEffect::blurMultipass(RenderArray& renderTextures)
@@ -64,30 +64,30 @@ void BloomPostEffect::blurMultipass(RenderArray& renderTextures)
 
 	for (std::size_t count = 0; count < 2; ++count)
 	{
-		blur(renderTextures[0], renderTextures[1], sf::Vector2f(0.f, 1.f / textureSize.y));
-		blur(renderTextures[1], renderTextures[0], sf::Vector2f(1.f / textureSize.x, 0.f));
+		blur(renderTextures[0].getTexture(), renderTextures[1], sf::Vector2f(0.f, 1.f / textureSize.y));
+		renderTextures[1].display();
+		blur(renderTextures[1].getTexture(), renderTextures[0], sf::Vector2f(1.f / textureSize.x, 0.f));
+		renderTextures[0].display();
 	}
 }
 
-void BloomPostEffect::blur(const sf::RenderTexture& input, sf::RenderTexture& output, sf::Vector2f offsetFactor)
+void BloomPostEffect::blur(const sf::Texture& input, sf::RenderTarget& output, sf::Vector2f offsetFactor)
 {
-	gaussianBlur.setUniform("texture", input.getTexture());
+	gaussianBlur.setUniform("texture", input);
 	gaussianBlur.setUniform("offsetFactor", offsetFactor);
 	applyShader(gaussianBlur, output);
-	output.display();
 }
 
-void BloomPostEffect::downsample(const sf::RenderTexture& input, sf::RenderTexture& output)
+void BloomPostEffect::downsample(const sf::Texture& input, sf::RenderTarget& output)
 {
-	downSample.setUniform("texture", input.getTexture());
+	downSample.setUniform("texture", input);
 	downSample.setUniform("textureSize", sf::Vector2f(input.getSize()));
 	applyShader(downSample, output);
-	output.display();
 }
 
-void BloomPostEffect::add(const sf::RenderTexture& source, const sf::RenderTexture& bloom, sf::RenderTarget& output)
+void BloomPostEffect::add(const sf::Texture& source, const sf::Texture& bloom, sf::RenderTarget& output)
 {
-	addition.setUniform("texture", source.getTexture());
-	addition.setUniform("other", bloom.getTexture());
+	addition.setUniform("texture", source);
+	addition.setUniform("other", bloom);
 	applyShader(addition, output);
 }

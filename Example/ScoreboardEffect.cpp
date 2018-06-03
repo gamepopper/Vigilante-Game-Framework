@@ -12,7 +12,7 @@ ScoreboardEffect::ScoreboardEffect()
 	SetBlur(false, 1.0f);
 }
 
-void ScoreboardEffect::Apply(const sf::RenderTexture& input, sf::RenderTarget& output)
+void ScoreboardEffect::Apply(const sf::Texture& input, sf::RenderTarget& output)
 {
 	prepareTextures(input.getSize());
 
@@ -20,15 +20,16 @@ void ScoreboardEffect::Apply(const sf::RenderTexture& input, sf::RenderTarget& o
 
 	if (blurEffect)
 	{
-		mask(mDownSampleTexture, mBlurPassTextures[0]);
+		mask(mDownSampleTexture.getTexture(), mBlurPassTextures[0]);
+		mBlurPassTextures[0].display();
 		blurMultipass(mBlurPassTextures);
-		passThrough(mBlurPassTextures[0], output);
+		passThrough(mBlurPassTextures[0].getTexture(), output);
 		mBlurPassTextures[0].clear(sf::Color::Transparent);
 		mBlurPassTextures[1].clear(sf::Color::Transparent);
 	}
 	else
 	{
-		mask(mDownSampleTexture, output);
+		mask(mDownSampleTexture.getTexture(), output);
 	}
 }
 
@@ -66,17 +67,16 @@ void ScoreboardEffect::prepareTextures(sf::Vector2u size)
 	}
 }
 
-void ScoreboardEffect::downsample(const sf::RenderTexture& input, sf::RenderTexture& output)
+void ScoreboardEffect::downsample(const sf::Texture& input, sf::RenderTarget& output)
 {
-	downSample.setUniform("texture", input.getTexture());
+	downSample.setUniform("texture", input);
 	downSample.setUniform("textureSize", sf::Vector2f(input.getSize()));
 	applyShader(downSample, output);
-	output.display();
 }
 
-void ScoreboardEffect::mask(const sf::RenderTexture& source, sf::RenderTarget& target)
+void ScoreboardEffect::mask(const sf::Texture& source, sf::RenderTarget& target)
 {
-	maskSample.setUniform("texture", source.getTexture());
+	maskSample.setUniform("texture", source);
 	maskSample.setUniform("screenDim", sf::Vector2f((float)VGlobal::p()->Width, (float)VGlobal::p()->Height));
 	applyShader(maskSample, target);
 }
@@ -87,15 +87,16 @@ void ScoreboardEffect::blurMultipass(RenderArray& renderTextures)
 
 	for (std::size_t count = 0; count < 2; ++count)
 	{
-		blur(renderTextures[0], renderTextures[1], sf::Vector2f(0.f, 1.f / textureSize.y));
-		blur(renderTextures[1], renderTextures[0], sf::Vector2f(1.f / textureSize.x, 0.f));
+		blur(renderTextures[0].getTexture(), renderTextures[1], sf::Vector2f(0.f, 1.f / textureSize.y));
+		renderTextures[1].display();
+		blur(renderTextures[1].getTexture(), renderTextures[0], sf::Vector2f(1.f / textureSize.x, 0.f));
+		renderTextures[0].display();
 	}
 }
 
-void ScoreboardEffect::blur(const sf::RenderTexture& input, sf::RenderTexture& output, sf::Vector2f offsetFactor)
+void ScoreboardEffect::blur(const sf::Texture& input, sf::RenderTarget& output, sf::Vector2f offsetFactor)
 {
-	gaussianBlur.setUniform("texture", input.getTexture());
+	gaussianBlur.setUniform("texture", input);
 	gaussianBlur.setUniform("offsetFactor", offsetFactor);
 	applyShader(gaussianBlur, output);
-	output.display();
 }
