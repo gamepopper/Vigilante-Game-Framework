@@ -55,7 +55,7 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 	else
 	{
 		postProcessTex.clear(sf::Color::Transparent);
-		PostEffect->Apply(renderTex, postProcessTex);
+		PostEffect->Apply(renderTex.getTexture(), postProcessTex);
 		postProcessTex.display();
 
 		sprite.setTexture(postProcessTex.getTexture());

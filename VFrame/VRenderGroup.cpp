@@ -132,7 +132,7 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 	if (PostEffect != nullptr && VPostEffectBase::isSupported())
 	{
 		postProcessTex.clear(sf::Color::Transparent);
-		PostEffect->Apply(renderTex, postProcessTex);
+		PostEffect->Apply(renderTex.getTexture(), postProcessTex);
 		postProcessTex.display();
 
 		updateTexture(postProcessTex.getTexture());

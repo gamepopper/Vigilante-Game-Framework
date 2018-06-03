@@ -20,7 +20,7 @@ void VPostEffectBase::applyShader(const sf::Shader& shader, sf::RenderTarget& ou
 	output.draw(vertices, states);
 }
 
-void VPostEffectBase::passThrough(const sf::RenderTexture& input, sf::RenderTarget& output)
+void VPostEffectBase::passThrough(const sf::Texture& input, sf::RenderTarget& output)
 {
 	const std::string fragment = \
 		"uniform sampler2D texture;" \
@@ -33,7 +33,7 @@ void VPostEffectBase::passThrough(const sf::RenderTexture& input, sf::RenderTarg
 	sf::Shader shader;
 	if (shader.loadFromMemory(fragment, sf::Shader::Fragment))
 	{
-		shader.setUniform("texture", input.getTexture());
+		shader.setUniform("texture", input);
 
 		sf::Vector2f outputSize = static_cast<sf::Vector2f>(output.getSize());
 
@@ -56,9 +56,9 @@ bool VPostEffectBase::isSupported()
 	return sf::Shader::isAvailable();
 }
 
-void VPostEffect::Apply(const sf::RenderTexture& input, sf::RenderTarget& output)
+void VPostEffect::Apply(const sf::Texture& input, sf::RenderTarget& output)
 {
-	shader.setUniform(sourceTextureName, input.getTexture());
+	shader.setUniform(sourceTextureName, input);
 	applyShader(shader, output);
 }
 
@@ -70,9 +70,8 @@ VPostEffectMultipass::VPostEffectMultipass(int MaxSize)
 	renderTextures.reserve(amount);
 	for (unsigned int i = 0; i < amount; i++)
 	{
-		sf::RenderTexture* renderTex = new sf::RenderTexture();
-		renderTex->create(VGlobal::p()->Width, VGlobal::p()->Height);
-		renderTextures.push_back(renderTex);
+		renderTextures.push_back(std::make_unique<sf::RenderTexture>());
+		renderTextures[i]->create(VGlobal::p()->Width, VGlobal::p()->Height);
 	}
 }
 
@@ -92,8 +91,7 @@ VPostEffectMultipass::~VPostEffectMultipass()
 
 	for (unsigned int i = 0; i < renderTextures.size(); i++)
 	{
-		delete renderTextures[i];
-		renderTextures[i] = nullptr;
+		renderTextures[i].reset();
 	}
 
 	renderTextures.clear();
@@ -137,28 +135,28 @@ void VPostEffectMultipass::EnableEffect(unsigned int index, bool enable)
 	}
 }
 
-void VPostEffectMultipass::Apply(const sf::RenderTexture& input, sf::RenderTarget& output)
+void VPostEffectMultipass::Apply(const sf::Texture& input, sf::RenderTarget& output)
 {
 	int inputRenderId = -1;
 	int outputRenderId = 0;
 
 	for (unsigned int i = 0; i < postEffects.size(); i++)
 	{
-		sf::RenderTarget& renderOutput = outputRenderId < (int)postEffects.size() - 1 ? *renderTextures[outputRenderId] : output;
+		sf::RenderTarget* renderOutput = outputRenderId < (int)postEffects.size() - 1 ? renderTextures[outputRenderId].get() : &output;
 
 		if (enabled[i])
 		{
 			if (inputRenderId < 0)
-				postEffects[i]->Apply(input, renderOutput);
+				postEffects[i]->Apply(input, *renderOutput);
 			else
-				postEffects[i]->Apply(*renderTextures[inputRenderId], renderOutput);
+				postEffects[i]->Apply(renderTextures[inputRenderId]->getTexture(), *renderOutput);
 		}
 		else
 		{
 			if (inputRenderId < 0)
-				passThrough(input, renderOutput);
+				passThrough(input, *renderOutput);
 			else
-				passThrough(*renderTextures[inputRenderId], renderOutput);
+				passThrough(renderTextures[inputRenderId]->getTexture(), *renderOutput);
 		}
 
 		inputRenderId++;

@@ -37,6 +37,7 @@
 #include <SFML/System/String.hpp>
 #include <SFML/Graphics/Glsl.hpp>
 #include <vector>
+#include <memory>
 
 ///Base class for Post Processing Effects.
 class VPostEffectBase
@@ -54,7 +55,7 @@ protected:
 	* @param input The texture to pass through.
 	* @param output The render target (Whether it's a RenderTexture or RenderWindow) to apply the shader to.
 	*/
-	static void passThrough(const sf::RenderTexture& input, sf::RenderTarget& output);
+	static void passThrough(const sf::Texture& input, sf::RenderTarget& output);
 
 public:
 	VPostEffectBase() = default;
@@ -68,7 +69,7 @@ public:
 	* @param input The texture to pass through.
 	* @param output The render target (Whether it's a RenderTexture or RenderWindow) to apply the shader to.
 	*/
-	virtual void Apply(const sf::RenderTexture& input, sf::RenderTarget& output) = 0;
+	virtual void Apply(const sf::Texture& input, sf::RenderTarget& output) = 0;
 
 	/**
 	* Updates post effect.
@@ -86,7 +87,7 @@ protected:
 	///List to determine which post effects are enabled.
 	std::vector<bool>				enabled;
 	///List of render textures to apply post effects to.
-	std::vector<sf::RenderTexture*>	renderTextures;
+	std::vector<std::unique_ptr<sf::RenderTexture>>	renderTextures;
 	///The fixed size of post process effects.
 	unsigned int maxSize = 0;
 
@@ -118,7 +119,7 @@ public:
 	* @param input The texture to pass through.
 	* @param output The render target (Whether it's a RenderTexture or RenderWindow) to apply the shader to.
 	*/
-	virtual void Apply(const sf::RenderTexture& input, sf::RenderTarget& output);
+	virtual void Apply(const sf::Texture& input, sf::RenderTarget& output);
 
 	/**
 	* Updates all post effects currently enabled.
@@ -293,6 +294,6 @@ public:
 	* @param input The texture to pass through.
 	* @param output The render target (Whether it's a RenderTexture or RenderWindow) to apply the shader to.
 	*/
-	virtual void Apply(const sf::RenderTexture& input, sf::RenderTarget& output);
+	virtual void Apply(const sf::Texture& input, sf::RenderTarget& output);
 };
 
