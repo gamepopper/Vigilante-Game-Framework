@@ -60,40 +60,40 @@ struct V3DVertex
 	* @param pos Vertex Position.
 	* @param norm Vertex Normal.
 	*/
-	V3DVertex(glm::vec3& pos, glm::vec3& norm) : position(pos), normal(norm), color(1, 1, 1, 1) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec3& norm) : position(pos), normal(norm), color(1, 1, 1, 1) {}
 
 	/**
 	* @param pos Vertex Position.
 	* @param tex Vertex Texture Coordinate.
 	*/
-	V3DVertex(glm::vec3& pos, glm::vec2& tex) : position(pos), color(1, 1, 1, 1), texCoord(tex) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec2& tex) : position(pos), color(1, 1, 1, 1), texCoord(tex) {}
 
 	/**
 	* @param pos Vertex Position.
 	* @param tint Vertex Colour.
 	*/
-	V3DVertex(glm::vec3& pos, glm::vec4& tint) : position(pos), color(tint) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec4& tint) : position(pos), color(tint) {}
 
 	/**
 	* @param pos Vertex Position.
 	* @param norm Vertex Normal.
 	* @param tex Vertex Texture Coordinate.
 	*/
-	V3DVertex(glm::vec3& pos, glm::vec3& norm, glm::vec2& tex) : position(pos), normal(norm), color(1, 1, 1, 1), texCoord(tex) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec3& norm, const glm::vec2& tex) : position(pos), normal(norm), color(1, 1, 1, 1), texCoord(tex) {}
 
 	/**
 	* @param pos Vertex Position.
 	* @param norm Vertex Normal.
 	* @param tint Vertex Colour.
 	*/
-	V3DVertex(glm::vec3& pos, glm::vec3& norm, glm::vec4& tint) : position(pos), normal(norm), color(tint) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec3& norm, const glm::vec4& tint) : position(pos), normal(norm), color(tint) {}
 
 	/**
 	* @param pos Vertex Position.
 	* @param tint Vertex Colour.
 	* @param tex Vertex Texture Coordinate.
 	*/
-	V3DVertex(glm::vec3& pos, glm::vec2& tex,  glm::vec4& tint) : position(pos), texCoord(tex), color(tint) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec2& tex, const glm::vec4& tint) : position(pos), texCoord(tex), color(tint) {}
 
 	/**
 	* @param pos Vertex Position.
@@ -101,7 +101,7 @@ struct V3DVertex
 	* @param tint Vertex Colour.
 	* @param tex Vertex Texture Coordinate.
 	*/
-	V3DVertex(glm::vec3& pos, glm::vec3& norm, glm::vec4& tint, glm::vec2& tex) : position(pos), normal(norm), color(tint), texCoord(tex) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec3& norm, const glm::vec4& tint, const glm::vec2& tex) : position(pos), normal(norm), color(tint), texCoord(tex) {}
 
 	///Position Vertex
 	glm::vec3 position;

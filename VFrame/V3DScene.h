@@ -58,7 +58,7 @@ public:
 	* @param settings The settings of the OpenGL Context that the sf::RenderTexture will have.
 	* @param maxSize The fixed length of the group. If 0, then the VGroup has no limit in size.
 	*/
-	V3DScene(float x, float y, unsigned int width, unsigned int height, sf::ContextSettings& settings = sf::ContextSettings(), unsigned int maxSize = 0);
+	V3DScene(float x, float y, unsigned int width, unsigned int height, const sf::ContextSettings& settings = sf::ContextSettings(), unsigned int maxSize = 0);
 	
 	/**
 	* @param position Position of the sprite.
@@ -66,7 +66,7 @@ public:
 	* @param settings The settings of the OpenGL Context that the sf::RenderTexture will have.
 	* @param maxSize The fixed length of the group. If 0, then the VGroup has no limit in size.
 	*/
-	V3DScene(sf::Vector2f position, sf::Vector2u size, sf::ContextSettings& settings = sf::ContextSettings(), unsigned int maxSize = 0);
+	V3DScene(sf::Vector2f position, sf::Vector2u size, const sf::ContextSettings& settings = sf::ContextSettings(), unsigned int maxSize = 0);
 
 	///OpenGL Shader for the entire scene.
 	std::unique_ptr<V3DShader> Shader;

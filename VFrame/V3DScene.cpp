@@ -7,14 +7,14 @@
 
 #pragma comment(lib, "glu32.lib")
 
-V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize), contextSettings(settings)
+V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize), contextSettings(settings)
 {
 	postProcessTex.create(width, height);
 	renderTex.create(width, height, settings);
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 }
 
-V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(position, size, maxSize), contextSettings(settings)
+V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(position, size, maxSize), contextSettings(settings)
 {
 	postProcessTex.create(size.x, size.y);
 	renderTex.create(size.x, size.y, settings);
