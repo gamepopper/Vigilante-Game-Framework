@@ -153,6 +153,17 @@ VSprite* VSprite::MakeGraphicCircle(int radius, sf::Color color, float outline, 
 	return this;
 }
 
+void VSprite::Destroy()
+{
+	VSUPERCLASS::Destroy();
+
+	if (disposible && texture)
+	{
+		delete texture;
+		texture = nullptr;
+	}
+}
+
 void VSprite::Update(float dt)
 {
 	VSUPERCLASS::Update(dt);
