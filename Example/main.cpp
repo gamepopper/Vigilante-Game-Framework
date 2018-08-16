@@ -12,7 +12,7 @@ int main()
 	settings.majorVersion = 4;
 	settings.minorVersion = 5;
 
-	int r = game->Run("VFrame Stuff", new DemoStatesManager(), 640, 360, 60.0f, 7, settings);
+	int r = game->Run("VFrame Stuff with SFML 2.5.0", new DemoStatesManager(), 640, 360, 60.0f, 7, settings);
 	delete game;
 	return r;
 }

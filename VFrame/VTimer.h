@@ -51,7 +51,7 @@ private:
 public:
 	///@param addToManager If true, this will automatically add the timer to VTimeManager. If it's not added to the VTimeManager it has to be updated manually.
 	VTimer(bool addToManager = true);
-	~VTimer() = default;
+	~VTimer();
 
 	/**
 	* Updates the time.

@@ -76,6 +76,7 @@ void VTypedText::ResetText(sf::String text)
 	Paused = false;
 	waiting = false;
 	timer = 0;
+	length = 0;
 }
 
 void VTypedText::Skip()

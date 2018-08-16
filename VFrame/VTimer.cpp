@@ -46,7 +46,6 @@ void VTimeManager::RemoveTimer(VTimer* timer)
 	if (i != timers.end())
 	{
 		timers.erase(i);
-		delete *i;
 	}
 }
 
@@ -59,10 +58,10 @@ void VTimeManager::Clear(bool destroy)
 {
 	if (destroy)
 	{
-		for (unsigned int i = 0; i < timers.size(); i++)
+		for (int i = 0; i < (int)timers.size(); i++)
 		{
 			delete timers[i];
-			timers[i] = nullptr;
+			i--;
 		}
 	}
 
@@ -81,6 +80,11 @@ VTimer::VTimer(bool addToManager)
 
 	if (addToManager)
 		VTimeManager::p()->AddTimer(this);
+}
+
+VTimer::~VTimer()
+{
+	VTimeManager::p()->RemoveTimer(this);
 }
 
 float VTimer::Update(float dt)

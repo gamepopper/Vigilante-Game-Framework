@@ -139,8 +139,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a41728af8f9410ac235479a1bff6917f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a416d9f7137e29248f49fc75f93bed136"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a416d9f7137e29248f49fc75f93bed136">SetWrap</a> (const <a class="el" href="_v_text_8h.html#a77fe27e741dd08d61bb5d6148ddd0b5b">VTextWrap</a> &amp;wrapMode)</td></tr>
 <tr class="separator:a416d9f7137e29248f49fc75f93bed136"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a944398386aa1bed717b6bfcbd80c0771"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a944398386aa1bed717b6bfcbd80c0771">SetLineSpaceModifier</a> (float lineSpacing)</td></tr>
-<tr class="separator:a944398386aa1bed717b6bfcbd80c0771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a437db29122d73abd306fb19598fe7e90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a437db29122d73abd306fb19598fe7e90">SetLineSpaceModifier</a> (int lineSpacing)</td></tr>
+<tr class="separator:a437db29122d73abd306fb19598fe7e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a691e09b6468cdf53f83a6e8688984c05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a691e09b6468cdf53f83a6e8688984c05">SetAlignment</a> (const <a class="el" href="_v_text_8h.html#a10d243a4396e2af78598c5278119b885">VTextAlign</a> &amp;align)</td></tr>
 <tr class="separator:a691e09b6468cdf53f83a6e8688984c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62a3c486276a2ad4a87ff6298fc59011"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a62a3c486276a2ad4a87ff6298fc59011">SetOutlineThickness</a> (float thickness)</td></tr>
@@ -149,6 +149,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3245b905f98699d69c2ad2a321e553f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae786d2434cba19afd5a04f09ccf0b9e2"><td class="memItemLeft" align="right" valign="top">const sf::String &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ae786d2434cba19afd5a04f09ccf0b9e2">GetText</a> ()</td></tr>
 <tr class="separator:ae786d2434cba19afd5a04f09ccf0b9e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ee5f1db21d73302cc8b0955b021201c"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a9ee5f1db21d73302cc8b0955b021201c">GetLength</a> ()</td></tr>
+<tr class="separator:a9ee5f1db21d73302cc8b0955b021201c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac26041c1ca96ce78351896975543b3fa"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ac26041c1ca96ce78351896975543b3fa">GetStyle</a> ()</td></tr>
 <tr class="separator:ac26041c1ca96ce78351896975543b3fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cdae953a25c09381f8d9b538da54f76"><td class="memItemLeft" align="right" valign="top">sf::Color const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a1cdae953a25c09381f8d9b538da54f76">GetFillTint</a> ()</td></tr>
@@ -695,6 +697,32 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
+<a id="a9ee5f1db21d73302cc8b0955b021201c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ee5f1db21d73302cc8b0955b021201c">&#9670;&nbsp;</a></span>GetLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int VText::GetLength </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The current length of the string that is being rendered. </dd></dl>
+
+</div>
+</div>
 <a id="aad7c12557dd8265382b96bd4e4829aad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad7c12557dd8265382b96bd4e4829aad">&#9670;&nbsp;</a></span>GetLineSpaceModifier()</h2>
 
@@ -1143,8 +1171,8 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
-<a id="a944398386aa1bed717b6bfcbd80c0771"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a944398386aa1bed717b6bfcbd80c0771">&#9670;&nbsp;</a></span>SetLineSpaceModifier()</h2>
+<a id="a437db29122d73abd306fb19598fe7e90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a437db29122d73abd306fb19598fe7e90">&#9670;&nbsp;</a></span>SetLineSpaceModifier()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1152,7 +1180,7 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
         <tr>
           <td class="memname">void VText::SetLineSpaceModifier </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>lineSpacing</em></td><td>)</td>
           <td></td>
         </tr>

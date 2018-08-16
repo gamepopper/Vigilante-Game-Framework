@@ -109,7 +109,7 @@ void VTilemap::updateTilemap()
 				quad[2].color = colour;
 				quad[3].color = colour;
 
-				if (vertexOffset < vertices.getVertexCount())
+				if (vertexOffset < (int)vertices.getVertexCount())
 				{
 					vertices[vertexOffset + 0] = quad[0];
 					vertices[vertexOffset + 1] = quad[1];

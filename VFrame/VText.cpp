@@ -344,7 +344,7 @@ void VText::SetWrap(const VTextWrap& wrapMode)
 	}
 }
 
-void VText::SetLineSpaceModifier(float lineSpacing)
+void VText::SetLineSpaceModifier(int lineSpacing)
 {
 	if (lineSpaceModifier != lineSpacing)
 	{
