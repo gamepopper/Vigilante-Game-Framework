@@ -290,8 +290,8 @@ float VObject::overlapX(VObject* a, VObject *b, bool maxOverlap)
 		//Use the Last Y position instead of current to avoid floor collisions due to gravity.
 		sf::FloatRect aRect = sf::FloatRect(a->Position.x - ((aDiff > 0) ? aDiff : 0), a->Last.y, a->Size.x + aDiffAbs, a->Size.y);
 		sf::FloatRect bRect = sf::FloatRect(b->Position.x - ((bDiff > 0) ? bDiff : 0), b->Last.y, b->Size.x + bDiffAbs, b->Size.y);
-		
-		if ((aRect.left + aRect.width > bRect.left) && (aRect.left < bRect.left + bRect.width) && 
+
+		if ((aRect.left + aRect.width > bRect.left) && (aRect.left < bRect.left + bRect.width) &&
 			(aRect.top + aRect.height > bRect.top) && (aRect.top < bRect.top + bRect.height))
 		{
 			float maxOverlapDist = maxOverlap ? (aDiffAbs + bDiffAbs + SeparateBias) : 0;
@@ -313,7 +313,7 @@ float VObject::overlapX(VObject* a, VObject *b, bool maxOverlap)
 			else if (aDiff < bDiff)
 			{
 				overlap = a->Position.x - b->Size.x - b->Position.x;
-				
+
 				if ((maxOverlap && -overlap > maxOverlapDist) || (a->AllowCollisions & SidesTouching::TOUCHLEFT) == 0 || (b->AllowCollisions & SidesTouching::TOUCHRIGHT) == 0)
 				{
 					overlap = 0;
@@ -518,7 +518,7 @@ float VObject::computeVelocity(float v, float a, float d, float max, float dt)
 	return v;
 }
 
-bool VObject::TestInView(const sf::View& renderTargetView, sf::View& scrollView, VObject* o, sf::FloatRect& renderBox)
+bool VObject::TestInView(const sf::View& renderTargetView, sf::View& scrollView, VObject* o, const sf::FloatRect& renderBox)
 {
 	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
 	scroll.x *= o->ScrollFactor.x;

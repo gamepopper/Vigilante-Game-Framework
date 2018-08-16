@@ -34,7 +34,7 @@ int VGame::Init()
 		if (!VGlobal::p()->App->isOpen())
 			return 3;
 
-		renderTarget = std::unique_ptr<sf::RenderTexture>(new sf::RenderTexture());
+		renderTarget = std::make_unique<sf::RenderTexture>();
 		if (!renderTarget->create(VGlobal::p()->Width, VGlobal::p()->Height))
 			return 4;
 
@@ -45,14 +45,14 @@ int VGame::Init()
 		vertexArray.resize(4);
 		vertexArray.setPrimitiveType(sf::Quads);
 		vertexArray[0] = sf::Vertex(sf::Vector2f(), sf::Color::White, sf::Vector2f());
-		vertexArray[1] = sf::Vertex(sf::Vector2f(VGlobal::p()->WorldBounds.width, 0.0f), 
-			sf::Color::White, 
+		vertexArray[1] = sf::Vertex(sf::Vector2f(VGlobal::p()->WorldBounds.width, 0.0f),
+			sf::Color::White,
 			sf::Vector2f(VGlobal::p()->WorldBounds.width, 0.0f));
-		vertexArray[2] = sf::Vertex(sf::Vector2f(VGlobal::p()->WorldBounds.width, VGlobal::p()->WorldBounds.height), 
-			sf::Color::White, 
+		vertexArray[2] = sf::Vertex(sf::Vector2f(VGlobal::p()->WorldBounds.width, VGlobal::p()->WorldBounds.height),
+			sf::Color::White,
 			sf::Vector2f(VGlobal::p()->WorldBounds.width, VGlobal::p()->WorldBounds.height));
-		vertexArray[3] = sf::Vertex(sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.height), 
-			sf::Color::White, 
+		vertexArray[3] = sf::Vertex(sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.height),
+			sf::Color::White,
 			sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.height));
 
 		ResizeCheck();
