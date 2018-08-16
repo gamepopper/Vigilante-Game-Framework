@@ -227,7 +227,7 @@ public:
 	///@return Text wrapping mode.
 	void SetWrap(const VTextWrap& wrapMode);
 	///@return Used for adjusting the distance between lines different to the default.
-	void SetLineSpaceModifier(float lineSpacing);
+	void SetLineSpaceModifier(int lineSpacing);
 	///@return Text alignment property.
 	void SetAlignment(const VTextAlign& align);
 	///@return The thickness of the outline.
@@ -237,6 +237,8 @@ public:
 
 	///@return The text that will be rendered.
 	const sf::String& GetText() { return text; }
+	///@return The current length of the string that is being rendered.
+	const int GetLength() { return length; }
 	///@return Flags for setting a text's display style.
 	unsigned int GetStyle() { return style; }
 	///@return The main text colour.

@@ -118,6 +118,10 @@ Public Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#a8cd73f474d55512bcc257e9073c77a97">Kill</a> () override</td></tr>
 <tr class="memdesc:a8cd73f474d55512bcc257e9073c77a97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kills the emitter and all of its particles. <br /></td></tr>
 <tr class="separator:a8cd73f474d55512bcc257e9073c77a97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf94a087248cc2149d691a86a97f4797"><td class="memItemLeft" align="right" valign="top"><a id="abf94a087248cc2149d691a86a97f4797"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#abf94a087248cc2149d691a86a97f4797">Revive</a> () override</td></tr>
+<tr class="memdesc:abf94a087248cc2149d691a86a97f4797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Revives the emitter. <br /></td></tr>
+<tr class="separator:abf94a087248cc2149d691a86a97f4797"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45916cb0705dd52cded0d944fe671b00"><td class="memItemLeft" align="right" valign="top"><a id="a45916cb0705dd52cded0d944fe671b00"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#a45916cb0705dd52cded0d944fe671b00">Destroy</a> () override</td></tr>
 <tr class="memdesc:a45916cb0705dd52cded0d944fe671b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes and removes all particles before destroying any data stored in the emitter. <br /></td></tr>
@@ -128,6 +132,14 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a11d0da26b3d5fe1768de9e3b9c922507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87d76f34748747a3e8512d9a2dada6d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_emitter.html">VEmitter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#a87d76f34748747a3e8512d9a2dada6d9">Start</a> (int Amount=0)</td></tr>
 <tr class="separator:a87d76f34748747a3e8512d9a2dada6d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8c680783c46e0be078aae4ae73c258b"><td class="memItemLeft" align="right" valign="top"><a id="af8c680783c46e0be078aae4ae73c258b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#af8c680783c46e0be078aae4ae73c258b">Stop</a> ()</td></tr>
+<tr class="memdesc:af8c680783c46e0be078aae4ae73c258b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops emitter from emitting without the need to kill it. <br /></td></tr>
+<tr class="separator:af8c680783c46e0be078aae4ae73c258b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa380c581da480fd4006220320dc42b62"><td class="memItemLeft" align="right" valign="top"><a id="aa380c581da480fd4006220320dc42b62"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#aa380c581da480fd4006220320dc42b62">IsRunning</a> ()</td></tr>
+<tr class="memdesc:aa380c581da480fd4006220320dc42b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the emitter is currently active. <br /></td></tr>
+<tr class="separator:aa380c581da480fd4006220320dc42b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18542290f91c965e2864edd08db9eaf6"><td class="memItemLeft" align="right" valign="top"><a id="a18542290f91c965e2864edd08db9eaf6"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_emitter.html#a18542290f91c965e2864edd08db9eaf6">EmitParticle</a> ()</td></tr>
 <tr class="memdesc:a18542290f91c965e2864edd08db9eaf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Emits a single particle. This can be called directly if you don't want to emit a bunch of particles in sequence or as a special pattern. <br /></td></tr>
@@ -185,10 +197,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a94b47faa2425ee65841c09390e0c25b7">Clear</a> ()</td></tr>
 <tr class="memdesc:a94b47faa2425ee65841c09390e0c25b7 inherit pub_methods_class_v_group"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the whole group (does not destroy any of the members, that must be done using the Destroy method). <br /></td></tr>
 <tr class="separator:a94b47faa2425ee65841c09390e0c25b7 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf46fa644e58f357206fcdbec637093d inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top"><a id="acf46fa644e58f357206fcdbec637093d"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#acf46fa644e58f357206fcdbec637093d">Revive</a> () override</td></tr>
-<tr class="memdesc:acf46fa644e58f357206fcdbec637093d inherit pub_methods_class_v_group"><td class="mdescLeft">&#160;</td><td class="mdescRight">Revives all dead objects before reviving the group itself. <br /></td></tr>
-<tr class="separator:acf46fa644e58f357206fcdbec637093d inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>

@@ -203,7 +203,7 @@ public:
 		{
 			if (animationList[currentAnim]->GetFrameCount() > 1)
 			{
-				lastFrame = animationList[currentAnim]->GetCurrentFrame();
+				//lastFrame = animationList[currentAnim]->GetCurrentFrame();
 				animationList[currentAnim]->Update(dt);
 			}
 		}

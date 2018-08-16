@@ -28,7 +28,7 @@ var searchData=
   ['restart',['Restart',['../class_v_timer.html#afa45ae37b5f1a5a2326932a6b5efd6df',1,'VTimer']]],
   ['resume',['Resume',['../class_v_state.html#ab2fd8eed8aa31e80f225a6a0a1bb518e',1,'VState::Resume()'],['../class_v_timer.html#ad4db04193f1195bc6686a6f8b142c658',1,'VTimer::Resume()']]],
   ['reverse',['Reverse',['../class_v_group.html#a9d9f5e149e64418b75b3684e2b557577',1,'VGroup']]],
-  ['revive',['Revive',['../class_v_base.html#a3e6f48dc57252f66e365b409e0a8ecb8',1,'VBase::Revive()'],['../class_v_group.html#acf46fa644e58f357206fcdbec637093d',1,'VGroup::Revive()'],['../class_v_render_group.html#a386de075107dada78b5abe3b7e0bb462',1,'VRenderGroup::Revive()']]],
+  ['revive',['Revive',['../class_v_base.html#a3e6f48dc57252f66e365b409e0a8ecb8',1,'VBase::Revive()'],['../class_v_emitter.html#abf94a087248cc2149d691a86a97f4797',1,'VEmitter::Revive()'],['../class_v_group.html#acf46fa644e58f357206fcdbec637093d',1,'VGroup::Revive()'],['../class_v_render_group.html#a386de075107dada78b5abe3b7e0bb462',1,'VRenderGroup::Revive()']]],
   ['right',['Right',['../class_v3_d_camera.html#a5a13abaabba6cd1b50f33d72d3be4206',1,'V3DCamera']]],
   ['room',['ROOM',['../_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5ca3a92b9ec0d994251444883834e9ad75e',1,'VCamera.h']]],
   ['roomlerp',['ROOMLERP',['../_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5cae8a3599484c3887fdc3a9d8e8675de2f',1,'VCamera.h']]],

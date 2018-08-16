@@ -172,7 +172,7 @@ void VCamera::Update(float dt)
 			sf::Vector2f relativePos;
 			relativePos.x = floorf(FollowPos.x / VGlobal::p()->Width) * VGlobal::p()->Width;
 			relativePos.y = floorf(FollowPos.y / VGlobal::p()->Height) * VGlobal::p()->Height;
-			relativePos += sf::Vector2f(VGlobal::p()->Width, VGlobal::p()->Height) / 2.0f;
+			relativePos += sf::Vector2f(VGlobal::p()->Width / 2.0f, VGlobal::p()->Height / 2.0f);
 
 			if (followMethod == ROOM)
 				position = relativePos;

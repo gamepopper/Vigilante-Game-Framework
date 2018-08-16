@@ -270,6 +270,13 @@ void VEmitter::Kill()
 	VSUPERCLASS::Kill();
 }
 
+void VEmitter::Revive()
+{
+	running = false;
+	alive = true;
+	exists = true;
+}
+
 VEmitter* VEmitter::Start(int Amount)
 {
 	exists = true;
@@ -283,6 +290,16 @@ VEmitter* VEmitter::Start(int Amount)
 
 	amount = Amount != 0 ? Amount : Length();
 	return this;
+}
+
+void VEmitter::Stop()
+{
+	running = false;
+}
+
+bool VEmitter::IsRunning()
+{
+	return running;
 }
 
 void VEmitter::EmitParticle()

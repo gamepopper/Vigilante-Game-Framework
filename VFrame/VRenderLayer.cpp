@@ -13,6 +13,16 @@ void VRenderLayer::Destroy()
 	PostEffect = nullptr;
 }
 
+void VRenderLayer::SetTint(const sf::Color& tint)
+{
+	sprite.setColor(tint);
+}
+
+const sf::Color& VRenderLayer::GetTint()
+{
+	return sprite.getColor();
+}
+
 void VRenderLayer::Update(float dt)
 {
 	VSUPERCLASS::Update(dt);

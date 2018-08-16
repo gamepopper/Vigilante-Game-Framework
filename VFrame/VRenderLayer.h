@@ -62,6 +62,12 @@ public:
 	///@param maxSize The fixed size of the layer. 0 assumes the size is not fixed.
 	VRenderLayer(unsigned int maxSize = 0);
 
+	///@param tint The colour to set the RenderLayer.
+	void SetTint(const sf::Color& tint);
+
+	///@return The tint of the RenderLayer (sf::Color::White as default).
+	const sf::Color& GetTint();
+
 	///@return The sprite's texture after the scene is rendered to it.
 	virtual const sf::Texture& GetTexture();
 

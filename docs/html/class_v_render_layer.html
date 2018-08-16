@@ -105,6 +105,10 @@ typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="me
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aeb5a554cedccbf92775cd3be2fe78b12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_layer.html#aeb5a554cedccbf92775cd3be2fe78b12">VRenderLayer</a> (unsigned int maxSize=0)</td></tr>
 <tr class="separator:aeb5a554cedccbf92775cd3be2fe78b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b2267ebdbf86fdf14f0f5dcc10f1b1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_layer.html#a7b2267ebdbf86fdf14f0f5dcc10f1b1f">SetTint</a> (const sf::Color &amp;tint)</td></tr>
+<tr class="separator:a7b2267ebdbf86fdf14f0f5dcc10f1b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a6f070e9bf8942091d4b6c7d51456f9"><td class="memItemLeft" align="right" valign="top">const sf::Color &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_layer.html#a9a6f070e9bf8942091d4b6c7d51456f9">GetTint</a> ()</td></tr>
+<tr class="separator:a9a6f070e9bf8942091d4b6c7d51456f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a59c9d58c53a20260613af7f95940be"><td class="memItemLeft" align="right" valign="top">virtual const sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_layer.html#a3a59c9d58c53a20260613af7f95940be">GetTexture</a> ()</td></tr>
 <tr class="separator:a3a59c9d58c53a20260613af7f95940be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbfc8e55cb88443f1c185702f1a447e0"><td class="memItemLeft" align="right" valign="top"><a id="adbfc8e55cb88443f1c185702f1a447e0"></a>
@@ -336,6 +340,48 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The sprite's texture after the scene is rendered to it. </dd></dl>
+
+</div>
+</div>
+<a id="a9a6f070e9bf8942091d4b6c7d51456f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a6f070e9bf8942091d4b6c7d51456f9">&#9670;&nbsp;</a></span>GetTint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::Color&amp; VRenderLayer::GetTint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The tint of the RenderLayer (sf::Color::White as default). </dd></dl>
+
+</div>
+</div>
+<a id="a7b2267ebdbf86fdf14f0f5dcc10f1b1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b2267ebdbf86fdf14f0f5dcc10f1b1f">&#9670;&nbsp;</a></span>SetTint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VRenderLayer::SetTint </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Color &amp;&#160;</td>
+          <td class="paramname"><em>tint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tint</td><td>The colour to set the RenderLayer. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

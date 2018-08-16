@@ -226,9 +226,12 @@ public:
 	* @return The VEmitter that is being loaded, typically the one that the function is being called from.
 	*/
 	VEmitter* MakeParticles(int Amount, int Width, int Height, sf::Color Color = sf::Color::White);
-	
+
 	///Kills the emitter and all of its particles.
 	virtual void Kill() override;
+
+	///Revives the emitter.
+	virtual void Revive() override;
 	
 	///Deletes and removes all particles before destroying any data stored in the emitter.
 	virtual void Destroy() override;
@@ -250,6 +253,12 @@ public:
 	* @param Amount The amount of particles to emit. Default is all particles available in the emitter.
 	*/
 	VEmitter* Start(int Amount = 0);
+
+	///Stops emitter from emitting without the need to kill it.
+	void Stop();
+
+	///Check if the emitter is currently active.
+	bool IsRunning();
 
 	///Emits a single particle. This can be called directly if you don't want to emit a bunch of particles in sequence or as a special pattern.
 	virtual void EmitParticle();
