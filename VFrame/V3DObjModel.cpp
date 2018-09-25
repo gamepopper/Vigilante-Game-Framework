@@ -16,7 +16,7 @@
 #include "depend/tiny_obj_loader.h"
 
 V3DObjModel::V3DObjModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) :
-	V3DObject(position, rotation), Scale(scale)
+	V3DObject(position, rotation, scale)
 {
 	material = new V3DMaterial();
 }
@@ -24,7 +24,7 @@ V3DObjModel::V3DObjModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vecto
 V3DObjModel::V3DObjModel(float posX, float posY, float posZ,
 	float rotX, float rotY, float rotZ,
 	float scaleX, float scaleY, float scaleZ) :
-	V3DObject(posX, posY, posZ, rotX, rotY, rotZ), Scale(scaleX, scaleY, scaleZ)
+	V3DObject(posX, posY, posZ, rotX, rotY, rotZ)
 {
 	material = new V3DMaterial();
 }
@@ -56,6 +56,13 @@ bool V3DObjModel::LoadModelData(const char* filename)
 	modelData.clear();
 	materials.clear();
 	textures.clear();
+
+	Minimum.x = FLT_MAX;
+	Minimum.y = FLT_MAX;
+	Minimum.z = FLT_MAX;
+	Maximum.x = -FLT_MAX;
+	Maximum.y = -FLT_MAX;
+	Maximum.z = -FLT_MAX;
 
 	std::string path = GetBaseDir(filename);
 	path += "/";
@@ -239,12 +246,52 @@ bool V3DObjModel::LoadModelData(const char* filename)
 			}
 
 			modelData.push_back(md);
+
+			for (unsigned int v = 0; v < vb.size(); v += 10)
+			{
+				if (vb[v + 0] < Minimum.x)
+					Minimum.x = vb[v + 0];
+				if (vb[v + 0] > Maximum.x)
+					Minimum.x = vb[v + 0];
+				if (vb[v + 1] < Minimum.y)
+					Minimum.y = vb[v + 1];
+				if (vb[v + 1] > Maximum.y)
+					Maximum.y = vb[v + 1];
+				if (vb[v + 2] < Minimum.z)
+					Minimum.z = vb[v + 2];
+				if (vb[v + 2] > Maximum.z)
+					Maximum.z = vb[v + 2];
+			}
 		}
 	}
 	else
 	{
 		VLog("%s failed to load", filename);
 	}
+
+	sf::Vector3f Size;
+	Size.x = Maximum.x - Minimum.x;
+	Size.y = Maximum.y - Minimum.y;
+	Size.z = Minimum.z - Maximum.z;
+
+	if (Size.x <= 0.0f)
+		Size.x = 0.01f;
+	if (Size.y <= 0.0f)
+		Size.y = 0.01f;
+	if (Size.z <= 0.0f)
+		Size.z = 0.01f;
+
+	Origin.x = Minimum.x + (Size.x / 2.0f);
+	Origin.y = Minimum.y + (Size.y / 2.0f);
+	Origin.z = Maximum.z + (Size.z / 2.0f);
+
+	Radius = Size.x;
+	if (Radius < Size.y)
+		Radius = Size.y;
+	if (Radius < Size.z)
+		Radius = Size.z;
+
+	Radius /= 2.0f;
 
 	return r;
 }

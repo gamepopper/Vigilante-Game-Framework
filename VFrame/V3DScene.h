@@ -45,6 +45,7 @@ class V3DScene : public VRenderGroup
 {
 private:
 	sf::ContextSettings contextSettings;
+	void RenderGroup(VGroup* group);
 
 public:
 	///Used to call parent class functions when they are overrided in class.

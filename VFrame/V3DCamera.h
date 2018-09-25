@@ -70,13 +70,48 @@ public:
 	///Camera's Up Vector.
 	sf::Vector3f Up() const;
 
+	/**
+	* @param p Position of 3D Point.
+	* @return True if 
+	*/
+	virtual bool PointInView(sf::Vector3f p);
+
+	/**
+	* @param p Centre Position of Sphere.
+	* @param radius Radius of Sphere.
+	* @return True if sphere is in view.
+	*/
+	virtual bool SphereInView(sf::Vector3f p, float radius);
+
+	/**
+	* @param p Centre Position of Box.
+	* @param size Dimensions of Box.
+	* @return True if box is in view.
+	*/
+	virtual bool BoxInView(sf::Vector3f p, sf::Vector3f min, sf::Vector3f max);
+
 protected:
+	enum FrustumPlane : unsigned char
+	{
+		PRIGHT,
+		PLEFT,
+		PTOP,
+		PBOTTOM,
+		PNEAR,
+		PFAR,
+	};
+
 	///Field Near value.
 	float fnear;
 	///Field Far value.
 	float ffar;
 	///Normalize the rotation angles.
 	void normalizeAngles();
+
+	void updatePlanes();
+	float pointPlaneDistance(glm::vec4& plane, glm::vec3& point);
+
+	glm::vec4 planes[6];
 };
 
 ///3D Camera with a Perspective View

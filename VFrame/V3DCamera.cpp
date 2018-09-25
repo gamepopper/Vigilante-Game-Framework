@@ -65,6 +65,144 @@ void V3DCamera::normalizeAngles()
 	Rotation.x = fmaxf(-MaxVerticalAngle, Rotation.x);
 }
 
+bool V3DCamera::PointInView(sf::Vector3f p)
+{
+	updatePlanes();
+
+	for (int i = 0; i < 6; i++)
+	{
+		if (pointPlaneDistance(planes[i], glm::vec3(p.x, p.y, p.z)) < 0)
+			return false;
+	}
+
+	return true;
+}
+
+bool V3DCamera::SphereInView(sf::Vector3f p, float radius)
+{
+	updatePlanes();
+
+	float distance;
+	for (int i = 0; i < 6; i++)
+	{
+		distance = pointPlaneDistance(planes[i], glm::vec3(p.x, p.y, p.z));
+		if (distance < -radius)
+			return false;
+	}
+
+	return true;
+}
+
+bool V3DCamera::BoxInView(sf::Vector3f p, sf::Vector3f min, sf::Vector3f max)
+{
+	updatePlanes();
+
+	sf::Vector3f positive;
+	sf::Vector3f negative;
+
+	for (int i = 0; i < 6; i++)
+	{
+		const float pos = planes[i].w;
+		const glm::vec3 normal = glm::vec3(planes[i]);
+
+		if (normal.x >= 0.0f)
+		{
+			positive.x = max.x;
+			negative.x = min.x;
+		}
+
+		if (normal.y >= 0.0f)
+		{
+			positive.y = max.y;
+			negative.y = min.y;
+		}
+
+		if (normal.z >= 0.0f)
+		{
+			positive.z = max.z;
+			negative.z = min.z;
+		}
+
+		positive += p;
+		negative += p;
+
+		float dotPositive = glm::dot(normal, glm::vec3(positive.x, positive.y, positive.z)) + pos;
+		if (dotPositive < -0.f)
+			return false;
+
+		//float dotNegative = glm::dot(normal, glm::vec3(negative.x, negative.y, negative.z)) + pos;
+		//if (dotNegative < -0.f)
+		//	return true;
+	}
+
+	return true;
+}
+
+void V3DCamera::updatePlanes()
+{
+	const glm::mat4 &v = ViewMatrix();
+	const glm::mat4 &p = ProjectionMatrix();
+
+	glm::mat4 clipMatrix;
+
+	clipMatrix[0][0] = v[0][0] * p[0][0] + v[0][1] * p[1][0] + v[0][2] * p[2][0] + v[0][3] * p[3][0];
+	clipMatrix[1][0] = v[0][0] * p[0][1] + v[0][1] * p[1][1] + v[0][2] * p[2][1] + v[0][3] * p[3][1];
+	clipMatrix[2][0] = v[0][0] * p[0][2] + v[0][1] * p[1][2] + v[0][2] * p[2][2] + v[0][3] * p[3][2];
+	clipMatrix[3][0] = v[0][0] * p[0][3] + v[0][1] * p[1][3] + v[0][2] * p[2][3] + v[0][3] * p[3][3];
+	clipMatrix[0][1] = v[1][0] * p[0][0] + v[1][1] * p[1][0] + v[1][2] * p[2][0] + v[1][3] * p[3][0];
+	clipMatrix[1][1] = v[1][0] * p[0][1] + v[1][1] * p[1][1] + v[1][2] * p[2][1] + v[1][3] * p[3][1];
+	clipMatrix[2][1] = v[1][0] * p[0][2] + v[1][1] * p[1][2] + v[1][2] * p[2][2] + v[1][3] * p[3][2];
+	clipMatrix[3][1] = v[1][0] * p[0][3] + v[1][1] * p[1][3] + v[1][2] * p[2][3] + v[1][3] * p[3][3];
+	clipMatrix[0][2] = v[2][0] * p[0][0] + v[2][1] * p[1][0] + v[2][2] * p[2][0] + v[2][3] * p[3][0];
+	clipMatrix[1][2] = v[2][0] * p[0][1] + v[2][1] * p[1][1] + v[2][2] * p[2][1] + v[2][3] * p[3][1];
+	clipMatrix[2][2] = v[2][0] * p[0][2] + v[2][1] * p[1][2] + v[2][2] * p[2][2] + v[2][3] * p[3][2];
+	clipMatrix[3][2] = v[2][0] * p[0][3] + v[2][1] * p[1][3] + v[2][2] * p[2][3] + v[2][3] * p[3][3];
+	clipMatrix[0][3] = v[3][0] * p[0][0] + v[3][1] * p[1][0] + v[3][2] * p[2][0] + v[3][3] * p[3][0];
+	clipMatrix[1][3] = v[3][0] * p[0][1] + v[3][1] * p[1][1] + v[3][2] * p[2][1] + v[3][3] * p[3][1];
+	clipMatrix[2][3] = v[3][0] * p[0][2] + v[3][1] * p[1][2] + v[3][2] * p[2][2] + v[3][3] * p[3][2];
+	clipMatrix[3][3] = v[3][0] * p[0][3] + v[3][1] * p[1][3] + v[3][2] * p[2][3] + v[3][3] * p[3][3];
+
+	planes[PRIGHT].x = clipMatrix[3][0] - clipMatrix[0][0];
+	planes[PRIGHT].y = clipMatrix[3][1] - clipMatrix[0][1];
+	planes[PRIGHT].z = clipMatrix[3][2] - clipMatrix[0][2];
+	planes[PRIGHT].w = clipMatrix[3][3] - clipMatrix[0][3];
+
+	planes[PLEFT].x = clipMatrix[3][0] + clipMatrix[0][0];
+	planes[PLEFT].y = clipMatrix[3][1] + clipMatrix[0][1];
+	planes[PLEFT].z = clipMatrix[3][2] + clipMatrix[0][2];
+	planes[PLEFT].w = clipMatrix[3][3] + clipMatrix[0][3];
+
+	planes[PBOTTOM].x = clipMatrix[3][0] + clipMatrix[1][0];
+	planes[PBOTTOM].y = clipMatrix[3][1] + clipMatrix[1][1];
+	planes[PBOTTOM].z = clipMatrix[3][2] + clipMatrix[1][2];
+	planes[PBOTTOM].w = clipMatrix[3][3] + clipMatrix[1][3];
+
+	planes[PTOP].x = clipMatrix[3][0] - clipMatrix[1][0];
+	planes[PTOP].y = clipMatrix[3][1] - clipMatrix[1][1];
+	planes[PTOP].z = clipMatrix[3][2] - clipMatrix[1][2];
+	planes[PTOP].w = clipMatrix[3][3] - clipMatrix[1][3];
+
+	planes[PNEAR].x = clipMatrix[3][0] - clipMatrix[2][0];
+	planes[PNEAR].y = clipMatrix[3][1] - clipMatrix[2][1];
+	planes[PNEAR].z = clipMatrix[3][2] - clipMatrix[2][2];
+	planes[PNEAR].w = clipMatrix[3][3] - clipMatrix[2][3];
+
+	planes[PFAR].x = clipMatrix[3][0] + clipMatrix[2][0];
+	planes[PFAR].y = clipMatrix[3][1] + clipMatrix[2][1];
+	planes[PFAR].z = clipMatrix[3][2] + clipMatrix[2][2];
+	planes[PFAR].w = clipMatrix[3][3] + clipMatrix[2][3];
+
+	for (int i = 0; i < 6; i++)
+	{
+		planes[i] = glm::normalize(planes[i]);
+	}
+}
+
+float V3DCamera::pointPlaneDistance(glm::vec4& plane, glm::vec3& point)
+{
+	return (plane.x * point.x) + (plane.y * point.y) + (plane.z * point.z) + plane.w;
+}
+
 V3DPerspectiveCamera::V3DPerspectiveCamera(const sf::Vector3f& pos, float fieldOfView, float aspectRatio, float zNear, float zFar)
 	: V3DCamera(pos, zNear, zFar), fov(fieldOfView), aspect(aspectRatio) {}
 

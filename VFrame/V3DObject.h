@@ -40,6 +40,7 @@
 
 class V3DShader;
 class V3DCamera;
+
 ///Base 3D Object.
 class V3DObject : public VBase
 {
@@ -60,6 +61,8 @@ public:
 	sf::Vector3f Position;
 	///Rotation Transform.
 	sf::Vector3f Rotation;
+	///Scale transform.
+	sf::Vector3f Scale;
 	///Last Position.
 	sf::Vector3f Last;
 	///Velocity of Rotation.
@@ -82,15 +85,24 @@ public:
 	sf::Vector3f MaxVelocity;
 	///Standard health value (object dies if health is <= 0)
 	float Health = 100;
-	
+	///Minimum size of the object bounding box.
+	sf::Vector3f Minimum;
+	///Maximum size of the object bounding box.
+	sf::Vector3f Maximum;
+	///Radius from the centre of the object as a sphere.
+	float Radius;
+	///Centre of the 3D object, useful for collisions.
+	sf::Vector3f Origin;
+
 	/**
 	* @param position Position of the object.
 	* @param rotation Angle of the object.
 	*/
-	V3DObject(sf::Vector3f position, sf::Vector3f rotation) : VBase()
+	V3DObject(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) : VBase()
 	{
 		Position = position;
 		Rotation = rotation;
+		Scale = scale;
 		MaxVelocity = sf::Vector3f(10000, 10000, 10000);
 		AngleMax = sf::Vector3f(10000, 10000, 10000);
 		type = VType::OBJECT;
@@ -105,10 +117,12 @@ public:
 	* @param rotZ Z angle of the object.
 	*/
 	V3DObject(float posX = 0, float posY = 0, float posZ = 0, 
-			float rotX = 0, float rotY = 0, float rotZ = 0) : VBase()
+			float rotX = 0, float rotY = 0, float rotZ = 0,
+			float scaleX = 1, float scaleY = 1, float scaleZ = 1) : VBase()
 	{
 		Position = sf::Vector3f(posX, posY, posZ);
 		Rotation = sf::Vector3f(rotX, rotY, rotZ);
+		Scale = sf::Vector3f(scaleX, scaleY, scaleZ);
 		MaxVelocity = sf::Vector3f(10000, 10000, 10000);
 		AngleMax = sf::Vector3f(10000, 10000, 10000);
 		type = VType::OBJECT;

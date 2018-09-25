@@ -118,8 +118,6 @@ void VBase::VLogError(const char* format, ...)
 	MessageBoxW(NULL, output, NULL, MB_TASKMODAL | MB_ICONERROR | MB_OK);
 	throw std::exception(con);
 #endif
-
-	delete[] con;
 }
 
 //Source http://www.cplusplus.com/articles/4z18T05o/

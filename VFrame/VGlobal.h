@@ -142,6 +142,8 @@ public:
 	void ToggleFullscreen();
 	///@return If the game is in fullscreen mode, function returns true.
 	bool IsFullscreen();
+	///@return True if the game is running.
+	bool IsRunning();
 	///@return Position of the mouse relative to the game screen (even when resized).
 	sf::Vector2f GetMousePosition();
 	/// @param set Sets mouse cursor to be visible or not, depending of if you want an in-game cursor.
@@ -221,6 +223,7 @@ private:
 	VState* nextState = nullptr; ///Store the next state to apply until the current state has finished processing.
 	bool fullscreen = false; ///Sets for when the game is in fullscreen mode or not.
 	bool mouseCursorVisible = true; ///Sets for when the system mouse cursor is visible.
+	bool running = true;
 
 	std::unique_ptr<VCollision> collision; ///The game's collision handling system.
 	std::function<bool(VObject*, VObject*)> rectCollision; ///Function for handling rectangle collisions.

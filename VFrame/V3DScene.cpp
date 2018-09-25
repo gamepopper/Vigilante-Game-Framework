@@ -1,6 +1,7 @@
 #ifndef VFRAME_NO_3D
 #include "V3DScene.h"
 #include "V3DObject.h"
+#include "V3DBatchModelGroup.h"
 #include "V3DShader.h"
 #include "V3DCamera.h"
 #include <cstring>
@@ -45,6 +46,41 @@ void V3DScene::Update(float dt)
 	VSUPERCLASS::Update(dt);
 }
 
+void V3DScene::RenderGroup(VGroup* group)
+{
+	for (int i = 0; i < group->Length(); i++)
+	{
+		V3DObject* base = dynamic_cast<V3DObject*>(group->GetGroupItem(i));
+
+		if (base != nullptr && base->exists && base->visible)
+		{
+			//if (Camera->BoxInView(base->Position + base->Origin, base->Minimum, base->Maximum))
+			{
+				base->UpdateShader(Shader.get(), Camera.get());
+				base->Draw(renderTex);
+			}
+		}
+		else
+		{
+			V3DBatchModelGroup* batchGroup = dynamic_cast<V3DBatchModelGroup*>(group->GetGroupItem(i));
+
+			if (batchGroup != nullptr)
+			{
+				batchGroup->UpdateShader(Camera.get(), Shader.get());
+				batchGroup->Draw(renderTex);
+			}
+			else
+			{
+				VGroup* childGroup = dynamic_cast<VGroup*>(base);
+				if (childGroup != nullptr)
+				{
+					RenderGroup(childGroup);
+				}
+			}
+		}
+	}
+}
+
 const sf::Texture& V3DScene::GetTexture()
 {
 	sf::Texture::getMaximumSize();
@@ -61,16 +97,7 @@ const sf::Texture& V3DScene::GetTexture()
 	Shader->Bind();
 	Shader->Update();
 
-	for (unsigned int i = 0; i < members.size(); i++)
-	{
-		V3DObject* base = dynamic_cast<V3DObject*>(members[i]);
-
-		if (base != nullptr && base->exists && base->visible)
-		{
-			base->UpdateShader(Shader.get(), Camera.get());
-			base->Draw(renderTex);
-		}
-	}
+	RenderGroup(this);
 
 	renderTex.display();
 	renderTex.setActive(false);

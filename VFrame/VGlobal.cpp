@@ -54,15 +54,15 @@ VGlobal::VGlobal()
 
 VGlobal::~VGlobal()
 {
-	App.reset();
+	gsm.reset();
 	Input.reset();
 	Content.reset();
 	Music.reset();
 	Sound.reset();
-	PostProcess.reset();
 	Random.reset();
 	Async.reset();
-	gsm.reset();
+	PostProcess.reset();
+	App.reset();
 }
 
 void VGlobal::SetFullscreen(bool set)
@@ -95,6 +95,11 @@ void VGlobal::ToggleFullscreen()
 bool VGlobal::IsFullscreen()
 {
 	return fullscreen;
+}
+
+bool VGlobal::IsRunning()
+{
+	return running;
 }
 
 sf::Vector2f VGlobal::GetMousePosition()
@@ -175,7 +180,7 @@ void VGlobal::ClearState()
 
 void VGlobal::Exit()
 {
-	App->close();
+	running = false;
 }
 
 bool VGlobal::OverlapAtPoint(const sf::Vector2f& point, VBase* a)

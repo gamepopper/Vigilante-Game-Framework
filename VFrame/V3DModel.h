@@ -51,6 +51,8 @@ enum class V3DVertexAttribute { Position, Normal, Color, TexCoord, COUNT };
 ///The 3D vertex structure for V3DModel.
 struct V3DVertex
 {
+	V3DVertex() {}
+
 	/**
 	* @param pos Vertex Position.
 	*/
@@ -123,11 +125,11 @@ class V3DModel : public V3DObject
 protected:
 	virtual void updateTransform();
 	///Vertex Array Object ID.
-	GLuint vao;
+	unsigned int vao;
 	///Vertex Buffer Object for Vertices.
-	GLuint vertexVBO;
+	unsigned int vertexVBO;
 	///Vertex Buffer Object for Indices.
-	GLuint indexVBO;
+	unsigned int indexVBO;
 	///Depending on input, the amount of vertices or indices that are needed to be drawn for this object.
 	unsigned int drawCount;
 	///Single texture for this model.
@@ -141,8 +143,6 @@ public:
 	
 	///Surface Material for Lighting.
 	V3DMaterial* Material;
-	///Scale Transform.
-	sf::Vector3f Scale;
 
 	/**
 	* @param position Position of the sprite.
@@ -178,13 +178,20 @@ public:
 	* @param filename The file path and name of the texture file.
 	*/
 	bool LoadTexture(const sf::String& filename);
+
+	/**
+	* Loads a texture for the 3D model. If no texture is loaded than the default texture is used.
+	* @param tex The sf::Texture object that is being used as the texture.
+	*/
+	bool LoadTexture(const sf::Texture& tex);
+
 	virtual void UpdateShader(V3DShader* shader, V3DCamera* camera);
 
 	virtual void Destroy();
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 
 	///A generated 1x1 White texture. If no texture is loaded, then this will be used.
-	static GLuint DefaultTexture;
+	static unsigned int DefaultTexture;
 	///Function to generate default texture.
 	static void GenerateDefaultTexture();
 };

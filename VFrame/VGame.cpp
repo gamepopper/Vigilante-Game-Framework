@@ -125,7 +125,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	{
 		double end = 0.0;
 
-		while (VGlobal::p()->App->isOpen())
+		while (VGlobal::p()->IsRunning())
 		{
 			VGlobal::p()->Async->ProcessSyncRequests();
 
@@ -148,6 +148,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 			}
 
 			HandleEvents();
+
 			if (focused)
 			{
 				Update(dt * deltaScale * VGlobal::p()->TimeScale);

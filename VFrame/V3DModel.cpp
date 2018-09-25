@@ -14,7 +14,7 @@
 GLuint V3DModel::DefaultTexture = 0;
 
 V3DModel::V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) :
-	V3DObject(position, rotation), vao(0), vertexVBO(0), indexVBO(0), Scale(scale)
+	V3DObject(position, rotation, scale), vao(0), vertexVBO(0), indexVBO(0)
 {
 	Material = new V3DMaterial();
 }
@@ -22,7 +22,7 @@ V3DModel::V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f sc
 V3DModel::V3DModel(float posX, float posY, float posZ,
 	float rotX, float rotY, float rotZ,
 	float scaleX, float scaleY, float scaleZ) :
-	V3DObject(posX, posY, posZ, rotX, rotY, rotZ), vao(0), vertexVBO(0), indexVBO(0), Scale(scaleX, scaleY, scaleZ)
+	V3DObject(posX, posY, posZ, rotX, rotY, rotZ), vao(0), vertexVBO(0), indexVBO(0)
 {
 	Material = new V3DMaterial();
 }
@@ -49,6 +49,53 @@ bool V3DModel::LoadModelData(const V3DVertexArray& vertexArray, const std::vecto
 {
 	drawCount = indexArray.size() > 0 ? indexArray.size() : vertexArray.size();
 
+	Minimum.x = FLT_MAX;
+	Minimum.y = FLT_MAX;
+	Minimum.z = FLT_MAX;
+	Maximum.x = -FLT_MAX;
+	Maximum.y = -FLT_MAX;
+	Maximum.z = -FLT_MAX;
+
+	for (unsigned int v = 0; v < vertexArray.size(); v++)
+	{
+		if (vertexArray[v].position.x < Minimum.x)
+			Minimum.x = vertexArray[v].position.x;
+		if (vertexArray[v].position.x > Maximum.x)
+			Maximum.x = vertexArray[v].position.x;
+		if (vertexArray[v].position.y < Minimum.y)
+			Minimum.y = vertexArray[v].position.y;
+		if (vertexArray[v].position.y > Maximum.y)
+			Maximum.y = vertexArray[v].position.y;
+		if (vertexArray[v].position.z < Minimum.z)
+			Minimum.z = vertexArray[v].position.z;
+		if (vertexArray[v].position.z > Maximum.z)
+			Maximum.z = vertexArray[v].position.z;
+	}
+
+	sf::Vector3f Size;
+	Size.x = Maximum.x - Minimum.x;
+	Size.y = Maximum.y - Minimum.y;
+	Size.z = Minimum.z - Maximum.z;
+
+	if (Size.x <= 0.0f)
+		Size.x = 0.01f;
+	if (Size.y <= 0.0f)
+		Size.y = 0.01f;
+	if (Size.z <= 0.0f)
+		Size.z = 0.01f;
+
+	Origin.x = Minimum.x + (Size.x / 2.0f);
+	Origin.y = Minimum.y + (Size.y / 2.0f);
+	Origin.z = Maximum.z + (Size.z / 2.0f);
+
+	Radius = Size.x;
+	if (Radius < Size.y)
+		Radius = Size.y;
+	if (Radius < Size.z)
+		Radius = Size.z;
+
+	Radius /= 2.0f;
+
 	auto stride = sizeof(vertexArray[0]);
 	auto normalOffset = sizeof(vertexArray[0].position);
 	auto colorOffset = normalOffset + sizeof(vertexArray[0].normal);
@@ -65,7 +112,7 @@ bool V3DModel::LoadModelData(const V3DVertexArray& vertexArray, const std::vecto
 	glCheck(glGenBuffers(1, &vertexVBO));
 
 	glCheck(glBindBuffer(GL_ARRAY_BUFFER, vertexVBO));
-	glCheck(glBufferData(GL_ARRAY_BUFFER, drawCount * stride, vertexArray.data(), GL_STATIC_DRAW));
+	glCheck(glBufferData(GL_ARRAY_BUFFER, vertexArray.size() * stride, vertexArray.data(), GL_STATIC_DRAW));
 	glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Position)));
 	glCheck(glVertexAttribPointer(static_cast<GLuint>(V3DVertexAttribute::Position),	3, GL_FLOAT, GL_FALSE,	stride, 0));
 	glCheck(glEnableVertexAttribArray(static_cast<GLuint>(V3DVertexAttribute::Normal)));
@@ -86,12 +133,19 @@ bool V3DModel::LoadModelData(const V3DVertexArray& vertexArray, const std::vecto
 	}
 
 	glCheck(glBindVertexArray(0));
+
 	return true;
 }
 
 bool V3DModel::LoadTexture(const sf::String& filename)
 {
 	return texture.loadFromFile(filename);
+}
+
+bool V3DModel::LoadTexture(const sf::Texture& tex)
+{
+	texture = tex;
+	return true;
 }
 
 void V3DModel::UpdateShader(V3DShader* shader, V3DCamera* camera)

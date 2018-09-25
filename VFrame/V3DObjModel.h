@@ -54,9 +54,9 @@ protected:
 	struct V3DModelData
 	{
 		///Vertex Buffer ID.
-		GLuint vb;
+		unsigned int vb;
 		///Vertex Array Object ID.
-		GLuint vao;
+		unsigned int vao;
 		///Number of Triangles in this model.
 		int triangleCount;
 		///Material ID of this mode.
@@ -107,9 +107,6 @@ public:
 	V3DObjModel(float posX = 0, float posY = 0, float posZ = 0,
 		float rotX = 0, float rotY = 0, float rotZ = 0,
 		float scaleX = 1, float scaleY = 1, float scaleZ = 1);
-
-	///Scale transform.
-	sf::Vector3f Scale;
 
 	/**
 	Loads Object Model from filepath.
