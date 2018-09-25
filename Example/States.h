@@ -56,7 +56,7 @@ public:
 		standardSprite->SetPositionAtCentre(VGlobal::p()->Width / 3.0f, VGlobal::p()->Height / 2.0f - 50.0f);
 
 		auto sprite1 = new VText(standardSprite->Position.x, 50, standardSprite->Size.x, "Regular Sprite", 16);
-		sprite1->SetAlignment(VTextAlign::ALIGNCENTRE);
+		sprite1->SetAlignment(VText::ALIGNCENTRE);
 
 		animatedSprite = new VSprite(0, 0);
 		animatedSprite->LoadGraphic("Example/Assets/Turret.png", true, 128, 128);
@@ -68,7 +68,7 @@ public:
 		animatedSprite->Animation.Play("start");
 
 		auto sprite2 = new VText(animatedSprite->Position.x, 50, animatedSprite->Size.x, "Animated Sprite", 16);
-		sprite2->SetAlignment(VTextAlign::ALIGNCENTRE);
+		sprite2->SetAlignment(VText::ALIGNCENTRE);
 
 		auto text = new VText(standardSprite->Position.x, 200, 400, "Press 1: Start Animation\nPress 2: Shotgun Animation\nPress 3: Railgun Animation\nPress 4: Double Barrel Animation", 21);
 
@@ -148,7 +148,7 @@ public:
 		Add(standardSprite);
 
 		auto sprite1 = new VText(standardSprite->Position.x, 80, standardSprite->Size.x, "Regular TiledSprite", 16);
-		sprite1->SetAlignment(VTextAlign::ALIGNCENTRE);
+		sprite1->SetAlignment(VText::ALIGNCENTRE);
 
 		animatedSprite = new VTiledSprite(0, 0);
 		animatedSprite->LoadGraphic("Example/Assets/Waterfall.png", true, 32, 32);
@@ -159,7 +159,7 @@ public:
 		Add(animatedSprite);
 
 		auto sprite2 = new VText(animatedSprite->Position.x, 80, animatedSprite->Size.x, "Animated TiledSprite", 16);
-		sprite2->SetAlignment(VTextAlign::ALIGNCENTRE);
+		sprite2->SetAlignment(VText::ALIGNCENTRE);
 
 		auto text = new VText(standardSprite->Position.x - 40, 300, 480, "Press WASD: Resize Standard Tiled Sprite\nPress IJKL: Resize Animated Tiled Sprite", 21);
 
@@ -202,17 +202,17 @@ public:
 		VSUPERCLASS::Initialise();
 
 		normalText = new VText(10.0f, 120.0f, VGlobal::p()->Width - 20.0f);
-		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNRIGHT, sf::Text::Italic | sf::Text::Underlined);
+		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VText::ALIGNRIGHT, sf::Text::Italic | sf::Text::Underlined);
 		normalText->SetText(L"!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬-®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſƒǺǻǼǽǾǿȘșȚțˆˇˉ˘˙˚˛˜˝;΄΅Ά·ΈΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώЁЂЃЄЅІЇЈЉЊЋЌЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяёђѓєѕіїјљњћќўџҐґẀẁẂẃẄẅỲỳ–—―‗‘’‚“”„†‡•…‰‹›‼‾⁄ⁿ₣₤₧€№™Ω⅛⅜⅝⅞←↑→↓↔↕↨∂∆∏∑−∙√∞∟∩∫≈≠≡≤≥⌂⌐⌠⌡─│┌┐└┘├┤┬┴┼═║╒╓╔╕╖╗╘╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬▀▄█▌▐░▒▓■▬▲►▼◄◊○◘◙☺☻☼♀♂♠♣♥♦♪♫ﬁﬂ");
-		normalText->SetWrap(WRAPLETTER);
+		normalText->SetWrap(VText::WRAPLETTER);
 		Add(normalText);
 
 		typedText = new VTypedText(10.0f, 50.0f, (float)VGlobal::p()->Width - 20.0f);
-		typedText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNLEFT, sf::Text::Bold);
+		typedText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VText::ALIGNLEFT, sf::Text::Bold);
 		typedText->ResetText("Religion and politics often make some people lose all perspective and give way to ranting and raving and carrying on like emotional children");
 		typedText->CursorChar = '_';
 		typedText->CursorBlinkSpeed = 0.5f;
-		typedText->SetWrap(WRAPWORD);
+		typedText->SetWrap(VText::WRAPWORD);
 		typedText->ShowCursor = true;
 		typedText->Start(0.05f);
 		Add(typedText);
@@ -490,9 +490,9 @@ public:
 		layer->Add(collideGroup);
 
 		auto overlapText = new VText(sprite1->Position.x, 100.0f, 160, "Overlap These", 16);
-		overlapText->SetAlignment(VTextAlign::ALIGNCENTRE);
+		overlapText->SetAlignment(VText::ALIGNCENTRE);
 		auto collideText = new VText(sprite3->Position.x, 100.0f, 160, "Collide These", 16);
-		collideText->SetAlignment(VTextAlign::ALIGNCENTRE);
+		collideText->SetAlignment(VText::ALIGNCENTRE);
 
 		layer->Add(overlapText);
 		layer->Add(collideText);
@@ -570,7 +570,7 @@ public:
 			float y = (i / 10) * 60.0f;
 
 			VText* t = new VText(20.0f + x, 80.0f + y - 6, 20.0f, std::to_string(i) + ":", 12);
-			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VTextAlign::ALIGNLEFT);
+			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VText::ALIGNLEFT);
 
 			VShape* b = new VShape(40.0f + x, 70.0f + y);
 			b->SetRectangle(30, 30);
@@ -587,7 +587,7 @@ public:
 			float y = (i / 10) * 60.0f;
 
 			VText* t = new VText(20.0f + x, 120.0f + y + (buttonOffset * 60.0f) - 6.0f, 20.0f, std::to_string(i) + ":", 12);
-			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VTextAlign::ALIGNLEFT);
+			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VText::ALIGNLEFT);
 
 			VShape* a = new VShape(40.0f + x, 120.0f + y + (buttonOffset * 60.0f));
 			a->SetRectangle(30, 50);
@@ -851,7 +851,7 @@ public:
 
 		std::wstringstream ws;
 		auto copyright = new VText(10.0f, VGlobal::p()->Height - 18.0f, (float)VGlobal::p()->Width - 20.0f, "Remade by hand by Gamepopper.\tOriginal logo by GridSageGames.", 14);
-		copyright->SetAlignment(VTextAlign::ALIGNCENTRE);
+		copyright->SetAlignment(VText::ALIGNCENTRE);
 
 		ws = std::wstringstream();
 		ws << L"                                                 ▄" << std::endl <<
@@ -877,7 +877,7 @@ public:
 			L"                    ╥              |└└┴╜      ┼";
 
 		VTypedText* cLayer1 = new VTypedText(10.0f, 40.0f, (float)VGlobal::p()->Width);
-		cLayer1->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(255, 255, 255, 24), VTextAlign::ALIGNLEFT);
+		cLayer1->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(255, 255, 255, 24), VText::ALIGNLEFT);
 		cLayer1->ResetText(ws.str());
 		cLayer1->CharactersPerIteration = 4;
 		cLayer1->SetSound("type", 20.0f, "Example/Assets/type.ogg");
@@ -902,7 +902,7 @@ public:
 			L"                    ¦   ˝             |  ─┼           ¦                     ";
 
 		VTypedText* cLayer2 = new VTypedText(10.0f, 40.0f, (float)VGlobal::p()->Width);
-		cLayer2->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 64), VTextAlign::ALIGNLEFT);
+		cLayer2->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 64), VText::ALIGNLEFT);
 		cLayer2->ResetText(ws.str());
 		cLayer2->CharactersPerIteration = 4;
 		Add(cLayer2);
@@ -926,7 +926,7 @@ public:
 			L"";
 
 		VTypedText* cLayer3 = new VTypedText(10.0f, 40.0f, (float)VGlobal::p()->Width);
-		cLayer3->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 200), VTextAlign::ALIGNLEFT);
+		cLayer3->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 200), VText::ALIGNLEFT);
 		cLayer3->ResetText(ws.str());
 		cLayer3->CharactersPerIteration = 4;
 		Add(cLayer3);
@@ -1206,7 +1206,7 @@ public:
 		};
 
 		auto text = new VText(15.0f, 50.0f - 4, (float)VGlobal::p()->Width - 20.0f, "", 9);
-		text->SetAlignment(VTextAlign::ALIGNLEFT);
+		text->SetAlignment(VText::ALIGNLEFT);
 		Add(text);
 
 		for (int i = 0; i < VInterpolate::NumInterpolationTypes; i++)
@@ -1384,7 +1384,7 @@ public:
 		for (int i = 0; i < TEXT_COUNT; i++)
 		{
 			VTextPath* t = new VTextPath(0.0f, (i * 18) + 8.0f, 640.0f);
-			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::ALIGNLEFT);
+			t->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VText::ALIGNLEFT);
 			t->SetText("Pixelation Art Jam - GDC 2017 ");
 
 			if (i % 2)
@@ -1502,7 +1502,7 @@ public:
 		Add(pixel);
 
 		normalText = new VText(0.0f, VGlobal::p()->Height / 2.0f, VGlobal::p()->Width * 1.0f, "GENERATING MAP");
-		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 32, sf::Color::White, VTextAlign::ALIGNCENTER);
+		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 32, sf::Color::White, VText::ALIGNCENTER);
 		Add(normalText);
 
         future = std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this));
