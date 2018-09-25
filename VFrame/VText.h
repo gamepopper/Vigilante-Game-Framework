@@ -41,26 +41,27 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/String.hpp>
 
-///Propertry for aligning the text within the text box.
-enum VTextAlign : unsigned char
-{
-	ALIGNLEFT	= 0,
-	ALIGNCENTER = 1,
-	ALIGNCENTRE = 1,
-	ALIGNRIGHT	= 2
-};
-
-///Property for the method of wrapping the text when it reaches tje edge of the box.
-enum VTextWrap : unsigned char
-{
-	WRAPNONE	= 0,
-	WRAPLETTER	= 1,
-	WRAPWORD	= 2,
-};
-
 ///Object that renders text.
 class VText : public VObject
 {
+public:
+	///Propertry for aligning the text within the text box.
+	enum VTextAlign : unsigned char
+	{
+		ALIGNLEFT = 0,
+		ALIGNCENTER = 1,
+		ALIGNCENTRE = 1,
+		ALIGNRIGHT = 2,
+	};
+
+	///Property for the method of wrapping the text when it reaches the edge of the box.
+	enum VTextWrap : unsigned char
+	{
+		WRAPNONE = 0,
+		WRAPLETTER = 1,
+		WRAPWORD = 2,
+	};
+
 protected:
 	///Vertex Data.
 	sf::VertexArray vertices;
