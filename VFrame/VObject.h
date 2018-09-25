@@ -49,7 +49,7 @@ protected:
 	virtual void updateMotion(float dt);
 	///Update the tranform.
 	virtual void updateTransform() {};
-	
+
 private:
 	/**
 	* Checks the amount of overlap between two objects in x axis.
@@ -173,10 +173,10 @@ public:
 	unsigned char Touching = SidesTouching::TOUCHNONE;
 	///Which sides on previous frame were touching (is reset on each Update call!)
 	unsigned char WasTouching = SidesTouching::TOUCHNONE;
-	
+
 	///Which sides are allowed to check collisions for.
 	unsigned char AllowCollisions = SidesTouching::TOUCHALL;
-	
+
 	///Useful for moving platforms.
 	bool CollisionXDrag = true;
 
@@ -187,7 +187,7 @@ public:
 
 	///Adds to the maximum overlap distance between objects.
 	static float SeparateBias;
-	
+
 	/**
 	* @param position Position of the sprite.
 	* @param size Size of the sprite (also sets the size of the render area).
@@ -272,7 +272,7 @@ public:
 	* @param renderBox The render area of the object. Default is the Position and Size of the VObject, but this parameter can use whatever custom one is provided.
 	* @return If the VObject is within the rectangle of the view (factoring in ScrollFactor, RotateFactor and ZoomFactor), then returns true.
 	*/
-	static bool TestInView(const sf::View& renderTargetView, sf::View& defaultView, VObject* o, sf::FloatRect& renderBox = sf::FloatRect());
+	static bool TestInView(const sf::View& renderTargetView, sf::View& defaultView, VObject* o, const sf::FloatRect& renderBox = sf::FloatRect());
 
 	/**
 	* Sets object position based on the centre of it's circular area.

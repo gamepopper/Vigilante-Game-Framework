@@ -98,10 +98,10 @@ bool VCamera::Flash(sf::Color colour, float time, std::function<void()> OnComple
 
 sf::View VCamera::GetDefaultView()
 {
-	sf::View default;
-	default.reset(sf::FloatRect(0.0f, 0.0f, view.getSize().x, view.getSize().y));
+	sf::View defaultView;
+	defaultView.reset(sf::FloatRect(0.0f, 0.0f, view.getSize().x, view.getSize().y));
 
-	return default;
+	return defaultView;
 }
 
 void VCamera::Update(float dt)
@@ -111,7 +111,7 @@ void VCamera::Update(float dt)
 	float zoom = Zoom;
 
 	sf::Vector2f HalfWidth = view.getSize() / 2.0f;
-	
+
 	if (isFollowing)
 	{
 		sf::Vector2f DeadZoneArea = HalfWidth * deadZone;
