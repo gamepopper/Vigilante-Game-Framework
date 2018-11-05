@@ -5,7 +5,7 @@
 #include "V3DLightShader.h"
 #include "V3DCamera.h"
 
-V3DLightShader::V3DLightShader(V3DCamera* camera) : cam(camera)
+V3DLightShader::V3DLightShader()
 {
 	const std::string vertexShader =
 		"#version 330\n"\
@@ -114,11 +114,6 @@ V3DLightShader::V3DLightShader(V3DCamera* camera) : cam(camera)
 		"}";
 
 	LoadFromMemory(vertexShader, fragShader);
-}
-
-void V3DLightShader::SetCamera(V3DCamera* camera)
-{
-	cam = camera;
 }
 
 void V3DLightShader::Update()

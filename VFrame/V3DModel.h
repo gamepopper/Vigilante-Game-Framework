@@ -118,7 +118,7 @@ struct V3DVertex
 ///A 3D Vertex Array is a list of 3D vertices.
 typedef std::vector<V3DVertex> V3DVertexArray;
 
-struct V3DMaterial;
+#include "V3DLight.h"
 ///Basic 3D Model with a single texture.
 class V3DModel : public V3DObject
 {

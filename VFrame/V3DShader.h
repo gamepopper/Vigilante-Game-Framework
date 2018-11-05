@@ -42,6 +42,8 @@ enum class ShaderType { Vertex, Fragment, Geometry, Count };
 enum class UniformType { TransformPVM, TransformVM, TransformM, Material, Count };
 enum class V3DVertexAttribute;
 
+class V3DCamera;
+
 ///Base class for rendering 3D shaders.
 class V3DShader
 {
@@ -125,6 +127,9 @@ public:
 	*/
 	GLuint GetUniform(UniformType type);
 
+	///@param camera Pointer to the currently referenced Camera.
+	void SetCamera(V3DCamera * camera);
+
 	///Update the shader.
 	virtual void Update();
 
@@ -139,5 +144,8 @@ private:
 	static std::string readFile(const std::string& filename);
 	static void checkError(GLuint l_shader, GLuint l_flag, bool l_program, const std::string& l_errorMsg);
 	static GLuint buildShader(const std::string& l_src, unsigned int l_type);
+
+protected:
+	V3DCamera* cam;
 };
 #endif

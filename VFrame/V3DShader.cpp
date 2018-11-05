@@ -5,6 +5,7 @@
 #include "V3DModel.h"
 #include "V3DShader.h"
 #include "V3DLight.h"
+#include "V3DCamera.h"
 #include "VBase.h"
 #include <fstream>
 
@@ -57,6 +58,9 @@ V3DShader::~V3DShader()
 
 void V3DShader::Bind() const
 {
+	if (program <= 0)
+		return;
+
 	glCheck(glUseProgram(program));
 }
 
@@ -75,12 +79,24 @@ void V3DShader::LoadFromFile(const sf::String& filename, ShaderType type)
 
 void V3DShader::LoadFromFile(const sf::String& vertexFile, const sf::String& fragmentFile)
 {
+	if (program > 0)
+	{
+		glCheck(glDeleteProgram(program));
+		program = 0;
+	}
+
 	LoadFromFile(vertexFile, ShaderType::Vertex);
 	LoadFromFile(fragmentFile, ShaderType::Fragment);
 }
 
 void V3DShader::LoadFromFile(const sf::String& vertexFile, const sf::String& geometryFile, const sf::String& fragmentFile)
 {
+	if (program > 0)
+	{
+		glCheck(glDeleteProgram(program));
+		program = 0;
+	}
+
 	LoadFromFile(vertexFile, ShaderType::Vertex);
 	LoadFromFile(fragmentFile, ShaderType::Fragment);
 	LoadFromFile(geometryFile, ShaderType::Geometry);
@@ -113,10 +129,8 @@ void V3DShader::LoadFromMemory(const std::string& shaderData, ShaderType type)
 		break;
 	}
 
-	if (program == 0)
-	{
+	if (program <= 0)
 		program = glCreateProgram();
-	}
 
 	glCheck(glAttachShader(program, shader[static_cast<unsigned int>(type)]));
 	glCheck(glBindAttribLocation(program, static_cast<GLuint>(V3DVertexAttribute::Position), "position"));
@@ -137,12 +151,24 @@ void V3DShader::LoadFromMemory(const std::string& shaderData, ShaderType type)
 
 void V3DShader::LoadFromMemory(const std::string& vertexShader, const std::string& fragmentShader)
 {
+	if (program > 0)
+	{
+		glCheck(glDeleteProgram(program));
+		program = 0;
+	}
+
 	LoadFromMemory(vertexShader, ShaderType::Vertex);
 	LoadFromMemory(fragmentShader, ShaderType::Fragment);
 }
 
 void V3DShader::LoadFromMemory(const std::string& vertexShader, const std::string& geometryShader, const std::string& fragmentShader)
 {
+	if (program > 0)
+	{
+		glCheck(glDeleteProgram(program));
+		program = 0;
+	}
+
 	LoadFromMemory(vertexShader, ShaderType::Vertex);
 	LoadFromMemory(fragmentShader, ShaderType::Fragment);
 	LoadFromMemory(geometryShader, ShaderType::Geometry);
@@ -150,17 +176,28 @@ void V3DShader::LoadFromMemory(const std::string& vertexShader, const std::strin
 
 void V3DShader::SetAttribute(V3DVertexAttribute Attribute, const std::string& name)
 {
+	if (program <= 0)
+		return;
+
 	glCheck(glBindAttribLocation(program, static_cast<GLuint>(Attribute), name.c_str()));
 }
 
 void V3DShader::Update()
 {
-	if (program == 0)
+	if (program <= 0)
 		LoadFromMemory(defaultVertexShader, defaultFragShader);
+}
+
+void V3DShader::SetCamera(V3DCamera* camera)
+{
+	cam = camera;
 }
 
 void V3DShader::UpdateUniform(UniformType type, void* data)
 {
+	if (program <= 0)
+		return;
+
 	if (uniform[static_cast<int>(type)] < 0)
 		return;
 

@@ -44,16 +44,10 @@ class V3DCamera;
 class V3DLightShader : public V3DShader
 {
 public:
-	///@param camera Pointer the scene camera.
-	V3DLightShader(V3DCamera* camera);
+	V3DLightShader();
 	///List of lights.
 	std::unique_ptr<V3DLight> Lights[LIGHT_COUNT];
 
-	///@param camera Pointer the scene camera.
-	void SetCamera(V3DCamera* camera);
 	virtual void Update();
-
-private:
-	V3DCamera* cam;
 };
 #endif

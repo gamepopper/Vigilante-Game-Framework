@@ -8,18 +8,38 @@
 
 #pragma comment(lib, "glu32.lib")
 
-V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize), contextSettings(settings)
+V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(maxSize), contextSettings(settings)
 {
-	postProcessTex.create(width, height);
 	renderTex.create(width, height, settings);
+	Sprite->Position = sf::Vector2f(x, y);
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 }
 
-V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(position, size, maxSize), contextSettings(settings)
+V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(maxSize), contextSettings(settings)
 {
-	postProcessTex.create(size.x, size.y);
 	renderTex.create(size.x, size.y, settings);
+	Sprite->Position = position;
 	Sprite->Size = sf::Vector2f(size);
+}
+
+void V3DScene::SetActive(bool value)
+{
+	renderTex.setActive(value);
+}
+
+void V3DScene::PushGLStates()
+{
+	renderTex.pushGLStates();
+}
+
+void V3DScene::PopGLStates()
+{
+	renderTex.popGLStates();
+}
+
+void V3DScene::ResetGLStates()
+{
+	renderTex.resetGLStates();
 }
 
 #include "V3DModel.h"
@@ -54,10 +74,10 @@ void V3DScene::RenderGroup(VGroup* group)
 
 		if (base != nullptr && base->exists && base->visible)
 		{
-			//if (Camera->BoxInView(base->Position + base->Origin, base->Minimum, base->Maximum))
+			if (Camera[CurrentCamera]->BoxInView(base->Position, base->GetMinimum(), base->GetMaximum()))
 			{
-				base->UpdateShader(Shader.get(), Camera.get());
-				base->Draw(renderTex);
+				base->UpdateShader(Shader.get(), Camera[CurrentCamera].get());
+				base->Draw(renderTex); //If Renderable 3D Object
 			}
 		}
 		else
@@ -66,15 +86,19 @@ void V3DScene::RenderGroup(VGroup* group)
 
 			if (batchGroup != nullptr)
 			{
-				batchGroup->UpdateShader(Camera.get(), Shader.get());
+				batchGroup->UpdateShader(Camera[CurrentCamera].get(), Shader.get()); //If RenderBatch Group
 				batchGroup->Draw(renderTex);
 			}
 			else
 			{
-				VGroup* childGroup = dynamic_cast<VGroup*>(base);
+				VGroup* childGroup = dynamic_cast<VGroup*>(group->GetGroupItem(i));
 				if (childGroup != nullptr)
 				{
-					RenderGroup(childGroup);
+					RenderGroup(childGroup); //If regular group.
+				}
+				else
+				{
+					group->GetGroupItem(i)->Draw(renderTex); //If nothing else, just draw it.
 				}
 			}
 		}
@@ -87,15 +111,25 @@ const sf::Texture& V3DScene::GetTexture()
 
 	renderTex.setActive(true);
 	renderTex.clear(BackgroundTint);
-	glCheck(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-	glCheck(glViewport(0, 0, renderTex.getSize().x, renderTex.getSize().y));
 
+	sf::IntRect Viewport(
+		(int)(Camera[CurrentCamera]->Viewport.left		* renderTex.getSize().x),
+		(int)(Camera[CurrentCamera]->Viewport.top		* renderTex.getSize().y),
+		(int)(Camera[CurrentCamera]->Viewport.width		* renderTex.getSize().x),
+		(int)(Camera[CurrentCamera]->Viewport.height	* renderTex.getSize().y)
+	);
+
+	glCheck(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+	glCheck(glViewport(Viewport.left, Viewport.top, Viewport.width, Viewport.height));
+	glCheck(glEnable(GL_BLEND));
+	glCheck(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 	glCheck(glEnable(GL_DEPTH_TEST));
 	glCheck(glEnable(GL_CULL_FACE));
 	glCheck(glCullFace(GL_BACK));
 
-	Shader->Bind();
+	Shader->SetCamera(Camera[CurrentCamera].get());
 	Shader->Update();
+	Shader->Bind();
 
 	RenderGroup(this);
 
@@ -105,16 +139,46 @@ const sf::Texture& V3DScene::GetTexture()
 	return renderTex.getTexture();
 }
 
+const sf::Texture V3DScene::GetTexture(V3DShader* shader, V3DCamera* camera)
+{
+	std::unique_ptr<V3DShader> uShader(shader);
+	std::unique_ptr<V3DCamera> uCamera(camera);
+
+	if (Shader.get() != shader)
+		Shader.swap(uShader);
+
+	if (Camera[CurrentCamera].get() != camera)
+		Camera[CurrentCamera].swap(uCamera);
+
+	GetTexture();
+
+	if (Shader.get() != shader)
+		Shader.swap(uShader);
+
+	if (Camera[CurrentCamera].get() != camera)
+		Camera[CurrentCamera].swap(uCamera);
+
+	uShader.release();
+	uCamera.release();
+
+	return renderTex.getTexture();
+}
+
 void V3DScene::Draw(sf::RenderTarget& RenderTarget)
 {
 	if (!visible)
 		return;
 
-	sf::Texture texture = GetTexture();
+	GetTexture();
 
+	RenderTarget.resetGLStates();
 	if (PostEffect != nullptr && VPostEffectBase::isSupported())
 	{
-		postProcessTex.clear(sf::Color::Transparent);
+		if (postProcessTex.getSize().x == 0 || postProcessTex.getSize().y == 0)
+		{
+			postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
+		}
+
 		PostEffect->Apply(renderTex.getTexture(), postProcessTex);
 		postProcessTex.display();
 
@@ -122,10 +186,9 @@ void V3DScene::Draw(sf::RenderTarget& RenderTarget)
 	}
 	else
 	{
-		updateTexture(texture);
+		updateTexture(renderTex.getTexture());
 	}
 
-	RenderTarget.resetGLStates();
 	Sprite->Draw(RenderTarget);
 }
 #endif

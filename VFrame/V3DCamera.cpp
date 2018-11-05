@@ -8,12 +8,13 @@
 static const float MaxVerticalAngle = 85.0f; //must be less than 90 to avoid gimbal lock
 
 V3DCamera::V3DCamera(const sf::Vector3f& pos, float zNear, float zFar)
-	: Position(pos), fnear(zNear), ffar(zFar) {}
+	: Position(pos), fnear(zNear), ffar(zFar), Viewport(0.0f, 0.0f, 1.0f, 1.0f) {}
 
 glm::mat4 V3DCamera::Orientation() const
 {
 	glm::mat4 orientation = glm::rotate(glm::radians(Rotation.x), glm::vec3(1, 0, 0));
 	orientation *= glm::rotate(glm::radians(Rotation.y), glm::vec3(0, 1, 0));
+	orientation *= glm::rotate(glm::radians(Rotation.z), glm::vec3(0, 0, 1));
 	return orientation;
 }
 
@@ -60,6 +61,7 @@ sf::Vector3f V3DCamera::Up() const
 void V3DCamera::normalizeAngles()
 {
 	Rotation.y = fmodf(Rotation.y + 360.0f, 360.0f);
+	Rotation.z = fmodf(Rotation.z + 360.0f, 360.0f);
 
 	Rotation.x = fminf(MaxVerticalAngle, Rotation.x);
 	Rotation.x = fmaxf(-MaxVerticalAngle, Rotation.x);
@@ -97,11 +99,12 @@ bool V3DCamera::BoxInView(sf::Vector3f p, sf::Vector3f min, sf::Vector3f max)
 {
 	updatePlanes();
 
-	sf::Vector3f positive;
-	sf::Vector3f negative;
 
 	for (int i = 0; i < 6; i++)
 	{
+		sf::Vector3f positive = min;
+		sf::Vector3f negative = max;
+		
 		const float pos = planes[i].w;
 		const glm::vec3 normal = glm::vec3(planes[i]);
 
@@ -126,12 +129,12 @@ bool V3DCamera::BoxInView(sf::Vector3f p, sf::Vector3f min, sf::Vector3f max)
 		positive += p;
 		negative += p;
 
-		float dotPositive = glm::dot(normal, glm::vec3(positive.x, positive.y, positive.z)) + pos;
-		if (dotPositive < -0.f)
+		float dotPositive = glm::dot(normal, glm::vec3(positive.x, positive.y, positive.z));
+		if (dotPositive + pos < 0.f)
 			return false;
 
-		//float dotNegative = glm::dot(normal, glm::vec3(negative.x, negative.y, negative.z)) + pos;
-		//if (dotNegative < -0.f)
+		//float dotNegative = glm::dot(normal, glm::vec3(negative.x, negative.y, negative.z));
+		//if (dotNegative + pos < -0.f)
 		//	return true;
 	}
 
@@ -162,39 +165,40 @@ void V3DCamera::updatePlanes()
 	clipMatrix[2][3] = v[3][0] * p[0][2] + v[3][1] * p[1][2] + v[3][2] * p[2][2] + v[3][3] * p[3][2];
 	clipMatrix[3][3] = v[3][0] * p[0][3] + v[3][1] * p[1][3] + v[3][2] * p[2][3] + v[3][3] * p[3][3];
 
-	planes[PRIGHT].x = clipMatrix[3][0] - clipMatrix[0][0];
-	planes[PRIGHT].y = clipMatrix[3][1] - clipMatrix[0][1];
-	planes[PRIGHT].z = clipMatrix[3][2] - clipMatrix[0][2];
-	planes[PRIGHT].w = clipMatrix[3][3] - clipMatrix[0][3];
+	planes[PRIGHT].x = clipMatrix[3][0] + clipMatrix[0][0];
+	planes[PRIGHT].y = clipMatrix[3][1] + clipMatrix[0][1];
+	planes[PRIGHT].z = clipMatrix[3][2] + clipMatrix[0][2];
+	planes[PRIGHT].w = clipMatrix[3][3] + clipMatrix[0][3];
 
-	planes[PLEFT].x = clipMatrix[3][0] + clipMatrix[0][0];
-	planes[PLEFT].y = clipMatrix[3][1] + clipMatrix[0][1];
-	planes[PLEFT].z = clipMatrix[3][2] + clipMatrix[0][2];
-	planes[PLEFT].w = clipMatrix[3][3] + clipMatrix[0][3];
+	planes[PLEFT].x = clipMatrix[3][0] - clipMatrix[0][0];
+	planes[PLEFT].y = clipMatrix[3][1] - clipMatrix[0][1];
+	planes[PLEFT].z = clipMatrix[3][2] - clipMatrix[0][2];
+	planes[PLEFT].w = clipMatrix[3][3] - clipMatrix[0][3];
 
-	planes[PBOTTOM].x = clipMatrix[3][0] + clipMatrix[1][0];
-	planes[PBOTTOM].y = clipMatrix[3][1] + clipMatrix[1][1];
-	planes[PBOTTOM].z = clipMatrix[3][2] + clipMatrix[1][2];
-	planes[PBOTTOM].w = clipMatrix[3][3] + clipMatrix[1][3];
+	planes[PBOTTOM].x = clipMatrix[3][0] - clipMatrix[1][0];
+	planes[PBOTTOM].y = clipMatrix[3][1] - clipMatrix[1][1];
+	planes[PBOTTOM].z = clipMatrix[3][2] - clipMatrix[1][2];
+	planes[PBOTTOM].w = clipMatrix[3][3] - clipMatrix[1][3];
 
-	planes[PTOP].x = clipMatrix[3][0] - clipMatrix[1][0];
-	planes[PTOP].y = clipMatrix[3][1] - clipMatrix[1][1];
-	planes[PTOP].z = clipMatrix[3][2] - clipMatrix[1][2];
-	planes[PTOP].w = clipMatrix[3][3] - clipMatrix[1][3];
+	planes[PTOP].x = clipMatrix[3][0] + clipMatrix[1][0];
+	planes[PTOP].y = clipMatrix[3][1] + clipMatrix[1][1];
+	planes[PTOP].z = clipMatrix[3][2] + clipMatrix[1][2];
+	planes[PTOP].w = clipMatrix[3][3] + clipMatrix[1][3];
 
-	planes[PNEAR].x = clipMatrix[3][0] - clipMatrix[2][0];
-	planes[PNEAR].y = clipMatrix[3][1] - clipMatrix[2][1];
-	planes[PNEAR].z = clipMatrix[3][2] - clipMatrix[2][2];
-	planes[PNEAR].w = clipMatrix[3][3] - clipMatrix[2][3];
+	planes[PNEAR].x = clipMatrix[3][0] + clipMatrix[2][0];
+	planes[PNEAR].y = clipMatrix[3][1] + clipMatrix[2][1];
+	planes[PNEAR].z = clipMatrix[3][2] + clipMatrix[2][2];
+	planes[PNEAR].w = clipMatrix[3][3] + clipMatrix[2][3];
 
-	planes[PFAR].x = clipMatrix[3][0] + clipMatrix[2][0];
-	planes[PFAR].y = clipMatrix[3][1] + clipMatrix[2][1];
-	planes[PFAR].z = clipMatrix[3][2] + clipMatrix[2][2];
-	planes[PFAR].w = clipMatrix[3][3] + clipMatrix[2][3];
+	planes[PFAR].x = clipMatrix[3][0] - clipMatrix[2][0];
+	planes[PFAR].y = clipMatrix[3][1] - clipMatrix[2][1];
+	planes[PFAR].z = clipMatrix[3][2] - clipMatrix[2][2];
+	planes[PFAR].w = clipMatrix[3][3] - clipMatrix[2][3];
 
 	for (int i = 0; i < 6; i++)
 	{
-		planes[i] = glm::normalize(planes[i]);
+		float mag = glm::length(glm::vec3(planes[i]));
+		planes[i] /= mag;
 	}
 }
 

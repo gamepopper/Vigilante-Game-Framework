@@ -49,44 +49,37 @@ bool V3DModel::LoadModelData(const V3DVertexArray& vertexArray, const std::vecto
 {
 	drawCount = indexArray.size() > 0 ? indexArray.size() : vertexArray.size();
 
-	Minimum.x = FLT_MAX;
-	Minimum.y = FLT_MAX;
-	Minimum.z = FLT_MAX;
-	Maximum.x = -FLT_MAX;
-	Maximum.y = -FLT_MAX;
-	Maximum.z = -FLT_MAX;
+	minimum.x = FLT_MAX;
+	minimum.y = FLT_MAX;
+	minimum.z = FLT_MAX;
+	maximum.x = -FLT_MAX;
+	maximum.y = -FLT_MAX;
+	maximum.z = -FLT_MAX;
 
 	for (unsigned int v = 0; v < vertexArray.size(); v++)
 	{
-		if (vertexArray[v].position.x < Minimum.x)
-			Minimum.x = vertexArray[v].position.x;
-		if (vertexArray[v].position.x > Maximum.x)
-			Maximum.x = vertexArray[v].position.x;
-		if (vertexArray[v].position.y < Minimum.y)
-			Minimum.y = vertexArray[v].position.y;
-		if (vertexArray[v].position.y > Maximum.y)
-			Maximum.y = vertexArray[v].position.y;
-		if (vertexArray[v].position.z < Minimum.z)
-			Minimum.z = vertexArray[v].position.z;
-		if (vertexArray[v].position.z > Maximum.z)
-			Maximum.z = vertexArray[v].position.z;
+		if (vertexArray[v].position.x < minimum.x)
+			minimum.x = vertexArray[v].position.x;
+		if (vertexArray[v].position.x > maximum.x)
+			maximum.x = vertexArray[v].position.x;
+		if (vertexArray[v].position.y < minimum.y)
+			minimum.y = vertexArray[v].position.y;
+		if (vertexArray[v].position.y > maximum.y)
+			maximum.y = vertexArray[v].position.y;
+		if (vertexArray[v].position.z < minimum.z)
+			minimum.z = vertexArray[v].position.z;
+		if (vertexArray[v].position.z > maximum.z)
+			maximum.z = vertexArray[v].position.z;
 	}
 
 	sf::Vector3f Size;
-	Size.x = Maximum.x - Minimum.x;
-	Size.y = Maximum.y - Minimum.y;
-	Size.z = Minimum.z - Maximum.z;
+	Size.x = maximum.x - minimum.x;
+	Size.y = maximum.y - minimum.y;
+	Size.z = minimum.z - maximum.z;
 
-	if (Size.x <= 0.0f)
-		Size.x = 0.01f;
-	if (Size.y <= 0.0f)
-		Size.y = 0.01f;
-	if (Size.z <= 0.0f)
-		Size.z = 0.01f;
-
-	Origin.x = Minimum.x + (Size.x / 2.0f);
-	Origin.y = Minimum.y + (Size.y / 2.0f);
-	Origin.z = Maximum.z + (Size.z / 2.0f);
+	Origin.x = minimum.x + (Size.x / 2.0f);
+	Origin.y = minimum.y + (Size.y / 2.0f);
+	Origin.z = minimum.z + (Size.z / 2.0f);
 
 	Radius = Size.x;
 	if (Radius < Size.y)
@@ -185,6 +178,8 @@ void V3DModel::Destroy()
 
 void V3DModel::Draw(sf::RenderTarget& RenderTarget)
 {
+	VSUPERCLASS::Draw(RenderTarget);
+
 	if (texture.getSize().x == 0 || texture.getSize().y == 0)
 		glCheck(glBindTexture(GL_TEXTURE_2D, DefaultTexture));
 	else

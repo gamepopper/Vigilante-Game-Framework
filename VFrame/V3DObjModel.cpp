@@ -24,7 +24,7 @@ V3DObjModel::V3DObjModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vecto
 V3DObjModel::V3DObjModel(float posX, float posY, float posZ,
 	float rotX, float rotY, float rotZ,
 	float scaleX, float scaleY, float scaleZ) :
-	V3DObject(posX, posY, posZ, rotX, rotY, rotZ)
+	V3DObject(posX, posY, posZ, rotX, rotY, rotZ, scaleX, scaleY, scaleZ)
 {
 	material = new V3DMaterial();
 }
@@ -57,12 +57,12 @@ bool V3DObjModel::LoadModelData(const char* filename)
 	materials.clear();
 	textures.clear();
 
-	Minimum.x = FLT_MAX;
-	Minimum.y = FLT_MAX;
-	Minimum.z = FLT_MAX;
-	Maximum.x = -FLT_MAX;
-	Maximum.y = -FLT_MAX;
-	Maximum.z = -FLT_MAX;
+	minimum.x = FLT_MAX;
+	minimum.y = FLT_MAX;
+	minimum.z = FLT_MAX;
+	maximum.x = -FLT_MAX;
+	maximum.y = -FLT_MAX;
+	maximum.z = -FLT_MAX;
 
 	std::string path = GetBaseDir(filename);
 	path += "/";
@@ -189,17 +189,17 @@ bool V3DObjModel::LoadModelData(const char* filename)
 						diffuse[1],
 						diffuse[2]
 					};
-					float len2 = c[0] * c[0] + c[1] * c[1] + c[2] * c[2];
+					/*float len2 = c[0] * c[0] + c[1] * c[1] + c[2] * c[2];
 					if (len2 > 0.0f) {
 						float len = sqrtf(len2);
 
 						c[0] /= len;
 						c[1] /= len;
 						c[2] /= len;
-					}
-					vb.push_back(c[0] * 0.5f + 0.5f);
-					vb.push_back(c[1] * 0.5f + 0.5f);
-					vb.push_back(c[2] * 0.5f + 0.5f);
+					}*/
+					vb.push_back(c[0]);
+					vb.push_back(c[1]);
+					vb.push_back(c[2]);
 					vb.push_back(1.0f);
 
 					vb.push_back(tc[k][0]);
@@ -249,18 +249,18 @@ bool V3DObjModel::LoadModelData(const char* filename)
 
 			for (unsigned int v = 0; v < vb.size(); v += 10)
 			{
-				if (vb[v + 0] < Minimum.x)
-					Minimum.x = vb[v + 0];
-				if (vb[v + 0] > Maximum.x)
-					Minimum.x = vb[v + 0];
-				if (vb[v + 1] < Minimum.y)
-					Minimum.y = vb[v + 1];
-				if (vb[v + 1] > Maximum.y)
-					Maximum.y = vb[v + 1];
-				if (vb[v + 2] < Minimum.z)
-					Minimum.z = vb[v + 2];
-				if (vb[v + 2] > Maximum.z)
-					Maximum.z = vb[v + 2];
+				if (vb[v + 0] < minimum.x)
+					minimum.x = vb[v + 0];
+				if (vb[v + 0] > maximum.x)
+					maximum.x = vb[v + 0];
+				if (vb[v + 1] < minimum.y)
+					minimum.y = vb[v + 1];
+				if (vb[v + 1] > maximum.y)
+					maximum.y = vb[v + 1];
+				if (vb[v + 2] < minimum.z)
+					minimum.z = vb[v + 2];
+				if (vb[v + 2] > maximum.z)
+					maximum.z = vb[v + 2];
 			}
 		}
 	}
@@ -270,20 +270,13 @@ bool V3DObjModel::LoadModelData(const char* filename)
 	}
 
 	sf::Vector3f Size;
-	Size.x = Maximum.x - Minimum.x;
-	Size.y = Maximum.y - Minimum.y;
-	Size.z = Minimum.z - Maximum.z;
+	Size.x = maximum.x - minimum.x;
+	Size.y = maximum.y - minimum.y;
+	Size.z = minimum.z - maximum.z;
 
-	if (Size.x <= 0.0f)
-		Size.x = 0.01f;
-	if (Size.y <= 0.0f)
-		Size.y = 0.01f;
-	if (Size.z <= 0.0f)
-		Size.z = 0.01f;
-
-	Origin.x = Minimum.x + (Size.x / 2.0f);
-	Origin.y = Minimum.y + (Size.y / 2.0f);
-	Origin.z = Maximum.z + (Size.z / 2.0f);
+	Origin.x = minimum.x + (Size.x / 2.0f);
+	Origin.y = minimum.y + (Size.y / 2.0f);
+	Origin.z = maximum.z + (Size.z / 2.0f);
 
 	Radius = Size.x;
 	if (Radius < Size.y)
@@ -372,6 +365,8 @@ void V3DObjModel::Destroy()
 
 void V3DObjModel::Draw(sf::RenderTarget& RenderTarget)
 {
+	VSUPERCLASS::Draw(RenderTarget);
+
 	for (unsigned int i = 0; i < modelData.size(); i++)
 	{
 		V3DModelData &md = modelData[i];

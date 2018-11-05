@@ -51,6 +51,9 @@ public:
 	///Used to call parent class functions when they are overrided in class.
 	typedef VRenderGroup VSUPERCLASS;
 
+	///Current Camera Index for rendering.
+	unsigned int CurrentCamera = 0;
+
 	/**
 	* @param x X position of the sprite.
 	* @param y Y position of the sprite
@@ -72,10 +75,18 @@ public:
 	///OpenGL Shader for the entire scene.
 	std::unique_ptr<V3DShader> Shader;
 	///Main 3D Camera for this scene.
-	std::unique_ptr<V3DCamera> Camera;
+	std::vector<std::unique_ptr<V3DCamera>> Camera;
 
-	//@return The rendered scene as a texture.
+	///@return The rendered scene as a texture.
 	virtual const sf::Texture& GetTexture();
+
+	/**
+	* Renders the scene 
+	* @param width Width of the sprite and texture area.
+	* @param height Height of the sprite and texture area.
+	* @return The rendered scene as a texture.
+	*/
+	const sf::Texture GetTexture(V3DShader* shader, V3DCamera* camera);
 
 	/**
 	* Resizes sprite and render area of the group.
@@ -83,6 +94,15 @@ public:
 	* @param height Height of the sprite and texture area.
 	*/
 	virtual void Resize(int width, int height) override;
+
+	///@param if true, sets the scene to be the current active context.
+	void SetActive(bool value = true);
+	///Push all the GL States up the stack to preserve them from any changes.
+	void PushGLStates();
+	///Pop all the GL States off the stack to restore them.
+	void PopGLStates();
+	///Reset all the GL States.
+	void ResetGLStates();
 
 	virtual void Destroy();
 	virtual void Update(float dt);

@@ -45,7 +45,7 @@
 
 #include "depend/glm/matrix.hpp"
 
-struct V3DMaterial;
+#include "V3DLight.h"
 ///3D Model Class for Loading and Rendering models in the .OBJ file format using TinyOBJLoader.
 class V3DObjModel : public V3DObject
 {

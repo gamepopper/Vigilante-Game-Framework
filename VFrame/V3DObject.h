@@ -53,6 +53,10 @@ protected:
 	virtual void updateMotion(float dt);
 	///Update the tranform.
 	virtual void updateTransform() {};
+	///Minimum size of the object bounding box.
+	sf::Vector3f minimum;
+	///Maximum size of the object bounding box.
+	sf::Vector3f maximum;
 
 public:
 	///Used to call parent class functions when they are overrided in class.
@@ -85,10 +89,6 @@ public:
 	sf::Vector3f MaxVelocity;
 	///Standard health value (object dies if health is <= 0)
 	float Health = 100;
-	///Minimum size of the object bounding box.
-	sf::Vector3f Minimum;
-	///Maximum size of the object bounding box.
-	sf::Vector3f Maximum;
 	///Radius from the centre of the object as a sphere.
 	float Radius;
 	///Centre of the 3D object, useful for collisions.
@@ -127,6 +127,11 @@ public:
 		AngleMax = sf::Vector3f(10000, 10000, 10000);
 		type = VType::OBJECT;
 	}
+
+	///@return Minimum size of the object bounding box.
+	sf::Vector3f GetMinimum();
+	///@return Maximum size of the object bounding box.
+	sf::Vector3f GetMaximum();
 
 	/**
 	* Resets object

@@ -52,7 +52,7 @@ public:
 	///The Camera Position.
 	sf::Vector3f Position;
 	///The Camera Angle.
-	sf::Vector2f Rotation;
+	sf::Vector3f Rotation;
 	///@return Calculated the rotation matrix.
 	glm::mat4 Orientation() const;
 	///@param pos The target position for the camera to look at.
@@ -69,6 +69,8 @@ public:
 	sf::Vector3f Right() const;
 	///Camera's Up Vector.
 	sf::Vector3f Up() const;
+	///Render Viewport Area to apply a Renderscene.
+	sf::FloatRect Viewport;
 
 	/**
 	* @param p Position of 3D Point.

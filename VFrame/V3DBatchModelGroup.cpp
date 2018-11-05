@@ -28,13 +28,13 @@ void V3DBatchModelGroup::Draw(sf::RenderTarget& RenderTarget)
 
 		if (base != nullptr && base->exists && base->visible)
 		{
-			//if (currentCamera->BoxInView(base->Position, baseObject->Minimum, baseObject->Maximum))
+			if (currentCamera->BoxInView(base->Position, baseObject->GetMinimum(), baseObject->GetMaximum()))
 			{
 				baseObject->Position = base->Position;
 				baseObject->Rotation = base->Rotation;
 				baseObject->Scale = base->Scale;
-				baseObject->Update(0.0f);
 				baseObject->UpdateShader(currentShader, currentCamera);
+				baseObject->Update(0.0f);
 				baseObject->Draw(RenderTarget);
 			}
 		}

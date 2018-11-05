@@ -71,6 +71,71 @@ void V3DObject::updateMotion(float dt)
 	Position.z += delta;
 }
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include "depend/glm/glm.hpp" 
+#include "depend/glm/gtx/transform.hpp"
+sf::Vector3f V3DObject::GetMinimum()
+{
+	if (Rotation != sf::Vector3f())
+	{
+		glm::mat4 matrix_scale = glm::scale(glm::vec3(Scale.x, Scale.y, Scale.z));
+		// Represent each stored rotation as a different matrix, because 
+		// we store angles. 
+		//          x  y  z 
+		glm::mat4 matrix_rotX = glm::rotate(-Rotation.x * (3.1415926f / 180.0f), glm::vec3(1, 0, 0));
+		glm::mat4 matrix_rotY = glm::rotate(-Rotation.y * (3.1415926f / 180.0f), glm::vec3(0, 1, 0));
+		glm::mat4 matrix_rotZ = glm::rotate(-Rotation.z * (3.1415926f / 180.0f), glm::vec3(0, 0, 1));
+		// Create a rotation matrix. 
+		// Multiply in reverse order it needs to be applied. 
+		glm::mat4 matrix_rotation = matrix_rotZ * matrix_rotY * matrix_rotX;
+		// Apply transforms in reverse order they need to be applied in. 
+		glm::mat4 transform = matrix_rotation * matrix_scale;
+
+		glm::vec3 min = glm::vec3(glm::vec4(minimum.x, minimum.y, minimum.z, 0.0f) * transform);
+		glm::vec3 max = glm::vec3(glm::vec4(maximum.x, maximum.y, maximum.z, 0.0f) * transform);
+
+		sf::Vector3f result = sf::Vector3f(
+			min.x < max.x ? min.x : max.x,
+			min.y < max.y ? min.y : max.y,
+			min.z < max.z ? min.z : max.z);
+
+		return result;
+	}
+
+	return minimum;
+}
+
+sf::Vector3f V3DObject::GetMaximum()
+{
+	if (Rotation != sf::Vector3f())
+	{
+		glm::mat4 matrix_scale = glm::scale(glm::vec3(Scale.x, Scale.y, Scale.z));
+		// Represent each stored rotation as a different matrix, because 
+		// we store angles. 
+		//          x  y  z 
+		glm::mat4 matrix_rotX = glm::rotate(Rotation.x * (3.1415926f / 180.0f), glm::vec3(1, 0, 0));
+		glm::mat4 matrix_rotY = glm::rotate(Rotation.y * (3.1415926f / 180.0f), glm::vec3(0, 1, 0));
+		glm::mat4 matrix_rotZ = glm::rotate(Rotation.z * (3.1415926f / 180.0f), glm::vec3(0, 0, 1));
+		// Create a rotation matrix. 
+		// Multiply in reverse order it needs to be applied. 
+		glm::mat4 matrix_rotation = matrix_rotZ * matrix_rotY * matrix_rotX;
+		// Apply transforms in reverse order they need to be applied in. 
+		glm::mat4 transform = matrix_rotation * matrix_scale;
+
+		glm::vec3 min = glm::vec3(glm::vec4(minimum.x, minimum.y, minimum.z, 0.0f) * transform);
+		glm::vec3 max = glm::vec3(glm::vec4(maximum.x, maximum.y, maximum.z, 0.0f) * transform);
+
+		sf::Vector3f result = sf::Vector3f(
+			min.x > max.x ? min.x : max.x,
+			min.y > max.y ? min.y : max.y,
+			min.z > max.z ? min.z : max.z);
+
+		return result;
+	}
+
+	return maximum;
+}
+
 void V3DObject::UpdateShader(V3DShader* shader, V3DCamera* camera)
 {
 
