@@ -65,6 +65,21 @@ VGlobal::~VGlobal()
 	App.reset();
 }
 
+void VGlobal::SetTitle(const char* newTitle)
+{
+	App->setTitle(newTitle);
+	title = newTitle;
+}
+
+void VGlobal::SetTitle(std::string newTitle)
+{
+	SetTitle(newTitle.c_str());
+}
+
+const char* VGlobal::GetTitle()
+{
+	return title;
+}
 void VGlobal::SetFullscreen(bool set)
 {
 	if (set && !fullscreen)

@@ -100,8 +100,6 @@ public:
 	sf::Color BackgroundColor = sf::Color::Black;
 	///Speed of GameTime by manipulating the Delta Time. (e.g. 1 is default speed, 2 is 2x speed)
 	float TimeScale = 1.0f;
-	///Title displayed on the Window (updating the Window title should be done using App->SetTitle().
-	sf::String Title;
 	///Set the game to pause when going out of focus.
 	bool FocusPause = true;
 	///VGame Area Width (Read Only)	
@@ -136,6 +134,12 @@ public:
 	std::unique_ptr<VAsync> Async;
 	///Current Window Style being used (set with sf::Style).
 	int WindowStyle;
+	///@param newTitle The new text the window should display in the title bar.
+	void SetTitle(const char* newTitle);
+	///@param newTitle The new text the window should display in the title bar.
+	void SetTitle(std::string newTitle);
+	///@return The current text on the window's title bar.
+	const char* GetTitle();
 	///@param set Set the game to fullscreen mode or not.
 	void SetFullscreen(bool set);
 	///Toggles from fullscreen to window mode.
@@ -224,6 +228,7 @@ private:
 	bool fullscreen = false; ///Sets for when the game is in fullscreen mode or not.
 	bool mouseCursorVisible = true; ///Sets for when the system mouse cursor is visible.
 	bool running = true;
+	const char* title = "";
 
 	std::unique_ptr<VCollision> collision; ///The game's collision handling system.
 	std::function<bool(VObject*, VObject*)> rectCollision; ///Function for handling rectangle collisions.

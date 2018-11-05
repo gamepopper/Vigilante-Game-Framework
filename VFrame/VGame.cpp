@@ -90,7 +90,6 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 
 int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, int windowheight, int screenwidth, int screenheight, float fps, int flags, const sf::ContextSettings& settings)
 {
-	VGlobal::p()->Title = title;
 	VGlobal::p()->Width = screenwidth;
 	VGlobal::p()->Height = screenheight;
 	VGlobal::p()->FPS = fps;
