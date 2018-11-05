@@ -27,7 +27,6 @@ VRenderGroup::VRenderGroup(float x, float y, unsigned int width, unsigned int he
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 	Sprite->Radius = Sprite->Size.x < Sprite->Size.y ? Sprite->Size.x / 2 : Sprite->Size.y / 2;
 
-	postProcessTex.create(width, height);
 	renderTex.create(width, height);
 
 	type = RENDERGROUP;
@@ -39,7 +38,6 @@ VRenderGroup::VRenderGroup(sf::Vector2f position, sf::Vector2u size, unsigned in
 	Sprite->Size = sf::Vector2f(size);
 	Sprite->Radius = Sprite->Size.x < Sprite->Size.y ? Sprite->Size.x / 2 : Sprite->Size.y / 2;
 
-	postProcessTex.create(size.x, size.y);
 	renderTex.create(size.x, size.y);
 
 	type = RENDERGROUP;
@@ -128,6 +126,11 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 
 	if (PostEffect != nullptr && VPostEffectBase::isSupported())
 	{
+		if (postProcessTex.getSize().x == 0 || postProcessTex.getSize().y == 0)
+		{
+			postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
+		}
+
 		postProcessTex.clear(sf::Color::Transparent);
 		PostEffect->Apply(renderTex.getTexture(), postProcessTex);
 		postProcessTex.display();

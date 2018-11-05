@@ -4,7 +4,6 @@
 VRenderLayer::VRenderLayer(unsigned int maxSize) : VGroup(maxSize)
 {
 	renderTex.create(VGlobal::p()->Width, VGlobal::p()->Height);
-	postProcessTex.create(VGlobal::p()->Width, VGlobal::p()->Height);
 }
 
 void VRenderLayer::Destroy()
@@ -59,6 +58,8 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 	}
 	else
 	{
+		postProcessTex.create(VGlobal::p()->Width, VGlobal::p()->Height);
+
 		postProcessTex.clear(sf::Color::Transparent);
 		PostEffect->Apply(renderTex.getTexture(), postProcessTex);
 		postProcessTex.display();
