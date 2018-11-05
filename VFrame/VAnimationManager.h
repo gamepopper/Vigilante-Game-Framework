@@ -110,7 +110,7 @@ public:
 	{
 		if (animationList.find(name) == animationList.end())
 		{
-			animationList.insert(std::pair<sf::String, VAnimation*>(name, new VAnimation(Frames, FramesPerSecond, Looping, Reverse)));
+			animationList.emplace(std::make_pair(name, new VAnimation(Frames, FramesPerSecond, Looping, Reverse)));
 		}
 		else
 		{

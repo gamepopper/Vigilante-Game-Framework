@@ -175,7 +175,7 @@ bool VContent::StoreTexture(const sf::String& name, const sf::Texture& texture)
 	if (found == textureDir.end())
 	{
 		VBase::VLog("%s stored", name.toUtf8().c_str());
-		textureDir.insert(std::pair<sf::String, std::unique_ptr<sf::Texture>>(
+		textureDir.emplace(std::make_pair(
 			name, std::unique_ptr<sf::Texture>(new sf::Texture(texture))));
 		return true;
 	}
@@ -190,7 +190,7 @@ bool VContent::StoreImage(const sf::String& name, const sf::Image& image)
 	if (found == imageDir.end())
 	{
 		VBase::VLog("%s stored", name.toUtf8().c_str());
-		imageDir.insert(std::pair<sf::String, std::unique_ptr<sf::Image>>(
+		imageDir.emplace(std::make_pair(
 			name, std::unique_ptr<sf::Image>(new sf::Image(image))));
 		return true;
 	}
@@ -205,7 +205,7 @@ bool VContent::StoreFont(const sf::String& name, const sf::Font& font)
 	if (found == fontDir.end())
 	{
 		VBase::VLog("%s stored", name.toUtf8().c_str());
-		fontDir.insert(std::pair<sf::String, std::unique_ptr<sf::Font>>(
+		fontDir.emplace(std::make_pair(
 			name, std::unique_ptr<sf::Font>(new sf::Font(font))));
 		return true;
 	}
@@ -220,7 +220,7 @@ bool VContent::StoreSound(const sf::String& name, const sf::SoundBuffer& sound)
 	if (found == soundDir.end())
 	{
 		VBase::VLog("%s stored", name.toUtf8().c_str());
-		soundDir.insert(std::pair<sf::String, std::unique_ptr<sf::SoundBuffer>>(
+		soundDir.emplace(std::make_pair(
 			name, std::unique_ptr<sf::SoundBuffer>(new sf::SoundBuffer(sound))));
 		return true;
 	}
