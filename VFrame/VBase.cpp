@@ -29,13 +29,10 @@ void VBase::VLog(const char* format, ...)
 	n = vsnprintf(p, sizeof buf - 3, format, args); // buf-3 is room for CR/LF/NUL
 
 	int len = strlen(buf);
-	char* con = new char[len + 2];
+	buf[len] = '\n';
+	buf[len + 1] = '\0';
 
-	strcpy(con, buf);
-	con[len] = '\n';
-	con[len + 1] = '\0';
-
-	printf(con, args);
+	printf(buf, args);
 	va_end(args);
 
 	p += (n < 0) ? sizeof buf - 3 : n;
@@ -48,13 +45,13 @@ void VBase::VLog(const char* format, ...)
 	*p = '\0';
 
 	wchar_t output[4096];
-	std::mbstowcs(output, buf, strlen(buf) + 1);
+	for (unsigned int i = 0; i < strlen(buf); i++)
+		output[i] = (wchar_t)buf[i];
+	output[strlen(buf)] = L'\0';
 
 #ifdef _MSC_VER
 	OutputDebugStringW(output);
 #endif
-
-	delete[] con;
 }
 
 void VBase::VLogError(const char* format, ...)
@@ -67,13 +64,10 @@ void VBase::VLogError(const char* format, ...)
 	n = vsnprintf(p, sizeof buf - 3, format, args); // buf-3 is room for CR/LF/NUL
 
 	int len = strlen(buf);
-	char* con = new char[len + 2];
+	buf[len] = '\n';
+	buf[len + 1] = '\0';
 
-	strcpy(con, buf);
-	con[len] = '\n';
-	con[len + 1] = '\0';
-
-	printf(con, args);
+	printf(buf, args);
 	va_end(args);
 
 	p += (n < 0) ? sizeof buf - 3 : n;
@@ -86,7 +80,9 @@ void VBase::VLogError(const char* format, ...)
 	*p = '\0';
 
 	wchar_t output[4096];
-	std::mbstowcs(output, buf, strlen(buf) + 1);
+	for (unsigned int i = 0; i < strlen(buf); i++)
+		output[i] = (wchar_t)buf[i];
+	output[strlen(buf)] = L'\0';
 
 	std::ofstream outfile;
 
@@ -116,7 +112,7 @@ void VBase::VLogError(const char* format, ...)
 	throw output;
 #else
 	MessageBoxW(NULL, output, NULL, MB_TASKMODAL | MB_ICONERROR | MB_OK);
-	throw std::exception(con);
+	throw std::exception(buf);
 #endif
 }
 
