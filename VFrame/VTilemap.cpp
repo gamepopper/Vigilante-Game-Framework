@@ -330,7 +330,7 @@ void VTilemap::SetTileRenderID(char ID, int tileNumber, int autoTileNumber)
 	tileInfo->TileNumber = tileNumber;
 	tileInfo->AutoTileLevel = autoTileNumber;
 
-	renderDir.insert(renderDir.begin(), std::pair<char, VTileRenderInfo*>(ID, tileInfo));
+	renderDir.insert(renderDir.begin(), std::make_pair(ID, tileInfo));
 	dirty = true;
 }
 
