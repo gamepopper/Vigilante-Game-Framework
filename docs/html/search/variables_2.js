@@ -1,7 +1,8 @@
 var searchData=
 [
   ['callback',['Callback',['../class_v_tile.html#a2a8ad7f3331e88ee377a2e3ba1cd3d86',1,'VTile::Callback()'],['../struct_v_tile_collision_info.html#a029afd466b858440fcf86b93a9d87d23',1,'VTileCollisionInfo::Callback()']]],
-  ['camera',['Camera',['../class_v3_d_scene.html#a92f1d0dffc0a4fb4ad26a576addd59ef',1,'V3DScene']]],
+  ['cam',['cam',['../class_v3_d_shader.html#ae7961a9b402c3645d85afdc2edaf2896',1,'V3DShader']]],
+  ['camera',['Camera',['../class_v3_d_scene.html#a2088e12d10e9ef86d2f90e2da5c40944',1,'V3DScene']]],
   ['cameras',['Cameras',['../class_v_state.html#aa35a546b39b57dc806529f601096cdb7',1,'VState']]],
   ['camerascroll',['CameraScroll',['../class_v_backdrop.html#a19d512d48df447d9aba00ee082383465',1,'VBackdrop']]],
   ['charactersperiteration',['CharactersPerIteration',['../class_v_typed_text.html#a6a511b3dcb176ab0afd4dc76d6fa3263',1,'VTypedText']]],
@@ -16,6 +17,7 @@ var searchData=
   ['content',['Content',['../class_v_global.html#a888aa3ad353c4ed5358a0f9997719cfc',1,'VGlobal']]],
   ['contextsettings',['ContextSettings',['../class_v_global.html#add32445de0ceb7ceed9630b2843e94b8',1,'VGlobal']]],
   ['counter',['counter',['../class_v_emitter.html#aa2d8b7726c1cda7cc83cb2168ac06c1b',1,'VEmitter']]],
+  ['currentcamera',['CurrentCamera',['../class_v3_d_scene.html#a6dc956feb731ad02f1deca32b77ad420',1,'V3DScene']]],
   ['cursorblinkspeed',['CursorBlinkSpeed',['../class_v_typed_text.html#a344d6f46d594e5fec1cb8a39b9965963',1,'VTypedText']]],
   ['cursorchar',['CursorChar',['../class_v_typed_text.html#a534fb1b546db78fa2bf3dc66b3e129de',1,'VTypedText']]],
   ['cutoff',['CutOff',['../struct_v3_d_light.html#ae934db1244145e7f79b7e7f110e7143d',1,'V3DLight']]]

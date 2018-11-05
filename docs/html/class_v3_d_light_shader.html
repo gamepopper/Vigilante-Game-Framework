@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.2</span>
+   &#160;<span id="projectnumber">1.0.0.3</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -88,10 +88,6 @@ Inheritance diagram for V3DLightShader:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a278e672287a360c141c9b878d281da2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_light_shader.html#a278e672287a360c141c9b878d281da2b">V3DLightShader</a> (<a class="el" href="class_v3_d_camera.html">V3DCamera</a> *camera)</td></tr>
-<tr class="separator:a278e672287a360c141c9b878d281da2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1598ef3519e465889d82ae85f48cf8cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_light_shader.html#a1598ef3519e465889d82ae85f48cf8cb">SetCamera</a> (<a class="el" href="class_v3_d_camera.html">V3DCamera</a> *camera)</td></tr>
-<tr class="separator:a1598ef3519e465889d82ae85f48cf8cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb3279e909c09b9412703b49b1dd0ed3"><td class="memItemLeft" align="right" valign="top"><a id="adb3279e909c09b9412703b49b1dd0ed3"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_light_shader.html#adb3279e909c09b9412703b49b1dd0ed3">Update</a> ()</td></tr>
 <tr class="memdesc:adb3279e909c09b9412703b49b1dd0ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the shader. <br /></td></tr>
@@ -123,6 +119,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a265f7af1c8d7517335031a7cec3bc811 inherit pub_methods_class_v3_d_shader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1794abf351167bf29fa17a1c7ea3116 inherit pub_methods_class_v3_d_shader"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_shader.html#ad1794abf351167bf29fa17a1c7ea3116">GetUniform</a> (<a class="el" href="_v3_d_shader_8h.html#a0d2757b6f370648e2dc98adc54edb97d">UniformType</a> type)</td></tr>
 <tr class="separator:ad1794abf351167bf29fa17a1c7ea3116 inherit pub_methods_class_v3_d_shader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65f8229db292d06e8838b4f4865b9fc3 inherit pub_methods_class_v3_d_shader"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_shader.html#a65f8229db292d06e8838b4f4865b9fc3">SetCamera</a> (<a class="el" href="class_v3_d_camera.html">V3DCamera</a> *camera)</td></tr>
+<tr class="separator:a65f8229db292d06e8838b4f4865b9fc3 inherit pub_methods_class_v3_d_shader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -130,60 +128,18 @@ Public Attributes</h2></td></tr>
 std::unique_ptr&lt; <a class="el" href="struct_v3_d_light.html">V3DLight</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_light_shader.html#aec916c5968996fadbd4625924b5066ce">Lights</a> [<a class="el" href="_v3_d_light_8h.html#a04f737f6f1242f7ca636b6d54c35510a">LIGHT_COUNT</a>]</td></tr>
 <tr class="memdesc:aec916c5968996fadbd4625924b5066ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of lights. <br /></td></tr>
 <tr class="separator:aec916c5968996fadbd4625924b5066ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_class_v3_d_shader"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_v3_d_shader')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_v3_d_shader.html">V3DShader</a></td></tr>
+<tr class="memitem:ae7961a9b402c3645d85afdc2edaf2896 inherit pro_attribs_class_v3_d_shader"><td class="memItemLeft" align="right" valign="top"><a id="ae7961a9b402c3645d85afdc2edaf2896"></a>
+<a class="el" href="class_v3_d_camera.html">V3DCamera</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_shader.html#ae7961a9b402c3645d85afdc2edaf2896">cam</a></td></tr>
+<tr class="memdesc:ae7961a9b402c3645d85afdc2edaf2896 inherit pro_attribs_class_v3_d_shader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference pointer for current <a class="el" href="class_v3_d_camera.html" title="Base 3D Camera. ">V3DCamera</a>. <br /></td></tr>
+<tr class="separator:ae7961a9b402c3645d85afdc2edaf2896 inherit pro_attribs_class_v3_d_shader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>3D Shader with Lighting Support. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a278e672287a360c141c9b878d281da2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a278e672287a360c141c9b878d281da2b">&#9670;&nbsp;</a></span>V3DLightShader()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">V3DLightShader::V3DLightShader </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_v3_d_camera.html">V3DCamera</a> *&#160;</td>
-          <td class="paramname"><em>camera</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">camera</td><td>Pointer the scene camera. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1598ef3519e465889d82ae85f48cf8cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1598ef3519e465889d82ae85f48cf8cb">&#9670;&nbsp;</a></span>SetCamera()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void V3DLightShader::SetCamera </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_v3_d_camera.html">V3DCamera</a> *&#160;</td>
-          <td class="paramname"><em>camera</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">camera</td><td>Pointer the scene camera. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>D:/Development/Libs/Vigilante-Game-Framework/VFrame/<a class="el" href="_v3_d_light_shader_8h_source.html">V3DLightShader.h</a></li>
 </ul>
 </div><!-- contents -->

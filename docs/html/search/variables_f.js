@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['radius',['Radius',['../class_v_object.html#acb0c6d152a5d964cfe9be98749d7e899',1,'VObject']]],
+  ['radius',['Radius',['../class_v3_d_object.html#a73725b97983bfe515bacc10794d02729',1,'V3DObject::Radius()'],['../class_v_object.html#acb0c6d152a5d964cfe9be98749d7e899',1,'VObject::Radius()']]],
   ['random',['Random',['../class_v_global.html#acfb58dec5599d69296f28e94bfcca985',1,'VGlobal']]],
   ['redmultiplier',['RedMultiplier',['../class_v_trail_area.html#ad451e4bec84eb283f6873d524012a1f0',1,'VTrailArea']]],
   ['refcount',['RefCount',['../class_v_base.html#aa42f189c6ad82085155573fbcaa44e65',1,'VBase']]],
@@ -14,6 +14,6 @@ var searchData=
   ['repeatx',['RepeatX',['../class_v_backdrop.html#a69d67e5b3b10ef49019c37bb8958fd40',1,'VBackdrop']]],
   ['repeaty',['RepeatY',['../class_v_backdrop.html#ad88ebdfb8980ab931cd8b6478f62356d',1,'VBackdrop']]],
   ['rotatefactor',['RotateFactor',['../class_v_emitter.html#a87c9539ce4ef6d8761295496c76de7aa',1,'VEmitter::RotateFactor()'],['../class_v_object.html#a54abc41655bbfdf5ebd651d8c546093c',1,'VObject::RotateFactor()']]],
-  ['rotation',['Rotation',['../class_v3_d_camera.html#a23f648849c1655f24bf441e6d8b3fdfe',1,'V3DCamera::Rotation()'],['../class_v3_d_object.html#a3ad54ca3295571a57d6206b910c3e657',1,'V3DObject::Rotation()'],['../class_v_camera.html#a94fe827f4c1118ecfd9815da58243a99',1,'VCamera::Rotation()']]],
+  ['rotation',['Rotation',['../class_v3_d_camera.html#ac13191013ee4f33dfe7e7de3e91461af',1,'V3DCamera::Rotation()'],['../class_v3_d_object.html#a3ad54ca3295571a57d6206b910c3e657',1,'V3DObject::Rotation()'],['../class_v_camera.html#a94fe827f4c1118ecfd9815da58243a99',1,'VCamera::Rotation()']]],
   ['running',['running',['../class_v_emitter.html#ad54f979437f4a8d892a4952c93faefec',1,'VEmitter']]]
 ];

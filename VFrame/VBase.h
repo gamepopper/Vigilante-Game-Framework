@@ -154,6 +154,7 @@ public:
 #define glCheck(expr) do { expr; VBase::VCheckGLError(__FILE__, __LINE__, #expr); } while (false)
 	static void VCheckGLError(const char* file, unsigned int line, const char* expression);
 #else
+	///Function to provide debugging help for OpenGL functions.
 #define glCheck(expr) (expr)
 #endif
 

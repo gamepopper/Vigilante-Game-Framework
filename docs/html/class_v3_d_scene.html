@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.2</span>
+   &#160;<span id="projectnumber">1.0.0.3</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -114,8 +114,24 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa7566120128a9f766e65ded0c218a917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae71ff4cafda38521a6427f89ddd671f3"><td class="memItemLeft" align="right" valign="top">virtual const sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#ae71ff4cafda38521a6427f89ddd671f3">GetTexture</a> ()</td></tr>
 <tr class="separator:ae71ff4cafda38521a6427f89ddd671f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a605cbbc68b3052c3b9302f5e4d17a09b"><td class="memItemLeft" align="right" valign="top">const sf::Texture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a605cbbc68b3052c3b9302f5e4d17a09b">GetTexture</a> (<a class="el" href="class_v3_d_shader.html">V3DShader</a> *shader, <a class="el" href="class_v3_d_camera.html">V3DCamera</a> *camera)</td></tr>
+<tr class="separator:a605cbbc68b3052c3b9302f5e4d17a09b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b489449f5016ffe12f2a70bab4a4d0c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a2b489449f5016ffe12f2a70bab4a4d0c">Resize</a> (int width, int height) override</td></tr>
 <tr class="separator:a2b489449f5016ffe12f2a70bab4a4d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03a3caf93a09444351a8addae3e9b44d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a03a3caf93a09444351a8addae3e9b44d">SetActive</a> (bool value=true)</td></tr>
+<tr class="separator:a03a3caf93a09444351a8addae3e9b44d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a661fc4cc63f866962748369f1e47014d"><td class="memItemLeft" align="right" valign="top"><a id="a661fc4cc63f866962748369f1e47014d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a661fc4cc63f866962748369f1e47014d">PushGLStates</a> ()</td></tr>
+<tr class="memdesc:a661fc4cc63f866962748369f1e47014d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Push all the GL States up the stack to preserve them from any changes. <br /></td></tr>
+<tr class="separator:a661fc4cc63f866962748369f1e47014d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a933554cf755057c0c3d93f1774400c41"><td class="memItemLeft" align="right" valign="top"><a id="a933554cf755057c0c3d93f1774400c41"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a933554cf755057c0c3d93f1774400c41">PopGLStates</a> ()</td></tr>
+<tr class="memdesc:a933554cf755057c0c3d93f1774400c41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop all the GL States off the stack to restore them. <br /></td></tr>
+<tr class="separator:a933554cf755057c0c3d93f1774400c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bf734c2f85903f987e4278b6bf3abc2"><td class="memItemLeft" align="right" valign="top"><a id="a2bf734c2f85903f987e4278b6bf3abc2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a2bf734c2f85903f987e4278b6bf3abc2">ResetGLStates</a> ()</td></tr>
+<tr class="memdesc:a2bf734c2f85903f987e4278b6bf3abc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all the GL States. <br /></td></tr>
+<tr class="separator:a2bf734c2f85903f987e4278b6bf3abc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ecf88572def9db00ab4535c212a7c57"><td class="memItemLeft" align="right" valign="top"><a id="a0ecf88572def9db00ab4535c212a7c57"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a0ecf88572def9db00ab4535c212a7c57">Destroy</a> ()</td></tr>
 <tr class="memdesc:a0ecf88572def9db00ab4535c212a7c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes and/or destroys all objects inside the group and sprite before destroying extra data. (If an object is referenced in another <a class="el" href="class_v_group.html" title="An object management class that stores a set of objects to be updated and rendered in a batch...">VGroup</a>, the object won't be destroyed) <br /></td></tr>
@@ -197,14 +213,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a6dc956feb731ad02f1deca32b77ad420"><td class="memItemLeft" align="right" valign="top"><a id="a6dc956feb731ad02f1deca32b77ad420"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a6dc956feb731ad02f1deca32b77ad420">CurrentCamera</a> = 0</td></tr>
+<tr class="memdesc:a6dc956feb731ad02f1deca32b77ad420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current Camera Index for rendering. <br /></td></tr>
+<tr class="separator:a6dc956feb731ad02f1deca32b77ad420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa734dec2df3f32cd403974fa05996d35"><td class="memItemLeft" align="right" valign="top"><a id="aa734dec2df3f32cd403974fa05996d35"></a>
 std::unique_ptr&lt; <a class="el" href="class_v3_d_shader.html">V3DShader</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#aa734dec2df3f32cd403974fa05996d35">Shader</a></td></tr>
 <tr class="memdesc:aa734dec2df3f32cd403974fa05996d35"><td class="mdescLeft">&#160;</td><td class="mdescRight">OpenGL Shader for the entire scene. <br /></td></tr>
 <tr class="separator:aa734dec2df3f32cd403974fa05996d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92f1d0dffc0a4fb4ad26a576addd59ef"><td class="memItemLeft" align="right" valign="top"><a id="a92f1d0dffc0a4fb4ad26a576addd59ef"></a>
-std::unique_ptr&lt; <a class="el" href="class_v3_d_camera.html">V3DCamera</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a92f1d0dffc0a4fb4ad26a576addd59ef">Camera</a></td></tr>
-<tr class="memdesc:a92f1d0dffc0a4fb4ad26a576addd59ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main 3D Camera for this scene. <br /></td></tr>
-<tr class="separator:a92f1d0dffc0a4fb4ad26a576addd59ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2088e12d10e9ef86d2f90e2da5c40944"><td class="memItemLeft" align="right" valign="top"><a id="a2088e12d10e9ef86d2f90e2da5c40944"></a>
+std::vector&lt; std::unique_ptr&lt; <a class="el" href="class_v3_d_camera.html">V3DCamera</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a2088e12d10e9ef86d2f90e2da5c40944">Camera</a></td></tr>
+<tr class="memdesc:a2088e12d10e9ef86d2f90e2da5c40944"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main 3D Camera for this scene. <br /></td></tr>
+<tr class="separator:a2088e12d10e9ef86d2f90e2da5c40944"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_v_render_group"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v_render_group')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v_render_group.html">VRenderGroup</a></td></tr>
 <tr class="memitem:a1da609bd10bbaac2c89fa2af87b64f89 inherit pub_attribs_class_v_render_group"><td class="memItemLeft" align="right" valign="top"><a id="a1da609bd10bbaac2c89fa2af87b64f89"></a>
 std::unique_ptr&lt; <a class="el" href="class_v_sprite.html">VSprite</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a1da609bd10bbaac2c89fa2af87b64f89">Sprite</a> = nullptr</td></tr>
@@ -444,7 +464,7 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <a id="ae71ff4cafda38521a6427f89ddd671f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae71ff4cafda38521a6427f89ddd671f3">&#9670;&nbsp;</a></span>GetTexture()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae71ff4cafda38521a6427f89ddd671f3">&#9670;&nbsp;</a></span>GetTexture() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -465,9 +485,45 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>The sprite's texture after the scene is rendered to it. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The rendered scene as a texture. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_v_render_group.html#a612d9000f97cbf0f2e0d0d25bdd00bcb">VRenderGroup</a>.</p>
+
+</div>
+</div>
+<a id="a605cbbc68b3052c3b9302f5e4d17a09b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a605cbbc68b3052c3b9302f5e4d17a09b">&#9670;&nbsp;</a></span>GetTexture() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const sf::Texture V3DScene::GetTexture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_v3_d_shader.html">V3DShader</a> *&#160;</td>
+          <td class="paramname"><em>shader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_v3_d_camera.html">V3DCamera</a> *&#160;</td>
+          <td class="paramname"><em>camera</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Renders the scene </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">shader</td><td>The scene shader. </td></tr>
+    <tr><td class="paramname">camera</td><td>The scene camera. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The rendered scene as a texture. </dd></dl>
 
 </div>
 </div>
@@ -513,6 +569,30 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_v_render_group.html#a83e321d63a34ecd34dcce26e799d5985">VRenderGroup</a>.</p>
+
+</div>
+</div>
+<a id="a03a3caf93a09444351a8addae3e9b44d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03a3caf93a09444351a8addae3e9b44d">&#9670;&nbsp;</a></span>SetActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void V3DScene::SetActive </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>If true, sets the scene to be the current active context. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['testinview',['TestInView',['../class_v_object.html#a5654758fad84f7db9f130adea48724e0',1,'VObject']]],
+  ['testinview',['TestInView',['../class_v_object.html#abc32c9c860277af7d3c9bf41df1dc4f6',1,'VObject']]],
   ['texcoord',['texCoord',['../struct_v3_d_vertex.html#a24e8e16b98aba9dce62a83c23e400ef2',1,'V3DVertex']]],
   ['text',['text',['../class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed',1,'VText']]],
   ['texture',['texture',['../class_v3_d_model.html#a4167384145e00786f86db06cf7830459',1,'V3DModel::texture()'],['../class_v_backdrop.html#a1185cf94fe1706b4897dd833bca5b3b8',1,'VBackdrop::texture()'],['../class_v_sprite.html#a4769ac7e61ee128e55a5c5ac82c9f347',1,'VSprite::texture()']]],
@@ -15,7 +15,6 @@ var searchData=
   ['timer',['timer',['../class_v_emitter.html#ad9ea92960d7521efa463bf7af96bf0ba',1,'VEmitter']]],
   ['timescale',['TimeScale',['../class_v_global.html#ac97288e4f2f83b7eed63e9953c25f05e',1,'VGlobal']]],
   ['tint',['Tint',['../struct_v3_d_light.html#a6e9ef12c09c477f600174515765ca40c',1,'V3DLight::Tint()'],['../class_v_particle.html#aeaef7411246b0ffb6c9725dcc32bcc18',1,'VParticle::Tint()'],['../class_v_sprite.html#a7da88e002a6d0d05556e99fa956c8aac',1,'VSprite::Tint()']]],
-  ['title',['Title',['../class_v_global.html#a66f3d86864b912775c1974e83901820f',1,'VGlobal']]],
   ['togglefullscreen',['ToggleFullscreen',['../class_v_global.html#aa1ee39db10d8dd9964dcb589338432a0',1,'VGlobal']]],
   ['topdown',['TOPDOWN',['../_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5caefab808dd2b629a851f97cdd03bb208a',1,'VCamera.h']]],
   ['touchflag',['touchFlag',['../class_v_object.html#a41d7b4976eac896a40cbc4aae30c0575',1,'VObject']]],
@@ -23,5 +22,5 @@ var searchData=
   ['transform',['transform',['../class_v3_d_model.html#acd14cd1afeebb47ad08614803c93cb5c',1,'V3DModel::transform()'],['../class_v3_d_obj_model.html#a470274b20b2815a305eb87452d7eb709',1,'V3DObjModel::transform()'],['../class_v_backdrop.html#a16436cb56b4ed62f8ccbde43eb47e226',1,'VBackdrop::transform()']]],
   ['transformable',['transformable',['../class_v_text.html#aedb3faf514b96f57fce439b97e432d9e',1,'VText::transformable()'],['../class_v_tilemap.html#a9a1d4263203df18021d7e8fc8b08b961',1,'VTilemap::transformable()']]],
   ['trianglecount',['triangleCount',['../struct_v3_d_obj_model_1_1_v3_d_model_data.html#a4014bc290d57e41c0d1d180221a02ed5',1,'V3DObjModel::V3DModelData']]],
-  ['type',['type',['../class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f',1,'VBase::type()'],['../struct_v3_d_light.html#adf638859ea6643a6d4ed11f46ae85c1d',1,'V3DLight::Type()']]]
+  ['type',['Type',['../struct_v3_d_light.html#adf638859ea6643a6d4ed11f46ae85c1d',1,'V3DLight::Type()'],['../class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f',1,'VBase::type()']]]
 ];

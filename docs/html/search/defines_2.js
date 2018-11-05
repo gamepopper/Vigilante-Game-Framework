@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vframe_5fversion',['VFRAME_VERSION',['../_v_global_8h.html#acb48951f54396228eb120371f929e3d8',1,'VGlobal.h']]]
+  ['light_5fcount',['LIGHT_COUNT',['../_v3_d_light_8h.html#a04f737f6f1242f7ca636b6d54c35510a',1,'V3DLight.h']]]
 ];

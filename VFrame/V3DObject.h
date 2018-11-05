@@ -97,6 +97,7 @@ public:
 	/**
 	* @param position Position of the object.
 	* @param rotation Angle of the object.
+	* @param scale Scale of the object.
 	*/
 	V3DObject(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) : VBase()
 	{
@@ -115,6 +116,9 @@ public:
 	* @param rotX X angle of the object.
 	* @param rotY Y angle of the object.
 	* @param rotZ Z angle of the object.
+	* @param scaleX X scale of the object.
+	* @param scaleY Y scale of the object.
+	* @param scaleZ Z scale of the object.
 	*/
 	V3DObject(float posX = 0, float posY = 0, float posZ = 0, 
 			float rotX = 0, float rotY = 0, float rotZ = 0,

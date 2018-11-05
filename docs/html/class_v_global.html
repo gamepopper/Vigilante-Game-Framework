@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.2</span>
+   &#160;<span id="projectnumber">1.0.0.3</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -80,6 +80,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:abf3d07c7b0f6d1c64a8e200dbc3f6c62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#abf3d07c7b0f6d1c64a8e200dbc3f6c62">SetTitle</a> (const char *newTitle)</td></tr>
+<tr class="separator:abf3d07c7b0f6d1c64a8e200dbc3f6c62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af427d6c8250b2e70b1a0545faf96f843"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#af427d6c8250b2e70b1a0545faf96f843">SetTitle</a> (std::string newTitle)</td></tr>
+<tr class="separator:af427d6c8250b2e70b1a0545faf96f843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4453ff90d6a9875c0413c4308cff1397"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#a4453ff90d6a9875c0413c4308cff1397">GetTitle</a> ()</td></tr>
+<tr class="separator:a4453ff90d6a9875c0413c4308cff1397"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4ebd9f73c22ff4b84ab352dccf5a24c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#ac4ebd9f73c22ff4b84ab352dccf5a24c">SetFullscreen</a> (bool set)</td></tr>
 <tr class="separator:ac4ebd9f73c22ff4b84ab352dccf5a24c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1ee39db10d8dd9964dcb589338432a0"><td class="memItemLeft" align="right" valign="top"><a id="aa1ee39db10d8dd9964dcb589338432a0"></a>
@@ -88,6 +94,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:aa1ee39db10d8dd9964dcb589338432a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6373d7a5065c0a140a48efb7189213c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#aa6373d7a5065c0a140a48efb7189213c">IsFullscreen</a> ()</td></tr>
 <tr class="separator:aa6373d7a5065c0a140a48efb7189213c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d74bcdd91e19545c356589561aa6b02"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#a4d74bcdd91e19545c356589561aa6b02">IsRunning</a> ()</td></tr>
+<tr class="separator:a4d74bcdd91e19545c356589561aa6b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa159bc5f7e582cb488584abd1c25d4f2"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#aa159bc5f7e582cb488584abd1c25d4f2">GetMousePosition</a> ()</td></tr>
 <tr class="separator:aa159bc5f7e582cb488584abd1c25d4f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a529dc70f035f320e52d85b43e0832ca2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#a529dc70f035f320e52d85b43e0832ca2">SetMouseCursorVisible</a> (bool set)</td></tr>
@@ -168,10 +176,6 @@ sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#ac97288e4f2f83b7eed63e9953c25f05e">TimeScale</a> = 1.0f</td></tr>
 <tr class="memdesc:ac97288e4f2f83b7eed63e9953c25f05e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Speed of GameTime by manipulating the Delta Time. (e.g. 1 is default speed, 2 is 2x speed) <br /></td></tr>
 <tr class="separator:ac97288e4f2f83b7eed63e9953c25f05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66f3d86864b912775c1974e83901820f"><td class="memItemLeft" align="right" valign="top"><a id="a66f3d86864b912775c1974e83901820f"></a>
-sf::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#a66f3d86864b912775c1974e83901820f">Title</a></td></tr>
-<tr class="memdesc:a66f3d86864b912775c1974e83901820f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Title displayed on the Window (updating the Window title should be done using App-&gt;SetTitle(). <br /></td></tr>
-<tr class="separator:a66f3d86864b912775c1974e83901820f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75e67b8e02b98be46ac4fa04e6e31cdf"><td class="memItemLeft" align="right" valign="top"><a id="a75e67b8e02b98be46ac4fa04e6e31cdf"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_global.html#a75e67b8e02b98be46ac4fa04e6e31cdf">FocusPause</a> = true</td></tr>
 <tr class="memdesc:a75e67b8e02b98be46ac4fa04e6e31cdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the game to pause when going out of focus. <br /></td></tr>
@@ -390,6 +394,24 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 
 </div>
 </div>
+<a id="a4453ff90d6a9875c0413c4308cff1397"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4453ff90d6a9875c0413c4308cff1397">&#9670;&nbsp;</a></span>GetTitle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* VGlobal::GetTitle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The current text on the window's title bar. </dd></dl>
+
+</div>
+</div>
 <a id="aa6373d7a5065c0a140a48efb7189213c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6373d7a5065c0a140a48efb7189213c">&#9670;&nbsp;</a></span>IsFullscreen()</h2>
 
@@ -405,6 +427,24 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>If the game is in fullscreen mode, function returns true. </dd></dl>
+
+</div>
+</div>
+<a id="a4d74bcdd91e19545c356589561aa6b02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d74bcdd91e19545c356589561aa6b02">&#9670;&nbsp;</a></span>IsRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VGlobal::IsRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>True if the game is running. </dd></dl>
 
 </div>
 </div>
@@ -647,6 +687,54 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">set</td><td>Sets mouse cursor to be visible or not, depending of if you want an in-game cursor. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abf3d07c7b0f6d1c64a8e200dbc3f6c62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf3d07c7b0f6d1c64a8e200dbc3f6c62">&#9670;&nbsp;</a></span>SetTitle() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VGlobal::SetTitle </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>newTitle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newTitle</td><td>The new text the window should display in the title bar. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af427d6c8250b2e70b1a0545faf96f843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af427d6c8250b2e70b1a0545faf96f843">&#9670;&nbsp;</a></span>SetTitle() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VGlobal::SetTitle </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>newTitle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newTitle</td><td>The new text the window should display in the title bar. </td></tr>
   </table>
   </dd>
 </dl>

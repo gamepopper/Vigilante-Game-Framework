@@ -1,11 +1,11 @@
 var searchData=
 [
+  ['v3dbatchmodelgroup',['V3DBatchModelGroup',['../class_v3_d_batch_model_group.html#a14ec64c5d6be2779daa77af71022240a',1,'V3DBatchModelGroup']]],
   ['v3dcamera',['V3DCamera',['../class_v3_d_camera.html#a9313213b5b2593a742dcb5c3eff0b9b7',1,'V3DCamera']]],
   ['v3dlight',['V3DLight',['../struct_v3_d_light.html#a34547ce501944e9dcc3e2963be3babbd',1,'V3DLight']]],
-  ['v3dlightshader',['V3DLightShader',['../class_v3_d_light_shader.html#a278e672287a360c141c9b878d281da2b',1,'V3DLightShader']]],
   ['v3dmaterial',['V3DMaterial',['../struct_v3_d_material.html#aafd174f2e7f2dc452609a655e32a083b',1,'V3DMaterial']]],
   ['v3dmodel',['V3DModel',['../class_v3_d_model.html#a474624780ce1c8b80edf71a5f4df8f2b',1,'V3DModel::V3DModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale)'],['../class_v3_d_model.html#ae36bbb2b0fa3d56fae95b2aa9ac25141',1,'V3DModel::V3DModel(float posX=0, float posY=0, float posZ=0, float rotX=0, float rotY=0, float rotZ=0, float scaleX=1, float scaleY=1, float scaleZ=1)']]],
-  ['v3dobject',['V3DObject',['../class_v3_d_object.html#a05731f900cae1823a9f8c918f0c4943e',1,'V3DObject::V3DObject(sf::Vector3f position, sf::Vector3f rotation)'],['../class_v3_d_object.html#ad31c7f1b37dd293fbec65d9eda174a0b',1,'V3DObject::V3DObject(float posX=0, float posY=0, float posZ=0, float rotX=0, float rotY=0, float rotZ=0)']]],
+  ['v3dobject',['V3DObject',['../class_v3_d_object.html#a6e047fa5deb863b79bb995da8a17d56b',1,'V3DObject::V3DObject(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale)'],['../class_v3_d_object.html#ad8438319e9ddcffd904aa02ead2dd917',1,'V3DObject::V3DObject(float posX=0, float posY=0, float posZ=0, float rotX=0, float rotY=0, float rotZ=0, float scaleX=1, float scaleY=1, float scaleZ=1)']]],
   ['v3dobjmodel',['V3DObjModel',['../class_v3_d_obj_model.html#af41b6789e68468904e1684f5e5672afc',1,'V3DObjModel::V3DObjModel(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale)'],['../class_v3_d_obj_model.html#a5cead85cfc45a3095142ed40899ed4a5',1,'V3DObjModel::V3DObjModel(float posX=0, float posY=0, float posZ=0, float rotX=0, float rotY=0, float rotZ=0, float scaleX=1, float scaleY=1, float scaleZ=1)']]],
   ['v3dorthographiccamera',['V3DOrthographicCamera',['../class_v3_d_orthographic_camera.html#ae8a456886a10e65aba027c5f26ae760e',1,'V3DOrthographicCamera']]],
   ['v3dperspectivecamera',['V3DPerspectiveCamera',['../class_v3_d_perspective_camera.html#a256d852f374bd532dfb712199fa9e247',1,'V3DPerspectiveCamera']]],

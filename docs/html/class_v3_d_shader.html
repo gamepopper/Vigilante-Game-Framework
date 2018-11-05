@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.2</span>
+   &#160;<span id="projectnumber">1.0.0.3</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -65,6 +65,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_v3_d_shader-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">V3DShader Class Reference</div>  </div>
@@ -113,10 +114,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a265f7af1c8d7517335031a7cec3bc811"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1794abf351167bf29fa17a1c7ea3116"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_shader.html#ad1794abf351167bf29fa17a1c7ea3116">GetUniform</a> (<a class="el" href="_v3_d_shader_8h.html#a0d2757b6f370648e2dc98adc54edb97d">UniformType</a> type)</td></tr>
 <tr class="separator:ad1794abf351167bf29fa17a1c7ea3116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65f8229db292d06e8838b4f4865b9fc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_shader.html#a65f8229db292d06e8838b4f4865b9fc3">SetCamera</a> (<a class="el" href="class_v3_d_camera.html">V3DCamera</a> *camera)</td></tr>
+<tr class="separator:a65f8229db292d06e8838b4f4865b9fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f9112b349c270cf6ee8a25bac00a1db"><td class="memItemLeft" align="right" valign="top"><a id="a1f9112b349c270cf6ee8a25bac00a1db"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_shader.html#a1f9112b349c270cf6ee8a25bac00a1db">Update</a> ()</td></tr>
 <tr class="memdesc:a1f9112b349c270cf6ee8a25bac00a1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the shader. <br /></td></tr>
 <tr class="separator:a1f9112b349c270cf6ee8a25bac00a1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ae7961a9b402c3645d85afdc2edaf2896"><td class="memItemLeft" align="right" valign="top"><a id="ae7961a9b402c3645d85afdc2edaf2896"></a>
+<a class="el" href="class_v3_d_camera.html">V3DCamera</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_shader.html#ae7961a9b402c3645d85afdc2edaf2896">cam</a></td></tr>
+<tr class="memdesc:ae7961a9b402c3645d85afdc2edaf2896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference pointer for current <a class="el" href="class_v3_d_camera.html" title="Base 3D Camera. ">V3DCamera</a>. <br /></td></tr>
+<tr class="separator:ae7961a9b402c3645d85afdc2edaf2896"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for rendering 3D shaders. </p>
@@ -442,6 +452,30 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   <table class="params">
     <tr><td class="paramname">Attribute</td><td>Vertex Attribute Type. </td></tr>
     <tr><td class="paramname">name</td><td>Name of the variable in the shader this attribute associates with. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a65f8229db292d06e8838b4f4865b9fc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65f8229db292d06e8838b4f4865b9fc3">&#9670;&nbsp;</a></span>SetCamera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void V3DShader::SetCamera </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_v3_d_camera.html">V3DCamera</a> *&#160;</td>
+          <td class="paramname"><em>camera</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">camera</td><td>Pointer to the currently referenced Camera. </td></tr>
   </table>
   </dd>
 </dl>

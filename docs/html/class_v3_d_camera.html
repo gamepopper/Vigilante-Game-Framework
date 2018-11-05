@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.2</span>
+   &#160;<span id="projectnumber">1.0.0.3</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -66,6 +66,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_v3_d_camera-members.html">List of all members</a>  </div>
@@ -115,6 +116,12 @@ sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#ac984c323f1ab9bf0695552e0590b38db">Up</a> () const</td></tr>
 <tr class="memdesc:ac984c323f1ab9bf0695552e0590b38db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Camera's Up Vector. <br /></td></tr>
 <tr class="separator:ac984c323f1ab9bf0695552e0590b38db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07a30233fd6b091cf5ba70c56a5d14ec"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#a07a30233fd6b091cf5ba70c56a5d14ec">PointInView</a> (sf::Vector3f p)</td></tr>
+<tr class="separator:a07a30233fd6b091cf5ba70c56a5d14ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63d86f38c92bca0d6211aec265946e6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#ad63d86f38c92bca0d6211aec265946e6">SphereInView</a> (sf::Vector3f p, float radius)</td></tr>
+<tr class="separator:ad63d86f38c92bca0d6211aec265946e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aede4072cd14e4625f15a38195216e9d9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#aede4072cd14e4625f15a38195216e9d9">BoxInView</a> (sf::Vector3f p, sf::Vector3f min, sf::Vector3f max)</td></tr>
+<tr class="separator:aede4072cd14e4625f15a38195216e9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -122,10 +129,29 @@ Public Attributes</h2></td></tr>
 sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#a79e4b644304f2fe92607900a22f6e305">Position</a></td></tr>
 <tr class="memdesc:a79e4b644304f2fe92607900a22f6e305"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Camera Position. <br /></td></tr>
 <tr class="separator:a79e4b644304f2fe92607900a22f6e305"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23f648849c1655f24bf441e6d8b3fdfe"><td class="memItemLeft" align="right" valign="top"><a id="a23f648849c1655f24bf441e6d8b3fdfe"></a>
-sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#a23f648849c1655f24bf441e6d8b3fdfe">Rotation</a></td></tr>
-<tr class="memdesc:a23f648849c1655f24bf441e6d8b3fdfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Camera Angle. <br /></td></tr>
-<tr class="separator:a23f648849c1655f24bf441e6d8b3fdfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac13191013ee4f33dfe7e7de3e91461af"><td class="memItemLeft" align="right" valign="top"><a id="ac13191013ee4f33dfe7e7de3e91461af"></a>
+sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#ac13191013ee4f33dfe7e7de3e91461af">Rotation</a></td></tr>
+<tr class="memdesc:ac13191013ee4f33dfe7e7de3e91461af"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Camera Angle. <br /></td></tr>
+<tr class="separator:ac13191013ee4f33dfe7e7de3e91461af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad151f8a417c6326fe3000e72218da640"><td class="memItemLeft" align="right" valign="top"><a id="ad151f8a417c6326fe3000e72218da640"></a>
+sf::FloatRect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#ad151f8a417c6326fe3000e72218da640">Viewport</a></td></tr>
+<tr class="memdesc:ad151f8a417c6326fe3000e72218da640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render Viewport Area to apply a Renderscene. <br /></td></tr>
+<tr class="separator:ad151f8a417c6326fe3000e72218da640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:a5ead7d655d898a1a74f768908d6f95b4"><td class="memItemLeft" align="right" valign="top"><a id="a5ead7d655d898a1a74f768908d6f95b4"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#a5ead7d655d898a1a74f768908d6f95b4">FrustumPlane</a> : unsigned char { <br />
+&#160;&#160;<b>PRIGHT</b>, 
+<b>PLEFT</b>, 
+<b>PTOP</b>, 
+<b>PBOTTOM</b>, 
+<br />
+&#160;&#160;<b>PNEAR</b>, 
+<b>PFAR</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:a5ead7d655d898a1a74f768908d6f95b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sides of a Frustum plane for box overlap. <br /></td></tr>
+<tr class="separator:a5ead7d655d898a1a74f768908d6f95b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -133,6 +159,14 @@ Protected Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#af3809d88f9a56d17ecefbee293d200af">normalizeAngles</a> ()</td></tr>
 <tr class="memdesc:af3809d88f9a56d17ecefbee293d200af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalize the rotation angles. <br /></td></tr>
 <tr class="separator:af3809d88f9a56d17ecefbee293d200af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ec8b00af64b0a8d149480255f65625f"><td class="memItemLeft" align="right" valign="top"><a id="a0ec8b00af64b0a8d149480255f65625f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#a0ec8b00af64b0a8d149480255f65625f">updatePlanes</a> ()</td></tr>
+<tr class="memdesc:a0ec8b00af64b0a8d149480255f65625f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the plane coordinates based on the view-projection transform. <br /></td></tr>
+<tr class="separator:a0ec8b00af64b0a8d149480255f65625f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ea842956e4f11c28a2b7429ed38d29c"><td class="memItemLeft" align="right" valign="top"><a id="a0ea842956e4f11c28a2b7429ed38d29c"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#a0ea842956e4f11c28a2b7429ed38d29c">pointPlaneDistance</a> (glm::vec4 &amp;plane, glm::vec3 &amp;point)</td></tr>
+<tr class="memdesc:a0ea842956e4f11c28a2b7429ed38d29c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Works out the distance between a point and plane based on dot-product. <br /></td></tr>
+<tr class="separator:a0ea842956e4f11c28a2b7429ed38d29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -144,6 +178,10 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#a501589b83801673443b450871970a236">ffar</a></td></tr>
 <tr class="memdesc:a501589b83801673443b450871970a236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Field Far value. <br /></td></tr>
 <tr class="separator:a501589b83801673443b450871970a236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19626fcf9f4dbc389d26fc234906654f"><td class="memItemLeft" align="right" valign="top"><a id="a19626fcf9f4dbc389d26fc234906654f"></a>
+glm::vec4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_camera.html#a19626fcf9f4dbc389d26fc234906654f">planes</a> [6]</td></tr>
+<tr class="memdesc:a19626fcf9f4dbc389d26fc234906654f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The plane coordinates for all six size. <br /></td></tr>
+<tr class="separator:a19626fcf9f4dbc389d26fc234906654f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base 3D Camera. </p>
@@ -191,6 +229,57 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aede4072cd14e4625f15a38195216e9d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aede4072cd14e4625f15a38195216e9d9">&#9670;&nbsp;</a></span>BoxInView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool V3DCamera::BoxInView </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector3f&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector3f&#160;</td>
+          <td class="paramname"><em>min</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector3f&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Centre Position of Box. </td></tr>
+    <tr><td class="paramname">min</td><td>Lowest values in the box (possibly negative). </td></tr>
+    <tr><td class="paramname">max</td><td>Highest values in the box. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if box is in view. </dd></dl>
+
+</div>
+</div>
 <a id="a8e01e28ed7d7baf15fe0f75018d0d5ca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e01e28ed7d7baf15fe0f75018d0d5ca">&#9670;&nbsp;</a></span>LookAt()</h2>
 
@@ -230,6 +319,39 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Calculated the rotation matrix. </dd></dl>
+
+</div>
+</div>
+<a id="a07a30233fd6b091cf5ba70c56a5d14ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07a30233fd6b091cf5ba70c56a5d14ec">&#9670;&nbsp;</a></span>PointInView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool V3DCamera::PointInView </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector3f&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Position of 3D Point. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if </dd></dl>
 
 </div>
 </div>
@@ -276,6 +398,50 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The combined Projection View Matrix of the Camera. Combine with a model matrix to get the transform of the model in a scene. </dd></dl>
+
+</div>
+</div>
+<a id="ad63d86f38c92bca0d6211aec265946e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad63d86f38c92bca0d6211aec265946e6">&#9670;&nbsp;</a></span>SphereInView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool V3DCamera::SphereInView </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector3f&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>radius</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Centre Position of Sphere. </td></tr>
+    <tr><td class="paramname">radius</td><td>Radius of Sphere. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if sphere is in view. </dd></dl>
 
 </div>
 </div>

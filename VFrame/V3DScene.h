@@ -82,8 +82,8 @@ public:
 
 	/**
 	* Renders the scene 
-	* @param width Width of the sprite and texture area.
-	* @param height Height of the sprite and texture area.
+	* @param shader The scene shader.
+	* @param camera The scene camera.
 	* @return The rendered scene as a texture.
 	*/
 	const sf::Texture GetTexture(V3DShader* shader, V3DCamera* camera);
@@ -95,7 +95,7 @@ public:
 	*/
 	virtual void Resize(int width, int height) override;
 
-	///@param if true, sets the scene to be the current active context.
+	///@param value If true, sets the scene to be the current active context.
 	void SetActive(bool value = true);
 	///Push all the GL States up the stack to preserve them from any changes.
 	void PushGLStates();

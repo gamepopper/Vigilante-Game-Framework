@@ -17,7 +17,7 @@ var searchData=
   ['isfullscreen',['IsFullscreen',['../class_v_global.html#aa6373d7a5065c0a140a48efb7189213c',1,'VGlobal']]],
   ['isgamepadactive',['IsGamepadActive',['../class_v_input_handler.html#a9ebc4e3ed3f3f20f05423d22245465a6',1,'VInputHandler']]],
   ['ispaused',['IsPaused',['../class_v_timer.html#a030877a6c9c2e2ce2277543ff5726ad7',1,'VTimer']]],
-  ['isrunning',['IsRunning',['../class_v_emitter.html#aa380c581da480fd4006220320dc42b62',1,'VEmitter']]],
+  ['isrunning',['IsRunning',['../class_v_emitter.html#aa380c581da480fd4006220320dc42b62',1,'VEmitter::IsRunning()'],['../class_v_global.html#a4d74bcdd91e19545c356589561aa6b02',1,'VGlobal::IsRunning()']]],
   ['isshaking',['IsShaking',['../class_v_camera.html#a798daeb8a4e21ce55f474f14ada785b2',1,'VCamera']]],
   ['issolid',['IsSolid',['../class_v_object.html#ad94a8aabc3efd92bb73c9712b067ea02',1,'VObject']]],
   ['issupported',['isSupported',['../class_v_post_effect_base.html#afff2b738a587cf04f9f80e0efbf45ffb',1,'VPostEffectBase']]],

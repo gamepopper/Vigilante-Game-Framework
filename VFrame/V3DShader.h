@@ -146,6 +146,7 @@ private:
 	static GLuint buildShader(const std::string& l_src, unsigned int l_type);
 
 protected:
+	///Reference pointer for current V3DCamera.
 	V3DCamera* cam;
 };
 #endif

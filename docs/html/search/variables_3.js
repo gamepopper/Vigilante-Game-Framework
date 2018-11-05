@@ -3,7 +3,7 @@ var searchData=
   ['deadzone',['deadZone',['../class_v_camera.html#a93e30d52593df27ab747f90804cc36ef',1,'VCamera']]],
   ['default',['Default',['../class_v_camera_list.html#a468a823035452b24a50c99741907fc33',1,'VCameraList']]],
   ['defaultcamera',['DefaultCamera',['../class_v_state.html#a26e483488575a4c4e09fb5fef1b69e2c',1,'VState']]],
-  ['defaulttexture',['DefaultTexture',['../class_v3_d_model.html#a1bf24bc457aa144045406401596a4d27',1,'V3DModel']]],
+  ['defaulttexture',['DefaultTexture',['../class_v3_d_model.html#a7ad7f6a2f4d9b737307afbb8b596ab74',1,'V3DModel']]],
   ['delay',['Delay',['../class_v_trail_area.html#ab9d4e214ae1912626ffab1dbd9c01a76',1,'VTrailArea::Delay()'],['../class_v_typed_text.html#a8544aa0a3d577ac2a30847490c757124',1,'VTypedText::Delay()']]],
   ['dir',['Dir',['../struct_v3_d_light.html#aa5328b5a050a3fc2b7b259657d120aa2',1,'V3DLight']]],
   ['dirty',['dirty',['../class_v_text.html#a3a6648b1e800c0bb2808e8c08488acd1',1,'VText::dirty()'],['../class_v_tilemap.html#acaf38cae874b038dde75b8e76ebc6e91',1,'VTilemap::dirty()']]],

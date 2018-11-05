@@ -87,12 +87,15 @@ public:
 
 	/**
 	* @param p Centre Position of Box.
-	* @param size Dimensions of Box.
+	* @param min Lowest values in the box (possibly negative).
+	* @param max Highest values in the box.
 	* @return True if box is in view.
 	*/
 	virtual bool BoxInView(sf::Vector3f p, sf::Vector3f min, sf::Vector3f max);
 
 protected:
+
+	///Sides of a Frustum plane for box overlap.
 	enum FrustumPlane : unsigned char
 	{
 		PRIGHT,
@@ -109,10 +112,11 @@ protected:
 	float ffar;
 	///Normalize the rotation angles.
 	void normalizeAngles();
-
+	///Updates the plane coordinates based on the view-projection transform.
 	void updatePlanes();
+	///Works out the distance between a point and plane based on dot-product.
 	float pointPlaneDistance(glm::vec4& plane, glm::vec3& point);
-
+	///The plane coordinates for all six size.
 	glm::vec4 planes[6];
 };
 

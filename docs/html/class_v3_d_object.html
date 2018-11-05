@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.2</span>
+   &#160;<span id="projectnumber">1.0.0.3</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -68,6 +68,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_v3_d_object-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">V3DObject Class Reference</div>  </div>
@@ -99,10 +100,14 @@ typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="me
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a05731f900cae1823a9f8c918f0c4943e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a05731f900cae1823a9f8c918f0c4943e">V3DObject</a> (sf::Vector3f position, sf::Vector3f rotation)</td></tr>
-<tr class="separator:a05731f900cae1823a9f8c918f0c4943e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad31c7f1b37dd293fbec65d9eda174a0b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#ad31c7f1b37dd293fbec65d9eda174a0b">V3DObject</a> (float posX=0, float posY=0, float posZ=0, float rotX=0, float rotY=0, float rotZ=0)</td></tr>
-<tr class="separator:ad31c7f1b37dd293fbec65d9eda174a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e047fa5deb863b79bb995da8a17d56b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a6e047fa5deb863b79bb995da8a17d56b">V3DObject</a> (sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale)</td></tr>
+<tr class="separator:a6e047fa5deb863b79bb995da8a17d56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8438319e9ddcffd904aa02ead2dd917"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#ad8438319e9ddcffd904aa02ead2dd917">V3DObject</a> (float posX=0, float posY=0, float posZ=0, float rotX=0, float rotY=0, float rotZ=0, float scaleX=1, float scaleY=1, float scaleZ=1)</td></tr>
+<tr class="separator:ad8438319e9ddcffd904aa02ead2dd917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad42b29689d4b043dec7fc0d19c84a177"><td class="memItemLeft" align="right" valign="top">sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#ad42b29689d4b043dec7fc0d19c84a177">GetMinimum</a> ()</td></tr>
+<tr class="separator:ad42b29689d4b043dec7fc0d19c84a177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a904d7b6a2b0605855a9e121e55e31404"><td class="memItemLeft" align="right" valign="top">sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a904d7b6a2b0605855a9e121e55e31404">GetMaximum</a> ()</td></tr>
+<tr class="separator:a904d7b6a2b0605855a9e121e55e31404"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a6dc1ca2a9e30aba96541f719d80cd9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a7a6dc1ca2a9e30aba96541f719d80cd9">Reset</a> (sf::Vector3f newPos)</td></tr>
 <tr class="separator:a7a6dc1ca2a9e30aba96541f719d80cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a334f806003ebe3b25018d72146b98193"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a334f806003ebe3b25018d72146b98193">Reset</a> (float x, float y, float z)</td></tr>
@@ -137,6 +142,10 @@ sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a3ad54ca3295571a57d6206b910c3e657">Rotation</a></td></tr>
 <tr class="memdesc:a3ad54ca3295571a57d6206b910c3e657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotation Transform. <br /></td></tr>
 <tr class="separator:a3ad54ca3295571a57d6206b910c3e657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48bc2ffa59e9ebaf8705c28c1c43b244"><td class="memItemLeft" align="right" valign="top"><a id="a48bc2ffa59e9ebaf8705c28c1c43b244"></a>
+sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a48bc2ffa59e9ebaf8705c28c1c43b244">Scale</a></td></tr>
+<tr class="memdesc:a48bc2ffa59e9ebaf8705c28c1c43b244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale transform. <br /></td></tr>
+<tr class="separator:a48bc2ffa59e9ebaf8705c28c1c43b244"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44115b10e48d2dbfd5d4eafc3ddf9a6d"><td class="memItemLeft" align="right" valign="top"><a id="a44115b10e48d2dbfd5d4eafc3ddf9a6d"></a>
 sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a44115b10e48d2dbfd5d4eafc3ddf9a6d">Last</a></td></tr>
 <tr class="memdesc:a44115b10e48d2dbfd5d4eafc3ddf9a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last Position. <br /></td></tr>
@@ -181,6 +190,14 @@ sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#aaa0f142a334a21f6ef4bd506a619944f">Health</a> = 100</td></tr>
 <tr class="memdesc:aaa0f142a334a21f6ef4bd506a619944f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard health value (object dies if health is &lt;= 0) <br /></td></tr>
 <tr class="separator:aaa0f142a334a21f6ef4bd506a619944f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73725b97983bfe515bacc10794d02729"><td class="memItemLeft" align="right" valign="top"><a id="a73725b97983bfe515bacc10794d02729"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a73725b97983bfe515bacc10794d02729">Radius</a></td></tr>
+<tr class="memdesc:a73725b97983bfe515bacc10794d02729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radius from the centre of the object as a sphere. <br /></td></tr>
+<tr class="separator:a73725b97983bfe515bacc10794d02729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8810de8ec26d134fed2e5cf260fb3430"><td class="memItemLeft" align="right" valign="top"><a id="a8810de8ec26d134fed2e5cf260fb3430"></a>
+sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a8810de8ec26d134fed2e5cf260fb3430">Origin</a></td></tr>
+<tr class="memdesc:a8810de8ec26d134fed2e5cf260fb3430"><td class="mdescLeft">&#160;</td><td class="mdescRight">Centre of the 3D object, useful for collisions. <br /></td></tr>
+<tr class="separator:a8810de8ec26d134fed2e5cf260fb3430"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v_base')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
 <tr class="memitem:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="aa771f52f4fa755fb64b8dc8cc563250c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aa771f52f4fa755fb64b8dc8cc563250c">active</a> = true</td></tr>
@@ -216,6 +233,17 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a2002d11f5bef66b82825e0e5a8b67af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the tranform. <br /></td></tr>
 <tr class="separator:a2002d11f5bef66b82825e0e5a8b67af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a6286828b476be3431708a36c8423e9dc"><td class="memItemLeft" align="right" valign="top"><a id="a6286828b476be3431708a36c8423e9dc"></a>
+sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a6286828b476be3431708a36c8423e9dc">minimum</a></td></tr>
+<tr class="memdesc:a6286828b476be3431708a36c8423e9dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum size of the object bounding box. <br /></td></tr>
+<tr class="separator:a6286828b476be3431708a36c8423e9dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c5051c0689213b28e7ac48b72889887"><td class="memItemLeft" align="right" valign="top"><a id="a4c5051c0689213b28e7ac48b72889887"></a>
+sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a4c5051c0689213b28e7ac48b72889887">maximum</a></td></tr>
+<tr class="memdesc:a4c5051c0689213b28e7ac48b72889887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum size of the object bounding box. <br /></td></tr>
+<tr class="separator:a4c5051c0689213b28e7ac48b72889887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
@@ -229,8 +257,8 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base 3D Object. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a05731f900cae1823a9f8c918f0c4943e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05731f900cae1823a9f8c918f0c4943e">&#9670;&nbsp;</a></span>V3DObject() <span class="overload">[1/2]</span></h2>
+<a id="a6e047fa5deb863b79bb995da8a17d56b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e047fa5deb863b79bb995da8a17d56b">&#9670;&nbsp;</a></span>V3DObject() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +276,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">sf::Vector3f&#160;</td>
-          <td class="paramname"><em>rotation</em>&#160;</td>
+          <td class="paramname"><em>rotation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector3f&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -266,14 +300,15 @@ Additional Inherited Members</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">position</td><td>Position of the object. </td></tr>
     <tr><td class="paramname">rotation</td><td>Angle of the object. </td></tr>
+    <tr><td class="paramname">scale</td><td>Scale of the object. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ad31c7f1b37dd293fbec65d9eda174a0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad31c7f1b37dd293fbec65d9eda174a0b">&#9670;&nbsp;</a></span>V3DObject() <span class="overload">[2/2]</span></h2>
+<a id="ad8438319e9ddcffd904aa02ead2dd917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8438319e9ddcffd904aa02ead2dd917">&#9670;&nbsp;</a></span>V3DObject() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,7 +350,25 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>rotZ</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>rotZ</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scaleX</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scaleY</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scaleZ</em> = <code>1</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -337,6 +390,9 @@ Additional Inherited Members</h2></td></tr>
     <tr><td class="paramname">rotX</td><td>X angle of the object. </td></tr>
     <tr><td class="paramname">rotY</td><td>Y angle of the object. </td></tr>
     <tr><td class="paramname">rotZ</td><td>Z angle of the object. </td></tr>
+    <tr><td class="paramname">scaleX</td><td>X scale of the object. </td></tr>
+    <tr><td class="paramname">scaleY</td><td>Y scale of the object. </td></tr>
+    <tr><td class="paramname">scaleZ</td><td>Z scale of the object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -377,6 +433,42 @@ Additional Inherited Members</h2></td></tr>
 <p>Reimplemented from <a class="el" href="class_v_base.html#a1e21ec17d7d5cdf6cc8fd2283703c0e4">VBase</a>.</p>
 
 <p>Reimplemented in <a class="el" href="class_v3_d_model.html#a7bac9e376dd8c91cb5950a93525b3a51">V3DModel</a>, and <a class="el" href="class_v3_d_obj_model.html#a2ee224234ab64fb9504f37127b991b18">V3DObjModel</a>.</p>
+
+</div>
+</div>
+<a id="a904d7b6a2b0605855a9e121e55e31404"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a904d7b6a2b0605855a9e121e55e31404">&#9670;&nbsp;</a></span>GetMaximum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Vector3f V3DObject::GetMaximum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Maximum size of the object bounding box. </dd></dl>
+
+</div>
+</div>
+<a id="ad42b29689d4b043dec7fc0d19c84a177"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad42b29689d4b043dec7fc0d19c84a177">&#9670;&nbsp;</a></span>GetMinimum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Vector3f V3DObject::GetMinimum </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Minimum size of the object bounding box. </dd></dl>
 
 </div>
 </div>

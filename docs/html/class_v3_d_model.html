@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.2</span>
+   &#160;<span id="projectnumber">1.0.0.3</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -114,6 +114,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab946fe77651eaed6146004922f7b0e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74f10da43a2ed543932212b9b67fb495"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a74f10da43a2ed543932212b9b67fb495">LoadTexture</a> (const sf::String &amp;filename)</td></tr>
 <tr class="separator:a74f10da43a2ed543932212b9b67fb495"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c4fc502881467de23a8d3b4df164651"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a2c4fc502881467de23a8d3b4df164651">LoadTexture</a> (const sf::Texture &amp;tex)</td></tr>
+<tr class="separator:a2c4fc502881467de23a8d3b4df164651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2515881d5d84f2a202e8821055276d2e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a2515881d5d84f2a202e8821055276d2e">UpdateShader</a> (<a class="el" href="class_v3_d_shader.html">V3DShader</a> *shader, <a class="el" href="class_v3_d_camera.html">V3DCamera</a> *camera)</td></tr>
 <tr class="separator:a2515881d5d84f2a202e8821055276d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae24f554309d40a6af9b5a73edd26b1e0"><td class="memItemLeft" align="right" valign="top"><a id="ae24f554309d40a6af9b5a73edd26b1e0"></a>
@@ -123,10 +125,14 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:a7bac9e376dd8c91cb5950a93525b3a51"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a7bac9e376dd8c91cb5950a93525b3a51">Draw</a> (sf::RenderTarget &amp;RenderTarget) override</td></tr>
 <tr class="separator:a7bac9e376dd8c91cb5950a93525b3a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v3_d_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v3_d_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v3_d_object.html">V3DObject</a></td></tr>
-<tr class="memitem:a05731f900cae1823a9f8c918f0c4943e inherit pub_methods_class_v3_d_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a05731f900cae1823a9f8c918f0c4943e">V3DObject</a> (sf::Vector3f position, sf::Vector3f rotation)</td></tr>
-<tr class="separator:a05731f900cae1823a9f8c918f0c4943e inherit pub_methods_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad31c7f1b37dd293fbec65d9eda174a0b inherit pub_methods_class_v3_d_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#ad31c7f1b37dd293fbec65d9eda174a0b">V3DObject</a> (float posX=0, float posY=0, float posZ=0, float rotX=0, float rotY=0, float rotZ=0)</td></tr>
-<tr class="separator:ad31c7f1b37dd293fbec65d9eda174a0b inherit pub_methods_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e047fa5deb863b79bb995da8a17d56b inherit pub_methods_class_v3_d_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a6e047fa5deb863b79bb995da8a17d56b">V3DObject</a> (sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale)</td></tr>
+<tr class="separator:a6e047fa5deb863b79bb995da8a17d56b inherit pub_methods_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8438319e9ddcffd904aa02ead2dd917 inherit pub_methods_class_v3_d_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#ad8438319e9ddcffd904aa02ead2dd917">V3DObject</a> (float posX=0, float posY=0, float posZ=0, float rotX=0, float rotY=0, float rotZ=0, float scaleX=1, float scaleY=1, float scaleZ=1)</td></tr>
+<tr class="separator:ad8438319e9ddcffd904aa02ead2dd917 inherit pub_methods_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad42b29689d4b043dec7fc0d19c84a177 inherit pub_methods_class_v3_d_object"><td class="memItemLeft" align="right" valign="top">sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#ad42b29689d4b043dec7fc0d19c84a177">GetMinimum</a> ()</td></tr>
+<tr class="separator:ad42b29689d4b043dec7fc0d19c84a177 inherit pub_methods_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a904d7b6a2b0605855a9e121e55e31404 inherit pub_methods_class_v3_d_object"><td class="memItemLeft" align="right" valign="top">sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a904d7b6a2b0605855a9e121e55e31404">GetMaximum</a> ()</td></tr>
+<tr class="separator:a904d7b6a2b0605855a9e121e55e31404 inherit pub_methods_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a6dc1ca2a9e30aba96541f719d80cd9 inherit pub_methods_class_v3_d_object"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a7a6dc1ca2a9e30aba96541f719d80cd9">Reset</a> (sf::Vector3f newPos)</td></tr>
 <tr class="separator:a7a6dc1ca2a9e30aba96541f719d80cd9 inherit pub_methods_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a334f806003ebe3b25018d72146b98193 inherit pub_methods_class_v3_d_object"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a334f806003ebe3b25018d72146b98193">Reset</a> (float x, float y, float z)</td></tr>
@@ -163,10 +169,6 @@ Public Attributes</h2></td></tr>
 <a class="el" href="struct_v3_d_material.html">V3DMaterial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#ac85c5c5a9d9e9f78bd35036c706e2ce5">Material</a></td></tr>
 <tr class="memdesc:ac85c5c5a9d9e9f78bd35036c706e2ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surface Material for Lighting. <br /></td></tr>
 <tr class="separator:ac85c5c5a9d9e9f78bd35036c706e2ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed240c258f69700af1a12bc60327cf09"><td class="memItemLeft" align="right" valign="top"><a id="aed240c258f69700af1a12bc60327cf09"></a>
-sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#aed240c258f69700af1a12bc60327cf09">Scale</a></td></tr>
-<tr class="memdesc:aed240c258f69700af1a12bc60327cf09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale Transform. <br /></td></tr>
-<tr class="separator:aed240c258f69700af1a12bc60327cf09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_v3_d_object"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v3_d_object')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v3_d_object.html">V3DObject</a></td></tr>
 <tr class="memitem:ad4652d6f32e3dd44d4c17affbf78bf4b inherit pub_attribs_class_v3_d_object"><td class="memItemLeft" align="right" valign="top"><a id="ad4652d6f32e3dd44d4c17affbf78bf4b"></a>
 sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#ad4652d6f32e3dd44d4c17affbf78bf4b">Position</a></td></tr>
@@ -176,6 +178,10 @@ sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a3ad54ca3295571a57d6206b910c3e657">Rotation</a></td></tr>
 <tr class="memdesc:a3ad54ca3295571a57d6206b910c3e657 inherit pub_attribs_class_v3_d_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotation Transform. <br /></td></tr>
 <tr class="separator:a3ad54ca3295571a57d6206b910c3e657 inherit pub_attribs_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48bc2ffa59e9ebaf8705c28c1c43b244 inherit pub_attribs_class_v3_d_object"><td class="memItemLeft" align="right" valign="top"><a id="a48bc2ffa59e9ebaf8705c28c1c43b244"></a>
+sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a48bc2ffa59e9ebaf8705c28c1c43b244">Scale</a></td></tr>
+<tr class="memdesc:a48bc2ffa59e9ebaf8705c28c1c43b244 inherit pub_attribs_class_v3_d_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale transform. <br /></td></tr>
+<tr class="separator:a48bc2ffa59e9ebaf8705c28c1c43b244 inherit pub_attribs_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44115b10e48d2dbfd5d4eafc3ddf9a6d inherit pub_attribs_class_v3_d_object"><td class="memItemLeft" align="right" valign="top"><a id="a44115b10e48d2dbfd5d4eafc3ddf9a6d"></a>
 sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a44115b10e48d2dbfd5d4eafc3ddf9a6d">Last</a></td></tr>
 <tr class="memdesc:a44115b10e48d2dbfd5d4eafc3ddf9a6d inherit pub_attribs_class_v3_d_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last Position. <br /></td></tr>
@@ -220,6 +226,14 @@ sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#aaa0f142a334a21f6ef4bd506a619944f">Health</a> = 100</td></tr>
 <tr class="memdesc:aaa0f142a334a21f6ef4bd506a619944f inherit pub_attribs_class_v3_d_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard health value (object dies if health is &lt;= 0) <br /></td></tr>
 <tr class="separator:aaa0f142a334a21f6ef4bd506a619944f inherit pub_attribs_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73725b97983bfe515bacc10794d02729 inherit pub_attribs_class_v3_d_object"><td class="memItemLeft" align="right" valign="top"><a id="a73725b97983bfe515bacc10794d02729"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a73725b97983bfe515bacc10794d02729">Radius</a></td></tr>
+<tr class="memdesc:a73725b97983bfe515bacc10794d02729 inherit pub_attribs_class_v3_d_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radius from the centre of the object as a sphere. <br /></td></tr>
+<tr class="separator:a73725b97983bfe515bacc10794d02729 inherit pub_attribs_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8810de8ec26d134fed2e5cf260fb3430 inherit pub_attribs_class_v3_d_object"><td class="memItemLeft" align="right" valign="top"><a id="a8810de8ec26d134fed2e5cf260fb3430"></a>
+sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a8810de8ec26d134fed2e5cf260fb3430">Origin</a></td></tr>
+<tr class="memdesc:a8810de8ec26d134fed2e5cf260fb3430 inherit pub_attribs_class_v3_d_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Centre of the 3D object, useful for collisions. <br /></td></tr>
+<tr class="separator:a8810de8ec26d134fed2e5cf260fb3430 inherit pub_attribs_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v_base')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
 <tr class="memitem:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="aa771f52f4fa755fb64b8dc8cc563250c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aa771f52f4fa755fb64b8dc8cc563250c">active</a> = true</td></tr>
@@ -248,10 +262,10 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a1bf24bc457aa144045406401596a4d27"><td class="memItemLeft" align="right" valign="top"><a id="a1bf24bc457aa144045406401596a4d27"></a>
-static GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a1bf24bc457aa144045406401596a4d27">DefaultTexture</a></td></tr>
-<tr class="memdesc:a1bf24bc457aa144045406401596a4d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">A generated 1x1 White texture. If no texture is loaded, then this will be used. <br /></td></tr>
-<tr class="separator:a1bf24bc457aa144045406401596a4d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ad7f6a2f4d9b737307afbb8b596ab74"><td class="memItemLeft" align="right" valign="top"><a id="a7ad7f6a2f4d9b737307afbb8b596ab74"></a>
+static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a7ad7f6a2f4d9b737307afbb8b596ab74">DefaultTexture</a></td></tr>
+<tr class="memdesc:a7ad7f6a2f4d9b737307afbb8b596ab74"><td class="mdescLeft">&#160;</td><td class="mdescRight">A generated 1x1 White texture. If no texture is loaded, then this will be used. <br /></td></tr>
+<tr class="separator:a7ad7f6a2f4d9b737307afbb8b596ab74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -265,18 +279,18 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a3444d5122d0b5fae42f06e2583f2415e"><td class="memItemLeft" align="right" valign="top"><a id="a3444d5122d0b5fae42f06e2583f2415e"></a>
-GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a3444d5122d0b5fae42f06e2583f2415e">vao</a></td></tr>
-<tr class="memdesc:a3444d5122d0b5fae42f06e2583f2415e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex Array Object ID. <br /></td></tr>
-<tr class="separator:a3444d5122d0b5fae42f06e2583f2415e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dbd085e29de89db7c967e2323248f6a"><td class="memItemLeft" align="right" valign="top"><a id="a3dbd085e29de89db7c967e2323248f6a"></a>
-GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a3dbd085e29de89db7c967e2323248f6a">vertexVBO</a></td></tr>
-<tr class="memdesc:a3dbd085e29de89db7c967e2323248f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex Buffer Object for Vertices. <br /></td></tr>
-<tr class="separator:a3dbd085e29de89db7c967e2323248f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66bed929043d7ebfd03ed61bf28c0132"><td class="memItemLeft" align="right" valign="top"><a id="a66bed929043d7ebfd03ed61bf28c0132"></a>
-GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a66bed929043d7ebfd03ed61bf28c0132">indexVBO</a></td></tr>
-<tr class="memdesc:a66bed929043d7ebfd03ed61bf28c0132"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex Buffer Object for Indices. <br /></td></tr>
-<tr class="separator:a66bed929043d7ebfd03ed61bf28c0132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaba31560aedc14e03cee8a15dcbf23e1"><td class="memItemLeft" align="right" valign="top"><a id="aaba31560aedc14e03cee8a15dcbf23e1"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#aaba31560aedc14e03cee8a15dcbf23e1">vao</a></td></tr>
+<tr class="memdesc:aaba31560aedc14e03cee8a15dcbf23e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex Array Object ID. <br /></td></tr>
+<tr class="separator:aaba31560aedc14e03cee8a15dcbf23e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0124d920c96efd413a912c8ec82ad0f5"><td class="memItemLeft" align="right" valign="top"><a id="a0124d920c96efd413a912c8ec82ad0f5"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a0124d920c96efd413a912c8ec82ad0f5">vertexVBO</a></td></tr>
+<tr class="memdesc:a0124d920c96efd413a912c8ec82ad0f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex Buffer Object for Vertices. <br /></td></tr>
+<tr class="separator:a0124d920c96efd413a912c8ec82ad0f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af923e728cb2a805b70495fd37d15913a"><td class="memItemLeft" align="right" valign="top"><a id="af923e728cb2a805b70495fd37d15913a"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#af923e728cb2a805b70495fd37d15913a">indexVBO</a></td></tr>
+<tr class="memdesc:af923e728cb2a805b70495fd37d15913a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex Buffer Object for Indices. <br /></td></tr>
+<tr class="separator:af923e728cb2a805b70495fd37d15913a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20d7e71ce3d6948b4cee56bc44757624"><td class="memItemLeft" align="right" valign="top"><a id="a20d7e71ce3d6948b4cee56bc44757624"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#a20d7e71ce3d6948b4cee56bc44757624">drawCount</a></td></tr>
 <tr class="memdesc:a20d7e71ce3d6948b4cee56bc44757624"><td class="mdescLeft">&#160;</td><td class="mdescRight">Depending on input, the amount of vertices or indices that are needed to be drawn for this object. <br /></td></tr>
@@ -289,6 +303,15 @@ sf::Texture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_model.html#acd14cd1afeebb47ad08614803c93cb5c">transform</a></td></tr>
 <tr class="memdesc:acd14cd1afeebb47ad08614803c93cb5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Model Matrix. <br /></td></tr>
 <tr class="separator:acd14cd1afeebb47ad08614803c93cb5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_v3_d_object"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_v3_d_object')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_v3_d_object.html">V3DObject</a></td></tr>
+<tr class="memitem:a6286828b476be3431708a36c8423e9dc inherit pro_attribs_class_v3_d_object"><td class="memItemLeft" align="right" valign="top"><a id="a6286828b476be3431708a36c8423e9dc"></a>
+sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a6286828b476be3431708a36c8423e9dc">minimum</a></td></tr>
+<tr class="memdesc:a6286828b476be3431708a36c8423e9dc inherit pro_attribs_class_v3_d_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum size of the object bounding box. <br /></td></tr>
+<tr class="separator:a6286828b476be3431708a36c8423e9dc inherit pro_attribs_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c5051c0689213b28e7ac48b72889887 inherit pro_attribs_class_v3_d_object"><td class="memItemLeft" align="right" valign="top"><a id="a4c5051c0689213b28e7ac48b72889887"></a>
+sf::Vector3f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_object.html#a4c5051c0689213b28e7ac48b72889887">maximum</a></td></tr>
+<tr class="memdesc:a4c5051c0689213b28e7ac48b72889887 inherit pro_attribs_class_v3_d_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum size of the object bounding box. <br /></td></tr>
+<tr class="separator:a4c5051c0689213b28e7ac48b72889887 inherit pro_attribs_class_v3_d_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Basic 3D Model with a single texture. </p>
@@ -490,7 +513,7 @@ glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 </div>
 </div>
 <a id="a74f10da43a2ed543932212b9b67fb495"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74f10da43a2ed543932212b9b67fb495">&#9670;&nbsp;</a></span>LoadTexture()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f10da43a2ed543932212b9b67fb495">&#9670;&nbsp;</a></span>LoadTexture() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -507,6 +530,30 @@ glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Loads a texture for the 3D model. If no texture is loaded than the default texture is used. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filename</td><td>The file path and name of the texture file. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2c4fc502881467de23a8d3b4df164651"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c4fc502881467de23a8d3b4df164651">&#9670;&nbsp;</a></span>LoadTexture() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool V3DModel::LoadTexture </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Texture &amp;&#160;</td>
+          <td class="paramname"><em>tex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Loads a texture for the 3D model. If no texture is loaded than the default texture is used. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tex</td><td>The sf::Texture object that is being used as the texture. </td></tr>
   </table>
   </dd>
 </dl>

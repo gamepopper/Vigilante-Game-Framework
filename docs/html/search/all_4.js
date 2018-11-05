@@ -4,7 +4,7 @@ var searchData=
   ['elasticityrange',['ElasticityRange',['../class_v_emitter.html#a423a939f80a7407ac4982ab301ec9678',1,'VEmitter']]],
   ['emitparticle',['EmitParticle',['../class_v_emitter.html#a18542290f91c965e2864edd08db9eaf6',1,'VEmitter']]],
   ['emittingangle',['EmittingAngle',['../class_v_emitter.html#ab4356a7be8a283d223ccccbb9d8de562',1,'VEmitter']]],
-  ['enabled',['enabled',['../class_v_post_effect_multipass.html#ac09b57cfbf958f44c59e723c517a78a6',1,'VPostEffectMultipass::enabled()'],['../struct_v3_d_light.html#a43d8edb7c133a04cd9d7b7f3284b29a5',1,'V3DLight::Enabled()']]],
+  ['enabled',['Enabled',['../struct_v3_d_light.html#a43d8edb7c133a04cd9d7b7f3284b29a5',1,'V3DLight::Enabled()'],['../class_v_post_effect_multipass.html#ac09b57cfbf958f44c59e723c517a78a6',1,'VPostEffectMultipass::enabled()']]],
   ['enableeffect',['EnableEffect',['../class_v_post_effect_multipass.html#a14a87fc03db916f2aefea25a43f736ec',1,'VPostEffectMultipass']]],
   ['erase',['Erase',['../class_v_typed_text.html#abe60f25ca4ceb71dd8e543564c3379d9',1,'VTypedText']]],
   ['erasedelay',['EraseDelay',['../class_v_typed_text.html#a95f24068ed33bf608595708625d7b3d0',1,'VTypedText']]],
