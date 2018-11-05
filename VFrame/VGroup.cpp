@@ -176,8 +176,8 @@ int VGroup::CountDead()
 VBase* VGroup::GetRandom(int min, int max)
 {
 	min = min >= 0 ? min : 0;
-	max = max < (int)members.size() ? max : (int)members.size();
-	return members[VGlobal::p()->Random->GetInt(max, min)];
+	max = max - 1 < (int)members.size() - 1 && max > 0 ? max : (int)members.size();
+	return members[VGlobal::p()->Random->GetInt(max - 1, min)];
 }
 
 void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
@@ -190,6 +190,8 @@ void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
 
 		if (base != nullptr)
 		{
+			function(base);
+
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
@@ -197,10 +199,6 @@ void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
 				{
 					group->ForEachAlive(function, recursive);
 				}
-			}
-			else
-			{
-				function(base);
 			}
 		}
 	}
@@ -216,6 +214,8 @@ void VGroup::ForEachAlive(std::function<void(VBase*)> function, bool recursive)
 
 		if (base != nullptr && base->exists && base->alive)
 		{
+			function(base);
+
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
@@ -225,8 +225,6 @@ void VGroup::ForEachAlive(std::function<void(VBase*)> function, bool recursive)
 					continue;
 				}
 			}
-			
-			function(base);
 		}
 	}
 }
@@ -241,6 +239,8 @@ void VGroup::ForEachDead(std::function<void(VBase*)> function, bool recursive)
 
 		if (base != nullptr && !base->alive)
 		{
+			function(base);
+
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
@@ -248,10 +248,6 @@ void VGroup::ForEachDead(std::function<void(VBase*)> function, bool recursive)
 				{
 					group->ForEachAlive(function, recursive);
 				}
-			}
-			else
-			{
-				function(base);
 			}
 		}
 	}
@@ -267,6 +263,8 @@ void VGroup::ForEachExists(std::function<void(VBase*)> function, bool recursive)
 
 		if (base != nullptr && base->exists)
 		{
+			function(base);
+
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
@@ -274,10 +272,6 @@ void VGroup::ForEachExists(std::function<void(VBase*)> function, bool recursive)
 				{
 					group->ForEachAlive(function, recursive);
 				}
-			}
-			else
-			{
-				function(base);
 			}
 		}
 	}
