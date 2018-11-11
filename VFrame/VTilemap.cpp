@@ -354,7 +354,7 @@ char VTilemap::GetTileID(unsigned int x, unsigned int y)
 		return tilemap[(y * mapWidth) + x];
 	}
 
-	return '\0';
+	return -1;
 }
 
 char VTilemap::GetTileID(sf::Vector2i position)

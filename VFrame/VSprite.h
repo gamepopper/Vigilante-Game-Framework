@@ -36,7 +36,8 @@
 #include "VAnimationManager.h"
 
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <memory>
 
@@ -44,12 +45,12 @@
 class VSprite :	public VObject
 {
 protected:
-	///Spite's texture.
-	sf::Texture* texture = nullptr;
 	///If true, texture will be destroyed within VSprite. Important if texture isn't loaded from VContent.
 	bool disposible = false;
-	///Sprite render infomation and transform.
-	sf::Sprite sprite;
+	///Sprite render infomation.
+	sf::VertexArray vertexArray;
+	///Sprite transform.
+	sf::Transformable transformable;
 
 	/**
 	* Sets up the Sprite's frame size and animation.
@@ -97,15 +98,18 @@ public:
 	*/
 	VSprite(sf::Vector2f Position, const sf::String& Filename = "") : VObject(Position)
 	{
-		if (Filename != "")
-		{
-			LoadGraphic(Filename);
-		}
-
 		RenderState = sf::RenderStates::Default;
 		Tint = sf::Color::White;
 		Scale = sf::Vector2f(1, 1);
 		Offset = sf::Vector2f();
+
+		vertexArray.setPrimitiveType(sf::Quads);
+		vertexArray.resize(4);
+
+		if (Filename != "")
+		{
+			LoadGraphic(Filename);
+		}
 
 #if _DEBUG
 		DebugColor = sf::Color(0, 255, 0, 128);
@@ -119,15 +123,18 @@ public:
 	*/
 	VSprite(float x = 0, float y = 0, const sf::String& filename = "") : VObject(x,y)
 	{
-		if (filename != "")
-		{
-			LoadGraphic(filename);
-		}
-
 		RenderState = sf::RenderStates::Default;
 		Tint = sf::Color::White;
 		Scale = sf::Vector2f(1, 1);
 		Offset = sf::Vector2f();
+
+		vertexArray.setPrimitiveType(sf::Quads);
+		vertexArray.resize(4);
+
+		if (filename != "")
+		{
+			LoadGraphic(filename);
+		}
 
 #if _DEBUG
 		DebugColor = sf::Color(0, 255, 0, 128);
@@ -172,12 +179,6 @@ public:
 	* @param outlineColor colour of sprite outline.
 	*/
 	virtual VSprite* MakeGraphicCircle(int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
-
-	///@return Texture of sprite.
-	sf::Texture* GetTexture()
-	{
-		return texture;
-	}
 
 	///Destroys the sprite rendering data (and texture if disposable is set for true).
 	virtual void Destroy() override;

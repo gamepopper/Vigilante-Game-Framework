@@ -21,40 +21,53 @@ void VSprite::setSize(unsigned int texWidth, unsigned int texHeight, bool animat
 	Origin = sf::Vector2f(FrameSize) / 2.0f;
 
 	Radius = Size.x < Size.y ? Size.x / 2 : Size.y / 2;
+
+	vertexArray[0].position = sf::Vector2f();
+	vertexArray[1].position = sf::Vector2f(Size.x, 0.0f);
+	vertexArray[2].position = sf::Vector2f(Size.x, Size.y);
+	vertexArray[3].position = sf::Vector2f(0.0f, Size.y);
 }
 
 void VSprite::updateTransform()
 {
-	if (sprite.getPosition() != Position + Origin - Offset) 
-		sprite.setPosition(Position + Origin - Offset);
-	if (sprite.getRotation() != Angle) 
-		sprite.setRotation(Angle);
-	if (sprite.getScale() != Scale)	
-		sprite.setScale(Scale);
-	if (sprite.getColor() != Tint) 
-		sprite.setColor(Tint);
-	if (sprite.getOrigin() != Origin) 
-		sprite.setOrigin(Origin);
+	if (transformable.getPosition() != Position + Origin - Offset) 
+		transformable.setPosition(Position + Origin - Offset);
+	if (transformable.getRotation() != Angle) 
+		transformable.setRotation(Angle);
+	if (transformable.getScale() != Scale)	
+		transformable.setScale(Scale);
+	if (transformable.getOrigin() != Origin) 
+		transformable.setOrigin(Origin);
+
+	if (vertexArray[0].color != Tint)
+	{
+		vertexArray[0].color = Tint;
+		vertexArray[1].color = Tint;
+		vertexArray[2].color = Tint;
+		vertexArray[3].color = Tint;
+	}
 }
 
 void VSprite::updateFrame()
 {
-	sf::IntRect rect = sprite.getTextureRect();
+	sf::IntRect rect;
 	rect.left		= FlipX ? Animation.GetU() + FrameSize.x : Animation.GetU();
 	rect.top		= FlipY ? Animation.GetV() + FrameSize.y : Animation.GetV();
 	rect.width		= FlipX ? -(int)FrameSize.x : FrameSize.x;
 	rect.height		= FlipY ? -(int)FrameSize.y : FrameSize.y;
-	if (sprite.getTextureRect() != rect) sprite.setTextureRect(rect);
+	vertexArray[0].texCoords = sf::Vector2f(rect.left,				rect.top);
+	vertexArray[1].texCoords = sf::Vector2f(rect.left + rect.width, rect.top);
+	vertexArray[2].texCoords = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
+	vertexArray[3].texCoords = sf::Vector2f(rect.left,				rect.top + rect.height);
 }
 
 VSprite* VSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, const sf::IntRect& area)
 {
-	texture = &VGlobal::p()->Content->LoadTexture(filename);
-	sprite.setTexture(*texture);
+	RenderState.texture = &VGlobal::p()->Content->LoadTexture(filename);
 
 	setSize(
-		area.width == 0 ? GetTexture()->getSize().x : area.width, 
-		area.height == 0 ? GetTexture()->getSize().y : area.height,
+		area.width == 0 ? RenderState.texture->getSize().x : area.width, 
+		area.height == 0 ? RenderState.texture->getSize().y : area.height,
 		animated, width, height, area.left, area.top
 		);
 
@@ -65,12 +78,11 @@ VSprite* VSprite::LoadGraphic(sf::String filename, bool animated, int width, int
 
 VSprite* VSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, const sf::IntRect& area)
 {
-	this->texture = &texture;
-	sprite = sf::Sprite(*this->texture);
+	RenderState.texture = &texture;
 
 	setSize(
-		area.width == 0 ? GetTexture()->getSize().x : area.width,
-		area.height == 0 ? GetTexture()->getSize().y : area.height,
+		area.width == 0 ? RenderState.texture->getSize().x : area.width,
+		area.height == 0 ? RenderState.texture->getSize().y : area.height,
 		animated, width, height, area.left, area.top
 		);
 
@@ -80,10 +92,10 @@ VSprite* VSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, in
 
 VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outline, sf::Color outlineColor)
 {
-	if (disposible && texture)
+	if (disposible && RenderState.texture)
 	{
-		delete texture;
-		texture = nullptr;
+		delete RenderState.texture;
+		RenderState.texture = nullptr;
 		disposible = false;
 	}
 
@@ -101,11 +113,11 @@ VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outl
 		}
 	}
 
-	texture = new sf::Texture();
+	sf::Texture* texture = new sf::Texture();
 	texture->loadFromImage(image);
 	disposible = true;
 
-	sprite = sf::Sprite(*texture);
+	RenderState.texture = texture;
 	setSize(width, height, false, width, height);
 
 	return this;
@@ -113,10 +125,10 @@ VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outl
 
 VSprite* VSprite::MakeGraphicCircle(int radius, sf::Color color, float outline, sf::Color outlineColor)
 {
-	if (disposible && texture)
+	if (disposible && RenderState.texture)
 	{
-		delete texture;
-		texture = nullptr;
+		delete RenderState.texture;
+		RenderState.texture = nullptr;
 		disposible = false;
 	}
 
@@ -143,11 +155,11 @@ VSprite* VSprite::MakeGraphicCircle(int radius, sf::Color color, float outline, 
 		}
 	}
 
-	texture = new sf::Texture();
+	sf::Texture* texture = new sf::Texture();
 	texture->loadFromImage(image);
 	disposible = true;
 
-	sprite = sf::Sprite(*texture);
+	RenderState.texture = texture;
 	setSize(radius * 2, radius * 2, false, radius * 2, radius * 2);
 
 	return this;
@@ -157,10 +169,11 @@ void VSprite::Destroy()
 {
 	VSUPERCLASS::Destroy();
 
-	if (disposible && texture)
+	if (disposible && RenderState.texture)
 	{
-		delete texture;
-		texture = nullptr;
+		delete RenderState.texture;
+		RenderState.texture = nullptr;
+		disposible = false;
 	}
 }
 
@@ -174,10 +187,10 @@ void VSprite::Update(float dt)
 	if (Animation.GetLastFrame() != Animation.GetCurrentFrame())
 		updateTexture = true;
 
-	if ((FlipX && sprite.getTextureRect().width > 0) || (!FlipX && sprite.getTextureRect().width < 0))
+	if ((FlipX && vertexArray[2].texCoords.x - vertexArray[0].texCoords.x > 0) || (!FlipX && vertexArray[2].texCoords.x - vertexArray[0].texCoords.x < 0))
 		updateTexture = true;
 
-	if ((FlipY && sprite.getTextureRect().height > 0) || (!FlipY && sprite.getTextureRect().height < 0))
+	if ((FlipY && vertexArray[2].texCoords.y - vertexArray[0].texCoords.y > 0) || (!FlipY && vertexArray[2].texCoords.y - vertexArray[0].texCoords.y < 0))
 		updateTexture = true;
 
 	if (updateTexture)
@@ -192,11 +205,12 @@ void VSprite::Draw(sf::RenderTarget& RenderTarget)
 
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
+	RenderState.transform = transformable.getTransform();
 
-	if (TestInView(renderTargetView, scrollView, this, sprite.getGlobalBounds()))
+	if (TestInView(renderTargetView, scrollView, this, transformable.getTransform().transformRect(vertexArray.getBounds())))
 	{
 		RenderTarget.setView(scrollView);
-		RenderTarget.draw(sprite, RenderState);
+		RenderTarget.draw(vertexArray, RenderState);
 		RenderTarget.setView(renderTargetView);
 	}
 }

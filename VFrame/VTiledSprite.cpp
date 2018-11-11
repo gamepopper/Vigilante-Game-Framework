@@ -3,40 +3,50 @@
 
 void VTiledSprite::updateTransform()
 {
-	if (sprite.getPosition() != Position + Origin)
-		sprite.setPosition(Position + Origin);
-	if (sprite.getRotation() != Angle)
-		sprite.setRotation(Angle);
-	if (sprite.getColor() != Tint)
-		sprite.setColor(Tint);
-	if (sprite.getTextureRect() != sf::IntRect(0, 0, static_cast<int>(Size.x), static_cast<int>(Size.y)))
-		sprite.setTextureRect(sf::IntRect(0, 0, static_cast<int>(Size.x), static_cast<int>(Size.y)));
-	if (sprite.getOrigin() != Origin)
-		sprite.setOrigin(Origin);
+	if (transformable.getPosition() != Position + Origin)
+		transformable.setPosition(Position + Origin);
+	if (transformable.getRotation() != Angle)
+		transformable.setRotation(Angle);
+	if (transformable.getOrigin() != Origin)
+		transformable.setOrigin(Origin);
+
+	if (vertexArray[0].color != Tint)
+	{
+		vertexArray[0].color = Tint;
+		vertexArray[1].color = Tint;
+		vertexArray[2].color = Tint;
+		vertexArray[3].color = Tint;
+	}
+	
+	vertexArray[0].position = sf::Vector2f();
+	vertexArray[1].position = sf::Vector2f(Size.x, 0.0f);
+	vertexArray[2].position = sf::Vector2f(Size.x, Size.y);
+	vertexArray[3].position = sf::Vector2f(0.0f, Size.y);
 }
 
 void VTiledSprite::updateFrame()
 {
-	sf::IntRect rect = sprite.getTextureRect();
+	sf::IntRect rect;
 	rect.left = FlipX ? Animation.GetU() + FrameSize.x : Animation.GetU();
 	rect.top = FlipY ? Animation.GetV() + FrameSize.y : Animation.GetV();
 	rect.width = FlipX ? -(int)FrameSize.x : FrameSize.x;
 	rect.height = FlipY ? -(int)FrameSize.y : FrameSize.y;
 
 	if (image != nullptr)
-		GetTexture()->loadFromImage(*image, rect);
+		const_cast<sf::Texture*>(RenderState.texture)->loadFromImage(*image, rect);
 }
 
 VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, const sf::IntRect& area)
 {
-	if (texture && disposible)
+	if (RenderState.texture && disposible)
 	{
-		delete texture;
-		texture = nullptr;
+		delete RenderState.texture;
+		RenderState.texture = nullptr;
 		disposible = false;
 	}
 
-	texture = new sf::Texture();
+	RenderState.texture = new sf::Texture();
+	const_cast<sf::Texture*>(RenderState.texture)->setRepeated(true);
 	disposible = true;
 
 	sf::Texture* tex = &VGlobal::p()->Content->LoadTexture(filename);
@@ -48,7 +58,6 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 	width = width == 0 ? image->getSize().x : width;
 	height = height == 0 ? image->getSize().y : height;
 
-	sprite = sf::Sprite(*texture);
 	updateFrame();
 
 	return this;
@@ -56,14 +65,15 @@ VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width
 
 VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& tex, bool animated, int width, int height, const sf::IntRect& area)
 {
-	if (texture && disposible)
+	if (RenderState.texture && disposible)
 	{
-		delete texture;
-		texture = nullptr;
+		delete RenderState.texture;
+		RenderState.texture = nullptr;
 		disposible = false;
 	}
 
-	this->texture = new sf::Texture();
+	RenderState.texture = new sf::Texture();
+	const_cast<sf::Texture*>(RenderState.texture)->setRepeated(true);
 	disposible = true;
 	image = std::unique_ptr<sf::Image>(new sf::Image(tex.copyToImage()));
 
@@ -73,7 +83,6 @@ VSprite* VTiledSprite::LoadGraphicFromTexture(sf::Texture& tex, bool animated, i
 	width = width == 0 ? image->getSize().x : width;
 	height = height == 0 ? image->getSize().y : height;
 
-	sprite = sf::Sprite(*texture);
 	updateFrame();
 
 	return this;
@@ -89,17 +98,18 @@ void VTiledSprite::Update(float dt)
 {
 	VSUPERCLASS::Update(dt);
 
-	sf::IntRect rect = sprite.getTextureRect();
-	rect.left = FlipX ? Animation.GetU() + FrameSize.x : Animation.GetU();
-	rect.top = FlipY ? Animation.GetV() + FrameSize.y : Animation.GetV();
-	rect.width = FlipX ? -(int)FrameSize.x : FrameSize.x;
-	rect.height = FlipY ? -(int)FrameSize.y : FrameSize.y;
-	sprite.setTextureRect(rect);
+	vertexArray[0].position = sf::Vector2f(0,		0);
+	vertexArray[1].position = sf::Vector2f(Size.x,	0);
+	vertexArray[2].position = sf::Vector2f(Size.x,	Size.y);
+	vertexArray[3].position = sf::Vector2f(0,		Size.y);
+
+	vertexArray[0].texCoords = sf::Vector2f(0,		0);
+	vertexArray[1].texCoords = sf::Vector2f(Size.x,	0);
+	vertexArray[2].texCoords = sf::Vector2f(Size.x,	Size.y);
+	vertexArray[3].texCoords = sf::Vector2f(0,		Size.y);
 }
 
 void VTiledSprite::Draw(sf::RenderTarget& RenderTarget)
 {
-	texture->setRepeated(true);
 	VSUPERCLASS::Draw(RenderTarget);
-	texture->setRepeated(false);
 }
