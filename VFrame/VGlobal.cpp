@@ -80,20 +80,49 @@ const char* VGlobal::GetTitle()
 {
 	return title;
 }
+
+#ifndef VFRAME_NO_3D
+#include "V3DScene.h"
+#endif
+
 void VGlobal::SetFullscreen(bool set)
 {
+#ifndef VFRAME_NO_3D
+	//Push any GL States from non-legacy contexts to avoid any removals.
+	auto pushStatesFunc = [](VBase* base) {
+		V3DScene* scene = dynamic_cast<V3DScene*>(base);
+		if (scene)
+		{
+			scene->SetActive(false);
+		}
+	};
+	CurrentState()->ForEach(pushStatesFunc, true);
+#endif
+
 	if (set && !fullscreen)
 	{
-		App->create(sf::VideoMode::getDesktopMode(), Title, sf::Style::Fullscreen);
-		App->setMouseCursorVisible(set);
+		App->create(sf::VideoMode::getDesktopMode(), title, sf::Style::Fullscreen);
+		App->setMouseCursorVisible(!set);
 		fullscreen = true;
 	}
 	else if (!set && fullscreen)
 	{
-		App->create(sf::VideoMode(Width, Height), Title, WindowStyle);
-		App->setMouseCursorVisible(set);
+		App->create(sf::VideoMode(Width, Height), title, WindowStyle);
+		App->setMouseCursorVisible(!set);
 		fullscreen = false;
 	}
+
+#ifndef VFRAME_NO_3D
+	//Restore the GLStates.
+	auto popStatesFunc = [](VBase* base) {
+		V3DScene* scene = dynamic_cast<V3DScene*>(base);
+		if (scene)
+		{
+			//scene->PopGLStates();
+		}
+	};
+	CurrentState()->ForEach(popStatesFunc, true);
+#endif
 }
 
 void VGlobal::SetMouseCursorVisible(bool set)
