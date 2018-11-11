@@ -984,18 +984,19 @@ public:
 		sf::ContextSettings settings;
 		settings.depthBits = 24;
 
+		std::unique_ptr<V3DCamera> MainCamera = std::make_unique<V3DPerspectiveCamera>(sf::Vector3f(0.0f, 0.0f, 0.0f), 50.0f, aspectRatio, 0.1f, 100.0f);
 		scene = new V3DScene(0.0f, 0.0f, VGlobal::p()->Width, VGlobal::p()->Height, settings);
-		scene->Camera = std::make_unique<V3DPerspectiveCamera>(sf::Vector3f(0.0f, 0.0f, 0.0f), 50.0f, aspectRatio, 0.1f, 100.0f);
-		scene->Camera->LookAt(sf::Vector3f(0.0f, 0.0f, 10.0f));
+		scene->Camera.push_back(std::move(MainCamera));
+		scene->Camera[0]->LookAt(sf::Vector3f(0.0f, 0.0f, 10.0f));
 		//scene->Shader = std::make_unique<V3DShader>();
 
-		scene->Shader = std::make_unique<V3DLightShader>(scene->Camera.get());
-		lightShader = dynamic_cast<V3DLightShader*>(scene->Shader.get());
+		std::unique_ptr<V3DLightShader> lightShader = std::make_unique<V3DLightShader>();
 		if (lightShader)
 		{
 			lightShader->Lights[0] = std::make_unique<V3DLight>(LightType::SPOT, lightPos, sf::Vector3f(), sf::Vector3f(0, 1, 0), 20.0f, 0.1f, 0.001f);
 			lightShader->Lights[1] = std::make_unique<V3DLight>(LightType::DIRECTION, sf::Vector3f(-1, 1, 0), sf::Vector3f(), sf::Vector3f(1, 1, 1), 20.0f, 0.2f, 0.002f);
 		}
+		scene->Shader = std::move(lightShader);
 
 		V3DVertexArray vertices;
 		std::vector<unsigned int> indices = 
