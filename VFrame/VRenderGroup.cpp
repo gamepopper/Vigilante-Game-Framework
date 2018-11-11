@@ -14,9 +14,9 @@ public:
 		FrameSize = texture.getSize();
 
 		vertexArray[0].position = sf::Vector2f();
-		vertexArray[1].position = sf::Vector2f(FrameSize.x, 0.0f);
-		vertexArray[2].position = sf::Vector2f(FrameSize.x, FrameSize.y);
-		vertexArray[3].position = sf::Vector2f(0.0f, FrameSize.y);
+		vertexArray[1].position = sf::Vector2f((float)FrameSize.x, 0.0f);
+		vertexArray[2].position = sf::Vector2f((float)FrameSize.x, (float)FrameSize.y);
+		vertexArray[3].position = sf::Vector2f(0.0f, (float)FrameSize.y);
 
 		vertexArray[0].texCoords = vertexArray[0].position;
 		vertexArray[1].texCoords = vertexArray[1].position;

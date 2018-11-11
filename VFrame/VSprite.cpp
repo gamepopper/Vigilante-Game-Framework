@@ -50,11 +50,11 @@ void VSprite::updateTransform()
 
 void VSprite::updateFrame()
 {
-	sf::IntRect rect;
+	sf::FloatRect rect;
 	rect.left		= FlipX ? Animation.GetU() + FrameSize.x : Animation.GetU();
 	rect.top		= FlipY ? Animation.GetV() + FrameSize.y : Animation.GetV();
-	rect.width		= FlipX ? -(int)FrameSize.x : FrameSize.x;
-	rect.height		= FlipY ? -(int)FrameSize.y : FrameSize.y;
+	rect.width		= FlipX ? -(float)FrameSize.x : (float)FrameSize.x;
+	rect.height		= FlipY ? -(float)FrameSize.y : (float)FrameSize.y;
 	vertexArray[0].texCoords = sf::Vector2f(rect.left,				rect.top);
 	vertexArray[1].texCoords = sf::Vector2f(rect.left + rect.width, rect.top);
 	vertexArray[2].texCoords = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
