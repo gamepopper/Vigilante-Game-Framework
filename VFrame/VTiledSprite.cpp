@@ -3,12 +3,20 @@
 
 void VTiledSprite::updateTransform()
 {
-	if (transformable.getPosition() != Position + Origin)
-		transformable.setPosition(Position + Origin);
-	if (transformable.getRotation() != Angle)
-		transformable.setRotation(Angle);
-	if (transformable.getOrigin() != Origin)
-		transformable.setOrigin(Origin);
+	float angle = -Angle * 3.141592654f / 180.f;
+	float cosine = static_cast<float>(std::cos(angle));
+	float sine = static_cast<float>(std::sin(angle));
+	float sxc = Scale.x * cosine;
+	float syc = Scale.y * cosine;
+	float sxs = Scale.x * sine;
+	float sys = Scale.y * sine;
+	float tx = -Origin.x * sxc - Origin.y * sys + (Position + Origin).x;
+	float ty = Origin.x * sxs - Origin.y * syc + (Position + Origin).y;
+
+	RenderState.transform =
+		sf::Transform(sxc, sys, tx,
+			-sxs, syc, ty,
+			0.f, 0.f, 1.f);
 
 	if (vertexArray[0].color != Tint)
 	{

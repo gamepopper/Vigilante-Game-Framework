@@ -49,8 +49,6 @@ protected:
 	bool disposible = false;
 	///Sprite render infomation.
 	sf::VertexArray vertexArray;
-	///Sprite transform.
-	sf::Transformable transformable;
 
 	/**
 	* Sets up the Sprite's frame size and animation.

@@ -65,8 +65,6 @@ public:
 protected:
 	///Vertex Data.
 	sf::VertexArray vertices;
-	///Transform Data.
-	sf::Transformable transformable;
 	///Font object.
 	sf::Font* font = nullptr;
 	///String of text that will be rendered.
@@ -160,7 +158,6 @@ public:
 																										fontSize(charSize)
 	{
 		Size.x = width;
-		transformable.setPosition(Position);
 
 		Moves = false;
 		dirty = true;
@@ -182,8 +179,6 @@ public:
 	{
 		Size.x = width;
 		fontSize = charSize;
-
-		transformable.setPosition(position);
 
 		Moves = false;
 		dirty = true;

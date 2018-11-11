@@ -81,13 +81,20 @@ void VText::setDimensions()
 
 void VText::updateTransform()
 {
-	transformable.setPosition(Position + origin);
-	transformable.setRotation(Angle);
-	transformable.setScale(Scale);
-	transformable.setOrigin(origin);
+	float angle = -Angle * 3.141592654f / 180.f;
+	float cosine = static_cast<float>(std::cos(angle));
+	float sine = static_cast<float>(std::sin(angle));
+	float sxc = Scale.x * cosine;
+	float syc = Scale.y * cosine;
+	float sxs = Scale.x * sine;
+	float sys = Scale.y * sine;
+	float tx = -origin.x * sxc - origin.y * sys + (Position + origin).x;
+	float ty = origin.x * sxs - origin.y * syc + (Position + origin).y;
 
-	RenderState.transform = sf::Transform::Identity;
-	RenderState.transform *= transformable.getTransform();
+	RenderState.transform =
+		sf::Transform(sxc, sys, tx,
+			-sxs, syc, ty,
+			0.f, 0.f, 1.f);
 }
 
 void VText::updateTextRender(sf::String text)

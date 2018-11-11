@@ -87,14 +87,14 @@ protected:
 	int mapWidth = 0;
 	///Height of the Tilemap in Tiles.
 	int mapHeight = 0;
+	///Position during the last update of the collision boxes.
+	sf::Vector2f last;
 	///Updates the collision and render infomation of the tilemap if true.
 	bool dirty = true;
 	///Updates the render infomation of the tilemap if different from AutoTile.
 	bool helperAutoTile = false;
 	///Vertex data for render.
 	sf::VertexArray vertices;
-	///Transform Matrix handler for Tilemap.
-	sf::Transformable transformable;
 	///Colour Tint of rendered tilemap.
 	sf::Color colour = sf::Color::White;
 	///List of Collideable Tilesets.

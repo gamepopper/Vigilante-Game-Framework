@@ -29,14 +29,25 @@ void VTilemap::setupTilemap(sf::String graphicFile, int tileWidth, int tileHeigh
 
 void VTilemap::updateTransform()
 {
-	if (Position != transformable.getPosition())
+	if (Position != last)
 	{
-		transformable.setPosition(Position);
 		updateCollisionBox();
 	}
 
-	transformable.setRotation(Angle);
-	transformable.setScale(Scale);
+	float angle = -Angle * 3.141592654f / 180.f;
+	float cosine = static_cast<float>(std::cos(angle));
+	float sine = static_cast<float>(std::sin(angle));
+	float sxc = Scale.x * cosine;
+	float syc = Scale.y * cosine;
+	float sxs = Scale.x * sine;
+	float sys = Scale.y * sine;
+	float tx = -0 * sxc - 0 * sys + (Position).x;
+	float ty = 0 * sxs - 0 * syc + (Position).y;
+
+	RenderState.transform =
+		sf::Transform(sxc, sys, tx,
+			-sxs, syc, ty,
+			0.f, 0.f, 1.f);
 }
 
 void VTilemap::updateTilemap()
@@ -248,6 +259,8 @@ void VTilemap::updateCollisionBox()
 			}
 		}
 	}
+
+	last = Position;
 }
 
 void VTilemap::clearTiles()
@@ -499,7 +512,7 @@ void VTilemap::Draw(sf::RenderTarget& RenderTarget)
 	{
 		RenderTarget.setView(scrollView);
 		sf::RenderStates states = sf::RenderStates(RenderState);
-		states.transform *= transformable.getTransform();
+		states.transform = RenderState.transform;
 		RenderTarget.draw(vertices, states);
 		RenderTarget.setView(renderTargetView);
 

@@ -30,14 +30,20 @@ void VSprite::setSize(unsigned int texWidth, unsigned int texHeight, bool animat
 
 void VSprite::updateTransform()
 {
-	if (transformable.getPosition() != Position + Origin - Offset) 
-		transformable.setPosition(Position + Origin - Offset);
-	if (transformable.getRotation() != Angle) 
-		transformable.setRotation(Angle);
-	if (transformable.getScale() != Scale)	
-		transformable.setScale(Scale);
-	if (transformable.getOrigin() != Origin) 
-		transformable.setOrigin(Origin);
+	float angle = -Angle * 3.141592654f / 180.f;
+	float cosine = static_cast<float>(std::cos(angle));
+	float sine = static_cast<float>(std::sin(angle));
+	float sxc = Scale.x * cosine;
+	float syc = Scale.y * cosine;
+	float sxs = Scale.x * sine;
+	float sys = Scale.y * sine;
+	float tx = -Origin.x * sxc - Origin.y * sys + (Position + Origin - Offset).x;
+	float ty =  Origin.x * sxs - Origin.y * syc + (Position + Origin - Offset).y;
+
+	RenderState.transform = 
+		sf::Transform(	sxc, sys, tx,
+						-sxs, syc, ty,
+						0.f, 0.f, 1.f);
 
 	if (vertexArray[0].color != Tint)
 	{
@@ -205,9 +211,8 @@ void VSprite::Draw(sf::RenderTarget& RenderTarget)
 
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
-	RenderState.transform = transformable.getTransform();
 
-	if (TestInView(renderTargetView, scrollView, this, transformable.getTransform().transformRect(vertexArray.getBounds())))
+	if (TestInView(renderTargetView, scrollView, this, RenderState.transform.transformRect(vertexArray.getBounds())))
 	{
 		RenderTarget.setView(scrollView);
 		RenderTarget.draw(vertexArray, RenderState);
