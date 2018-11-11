@@ -118,6 +118,7 @@ V3DLightShader::V3DLightShader()
 
 void V3DLightShader::Update()
 {
+	Bind();
 	for (unsigned int i = 0; i < LIGHT_COUNT; i++)
 	{
 		std::string index = std::to_string(i);

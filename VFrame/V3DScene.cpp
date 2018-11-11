@@ -112,26 +112,28 @@ const sf::Texture& V3DScene::GetTexture()
 	renderTex.setActive(true);
 	renderTex.clear(BackgroundTint);
 
-	sf::IntRect Viewport(
-		(int)(Camera[CurrentCamera]->Viewport.left		* renderTex.getSize().x),
-		(int)(Camera[CurrentCamera]->Viewport.top		* renderTex.getSize().y),
-		(int)(Camera[CurrentCamera]->Viewport.width		* renderTex.getSize().x),
-		(int)(Camera[CurrentCamera]->Viewport.height	* renderTex.getSize().y)
-	);
-
 	glCheck(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-	glCheck(glViewport(Viewport.left, Viewport.top, Viewport.width, Viewport.height));
 	glCheck(glEnable(GL_BLEND));
 	glCheck(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 	glCheck(glEnable(GL_DEPTH_TEST));
 	glCheck(glEnable(GL_CULL_FACE));
 	glCheck(glCullFace(GL_BACK));
+	for (CurrentCamera = 0; CurrentCamera < Camera.size(); CurrentCamera++)
+	{
+		sf::IntRect Viewport(
+			(int)(Camera[CurrentCamera]->Viewport.left		* renderTex.getSize().x),
+			(int)(Camera[CurrentCamera]->Viewport.top		* renderTex.getSize().y),
+			(int)(Camera[CurrentCamera]->Viewport.width		* renderTex.getSize().x),
+			(int)(Camera[CurrentCamera]->Viewport.height	* renderTex.getSize().y)
+		);
 
-	Shader->SetCamera(Camera[CurrentCamera].get());
-	Shader->Update();
-	Shader->Bind();
+		glCheck(glViewport(Viewport.left, Viewport.top, Viewport.width, Viewport.height));
+		Shader->SetCamera(Camera[CurrentCamera].get());
+		Shader->Update();
+		Shader->Bind();
 
-	RenderGroup(this);
+		RenderGroup(this);
+	}
 
 	renderTex.display();
 	renderTex.setActive(false);
