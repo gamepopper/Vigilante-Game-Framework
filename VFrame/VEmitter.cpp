@@ -273,22 +273,25 @@ void VEmitter::Kill()
 void VEmitter::Revive()
 {
 	running = false;
-	alive = true;
-	exists = true;
+	VSUPERCLASS::Revive();
 }
 
 VEmitter* VEmitter::Start(int Amount)
 {
-	exists = true;
-	visible = true;
-	running = true;
+	if (!running)
+	{
+		exists = true;
+		visible = true;
+		running = true;
 
-	counter = 0;
-	timer = 0;
+		counter = 0;
+		timer = 0;
 
-	willKill = false;
+		willKill = false;
 
-	amount = Amount != 0 ? Amount : Length();
+		amount = Amount != 0 ? Amount : Length();
+	}
+
 	return this;
 }
 
