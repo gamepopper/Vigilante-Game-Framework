@@ -1,5 +1,6 @@
 file(GLOB_RECURSE SOURCES_DEMO "*.cpp")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+message(STATUS "Setting up Example Project")
 
 find_package(SFML 2.4.2 REQUIRED system window graphics network audio)
 if (SFML_FOUND)
@@ -9,8 +10,8 @@ endif()
 
 find_package(GLEW)
 if (GLEW_FOUND)
-	include_directories(${GLEW_INCLUDE_DIR})
 	link_libraries(${GLEW_LIBRARY})
+	add_library(glew STATIC IMPORTED GLOBAL)
 else()
 	add_definitions(-DVFRAME_NO_3D)
 endif()

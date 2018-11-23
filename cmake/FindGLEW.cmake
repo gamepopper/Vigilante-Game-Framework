@@ -35,15 +35,6 @@ if (WIN32)
 		${GLEW_ROOT_DIR}/include
 		DOC "The directory where GL/glew.h resides")
 
-	# Use glew32s.lib for static library
-	# Define additional compiler definitions
-	if (GLEW_USE_STATIC_LIBS)
-		set(GLEW_LIBRARY_NAME glew32s)
-		set(GLEW_DEFINITIONS -DGLEW_STATIC)
-	else()
-		set(GLEW_LIBRARY_NAME glew32)
-	endif()
-
 	# Find library files
 	find_library(
 		GLEW_LIBRARY
@@ -52,8 +43,15 @@ if (WIN32)
 		$ENV{PROGRAMFILES}/GLEW/lib
 		${GLEW_ROOT_DIR}/lib
 		DOC "The GLEW library")
-
-	unset(GLEW_LIBRARY_NAME)
+		
+	
+	# Use glew32s.lib for static library
+	# Define additional compiler definitions
+	if (GLEW_USE_STATIC_LIBS)
+		string(REPLACE glew32.lib glew32s.lib GLEW_LIBRARY ${GLEW_LIBRARY})
+		set(GLEW_DEFINITIONS -DGLEW_STATIC)
+	endif()
+	
 else()
 	# Find include files
 	find_path(
@@ -87,9 +85,12 @@ endif()
 find_package_handle_standard_args(GLEW DEFAULT_MSG GLEW_INCLUDE_DIR GLEW_LIBRARY)
 
 # Define GLEW_LIBRARIES and GLEW_INCLUDE_DIRS
-if (GLEW_FOUND)
+if (GLEW_FOUND)	
 	set(GLEW_LIBRARIES ${OPENGL_LIBRARIES} ${GLEW_LIBRARY})
 	set(GLEW_INCLUDE_DIRS ${GLEW_INCLUDE_DIR})
+	message(STATUS "GLEW found in ${GLEW_INCLUDE_DIR}.")
+else()
+	message(STATUS "GLEW not found, 3D rendering code will be disabled.")
 endif()
 
 # Hide some variables
