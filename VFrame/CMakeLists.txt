@@ -1,10 +1,11 @@
 file(GLOB_RECURSE SOURCES_VGF "*.cpp")
+message(STATUS "Setting up VFrame Project")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 link_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-find_package(SFML 2.4 REQUIRED system window graphics network audio main)
+find_package(SFML 2.4.2 REQUIRED system window graphics network audio main)
 if (SFML_FOUND)
 	include_directories(${SFML_INCLUDE_DIR})
 	link_libraries(${SFML_LIBRARIES})
@@ -21,12 +22,6 @@ if (PNG_FOUND)
 	include_directories(${PNG_INCLUDE_DIRS})
 endif()
 link_libraries(${PNG_LIBRARIES})
-
-find_package(JPEG)
-if (JPEG_FOUND)
-	include_directories(${JPEG_INCLUDE_DIRS})
-endif()
-link_libraries(${JPEG_LIBRARY})
 
 find_package(OpenAL)
 if (OPENAL_FOUND)
@@ -58,12 +53,20 @@ if (FREETYPE_FOUND)
 endif()
 link_libraries(${FREETYPE_LIBRARY})
 
-find_package(GLEW)
+find_package(GLEW )
 if (GLEW_FOUND)
 	include_directories(${GLEW_INCLUDE_DIR})
-	link_libraries(${GLEW_LIBRARY})
+	add_definitions(${GLEW_DEFINITIONS})
 else()
 	add_definitions(-DVFRAME_NO_3D)
+endif()
+
+find_package(CHIPMUNK2D )
+if (CHIPMUNK2D_FOUND)
+	include_directories(${CHIPMUNK2D_INCLUDE_DIR})
+	link_libraries(${CHIPMUNK2D_LIBRARY})
+else()
+	add_definitions(-DVFRAME_NO_PHYSICS)
 endif()
 
 if (UNIX)
