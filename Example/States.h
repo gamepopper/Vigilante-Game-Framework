@@ -20,6 +20,8 @@
 #include "../VFrame/V3DLightShader.h"
 #include "../VFrame/V3DModel.h"
 #include "../VFrame/V3DObjModel.h"
+#include "../VFrame/VPhysicsGroup.h"
+#include "../VFrame/VPhysicsObject.h"
 #include "../VFrame/VTimer.h"
 
 #include <iostream>
@@ -1586,6 +1588,123 @@ public:
 		}
 	}
 };
+
+#ifndef VFRAME_NO_PHYSICS
+class PhysicsState : public VSubState
+{
+	VPhysicsGroup* group;
+
+public:
+	typedef VSubState VSUPERCLASS;
+	PhysicsState() : VSubState() {}
+
+	virtual void Initialise()
+	{
+		VSUPERCLASS::Initialise();
+
+		VShape* box = new VShape(VGlobal::p()->Width - 100.0f - 30.0f, 200.0f);
+		box->SetRectangle(30.0f, 30.0f);
+		box->SetFillTint(sf::Color::Yellow);
+		box->Elasticity = 0.5f;
+		box->Angle = 45.0f;
+
+		VShape* box2 = new VShape(100.0f, 200.0f);
+		box2->SetRectangle(30.0f, 30.0f);
+		box2->SetFillTint(sf::Color::Yellow);
+		box2->Elasticity = 0.5f;
+		box2->Angle = 45.0f;
+
+		VShape* slope = new VShape(150.0f, 200.0f);
+		slope->SetRectangle(120.0f, 1.0f);
+		slope->Origin = sf::Vector2f(0.0f, 0.5f);
+		slope->SetFillTint(sf::Color::White);
+		slope->Elasticity = 1.0f;
+		slope->Angle = 20.0f;
+
+		VShape* slope1 = new VShape(150.0f + cosf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f, 200.0f + sinf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f);
+		slope1->SetRectangle(120.0f, 1.0f);
+		slope1->Origin = sf::Vector2f(0.0f, 0.5f);
+		slope1->SetFillTint(sf::Color::White);
+		slope1->Elasticity = 1.0f;
+		slope1->Angle = 0.0f;
+
+		VShape* slope2 = new VShape(270.0f + cosf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f, 200.0f + sinf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f);
+		slope2->SetRectangle(120.0f, 1.0f);
+		slope2->Origin = sf::Vector2f(0.0f, 0.5f);
+		slope2->SetFillTint(sf::Color::White);
+		slope2->Elasticity = 1.0f;
+		slope2->Angle = -20.0f;
+
+		VShape* ground = new VShape(0.0f, VGlobal::p()->Height - 30.0f);
+		ground->SetRectangle((float)VGlobal::p()->Width, 30.0f);
+		ground->SetFillTint(sf::Color::Cyan);
+		ground->Elasticity = 0.5f;
+
+		Add(ground);
+
+		group = new VPhysicsGroup();
+		group->SetGravity(sf::Vector2f(0.0f, 910.0f));
+
+		VGlobal::p()->Sound->Load("Example/Assets/bounce.ogg", "bounce");
+		for (int i = 0; i < 100; i++)
+		{
+			VShape* circle = new VShape(VGlobal::p()->Random->GetFloat(VGlobal::p()->Width - 10.0f, 10.0f), VGlobal::p()->Random->GetFloat(100.0f));
+			circle->SetCircle(10.0f);
+			circle->Elasticity = 0.8f;
+			circle->SetFillTint(VColour::HSVtoRGB(VGlobal::p()->Random->GetFloat(360.0f), 1.0f, 0.8f));
+			Add(circle);
+
+			VPhysicsObject* ball = group->AddObject(circle, VPhysicsObject::DYNAMIC, VPhysicsObject::CIRCLE);
+			ball->SetFriction(0.7f);
+			ball->SetDensity(0.5f);
+
+			group->SetCollisionCallback(circle, slope, std::bind(&PhysicsState::BounceCallback, this, std::placeholders::_1, std::placeholders::_2), VPhysicsGroup::SEPARATE, true);
+			group->SetCollisionCallback(circle, slope1, std::bind(&PhysicsState::BounceCallback, this, std::placeholders::_1, std::placeholders::_2), VPhysicsGroup::SEPARATE, true);
+			group->SetCollisionCallback(circle, slope2, std::bind(&PhysicsState::BounceCallback, this, std::placeholders::_1, std::placeholders::_2), VPhysicsGroup::SEPARATE, true);
+		}
+
+		VPhysicsObject* boxPhysics = group->AddObject(box, VPhysicsObject::DYNAMIC, VPhysicsObject::BOX);
+		boxPhysics->LockX = boxPhysics->LockY = true;
+		boxPhysics->SetFriction(0.5f);
+		boxPhysics = group->AddObject(box2, VPhysicsObject::DYNAMIC, VPhysicsObject::BOX);
+		boxPhysics->LockX = boxPhysics->LockY = true;
+		boxPhysics->SetFriction(0.5f);
+
+		VPhysicsObject* slopePhysics = group->AddObject(slope, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f) });
+		slopePhysics->SetFriction(1.0f);
+		slopePhysics = group->AddObject(slope1, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope1->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope1->Angle * (3.1415926f / 180.0f)) * 120.0f) });
+		slopePhysics->SetFriction(1.0f);
+		slopePhysics = group->AddObject(slope2, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope2->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope2->Angle * (3.1415926f / 180.0f)) * 120.0f) });
+		slopePhysics->SetFriction(1.0f);
+
+		VPhysicsObject* groundPhysics = group->AddObject(ground, VPhysicsObject::STATIC, VPhysicsObject::BOX);
+		groundPhysics->SetFriction(1.0f);
+
+		group->AddObject(new VObject(-10.0f, 0.0f, 10.0f, (float)VGlobal::p()->Height), VPhysicsObject::STATIC);
+		group->AddObject(new VObject((float)VGlobal::p()->Width, 0.0f, 10.0f, (float)VGlobal::p()->Height), VPhysicsObject::STATIC);
+
+		Add(box);
+		Add(box2);
+		Add(slope);
+		Add(slope1);
+		Add(slope2);
+		Add(group);
+	}
+
+	bool BounceCallback(VPhysicsObject* circle, VPhysicsObject* other)
+	{
+		float speed = sqrtf((circle->GetBaseObject()->Velocity.x * circle->GetBaseObject()->Velocity.x) + (circle->GetBaseObject()->Velocity.y * circle->GetBaseObject()->Velocity.y));
+		VGlobal::p()->Sound->Play("bounce", speed > 100 ? 100 : speed);
+
+		return true;
+	}
+
+	virtual void Update(float dt)
+	{
+		VSUPERCLASS::Update(dt);
+	}
+};
+#endif
 
 class DemoStatesManager : public VState
 {

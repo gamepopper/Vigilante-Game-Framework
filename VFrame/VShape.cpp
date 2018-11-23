@@ -45,6 +45,11 @@ void VShape::SetRectangle(float width, float height)
 	shape.reset(new sf::RectangleShape(Size));
 
 	Origin = Size / 2.0f;
+
+	if (width > height)
+		Radius = height / 2.0f;
+	else
+		Radius = width / 2.0f;
 }
 
 void VShape::SetCircle(float radius, unsigned int pointCount)
@@ -53,6 +58,7 @@ void VShape::SetCircle(float radius, unsigned int pointCount)
 	shape.reset(new sf::CircleShape(radius, pointCount));
 
 	Origin = Size / 2.0f;
+	Radius = radius;
 }
 
 void VShape::SetConvex(std::vector<sf::Vector2f>& points)
@@ -82,6 +88,11 @@ void VShape::SetConvex(std::vector<sf::Vector2f>& points)
 	Size -= offset;
 	Origin = Size / 2.0f;
 
+	if (Origin.x > Origin.y)
+		Radius = Origin.y;
+	else
+		Radius = Origin.x;
+
 	shape.reset(newShape);
 }
 
@@ -91,6 +102,11 @@ void VShape::SetCustom(sf::Shape* newShape, float width, float height)
 	shape.reset(newShape);
 
 	Origin = Size / 2.0f;
+
+	if (Origin.x > Origin.y)
+		Radius = Origin.y;
+	else
+		Radius = Origin.x;
 }
 
 sf::Shape* VShape::GetShape()

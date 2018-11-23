@@ -15,6 +15,12 @@ else()
 	add_definitions(-DVFRAME_NO_3D)
 endif()
 
+find_package(CHIPMUNK2D)
+if (CHIPMUNK2D_FOUND)
+else()
+	add_definitions(-DVFRAME_NO_PHYSICS)
+endif()
+
 include_directories(.)
 add_executable(vigilantedemo ${SOURCES_DEMO})
 target_link_libraries(vigilantedemo vigilante)

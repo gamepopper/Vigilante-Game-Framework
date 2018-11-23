@@ -13,6 +13,9 @@ enum DemoPages
 	PAGE_INTERPOLATE,
 	PAGE_PARTICLES,
 	PAGE_TRAILAREA,
+#ifndef VFRAME_NO_PHYSICS
+	PAGE_PHYSICS,
+#endif
 #ifndef VFRAME_NO_3D
 	PAGE_GRAPHICS3D,
 #endif
@@ -58,6 +61,11 @@ void DemoStatesManager::SetNewPage()
 		case PAGE_PARTICLES:
 			subState = new ParticlesState();
 			break;
+#ifndef VFRAME_NO_PHYSICS
+		case PAGE_PHYSICS:
+			subState = new PhysicsState();
+			break;
+#endif
 		case PAGE_SPRITE:
 			subState = new SpriteState();
 			break;
