@@ -54,6 +54,12 @@ void VBase::VLog(const char* format, ...)
 #endif
 }
 
+std::wostream& wendl(std::wostream& out)
+{
+	// needed for binary mode files to retain Windows-style newline "\x0D\x0A"
+	return out.put(L'\r').put(L'\n').flush();
+}//wendl
+
 void VBase::VLogError(const char* format, ...)
 {
 	char    buf[4096], *p = buf;
@@ -84,10 +90,10 @@ void VBase::VLogError(const char* format, ...)
 		output[i] = (wchar_t)buf[i];
 	output[strlen(buf)] = L'\0';
 
-	std::ofstream outfile;
+	std::wfstream outfile;
 
-	outfile.open("error.txt");
-	outfile << output << std::endl;
+	outfile.open("error.txt", std::ios::out | std::ios::binary);
+	outfile << output << wendl;
 	outfile.close();
 
 #ifdef _MSC_VER
@@ -109,10 +115,10 @@ void VBase::VLogError(const char* format, ...)
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		while (g_main_context_iteration(NULL, false));
 	}*/
-	throw output;
+	//throw output;
 #else
 	MessageBoxW(NULL, output, NULL, MB_TASKMODAL | MB_ICONERROR | MB_OK);
-	throw std::exception(buf);
+	//throw std::exception(buf);
 #endif
 }
 
