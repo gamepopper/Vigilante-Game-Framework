@@ -22,7 +22,8 @@ VBase* VGroup::Add(VBase* object)
 
 	if (MaxSize > 0 && length >= static_cast<int>(MaxSize))
 	{
-		return object;
+		VLogError("Maximum amount of objects already reached.");
+		return nullptr;
 	}
 
 	int index = FirstNULL();
