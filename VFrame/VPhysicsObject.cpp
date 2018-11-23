@@ -38,21 +38,21 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 	switch (Shape)
 	{
 	case VObjectShape::BOX:
-		moment = cpMomentForBox(Object->Mass, Object->Size.x, Object->Size.y);
+		moment = cpMomentForBox((cpFloat)Object->Mass, (cpFloat)Object->Size.x, (cpFloat)Object->Size.y);
 		shape = cpBoxShapeNew(body, Object->Size.x, Object->Size.y, 0.0f);
 		break;
 	case VObjectShape::CIRCLE:
 		cpVect offset = cpVect();
 		//offset.x = Object->Radius;
 		//offset.y = Object->Radius;
-		moment = cpMomentForCircle(Object->Mass, 0, Object->Radius, offset);
+		moment = cpMomentForCircle((cpFloat)Object->Mass, (cpFloat)0, (cpFloat)Object->Radius, offset);
 		shape = cpCircleShapeNew(body, Object->Radius, offset);
 		break;
 	case VObjectShape::LINE:
 		cpVect a = ToCPVect(Verts[0] - (Object->Size / 2.0f));
 		cpVect b = ToCPVect(Verts[1] - (Object->Size / 2.0f));
 
-		moment = cpMomentForSegment(Object->Mass, a, b, 0.0f);
+		moment = cpMomentForSegment((cpFloat)Object->Mass, a, b, (cpFloat)0);
 		shape = cpSegmentShapeNew(body, a, b, 0.0f);
 		break;
 	case VObjectShape::CUSTOM:
@@ -63,7 +63,7 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 			verts[i] = ToCPVect(Verts[i]);
 		}
 
-		moment = cpMomentForPoly(Object->Mass, verts.size(), verts.data(), cpVect(), 0.0f);
+		moment = cpMomentForPoly((cpFloat)Object->Mass, verts.size(), verts.data(), cpVect(), (cpFloat)0);
 		shape = cpPolyShapeNew(body, verts.size(), verts.data(), cpTransformIdentity, 0.0f);
 		break;
 	}
@@ -166,16 +166,16 @@ void VPhysicsObject::Update(float dt)
 		switch (shapeType)
 		{
 		case VObjectShape::BOX:
-			moment = cpMomentForBox(baseObject->Mass, baseObject->Size.x, baseObject->Size.y);
+			moment = cpMomentForBox((cpFloat)baseObject->Mass, baseObject->Size.x, baseObject->Size.y);
 			break;
 		case VObjectShape::CIRCLE:
 			cpVect offset = cpVect();
 			//offset.x = Object->Radius;
 			//offset.y = Object->Radius;
-			moment = cpMomentForCircle(baseObject->Mass, 0, baseObject->Radius, offset);
+			moment = cpMomentForCircle((cpFloat)baseObject->Mass, (cpFloat)0, (cpFloat)baseObject->Radius, offset);
 			break;
 		case VObjectShape::LINE:
-			moment = cpMomentForSegment(baseObject->Mass, cpPolyShapeGetVert(shape, 0), cpPolyShapeGetVert(shape, 1), 0.0f);
+			moment = cpMomentForSegment((cpFloat)baseObject->Mass, cpPolyShapeGetVert(shape, 0), cpPolyShapeGetVert(shape, 1), (cpFloat)0);
 			break;
 		case VObjectShape::CUSTOM:
 
@@ -185,7 +185,7 @@ void VPhysicsObject::Update(float dt)
 				verts[i] = cpPolyShapeGetVert(shape, i);
 			}
 
-			moment = cpMomentForPoly(baseObject->Mass, verts.size(), verts.data(), cpVect(), 0.0f);
+			moment = cpMomentForPoly((cpFloat)baseObject->Mass, verts.size(), verts.data(), cpVect(), (cpFloat)0);
 			break;
 		}
 
