@@ -172,7 +172,7 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 	{
 		VObject* object = dynamic_cast<VObject*>(item);
 
-		if (object && object->alive)
+		if (object && object->exists)
 		{
 			for (unsigned int i = 0; i < quads.size(); i++)
 			{

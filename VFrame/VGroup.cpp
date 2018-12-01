@@ -459,7 +459,7 @@ void VGroup::Draw(sf::RenderTarget& RenderTarget)
 			if (object == nullptr)
 				continue;
 
-			if (object->alive)
+			if (object->exists)
 			{
 				debuggingVertices[0 + (i * 8)].position = object->Position;													debuggingVertices[0 + (i * 8)].color = object->DebugColor;
 				debuggingVertices[1 + (i * 8)].position = object->Position + sf::Vector2f(object->Size.x, 0);				debuggingVertices[1 + (i * 8)].color = object->DebugColor;

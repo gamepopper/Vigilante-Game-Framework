@@ -406,8 +406,9 @@ void VText::Update(float dt)
 
 	if (dirty)
 	{
-		setDimensions();
 		RenderState.texture = &font->getTexture(fontSize);
+		const_cast<sf::Texture*>(RenderState.texture)->setSmooth(false);
+		setDimensions();
 		dirty = false;
 	}
 }

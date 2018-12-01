@@ -67,9 +67,6 @@ public:
 	void SetCollisionCallback(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist = false);
 	bool ProcessCallback(cpArbiter *arb, cpSpace *space, VPhysicsCallbackType type);
 
-	//void* GetUserData();
-	//void SetUserData(void* userData);
-
 #ifdef _DEBUG
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 #endif
