@@ -42,8 +42,27 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 		fadeTimer.restart();
 	}
 
-	updateTexture(renderTex.getTexture());
+	if (PostEffect != nullptr && VPostEffectBase::isSupported())
+	{
+		if (postProcessTex.getSize().x == 0 || postProcessTex.getSize().y == 0)
+		{
+			postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
+		}
+
+		postProcessTex.clear(sf::Color::Transparent);
+		PostEffect->Apply(renderTex.getTexture(), postProcessTex);
+		postProcessTex.display();
+
+		updateTexture(postProcessTex.getTexture());
+	}
+	else
+	{
+		updateTexture(renderTex.getTexture());
+	}
+
 	Sprite->RenderState.blendMode = sf::BlendAdd;
 	Sprite->Draw(RenderTarget);
-	VGroup::Draw(RenderTarget);
+
+	if (RenderOutside)
+		VGroup::Draw(RenderTarget);
 }

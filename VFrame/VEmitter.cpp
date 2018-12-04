@@ -73,7 +73,7 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const s
 		VParticle* particle = new VParticle(*ParticleInstance);
 		Add(particle);
 
-		int RandomFrame = RandomFrames ? VGlobal::p()->Random->GetInt((FrameCount * FrameCountY) - 1) : i;
+		int RandomFrame = RandomFrames ? VGlobal::p()->Random->GetInt((FrameCount * FrameCountY) - 1) : i % (FrameCount * FrameCountY);
 		int FrameX = RandomFrame % FrameCount;
 		int FrameY = RandomFrame / FrameCount;
 
