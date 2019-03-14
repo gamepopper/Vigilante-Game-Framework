@@ -3,6 +3,7 @@
 #ifndef VFRAME_NO_PHYSICS
 #include <chipmunk/chipmunk.h>
 #include "VObject.h"
+#include "VGlobal.h"
 
 struct CollisionCallbackHelper
 {
@@ -96,16 +97,24 @@ void VPhysicsGroup::Destroy()
 
 void VPhysicsGroup::Update(float dt)
 {
-	VSUPERCLASS::Update(dt);
-	cpSpaceStep(space, dt);
+	timestep += dt;
+	float fixedTS = 1.0f / VGlobal::p()->FPS;
 
-	for (int i = 0; i < (int)callbackHelperList.size(); i++)
+	while (timestep > fixedTS)
 	{
-		if (!callbackHelperList[i].Persist)
+		VSUPERCLASS::Update(dt);
+		cpSpaceStep(space, dt);
+
+		/*for (int i = 0; i < (int)callbackHelperList.size(); i++)
 		{
-			callbackHelperList.erase(callbackHelperList.begin() + i);
-			i--;
-		}
+			if (!callbackHelperList[i].Persist)
+			{
+				callbackHelperList.erase(callbackHelperList.begin() + i);
+				i--;
+			}
+		}*/
+
+		timestep -= fixedTS;
 	}
 }
 
