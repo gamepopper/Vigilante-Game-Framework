@@ -58,6 +58,7 @@ public:
 		standardSprite->SetPositionAtCentre(VGlobal::p()->Width / 3.0f, VGlobal::p()->Height / 2.0f - 50.0f);
 
 		auto sprite1 = new VText(standardSprite->Position.x, 50, standardSprite->Size.x, "Regular Sprite", 16);
+		sprite1->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16);
 		sprite1->SetAlignment(VText::ALIGNCENTRE);
 
 		animatedSprite = new VSprite(0, 0);
@@ -70,9 +71,11 @@ public:
 		animatedSprite->Animation.Play("start");
 
 		auto sprite2 = new VText(animatedSprite->Position.x, 50, animatedSprite->Size.x, "Animated Sprite", 16);
+		sprite2->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16);
 		sprite2->SetAlignment(VText::ALIGNCENTRE);
 
-		auto text = new VText(standardSprite->Position.x, 200, 400, "Press 1: Start Animation\nPress 2: Shotgun Animation\nPress 3: Railgun Animation\nPress 4: Double Barrel Animation", 21);
+		auto text = new VText(VGlobal::p()->Width / 2.0f - 200.0f, 200, 400, "Press 1: Start Animation\nPress 2: Shotgun Animation\nPress 3: Railgun Animation\nPress 4: Double Barrel Animation", 21);
+		text->SetFormat("Example/Assets/DejaVuSansMono.ttf", 21);
 
 		Add(standardSprite);
 		Add(animatedSprite);
@@ -150,6 +153,7 @@ public:
 		Add(standardSprite);
 
 		auto sprite1 = new VText(standardSprite->Position.x, 80, standardSprite->Size.x, "Regular TiledSprite", 16);
+		sprite1->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16);
 		sprite1->SetAlignment(VText::ALIGNCENTRE);
 
 		animatedSprite = new VTiledSprite(0, 0);
@@ -161,9 +165,11 @@ public:
 		Add(animatedSprite);
 
 		auto sprite2 = new VText(animatedSprite->Position.x, 80, animatedSprite->Size.x, "Animated TiledSprite", 16);
+		sprite2->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16);
 		sprite2->SetAlignment(VText::ALIGNCENTRE);
 
-		auto text = new VText(standardSprite->Position.x - 40, 300, 480, "Press WASD: Resize Standard Tiled Sprite\nPress IJKL: Resize Animated Tiled Sprite", 21);
+		auto text = new VText(VGlobal::p()->Width / 2.0f - 270.0f, 300, 540, "Press WASD: Resize Standard Tiled Sprite\nPress IJKL: Resize Animated Tiled Sprite", 21);
+		text->SetFormat("Example/Assets/DejaVuSansMono.ttf", 21);
 
 		Add(sprite1);
 		Add(sprite2);
@@ -492,8 +498,10 @@ public:
 		layer->Add(collideGroup);
 
 		auto overlapText = new VText(sprite1->Position.x, 100.0f, 160, "Overlap These", 16);
+		overlapText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16);
 		overlapText->SetAlignment(VText::ALIGNCENTRE);
 		auto collideText = new VText(sprite3->Position.x, 100.0f, 160, "Collide These", 16);
+		collideText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16);
 		collideText->SetAlignment(VText::ALIGNCENTRE);
 
 		layer->Add(overlapText);
@@ -853,6 +861,7 @@ public:
 
 		std::wstringstream ws;
 		auto copyright = new VText(10.0f, VGlobal::p()->Height - 18.0f, (float)VGlobal::p()->Width - 20.0f, "Remade by hand by Gamepopper.\tOriginal logo by GridSageGames.", 14);
+		copyright->SetFormat("Example/Assets/DejaVuSansMono.ttf", 14);
 		copyright->SetAlignment(VText::ALIGNCENTRE);
 
 		ws = std::wstringstream();
@@ -981,13 +990,13 @@ public:
 	{
 		VSUPERCLASS::Initialise();
 
-		float aspectRatio = VGlobal::p()->Width / (float)VGlobal::p()->Height;
-
 		sf::ContextSettings settings;
 		settings.depthBits = 24;
 
-		std::unique_ptr<V3DCamera> MainCamera = std::make_unique<V3DPerspectiveCamera>(sf::Vector3f(0.0f, 0.0f, 0.0f), 50.0f, aspectRatio, 0.1f, 100.0f);
 		scene = new V3DScene(0.0f, 0.0f, VGlobal::p()->Width, VGlobal::p()->Height, settings);
+		
+		float aspectRatio = scene->Sprite->Size.x / scene->Sprite->Size.y;
+		std::unique_ptr<V3DCamera> MainCamera = std::make_unique<V3DPerspectiveCamera>(sf::Vector3f(0.0f, 0.0f, 0.0f), 50.0f, aspectRatio, 0.1f, 100.0f);
 		scene->Camera.push_back(std::move(MainCamera));
 		scene->Camera[0]->LookAt(sf::Vector3f(0.0f, 0.0f, 10.0f));
 		//scene->Shader = std::make_unique<V3DShader>();
@@ -1209,6 +1218,7 @@ public:
 		};
 
 		auto text = new VText(15.0f, 50.0f - 4, (float)VGlobal::p()->Width - 20.0f, "", 9);
+		text->SetFormat("Example/Assets/DejaVuSansMono.ttf", 9);
 		text->SetAlignment(VText::ALIGNLEFT);
 		Add(text);
 
