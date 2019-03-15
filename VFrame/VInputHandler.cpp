@@ -198,12 +198,14 @@ void VInputHandler::Update(float dt)
 			b.pressed[i] = false;
 			b.released[i] = false;
 
+			if (sf::Keyboard::isKeyPressed(b.key) || 
+				sf::Mouse::isButtonPressed(b.mouse) || 
 #ifdef USE_GAMEPAD_API
-			if (sf::Keyboard::isKeyPressed(b.key) || GamepadButtonDown((GAMEPAD_DEVICE)i, b.gamepad) || sf::Mouse::isButtonPressed(b.mouse))
+				GamepadButtonDown((GAMEPAD_DEVICE)i, b.gamepad))
 #elif defined(USE_SFML_JOYSTICK)
-			if (sf::Keyboard::isKeyPressed(b.key) || (JoystickID[i] >= 0 && b.gamepad >= 0 && sf::Joystick::isButtonPressed(JoystickID[i], b.gamepad)) || sf::Mouse::isButtonPressed(b.mouse))
+				(JoystickID[i] >= 0 && b.gamepad >= 0 && sf::Joystick::isButtonPressed(JoystickID[i], b.gamepad)))
 #else
-			if (sf::Keyboard::isKeyPressed(b.key) || sf::XInputDevice::isButtonPressed(i, b.gamepad) || sf::Mouse::isButtonPressed(b.mouse))
+				sf::XInputDevice::isButtonPressed(i, b.gamepad))
 #endif
 			{
 				if (!b.down[i])

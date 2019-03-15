@@ -27,10 +27,13 @@ namespace sf
 
 	bool XInputDevice::isAnyConnected()
 	{
-		return (isConnected(0) ||
-			isConnected(1) ||
-			isConnected(2) ||
-			isConnected(3));
+		for (int i = 0; i < 4; i++)
+		{
+			if (isConnected(i))
+				return true;
+		}
+
+		return false;
 	}
 
 	unsigned int XInputDevice::getButtonCount(unsigned int joystick)
