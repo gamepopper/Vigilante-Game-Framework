@@ -20,7 +20,7 @@ void VText::setDimensions()
 	vertices.clear();
 	vertices.setPrimitiveType(sf::Triangles);
 
-	sf::String& printText = text;
+	sf::String& printText = text.substring(0, length);
 
 	bool bold = style & sf::Text::Bold;
 	int newLineCount = 1;
@@ -31,9 +31,9 @@ void VText::setDimensions()
 		bool firstWord = true;
 		size_t wordBeginning = 0;
 	
-		for (size_t p(0); p < text.getSize(); ++p)
+		for (size_t p(0); p < printText.getSize(); ++p)
 		{
-			auto currentChar = text[p];
+			auto currentChar = printText[p];
 			if (currentChar == '\n')
 			{
 				newLineCount++;
@@ -66,7 +66,13 @@ void VText::setDimensions()
 				if (currentOffset > Size.x)
 				{
 					newLineCount++;
-					printText[p] = '\n';
+
+					if (currentChar == ' ')
+						printText[p] = '\n';
+					else
+						printText.insert(p, "\n");
+
+					p++;
 					currentOffset = 0;
 				}
 			}
@@ -114,8 +120,6 @@ void VText::updateTextRender(sf::String text)
 
 	float hspace = static_cast<float>(font->getGlyph(L' ', fontSize, bold).advance);
 
-	unsigned int letterCount = 0;
-
 	std::wstring item;
 	float y = static_cast<float>(fontSize);
 	while (std::getline(ss, item, L'\n'))
@@ -128,10 +132,6 @@ void VText::updateTextRender(sf::String text)
 
 		for (size_t i = 0; i < item.length(); ++i)
 		{
-			letterCount++;
-			if (letterCount > (unsigned)length)
-				break;
-
 			sf::Uint32 curChar = item[i];
 			const sf::Glyph& glyph = font->getGlyph(curChar, fontSize, bold);
 

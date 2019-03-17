@@ -19,6 +19,21 @@ void VTypedText::SetTimingVariation(bool TypingVariation, float TypingVarPercent
 	typingVariation = TypingVariation;
 }
 
+void VTypedText::SetPrefixText(const sf::String& text)
+{
+	if (prefix != text)
+	{
+		prefix = text;
+		length = (int)prefix.size();
+		dirty = true;
+	}
+}
+
+const std::wstring& VTypedText::GetPrefixText()
+{
+	return prefix;
+}
+
 void VTypedText::Start(float Delay, bool ForceRestart, bool AutoErase, std::function<void()> OnComplete)
 {
 	this->Delay = Delay;
@@ -34,7 +49,7 @@ void VTypedText::Start(float Delay, bool ForceRestart, bool AutoErase, std::func
 	if (ForceRestart)
 	{
 		text = "";
-		length = 0;
+		length = (int)prefix.size();
 	}
 
 	if (AutoErase)
@@ -60,8 +75,8 @@ void VTypedText::Erase(float Delay, bool ForceRestart, std::function<void()> OnE
 
 	if (ForceRestart)
 	{
-		text = finalText;
-		length = finalText.size();
+		text = prefix + finalText;
+		length = (int)(prefix.size() + finalText.size());
 	}
 
 	this->OnErased = OnErased;
@@ -76,12 +91,12 @@ void VTypedText::ResetText(sf::String text)
 	Paused = false;
 	waiting = false;
 	timer = 0;
-	length = 0;
+	length = prefix.size();
 }
 
 void VTypedText::Skip()
 {
-	length = finalText.size();
+	length = (int)(prefix.size() + finalText.size());
 	typing = false;
 	erasing = false;
 	Paused = false;
@@ -158,7 +173,7 @@ void VTypedText::Update(float dt)
 
 	if (!waiting && !Paused)
 	{
-		if (length < (int)finalText.size() && typing)
+		if (length < (int)(prefix.size() + finalText.size()) && typing)
 		{
 			timer += dt;
 		}
@@ -206,19 +221,21 @@ void VTypedText::Update(float dt)
 	}
 
 	bool cursorBlink = false;
-	if (ShowCursor && length >= (int)finalText.size())
+	if (ShowCursor && length >= (int)(prefix.size() + finalText.size()))
 	{
 		float futureCursorTime = cursorTimer + dt;
 
 		if (futureCursorTime > CursorBlinkSpeed / 2)
 		{
 			cursorBlink = true;
+			length = (int)(prefix.size() + finalText.size()) + 1;
 			dirty = cursorTimer <= CursorBlinkSpeed / 2;
 		}
 
 		if (futureCursorTime > CursorBlinkSpeed)
 		{
 			cursorBlink = false;
+			length = (int)(prefix.size() + finalText.size());
 			dirty = cursorTimer <= CursorBlinkSpeed;
 			futureCursorTime = 0;
 		}
@@ -229,16 +246,16 @@ void VTypedText::Update(float dt)
 	if (dirty)
 	{
 		if (cursorBlink)
-			text = Prefix + finalText + CursorChar;
+			text = prefix + finalText + CursorChar;
 		else
-			text = Prefix + finalText;
+			text = prefix + finalText;
 	}
 
-	if (length >= (int)finalText.size() && typing && !waiting && !erasing)
+	if (length >= (int)(prefix.size() + finalText.size()) && typing && !waiting && !erasing)
 	{
 		onComplete();
 	}
-	if (length <= 0 && erasing && !typing && !waiting)
+	if (length <= (int)prefix.size() && erasing && !typing && !waiting)
 	{
 		onErased();
 	}

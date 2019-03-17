@@ -41,6 +41,8 @@
 class VTypedText : public VText
 {
 private:
+	///Text that is displayed before the updated string, is not erased or typed out.
+	std::wstring prefix = L"";
 	///Final text that will displayed, might not be the complete text the player inputted.
 	std::wstring finalText = L"";
 	///Timer for the delay between character updates.
@@ -88,8 +90,6 @@ public:
 	wchar_t CursorChar = '_';
 	///Delay for cursor blinking.
 	float CursorBlinkSpeed = 0.5f;
-	///Text that is displayed before the updated string, is not erased or typed out.
-	sf::String Prefix = "";
 	///Time in seconds to wait between typing out and erased.
 	float WaitTime = 1;
 	///If true, the typeout or erase will be paused.
@@ -108,6 +108,12 @@ public:
 	{
 		ResetText(text);
 	}
+
+	/**
+	* Sets the prefix of the typed string.
+	* @param text Text that is displayed before the updated string, is not erased or typed out.
+	*/
+	void SetPrefixText(const sf::String& text);
 	
 	/**
 	* Set a sound to play on each letter when they appear/disappear.
@@ -143,6 +149,8 @@ public:
 
 	///@return True if text is currently being processed.
 	bool IsActive() { return typing || waiting || erasing; }
+
+	const std::wstring& GetPrefixText();
 
 	/**
 	* Reset the text that will be typed out, use this when changing text!
