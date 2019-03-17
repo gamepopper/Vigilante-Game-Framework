@@ -9,14 +9,39 @@ void VBackdrop::updateTransform()
 	transform.scale(Scale);
 }
 
-VBackdrop* VBackdrop::LoadGraphic(sf::String filename)
+VBackdrop* VBackdrop::LoadGraphic(sf::String filename, const sf::IntRect& area)
 {
-	texture = &VGlobal::p()->Content->LoadTexture(filename);
+	if (disposable)
+	{
+		delete texture;
+		texture = nullptr;
+		disposable = false;
+	}
+
+	if (area == sf::IntRect())
+	{
+		texture = &VGlobal::p()->Content->LoadTexture(filename);
+	}
+	else
+	{
+		texture = new sf::Texture();
+		sf::Texture* tex = &VGlobal::p()->Content->LoadTexture(filename);
+		texture->loadFromImage(tex->copyToImage(), area);
+		disposable = true;
+	}
+
 	return this;
 }
 
 VBackdrop* VBackdrop::LoadGraphicFromTexture(sf::Texture& texture)
 {
+	if (disposable)
+	{
+		delete this->texture;
+		this->texture = nullptr;
+		disposable = false;
+	}
+
 	this->texture = &texture;
 	return this;
 }
@@ -27,6 +52,18 @@ void VBackdrop::SetTint(const sf::Color& tint)
 	vertices[1].color = tint;
 	vertices[2].color = tint;
 	vertices[3].color = tint;
+}
+
+void VBackdrop::Destroy()
+{
+	VSUPERCLASS::Destroy();
+
+	if (disposable)
+	{
+		delete this->texture;
+		this->texture = nullptr;
+		disposable = false;
+	}
 }
 
 void VBackdrop::Update(float dt)

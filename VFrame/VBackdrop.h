@@ -55,6 +55,8 @@ protected:
 	///If true, the texture will appear repeated in the Y Axis, else the texture will lock in the Y axis.
 	bool RepeatY;
 
+	bool disposable = false;
+
 public:
 	///Used to call parent class functions when they are overrided in class.
 	typedef VObject VSUPERCLASS;
@@ -84,7 +86,7 @@ public:
 	* @param repeatY Repeats the texture in vertically.
 	* @param filename Filepath and name of texture to use. Loads with VContent in VGlobal.
 	*/
-	VBackdrop(float scrollX, float scrollY, bool repeatX, bool repeatY, const sf::String& filename) : VObject()
+	VBackdrop(float scrollX, float scrollY, bool repeatX, bool repeatY, const sf::String& filename = "") : VObject()
 	{
 		if (filename != "")
 			LoadGraphic(filename);
@@ -107,9 +109,12 @@ public:
 		ScrollMaxVelocity.x = 10000.0f;
 		ScrollMaxVelocity.y = 10000.0f;
 	}
+
+	///Destroy the VBackdrop.
+	virtual void Destroy();
 	
 	///@param filename Filepath and name of texture to use. Loads with VContent in VGlobal.
-	VBackdrop* LoadGraphic(sf::String filename);
+	VBackdrop* LoadGraphic(sf::String filename, const sf::IntRect& area = sf::IntRect());
 	///@param texture sf::Texture object to use.
 	VBackdrop* LoadGraphicFromTexture(sf::Texture& texture);
 
