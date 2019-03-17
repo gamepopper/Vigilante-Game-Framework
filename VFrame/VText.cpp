@@ -68,11 +68,15 @@ void VText::setDimensions()
 					newLineCount++;
 
 					if (currentChar == ' ')
+					{
 						printText[p] = '\n';
+					}
 					else
+					{
 						printText.insert(p, "\n");
+						p++;
+					}
 
-					p++;
 					currentOffset = 0;
 				}
 			}
