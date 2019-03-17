@@ -74,7 +74,7 @@ public:
 		sprite2->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16);
 		sprite2->SetAlignment(VText::ALIGNCENTRE);
 
-		auto text = new VText(VGlobal::p()->Width / 2.0f - 200.0f, 200, 400, "Press 1: Start Animation\nPress 2: Shotgun Animation\nPress 3: Railgun Animation\nPress 4: Double Barrel Animation", 21);
+		auto text = new VText(VGlobal::p()->Width / 2.0f - 250.0f, 200, 500, "Press 1: Start Animation\nPress 2: Shotgun Animation\nPress 3: Railgun Animation\nPress 4: Double Barrel Animation", 21);
 		text->SetFormat("Example/Assets/DejaVuSansMono.ttf", 21);
 
 		Add(standardSprite);
