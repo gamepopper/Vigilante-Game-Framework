@@ -297,7 +297,9 @@ void VInputHandler::Update(float dt)
 				}
 
 #elif defined(USE_SFML_JOYSTICK)
-				if (JoystickID[i] >= 0 && a.gamepad >= 0 && abs(sf::Joystick::getAxisPosition(JoystickID[i], a.gamepad)) > 20.0f) //Deadzone
+				float axis = sf::Joystick::getAxisPosition(JoystickID[i], a.gamepad);
+				axis = axis < 0 ? -axis : axis;
+				if (JoystickID[i] >= 0 && a.gamepad >= 0 && axis > 20.0f) //Deadzone
 				{
 					a.value[i] = sf::Joystick::getAxisPosition(JoystickID[i], a.gamepad);
 					isGamepadActive = true;
