@@ -72,7 +72,7 @@ void V3DShader::LoadFromFile(const sf::String& filename, ShaderType type)
 
 	if (data == "")
 	{
-		VBase::VLogError("Bad shader file: %s", filename);
+		VBase::VLogError("Bad shader file: %s", filename.toAnsiString().c_str());
 		return;
 	}
 

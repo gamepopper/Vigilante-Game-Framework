@@ -87,7 +87,7 @@ bool V3DObjModel::LoadModelData(const char* filename)
 					sf::Texture tex;
 					if (!tex.loadFromFile(path + mp->diffuse_texname))
 					{
-						VLog("Unable to find texture %s", mp->diffuse_texname);
+						VLog("Unable to find texture %s", mp->diffuse_texname.c_str());
 						return false;
 					}
 
