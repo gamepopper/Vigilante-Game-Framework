@@ -2,6 +2,11 @@
 #include "VGlobal.h"
 #include <sstream>
 
+VTypedText::VTypedText(float x, float y, float width, const sf::String& text, int charSize) : VText(x, y, width, "", charSize)
+{
+	ResetText(text);
+}
+
 void VTypedText::SetSound(sf::String id, float volume, sf::String filename)
 {
 	if (filename != "")

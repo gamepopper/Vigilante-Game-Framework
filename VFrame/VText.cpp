@@ -6,6 +6,42 @@
 using std::vector;
 using std::getline;
 
+VText::VText(float x, float y, float width, const sf::String& text, int charSize) : VObject(x, y),
+text(text),
+length(text.getSize()),
+fontSize(charSize)
+{
+	Size.x = width;
+
+	Moves = false;
+	dirty = true;
+
+#ifdef _DEBUG
+	DebugColor = sf::Color(0, 0, 255, 128);
+#endif
+}
+
+/**
+* @param position Position coordinates.
+* @param width The width of the text area that will bound the text.
+* @param text The string that the text object will display.
+* @param charSize The font size the text will be displayed at.
+*/
+VText::VText(sf::Vector2f position, float width, const sf::String& text, int charSize) : VObject(position),
+text(text),
+length(text.getSize())
+{
+	Size.x = width;
+	fontSize = charSize;
+
+	Moves = false;
+	dirty = true;
+
+#ifdef _DEBUG
+	DebugColor = sf::Color(0, 0, 255, 128);
+#endif
+}
+
 void VText::setDimensions()
 {
 	if (font == nullptr)

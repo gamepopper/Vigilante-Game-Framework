@@ -4,6 +4,28 @@
 
 #include <cmath>
 
+V3DObject::V3DObject(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) : VBase()
+{
+	Position = position;
+	Rotation = rotation;
+	Scale = scale;
+	MaxVelocity = sf::Vector3f(10000, 10000, 10000);
+	AngleMax = sf::Vector3f(10000, 10000, 10000);
+	type = VType::OBJECT;
+}
+
+V3DObject::V3DObject(float posX, float posY, float posZ,
+	float rotX, float rotY, float rotZ,
+	float scaleX, float scaleY, float scaleZ) : VBase()
+{
+	Position = sf::Vector3f(posX, posY, posZ);
+	Rotation = sf::Vector3f(rotX, rotY, rotZ);
+	Scale = sf::Vector3f(scaleX, scaleY, scaleZ);
+	MaxVelocity = sf::Vector3f(10000, 10000, 10000);
+	AngleMax = sf::Vector3f(10000, 10000, 10000);
+	type = VType::OBJECT;
+}
+
 void V3DObject::Reset(sf::Vector3f newPos)
 {
 	Position = newPos;

@@ -64,121 +64,46 @@ public:
 	* @param Looping Whether the animation should loop or not.
 	* @param Reverse Whether the animation should reverse or not.
 	*/
-	VAnimation(const std::vector<int>& Frames, float FramesPerSecond, bool Looping, bool Reverse) : frames(Frames), looping(Looping), reverse(Reverse)
-	{
-		if (FramesPerSecond > 0)
-			frameDelay = 1 / FramesPerSecond;
-		else
-			frameDelay = 0;
+	VAnimation(const std::vector<int>& Frames, float FramesPerSecond, bool Looping, bool Reverse);
 
-		totalFrames = frames.size();
-	}
-
-	virtual ~VAnimation() 
-	{
-		frames.clear();
-		frames.shrink_to_fit();
-	};
+	virtual ~VAnimation();
 
 	/**
 	* Resets the animation to the beginning.
 	* @param onComplete A callback function used when an animation reaches its end (assuming the animation isn't Looping).
 	*/
-	void Reset(std::function<void()> onComplete = nullptr)
-	{
-		currentFrame = 0;
-		frameTime = 0;
-		onCompleteCallback = onComplete;
-	}
+	void Reset(std::function<void()> onComplete = nullptr);
 
 	/**
 	* Sets the current frame index the animation uses. Do not use this to set the animation's frame number, as this is specified in the frame list.
 	* @param NewFrame the frame index the animation should use. This must be greater than 0 and less than the total amount of frames specified in the frame list.
 	*/
-	void SetCurrentFrame(int NewFrame)
-	{
-		if (NewFrame < totalFrames)
-			currentFrame = NewFrame;
-	}
+	void SetCurrentFrame(int NewFrame);
 
 	/**
 	*  @return returns the currently used frame number.
 	*/
-	int GetCurrentFrame()
-	{
-		return frames[currentFrame];
-	}
+	int GetCurrentFrame();
 
 	/**
 	*  @return returns the total amount of frames in the frame list.
 	*/
-	int GetFrameCount()
-	{
-		return totalFrames;
-	}
+	int GetFrameCount();
 
 	/**
 	* @param Looping If true, the animation will now loop, else it won't loop.
 	*/
-	void SetLooping(bool Looping)
-	{
-		looping = Looping;
-	}
+	void SetLooping(bool Looping);
 
 	/**
 	* @param Reverse If true, the animation will now play in reverse, else it won't.
 	*/
-	void SetReverse(bool Reverse)
-	{
-		reverse = Reverse;
-	}
+	void SetReverse(bool Reverse);
 
 	/**
 	* Updates the animation, handles changing of frame, callbacks and passing of time.
 	* @param dt Delta Time between the current and previous frame in the game.
 	*/
-	void Update(float dt)
-	{
-		if (frameDelay > 0)
-		{
-			frameTime += dt;
-
-			if (frameTime >= frameDelay)
-			{
-				int amount = 0;
-				if (!reverse)
-				{
-					amount = 1;
-				}
-				else
-				{
-					amount = -1;
-				}
-
-				if (looping)
-				{
-					currentFrame = (currentFrame + totalFrames + amount) % totalFrames;
-				}
-				else
-				{
-					if (onCompleteCallback != nullptr)
-					{
-						if ((reverse && currentFrame == 0) ||
-							(!reverse && currentFrame == totalFrames - 1))
-						{
-							onCompleteCallback();
-							onCompleteCallback = nullptr;
-						}
-					}
-
-					currentFrame = currentFrame + amount < 0 ? 
-						0 : currentFrame + amount >= totalFrames ? 
-						totalFrames - 1 : currentFrame + amount;
-				}
-
-				frameTime = 0;
-			}
-		}
-	}
+	void Update(float dt);
 };
 

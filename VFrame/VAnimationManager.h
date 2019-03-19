@@ -34,6 +34,7 @@
 #pragma once
 #include "VAnimation.h"
 #include <SFML/System/String.hpp>
+#include <SFML/Graphics/Rect.hpp>
 #include <iostream>
 #include <map>
 #include <vector>
@@ -61,7 +62,7 @@ private:
 	bool pause = false;
 
 public:
-	VAnimationManager() {}
+	VAnimationManager();
 
 	/**
 	* @param TextureWidth The width of the texture in pixels being used, or the partial width if the entire texture won't be used.
@@ -71,32 +72,14 @@ public:
 	* @param OffsetX The offset of the X axis in pixels, imporant if the area of animation is not the entire texture.
 	* @param OffsetY The offset of the Y axis in pixels, imporant if the area of animation is not the entire texture.
 	*/
-	VAnimationManager(int TextureWidth, int TextureHeight, int FrameWidth, int FrameHeight, int OffsetX, int OffsetY)
-	{
-        if (FrameWidth > 0 && FrameHeight > 0)
-        {
-            animWidth = TextureWidth / FrameWidth;
-            animHeight = TextureHeight / FrameHeight;
-		}
+	VAnimationManager(int TextureWidth, int TextureHeight, int FrameWidth, int FrameHeight, int OffsetX, int OffsetY);
 
-		frameWidth = FrameWidth;
-		frameHeight = FrameHeight;
-		offsetX = OffsetX;
-		offsetY = OffsetY;
-	}
-
-	virtual ~VAnimationManager()
-	{
-		Clear();
-	}
+	virtual ~VAnimationManager();
 
 	/**
 	* @return An sf::IntRect of the entire area of the texture where the animation is used.
 	*/
-	sf::IntRect GetTextureArea()
-	{
-		return sf::IntRect(offsetX, offsetY, frameWidth, frameHeight);
-	}
+	sf::IntRect GetTextureArea();
 
 	/**
 	* Adds a new animation to the manager. If an animation under the name already exists, then a new VAnimation will replace it.
@@ -106,18 +89,7 @@ public:
 	* @param Looping Whether the animation should loop or not.
 	* @param Reverse Whether the animation should reverse or not.
 	*/
-	void AddAnimation(const sf::String& name, const std::vector<int>& Frames, float FramesPerSecond = 6.0f, bool Looping = false, bool Reverse = false)
-	{
-		if (animationList.find(name) == animationList.end())
-		{
-			animationList.emplace(std::make_pair(name, new VAnimation(Frames, FramesPerSecond, Looping, Reverse)));
-		}
-		else
-		{
-			delete animationList[name];
-			animationList[name] = new VAnimation(Frames, FramesPerSecond, Looping, Reverse);
-		}
-	}
+	void AddAnimation(const sf::String& name, const std::vector<int>& Frames, float FramesPerSecond = 6.0f, bool Looping = false, bool Reverse = false);
 
 	/**
 	* Adds a new animation to the manager. If an animation under the name already exists, then a new VAnimation will replace it.
@@ -129,205 +101,90 @@ public:
 	* @param Looping Whether the animation should loop or not.
 	* @param Reverse Whether the animation should reverse or not.
 	*/
-	void AddAnimation(const sf::String& name, int Begin, int Length, float FramesPerSecond = 6.0f, bool Looping = false, bool Reverse = false)
-	{
-		std::vector<int> frames(Length);
-		std::iota(frames.begin(), frames.end(), Begin);
-		AddAnimation(name, frames, FramesPerSecond, Looping, Reverse);
-	}
+	void AddAnimation(const sf::String& name, int Begin, int Length, float FramesPerSecond = 6.0f, bool Looping = false, bool Reverse = false);
 
 	/**
 	*  @return returns the String name/id of the currently playing animation.
 	*/
-	sf::String CurrentAnimationName()
-	{
-		return currentAnim;
-	}
+	sf::String CurrentAnimationName();
 
 	/**
 	* Plays an animation. If the animation specified is already being played then nothing will happen. If you wish to replay the current animation, use the Reset function.
 	* @param name The name/id of the animation you wish to play. Must be an animation previously added to the scene.
 	* @param onComplete A callback function, used when the animation is completed.
 	*/
-	void Play(const sf::String& name, std::function<void()> onComplete = nullptr)
-	{
-		if (animationList.find(name) != animationList.end() &&
-			currentAnim != name)
-		{
-			lastFrame = -1;
-			currentAnim = name;
-			Reset(onComplete);
-		}
-	}
+	void Play(const sf::String& name, std::function<void()> onComplete = nullptr);
 
 	/**
 	* @param value True pauses the current animation, False resumes the current animation.
 	*/
-	void SetPaused(bool value)
-	{
-		pause = value;
-	}
+	void SetPaused(bool value);
 
 	///Stop all animations.
-	void Stop()
-	{
-		currentAnim = "";
-	}
+	void Stop();
 
 	/**
 	* Resets the current animation being played.
 	* @param onComplete A callback function, used when the animation is completed.
 	*/
-	void Reset(std::function<void()> onComplete = nullptr)
-	{
-		Reset(currentAnim, onComplete);
-	}
+	void Reset(std::function<void()> onComplete = nullptr);
 
 	/**
 	* Resets one of the animations in the manager.
 	* @param name The name/id of the animation to use.
 	* @param onComplete A callback function, used when the animation is completed.
 	*/
-	void Reset(const sf::String& name, std::function<void()> onComplete = nullptr)
-	{
-		animationList[name]->Reset(onComplete);
-	}
+	void Reset(const sf::String& name, std::function<void()> onComplete = nullptr);
 
 	/**
 	* Updates the current animation, assuming pause isn't set to true.
 	* @param dt Delta Time between the current and previous frame in the game.
 	*/
-	void Update(float dt)
-	{
-		if (currentAnim != "" && !pause)
-		{
-			if (animationList[currentAnim]->GetFrameCount() > 1)
-			{
-				//lastFrame = animationList[currentAnim]->GetCurrentFrame();
-				animationList[currentAnim]->Update(dt);
-			}
-		}
-	}
+	void Update(float dt);
 
 	/**
 	* Sets the current frame index the current animation. Do not use this to set the current animation's frame number, as this is specified in the current animation's frame list.
 	* The only exception is if no current animation has been set, then the frame number can be passed in.
 	* @param NewFrame The frame index the current animation should use. This must be greater than 0 and less than the total amount of frames specified in the current animation's frame list.
 	*/
-	void SetCurrentFrame(int NewFrame)
-	{
-		if (currentAnim != "")
-		{
-			lastFrame = -1;
-			animationList[currentAnim]->SetCurrentFrame(NewFrame);
-		}
-		else
-		{
-			current = NewFrame;
-			lastFrame = -1;
-		}
-	}
+	void SetCurrentFrame(int NewFrame);
 
 	/**
 	*  @return The currently used frame number, regardless of whether an animation is currently being used or not.
 	*/
-	int GetCurrentFrame()
-	{
-		if (currentAnim != "")
-		{
-			lastFrame = animationList[currentAnim]->GetCurrentFrame();
-			return lastFrame;
-		}
-
-		lastFrame = current;
-		return lastFrame;
-	}
+	int GetCurrentFrame();
 
 	/**
 	*  @return The previous frame used in the last game's loop.
 	*/
-	int GetLastFrame()
-	{
-		return lastFrame;
-	}
+	int GetLastFrame();
 
 	/**
 	* @param Looping If true, the current animation will now loop, else it won't loop.
 	*/
-	void SetLooping(bool Looping)
-	{
-		if (currentAnim != "")
-		{
-			lastFrame = -1;
-			animationList[currentAnim]->SetLooping(Looping);
-		}
-	}
+	void SetLooping(bool Looping);
 
 	/**
 	* @param Reverse If true, the current animation will now play in reverse, else it won't.
 	*/
-	void SetReverse(bool Reverse)
-	{
-		if (currentAnim != "")
-		{
-			lastFrame = -1;
-			animationList[currentAnim]->SetReverse(Reverse);
-		}
-	}
+	void SetReverse(bool Reverse);
 
 	/**
 	*  @return Returns the current U/X coordinate of the texture for rendering purposes.
 	*/
-	int GetU()
-	{
-		current = GetCurrentFrame();
-		if (current > 0)
-		{
-			int U;
-			U = current % animWidth;
-			U *= frameWidth;
-
-			return U + offsetX;
-		}
-		return offsetX;
-	}
+	int GetU();
 
 	/**
 	*  @return Returns the current V/Y coordinate of the texture for rendering purposes.
 	*/
-	int GetV()
-	{
-		current = GetCurrentFrame();
-		if (current > 0)
-		{
-			int V;
-			V = current / animWidth;
-			V *= frameHeight;
-
-			return V + offsetY;
-		}
-
-		return offsetY;
-	}
+	int GetV();
 
 	///Clears entire animation list.
-	void Clear()
-	{
-		for (std::pair<sf::String, VAnimation*> anim : animationList)
-		{
-			delete anim.second;
-			anim.second = nullptr;
-		}
-		animationList.clear();
-		currentAnim = "";
-	}
+	void Clear();
 
 	/**
 	*  @return Returns the amount of animations being stored in the animation manager.
 	*/
-	int Count()
-	{
-		return animationList.size();
-	}
+	int Count();
 };
 

@@ -98,15 +98,7 @@ public:
 	static bool AnyActiveTimers();
 
 	///@returns The singleton instance as a pointer.
-	static VTimeManager* p()
-	{
-		if (!Instance)
-		{
-			Instance = new VTimeManager();
-		}
-
-		return Instance;
-	}
+	static VTimeManager* p();
 
 	/**
 	* Updates all timers.

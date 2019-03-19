@@ -48,16 +48,7 @@ public:
 	* @param position Position of the tile.
 	* @param size Size of the of the tile, can be bigger than a single tile if it represents a single group of tiles.
 	*/
-	VTile(sf::Vector2f position, sf::Vector2f size) : VObject(position, size)
-	{
-		Immovable = true;
-		Moves = false;
-		type = TILE;
-
-#if _DEBUG
-		DebugColor = sf::Color::Red;
-#endif
-	}
+	VTile(sf::Vector2f position, sf::Vector2f size);
 
 	/**
 	* @param x X Position of the tile.
@@ -65,14 +56,5 @@ public:
 	* @param width Width of the of the tile, can be bigger than a single tile if it represents a single group of tiles.
 	* @param height Height of the of the tile, can be bigger than a single tile if it represents a single group of tiles.
 	*/
-	VTile(float x, float y, float width, float height) : VObject(x,y,width,height)
-	{
-		Immovable = true;
-		Moves = false;
-		type = TILE;
-
-#if _DEBUG
-		DebugColor = sf::Color::Red;
-#endif
-	}
+	VTile(float x, float y, float width, float height);
 };

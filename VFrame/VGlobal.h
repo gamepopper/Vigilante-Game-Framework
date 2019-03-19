@@ -69,16 +69,9 @@ private:
 	VGlobal();
 	~VGlobal();
 
-public:
-	static VGlobal* p() ///Access and creation of VGlobal
-	{
-		if (!Instance)
-		{
-			Instance = new VGlobal();
-		}
-
-		return Instance;
-	}
+public: 
+	///Access and creation of VGlobal
+	static VGlobal* p();
  
 	///Window the game is rendered on.
 	std::unique_ptr<sf::RenderWindow> App;

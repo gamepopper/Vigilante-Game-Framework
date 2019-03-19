@@ -94,50 +94,14 @@ public:
 	* @param Position Position of the Sprite.
 	* @param Filename File path and name of the texture for this sprite.
 	*/
-	VSprite(sf::Vector2f Position, const sf::String& Filename = "") : VObject(Position)
-	{
-		RenderState = sf::RenderStates::Default;
-		Tint = sf::Color::White;
-		Scale = sf::Vector2f(1, 1);
-		Offset = sf::Vector2f();
-
-		vertexArray.setPrimitiveType(sf::Quads);
-		vertexArray.resize(4);
-
-		if (Filename != "")
-		{
-			LoadGraphic(Filename);
-		}
-
-#if _DEBUG
-		DebugColor = sf::Color(0, 255, 0, 128);
-#endif
-	}
+	VSprite(sf::Vector2f Position, const sf::String& Filename = "");
 
 	/**
 	* @param x X Position of the Sprite.
 	* @param y Y Position of the Sprite.
 	* @param filename File path and name of the texture for this sprite.
 	*/
-	VSprite(float x = 0, float y = 0, const sf::String& filename = "") : VObject(x,y)
-	{
-		RenderState = sf::RenderStates::Default;
-		Tint = sf::Color::White;
-		Scale = sf::Vector2f(1, 1);
-		Offset = sf::Vector2f();
-
-		vertexArray.setPrimitiveType(sf::Quads);
-		vertexArray.resize(4);
-
-		if (filename != "")
-		{
-			LoadGraphic(filename);
-		}
-
-#if _DEBUG
-		DebugColor = sf::Color(0, 255, 0, 128);
-#endif
-	}
+	VSprite(float x = 0, float y = 0, const sf::String& filename = "");
 
 	/**
 	* Load Graphic from filepath.

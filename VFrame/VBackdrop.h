@@ -86,29 +86,7 @@ public:
 	* @param repeatY Repeats the texture in vertically.
 	* @param filename Filepath and name of texture to use. Loads with VContent in VGlobal.
 	*/
-	VBackdrop(float scrollX, float scrollY, bool repeatX, bool repeatY, const sf::String& filename = "") : VObject()
-	{
-		if (filename != "")
-			LoadGraphic(filename);
-
-		vertices.setPrimitiveType(sf::Quads);
-		vertices.resize(4);
-
-		Size.x = 0;
-		Size.y = 0;
-
-		Scale.x = 1;
-		Scale.y = 1;
-
-		RepeatX = repeatX;
-		RepeatY = repeatY;
-
-		ScrollFactor.x = scrollX;
-		ScrollFactor.y = scrollY;
-
-		ScrollMaxVelocity.x = 10000.0f;
-		ScrollMaxVelocity.y = 10000.0f;
-	}
+	VBackdrop(float scrollX, float scrollY, bool repeatX, bool repeatY, const sf::String& filename = "");
 
 	///Destroy the VBackdrop.
 	virtual void Destroy() override;

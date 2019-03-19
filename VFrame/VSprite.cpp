@@ -1,6 +1,46 @@
 #include "VSprite.h"
 #include "VGlobal.h"
 
+VSprite::VSprite(sf::Vector2f Position, const sf::String& Filename) : VObject(Position)
+{
+	RenderState = sf::RenderStates::Default;
+	Tint = sf::Color::White;
+	Scale = sf::Vector2f(1, 1);
+	Offset = sf::Vector2f();
+
+	vertexArray.setPrimitiveType(sf::Quads);
+	vertexArray.resize(4);
+
+	if (Filename != "")
+	{
+		LoadGraphic(Filename);
+	}
+
+#if _DEBUG
+	DebugColor = sf::Color(0, 255, 0, 128);
+#endif
+}
+
+VSprite::VSprite(float x, float y, const sf::String& filename) : VObject(x, y)
+{
+	RenderState = sf::RenderStates::Default;
+	Tint = sf::Color::White;
+	Scale = sf::Vector2f(1, 1);
+	Offset = sf::Vector2f();
+
+	vertexArray.setPrimitiveType(sf::Quads);
+	vertexArray.resize(4);
+
+	if (filename != "")
+	{
+		LoadGraphic(filename);
+	}
+
+#if _DEBUG
+	DebugColor = sf::Color(0, 255, 0, 128);
+#endif
+}
+
 void VSprite::setSize(unsigned int texWidth, unsigned int texHeight, bool animated, int width, int height, int offsetX, int offsetY)
 {
 	Size = sf::Vector2f(sf::Vector2u(width, height));

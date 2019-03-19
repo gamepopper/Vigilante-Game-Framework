@@ -104,10 +104,7 @@ public:
 	* @param text The string that the text object will display.
 	* @param charSize The font size the text will be displayed at.
 	*/
-	VTypedText(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8) : VText(x, y, width, "", charSize)
-	{
-		ResetText(text);
-	}
+	VTypedText(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8);
 
 	/**
 	* Sets the prefix of the typed string.

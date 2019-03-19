@@ -45,12 +45,8 @@ private:
 	std::map<sf::String, sf::Sound>			sounds;
 
 public:
-	VSoundManager() {}
-	~VSoundManager()
-	{
-		if (sounds.size())
-			Cleanup();
-	}
+	VSoundManager();
+	~VSoundManager();
 
 	///@param volume The volume that will be applied to all sound effects (0 will mute all sounds, 50 will play all sounds 50% of individual volumes ect)
 	void SetMasterVolume(float volume);

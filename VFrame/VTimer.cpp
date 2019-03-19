@@ -12,6 +12,16 @@ VTimeManager::~VTimeManager()
 	Clear(true);
 }
 
+VTimeManager* VTimeManager::p()
+{
+	if (!Instance)
+	{
+		Instance = new VTimeManager();
+	}
+
+	return Instance;
+}
+
 bool VTimeManager::AnyActiveTimers()
 {
 	if (Instance != nullptr)

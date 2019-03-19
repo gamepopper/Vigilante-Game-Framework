@@ -152,20 +152,7 @@ public:
 	* @param text The string that the text object will display.
 	* @param charSize The font size the text will be displayed at.
 	*/
-	VText(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8) : 	VObject(x,y),
-																										text(text),
-																										length(text.getSize()),
-																										fontSize(charSize)
-	{
-		Size.x = width;
-
-		Moves = false;
-		dirty = true;
-
-#ifdef _DEBUG
-		DebugColor = sf::Color(0, 0, 255, 128);
-#endif
-	}
+	VText(float x = 0, float y = 0, float width = 0, const sf::String& text = "", int charSize = 8);
 
 	/**
 	* @param position Position coordinates.
@@ -173,20 +160,7 @@ public:
 	* @param text The string that the text object will display.
 	* @param charSize The font size the text will be displayed at.
 	*/
-	VText(sf::Vector2f position, float width = 0, const sf::String& text = "", int charSize = 8) : 	VObject(position),
-																									text(text),
-																									length(text.getSize())
-	{
-		Size.x = width;
-		fontSize = charSize;
-
-		Moves = false;
-		dirty = true;
-
-#ifdef _DEBUG
-		DebugColor = sf::Color(0, 0, 255, 128);
-#endif
-	}
+	VText(sf::Vector2f position, float width = 0, const sf::String& text = "", int charSize = 8);
 
 	/**
 	* Sets up the main format of how the text will be rendered.

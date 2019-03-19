@@ -99,15 +99,7 @@ public:
 	* @param rotation Angle of the object.
 	* @param scale Scale of the object.
 	*/
-	V3DObject(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale) : VBase()
-	{
-		Position = position;
-		Rotation = rotation;
-		Scale = scale;
-		MaxVelocity = sf::Vector3f(10000, 10000, 10000);
-		AngleMax = sf::Vector3f(10000, 10000, 10000);
-		type = VType::OBJECT;
-	}
+	V3DObject(sf::Vector3f position, sf::Vector3f rotation, sf::Vector3f scale);
 
 	/**
 	* @param posX X position of the object.
@@ -120,17 +112,9 @@ public:
 	* @param scaleY Y scale of the object.
 	* @param scaleZ Z scale of the object.
 	*/
-	V3DObject(float posX = 0, float posY = 0, float posZ = 0, 
-			float rotX = 0, float rotY = 0, float rotZ = 0,
-			float scaleX = 1, float scaleY = 1, float scaleZ = 1) : VBase()
-	{
-		Position = sf::Vector3f(posX, posY, posZ);
-		Rotation = sf::Vector3f(rotX, rotY, rotZ);
-		Scale = sf::Vector3f(scaleX, scaleY, scaleZ);
-		MaxVelocity = sf::Vector3f(10000, 10000, 10000);
-		AngleMax = sf::Vector3f(10000, 10000, 10000);
-		type = VType::OBJECT;
-	}
+	V3DObject(float posX = 0, float posY = 0, float posZ = 0,
+		float rotX = 0, float rotY = 0, float rotZ = 0,
+		float scaleX = 1, float scaleY = 1, float scaleZ = 1);
 
 	///@return Minimum size of the object bounding box.
 	sf::Vector3f GetMinimum();

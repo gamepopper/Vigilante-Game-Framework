@@ -11,6 +11,11 @@ VState::VState() : VGroup()
 	DefaultCamera = Cameras[0];
 }
 
+VState::~VState()
+{
+	Cleanup();
+}
+
 void VState::Cleanup()
 {
 	if (exists)

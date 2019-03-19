@@ -66,53 +66,23 @@ private:
 	float masterVolume = 100.0f;
 
 public:
-	VMusic() {}
-	virtual ~VMusic() {}
+	VMusic();
+	virtual ~VMusic();
 
 	/**
 	* Opens music data from file.
 	*/
-	VMusic* OpenMusicFile(sf::String filename)
-	{
-		if (music.openFromFile(filename))
-		{
-			valid = true;
-			return this;
-		}
-
-		valid = false;
-		return nullptr;
-	}
+	VMusic* OpenMusicFile(sf::String filename);
 
 	/**
 	* Opens music data from memory.
 	*/
-	VMusic* OpenMusicMemory(const void* data, size_t size)
-	{
-		if (music.openFromMemory(data, size))
-		{
-			valid = true;
-			return this;
-		}
-
-		valid = false;
-		return nullptr;
-	}
+	VMusic* OpenMusicMemory(const void* data, size_t size);
 
 	/**
 	* Opens music data from a stream.
 	*/
-	VMusic* OpenMusicStream(sf::InputStream& stream)
-	{
-		if (music.openFromStream(stream))
-		{
-			valid = true;
-			return this;
-		}
-
-		valid = false;
-		return nullptr;
-	}
+	VMusic* OpenMusicStream(sf::InputStream& stream);
 
 	/**
 	* Updates music and volume.

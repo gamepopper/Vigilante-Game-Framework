@@ -1,6 +1,54 @@
 #include "VMusic.h"
 #include "VInterpolate.h"
 
+VMusic::VMusic() {}
+VMusic::~VMusic() {}
+
+/**
+* Opens music data from file.
+*/
+VMusic* VMusic::OpenMusicFile(sf::String filename)
+{
+	if (music.openFromFile(filename))
+	{
+		valid = true;
+		return this;
+	}
+
+	valid = false;
+	return nullptr;
+}
+
+/**
+* Opens music data from memory.
+*/
+VMusic* VMusic::OpenMusicMemory(const void* data, size_t size)
+{
+	if (music.openFromMemory(data, size))
+	{
+		valid = true;
+		return this;
+	}
+
+	valid = false;
+	return nullptr;
+}
+
+/**
+* Opens music data from a stream.
+*/
+VMusic* VMusic::OpenMusicStream(sf::InputStream& stream)
+{
+	if (music.openFromStream(stream))
+	{
+		valid = true;
+		return this;
+	}
+
+	valid = false;
+	return nullptr;
+}
+
 void VMusic::Update(float dt)
 {
 	if (!valid)

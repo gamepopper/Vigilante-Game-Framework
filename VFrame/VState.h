@@ -54,10 +54,7 @@ public:
 	///Used to call parent class functions when they are overrided in class.
 	typedef VGroup VSUPERCLASS;
 	VState();
-	virtual ~VState() 
-	{
-		Cleanup();
-	}
+	virtual ~VState();
 
 	///List of cameras to use.
 	std::vector<VCamera*> Cameras;

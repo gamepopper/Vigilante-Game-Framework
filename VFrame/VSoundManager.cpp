@@ -1,6 +1,13 @@
 #include "VSoundManager.h"
 #include "VGlobal.h"
 
+VSoundManager::VSoundManager() {}
+VSoundManager::~VSoundManager()
+{
+	if (sounds.size())
+		Cleanup();
+}
+
 void VSoundManager::SetMasterVolume(float volume)
 {
 	masterVolume = volume;
