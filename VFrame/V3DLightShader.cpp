@@ -1,6 +1,8 @@
 #ifndef VFRAME_NO_3D
 
+#ifndef NO_GLEW
 #include <GL/glew.h>
+#endif
 
 #include "V3DLightShader.h"
 #include "V3DCamera.h"

@@ -1,5 +1,7 @@
 #ifndef VFRAME_NO_3D
-#include <GL/glew.h>
+	#ifndef NO_GLEW
+	#include <GL/glew.h>
+	#endif
 #endif
 
 #include "VGame.h"
@@ -26,9 +28,11 @@ int VGame::Init()
 	try
 	{
 		#ifndef VFRAME_NO_3D
-		glewExperimental = GL_TRUE;
-		if (glewInit() != GLEW_OK)
-			return 2;
+			#ifndef NO_GLEW
+			glewExperimental = GL_TRUE;
+			if (glewInit() != GLEW_OK)
+				return 2;
+			#endif
 		#endif
 
 		if (!VGlobal::p()->App->isOpen())
@@ -109,7 +113,9 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	}
 
 	#ifndef VFRAME_NO_3D
-	VBase::VLog("OpenGL Version: %s", glGetString(GL_VERSION));
+		#ifndef NO_GLEW
+		VBase::VLog("OpenGL Version: %s", glGetString(GL_VERSION));
+		#endif
 	#endif
 	VBase::VLog("\nStarting Game: %s", title.toUtf8().c_str());
 
