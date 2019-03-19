@@ -440,9 +440,9 @@ void ChipmunkDebugDrawPolygon(int count, const cpVect *verts, cpFloat radius, cp
 		sf::Vector2f outer2 = ToSFVector(cpvadd(innerA, cpvmult(offsetA, outset)));
 		sf::Vector2f outer3 = ToSFVector(cpvadd(innerA, cpvmult(nA, outset)));
 
-		sf::Vector2f n0 = ToSFVector(nA);
+		/*sf::Vector2f n0 = ToSFVector(nA);
 		sf::Vector2f n1 = ToSFVector(nB);
-		sf::Vector2f offset0 = ToSFVector(offsetA);
+		sf::Vector2f offset0 = ToSFVector(offsetA);*/
 
 		m_DebugVertexArray.append(sf::Vertex(inner0, toSFColor(outlineColor)));
 		m_DebugVertexArray.append(sf::Vertex(inner1, toSFColor(outlineColor)));
@@ -506,11 +506,6 @@ DrawDot(cpFloat size, cpVect pos, cpSpaceDebugColor color, cpDataPointer data)
 
 static inline cpSpaceDebugColor RGBAColor(float r, float g, float b, float a) {
 	cpSpaceDebugColor color = { r, g, b, a };
-	return color;
-}
-
-static inline cpSpaceDebugColor LAColor(float l, float a) {
-	cpSpaceDebugColor color = { l, l, l, a };
 	return color;
 }
 
