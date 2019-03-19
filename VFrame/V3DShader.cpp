@@ -205,6 +205,8 @@ void V3DShader::UpdateUniform(UniformType type, void* data)
 
 	switch (type)
 	{
+	default:
+		break;
 	case UniformType::TransformPVM:
 		glCheck(glUniformMatrix4fv((unsigned int)uniform[static_cast<int>(type)], 1, GL_FALSE, static_cast<GLfloat*>(data)));
 		break;

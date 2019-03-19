@@ -12,6 +12,8 @@ VPhysicsJoints::VPhysicsJoints(VPhysicsJointType type, VPhysicsObject* ObjectA, 
 
 	switch (type)
 	{
+	default:
+		break;
 	case PIN:
 		constraint = cpPinJointNew(static_cast<cpBody*>(ObjectA->GetBody()), static_cast<cpBody*>(ObjectA->GetBody()), cpVect(), cpVect());
 		break;

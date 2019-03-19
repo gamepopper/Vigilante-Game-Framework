@@ -37,35 +37,45 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 
 	switch (Shape)
 	{
-	case VObjectShape::BOX:
-		moment = (float)cpMomentForBox((cpFloat)Object->Mass, (cpFloat)Object->Size.x, (cpFloat)Object->Size.y);
-		shape = cpBoxShapeNew(body, Object->Size.x, Object->Size.y, 0.0f);
-		break;
-	case VObjectShape::CIRCLE:
-		cpVect offset = cpVect();
-		//offset.x = Object->Radius;
-		//offset.y = Object->Radius;
-		moment = (float)cpMomentForCircle((cpFloat)Object->Mass, (cpFloat)0, (cpFloat)Object->Radius, offset);
-		shape = cpCircleShapeNew(body, Object->Radius, offset);
-		break;
-	case VObjectShape::LINE:
-		cpVect a = ToCPVect(Verts[0] - (Object->Size / 2.0f));
-		cpVect b = ToCPVect(Verts[1] - (Object->Size / 2.0f));
-
-		moment = (float)cpMomentForSegment((cpFloat)Object->Mass, a, b, (cpFloat)0);
-		shape = cpSegmentShapeNew(body, a, b, 0.0f);
-		break;
-	case VObjectShape::CUSTOM:
-		getPolyVertCount = Verts.size();
-		std::vector<cpVect> verts(getPolyVertCount);
-		for (unsigned int i = 0; i < verts.size(); i++)
+		default:
+			break;
+		case VObjectShape::BOX:
 		{
-			verts[i] = ToCPVect(Verts[i]);
+			moment = (float)cpMomentForBox((cpFloat)Object->Mass, (cpFloat)Object->Size.x, (cpFloat)Object->Size.y);
+			shape = cpBoxShapeNew(body, Object->Size.x, Object->Size.y, 0.0f);
+			break;
 		}
+		case VObjectShape::CIRCLE:
+		{
+			cpVect offset = cpVect();
+			//offset.x = Object->Radius;
+			//offset.y = Object->Radius;
+			moment = (float)cpMomentForCircle((cpFloat)Object->Mass, (cpFloat)0, (cpFloat)Object->Radius, offset);
+			shape = cpCircleShapeNew(body, Object->Radius, offset);
+			break;
+		}
+		case VObjectShape::LINE:
+		{
+			cpVect a = ToCPVect(Verts[0] - (Object->Size / 2.0f));
+			cpVect b = ToCPVect(Verts[1] - (Object->Size / 2.0f));
 
-		moment = (float)cpMomentForPoly((cpFloat)Object->Mass, verts.size(), verts.data(), cpVect(), (cpFloat)0);
-		shape = cpPolyShapeNew(body, verts.size(), verts.data(), cpTransformIdentity, 0.0f);
-		break;
+			moment = (float)cpMomentForSegment((cpFloat)Object->Mass, a, b, (cpFloat)0);
+			shape = cpSegmentShapeNew(body, a, b, 0.0f);
+			break;
+		}
+		case VObjectShape::CUSTOM:
+		{
+			getPolyVertCount = Verts.size();
+			std::vector<cpVect> verts(getPolyVertCount);
+			for (unsigned int i = 0; i < verts.size(); i++)
+			{
+				verts[i] = ToCPVect(Verts[i]);
+			}
+
+			moment = (float)cpMomentForPoly((cpFloat)Object->Mass, verts.size(), verts.data(), cpVect(), (cpFloat)0);
+			shape = cpPolyShapeNew(body, verts.size(), verts.data(), cpTransformIdentity, 0.0f);
+			break;
+		}
 	}
 
 	if (BodyType == VObjectType::DYNAMIC)
@@ -165,28 +175,35 @@ void VPhysicsObject::Update(float dt)
 		float moment = 0.0f;
 		switch (shapeType)
 		{
-		case VObjectShape::BOX:
-			moment = (float)cpMomentForBox((cpFloat)baseObject->Mass, baseObject->Size.x, baseObject->Size.y);
-			break;
-		case VObjectShape::CIRCLE:
-			cpVect offset = cpVect();
-			//offset.x = Object->Radius;
-			//offset.y = Object->Radius;
-			moment = (float)cpMomentForCircle((cpFloat)baseObject->Mass, (cpFloat)0, (cpFloat)baseObject->Radius, offset);
-			break;
-		case VObjectShape::LINE:
-			moment = (float)cpMomentForSegment((cpFloat)baseObject->Mass, cpPolyShapeGetVert(shape, 0), cpPolyShapeGetVert(shape, 1), (cpFloat)0);
-			break;
-		case VObjectShape::CUSTOM:
-
-			std::vector<cpVect> verts(getPolyVertCount);
-			for (unsigned int i = 0; i < getPolyVertCount; i++)
+			case VObjectShape::BOX:
 			{
-				verts[i] = cpPolyShapeGetVert(shape, i);
+				moment = (float)cpMomentForBox((cpFloat)baseObject->Mass, baseObject->Size.x, baseObject->Size.y);
+				break;
 			}
+			case VObjectShape::CIRCLE:
+			{
+				cpVect offset = cpVect();
+				//offset.x = Object->Radius;
+				//offset.y = Object->Radius;
+				moment = (float)cpMomentForCircle((cpFloat)baseObject->Mass, (cpFloat)0, (cpFloat)baseObject->Radius, offset);
+				break;
+			}
+			case VObjectShape::LINE:
+			{
+				moment = (float)cpMomentForSegment((cpFloat)baseObject->Mass, cpPolyShapeGetVert(shape, 0), cpPolyShapeGetVert(shape, 1), (cpFloat)0);
+				break;
+			}
+			case VObjectShape::CUSTOM:
+			{
+				std::vector<cpVect> verts(getPolyVertCount);
+				for (unsigned int i = 0; i < getPolyVertCount; i++)
+				{
+					verts[i] = cpPolyShapeGetVert(shape, i);
+				}
 
-			moment = (float)cpMomentForPoly((cpFloat)baseObject->Mass, verts.size(), verts.data(), cpVect(), (cpFloat)0);
-			break;
+				moment = (float)cpMomentForPoly((cpFloat)baseObject->Mass, verts.size(), verts.data(), cpVect(), (cpFloat)0);
+				break;
+			}
 		}
 
 		cpBodySetMoment(body, moment);
