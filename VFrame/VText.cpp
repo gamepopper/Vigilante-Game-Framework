@@ -46,11 +46,9 @@ void VText::setDimensions()
 {
 	if (font == nullptr)
 	{
-		font = new sf::Font();
-		if (font->loadFromFile("arial.ttf"))
+		font = &VGlobal::p()->Content->LoadFont("arial.ttf");
+		if (font)
 			SetFormat(*font, fontSize, GetFillTint(), alignment, style);
-
-		disposible = true;
 	}
 
 	vertices.clear();
@@ -446,9 +444,9 @@ void VText::Update(float dt)
 
 	if (dirty)
 	{
+		setDimensions();
 		RenderState.texture = &font->getTexture(fontSize);
 		const_cast<sf::Texture*>(RenderState.texture)->setSmooth(false);
-		setDimensions();
 		dirty = false;
 	}
 }
