@@ -145,9 +145,9 @@ public:
 	*/
 	VEmitter(float x, float y, unsigned int MaxSize = 0) :	VGroup(MaxSize),
 															Position(x, y),
-															EmittingAngle(-180, 180),
 															Lifespan(3),
 															VelocityRange(sf::Vector2f(-100, -100), sf::Vector2f(100, 100)),
+															EmittingAngle(-180, 180),
 															SpeedRange(0, 100),
 															AngleVelocityRange(0, 0),
 															AngleAccelerationRange(0, 0),
@@ -171,9 +171,9 @@ public:
 	*/
 	VEmitter(sf::Vector2f position, unsigned int MaxSize = 0) : 	VGroup(MaxSize),
 																	Position(position),
-																	EmittingAngle(-180, 180),
 																	Lifespan(3),
 																	VelocityRange(sf::Vector2f(-100, -100), sf::Vector2f(100, 100)),
+																	EmittingAngle(-180, 180),
 																	SpeedRange(0, 100),
 																	AngleVelocityRange(0, 0),
 																	AngleAccelerationRange(0, 0),

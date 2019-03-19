@@ -55,7 +55,7 @@ struct V3DLight
 	* @param ambientCoefficient Light Coefficient.
 	*/
 	V3DLight(LightType type, const sf::Vector3f pos = sf::Vector3f(), const sf::Vector3f dir = sf::Vector3f(), const sf::Vector3f color = sf::Vector3f(), float cutOff = 0.0f, float attentuation = 1.0f, float ambientCoefficient = 1.0f)
-		: Type(type), Position(pos), Dir(dir), Tint(color), CutOff(cutOff), Attenuation(attentuation), Coefficient(ambientCoefficient)
+		: Position(pos), Dir(dir), Tint(color), CutOff(cutOff), Attenuation(attentuation), Coefficient(ambientCoefficient), Type(type)
 	{
 		Enabled = true;
 	}

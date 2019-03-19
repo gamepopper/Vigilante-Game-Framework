@@ -48,6 +48,7 @@ public:
 	* @param zFar The far z value for the projection matrix.
 	*/
 	V3DCamera(const sf::Vector3f& pos, float zNear = 0.1f, float zFar = 500.0f);
+	virtual ~V3DCamera() = default;
 
 	///The Camera Position.
 	sf::Vector3f Position;
@@ -115,7 +116,7 @@ protected:
 	///Updates the plane coordinates based on the view-projection transform.
 	void updatePlanes();
 	///Works out the distance between a point and plane based on dot-product.
-	float pointPlaneDistance(glm::vec4& plane, glm::vec3& point);
+	float pointPlaneDistance(const glm::vec4& plane, const glm::vec3& point);
 	///The plane coordinates for all six size.
 	glm::vec4 planes[6];
 };

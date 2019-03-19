@@ -8,7 +8,7 @@
 static const float MaxVerticalAngle = 85.0f; //must be less than 90 to avoid gimbal lock
 
 V3DCamera::V3DCamera(const sf::Vector3f& pos, float zNear, float zFar)
-	: Position(pos), fnear(zNear), ffar(zFar), Viewport(0.0f, 0.0f, 1.0f, 1.0f) {}
+	: Position(pos), Viewport(0.0f, 0.0f, 1.0f, 1.0f), fnear(zNear), ffar(zFar) {}
 
 glm::mat4 V3DCamera::Orientation() const
 {
@@ -202,13 +202,13 @@ void V3DCamera::updatePlanes()
 	}
 }
 
-float V3DCamera::pointPlaneDistance(glm::vec4& plane, glm::vec3& point)
+float V3DCamera::pointPlaneDistance(const glm::vec4& plane, const glm::vec3& point)
 {
 	return (plane.x * point.x) + (plane.y * point.y) + (plane.z * point.z) + plane.w;
 }
 
 V3DPerspectiveCamera::V3DPerspectiveCamera(const sf::Vector3f& pos, float fieldOfView, float aspectRatio, float zNear, float zFar)
-	: V3DCamera(pos, zNear, zFar), fov(fieldOfView), aspect(aspectRatio) {}
+	: V3DCamera(pos, zNear, zFar), aspect(aspectRatio), fov(fieldOfView) {}
 
 glm::mat4 V3DPerspectiveCamera::ProjectionMatrix() const
 {

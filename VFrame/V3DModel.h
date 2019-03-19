@@ -95,7 +95,7 @@ struct V3DVertex
 	* @param tint Vertex Colour.
 	* @param tex Vertex Texture Coordinate.
 	*/
-	V3DVertex(const glm::vec3& pos, const glm::vec2& tex, const glm::vec4& tint) : position(pos), texCoord(tex), color(tint) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec2& tex, const glm::vec4& tint) : position(pos), color(tint), texCoord(tex) {}
 
 	/**
 	* @param pos Vertex Position.
@@ -123,7 +123,7 @@ typedef std::vector<V3DVertex> V3DVertexArray;
 class V3DModel : public V3DObject
 {
 protected:
-	virtual void updateTransform();
+	virtual void updateTransform() override;
 	///Vertex Array Object ID.
 	unsigned int vao;
 	///Vertex Buffer Object for Vertices.
@@ -185,9 +185,9 @@ public:
 	*/
 	bool LoadTexture(const sf::Texture& tex);
 
-	virtual void UpdateShader(V3DShader* shader, V3DCamera* camera);
+	virtual void UpdateShader(V3DShader* shader, V3DCamera* camera) override;
 
-	virtual void Destroy();
+	virtual void Destroy() override;
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 
 	///A generated 1x1 White texture. If no texture is loaded, then this will be used.
