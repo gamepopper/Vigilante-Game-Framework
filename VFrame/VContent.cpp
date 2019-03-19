@@ -2,6 +2,16 @@
 #include "VGlobal.h"
 #include <stdexcept>
 
+VContent::VContent()
+{
+	
+}
+
+VContent::~VContent()
+{
+	UnloadAll();
+}
+
 bool VContent::TextureExists(const sf::String& name)
 {
 	return textureDir.find(name) != textureDir.end();

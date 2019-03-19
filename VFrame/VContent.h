@@ -45,11 +45,8 @@
 class VContent
 {
 public:
-	VContent(){};
-	~VContent()
-	{
-		UnloadAll();
-	}
+	VContent();
+	~VContent();
 
 	/**
 	*@param name File path of the texture used for the sf::Texture object.
