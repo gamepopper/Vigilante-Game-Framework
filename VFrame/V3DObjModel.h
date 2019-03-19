@@ -63,7 +63,7 @@ protected:
 		size_t materialID;
 	};
 
-	virtual void updateTransform();
+	virtual void updateTransform() override;
 	///Get the directory of the file.
 	static std::string GetBaseDir(const std::string &filepath);
 	///Calculate the normal from three vertices.
@@ -113,9 +113,9 @@ public:
 	Any material and texture files should be placed relative to the .obj file.
 	*/
 	bool LoadModelData(const char* filename);
-	virtual void UpdateShader(V3DShader* shader, V3DCamera* camera);
+	virtual void UpdateShader(V3DShader* shader, V3DCamera* camera) override;
 
-	virtual void Destroy();
+	virtual void Destroy() override;
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };
 #endif

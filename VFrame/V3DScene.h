@@ -78,7 +78,7 @@ public:
 	std::vector<std::unique_ptr<V3DCamera>> Camera;
 
 	///@return The rendered scene as a texture.
-	virtual const sf::Texture& GetTexture();
+	virtual const sf::Texture& GetTexture() override;
 
 	/**
 	* Renders the scene 
@@ -104,8 +104,8 @@ public:
 	///Reset all the GL States.
 	void ResetGLStates();
 
-	virtual void Destroy();
-	virtual void Update(float dt);
+	virtual void Destroy() override;
+	virtual void Update(float dt) override;
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };
 #endif

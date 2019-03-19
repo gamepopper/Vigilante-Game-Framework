@@ -272,7 +272,7 @@ public:
 	* @param renderBox The render area of the object. Default is the Position and Size of the VObject, but this parameter can use whatever custom one is provided.
 	* @return If the VObject is within the rectangle of the view (factoring in ScrollFactor, RotateFactor and ZoomFactor), then returns true.
 	*/
-	static bool TestInView(const sf::View& renderTargetView, sf::View& defaultView, VObject* o, const sf::FloatRect& renderBox = sf::FloatRect());
+	static bool TestInView(const sf::View& renderTargetView, sf::View defaultView, VObject* o, const sf::FloatRect& renderBox = sf::FloatRect());
 
 	/**
 	* Sets object position based on the centre of it's circular area.

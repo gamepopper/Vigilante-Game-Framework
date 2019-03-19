@@ -111,7 +111,7 @@ public:
 	}
 
 	///Destroy the VBackdrop.
-	virtual void Destroy();
+	virtual void Destroy() override;
 	
 	///@param filename Filepath and name of texture to use. Loads with VContent in VGlobal.
 	VBackdrop* LoadGraphic(sf::String filename, const sf::IntRect& area = sf::IntRect());

@@ -49,7 +49,7 @@ class V3DShader
 {
 public:
 	V3DShader();
-	~V3DShader();
+	virtual ~V3DShader();
 
 	///Bind texture to the current scene.
 	void Bind() const;

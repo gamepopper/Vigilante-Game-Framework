@@ -90,7 +90,7 @@ public:
 	* @param outline Outline thickness.
 	* @param outlineColor colour of sprite outline.
 	*/
-	virtual VSprite* MakeGraphic(int width, int height, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) { return this; }
+	virtual VSprite* MakeGraphic(int width, int height, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) override { return this; }
 
 	/**
 	* Make sprite texture a circle. (NOT USED FOR TILED SPRITE)
@@ -99,7 +99,7 @@ public:
 	* @param outline Outline thickness.
 	* @param outlineColor colour of sprite outline.
 	*/
-	virtual VSprite* MakeGraphicCircle(int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) { return this; }
+	virtual VSprite* MakeGraphicCircle(int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) override { return this; }
 
 	/**
 	* Make sprite texture a multisided shape. (NOT USED FOR TILED SPRITE)

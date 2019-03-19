@@ -285,13 +285,13 @@ public:
 	sf::Color const& GetTint();
 
 	///Not used in VTilemap.
-	virtual void Reset(sf::Vector2f newPos) {}
+	virtual void Reset(sf::Vector2f newPos) override {}
 	///Not used in VTilemap.
-	virtual void Reset(float x, float y) {}
+	virtual void Reset(float x, float y) override {}
 	///Not used in VTilemap.
-	virtual void Hurt(float damage) {}
+	virtual void Hurt(float damage) override {}
 	///Not used in VTilemap.
-	virtual void Kill() {};
+	virtual void Kill() override {};
 
 	///Deletes and clears all the tilemap data.
 	virtual void Destroy() override;
