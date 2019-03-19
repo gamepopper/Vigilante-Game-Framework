@@ -99,7 +99,7 @@ protected:
 	{
 		///Keyboard Key Code
 		sf::Keyboard::Key key; 
-#ifdef USE_GAMEPAD_API
+#if	defined(USE_GAMEPAD_API)
 		///Gamepad Button
 		GAMEPAD_BUTTON gamepad;
 #elif defined(USE_SFML_JOYSTICK)

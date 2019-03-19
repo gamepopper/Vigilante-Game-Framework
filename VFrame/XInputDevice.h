@@ -33,7 +33,7 @@
 
 #pragma once
 
-#ifndef USE_GAMEPAD_API
+#if !defined(USE_GAMEPAD_API) && !defined(USE_SFML_JOYSTICK)
 namespace sf
 {
 	///Class for directly accessing and managing XInput controls (Windows Only!)

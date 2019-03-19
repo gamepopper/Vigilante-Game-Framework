@@ -174,7 +174,9 @@ void VBase::VClearLog()
 }
 
 #if !defined(VFRAME_NO_3D) && defined(_DEBUG)
+#ifndef NO_GLEW
 #include <GL/glew.h>
+#endif
 #include <SFML/OpenGL.hpp>
 
 #define GLEXT_GL_INVALID_FRAMEBUFFER_OPERATION 0x0506

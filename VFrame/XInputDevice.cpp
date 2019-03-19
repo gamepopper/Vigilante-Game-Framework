@@ -1,6 +1,6 @@
 #include "XInputDevice.h"
 
-#ifndef USE_GAMEPAD_API
+#if !defined(USE_GAMEPAD_API) && !defined(USE_SFML_JOYSTICK)
 #ifdef __MINGW32__
 #define _in
 #define _out
