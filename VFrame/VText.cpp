@@ -20,7 +20,7 @@ void VText::setDimensions()
 	vertices.clear();
 	vertices.setPrimitiveType(sf::Triangles);
 
-	sf::String& printText = text.substring(0, length);
+	sf::String printText = text.substring(0, length);
 
 	bool bold = style & sf::Text::Bold;
 	int newLineCount = 1;
