@@ -6,7 +6,7 @@ int main()
 	VGame* game = new VGame();
 
 	sf::ContextSettings settings;
-	settings.depthBits = 32;
+	settings.depthBits = 24;
 	settings.stencilBits = 8;
 	settings.antialiasingLevel = 0;
 	settings.majorVersion = 4;
