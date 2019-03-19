@@ -6,8 +6,6 @@
 #include "V3DCamera.h"
 #include <cstring>
 
-#pragma comment(lib, "glu32.lib")
-
 V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(maxSize), contextSettings(settings)
 {
 	renderTex.create(width, height, settings);
