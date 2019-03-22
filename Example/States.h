@@ -122,6 +122,30 @@ public:
 
 		standardSprite->Size += sf::Vector2f(x1Resize / 100, y1Resize / 100);
 		animatedSprite->Size += sf::Vector2f(x2Resize / 100, y2Resize / 100);
+
+		if (VGlobal::p()->Input->IsButtonPressed("A"))
+		{
+			animatedSprite->Animation.Play("start");
+			VGlobal::p()->Sound->Play("select");
+		}
+
+		if (VGlobal::p()->Input->IsButtonPressed("B"))
+		{
+			animatedSprite->Animation.Play("shotgun");
+			VGlobal::p()->Sound->Play("select");
+		}
+
+		if (VGlobal::p()->Input->IsButtonPressed("X"))
+		{
+			animatedSprite->Animation.Play("railgun");
+			VGlobal::p()->Sound->Play("select");
+		}
+
+		if (VGlobal::p()->Input->IsButtonPressed("Y"))
+		{
+			animatedSprite->Animation.Play("doublegun");
+			VGlobal::p()->Sound->Play("select");
+		}
 	}
 };
 
@@ -181,6 +205,8 @@ public:
 
 		standardSprite->Size += sf::Vector2f(x1Resize, y1Resize) * dt;
 		animatedSprite->Size += sf::Vector2f(x2Resize, y2Resize) * dt;
+
+		VGlobal::p()->Sound->Status("switch");
 	}
 };
 
@@ -1289,6 +1315,12 @@ public:
 		VSUPERCLASS::Update(dt);
 
 		sf::Vector2f mousePos = VGlobal::p()->GetMousePosition();
+
+		if (sf::Touch::isDown(0))
+		{
+			mousePos = sf::Vector2f(sf::Touch::getPosition(0));
+		}
+
 		mousePos -= sprite->Position;
 		lighting2DShader.setUniform("light", sf::Vector3f(mousePos.x / sprite->Size.x, mousePos.y / sprite->Size.y, lightZ));
 	}
@@ -1505,6 +1537,7 @@ public:
 		Add(pixel);
 
 		normalText = new VText(0.0f, VGlobal::p()->Height / 2.0f, VGlobal::p()->Width * 1.0f, "GENERATING MAP");
+		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 32, sf::Color::White, VText::ALIGNCENTER);
 		Add(normalText);
 
         future = std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this));
