@@ -151,7 +151,7 @@ void VShape::Draw(sf::RenderTarget& RenderTarget)
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
 
-	if (TestInView(renderTargetView, scrollView, this, shape->getGlobalBounds()))
+	if (TestInView(renderTargetView, &scrollView, this, shape->getGlobalBounds()))
 	{
 		RenderTarget.setView(scrollView);
 		RenderTarget.draw(*shape, RenderState);

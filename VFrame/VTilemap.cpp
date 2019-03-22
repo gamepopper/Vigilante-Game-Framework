@@ -508,7 +508,7 @@ void VTilemap::Draw(sf::RenderTarget& RenderTarget)
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
 
-	if (TestInView(renderTargetView, scrollView, this))
+	if (TestInView(renderTargetView, &scrollView, this))
 	{
 		RenderTarget.setView(scrollView);
 		sf::RenderStates states = sf::RenderStates(RenderState);

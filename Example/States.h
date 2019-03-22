@@ -311,7 +311,7 @@ public:
 		playerControl->MaxVelocity = sf::Vector2f(200, 600);
 		Add(playerControl);
 
-		ParentState->Cameras[0]->Follow(playerControl, 0.5f, PLATFORMER, 0.8f, 0.05f);
+		ParentState->Cameras[0]->Follow(playerControl, 0.5f, VCamera::PLATFORMER, 0.8f, 0.05f);
 		UseParentCamera = true;
 
 		timer = new VTimer();
@@ -516,7 +516,8 @@ public:
 		VGlobal::p()->Collides(playerControl, collideGroup, std::bind(&CollisionState::overlapResponse, this, _1, _2));
 		VGlobal::p()->Collides(collideGroup);
 
-		if (!VObject::TestInView(ParentState->DefaultCamera->GetView(), ParentState->DefaultCamera->GetDefaultView(), playerControl))
+		sf::View defaultView = ParentState->DefaultCamera->GetDefaultView();
+		if (!VObject::TestInView(ParentState->DefaultCamera->GetView(), &defaultView, playerControl))
 		{
 			VGlobal::p()->BackgroundColor = sf::Color::White;
 		}

@@ -252,7 +252,7 @@ void VSprite::Draw(sf::RenderTarget& RenderTarget)
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
 
-	if (TestInView(renderTargetView, scrollView, this, RenderState.transform.transformRect(vertexArray.getBounds())))
+	if (TestInView(renderTargetView, &scrollView, this, RenderState.transform.transformRect(vertexArray.getBounds())))
 	{
 		RenderTarget.setView(scrollView);
 		RenderTarget.draw(vertexArray, RenderState);
