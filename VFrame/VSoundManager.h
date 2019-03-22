@@ -63,7 +63,7 @@ public:
 	* @param id A simple ID name to assign the file for easier access.
 	* @return True if file has been loaded successfully.
 	*/
-	bool Load(sf::String filename, sf::String id);
+	bool Load(const sf::String& filename, const sf::String& id);
 
 	/**
 	* Play sound with specific id, with specified volume and pitch.
@@ -71,13 +71,19 @@ public:
 	* @param volume The volume specifically for this sound effect (will use as a percentage of the master volume).
 	* @param pitch The pitch specifically for this sound effect (will use as a percentage of the master pitch).
 	*/
-	void Play(sf::String id, float volume = 100.0f, float pitch = 1.0f);
+	void Play(const sf::String& id, float volume = 100.0f, float pitch = 1.0f, bool loop = false);
+	
+	/**
+	* Get the status of the specific sound.
+	* @return Status of the sound. (i.e. Playing, Paused, Stopped).
+	*/
+	sf::SoundStream::Status Status(const sf::String& id);
 
 	/**
 	* Stop sound with specific id (good if sound loops).
 	* @param id A simple ID name to easily access the sound.
 	*/
-	void Stop(sf::String id);
+	void Stop(const sf::String& id);
 
 	///Stop all sound effects.
 	void StopAll();
@@ -86,7 +92,7 @@ public:
 	* @param id The ID name of the sound.
 	* @return The direct sound object for direct manipulation.
 	*/
-	sf::Sound* GetSound(sf::String id);
+	sf::Sound* GetSound(const sf::String& id);
 
 	///Cleanup Sound and SoundBuffer lists.
 	void Cleanup();

@@ -28,7 +28,7 @@ float VSoundManager::MasterPitch()
 	return masterPitch;
 }
 
-bool VSoundManager::Load(sf::String filename, sf::String id)
+bool VSoundManager::Load(const sf::String& filename, const sf::String& id)
 {
 	if (sounds.find(id) == sounds.end() || sounds[id].getBuffer() == nullptr)
 	{
@@ -39,17 +39,18 @@ bool VSoundManager::Load(sf::String filename, sf::String id)
 	return true;
 }
 
-void VSoundManager::Play(sf::String id, float volume, float pitch)
+void VSoundManager::Play(const sf::String& id, float volume, float pitch, bool loop)
 {
 	if (sounds.find(id) != sounds.end())
 	{
 		sounds[id].setVolume((volume / 100) * masterVolume);
 		sounds[id].setPitch(pitch * masterPitch);
+		sounds[id].setLoop(loop);
 		sounds[id].play();
 	}
 }
 
-void VSoundManager::Stop(sf::String id)
+void VSoundManager::Stop(const sf::String& id)
 {
 	if (sounds.find(id) != sounds.end())
 	{
@@ -65,7 +66,17 @@ void VSoundManager::StopAll()
 	}
 }
 
-sf::Sound* VSoundManager::GetSound(sf::String id)
+sf::SoundStream::Status VSoundManager::Status(const sf::String& id)
+{
+	if (sounds.find(id) != sounds.end())
+	{
+		return sounds[id].getStatus();
+	}
+
+	return sf::Sound::Stopped;
+}
+
+sf::Sound* VSoundManager::GetSound(const sf::String& id)
 {
 	if (sounds.find(id) != sounds.end())
 	{
