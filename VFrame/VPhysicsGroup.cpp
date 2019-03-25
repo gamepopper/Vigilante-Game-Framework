@@ -4,6 +4,7 @@
 #include <chipmunk/chipmunk.h>
 #include "VObject.h"
 #include "VGlobal.h"
+#include <cstring>
 
 struct CollisionCallbackHelper
 {
@@ -380,8 +381,8 @@ void ChipmunkDebugDrawCircle(cpVect pos, cpFloat angle, cpFloat radius, cpSpaceD
 	for (int i = 0; i < circleDivisions; i++)
 	{
 		ChipmunkDebugDrawSegment(
-			cpvadd(pos, cpvmult(cpvforangle(anglePerDiv * i), r)), 
-			cpvadd(pos, cpvmult(cpvforangle(anglePerDiv * (i + 1)), r)), 
+			cpvadd(pos, cpvmult(cpvforangle(anglePerDiv * i), r)),
+			cpvadd(pos, cpvmult(cpvforangle(anglePerDiv * (i + 1)), r)),
 			outlineColor);
 	}
 

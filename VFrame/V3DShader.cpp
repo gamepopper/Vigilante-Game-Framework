@@ -10,6 +10,7 @@
 #include "V3DCamera.h"
 #include "VBase.h"
 #include <fstream>
+#include <cstring>
 
 const std::string V3DShader::defaultVertexShader =
 "#version 330\n"\
@@ -275,7 +276,7 @@ GLuint V3DShader::buildShader(const std::string& l_src, unsigned int l_type)
 {
 	GLuint shaderID = glCreateShader(l_type);
 	if (!shaderID) {
-		VBase::VLogError("Bad shader type!"); 
+		VBase::VLogError("Bad shader type!");
 		return 0;
 	}
 	const GLchar* sources[1];

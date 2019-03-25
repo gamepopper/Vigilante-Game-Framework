@@ -10,16 +10,16 @@ VGlobal::VGlobal()
 {
 	if (App == nullptr) //RenderWindow is most required, so we check if this is NULL.
 	{
-		App = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow());
-		Input = std::unique_ptr<VInputHandler>(new VInputHandler());
-		Content = std::unique_ptr<VContent>(new VContent());
-		Music = std::unique_ptr<VMusic>(new VMusic());
-		Sound = std::unique_ptr<VSoundManager>(new VSoundManager());
-		Random = std::unique_ptr<VRandom>(new VRandom());
-		Async = std::unique_ptr<VAsync>(new VAsync());
+		App = std::make_unique<sf::RenderWindow>();
+		Input = std::make_unique<VInputHandler>();
+		Content = std::make_unique<VContent>();
+		Music = std::make_unique<VMusic>();
+		Sound = std::make_unique<VSoundManager>();
+		Random = std::make_unique<VRandom>();
+		Async = std::make_unique<VAsync>();
 
-		gsm = std::unique_ptr<VStateManager>(new VStateManager());
-		collision = std::unique_ptr<VCollision>(new VCollision());
+		gsm = std::make_unique<VStateManager>();
+		collision = std::make_unique<VCollision>();
 
 		rectCollision = [](VObject* a, VObject* b)
 		{
@@ -160,7 +160,7 @@ sf::Vector2f VGlobal::GetMousePosition()
 {
 	sf::Vector2f actualMousePos = sf::Vector2f(sf::Mouse::getPosition(*App));
 	sf::Vector2f renderAreaOffset = VGlobal::p()->ViewportOffset;
-	float sx = App->getSize().x / (float)Width; 
+	float sx = App->getSize().x / (float)Width;
 	float sy = App->getSize().y / (float)Height;
 
 	actualMousePos -= renderAreaOffset;

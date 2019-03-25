@@ -4,7 +4,7 @@
 
 VContent::VContent()
 {
-	
+
 }
 
 VContent::~VContent()
@@ -37,7 +37,7 @@ sf::Texture& VContent::LoadTexture(const sf::String& name)
 	auto found = textureDir.find(name);
 	if (found == textureDir.end())
 	{
-		std::unique_ptr<sf::Texture> texture = std::unique_ptr<sf::Texture>(new sf::Texture());
+		std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
 		if (texture->loadFromFile(name))
 		{
 			VBase::VLog("%s loaded", name.toUtf8().c_str());
@@ -57,7 +57,7 @@ sf::Image& VContent::LoadImage(const sf::String& name)
 	auto found = imageDir.find(name);
 	if (found == imageDir.end())
 	{
-		std::unique_ptr<sf::Image> image = std::unique_ptr<sf::Image>(new sf::Image());
+		std::unique_ptr<sf::Image> image = std::make_unique<sf::Image>();
 		if (image->loadFromFile(name))
 		{
 			VBase::VLog("%s loaded", name.toUtf8().c_str());
@@ -77,7 +77,7 @@ sf::Font& VContent::LoadFont(const sf::String& name)
 	auto found = fontDir.find(name);
 	if (found == fontDir.end())
 	{
-		std::unique_ptr<sf::Font> font = std::unique_ptr<sf::Font>(new sf::Font());
+		std::unique_ptr<sf::Font> font = std::make_unique<sf::Font>();
 		if (font->loadFromFile(name))
 		{
 			VBase::VLog("%s loaded", name.toUtf8().c_str());
@@ -97,7 +97,7 @@ sf::SoundBuffer& VContent::LoadSound(const sf::String& name)
 	auto found = soundDir.find(name);
 	if (found == soundDir.end())
 	{
-		std::unique_ptr<sf::SoundBuffer> sound = std::unique_ptr<sf::SoundBuffer>(new sf::SoundBuffer());
+		std::unique_ptr<sf::SoundBuffer> sound = std::make_unique<sf::SoundBuffer>();
 		if (sound->loadFromFile(name))
 		{
 			VBase::VLog("%s loaded", name.toUtf8().c_str());
@@ -186,7 +186,7 @@ bool VContent::StoreTexture(const sf::String& name, const sf::Texture& texture)
 	{
 		VBase::VLog("%s stored", name.toUtf8().c_str());
 		textureDir.emplace(std::make_pair(
-			name, std::unique_ptr<sf::Texture>(new sf::Texture(texture))));
+			name, std::make_unique<sf::Texture>(texture)));
 		return true;
 	}
 
@@ -201,7 +201,7 @@ bool VContent::StoreImage(const sf::String& name, const sf::Image& image)
 	{
 		VBase::VLog("%s stored", name.toUtf8().c_str());
 		imageDir.emplace(std::make_pair(
-			name, std::unique_ptr<sf::Image>(new sf::Image(image))));
+			name, std::make_unique<sf::Image>(image)));
 		return true;
 	}
 
@@ -216,7 +216,7 @@ bool VContent::StoreFont(const sf::String& name, const sf::Font& font)
 	{
 		VBase::VLog("%s stored", name.toUtf8().c_str());
 		fontDir.emplace(std::make_pair(
-			name, std::unique_ptr<sf::Font>(new sf::Font(font))));
+			name, std::make_unique<sf::Font>(font)));
 		return true;
 	}
 
@@ -231,7 +231,7 @@ bool VContent::StoreSound(const sf::String& name, const sf::SoundBuffer& sound)
 	{
 		VBase::VLog("%s stored", name.toUtf8().c_str());
 		soundDir.emplace(std::make_pair(
-			name, std::unique_ptr<sf::SoundBuffer>(new sf::SoundBuffer(sound))));
+			name, std::make_unique<sf::SoundBuffer>(sound)));
 		return true;
 	}
 
