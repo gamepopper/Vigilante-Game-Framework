@@ -171,7 +171,6 @@ void VText::updateTextRender(sf::String text)
 		for (size_t i = 0; i < item.length(); ++i)
 		{
 			sf::Uint32 curChar = item[i];
-			const sf::Glyph& glyph = font->getGlyph(curChar, fontSize, bold);
 
 			x += font->getKerning(prevChar, curChar, fontSize);
 			prevChar = curChar;
@@ -189,6 +188,8 @@ void VText::updateTextRender(sf::String text)
 				}
 				continue;
 			}
+
+			const sf::Glyph& glyph = font->getGlyph(curChar, fontSize, bold);
 
 			if (outlined)
 			{
