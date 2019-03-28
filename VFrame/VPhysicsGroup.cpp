@@ -137,6 +137,11 @@ void VPhysicsGroup::SetCollisionCallback(VObject* a, VObject* b, const std::func
 	callbackHelperList.emplace_back(a, b, callback, type, persist);
 }
 
+void VPhysicsGroup::SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist)
+{
+	callbackHelperList.emplace_back(a->GetBaseObject(), b->GetBaseObject(), callback, type, persist);
+}
+
 bool VPhysicsGroup::ProcessCallback(cpArbiter *arb, cpSpace *space, VPhysicsCallbackType type)
 {
 	if (callbackHelperList.size() == 0)

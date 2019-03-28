@@ -134,7 +134,7 @@ public:
 	///The types of collision callback.
 	enum VPhysicsCallbackType
 	{
-		///Two shapes have just touched.Callbacks of this type can return a false boolean value to ignore the collision.
+		///Two shapes have just touched. Callbacks of this type can return a false boolean value to ignore the collision.
 		BEGIN,
 		///The shapes are touching. Callbacks of this type can return a false boolean value to ignore the collision.
 		PRESOLVE,
@@ -145,7 +145,7 @@ public:
 	};
 
 	/**
-	* Collision callbacks act slightly differently from VCollision. 
+	* Collision callbacks act slightly differently from VCollision.
 	* Here you can set the collision between specific objects, their callback, when the callback should be applied and whether you want the collision to be active forever or deactivated after being called once.
 	* @param a The first object to test collisions with for the callback.
 	* @param b The second object to test collisions with for the callback. Setting this to nullptr will apply the callback between object a and anything else.
@@ -154,6 +154,17 @@ public:
 	* @param persist If true, this callback will remain active for the duration of the space, otherwise this callback will be removed after one call. This way you aren't required to call it on each update.
 	*/
 	void SetCollisionCallback(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist = false);
+
+	/**
+	* Collision callbacks act slightly differently from VCollision.
+	* Here you can set the collision between specific objects, their callback, when the callback should be applied and whether you want the collision to be active forever or deactivated after being called once.
+	* @param a The first object to test collisions with for the callback.
+	* @param b The second object to test collisions with for the callback. Setting this to nullptr will apply the callback between object a and anything else.
+	* @param callback The function to call if the collision takes place, the two parameters are VPhysicsObject so you can adjust the collision properties and access the VObject at the same time.
+	* @param The type of collision callback to set (see VPhysicsCallbackType).
+	* @param persist If true, this callback will remain active for the duration of the space, otherwise this callback will be removed after one call. This way you aren't required to call it on each update.
+	*/
+	void SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist = false);
 
 	/**
 	* This function is called to process all the callbacks, this should only be overridden if you want to manipulate the collision response directly.
