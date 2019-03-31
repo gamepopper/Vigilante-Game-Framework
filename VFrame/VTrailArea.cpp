@@ -3,12 +3,12 @@
 
 VTrailArea::VTrailArea(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize)
 {
-	
+	renderTex.clear(sf::Color::Transparent);
 }
 
 VTrailArea::VTrailArea(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize) : VRenderGroup(position, size, maxSize)
 {
-	
+	renderTex.clear(sf::Color::Transparent);
 }
 
 void VTrailArea::Update(float dt)
@@ -23,7 +23,7 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 	{
 		sf::View renderTexView = renderTex.getView();
 		renderTex.setView(renderTex.getDefaultView());
-		trailTexture.loadFromImage(renderTex.getTexture().copyToImage());
+		trailTexture = sf::Texture(renderTex.getTexture());
 		trailSprite.setTexture(trailTexture);
 		trailSprite.setPosition(0.0f, 0.0f);
 		trailSprite.setColor(
