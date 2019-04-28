@@ -32,6 +32,7 @@
 */
 
 #pragma once
+#ifndef VFRAME_NO_3D
 #include "VGroup.h"
 #include "V3DObject.h"
 
@@ -64,4 +65,4 @@ public:
 
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };
-
+#endif

@@ -198,10 +198,6 @@ void VInputHandler::Update(float dt)
 			b.pressed[i] = false;
 			b.released[i] = false;
 
-#if defined(USE_SFML_JOYSTICK)
-			sf::Joystick::update();
-#endif
-
 			if (sf::Keyboard::isKeyPressed(b.key) || 
 				sf::Mouse::isButtonPressed(b.mouse) || 
 #ifdef USE_GAMEPAD_API
@@ -301,8 +297,8 @@ void VInputHandler::Update(float dt)
 				}
 
 #elif defined(USE_SFML_JOYSTICK)
-				float axis = sf::Joystick::getAxisPosition(JoystickID[i], a.gamepad);
-				if (JoystickID[i] >= 0 && a.gamepad >= 0 && axis != 0.0f) //Deadzone
+				float axis = JoystickID[i] >= 0 && a.gamepad >= 0 ? sf::Joystick::getAxisPosition(JoystickID[i], a.gamepad) : 0.0f;
+				if (axis != 0.0f) //Deadzone
 				{
 					a.value[i] = axis;
 					isGamepadActive = true;

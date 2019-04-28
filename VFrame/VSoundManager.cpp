@@ -43,10 +43,10 @@ void VSoundManager::Play(const sf::String& id, float volume, float pitch, bool l
 {
 	if (sounds.find(id) != sounds.end())
 	{
+		sounds[id].play();
 		sounds[id].setVolume((volume / 100) * masterVolume);
 		sounds[id].setPitch(pitch * masterPitch);
 		sounds[id].setLoop(loop);
-		sounds[id].play();
 	}
 }
 

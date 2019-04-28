@@ -145,10 +145,8 @@ void VPostEffect::Apply(const sf::Texture& input, sf::RenderTarget& output)
 VPostEffectMultipass::VPostEffectMultipass(int MaxSize)
 {
 	maxSize = MaxSize;
-
-	unsigned int amount = maxSize - 1 > 0 ? maxSize - 1 : 0;
-	renderTextures.reserve(amount);
-	for (unsigned int i = 0; i < amount; i++)
+	renderTextures.reserve(MaxSize);
+	for (unsigned int i = 0; i < MaxSize; i++)
 	{
 		renderTextures.push_back(std::make_unique<sf::RenderTexture>());
 		renderTextures[i]->create(VGlobal::p()->Width, VGlobal::p()->Height);
@@ -222,7 +220,7 @@ void VPostEffectMultipass::Apply(const sf::Texture& input, sf::RenderTarget& out
 
 	for (unsigned int i = 0; i < postEffects.size(); i++)
 	{
-		sf::RenderTarget* renderOutput = outputRenderId < (int)postEffects.size() - 1 ? renderTextures[outputRenderId].get() : &output;
+		sf::RenderTarget* renderOutput = renderTextures[outputRenderId].get();
 
 		if (enabled[i])
 		{
@@ -242,6 +240,8 @@ void VPostEffectMultipass::Apply(const sf::Texture& input, sf::RenderTarget& out
 		inputRenderId++;
 		outputRenderId++;
 	}
+
+	passThrough(renderTextures[outputRenderId - 1]->getTexture(), output);
 }
 
 void VPostEffectMultipass::Update(float dt)

@@ -79,14 +79,6 @@ void VMusic::Update(float dt)
 				fadeTimer = 0;
 			}
 		}
-
-		if (looping && loopEndPoint > 0)
-		{
-			if (music.getPlayingOffset().asSeconds() >= loopEndPoint)
-			{
-				SetPlayOffset(loopStartPoint);
-			}
-		}
 	}
 	else
 	{
@@ -254,33 +246,13 @@ void VMusic::SetLoop(bool loop, float loopStart, float loopEnd)
 	if (!valid)
 		return;
 
-	if (loop)
-	{
-		if (!looping || (loopStartPoint != loopStart) || (loopEndPoint != loopEnd))
-		{
-			looping = loop;
-
-			if (loopStart == 0 && loopEnd == 0)
-			{
-				music.setLoop(loop);
-				loopStartPoint = 0;
-				loopEndPoint = 0;
-			}
-			else
-			{
-				loopStartPoint = loopStart;
-				if (loopEnd != 0)
-					loopEndPoint = loopEnd;
-				else
-					loopEndPoint = music.getDuration().asSeconds();
-			}
-		}
-	}
-	else
-	{
-		looping = loop;
-		music.setLoop(loop);
-	}
+	looping = loop;
+	loopStartPoint = loopStart;
+	if (loopEnd == 0)
+		loopEndPoint = music.getDuration().asSeconds();
+	
+	music.setLoop(loop);
+	music.setLoopPoints(sf::Music::TimeSpan(sf::seconds(loopStartPoint), sf::seconds(loopEndPoint - loopStartPoint)));
 }
 
 void VMusic::SetPitch(float pitch)

@@ -313,10 +313,11 @@ void VGame::PostRender()
 	app->setVerticalSyncEnabled(VGlobal::p()->VSync);
 
 	sf::View view = app->getView();
+
+	VGlobal::p()->RenderState.texture = &renderTarget->getTexture();
 	if (VGlobal::p()->PostProcess == nullptr || !VPostEffectBase::isSupported())
 	{
 		view.setViewport(sf::FloatRect(0, 0, 1, 1));
-		VGlobal::p()->RenderState.texture = &renderTarget->getTexture();
 		app->draw(vertexArray, VGlobal::p()->RenderState);
 	}
 	else

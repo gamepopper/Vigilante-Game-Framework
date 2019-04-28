@@ -1,5 +1,6 @@
 #include "V3DBatchModelGroup.h"
 
+#ifndef VFRAME_NO_3D
 #include "V3DCamera.h"
 #include "V3DShader.h"
 
@@ -40,3 +41,4 @@ void V3DBatchModelGroup::Draw(sf::RenderTarget& RenderTarget)
 		}
 	}
 }
+#endif
