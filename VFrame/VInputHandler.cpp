@@ -13,6 +13,16 @@ VInputHandler::~VInputHandler()
 
 void VInputHandler::SetButtonInput(const sf::String& name, int key, int gamepad, int mouse)
 {
+	if (buttonInputs.find(name) != buttonInputs.end())
+	{
+		if (buttonInputs[name].key == key &&
+			buttonInputs[name].gamepad == gamepad &&
+			buttonInputs[name].mouse == mouse)
+		{
+			return;
+		}
+	}
+
 	ButtonInput button;
 	button.key = (sf::Keyboard::Key)key;
 
@@ -39,6 +49,16 @@ void VInputHandler::SetButtonInput(const sf::String& name, int key, int gamepad,
 
 void VInputHandler::SetAxisInput(const sf::String& name, int keyA, int keyB, int gamepad)
 {
+	if (axisInputs.find(name) != axisInputs.end())
+	{
+		if (axisInputs[name].keyA == keyA &&
+			axisInputs[name].gamepad == gamepad &&
+			axisInputs[name].keyB == keyB)
+		{
+			return;
+		}
+	}
+
 	AxisInput axis;
 	axis.keyA = (sf::Keyboard::Key)keyA;
 	axis.keyB = (sf::Keyboard::Key)keyB;

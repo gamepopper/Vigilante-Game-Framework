@@ -146,7 +146,7 @@ VPostEffectMultipass::VPostEffectMultipass(int MaxSize)
 {
 	maxSize = MaxSize;
 	renderTextures.reserve(MaxSize);
-	for (unsigned int i = 0; i < MaxSize; i++)
+	for (int i = 0; i < MaxSize; i++)
 	{
 		renderTextures.push_back(std::make_unique<sf::RenderTexture>());
 		renderTextures[i]->create(VGlobal::p()->Width, VGlobal::p()->Height);
