@@ -221,11 +221,11 @@ void VInputHandler::Update(float dt)
 			if (sf::Keyboard::isKeyPressed(b.key) || 
 				sf::Mouse::isButtonPressed(b.mouse) || 
 #ifdef USE_GAMEPAD_API
-				GamepadButtonDown((GAMEPAD_DEVICE)i, b.gamepad))
+				(GamepadIsConnected((GAMEPAD_DEVICE)i) && GamepadButtonDown((GAMEPAD_DEVICE)i, b.gamepad)))
 #elif defined(USE_SFML_JOYSTICK)
 				(JoystickID[i] >= 0 && b.gamepad >= 0 && sf::Joystick::isButtonPressed(JoystickID[i], b.gamepad)))
 #else
-				sf::XInputDevice::isButtonPressed(i, b.gamepad))
+				(sf::XInputDevice::isConnected(i) && sf::XInputDevice::isButtonPressed(i, b.gamepad)))
 #endif
 			{
 				if (!b.down[i])
@@ -270,50 +270,53 @@ void VInputHandler::Update(float dt)
 			if (a.gamepad >= 0)
 			{
 #ifdef USE_GAMEPAD_API
-				float val1 = 0, val2 = 0;
+				if (GamepadIsConnected((GAMEPAD_DEVICE)i))
+				{
+					float val1 = 0, val2 = 0;
 
-				switch (a.gamepad)
-				{
-				case PovX:
-				{
-					GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_LEFT, &val1, &val2);
-					break;
-				}
-				case PovY:
-				{
-					GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_LEFT, &val2, &val1);
-					val1 *= -1;
-					break;
-				}
-				case Z:
-				{
-					GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_RIGHT, &val1, &val2);
-					break;
-				}
-				case V:
-				{
-					GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_RIGHT, &val2, &val1);
-					val1 *= -1;
-					break;
-				}
-				case L:
-				{
-					val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_LEFT) / 32767.0f;
-					break;
-				}
-				case R:
-				{
-					val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_RIGHT) / 32767.0f;
-					break;
-				}
-				}
+					switch (a.gamepad)
+					{
+					case PovX:
+					{
+						GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_LEFT, &val1, &val2);
+						break;
+					}
+					case PovY:
+					{
+						GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_LEFT, &val2, &val1);
+						val1 *= -1;
+						break;
+					}
+					case Z:
+					{
+						GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_RIGHT, &val1, &val2);
+						break;
+					}
+					case V:
+					{
+						GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_RIGHT, &val2, &val1);
+						val1 *= -1;
+						break;
+					}
+					case L:
+					{
+						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_LEFT) / 32767.0f;
+						break;
+					}
+					case R:
+					{
+						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_RIGHT) / 32767.0f;
+						break;
+					}
+					}
 
-				val1 *= 100.0f;
+					val1 *= 100.0f;
 
-				if ((int)val1 != 0)
-				{
-					a.value[i] = val1;
-					isGamepadActive = true;
+					if ((int)val1 != 0)
+					{
+						a.value[i] = val1;
+						isGamepadActive = true;
+					}
 				}
 
 #elif defined(USE_SFML_JOYSTICK)
@@ -328,7 +331,7 @@ void VInputHandler::Update(float dt)
 					a.value[i] = 0;
 				}
 #else
-				float axis = sf::XInputDevice::getAxisPosition(i, a.gamepad);
+				float axis = sf::XInputDevice::isConnected(i) ? sf::XInputDevice::getAxisPosition(i, a.gamepad) : 0.0f;
 				if (axis != 0)
 				{
 					a.value[i] = axis;
