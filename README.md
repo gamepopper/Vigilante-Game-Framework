@@ -16,6 +16,7 @@ The framework itself is found in the **VFrame** directory, the **Example** direc
 ## Prerequisites
 * SFML (Preferably 2.4.0 or Higher) and all the required external libraries needed to build projects with it.
 * GLEW (If you want to use the 3D rendering capabilities, otherwise you need to define the VFRAME_NO_3D preprocessor to disable it)
+* Chipmunk2D (If you want to use the 2D physics capabilities, otherwise you need to define the VFRAME_NO_PHYSICS preprocessor to disable it)
 * (Linux Only) libncurses
 
 ![3D Object Rendering](https://i.imgur.com/Q5rFUf9.gif)
