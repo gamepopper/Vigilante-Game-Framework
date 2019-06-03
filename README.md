@@ -31,6 +31,8 @@ The framework itself is found in the **VFrame** directory, the **Example** direc
 * [Gemstone Keeper](http://gemstonekeeper.co.uk/)
 * [Dungeon Racer](https://gamepopper.itch.io/dungeon-racer)
 * [Berzerkatron](https://gamepopper.itch.io/berzerkatron)
+* [Tunnel Bug](https://gamepopper.itch.io/tunnel-bug)
+* [Fursuit Run](https://gamepopper.itch.io/fursuit-run)
 
 ## Feedback
 Despite being marked as version 1.0, this framework still has room for improvement. Feel free to get in touch to suggest ways to improve functionality or features to add.
