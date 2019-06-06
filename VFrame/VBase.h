@@ -116,6 +116,7 @@ public:
 	{
 		alive = true;
 		exists = true;
+		destroyed = false;
 	}
 
 	/**
