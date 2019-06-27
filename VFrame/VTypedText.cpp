@@ -46,6 +46,7 @@ void VTypedText::Start(float Delay, bool ForceRestart, bool AutoErase, std::func
 	if (!typing)
 		timer = 0;
 
+	dirty = true;
 	typing = true;
 	erasing = false;
 	Paused = false;
