@@ -49,7 +49,10 @@ void V3DScene::Destroy()
 	renderTex.setActive(false);
 
 	if (V3DModel::DefaultTexture)
+	{
 		glDeleteTextures(1, &V3DModel::DefaultTexture);
+		V3DModel::DefaultTexture = 0;
+	}
 }
 
 void V3DScene::Resize(int width, int height)
@@ -70,11 +73,11 @@ void V3DScene::RenderGroup(VGroup* group)
 	{
 		V3DObject* base = dynamic_cast<V3DObject*>(group->GetGroupItem(i));
 
-		if (base != nullptr && base->exists && base->visible)
+		if (base != nullptr)
 		{
-			if (Camera[CurrentCamera]->BoxInView(base->Position, base->GetMinimum(), base->GetMaximum()))
+			base->UpdateShader(Shader.get(), Camera[CurrentCamera].get());
+			if (Camera[CurrentCamera]->BoxInView(base->Position, base->GetMinimum(), base->GetMaximum()) && base->exists && base->visible)
 			{
-				base->UpdateShader(Shader.get(), Camera[CurrentCamera].get());
 				base->Draw(renderTex); //If Renderable 3D Object
 			}
 		}
