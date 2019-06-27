@@ -326,6 +326,9 @@ void V3DObjModel::CalcNormal(float N[3], float v0[3], float v1[3], float v2[3])
 
 void V3DObjModel::UpdateShader(V3DShader* shader, V3DCamera* camera)
 {
+	if (textures.size() == 0)
+		V3DModel::GenerateDefaultTexture();
+	
 	if (camera)
 	{
 		glm::mat4 viewProj = camera->PVMatrix() * transform;
@@ -342,9 +345,6 @@ void V3DObjModel::UpdateShader(V3DShader* shader, V3DCamera* camera)
 	}
 
 	this->shader = shader;
-
-	if (textures.size() == 0)
-		V3DModel::GenerateDefaultTexture();
 }
 
 void V3DObjModel::Destroy()

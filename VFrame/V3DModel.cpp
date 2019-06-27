@@ -145,6 +145,11 @@ bool V3DModel::LoadTexture(const sf::Texture& tex)
 
 void V3DModel::UpdateShader(V3DShader* shader, V3DCamera* camera)
 {
+	if (texture.getSize().x == 0 || texture.getSize().y == 0)
+	{
+		GenerateDefaultTexture();
+	}
+
 	if (camera)
 	{
 		glm::mat4 viewProj = camera->PVMatrix() * transform;
@@ -161,11 +166,6 @@ void V3DModel::UpdateShader(V3DShader* shader, V3DCamera* camera)
 	}
 
 	shader->UpdateUniform(UniformType::Material, Material);
-
-	if (texture.getSize().x == 0 || texture.getSize().y == 0)
-	{
-		GenerateDefaultTexture();
-	}
 }
 
 void V3DModel::Destroy()
