@@ -23,12 +23,18 @@ Documentation for the Vigilante Framework can be found [on this link](https://ga
 
 ![Easing Functions](https://i.imgur.com/jABi5k5.gif)
 
-<img src="https://i.imgur.com/hx5WrbM.gif" width="640">
+![3D Graphics and Visual Effects](https://i.imgur.com/qxDljfZ.gif)
 
 ## Games Featured
 * [Gemstone Keeper](http://gemstonekeeper.co.uk/)
 * [Dungeon Racer](https://gamepopper.itch.io/dungeon-racer)
 * [Berzerkatron](https://gamepopper.itch.io/berzerkatron)
+* [Tunnel Bug](https://gamepopper.itch.io/tunnel-bug)
+* [Fursuit Run](https://gamepopper.itch.io/fursuit-run)
+* [RDDL](https://gamepopper.itch.io/rddl)
+* [Re(e4ti0n](https://gamepopper.itch.io/rere4ti0n)
+* [RvB](https://gamepopper.itch.io/rvb)
+* [Tank Gauntlet](https://gamepopper.itch.io/tank-gauntlet)
 
 ## Feedback
 Despite being marked as version 1.0, this framework still has room for improvement. Feel free to get in touch to suggest ways to improve functionality or features to add.
