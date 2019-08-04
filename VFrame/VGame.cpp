@@ -128,19 +128,22 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 
 	try
 	{
-		double end = 0.0;
+		float dt = 1.0f / VGlobal::p()->FPS;
+		float end = 0.0f;
+		float frameDelay = dt;
 
 		while (VGlobal::p()->IsRunning())
 		{
 			VGlobal::p()->Async->ProcessSyncRequests();
 
-			float dt = 1.0f / VGlobal::p()->FPS;
-			double start = clock.getElapsedTime().asSeconds();
-			double passed = start - end;
-			float frameRate = (float)(1.0 / passed);
+			float start = clock.getElapsedTime().asSeconds();
+			float passed = start - end;
+			float frameRate = 1.0f / passed;
 			frameRate = frameRate < 12 ? 12 : frameRate;
 			float deltaScale = (VGlobal::p()->FPS / frameRate);
 			end = start;
+
+			frameDelay += passed;
 
 			if (VGlobal::p()->IfChangedState)
 			{
@@ -157,16 +160,17 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 			if (focused)
 			{
 				Update(dt * deltaScale * VGlobal::p()->TimeScale);
-			}
 
-			if (focused && !VGlobal::p()->IfChangedState && !VGlobal::p()->IfPushedState)
-			{
-				PreRender();
-				for (unsigned int c = 0; c < VGlobal::p()->CurrentState()->Cameras.size(); c++)
+				if (!VGlobal::p()->IfChangedState && !VGlobal::p()->IfPushedState && frameDelay >= dt)
 				{
-					Render(VGlobal::p()->CurrentState()->Cameras[c]);
+					PreRender();
+					for (unsigned int c = 0; c < VGlobal::p()->CurrentState()->Cameras.size(); c++)
+					{
+						Render(VGlobal::p()->CurrentState()->Cameras[c]);
+					}
+					PostRender();
+					frameDelay = 0.0f;
 				}
-				PostRender();
 			}
 		}
 	}
