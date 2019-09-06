@@ -425,29 +425,24 @@ bool VTilemap::OverlapWithCallback(VObject* object, std::function<bool(VObject*,
 			((object->Position.y + object->Size.y) > t->Position.y) &&
 			(object->Position.y < (t->Position.y + t->Size.y));
 
-		if (t->AllowCollisions != SidesTouching::TOUCHNONE)
+		if (Callback != nullptr && t->AllowCollisions != SidesTouching::TOUCHNONE)
 		{
-			if (Callback != nullptr)
+			if (FlipCallback)
 			{
-				if (FlipCallback)
-				{
-					overlapFound = Callback(object, t);
-				}
-				else
-				{
-					overlapFound = Callback(t, object);
-				}
+				overlapFound = Callback(object, t);
+			}
+			else
+			{
+				overlapFound = Callback(t, object);
 			}
 		}
 
 		if (overlapFound)
 		{
 			if (t->Callback != nullptr)
-			{
 				t->Callback(t, object);
-			}
 
-			results = true;
+			return true;
 		}
 	}
 

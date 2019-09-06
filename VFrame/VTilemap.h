@@ -269,7 +269,7 @@ public:
 	
 	/**
 	* When object overlaps tilemap, this function goes through all tiles to test overlap with specified overlap.
-	* This function is idea to test if an object overlaps any of the collieable tiles instead of using VGlobal::Overlaps (which will only test if the object overlaps the tilemap area).
+	* This function is ideal to test if an object overlaps any of the collieable tiles instead of using VGlobal::Overlaps (which will only test if the object overlaps the tilemap area).
 	* @param object VObject to test for overlap with the tilemap.
 	* @param Callback The Callback function that is used if an overlap has been found in the tilemap area (not individual tile sets!).
 	* @param FlipCallback If true, will swap the parameters when calling the Callback.
