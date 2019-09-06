@@ -25,7 +25,7 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 		renderTex.setView(renderTex.getDefaultView());
 		trailTexture = sf::Texture(renderTex.getTexture());
 		trailSprite.setTexture(trailTexture);
-		trailSprite.setPosition(0.0f, 0.0f);
+		trailSprite.setPosition(lastPos.x - Sprite->Position.x, lastPos.y - Sprite->Position.y);
 		trailSprite.setColor(
 			sf::Color(
 				255 - sf::Uint8(255 * RedMultiplier   * time),
@@ -40,6 +40,8 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 		VGroup::Draw(renderTex);
 		renderTex.display();
 		fadeTimer.restart();
+
+		lastPos = Sprite->Position;
 	}
 
 	if (PostEffect != nullptr && VPostEffectBase::isSupported())

@@ -42,6 +42,7 @@ private:
 	sf::Sprite trailSprite;
 	sf::Texture trailTexture;
 	sf::Clock fadeTimer;
+	sf::Vector2f lastPos;
 
 public:
 	///Used to call parent class functions when they are overrided in class.
