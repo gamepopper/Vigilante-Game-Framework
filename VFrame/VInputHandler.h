@@ -162,14 +162,13 @@ protected:
 
 public:
 
-#ifdef USE_GAMEPAD_API
 	VInputHandler()
 	{
+#ifdef USE_GAMEPAD_API
 		GamepadInit();
-	}
 #else
-	VInputHandler() = default;
 #endif
+	}
 
 	virtual ~VInputHandler();
 
