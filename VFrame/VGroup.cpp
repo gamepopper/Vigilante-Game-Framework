@@ -191,15 +191,21 @@ void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
 
 		if (base != nullptr)
 		{
-			function(base);
-
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
 				if (group != nullptr)
 				{
-					group->ForEachAlive(function, recursive);
+					group->ForEach(function, recursive);
 				}
+				else
+				{
+					function(base);
+				}
+			}
+			else
+			{
+				function(base);
 			}
 		}
 	}
@@ -215,16 +221,21 @@ void VGroup::ForEachAlive(std::function<void(VBase*)> function, bool recursive)
 
 		if (base != nullptr && base->exists && base->alive)
 		{
-			function(base);
-
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
 				if (group != nullptr)
 				{
 					group->ForEachAlive(function, recursive);
-					continue;
 				}
+				else
+				{
+					function(base);
+				}
+			}
+			else
+			{
+				function(base);
 			}
 		}
 	}
@@ -240,15 +251,21 @@ void VGroup::ForEachDead(std::function<void(VBase*)> function, bool recursive)
 
 		if (base != nullptr && !base->alive)
 		{
-			function(base);
-
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
 				if (group != nullptr)
 				{
-					group->ForEachAlive(function, recursive);
+					group->ForEachDead(function, recursive);
 				}
+				else
+				{
+					function(base);
+				}
+			}
+			else
+			{
+				function(base);
 			}
 		}
 	}
@@ -264,15 +281,21 @@ void VGroup::ForEachExists(std::function<void(VBase*)> function, bool recursive)
 
 		if (base != nullptr && base->exists)
 		{
-			function(base);
-
 			if (recursive)
 			{
 				VGroup* group = dynamic_cast<VGroup*>(base);
 				if (group != nullptr)
 				{
-					group->ForEachAlive(function, recursive);
+					group->ForEachExists(function, recursive);
 				}
+				else
+				{
+					function(base);
+				}
+			}
+			else
+			{
+				function(base);
 			}
 		}
 	}
@@ -450,7 +473,7 @@ void VGroup::Draw(sf::RenderTarget& RenderTarget)
 		{
 			VObject* object = dynamic_cast<VObject*>(members[i]);
 
-			if (object == nullptr && members[i]->type == RENDERGROUP)
+			if (object == nullptr && members[i] != nullptr && members[i]->type == RENDERGROUP)
 			{
 				VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(members[i]);
 				object = renderGroup->Sprite.get();

@@ -93,7 +93,7 @@ public:
 	VBase* Add(VBase* object);
 	
 	/**
-	* @param object The VBase object to remove from the group.
+	* @param object The VBase object to remove from the group (does not destroy any of the members, that must be done using the Destroy method).
 	* @param splice If true, all elements above the object will be moved down, else the element will become null.
 	*/
 	VBase* Remove(VBase* object, bool splice = false);
