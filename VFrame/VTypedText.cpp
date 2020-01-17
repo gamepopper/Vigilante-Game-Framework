@@ -251,10 +251,7 @@ void VTypedText::Update(float dt)
 
 	if (dirty)
 	{
-		if (cursorBlink)
-			text = prefix + finalText + CursorChar;
-		else
-			text = prefix + finalText;
+		text = prefix + finalText + CursorChar;
 	}
 
 	if (length >= (int)(prefix.size() + finalText.size()) && typing && !waiting && !erasing)
