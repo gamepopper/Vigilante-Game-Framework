@@ -32,9 +32,7 @@
 */
 
 #pragma once
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/Mouse.hpp>
+#include <SFML/Window.hpp>
 #include <stdint.h>
 
 ///Use Sean Middleditch's Multiplatform XInput Library.
@@ -154,6 +152,8 @@ protected:
 	float scrollWheel = 0;
 	///Previous mouse position, useful for testing mouse movement.
 	sf::Vector2i lastMousePos = sf::Vector2i();
+	///Reference to window for mouse inputs.
+	sf::Window* window = nullptr;
 	
 #ifdef USE_SFML_JOYSTICK
 	///SFML requires you to keep record of the joystick ID for each player.
@@ -162,14 +162,7 @@ protected:
 
 public:
 
-	VInputHandler()
-	{
-#ifdef USE_GAMEPAD_API
-		GamepadInit();
-#else
-#endif
-	}
-
+	VInputHandler(sf::Window* window);
 	virtual ~VInputHandler();
 
 	/**

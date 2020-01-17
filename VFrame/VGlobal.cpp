@@ -11,7 +11,7 @@ VGlobal::VGlobal()
 	if (App == nullptr) //RenderWindow is most required, so we check if this is NULL.
 	{
 		App = std::make_unique<sf::RenderWindow>();
-		Input = std::make_unique<VInputHandler>();
+		Input = std::make_unique<VInputHandler>(App.get());
 		Content = std::make_unique<VContent>();
 		Music = std::make_unique<VMusic>();
 		Sound = std::make_unique<VSoundManager>();

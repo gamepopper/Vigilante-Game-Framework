@@ -1,6 +1,15 @@
 #include "VInputHandler.h"
 #include <cstring>
 
+VInputHandler::VInputHandler(sf::Window* window)
+{
+	this->window = window;
+#ifdef USE_GAMEPAD_API
+	GamepadInit();
+#else
+#endif
+}
+
 VInputHandler::~VInputHandler()
 {
 	buttonInputs.clear();
@@ -209,6 +218,8 @@ void VInputHandler::Update(float dt)
 	}
 #endif
 
+	sf::Vector2i mousePosition = sf::Mouse::getPosition();
+
 	for (int i = 0; i < CONTROLLER_COUNT; i++)
 	{
 		for (std::map<sf::String, ButtonInput>::iterator button = buttonInputs.begin(); button != buttonInputs.end(); ++button)
@@ -218,8 +229,13 @@ void VInputHandler::Update(float dt)
 			b.pressed[i] = false;
 			b.released[i] = false;
 
-			if (sf::Keyboard::isKeyPressed(b.key) || 
-				sf::Mouse::isButtonPressed(b.mouse) || 
+			bool mousePress = sf::Mouse::isButtonPressed(b.mouse) &&
+				(mousePosition.x >= window->getPosition().x &&
+					mousePosition.y >= window->getPosition().y &&
+					mousePosition.x < window->getPosition().x + window->getSize().x &&
+					mousePosition.y < window->getPosition().y + window->getSize().y);
+
+			if (sf::Keyboard::isKeyPressed(b.key) || mousePress || 
 #ifdef USE_GAMEPAD_API
 				(GamepadIsConnected((GAMEPAD_DEVICE)i) && GamepadButtonDown((GAMEPAD_DEVICE)i, b.gamepad)))
 #elif defined(USE_SFML_JOYSTICK)
@@ -341,8 +357,6 @@ void VInputHandler::Update(float dt)
 			}
 		}
 	}
-
-	sf::Vector2i mousePosition = sf::Mouse::getPosition();
 
 	if (mousePosition - lastMousePos != sf::Vector2i())
 	{
