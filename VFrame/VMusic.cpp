@@ -11,6 +11,7 @@ VMusic* VMusic::OpenMusicFile(sf::String filename)
 {
 	if (music.openFromFile(filename))
 	{
+		music.setVolume(masterVolume);
 		valid = true;
 		return this;
 	}
@@ -26,12 +27,12 @@ VMusic* VMusic::OpenMusicMemory(const void* data, size_t size)
 {
 	if (music.openFromMemory(data, size))
 	{
+		music.setVolume(masterVolume);
 		valid = true;
 		return this;
 	}
 
 	valid = false;
-	return nullptr;
 }
 
 /**
@@ -41,12 +42,12 @@ VMusic* VMusic::OpenMusicStream(sf::InputStream& stream)
 {
 	if (music.openFromStream(stream))
 	{
+		music.setVolume(masterVolume);
 		valid = true;
 		return this;
 	}
 
 	valid = false;
-	return nullptr;
 }
 
 void VMusic::Update(float dt)
@@ -265,13 +266,14 @@ void VMusic::SetPitch(float pitch)
 
 void VMusic::SetVolume(float volume)
 {
-	if (!valid)
-		return;
-
-	if (volume < 0) 
+	if (volume < 0)
 		volume = 0;
 
 	masterVolume = volume;
+
+	if (!valid)
+		return;
+
 	music.setVolume(masterVolume);
 }
 

@@ -71,16 +71,19 @@ public:
 
 	/**
 	* Opens music data from file.
+	* Various properties will only have an effect once music data is open.
 	*/
 	VMusic* OpenMusicFile(sf::String filename);
 
 	/**
 	* Opens music data from memory.
+	* Various properties will only have an effect once music data is open.
 	*/
 	VMusic* OpenMusicMemory(const void* data, size_t size);
 
 	/**
 	* Opens music data from a stream.
+	* Various properties will only have an effect once music data is open.
 	*/
 	VMusic* OpenMusicStream(sf::InputStream& stream);
 
