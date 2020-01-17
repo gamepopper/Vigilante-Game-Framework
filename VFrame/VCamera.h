@@ -100,6 +100,8 @@ protected:
 	float fadeTime = 0.0f;
 	///Colour to fade to/from.
 	sf::Color fadeColour = sf::Color::Black;
+	///Colour to apply the fade.
+	sf::Color overlay = sf::Color::Black;
 	///The callback function used when the camera finishes fading.
 	std::function<void()> OnFadeComplete = nullptr;
 	///If true, the camera is currently flashing.

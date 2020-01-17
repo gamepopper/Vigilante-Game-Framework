@@ -224,11 +224,11 @@ void VCamera::Update(float dt)
 
 		if (fadeIn)
 		{
-			fadeColour.a = static_cast<unsigned int>(VInterpolate::Float(255, 0, fadePercentage));
+			overlay = (VInterpolate::Color(fadeColour, sf::Color::Transparent, fadePercentage));
 		}
 		else
 		{
-			fadeColour.a = static_cast<unsigned int>(VInterpolate::Float(0, 255, fadePercentage));
+			overlay = (VInterpolate::Color(sf::Color::Transparent, fadeColour, fadePercentage));
 		}
 
 		if (t > fadeTime)
@@ -251,14 +251,14 @@ void VCamera::Update(float dt)
 			float fadePercentage = t / halfFadeTime;
 			fadePercentage = fadePercentage > 1.0f ? 1.0f : fadePercentage;
 
-			fadeColour.a = static_cast<unsigned int>(VInterpolate::Float(0, 255, fadePercentage));
+			overlay = (VInterpolate::Color(sf::Color::Transparent, fadeColour, fadePercentage));
 		}
 		else
 		{
 			float fadePercentage = (t - halfFadeTime) / halfFadeTime;
 			fadePercentage = fadePercentage > 1.0f ? 1.0f : fadePercentage;
 
-			fadeColour.a = static_cast<unsigned int>(VInterpolate::Float(255, 0, fadePercentage));
+			overlay = (VInterpolate::Color(fadeColour, sf::Color::Transparent, fadePercentage));
 		}
 
 		if (t > fadeTime)
@@ -283,7 +283,7 @@ void VCamera::Render(sf::RenderTarget &RenderTarget)
 		sf::View defaultView = RenderTarget.getDefaultView();
 		RenderTarget.setView(defaultView);
 		block.setPosition(defaultView.getCenter() - (defaultView.getSize() / 2.0f));
-		block.setFillColor(fadeColour);
+		block.setFillColor(overlay);
 		RenderTarget.draw(block);
 	}
 }
