@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.3</span>
+   &#160;<span id="projectnumber">1.0.0.6</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -86,18 +86,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a06fee7d8b00ff63554fbe2f50b6661f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaec6f12701c7bf761784eeb6604c6b01"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#aaec6f12701c7bf761784eeb6604c6b01">MasterPitch</a> ()</td></tr>
 <tr class="separator:aaec6f12701c7bf761784eeb6604c6b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c26ddce47cea632b180168fe829d347"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#a3c26ddce47cea632b180168fe829d347">Load</a> (sf::String filename, sf::String id)</td></tr>
-<tr class="separator:a3c26ddce47cea632b180168fe829d347"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace779f321f409f33f5a0ee12082fad1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#ace779f321f409f33f5a0ee12082fad1f">Play</a> (sf::String id, float volume=100.0f, float pitch=1.0f)</td></tr>
-<tr class="separator:ace779f321f409f33f5a0ee12082fad1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a087628647597b650144485757b2c78a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#a087628647597b650144485757b2c78a0">Stop</a> (sf::String id)</td></tr>
-<tr class="separator:a087628647597b650144485757b2c78a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea4dfeeb119212ac76cb264ba9b65457"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#aea4dfeeb119212ac76cb264ba9b65457">Load</a> (const sf::String &amp;filename, const sf::String &amp;id)</td></tr>
+<tr class="separator:aea4dfeeb119212ac76cb264ba9b65457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a549d0d6e6f03f8fea1bf478353f4aaf7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#a549d0d6e6f03f8fea1bf478353f4aaf7">Play</a> (const sf::String &amp;id, float volume=100.0f, float pitch=1.0f, bool loop=false)</td></tr>
+<tr class="separator:a549d0d6e6f03f8fea1bf478353f4aaf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29ddc435e9bd426ccf9fd8b977540853"><td class="memItemLeft" align="right" valign="top">sf::SoundStream::Status&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#a29ddc435e9bd426ccf9fd8b977540853">Status</a> (const sf::String &amp;id)</td></tr>
+<tr class="separator:a29ddc435e9bd426ccf9fd8b977540853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d7ee616c1f10dc114268c9e703cf66a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#a7d7ee616c1f10dc114268c9e703cf66a">Stop</a> (const sf::String &amp;id)</td></tr>
+<tr class="separator:a7d7ee616c1f10dc114268c9e703cf66a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab074c80528b242912a30fc536150c418"><td class="memItemLeft" align="right" valign="top"><a id="ab074c80528b242912a30fc536150c418"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#ab074c80528b242912a30fc536150c418">StopAll</a> ()</td></tr>
 <tr class="memdesc:ab074c80528b242912a30fc536150c418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop all sound effects. <br /></td></tr>
 <tr class="separator:ab074c80528b242912a30fc536150c418"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7fe07fb677d59588c4ef2a60437cf73"><td class="memItemLeft" align="right" valign="top">sf::Sound *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#ac7fe07fb677d59588c4ef2a60437cf73">GetSound</a> (sf::String id)</td></tr>
-<tr class="separator:ac7fe07fb677d59588c4ef2a60437cf73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0ad953678b42f3aad75a2e423414e7d"><td class="memItemLeft" align="right" valign="top">sf::Sound *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#aa0ad953678b42f3aad75a2e423414e7d">GetSound</a> (const sf::String &amp;id)</td></tr>
+<tr class="separator:aa0ad953678b42f3aad75a2e423414e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c0a089a01d30546b01956d26280f0a2"><td class="memItemLeft" align="right" valign="top"><a id="a3c0a089a01d30546b01956d26280f0a2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sound_manager.html#a3c0a089a01d30546b01956d26280f0a2">Cleanup</a> ()</td></tr>
 <tr class="memdesc:a3c0a089a01d30546b01956d26280f0a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup Sound and SoundBuffer lists. <br /></td></tr>
@@ -106,8 +108,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A manager for loaded sound effect files. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac7fe07fb677d59588c4ef2a60437cf73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7fe07fb677d59588c4ef2a60437cf73">&#9670;&nbsp;</a></span>GetSound()</h2>
+<a id="aa0ad953678b42f3aad75a2e423414e7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0ad953678b42f3aad75a2e423414e7d">&#9670;&nbsp;</a></span>GetSound()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -115,7 +117,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">sf::Sound* VSoundManager::GetSound </td>
           <td>(</td>
-          <td class="paramtype">sf::String&#160;</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -131,8 +133,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a3c26ddce47cea632b180168fe829d347"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c26ddce47cea632b180168fe829d347">&#9670;&nbsp;</a></span>Load()</h2>
+<a id="aea4dfeeb119212ac76cb264ba9b65457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea4dfeeb119212ac76cb264ba9b65457">&#9670;&nbsp;</a></span>Load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -140,13 +142,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">bool VSoundManager::Load </td>
           <td>(</td>
-          <td class="paramtype">sf::String&#160;</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
           <td class="paramname"><em>filename</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::String&#160;</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
           <td class="paramname"><em>id</em>&#160;</td>
         </tr>
         <tr>
@@ -203,8 +205,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="ace779f321f409f33f5a0ee12082fad1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace779f321f409f33f5a0ee12082fad1f">&#9670;&nbsp;</a></span>Play()</h2>
+<a id="a549d0d6e6f03f8fea1bf478353f4aaf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a549d0d6e6f03f8fea1bf478353f4aaf7">&#9670;&nbsp;</a></span>Play()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,7 +214,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">void VSoundManager::Play </td>
           <td>(</td>
-          <td class="paramtype">sf::String&#160;</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
           <td class="paramname"><em>id</em>, </td>
         </tr>
         <tr>
@@ -225,7 +227,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>pitch</em> = <code>1.0f</code>&#160;</td>
+          <td class="paramname"><em>pitch</em> = <code>1.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>loop</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -239,6 +247,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
     <tr><td class="paramname">id</td><td>A simple ID name to easily access the sound. </td></tr>
     <tr><td class="paramname">volume</td><td>The volume specifically for this sound effect (will use as a percentage of the master volume). </td></tr>
     <tr><td class="paramname">pitch</td><td>The pitch specifically for this sound effect (will use as a percentage of the master pitch). </td></tr>
+    <tr><td class="paramname">loop</td><td>If the sound is looping. </td></tr>
   </table>
   </dd>
 </dl>
@@ -293,8 +302,27 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="a087628647597b650144485757b2c78a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a087628647597b650144485757b2c78a0">&#9670;&nbsp;</a></span>Stop()</h2>
+<a id="a29ddc435e9bd426ccf9fd8b977540853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29ddc435e9bd426ccf9fd8b977540853">&#9670;&nbsp;</a></span>Status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::SoundStream::Status VSoundManager::Status </td>
+          <td>(</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the status of the specific sound. </p><dl class="section return"><dt>Returns</dt><dd>Status of the sound. (i.e. Playing, Paused, Stopped). </dd></dl>
+
+</div>
+</div>
+<a id="a7d7ee616c1f10dc114268c9e703cf66a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d7ee616c1f10dc114268c9e703cf66a">&#9670;&nbsp;</a></span>Stop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,7 +330,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">void VSoundManager::Stop </td>
           <td>(</td>
-          <td class="paramtype">sf::String&#160;</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
           <td></td>
         </tr>

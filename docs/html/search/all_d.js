@@ -22,5 +22,6 @@ var searchData=
   ['overlapcircleatpoint',['OverlapCircleAtPoint',['../class_v_global.html#ac33a3527b9bd7a7b300f91fbdaa6fe43',1,'VGlobal']]],
   ['overlaps',['Overlaps',['../class_v_global.html#a86583d28e1dc6a1e9b4c40c4e91c0b3c',1,'VGlobal']]],
   ['overlapscircle',['OverlapsCircle',['../class_v_global.html#acf9c112c25f28ae223941eb848635abe',1,'VGlobal']]],
-  ['overlapwithcallback',['OverlapWithCallback',['../class_v_tilemap.html#ac95cb85448bcdd6c0e1ae939d94b3843',1,'VTilemap']]]
+  ['overlapwithcallback',['OverlapWithCallback',['../class_v_tilemap.html#ac95cb85448bcdd6c0e1ae939d94b3843',1,'VTilemap']]],
+  ['overlay',['overlay',['../class_v_camera.html#a411d61c57d6925cf3f5e00b9d291babe',1,'VCamera']]]
 ];

@@ -82,11 +82,17 @@ public:
 	};
 
 protected:
+	///The object to apply the angle and position from the physics body.
 	VObject* baseObject;
+	///The physics body.
 	cpBody* body;
+	///The shape of the physics body.
 	cpShape* shape;
+	///The amount of vertices of the shape if of type CUSTOM.
 	unsigned int getPolyVertCount;
+	///The type of shape of the physics object.
 	VObjectShape shapeType;
+	///The type of body of the physics object.
 	VObjectType bodyType;
 
 public:

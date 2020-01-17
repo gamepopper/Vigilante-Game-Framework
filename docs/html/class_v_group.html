@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.3</span>
+   &#160;<span id="projectnumber">1.0.0.6</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -83,15 +83,16 @@ Inheritance diagram for VGroup:</div>
  <div class="center">
   <img src="class_v_group.png" usemap="#VGroup_map" alt=""/>
   <map id="VGroup_map" name="VGroup_map">
-<area href="class_v_base.html" title="Base class that any object that updates or renders (including VState) inherints from this class..." alt="VBase" shape="rect" coords="372,0,511,24"/>
+<area href="class_v_base.html" title="Base class that any object that updates or renders (including VState) inherints from this class..." alt="VBase" shape="rect" coords="447,0,586,24"/>
 <area href="class_v3_d_batch_model_group.html" title="Renders multiple instances of a single base 3D renderable object. " alt="V3DBatchModelGroup" shape="rect" coords="0,112,139,136"/>
 <area href="class_v_emitter.html" title="A particle effects system that overrides VGroup. " alt="VEmitter" shape="rect" coords="149,112,288,136"/>
-<area href="class_v_render_group.html" title="Processes a group of objects and renders them all to a sprite object. " alt="VRenderGroup" shape="rect" coords="298,112,437,136"/>
-<area href="class_v_render_layer.html" title="Processes group of objects to a sprite. Unlike the VRenderGroup, the sprite cannot be moved and will ..." alt="VRenderLayer" shape="rect" coords="447,112,586,136"/>
-<area href="class_v_state.html" title="Processes the game&#39;s current scene as well as 2D cameras and substates. " alt="VState" shape="rect" coords="596,112,735,136"/>
-<area href="class_v_sub_state.html" title="A different kind of state class that would update and render over the top of the main state..." alt="VSubState" shape="rect" coords="745,112,884,136"/>
-<area href="class_v3_d_scene.html" title="A special VRenderGroup for Rendering 3D scenes. " alt="V3DScene" shape="rect" coords="223,168,362,192"/>
-<area href="class_v_trail_area.html" title="Special VRenderGroup that applies a trail to objects it contains within the area. ..." alt="VTrailArea" shape="rect" coords="372,168,511,192"/>
+<area href="class_v_physics_group.html" title="A special VGroup that sets up a physics world and updates VPhysicsObjects. It doesn&#39;t handle renderin..." alt="VPhysicsGroup" shape="rect" coords="298,112,437,136"/>
+<area href="class_v_render_group.html" title="Processes a group of objects and renders them all to a sprite object. " alt="VRenderGroup" shape="rect" coords="447,112,586,136"/>
+<area href="class_v_render_layer.html" title="Processes group of objects to a sprite. Unlike the VRenderGroup, the sprite cannot be moved and will ..." alt="VRenderLayer" shape="rect" coords="596,112,735,136"/>
+<area href="class_v_state.html" title="Processes the game&#39;s current scene as well as 2D cameras and substates. " alt="VState" shape="rect" coords="745,112,884,136"/>
+<area href="class_v_sub_state.html" title="A different kind of state class that would update and render over the top of the main state..." alt="VSubState" shape="rect" coords="894,112,1033,136"/>
+<area href="class_v3_d_scene.html" title="A special VRenderGroup for Rendering 3D scenes. " alt="V3DScene" shape="rect" coords="372,168,511,192"/>
+<area href="class_v_trail_area.html" title="Special VRenderGroup that applies a trail to objects it contains within the area. ..." alt="VTrailArea" shape="rect" coords="521,168,660,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -681,7 +682,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">object</td><td>The <a class="el" href="class_v_base.html" title="Base class that any object that updates or renders (including VState) inherints from this class...">VBase</a> object to remove from the group. </td></tr>
+    <tr><td class="paramname">object</td><td>The <a class="el" href="class_v_base.html" title="Base class that any object that updates or renders (including VState) inherints from this class...">VBase</a> object to remove from the group (does not destroy any of the members, that must be done using the Destroy method). </td></tr>
     <tr><td class="paramname">splice</td><td>If true, all elements above the object will be moved down, else the element will become null. </td></tr>
   </table>
   </dd>
@@ -769,7 +770,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 <p>Reimplemented from <a class="el" href="class_v_base.html#ab5ed834847bc1539c0f30b98da1c1f6e">VBase</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_v_emitter.html#a552fbd947049a48139beb5c1aab35d3f">VEmitter</a>, <a class="el" href="class_v_render_group.html#a53444be5035899abf90e7e580bcc7e83">VRenderGroup</a>, <a class="el" href="class_v3_d_scene.html#afa5fc701053604e24ef72172916f6459">V3DScene</a>, <a class="el" href="class_v_render_layer.html#aa48c0ed838c61a3e0aab2ebf6c108aee">VRenderLayer</a>, and <a class="el" href="class_v_trail_area.html#ad3e42907adde46a21cde5a129c0f1d2e">VTrailArea</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v_emitter.html#a552fbd947049a48139beb5c1aab35d3f">VEmitter</a>, <a class="el" href="class_v_render_group.html#a53444be5035899abf90e7e580bcc7e83">VRenderGroup</a>, <a class="el" href="class_v3_d_scene.html#a87382ab8d64b07a3a8a47c271a5679cb">V3DScene</a>, <a class="el" href="class_v_physics_group.html#a09673f4e4892369fd69a7f37cfeca784">VPhysicsGroup</a>, <a class="el" href="class_v_render_layer.html#aa48c0ed838c61a3e0aab2ebf6c108aee">VRenderLayer</a>, and <a class="el" href="class_v_trail_area.html#ad3e42907adde46a21cde5a129c0f1d2e">VTrailArea</a>.</p>
 
 </div>
 </div>

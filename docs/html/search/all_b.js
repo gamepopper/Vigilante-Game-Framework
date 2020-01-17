@@ -2,8 +2,8 @@ var searchData=
 [
   ['maintile',['MainTile',['../class_v_tile.html#a12b87a3fe76217fe3a1d3d3d6c7d2819',1,'VTile']]],
   ['maintint',['mainTint',['../class_v_emitter.html#a9f47249edc720fcbff14284f4b623328',1,'VEmitter']]],
-  ['makegraphic',['MakeGraphic',['../class_v_sprite.html#a71a87036258418524b1ed15413ba484d',1,'VSprite::MakeGraphic()'],['../class_v_tiled_sprite.html#a8cc5ea78b98b47d1f4805f6fa5d3468b',1,'VTiledSprite::MakeGraphic()']]],
-  ['makegraphiccircle',['MakeGraphicCircle',['../class_v_sprite.html#a4d7317320ca3619b80927c2b7ab649a8',1,'VSprite::MakeGraphicCircle()'],['../class_v_tiled_sprite.html#adf2b8b1d3fa77579b6fdafc6f2e4a4ee',1,'VTiledSprite::MakeGraphicCircle()']]],
+  ['makegraphic',['MakeGraphic',['../class_v_sprite.html#a71a87036258418524b1ed15413ba484d',1,'VSprite::MakeGraphic()'],['../class_v_tiled_sprite.html#adbc796ed3ba4a0dd539fc501baf6f4ec',1,'VTiledSprite::MakeGraphic()']]],
+  ['makegraphiccircle',['MakeGraphicCircle',['../class_v_sprite.html#a4d7317320ca3619b80927c2b7ab649a8',1,'VSprite::MakeGraphicCircle()'],['../class_v_tiled_sprite.html#ae88a8bfb9550cb0f69fd80a3c976dd34',1,'VTiledSprite::MakeGraphicCircle()']]],
   ['makegraphicconvex',['MakeGraphicConvex',['../class_v_tiled_sprite.html#a71dcec8f7efcb324ebc7f0ea80f207ac',1,'VTiledSprite']]],
   ['makegraphicsided',['MakeGraphicSided',['../class_v_tiled_sprite.html#a85ff1fea5fdf98638822b8f8343dc726',1,'VTiledSprite']]],
   ['makeparticles',['MakeParticles',['../class_v_emitter.html#ad21f1c336beaefa0a9c50fed61e5cef1',1,'VEmitter']]],

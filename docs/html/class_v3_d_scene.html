@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.3</span>
+   &#160;<span id="projectnumber">1.0.0.6</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -112,8 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aae11143b0e843cc7f19b8477396f27f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7566120128a9f766e65ded0c218a917"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#aa7566120128a9f766e65ded0c218a917">V3DScene</a> (sf::Vector2f position, sf::Vector2u size, const sf::ContextSettings &amp;settings=sf::ContextSettings(), unsigned int maxSize=0)</td></tr>
 <tr class="separator:aa7566120128a9f766e65ded0c218a917"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae71ff4cafda38521a6427f89ddd671f3"><td class="memItemLeft" align="right" valign="top">virtual const sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#ae71ff4cafda38521a6427f89ddd671f3">GetTexture</a> ()</td></tr>
-<tr class="separator:ae71ff4cafda38521a6427f89ddd671f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72746d6fcf87b8ebcfb4e0efbf59aa75"><td class="memItemLeft" align="right" valign="top">virtual const sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a72746d6fcf87b8ebcfb4e0efbf59aa75">GetTexture</a> () override</td></tr>
+<tr class="separator:a72746d6fcf87b8ebcfb4e0efbf59aa75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a605cbbc68b3052c3b9302f5e4d17a09b"><td class="memItemLeft" align="right" valign="top">const sf::Texture&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a605cbbc68b3052c3b9302f5e4d17a09b">GetTexture</a> (<a class="el" href="class_v3_d_shader.html">V3DShader</a> *shader, <a class="el" href="class_v3_d_camera.html">V3DCamera</a> *camera)</td></tr>
 <tr class="separator:a605cbbc68b3052c3b9302f5e4d17a09b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b489449f5016ffe12f2a70bab4a4d0c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a2b489449f5016ffe12f2a70bab4a4d0c">Resize</a> (int width, int height) override</td></tr>
@@ -132,12 +132,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a2bf734c2f85903f987e4278b6bf3abc2">ResetGLStates</a> ()</td></tr>
 <tr class="memdesc:a2bf734c2f85903f987e4278b6bf3abc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all the GL States. <br /></td></tr>
 <tr class="separator:a2bf734c2f85903f987e4278b6bf3abc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ecf88572def9db00ab4535c212a7c57"><td class="memItemLeft" align="right" valign="top"><a id="a0ecf88572def9db00ab4535c212a7c57"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a0ecf88572def9db00ab4535c212a7c57">Destroy</a> ()</td></tr>
-<tr class="memdesc:a0ecf88572def9db00ab4535c212a7c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes and/or destroys all objects inside the group and sprite before destroying extra data. (If an object is referenced in another <a class="el" href="class_v_group.html" title="An object management class that stores a set of objects to be updated and rendered in a batch...">VGroup</a>, the object won't be destroyed) <br /></td></tr>
-<tr class="separator:a0ecf88572def9db00ab4535c212a7c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa5fc701053604e24ef72172916f6459"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#afa5fc701053604e24ef72172916f6459">Update</a> (float dt)</td></tr>
-<tr class="separator:afa5fc701053604e24ef72172916f6459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a095747dca0c38b0dd6310053725c5a0b"><td class="memItemLeft" align="right" valign="top"><a id="a095747dca0c38b0dd6310053725c5a0b"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a095747dca0c38b0dd6310053725c5a0b">Destroy</a> () override</td></tr>
+<tr class="memdesc:a095747dca0c38b0dd6310053725c5a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes and/or destroys all objects inside the group and sprite before destroying extra data. (If an object is referenced in another <a class="el" href="class_v_group.html" title="An object management class that stores a set of objects to be updated and rendered in a batch...">VGroup</a>, the object won't be destroyed) <br /></td></tr>
+<tr class="separator:a095747dca0c38b0dd6310053725c5a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87382ab8d64b07a3a8a47c271a5679cb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a87382ab8d64b07a3a8a47c271a5679cb">Update</a> (float dt) override</td></tr>
+<tr class="separator:a87382ab8d64b07a3a8a47c271a5679cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f79edc2c4416e6e1e86b5bc642ef8a1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v3_d_scene.html#a1f79edc2c4416e6e1e86b5bc642ef8a1">Draw</a> (sf::RenderTarget &amp;RenderTarget) override</td></tr>
 <tr class="separator:a1f79edc2c4416e6e1e86b5bc642ef8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_render_group"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_render_group')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_render_group.html">VRenderGroup</a></td></tr>
@@ -463,8 +463,8 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
-<a id="ae71ff4cafda38521a6427f89ddd671f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae71ff4cafda38521a6427f89ddd671f3">&#9670;&nbsp;</a></span>GetTexture() <span class="overload">[1/2]</span></h2>
+<a id="a72746d6fcf87b8ebcfb4e0efbf59aa75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72746d6fcf87b8ebcfb4e0efbf59aa75">&#9670;&nbsp;</a></span>GetTexture() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -481,7 +481,7 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -596,8 +596,8 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
-<a id="afa5fc701053604e24ef72172916f6459"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa5fc701053604e24ef72172916f6459">&#9670;&nbsp;</a></span>Update()</h2>
+<a id="a87382ab8d64b07a3a8a47c271a5679cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87382ab8d64b07a3a8a47c271a5679cb">&#9670;&nbsp;</a></span>Update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -615,7 +615,7 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

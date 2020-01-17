@@ -23,6 +23,7 @@
 #include "../VFrame/VPhysicsGroup.h"
 #include "../VFrame/VPhysicsObject.h"
 #include "../VFrame/VTimer.h"
+#include "../VFrame/VFiniteStateMachine.h"
 
 #include <iostream>
 #include <sstream>
@@ -272,10 +273,11 @@ class TilemapState : public VSubState
 	typedef VSubState VSUPERCLASS;
 
 	VTilemap* tilemap;
-	VShape* playerControl;
+	VSprite* playerControl;
+	VFiniteStateMachine* playerFSM;
 	VShape* platform[2];
 	VTimer* timer;
-	bool wallJump = false;
+	VText* stateText;
 
 public:
 	TilemapState() : VSubState() {}
@@ -290,7 +292,6 @@ public:
 		tilemap->SetTileRenderID('#');
 		tilemap->SetTileRenderID('$');
 		tilemap->SetTileRenderID('~', 0, 1);
-		tilemap->SetTileCollisionID('$', VObject::TOUCHALL, std::bind(&TilemapState::WallJump, this, std::placeholders::_1, std::placeholders::_2));
 
 		Add(tilemap);
 
@@ -299,8 +300,9 @@ public:
 		platform[0]->SetFillTint(VColour::HSVtoRGB(0, 0.0f, 0.75f));
 		platform[0]->SetOutlineThickness(1.0f);
 		platform[0]->SetOutlineTint(sf::Color::Red);
-		platform[0]->SetPositionAtCentre(24.5f * 32, 10.5f * 32.0f);
+		platform[0]->SetPositionAtCentre(24.5f * 32, 11.5f * 32.0f);
 		platform[0]->Immovable = true;
+		platform[0]->AllowCollisions = VObject::TOUCHNONE;
 		platform[0]->Velocity.x = 32.0f;
 		Add(platform[0]);
 
@@ -311,6 +313,7 @@ public:
 		platform[1]->SetOutlineTint(sf::Color::Red);
 		platform[1]->SetPositionAtCentre(42.5f * 32, 7.5f * 32.0f);
 		platform[1]->Immovable = true;
+		platform[1]->AllowCollisions = VObject::TOUCHNONE;
 		platform[1]->Velocity.y = 32.0f;
 		Add(platform[1]);
 
@@ -330,17 +333,173 @@ public:
 			}
 		}
 
-		playerControl = new VShape();
-		playerControl->SetRectangle(32, 32);
+		timer = new VTimer();
+
+		enum PlayerStates
+		{
+			PLAYER_WALKING,
+			PLAYER_JUMPING,
+			PLAYER_STILL,
+			PLAYER_POUND,
+			PLAYER_WALL,
+			NUM_PLAYER_STATES
+		};
+
+		playerControl = new VSprite();
+		playerControl->LoadGraphic("Example/Assets/Player.png");
 		playerControl->SetPositionAtCentre(playerPos);
-		playerControl->Drag = sf::Vector2f(500, 500);
-		playerControl->MaxVelocity = sf::Vector2f(200, 600);
+		playerControl->MaxVelocity = sf::Vector2f(0, 0);
 		Add(playerControl);
+
+		stateText = new VText(10.0f, 120.0f, VGlobal::p()->Width - 20.0f);
+		stateText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VText::ALIGNCENTRE);
+		stateText->SetText("");
+		stateText->SetOutlineThickness(2.0f);
+		stateText->SetOutlineTint(sf::Color::Black);
+		stateText->ScrollFactor *= 0.0f;
+		Add(stateText);
 
 		ParentState->Cameras[0]->Follow(playerControl, 0.5f, VCamera::PLATFORMER, 0.8f, 0.05f);
 		UseParentCamera = true;
 
-		timer = new VTimer();
+		playerFSM = new VFiniteStateMachine(playerControl, NUM_PLAYER_STATES);
+		playerFSM->Add(PLAYER_WALKING, 
+			[](VBase* base, float dt) -> int //Update
+			{
+				VObject* player = dynamic_cast<VObject*>(base);
+				bool touchFloor = (player->Touching & VObject::TOUCHBOTTOM) > 0;
+
+				if (touchFloor)
+				{
+					if (VGlobal::p()->Input->IsButtonPressed("A"))
+						return PLAYER_JUMPING;
+				}
+
+				return -1;
+			},
+			[](VBase* base) //Enter
+			{
+				VObject* player = dynamic_cast<VObject*>(base);
+				player->Drag = sf::Vector2f(500, 500);
+				player->MaxVelocity = sf::Vector2f(200, 600);
+				player->Acceleration.y = 980.0f;
+			}
+		);
+		playerFSM->Add(PLAYER_JUMPING,
+			[](VBase* base, float dt) -> int //Update
+			{
+				VObject* player = dynamic_cast<VObject*>(base);
+
+				if ((player->Touching & VObject::TOUCHBOTTOM) > 0)
+					return PLAYER_WALKING;
+
+				if ((player->Touching & VObject::TOUCHWALL) > 0)
+					return PLAYER_WALL;
+
+				if (VGlobal::p()->Input->IsButtonPressed("A"))
+					return PLAYER_STILL;
+
+				return -1;
+			},
+			[](VBase* base) //Enter
+			{
+				VObject* player = dynamic_cast<VObject*>(base);
+				player->Velocity.y = -450.0f;
+				player->Touching = 0;
+			},
+			[](VBase* base) //Exit
+			{
+				VSprite* player = dynamic_cast<VSprite*>(base);
+				if ((player->Touching & VObject::TOUCHRIGHT) > 0)
+					player->FlipX = true;
+
+				if ((player->Touching & VObject::TOUCHLEFT) > 0)
+					player->FlipX = false;
+			});
+		playerFSM->Add(PLAYER_STILL,
+			[](VBase* base, float dt) -> int //Update
+			{
+				VObject* player = dynamic_cast<VObject*>(base);
+
+				if (player->Angle > 270)
+					return PLAYER_POUND;
+
+				return -1;
+			},
+			[](VBase* base) //Enter
+			{
+				VObject* player = dynamic_cast<VObject*>(base);
+				player->Drag = sf::Vector2f(0, 0);
+				player->Velocity = sf::Vector2f(0, 0);
+				player->MaxVelocity = sf::Vector2f(0, 0);
+				player->Acceleration = sf::Vector2f(0, 0);
+				player->AngleVelocity = 600;
+			},
+			[](VBase* base) //Exit
+			{
+				VObject* player = dynamic_cast<VObject*>(base);
+				player->Angle = 0;
+				player->MaxVelocity = sf::Vector2f(0, 800);
+				player->Velocity.y = 800;
+				player->AngleVelocity = 0;
+			});
+
+		playerFSM->Add(PLAYER_POUND,
+			[](VBase* base, float dt) -> int //Update
+			{
+				VObject* player = dynamic_cast<VObject*>(base);
+
+				if ((player->Touching & VObject::TOUCHBOTTOM) > 0)
+					return PLAYER_WALKING;
+
+				return -1;
+			},
+			nullptr,
+			[this](VBase* base)
+			{
+				ParentState->Cameras[0]->Shake(0.03f, 0.5f);
+			});
+
+		playerFSM->Add(PLAYER_WALL,
+			[this](VBase* base, float dt) -> int //Update
+			{
+				VSprite* player = dynamic_cast<VSprite*>(base);
+
+				if (VGlobal::p()->Input->IsButtonPressed("A"))
+				{
+					player->MaxVelocity = sf::Vector2f(200, 600);
+
+					if (player->FlipX)
+						player->Velocity.x = -player->MaxVelocity.x;
+					else
+						player->Velocity.x = player->MaxVelocity.x;
+
+					return PLAYER_JUMPING;
+				}
+
+				bool touchingWalls = false;
+				if (player->FlipX)
+					touchingWalls = tilemap->GetTileIDFromPosition(player->Position + sf::Vector2f(32.0f + 16.0f, 16.0f)) != '.';
+				else
+					touchingWalls = tilemap->GetTileIDFromPosition(player->Position + sf::Vector2f(-16.0f, 16.0f)) != '.';
+
+				if ((player->Touching & VObject::TOUCHBOTTOM) > 0 || !touchingWalls)
+					return PLAYER_WALKING;
+
+				return -1;
+			},
+			[](VBase* base) //Enter
+			{
+				VSprite* player = dynamic_cast<VSprite*>(base);
+				player->MaxVelocity *= 0.9f;
+				player->MaxVelocity.x = 0.0f;
+			},
+			[](VBase* base) //Exit
+			{
+				VObject* player = dynamic_cast<VObject*>(base);
+				player->Drag.x = 200;
+				player->MaxVelocity = sf::Vector2f(200, 600);
+			});
 	}
 
 	virtual void Cleanup()
@@ -352,51 +511,29 @@ public:
 
 	virtual void Update(float dt)
 	{
-		bool touchFloor = (playerControl->Touching & VObject::TOUCHBOTTOM) > 0;
-
-		for (unsigned int i = 0; i < 2; i++)
+		sf::String stateNames[]
 		{
-			sf::Vector2f playerFeet = playerControl->Position + sf::Vector2f(0, playerControl->Size.y + 5.0f);
+			"PLAYER_WALKING",
+			"PLAYER_JUMPING",
+			"PLAYER_STILL",
+			"PLAYER_POUND",
+			"PLAYER_WALL",
+			"NUM_PLAYER_STATES"
+		};
 
-			if (playerFeet.y > platform[i]->Position.y &&
-				playerFeet.y < platform[i]->Position.y + platform[1]->Size.y &&
-				playerFeet.x < platform[i]->Position.x + platform[1]->Size.x &&
-				playerFeet.x > platform[i]->Position.x - playerControl->Size.x)
-			{
-				touchFloor = true;
-			}
-		}
+		stateText->SetText(stateNames[playerFSM->GetCurrentState()]);
+
+		playerFSM->Update(dt);
 		
-		if (touchFloor)
-		{
-			if (VGlobal::p()->Input->IsButtonPressed("A"))
-			{
-				playerControl->Velocity.y = -450.0f;
-
-				if (wallJump)
-				{
-					if ((playerControl->Touching & VObject::TOUCHLEFT) > 0)
-					{
-						playerControl->Velocity.x = playerControl->MaxVelocity.x;
-					}
-					else if ((playerControl->Touching & VObject::TOUCHRIGHT) > 0)
-					{
-						playerControl->Velocity.x = -playerControl->MaxVelocity.x;
-					}
-				}
-			}
-		}
-
+		bool touchFloor = (playerControl->Touching & VObject::TOUCHBOTTOM) > 0;
 		playerControl->Acceleration.x = 0;
 		if (VGlobal::p()->Input->CurrentAxisValue("leftX") < 0)
 			playerControl->Acceleration.x -= playerControl->MaxVelocity.x * (touchFloor ? 4 : 3);
 		if (VGlobal::p()->Input->CurrentAxisValue("leftX") > 0)
 			playerControl->Acceleration.x += playerControl->MaxVelocity.x * (touchFloor ? 4 : 3);
 
-		if (VGlobal::p()->Input->IsButtonDown("A"))
-			playerControl->Acceleration.y = 700.0f;
-		else
-			playerControl->Acceleration.y = 980.0f;
+		if (playerControl->Velocity.x != 0)
+			playerControl->FlipX = playerControl->Velocity.x < 0;
 
 		VSUPERCLASS::Update(dt);
 
@@ -407,7 +544,6 @@ public:
 			timer->Restart();
 		}
 
-		wallJump = false;
 		VGlobal::p()->Collides(playerControl, tilemap);
 		VGlobal::p()->Collides(playerControl, platform[0], std::bind(&TilemapState::CloudPlatform, this, std::placeholders::_1, std::placeholders::_2));
 		VGlobal::p()->Collides(playerControl, platform[1], std::bind(&TilemapState::CloudPlatform, this, std::placeholders::_1, std::placeholders::_2));
@@ -418,7 +554,7 @@ public:
 		VObject* o = dynamic_cast<VObject*>(player);
 		VObject* p = dynamic_cast<VObject*>(platform);
 
-		if (VGlobal::p()->Input->CurrentAxisValue("leftY") > 20.0f)
+		if (VGlobal::p()->Input->CurrentAxisValue("leftY") > 20.0f) //Down Press
 		{
 			p->AllowCollisions = VObject::TOUCHNONE;
 		}
@@ -426,13 +562,6 @@ public:
 		{
 			p->AllowCollisions = VObject::TOUCHTOP;
 		}
-	}
-
-	void WallJump(VObject* tile, VObject* object)
-	{
-		object->Velocity *= 0.9f;
-		object->Touching |= VObject::TOUCHBOTTOM;
-		wallJump = true;
 	}
 };
 
@@ -597,13 +726,13 @@ public:
 
 		for (unsigned int i = 0; i < buttonCount; i++)
 		{
-			float x = (i % 10) * 60.0f;
-			float y = (i / 10) * 60.0f;
+			float x = (i % 15) * 40.0f;
+			float y = (i / 15) * 40.0f;
 
-			VText* t = new VText(20.0f + x, 80.0f + y - 6, 20.0f, std::to_string(i) + ":", 12);
+			VText* t = new VText(25.0f + x, 80.0f + y - 6, 20.0f, std::to_string(i) + ":", 12);
 
 			VShape* b = new VShape(40.0f + x, 70.0f + y);
-			b->SetRectangle(30, 30);
+			b->SetRectangle(20, 20);
 
 			text->Add(t);
 			buttons->Add(b);
@@ -613,13 +742,13 @@ public:
 
 		for (unsigned int i = 0; i < axisCount; i++)
 		{
-			float x = (i % 10) * 60.0f;
-			float y = (i / 10) * 60.0f;
+			float x = (i % 12) * 40.0f;
+			float y = (i / 12) * 40.0f;
 
-			VText* t = new VText(20.0f + x, 120.0f + y + (buttonOffset * 60.0f) - 6.0f, 20.0f, std::to_string(i) + ":", 12);
+			VText* t = new VText(25.0f + x, 120.0f + y + (buttonOffset * 40.0f) - 6.0f, 20.0f, std::to_string(i) + ":", 12);
 
-			VShape* a = new VShape(40.0f + x, 120.0f + y + (buttonOffset * 60.0f));
-			a->SetRectangle(30, 50);
+			VShape* a = new VShape(40.0f + x, 120.0f + y + (buttonOffset * 40.0f));
+			a->SetRectangle(20, 50);
 
 			a->Origin = sf::Vector2f(0, 0);
 

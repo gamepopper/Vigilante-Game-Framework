@@ -54,7 +54,7 @@
 #endif
 
 ///Currently defined build version of the Vigilante Game Framework
-#define VFRAME_VERSION "1.0.0.5"
+#define VFRAME_VERSION "1.0.0.6"
 
 class VBase;
 class VObject;

@@ -147,6 +147,7 @@ public:
 	///@return True if text is currently being processed.
 	bool IsActive() { return typing || waiting || erasing; }
 
+	///@return The string of the typed-out text's prefix.
 	const std::wstring& GetPrefixText();
 
 	/**

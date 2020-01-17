@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.3</span>
+   &#160;<span id="projectnumber">1.0.0.6</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -68,8 +68,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
 <div class="title">VCamera.h File Reference</div>  </div>
 </div><!--header-->
@@ -91,20 +90,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera_list.html">VCameraList</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A basic class to access the default view.  <a href="class_v_camera_list.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:adec2ff9700745ab41d8ffd8044a26a5c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5c">CameraFollowMethod</a> : unsigned char { <br />
-&#160;&#160;<a class="el" href="_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5ca21aff6c3d3ed482edc64fccc335bf28d">LOCKON</a>, 
-<a class="el" href="_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5caefab808dd2b629a851f97cdd03bb208a">TOPDOWN</a>, 
-<a class="el" href="_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5ca985950ff8c39c7461bb4c8fc6692deb8">PLATFORMER</a>, 
-<a class="el" href="_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5ca3a92b9ec0d994251444883834e9ad75e">ROOM</a>, 
-<br />
-&#160;&#160;<a class="el" href="_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5cae8a3599484c3887fdc3a9d8e8675de2f">ROOMLERP</a>
-<br />
- }</td></tr>
-<tr class="memdesc:adec2ff9700745ab41d8ffd8044a26a5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The method of how the camera shall follow a specific <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>.  <a href="_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5c">More...</a><br /></td></tr>
-<tr class="separator:adec2ff9700745ab41d8ffd8044a26a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Tim Stoddard <a href="#" onclick="location.href='mai'+'lto:'+'tim'+'@g'+'ame'+'po'+'ppe'+'r.'+'co.'+'uk'; return false;">tim@g<span style="display: none;">.nosp@m.</span>amep<span style="display: none;">.nosp@m.</span>opper<span style="display: none;">.nosp@m.</span>.co.<span style="display: none;">.nosp@m.</span>uk</a></dd></dl>
@@ -118,36 +103,7 @@ LICENSE</h1>
 <h1><a class="anchor" id="DESCRIPTION"></a>
 DESCRIPTION</h1>
 <p>The 2D Camera used to render a specific area of a <a class="el" href="class_v_state.html" title="Processes the game&#39;s current scene as well as 2D cameras and substates. ">VState</a>. </p>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="adec2ff9700745ab41d8ffd8044a26a5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adec2ff9700745ab41d8ffd8044a26a5c">&#9670;&nbsp;</a></span>CameraFollowMethod</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5c">CameraFollowMethod</a> : unsigned char</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The method of how the camera shall follow a specific <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adec2ff9700745ab41d8ffd8044a26a5ca21aff6c3d3ed482edc64fccc335bf28d"></a>LOCKON&#160;</td><td class="fielddoc"><p>Locks on directly to the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> with no lerp or lead. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="adec2ff9700745ab41d8ffd8044a26a5caefab808dd2b629a851f97cdd03bb208a"></a>TOPDOWN&#160;</td><td class="fielddoc"><p>Locks onto the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> with lerp and lead, best if a game has a top-down perspective. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="adec2ff9700745ab41d8ffd8044a26a5ca985950ff8c39c7461bb4c8fc6692deb8"></a>PLATFORMER&#160;</td><td class="fielddoc"><p>Locks onto the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> with lerp and lead, but with no dead zone restrictions for moving up. Best if a game is a side-scrolling platformer. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="adec2ff9700745ab41d8ffd8044a26a5ca3a92b9ec0d994251444883834e9ad75e"></a>ROOM&#160;</td><td class="fielddoc"><p>Fixes to positions like a grid. best used for grid based levels where the screen size is evenly divisible to the world size. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="adec2ff9700745ab41d8ffd8044a26a5cae8a3599484c3887fdc3a9d8e8675de2f"></a>ROOMLERP&#160;</td><td class="fielddoc"><p>Same as Room, however instead of instantly changing positions, the camera will lerp to the next position. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

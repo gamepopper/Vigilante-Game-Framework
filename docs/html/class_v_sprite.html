@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.3</span>
+   &#160;<span id="projectnumber">1.0.0.6</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -124,14 +124,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa309d1d4394834a6c86aa1f9b99988a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afae3a7519cec966a32bc72866b9534a1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#afae3a7519cec966a32bc72866b9534a1">LoadGraphic</a> (sf::String filename, bool animated=false, int width=0, int height=0, const sf::IntRect &amp;rect=sf::IntRect())</td></tr>
 <tr class="separator:afae3a7519cec966a32bc72866b9534a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c3a0bd9136fe879a89e281e839680b0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a9c3a0bd9136fe879a89e281e839680b0">LoadGraphicFromTexture</a> (sf::Texture &amp;<a class="el" href="class_v_sprite.html#a4769ac7e61ee128e55a5c5ac82c9f347">texture</a>, bool animated=false, int width=0, int height=0, const sf::IntRect &amp;rect=sf::IntRect())</td></tr>
+<tr class="memitem:a9c3a0bd9136fe879a89e281e839680b0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a9c3a0bd9136fe879a89e281e839680b0">LoadGraphicFromTexture</a> (sf::Texture &amp;texture, bool animated=false, int width=0, int height=0, const sf::IntRect &amp;rect=sf::IntRect())</td></tr>
 <tr class="separator:a9c3a0bd9136fe879a89e281e839680b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71a87036258418524b1ed15413ba484d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a71a87036258418524b1ed15413ba484d">MakeGraphic</a> (int width, int height, sf::Color color, float outline=0, sf::Color outlineColor=sf::Color::Transparent)</td></tr>
 <tr class="separator:a71a87036258418524b1ed15413ba484d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d7317320ca3619b80927c2b7ab649a8"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a4d7317320ca3619b80927c2b7ab649a8">MakeGraphicCircle</a> (int radius, sf::Color color, float outline=0, sf::Color outlineColor=sf::Color::Transparent)</td></tr>
 <tr class="separator:a4d7317320ca3619b80927c2b7ab649a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af540a17011d8502995d8f34965cb546e"><td class="memItemLeft" align="right" valign="top">sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#af540a17011d8502995d8f34965cb546e">GetTexture</a> ()</td></tr>
-<tr class="separator:af540a17011d8502995d8f34965cb546e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae81d8f0c97c3bcc6ece9037e16098b10"><td class="memItemLeft" align="right" valign="top"><a id="ae81d8f0c97c3bcc6ece9037e16098b10"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#ae81d8f0c97c3bcc6ece9037e16098b10">Destroy</a> () override</td></tr>
 <tr class="memdesc:ae81d8f0c97c3bcc6ece9037e16098b10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the sprite rendering data (and texture if disposable is set for true). <br /></td></tr>
@@ -348,18 +346,14 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a4769ac7e61ee128e55a5c5ac82c9f347"><td class="memItemLeft" align="right" valign="top"><a id="a4769ac7e61ee128e55a5c5ac82c9f347"></a>
-sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a4769ac7e61ee128e55a5c5ac82c9f347">texture</a> = nullptr</td></tr>
-<tr class="memdesc:a4769ac7e61ee128e55a5c5ac82c9f347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spite's texture. <br /></td></tr>
-<tr class="separator:a4769ac7e61ee128e55a5c5ac82c9f347"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08e9737395eb759849044d638b03bdb0"><td class="memItemLeft" align="right" valign="top"><a id="a08e9737395eb759849044d638b03bdb0"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a08e9737395eb759849044d638b03bdb0">disposible</a> = false</td></tr>
 <tr class="memdesc:a08e9737395eb759849044d638b03bdb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, texture will be destroyed within <a class="el" href="class_v_sprite.html" title="A sprite rendering object class. ">VSprite</a>. Important if texture isn't loaded from <a class="el" href="class_v_content.html" title="Content Management System for loading and storing Textures, Fonts and Sound Effects. ">VContent</a>. <br /></td></tr>
 <tr class="separator:a08e9737395eb759849044d638b03bdb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36b65c9276f8835bac0464a671bf962e"><td class="memItemLeft" align="right" valign="top"><a id="a36b65c9276f8835bac0464a671bf962e"></a>
-sf::Sprite&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a36b65c9276f8835bac0464a671bf962e">sprite</a></td></tr>
-<tr class="memdesc:a36b65c9276f8835bac0464a671bf962e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprite render infomation and transform. <br /></td></tr>
-<tr class="separator:a36b65c9276f8835bac0464a671bf962e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab99cce21feadaf077d948a22feb4b558"><td class="memItemLeft" align="right" valign="top"><a id="ab99cce21feadaf077d948a22feb4b558"></a>
+sf::VertexArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#ab99cce21feadaf077d948a22feb4b558">vertexArray</a></td></tr>
+<tr class="memdesc:ab99cce21feadaf077d948a22feb4b558"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprite render infomation. <br /></td></tr>
+<tr class="separator:ab99cce21feadaf077d948a22feb4b558"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -372,8 +366,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a41d7b4976eac896a40cbc4aae30c0575 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cffad74d30e7b13d4931198bf0d16e4 inherit pub_static_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a4cffad74d30e7b13d4931198bf0d16e4">computeVelocity</a> (float v, float a, float d, float max, float dt)</td></tr>
 <tr class="separator:a4cffad74d30e7b13d4931198bf0d16e4 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc32c9c860277af7d3c9bf41df1dc4f6 inherit pub_static_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#abc32c9c860277af7d3c9bf41df1dc4f6">TestInView</a> (const sf::View &amp;renderTargetView, sf::View &amp;defaultView, <a class="el" href="class_v_object.html">VObject</a> *o, const sf::FloatRect &amp;renderBox=sf::FloatRect())</td></tr>
-<tr class="separator:abc32c9c860277af7d3c9bf41df1dc4f6 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#acfc159100fd819b7500cbbe02ed21c67">TestInView</a> (const sf::View &amp;renderTargetView, sf::View *defaultView, <a class="el" href="class_v_object.html">VObject</a> *o, const sf::FloatRect &amp;renderBox=sf::FloatRect())</td></tr>
+<tr class="separator:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
 <tr class="memitem:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a24901d5efbff21bcb040ade5d2efdc1d">VLog</a> (const char *fmt,...)</td></tr>
 <tr class="separator:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -395,9 +389,6 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">VSprite::VSprite </td>
@@ -417,11 +408,6 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -438,9 +424,6 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">VSprite::VSprite </td>
@@ -466,11 +449,6 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -517,32 +495,6 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <p>Reimplemented from <a class="el" href="class_v_object.html#a20b4da39a4a1ec552cef2c618fcb9f7e">VObject</a>.</p>
 
 <p>Reimplemented in <a class="el" href="class_v_tiled_sprite.html#a17c03c13c098cd57ef2b2c0d0948d282">VTiledSprite</a>.</p>
-
-</div>
-</div>
-<a id="af540a17011d8502995d8f34965cb546e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af540a17011d8502995d8f34965cb546e">&#9670;&nbsp;</a></span>GetTexture()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Texture* VSprite::GetTexture </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>Texture of sprite. </dd></dl>
 
 </div>
 </div>
@@ -740,7 +692,7 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_v_tiled_sprite.html#a8cc5ea78b98b47d1f4805f6fa5d3468b">VTiledSprite</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v_tiled_sprite.html#adbc796ed3ba4a0dd539fc501baf6f4ec">VTiledSprite</a>.</p>
 
 </div>
 </div>
@@ -799,7 +751,7 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_v_tiled_sprite.html#adf2b8b1d3fa77579b6fdafc6f2e4a4ee">VTiledSprite</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v_tiled_sprite.html#ae88a8bfb9550cb0f69fd80a3c976dd34">VTiledSprite</a>.</p>
 
 </div>
 </div>

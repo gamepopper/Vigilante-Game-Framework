@@ -4,7 +4,6 @@ var searchData=
   ['callback',['Callback',['../class_v_tile.html#a2a8ad7f3331e88ee377a2e3ba1cd3d86',1,'VTile::Callback()'],['../struct_v_tile_collision_info.html#a029afd466b858440fcf86b93a9d87d23',1,'VTileCollisionInfo::Callback()']]],
   ['cam',['cam',['../class_v3_d_shader.html#ae7961a9b402c3645d85afdc2edaf2896',1,'V3DShader']]],
   ['camera',['Camera',['../class_v3_d_scene.html#a2088e12d10e9ef86d2f90e2da5c40944',1,'V3DScene']]],
-  ['camerafollowmethod',['CameraFollowMethod',['../_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5c',1,'VCamera.h']]],
   ['cameras',['Cameras',['../class_v_state.html#aa35a546b39b57dc806529f601096cdb7',1,'VState']]],
   ['camerascroll',['CameraScroll',['../class_v_backdrop.html#a19d512d48df447d9aba00ee082383465',1,'VBackdrop']]],
   ['changestate',['ChangeState',['../class_v_global.html#a6912456eee6d25949756504b9fe439d0',1,'VGlobal::ChangeState()'],['../class_v_state_manager.html#a39d1ccfd4d190b754c377c96219ef475',1,'VStateManager::ChangeState()']]],

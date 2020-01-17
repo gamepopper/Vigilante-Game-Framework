@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['path_5fanchor',['PATH_ANCHOR',['../class_v_text_path.html#ab92e32c0ec5eb87bcb425f08d2c464dea02607d1abd12e4c6a435d8ec3998d5c5',1,'VTextPath']]],
-  ['path_5fbezier',['PATH_BEZIER',['../class_v_text_path.html#ab92e32c0ec5eb87bcb425f08d2c464deab9e38add2bd3084fcdcd2a46e30a5495',1,'VTextPath']]],
-  ['platformer',['PLATFORMER',['../_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5ca985950ff8c39c7461bb4c8fc6692deb8',1,'VCamera.h']]]
+  ['num_5fpath_5fcurves',['NUM_PATH_CURVES',['../class_v_text_path.html#ab92e32c0ec5eb87bcb425f08d2c464deab468a1adc42451d3b636fd47e7de4b8f',1,'VTextPath']]]
 ];

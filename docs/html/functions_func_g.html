@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.3</span>
+   &#160;<span id="projectnumber">1.0.0.6</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -93,6 +93,15 @@ $(function() {
 <li>GetButtonInput()
 : <a class="el" href="class_v_input_handler.html#aaf40b95c2e994ddbf4ef46132d8132b2">VInputHandler</a>
 </li>
+<li>GetCollisionBias()
+: <a class="el" href="class_v_physics_group.html#a8e5f65b2f810d99cfaf3f35ed6a56feb">VPhysicsGroup</a>
+</li>
+<li>GetCollisionPersistence()
+: <a class="el" href="class_v_physics_group.html#af6d38842720243f483032d7c0d064a6d">VPhysicsGroup</a>
+</li>
+<li>GetCollisionSlop()
+: <a class="el" href="class_v_physics_group.html#a588efe229d044df153e080d56b7fa6cd">VPhysicsGroup</a>
+</li>
 <li>GetColor()
 : <a class="el" href="class_v_random.html#a6ba3680d8aa4b5c7d3b6de36235f9841">VRandom</a>
 </li>
@@ -100,8 +109,14 @@ $(function() {
 : <a class="el" href="class_v_animation.html#aafce2f78a15032f74471ec7718a42c6f">VAnimation</a>
 , <a class="el" href="class_v_animation_manager.html#a2078909d136dd5d1cd59b3a03f8cbe45">VAnimationManager</a>
 </li>
+<li>GetCurrentState()
+: <a class="el" href="class_v_finite_state_machine.html#a40392bba48a0080f9167dd7b60544f0f">VFiniteStateMachine</a>
+</li>
 <li>GetCurveType()
 : <a class="el" href="class_v_text_path.html#adc12369ea027f6306d8210567e35ba5d">VTextPath</a>
+</li>
+<li>GetDamping()
+: <a class="el" href="class_v_physics_group.html#acbce9a365a045364306eb7f26b04692f">VPhysicsGroup</a>
 </li>
 <li>GetDefaultView()
 : <a class="el" href="class_v_camera.html#a97137b287508b3eb104e01ab68a059c3">VCamera</a>
@@ -122,14 +137,23 @@ $(function() {
 <li>GetFrameCount()
 : <a class="el" href="class_v_animation.html#a4d63fe19a360486202ac1054a969e65c">VAnimation</a>
 </li>
+<li>GetGravity()
+: <a class="el" href="class_v_physics_group.html#aa1a17891564c38597eff5a535a7c7d3b">VPhysicsGroup</a>
+</li>
 <li>GetGroupItem()
 : <a class="el" href="class_v_group.html#a89032075a3434ea39ca431da86a231cb">VGroup</a>
+</li>
+<li>GetIdleSpeedThreshold()
+: <a class="el" href="class_v_physics_group.html#a1672638ff57d740730636db47896f01f">VPhysicsGroup</a>
 </li>
 <li>GetIndexOfItem()
 : <a class="el" href="class_v_group.html#a6fa144c3d24a75018a818dc5a95eab55">VGroup</a>
 </li>
 <li>GetInt()
 : <a class="el" href="class_v_random.html#a2e083880d440512679c2bc289572bcac">VRandom</a>
+</li>
+<li>GetIterations()
+: <a class="el" href="class_v_physics_group.html#a001f9c643c103f360016c36da3732230">VPhysicsGroup</a>
 </li>
 <li>GetLastFrame()
 : <a class="el" href="class_v_animation_manager.html#af4c3962670cbc021a5576f13868fa44b">VAnimationManager</a>
@@ -166,6 +190,9 @@ $(function() {
 <li>GetPostEffect()
 : <a class="el" href="class_v_post_effect_multipass.html#a4569aedba6a1db6b5d67cd31d732f781">VPostEffectMultipass</a>
 </li>
+<li>GetPrefixText()
+: <a class="el" href="class_v_typed_text.html#adf8172b6dbbfdc628f38194f9ee83954">VTypedText</a>
+</li>
 <li>GetProgram()
 : <a class="el" href="class_v3_d_shader.html#afa6f273a71078a9c58bc629303fae97a">V3DShader</a>
 </li>
@@ -178,8 +205,11 @@ $(function() {
 <li>GetShape()
 : <a class="el" href="class_v_shape.html#addfc0a86768d4cf1a1bd8755e6eec169">VShape</a>
 </li>
+<li>GetSleepTimeThreshold()
+: <a class="el" href="class_v_physics_group.html#a4e8599477161f955031563dd860108bf">VPhysicsGroup</a>
+</li>
 <li>GetSound()
-: <a class="el" href="class_v_sound_manager.html#ac7fe07fb677d59588c4ef2a60437cf73">VSoundManager</a>
+: <a class="el" href="class_v_sound_manager.html#aa0ad953678b42f3aad75a2e423414e7d">VSoundManager</a>
 </li>
 <li>GetStyle()
 : <a class="el" href="class_v_text.html#ac26041c1ca96ce78351896975543b3fa">VText</a>
@@ -188,10 +218,9 @@ $(function() {
 : <a class="el" href="class_v_text.html#ae786d2434cba19afd5a04f09ccf0b9e2">VText</a>
 </li>
 <li>GetTexture()
-: <a class="el" href="class_v3_d_scene.html#ae71ff4cafda38521a6427f89ddd671f3">V3DScene</a>
+: <a class="el" href="class_v3_d_scene.html#a72746d6fcf87b8ebcfb4e0efbf59aa75">V3DScene</a>
 , <a class="el" href="class_v_render_group.html#a612d9000f97cbf0f2e0d0d25bdd00bcb">VRenderGroup</a>
 , <a class="el" href="class_v_render_layer.html#a3a59c9d58c53a20260613af7f95940be">VRenderLayer</a>
-, <a class="el" href="class_v_sprite.html#af540a17011d8502995d8f34965cb546e">VSprite</a>
 </li>
 <li>GetTextureArea()
 : <a class="el" href="class_v_animation_manager.html#a9e7500ab9533261964f2f38f3113b7c5">VAnimationManager</a>

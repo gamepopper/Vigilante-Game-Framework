@@ -70,6 +70,7 @@ public:
 	* @param id A simple ID name to easily access the sound.
 	* @param volume The volume specifically for this sound effect (will use as a percentage of the master volume).
 	* @param pitch The pitch specifically for this sound effect (will use as a percentage of the master pitch).
+	* @param loop If the sound is looping.
 	*/
 	void Play(const sf::String& id, float volume = 100.0f, float pitch = 1.0f, bool loop = false);
 	

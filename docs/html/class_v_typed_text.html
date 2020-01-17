@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.3</span>
+   &#160;<span id="projectnumber">1.0.0.6</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -136,6 +136,8 @@ typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="me
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac0936b96392d880dbf08ab489cd8d203"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#ac0936b96392d880dbf08ab489cd8d203">VTypedText</a> (float x=0, float y=0, float width=0, const sf::String &amp;<a class="el" href="class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed">text</a>=&quot;&quot;, int charSize=8)</td></tr>
 <tr class="separator:ac0936b96392d880dbf08ab489cd8d203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18de0b72b57ca7b46c1bb141e48a3062"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#a18de0b72b57ca7b46c1bb141e48a3062">SetPrefixText</a> (const sf::String &amp;<a class="el" href="class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed">text</a>)</td></tr>
+<tr class="separator:a18de0b72b57ca7b46c1bb141e48a3062"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dfb8a55600ff4ba935c043ed9469a12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#a1dfb8a55600ff4ba935c043ed9469a12">SetSound</a> (sf::String id, float volume=100.0f, sf::String filename=&quot;&quot;)</td></tr>
 <tr class="separator:a1dfb8a55600ff4ba935c043ed9469a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe8d7bd044aefd9189a9006a570ed9b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#abe8d7bd044aefd9189a9006a570ed9b4">SetTimingVariation</a> (bool TypingVariation, float TypingVarPercent=0.5f)</td></tr>
@@ -146,6 +148,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abe60f25ca4ceb71dd8e543564c3379d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55081e4573146b6915a2fe1148b0c0f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#a55081e4573146b6915a2fe1148b0c0f5">IsActive</a> ()</td></tr>
 <tr class="separator:a55081e4573146b6915a2fe1148b0c0f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf8172b6dbbfdc628f38194f9ee83954"><td class="memItemLeft" align="right" valign="top">const std::wstring &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#adf8172b6dbbfdc628f38194f9ee83954">GetPrefixText</a> ()</td></tr>
+<tr class="separator:adf8172b6dbbfdc628f38194f9ee83954"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa00b862dd37eae71bcacb87938aa315"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#aaa00b862dd37eae71bcacb87938aa315">ResetText</a> (sf::String Text)</td></tr>
 <tr class="separator:aaa00b862dd37eae71bcacb87938aa315"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a920c0b145794a2e41d596f1fd0f21ac0"><td class="memItemLeft" align="right" valign="top"><a id="a920c0b145794a2e41d596f1fd0f21ac0"></a>
@@ -268,10 +272,6 @@ wchar_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#a344d6f46d594e5fec1cb8a39b9965963">CursorBlinkSpeed</a> = 0.5f</td></tr>
 <tr class="memdesc:a344d6f46d594e5fec1cb8a39b9965963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delay for cursor blinking. <br /></td></tr>
 <tr class="separator:a344d6f46d594e5fec1cb8a39b9965963"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a329592fd35008dcbe247d9f8909f592e"><td class="memItemLeft" align="right" valign="top"><a id="a329592fd35008dcbe247d9f8909f592e"></a>
-sf::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#a329592fd35008dcbe247d9f8909f592e">Prefix</a> = &quot;&quot;</td></tr>
-<tr class="memdesc:a329592fd35008dcbe247d9f8909f592e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Text that is displayed before the updated string, is not erased or typed out. <br /></td></tr>
-<tr class="separator:a329592fd35008dcbe247d9f8909f592e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2824a6b94d7f2032accdf762a3c460b6"><td class="memItemLeft" align="right" valign="top"><a id="a2824a6b94d7f2032accdf762a3c460b6"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_typed_text.html#a2824a6b94d7f2032accdf762a3c460b6">WaitTime</a> = 1</td></tr>
 <tr class="memdesc:a2824a6b94d7f2032accdf762a3c460b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time in seconds to wait between typing out and erased. <br /></td></tr>
@@ -435,8 +435,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a41d7b4976eac896a40cbc4aae30c0575 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cffad74d30e7b13d4931198bf0d16e4 inherit pub_static_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a4cffad74d30e7b13d4931198bf0d16e4">computeVelocity</a> (float v, float a, float d, float max, float dt)</td></tr>
 <tr class="separator:a4cffad74d30e7b13d4931198bf0d16e4 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc32c9c860277af7d3c9bf41df1dc4f6 inherit pub_static_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#abc32c9c860277af7d3c9bf41df1dc4f6">TestInView</a> (const sf::View &amp;renderTargetView, sf::View &amp;defaultView, <a class="el" href="class_v_object.html">VObject</a> *o, const sf::FloatRect &amp;renderBox=sf::FloatRect())</td></tr>
-<tr class="separator:abc32c9c860277af7d3c9bf41df1dc4f6 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#acfc159100fd819b7500cbbe02ed21c67">TestInView</a> (const sf::View &amp;renderTargetView, sf::View *defaultView, <a class="el" href="class_v_object.html">VObject</a> *o, const sf::FloatRect &amp;renderBox=sf::FloatRect())</td></tr>
+<tr class="separator:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
 <tr class="memitem:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a24901d5efbff21bcb040ade5d2efdc1d">VLog</a> (const char *fmt,...)</td></tr>
 <tr class="separator:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -472,10 +472,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 sf::VertexArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#ad20dccac34e461fb1405dcaefb38603c">vertices</a></td></tr>
 <tr class="memdesc:ad20dccac34e461fb1405dcaefb38603c inherit pro_attribs_class_v_text"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex Data. <br /></td></tr>
 <tr class="separator:ad20dccac34e461fb1405dcaefb38603c inherit pro_attribs_class_v_text"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedb3faf514b96f57fce439b97e432d9e inherit pro_attribs_class_v_text"><td class="memItemLeft" align="right" valign="top"><a id="aedb3faf514b96f57fce439b97e432d9e"></a>
-sf::Transformable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#aedb3faf514b96f57fce439b97e432d9e">transformable</a></td></tr>
-<tr class="memdesc:aedb3faf514b96f57fce439b97e432d9e inherit pro_attribs_class_v_text"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform Data. <br /></td></tr>
-<tr class="separator:aedb3faf514b96f57fce439b97e432d9e inherit pro_attribs_class_v_text"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e4a450740059e52aa29a01cb137cac6 inherit pro_attribs_class_v_text"><td class="memItemLeft" align="right" valign="top"><a id="a7e4a450740059e52aa29a01cb137cac6"></a>
 sf::Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_text.html#a7e4a450740059e52aa29a01cb137cac6">font</a> = nullptr</td></tr>
 <tr class="memdesc:a7e4a450740059e52aa29a01cb137cac6 inherit pro_attribs_class_v_text"><td class="mdescLeft">&#160;</td><td class="mdescRight">Font object. <br /></td></tr>
@@ -545,9 +541,6 @@ sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">VTypedText::VTypedText </td>
@@ -585,11 +578,6 @@ sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -644,6 +632,24 @@ sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="adf8172b6dbbfdc628f38194f9ee83954"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf8172b6dbbfdc628f38194f9ee83954">&#9670;&nbsp;</a></span>GetPrefixText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::wstring&amp; VTypedText::GetPrefixText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The string of the typed-out text's prefix. </dd></dl>
 
 </div>
 </div>
@@ -769,6 +775,30 @@ sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Reset the text that will be typed out, use this when changing text! </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Text</td><td>The string to set the text to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a18de0b72b57ca7b46c1bb141e48a3062"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18de0b72b57ca7b46c1bb141e48a3062">&#9670;&nbsp;</a></span>SetPrefixText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VTypedText::SetPrefixText </td>
+          <td>(</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
+          <td class="paramname"><em>text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the prefix of the typed string. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">text</td><td>Text that is displayed before the updated string, is not erased or typed out. </td></tr>
   </table>
   </dd>
 </dl>

@@ -2,7 +2,7 @@ var searchData=
 [
   ['texcoord',['texCoord',['../struct_v3_d_vertex.html#a24e8e16b98aba9dce62a83c23e400ef2',1,'V3DVertex']]],
   ['text',['text',['../class_v_text.html#a003eec729bf16ba005f8729ae5bcd2ed',1,'VText']]],
-  ['texture',['texture',['../class_v3_d_model.html#a4167384145e00786f86db06cf7830459',1,'V3DModel::texture()'],['../class_v_backdrop.html#a1185cf94fe1706b4897dd833bca5b3b8',1,'VBackdrop::texture()'],['../class_v_sprite.html#a4769ac7e61ee128e55a5c5ac82c9f347',1,'VSprite::texture()']]],
+  ['texture',['texture',['../class_v3_d_model.html#a4167384145e00786f86db06cf7830459',1,'V3DModel::texture()'],['../class_v_backdrop.html#a1185cf94fe1706b4897dd833bca5b3b8',1,'VBackdrop::texture()']]],
   ['textureoffset',['textureOffset',['../class_v_tilemap.html#a269a6ce93c7c393d9b4e163ea20b0968',1,'VTilemap']]],
   ['textures',['textures',['../class_v3_d_obj_model.html#a1a5971c7c751379b169baf3280907661',1,'V3DObjModel']]],
   ['tilemap',['tilemap',['../class_v_tilemap.html#a0cc7693b42b14e9eb62e778f646396d6',1,'VTilemap']]],
@@ -15,7 +15,6 @@ var searchData=
   ['tint',['Tint',['../struct_v3_d_light.html#a6e9ef12c09c477f600174515765ca40c',1,'V3DLight::Tint()'],['../class_v_particle.html#aeaef7411246b0ffb6c9725dcc32bcc18',1,'VParticle::Tint()'],['../class_v_sprite.html#a7da88e002a6d0d05556e99fa956c8aac',1,'VSprite::Tint()']]],
   ['touching',['Touching',['../class_v_object.html#a7ef9ed6e356e0f51f74a21149c9612aa',1,'VObject']]],
   ['transform',['transform',['../class_v3_d_model.html#acd14cd1afeebb47ad08614803c93cb5c',1,'V3DModel::transform()'],['../class_v3_d_obj_model.html#a470274b20b2815a305eb87452d7eb709',1,'V3DObjModel::transform()'],['../class_v_backdrop.html#a16436cb56b4ed62f8ccbde43eb47e226',1,'VBackdrop::transform()']]],
-  ['transformable',['transformable',['../class_v_text.html#aedb3faf514b96f57fce439b97e432d9e',1,'VText::transformable()'],['../class_v_tilemap.html#a9a1d4263203df18021d7e8fc8b08b961',1,'VTilemap::transformable()']]],
   ['trianglecount',['triangleCount',['../struct_v3_d_obj_model_1_1_v3_d_model_data.html#a4014bc290d57e41c0d1d180221a02ed5',1,'V3DObjModel::V3DModelData']]],
-  ['type',['Type',['../struct_v3_d_light.html#adf638859ea6643a6d4ed11f46ae85c1d',1,'V3DLight::Type()'],['../class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f',1,'VBase::type()']]]
+  ['type',['type',['../class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f',1,'VBase::type()'],['../struct_v3_d_light.html#adf638859ea6643a6d4ed11f46ae85c1d',1,'V3DLight::Type()']]]
 ];

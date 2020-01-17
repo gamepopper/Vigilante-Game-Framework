@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['topdown',['TOPDOWN',['../_v_camera_8h.html#adec2ff9700745ab41d8ffd8044a26a5caefab808dd2b629a851f97cdd03bb208a',1,'VCamera.h']]]
+  ['room',['ROOM',['../class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0daf6157f6aacca8a42b4fee5d719f62c66',1,'VCamera']]],
+  ['roomlerp',['ROOMLERP',['../class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0dac5de46ff3670976b0734b3546639e301',1,'VCamera']]]
 ];

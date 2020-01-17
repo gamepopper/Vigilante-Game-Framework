@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lighttype',['LightType',['../_v3_d_light_8h.html#adc3ec8293e6a97ebe43f0196b9a7f638',1,'V3DLight.h']]]
+  ['pathcurvetype',['PathCurveType',['../class_v_text_path.html#ab92e32c0ec5eb87bcb425f08d2c464de',1,'VTextPath']]]
 ];

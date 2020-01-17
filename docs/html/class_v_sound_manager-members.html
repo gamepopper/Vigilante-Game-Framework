@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.3</span>
+   &#160;<span id="projectnumber">1.0.0.6</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -71,17 +71,18 @@ $(function() {
 <p>This is the complete list of members for <a class="el" href="class_v_sound_manager.html">VSoundManager</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_v_sound_manager.html#a3c0a089a01d30546b01956d26280f0a2">Cleanup</a>()</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_sound_manager.html#ac7fe07fb677d59588c4ef2a60437cf73">GetSound</a>(sf::String id)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_v_sound_manager.html#a3c26ddce47cea632b180168fe829d347">Load</a>(sf::String filename, sf::String id)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_sound_manager.html#aa0ad953678b42f3aad75a2e423414e7d">GetSound</a>(const sf::String &amp;id)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_sound_manager.html#aea4dfeeb119212ac76cb264ba9b65457">Load</a>(const sf::String &amp;filename, const sf::String &amp;id)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_sound_manager.html#aaec6f12701c7bf761784eeb6604c6b01">MasterPitch</a>()</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_sound_manager.html#a06fee7d8b00ff63554fbe2f50b6661f4">MasterVolume</a>()</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_sound_manager.html#ace779f321f409f33f5a0ee12082fad1f">Play</a>(sf::String id, float volume=100.0f, float pitch=1.0f)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_sound_manager.html#a549d0d6e6f03f8fea1bf478353f4aaf7">Play</a>(const sf::String &amp;id, float volume=100.0f, float pitch=1.0f, bool loop=false)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_sound_manager.html#a9a8ede3acc47a7d7c119d2a207b010a3">SetMasterPitch</a>(float pitch)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_sound_manager.html#a08f3dfbccd58053189473572f594dd13">SetMasterVolume</a>(float volume)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_v_sound_manager.html#a087628647597b650144485757b2c78a0">Stop</a>(sf::String id)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_sound_manager.html#ab074c80528b242912a30fc536150c418">StopAll</a>()</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>VSoundManager</b>() (defined in <a class="el" href="class_v_sound_manager.html">VSoundManager</a>)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>~VSoundManager</b>() (defined in <a class="el" href="class_v_sound_manager.html">VSoundManager</a>)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_sound_manager.html#a29ddc435e9bd426ccf9fd8b977540853">Status</a>(const sf::String &amp;id)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_sound_manager.html#a7d7ee616c1f10dc114268c9e703cf66a">Stop</a>(const sf::String &amp;id)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_sound_manager.html#ab074c80528b242912a30fc536150c418">StopAll</a>()</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>VSoundManager</b>() (defined in <a class="el" href="class_v_sound_manager.html">VSoundManager</a>)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~VSoundManager</b>() (defined in <a class="el" href="class_v_sound_manager.html">VSoundManager</a>)</td><td class="entry"><a class="el" href="class_v_sound_manager.html">VSoundManager</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -7,7 +7,7 @@ var searchData=
   ['isanybuttonpressed',['isAnyButtonPressed',['../classsf_1_1_x_input_device.html#a361aaeaa57e4ca009d7227cba194ee34',1,'sf::XInputDevice']]],
   ['isanyconnected',['isAnyConnected',['../classsf_1_1_x_input_device.html#ace60ef57dcf22d823d8c302836225d23',1,'sf::XInputDevice']]],
   ['isbuttondown',['IsButtonDown',['../class_v_input_handler.html#a65c1004b86fa205cf40bfc17fcf0094b',1,'VInputHandler']]],
-  ['isbuttonpressed',['IsButtonPressed',['../class_v_input_handler.html#a8c972bebc7cbe9f5186a7690f61aa505',1,'VInputHandler::IsButtonPressed()'],['../classsf_1_1_x_input_device.html#a8fec1f47cf7784f3c950cccb7dd434cf',1,'sf::XInputDevice::isButtonPressed()']]],
+  ['isbuttonpressed',['isButtonPressed',['../classsf_1_1_x_input_device.html#a8fec1f47cf7784f3c950cccb7dd434cf',1,'sf::XInputDevice::isButtonPressed()'],['../class_v_input_handler.html#a8c972bebc7cbe9f5186a7690f61aa505',1,'VInputHandler::IsButtonPressed()']]],
   ['isbuttonreleased',['IsButtonReleased',['../class_v_input_handler.html#ab94b2891eae35558cc94adddbd210b65',1,'VInputHandler']]],
   ['isbuttonup',['IsButtonUp',['../class_v_input_handler.html#a63c807b7d91f244d51c12414be0003f0',1,'VInputHandler']]],
   ['isconnected',['isConnected',['../classsf_1_1_x_input_device.html#a75c8ab8f4252a41ee69ac6381fd80553',1,'sf::XInputDevice']]],

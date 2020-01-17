@@ -5,5 +5,5 @@ var searchData=
   ['height',['Height',['../class_v_global.html#a0f9aec392b77b2eb657f7a80b93b06d1',1,'VGlobal']]],
   ['helperautotile',['helperAutoTile',['../class_v_tilemap.html#a9e26b086627f1f2d81c6bbe494a557cc',1,'VTilemap']]],
   ['hsvtorgb',['HSVtoRGB',['../class_v_colour.html#a2bf8324adf9b5d6f96ee583f88129dd8',1,'VColour']]],
-  ['hurt',['Hurt',['../class_v3_d_object.html#a833c04b92381c3fc6027d0cb4f20ab05',1,'V3DObject::Hurt()'],['../class_v_object.html#a62be43d44b9aaf5217898e5f1b0da1de',1,'VObject::Hurt()'],['../class_v_tilemap.html#a9d9fe247a012dabe95fb3fb1ad31efe6',1,'VTilemap::Hurt()']]]
+  ['hurt',['Hurt',['../class_v3_d_object.html#a833c04b92381c3fc6027d0cb4f20ab05',1,'V3DObject::Hurt()'],['../class_v_object.html#a62be43d44b9aaf5217898e5f1b0da1de',1,'VObject::Hurt()'],['../class_v_tilemap.html#ab8ac558afd3ed1698b8773574f03e12b',1,'VTilemap::Hurt()']]]
 ];
