@@ -52,6 +52,22 @@ unsigned int VFiniteStateMachine::GetCurrentState()
 	return state;
 }
 
+void VFiniteStateMachine::SetNewState(unsigned int state)
+{
+	if (this->state != state && state < finiteStates.size())
+	{
+		finiteStates[this->state].CallExit(base);
+		this->state = state;
+		finiteStates[this->state].CallEnter(base);
+	}
+}
+
+void VFiniteStateMachine::ResetState()
+{
+	finiteStates[state].CallExit(base);
+	finiteStates[state].CallEnter(base);
+}
+
 void VFiniteStateMachine::Update(float dt)
 {
 	int newState = finiteStates[state].CallUpdate(base, dt);

@@ -59,6 +59,13 @@ public:
 	///@return The ID number of the currently active state in the FSM.
 	unsigned int GetCurrentState();
 
+	///Exits the current state and enters the new state of the FSM from outside. Only works if the new state is not the current one, use ResetState() to exit and re-enter the current state.
+	///@param state The ID number of the new state to run in the FSM.
+	void SetNewState(unsigned int state);
+
+	///Resets the currently running state in the FSM.
+	void ResetState();
+
 	/**
 	* Applys a set of functions to a specified State ID in the FSM.
 	* @param stateID The ID number of the state you wish to apply the functions to.
