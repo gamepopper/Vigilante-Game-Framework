@@ -421,19 +421,19 @@ public:
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 
-				if (player->Angle > 270)
+				if (player->Angle > 360 || player->Angle < -360)
 					return PLAYER_POUND;
 
 				return -1;
 			},
 			[](VBase* base) //Enter
 			{
-				VObject* player = dynamic_cast<VObject*>(base);
+				VSprite* player = dynamic_cast<VSprite*>(base);
 				player->Drag = sf::Vector2f(0, 0);
 				player->Velocity = sf::Vector2f(0, 0);
 				player->MaxVelocity = sf::Vector2f(0, 0);
 				player->Acceleration = sf::Vector2f(0, 0);
-				player->AngleVelocity = 600;
+				player->AngleVelocity = player->FlipX ? -900 : 900;
 			},
 			[](VBase* base) //Exit
 			{
