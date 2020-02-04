@@ -7,18 +7,19 @@ enum DemoPages
 	PAGE_TEXT,
 	PAGE_TEXTPATH,
 	PAGE_CONTROLLER,
-	PAGE_ASCII,
 	PAGE_TILEMAP,
 	PAGE_COLLISION,
 	PAGE_INTERPOLATE,
 	PAGE_PARTICLES,
 	PAGE_TRAILAREA,
+	PAGE_PATH,
 #ifndef VFRAME_NO_PHYSICS
 	PAGE_PHYSICS,
 #endif
 #ifndef VFRAME_NO_3D
 	PAGE_GRAPHICS3D,
 #endif
+	PAGE_ASCII,
 	PAGE_LIGHTING2D,
 	PAGE_BACKDROP,
 	PAGE_ASYNC,
@@ -57,6 +58,9 @@ void DemoStatesManager::SetNewPage()
 			break;
 		case PAGE_LIGHTING2D:
 			subState = new Lighting2DState();
+			break;
+		case PAGE_PATH:
+			subState = new PathState();
 			break;
 		case PAGE_PARTICLES:
 			subState = new ParticlesState();

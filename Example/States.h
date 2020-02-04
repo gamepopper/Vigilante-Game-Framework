@@ -13,6 +13,7 @@
 #include "../VFrame/VTilemap.h"
 #include "../VFrame/VTrailArea.h"
 #include "../VFrame/VTextPath.h"
+#include "../VFrame/VPath.h"
 #include "../VFrame/VTypedText.h"
 #include "../VFrame/VShape.h"
 #include "../VFrame/XInputDevice.h"
@@ -407,7 +408,7 @@ public:
 				player->Velocity.y = -450.0f;
 				player->Touching = 0;
 			},
-			[](VBase* base) //Exit
+			[](VBase* base, unsigned int state) //Exit
 			{
 				VSprite* player = dynamic_cast<VSprite*>(base);
 				if ((player->Touching & VObject::TOUCHRIGHT) > 0)
@@ -435,7 +436,7 @@ public:
 				player->Acceleration = sf::Vector2f(0, 0);
 				player->AngleVelocity = player->FlipX ? -900 : 900;
 			},
-			[](VBase* base) //Exit
+			[](VBase* base, unsigned int state) //Exit
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 				player->Angle = 0;
@@ -454,8 +455,8 @@ public:
 
 				return -1;
 			},
-			nullptr,
-			[this](VBase* base)
+			nullptr, //Enter
+			[this](VBase* base, unsigned int state) //Exit
 			{
 				ParentState->Cameras[0]->Shake(0.03f, 0.5f);
 			});
@@ -466,16 +467,7 @@ public:
 				VSprite* player = dynamic_cast<VSprite*>(base);
 
 				if (VGlobal::p()->Input->IsButtonPressed("A"))
-				{
-					player->MaxVelocity = sf::Vector2f(200, 600);
-
-					if (player->FlipX)
-						player->Velocity.x = -player->MaxVelocity.x;
-					else
-						player->Velocity.x = player->MaxVelocity.x;
-
 					return PLAYER_JUMPING;
-				}
 
 				bool touchingWalls = false;
 				if (player->FlipX)
@@ -494,11 +486,19 @@ public:
 				player->MaxVelocity *= 0.9f;
 				player->MaxVelocity.x = 0.0f;
 			},
-			[](VBase* base) //Exit
+			[](VBase* base, unsigned int state) //Exit
 			{
-				VObject* player = dynamic_cast<VObject*>(base);
+				VSprite* player = dynamic_cast<VSprite*>(base);
 				player->Drag.x = 200;
 				player->MaxVelocity = sf::Vector2f(200, 600);
+
+				if (state == PLAYER_JUMPING)
+				{
+					if (player->FlipX)
+						player->Velocity.x = -player->MaxVelocity.x;
+					else
+						player->Velocity.x = player->MaxVelocity.x;
+				}
 			});
 	}
 
@@ -684,6 +684,149 @@ public:
 	{
 		VShape* sprite = dynamic_cast<VShape*>(object);
 		VGlobal::p()->BackgroundColor = sprite->GetOutlineTint();
+	}
+};
+
+//Path
+/*
+Tests the VPath class
+*/
+class PathState : public VSubState
+{
+	typedef VSubState VSUPERCLASS;
+
+	VSprite* playerControl;
+	VPath* playerPath;
+	VGroup* pathPoints;
+	VText* stateText;
+	float timer = 0.0f;
+
+public:
+	PathState() : VSubState() {}
+	~PathState() = default;
+
+	virtual void Initialise()
+	{
+		VSUPERCLASS::Initialise();
+
+		pathPoints = new VGroup();
+		Add(pathPoints);
+
+		playerControl = new VSprite(0.0f, 0.0f, "Example/Assets/Player.png");
+		playerControl->SetPositionAtCentre(100.0f, VGlobal::p()->Height / 2.0f);
+		Add(playerControl);
+
+		stateText = new VText(10.0f, 60.0f, VGlobal::p()->Width - 20.0f);
+		stateText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VText::ALIGNLEFT);
+		stateText->SetText("");
+		stateText->SetOutlineThickness(2.0f);
+		stateText->SetOutlineTint(sf::Color::Black);
+		stateText->ScrollFactor *= 0.0f;
+		Add(stateText);
+
+		playerPath = new VPath();
+		playerPath->SetUpdateAngle(true);
+		playerPath->SetPathType(VPath::LINE);
+		playerPath->SetInterpolationType(VInterpolate::OutElastic);
+	}
+
+	void AddPoint(sf::Vector2f p)
+	{
+		pathPoints->exists = true;
+		pathPoints->alive = true;
+
+		VShape* point = dynamic_cast<VShape*>(pathPoints->FirstDead());
+		if (point)
+		{
+			point->Revive();
+		}
+		else
+		{
+			point = new VShape();
+			point->SetCircle(5.0f);
+			point->SetFillTint(sf::Color::Red);
+			pathPoints->Add(point);
+		}
+
+		point->SetPositionAtCentre(p);
+	}
+
+	virtual void HandleEvents(const sf::Event& event)
+	{
+		if (event.type == sf::Event::MouseButtonPressed)
+		{
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				if (playerPath->GetNumPoints() == 0)
+				{
+					playerPath->AddPoint(playerControl->Position + (playerControl->Size / 2.0f));
+					AddPoint(playerControl->Position + (playerControl->Size / 2.0f));
+				}
+
+				playerPath->AddPoint(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+				AddPoint(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+				playerPath->SetSpeed(1.0f / (playerPath->GetNumPoints() - 1));
+			}
+		}
+
+		if (event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == sf::Keyboard::Space)
+			{
+				playerPath->StartFollowing(playerControl, std::bind(&PathState::clearPath, this));
+			}
+
+			if (event.key.code == sf::Keyboard::O)
+			{
+				playerPath->SetPathType(playerPath->GetPathType() == VPath::LINE ? VPath::CURVE : VPath::LINE);
+			}
+
+			if (event.key.code == sf::Keyboard::K)
+			{
+				playerPath->SetInterpolationType((VInterpolate::VInterpolateType)(((int)playerPath->GetInterpolationType() - 1 + VInterpolate::NumInterpolationTypes) % VInterpolate::NumInterpolationTypes));
+			}
+
+			if (event.key.code == sf::Keyboard::L)
+			{
+				playerPath->SetInterpolationType((VInterpolate::VInterpolateType)(((int)playerPath->GetInterpolationType() + 1 + VInterpolate::NumInterpolationTypes) % VInterpolate::NumInterpolationTypes));
+			}
+		}
+	}
+
+	virtual void Update(float dt)
+	{
+		VSUPERCLASS::Update(dt);
+		playerPath->Update(dt);
+
+		std::string lineTypes[VPath::NUMPATHTYPES] = {
+			"LINE", "CURVE"
+		};
+
+		std::string interpolationTypes[VInterpolate::NumInterpolationTypes] = {
+			"InBack", "OutBack", "InOutBack", "InBounce", "OutBounce", "InOutBounce",
+			"InCirc", "OutCirc", "InOutCirc", "InCubic", "OutCubic", "InOutCubic",
+			"InElastic", "OutElastic", "InOutElastic", "InExpo", "OutExpo", "InOutExpo",
+			"Linear", "InQuad", "OutQuad", "InOutQuad", "InQuart", "OutQuart", "InOutQuart",
+			"InQuint", "OutQuint", "InOutQuint", "InSine", "OutSine", "InOutSine",
+		};
+
+		sf::String s;
+		s = "Line Type (O): " + lineTypes[playerPath->GetPathType()] + "\n";
+		s += "Interpolation Type (K/L): " + interpolationTypes[playerPath->GetInterpolationType()];
+
+		stateText->SetText(s);
+	}
+
+	virtual void Draw(sf::RenderTarget& RenderTarget)
+	{
+		playerPath->Draw(RenderTarget);
+		VSUPERCLASS::Draw(RenderTarget);
+	}
+
+	void clearPath()
+	{
+		playerPath->ClearPath();
+		pathPoints->Kill();
 	}
 };
 
