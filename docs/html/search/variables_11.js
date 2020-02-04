@@ -16,5 +16,5 @@ var searchData=
   ['touching',['Touching',['../class_v_object.html#a7ef9ed6e356e0f51f74a21149c9612aa',1,'VObject']]],
   ['transform',['transform',['../class_v3_d_model.html#acd14cd1afeebb47ad08614803c93cb5c',1,'V3DModel::transform()'],['../class_v3_d_obj_model.html#a470274b20b2815a305eb87452d7eb709',1,'V3DObjModel::transform()'],['../class_v_backdrop.html#a16436cb56b4ed62f8ccbde43eb47e226',1,'VBackdrop::transform()']]],
   ['trianglecount',['triangleCount',['../struct_v3_d_obj_model_1_1_v3_d_model_data.html#a4014bc290d57e41c0d1d180221a02ed5',1,'V3DObjModel::V3DModelData']]],
-  ['type',['type',['../class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f',1,'VBase::type()'],['../struct_v3_d_light.html#adf638859ea6643a6d4ed11f46ae85c1d',1,'V3DLight::Type()']]]
+  ['type',['Type',['../struct_v3_d_light.html#adf638859ea6643a6d4ed11f46ae85c1d',1,'V3DLight::Type()'],['../class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f',1,'VBase::type()']]]
 ];

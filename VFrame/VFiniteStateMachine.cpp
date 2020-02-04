@@ -4,7 +4,7 @@ class VFiniteState
 {
 	std::function<void(VBase*)> onEnter = nullptr;
 	std::function<int(VBase*, float)> onUpdate = nullptr;
-	std::function<void(VBase*)> onExit = nullptr;
+	std::function<void(VBase*, unsigned int)> onExit = nullptr;
 	bool hasEntered = false;
 
 public:
@@ -17,7 +17,7 @@ public:
 	* @param onEnterFunc The function that gets called when the FSM first enters a state. Needs to be a function that passes in a VBase object as a parameter. (optional)
 	* @param onExitFunc The function that gets called when the FSM exits a state. Needs to be a function that passes in a VBase object as a parameter. (optional)
 	*/
-	void SetupFunctions(std::function<int(VBase*, float)> onUpdateFunc, std::function<void(VBase*)> onEnterFunc = nullptr, std::function<void(VBase*)> onExitFunc = nullptr);
+	void SetupFunctions(std::function<int(VBase*, float)> onUpdateFunc, std::function<void(VBase*)> onEnterFunc = nullptr, std::function<void(VBase*, unsigned int)> onExitFunc = nullptr);
 	
 	/**
 	* Calls the Enter function of the state (if one is defined).
@@ -36,8 +36,9 @@ public:
 	/**
 	* Calls the Exit function of the state (if one is defined) and reset the state.
 	* @param base The base object to pass into the Exit function.
+	* @param state The next state the FSM is entering.
 	*/
-	void CallExit(VBase* base);
+	void CallExit(VBase* base, unsigned int state);
 };
 
 VFiniteStateMachine::VFiniteStateMachine(VBase* baseObj, unsigned int MaxSize)
@@ -56,7 +57,7 @@ void VFiniteStateMachine::SetNewState(unsigned int state)
 {
 	if (this->state != state && state < finiteStates.size())
 	{
-		finiteStates[this->state].CallExit(base);
+		finiteStates[this->state].CallExit(base, state);
 		this->state = state;
 		finiteStates[this->state].CallEnter(base);
 	}
@@ -64,7 +65,7 @@ void VFiniteStateMachine::SetNewState(unsigned int state)
 
 void VFiniteStateMachine::ResetState()
 {
-	finiteStates[state].CallExit(base);
+	finiteStates[state].CallExit(base, state);
 	finiteStates[state].CallEnter(base);
 }
 
@@ -74,17 +75,17 @@ void VFiniteStateMachine::Update(float dt)
 
 	if (newState >= 0 && newState < finiteStates.size())
 	{
-		finiteStates[state].CallExit(base);
+		finiteStates[state].CallExit(base, newState);
 		state = (unsigned int)newState;
 	}
 }
 
-void VFiniteStateMachine::Add(unsigned int stateID, std::function<int(VBase*, float)> onUpdateFunc, std::function<void(VBase*)> onEnterFunc, std::function<void(VBase*)> onExitFunc)
+void VFiniteStateMachine::Add(unsigned int stateID, std::function<int(VBase*, float)> onUpdateFunc, std::function<void(VBase*)> onEnterFunc, std::function<void(VBase*, unsigned int)> onExitFunc)
 {
 	finiteStates[stateID].SetupFunctions(onUpdateFunc, onEnterFunc, onExitFunc);
 }
 
-void VFiniteState::SetupFunctions(std::function<int(VBase*, float)> onUpdateFunc, std::function<void(VBase*)> onEnterFunc, std::function<void(VBase*)> onExitFunc)
+void VFiniteState::SetupFunctions(std::function<int(VBase*, float)> onUpdateFunc, std::function<void(VBase*)> onEnterFunc, std::function<void(VBase*, unsigned int)> onExitFunc)
 {
 	onEnter = onEnterFunc;
 	onUpdate = onUpdateFunc;
@@ -108,10 +109,10 @@ int VFiniteState::CallUpdate(VBase* base, float dt)
 	return onUpdate(base, dt);
 }
 
-void VFiniteState::CallExit(VBase* base)
+void VFiniteState::CallExit(VBase* base, unsigned int state)
 {
 	if (onExit != nullptr)
-		onExit(base);
+		onExit(base, state);
 
 	hasEntered = false;
 }

@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['path_5fanchor',['PATH_ANCHOR',['../class_v_text_path.html#ab92e32c0ec5eb87bcb425f08d2c464dea02607d1abd12e4c6a435d8ec3998d5c5',1,'VTextPath']]],
-  ['path_5fbezier',['PATH_BEZIER',['../class_v_text_path.html#ab92e32c0ec5eb87bcb425f08d2c464deab9e38add2bd3084fcdcd2a46e30a5495',1,'VTextPath']]],
-  ['platformer',['PLATFORMER',['../class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0da3dd51f2cffc395b6507d8fef47295166',1,'VCamera']]],
-  ['postsolve',['POSTSOLVE',['../class_v_physics_group.html#ac9557de337d5603278d14af2e345f0eca3ff0da613037fa2927724ab4b4197368',1,'VPhysicsGroup']]],
-  ['presolve',['PRESOLVE',['../class_v_physics_group.html#ac9557de337d5603278d14af2e345f0eca591172677a4410cae7e84d5400c73e9a',1,'VPhysicsGroup']]]
+  ['num_5fpath_5fcurves',['NUM_PATH_CURVES',['../class_v_text_path.html#ab92e32c0ec5eb87bcb425f08d2c464deab468a1adc42451d3b636fd47e7de4b8f',1,'VTextPath']]]
 ];

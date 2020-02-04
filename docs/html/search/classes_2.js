@@ -34,6 +34,7 @@ var searchData=
   ['vmusic',['VMusic',['../class_v_music.html',1,'']]],
   ['vobject',['VObject',['../class_v_object.html',1,'']]],
   ['vparticle',['VParticle',['../class_v_particle.html',1,'']]],
+  ['vpath',['VPath',['../class_v_path.html',1,'']]],
   ['vphysicsarbiter',['VPhysicsArbiter',['../struct_v_physics_arbiter.html',1,'']]],
   ['vphysicsgroup',['VPhysicsGroup',['../class_v_physics_group.html',1,'']]],
   ['vphysicsjoints',['VPhysicsJoints',['../class_v_physics_joints.html',1,'']]],

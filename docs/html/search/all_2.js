@@ -14,6 +14,7 @@ var searchData=
   ['circular',['Circular',['../class_v_emitter.html#a89a7abfc74d4c5d79d7b7cbcff2e29aa',1,'VEmitter']]],
   ['cleanup',['Cleanup',['../class_v_collision.html#a5533a34e8c03824b6669e6bdc3b74661',1,'VCollision::Cleanup()'],['../class_v_game.html#a2403e47dac31ed31fff3d95e026ef85a',1,'VGame::Cleanup()'],['../class_v_global.html#af5c92364b8bff968952dfa9073934da6',1,'VGlobal::Cleanup()'],['../class_v_sound_manager.html#a3c0a089a01d30546b01956d26280f0a2',1,'VSoundManager::Cleanup()'],['../class_v_state.html#a09f52e496785b6b120a8070f6e7b0e78',1,'VState::Cleanup()'],['../class_v_sub_state.html#a1f64c49393883197afd11839a416402f',1,'VSubState::Cleanup()']]],
   ['clear',['Clear',['../class_v_animation_manager.html#a41f24fe33af1a447505779a9104ff190',1,'VAnimationManager::Clear()'],['../class_v_group.html#a94b47faa2425ee65841c09390e0c25b7',1,'VGroup::Clear()'],['../class_v_state_manager.html#aaff7ee99185e71abc9843eab80962f69',1,'VStateManager::Clear()'],['../class_v_time_manager.html#ae5ce19fec7211a2691bc624565ed203a',1,'VTimeManager::Clear()'],['../struct_v_quad_tree.html#a7f5bac0f53729c49354b53f0cb7f5160',1,'VQuadTree::clear()']]],
+  ['clearpath',['ClearPath',['../class_v_path.html#afa5905760283c5d065f9e487901e3bdf',1,'VPath']]],
   ['clearstate',['ClearState',['../class_v_global.html#aab319618a34b8ec21cbfbdd380d1f05b',1,'VGlobal']]],
   ['cleartiles',['clearTiles',['../class_v_tilemap.html#a313150df6d6ee504c644b4d339031b5c',1,'VTilemap']]],
   ['close',['Close',['../class_v_sub_state.html#a9038cb891e1441a0ad4dbcbc7b7e810a',1,'VSubState']]],
@@ -24,7 +25,7 @@ var searchData=
   ['collidescircle',['CollidesCircle',['../class_v_global.html#a49687f446bc6fdbafd15ff4c034243cf',1,'VGlobal']]],
   ['collisiondir',['collisionDir',['../class_v_tilemap.html#a172acb2ee1639a65b5c5f93bc0aaacdd',1,'VTilemap']]],
   ['collisionxdrag',['CollisionXDrag',['../class_v_object.html#a912708fc0c91f1fb12aa61d49fb42634',1,'VObject']]],
-  ['color',['color',['../struct_v3_d_vertex.html#adffb12197b2d630ec3d97e108d408471',1,'V3DVertex::color()'],['../class_v_interpolate.html#a2f925be0cf10cf0bfbd76ff98a8b581b',1,'VInterpolate::Color()']]],
+  ['color',['Color',['../class_v_interpolate.html#a2f925be0cf10cf0bfbd76ff98a8b581b',1,'VInterpolate::Color()'],['../struct_v3_d_vertex.html#adffb12197b2d630ec3d97e108d408471',1,'V3DVertex::color()']]],
   ['colour',['colour',['../class_v_tilemap.html#a55805df7aed239c7dad06f83190bbee7',1,'VTilemap']]],
   ['colourrange',['ColourRange',['../class_v_emitter.html#a462d65017d99babd694428903c5d94cd',1,'VEmitter::ColourRange()'],['../class_v_particle.html#af1123f53dd8f1d62f58b88ab4ab80955',1,'VParticle::ColourRange()']]],
   ['computevelocity',['computeVelocity',['../class_v_object.html#a4cffad74d30e7b13d4931198bf0d16e4',1,'VObject']]],
@@ -42,5 +43,6 @@ var searchData=
   ['currentstate',['CurrentState',['../class_v_global.html#a93e9f40a3df5f860b8ab3f3a18763fe8',1,'VGlobal::CurrentState()'],['../class_v_state_manager.html#a4e04888f7667fcb602ec7b6e09904ee8',1,'VStateManager::CurrentState()']]],
   ['cursorblinkspeed',['CursorBlinkSpeed',['../class_v_typed_text.html#a344d6f46d594e5fec1cb8a39b9965963',1,'VTypedText']]],
   ['cursorchar',['CursorChar',['../class_v_typed_text.html#a534fb1b546db78fa2bf3dc66b3e129de',1,'VTypedText']]],
+  ['curve',['CURVE',['../class_v_path.html#a6732633f619ef3d035da3d4bda0a13efa3106b70462379960ef3ad014ea3a3ede',1,'VPath']]],
   ['cutoff',['CutOff',['../struct_v3_d_light.html#ae934db1244145e7f79b7e7f110e7143d',1,'V3DLight']]]
 ];

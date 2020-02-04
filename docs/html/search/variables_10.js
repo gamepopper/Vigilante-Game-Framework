@@ -10,7 +10,7 @@ var searchData=
   ['scrollvelocity',['ScrollVelocity',['../class_v_backdrop.html#aacc8391ce09130c617076c38621812e4',1,'VBackdrop']]],
   ['scrollwheel',['scrollWheel',['../class_v_input_handler.html#ad26a297f986c97e0b4161ea7d10ff689',1,'VInputHandler']]],
   ['separatebias',['SeparateBias',['../class_v_object.html#aa677149463543fe198fdf48c2abd961f',1,'VObject']]],
-  ['shader',['shader',['../class_v3_d_obj_model.html#ae0e41eebbc87b685749780d4d72ffd61',1,'V3DObjModel::shader()'],['../class_v3_d_scene.html#aa734dec2df3f32cd403974fa05996d35',1,'V3DScene::Shader()']]],
+  ['shader',['Shader',['../class_v3_d_scene.html#aa734dec2df3f32cd403974fa05996d35',1,'V3DScene::Shader()'],['../class_v3_d_obj_model.html#ae0e41eebbc87b685749780d4d72ffd61',1,'V3DObjModel::shader()']]],
   ['shakelength',['shakeLength',['../class_v_camera.html#ab8051675c8df2d4ee50d1f1e24e4fcaf',1,'VCamera']]],
   ['shaketimer',['shakeTimer',['../class_v_camera.html#a88fc62dcfba5b3acf7d88dec95707a0a',1,'VCamera']]],
   ['shakex',['shakeX',['../class_v_camera.html#a0a16b5234fbf4bd35544b3dc9ce8ca89',1,'VCamera']]],
@@ -23,7 +23,7 @@ var searchData=
   ['sound',['Sound',['../class_v_global.html#a5fa2cc64f368f1e7ac5d88124b269f1b',1,'VGlobal']]],
   ['specular',['Specular',['../struct_v3_d_material.html#a827b0b8d03cae3a6087a49e1d3e1f014',1,'V3DMaterial']]],
   ['speedrange',['SpeedRange',['../class_v_emitter.html#a4fb0498db7335fc4e436d55487c1914b',1,'VEmitter']]],
-  ['sprite',['sprite',['../class_v_render_layer.html#aa0b3bc0de30a1eb751eb9469d6b4a94e',1,'VRenderLayer::sprite()'],['../class_v_render_group.html#a1da609bd10bbaac2c89fa2af87b64f89',1,'VRenderGroup::Sprite()']]],
+  ['sprite',['Sprite',['../class_v_render_group.html#a1da609bd10bbaac2c89fa2af87b64f89',1,'VRenderGroup::Sprite()'],['../class_v_render_layer.html#aa0b3bc0de30a1eb751eb9469d6b4a94e',1,'VRenderLayer::sprite()']]],
   ['states',['states',['../class_v_state_manager.html#a2af3dc6e0cb9e5ff35f1d0e62cae6013',1,'VStateManager']]],
   ['style',['style',['../class_v_text.html#aa0c3f41b1569a5fc147e13e4f729d9c3',1,'VText']]],
   ['substate',['SubState',['../class_v_state.html#a0057234fcf4448aabf602d87dbfb176f',1,'VState']]]

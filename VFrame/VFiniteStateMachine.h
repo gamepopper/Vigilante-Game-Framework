@@ -6,7 +6,7 @@
 *
 * MIT License
 *
-* Copyright (c) 2018 Tim Stoddard
+* Copyright (c) 2020 Tim Stoddard
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 *
 * @section DESCRIPTION
 *
-* Text rendering object that displays the text to follow a specified path.
+* An object for handling a Finite State machine.
 */
 
 #pragma once
@@ -73,7 +73,7 @@ public:
 	* @param onEnterFunc The function that gets called when the FSM first enters a state. Needs to be a function that passes in a VBase object as a parameter. (optional)
 	* @param onExitFunc The function that gets called when the FSM exits a state. Needs to be a function that passes in a VBase object as a parameter. (optional)
 	*/
-	void Add(unsigned int stateID, std::function<int(VBase*,float)> onUpdateFunc, std::function<void(VBase*)> onEnterFunc = nullptr, std::function<void(VBase*)> onExitFunc = nullptr);
+	void Add(unsigned int stateID, std::function<int(VBase*,float)> onUpdateFunc, std::function<void(VBase*)> onEnterFunc = nullptr, std::function<void(VBase*, unsigned int)> onExitFunc = nullptr);
 
 	/**
 	* Updates the FSM.

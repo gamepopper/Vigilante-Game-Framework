@@ -6,7 +6,7 @@
 *
 * MIT License
 *
-* Copyright (c) 2018 Tim Stoddard
+* Copyright (c) 2020 Tim Stoddard
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -66,6 +66,7 @@ class VPhysicsObject : public VBase
 public:
 	typedef VBase VSUPERCLASS;
 
+	///The shape of the collision area of the physics object.
 	enum VObjectShape
 	{
 		CIRCLE,
@@ -74,6 +75,7 @@ public:
 		CUSTOM
 	};
 
+	///The physics type of the physics object.
 	enum VObjectType
 	{
 		KINEMATIC,
@@ -96,41 +98,122 @@ protected:
 	VObjectType bodyType;
 
 public:
+	/**
+	* @param Object The game object to apply physics towards.
+	* @param BodyType The type of physics body to set the physics object to.
+	* @param Shape The type of collision shape the object will have. Default is BOX.
+	* @param Verts If the shape set is LINE or CUSTOM, this parameter will define the shape in local space (relative to the top-left of the game object).
+	*/
 	VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectShape Shape = VObjectShape::BOX, std::vector<sf::Vector2f> Verts = {});
 
+	///Lock the X-Position of the object.
 	bool LockX = false;
+	///Lock the Y-Position of the object.
 	bool LockY = false;
+	///Lock the Angle of the object.
 	bool LockAngle = false;
 
+	/**
+	* Initialises the physics object.
+	* @param space The physics space to initialise the object to.
+	*/
 	void Initialise(cpSpace* space);
+
+	///@return Gets the base game object that physics is being applied to.
 	VObject* GetBaseObject();
+	
+	/**
+	* Deinitises and removes the physics object from the world.
+	* @param space The physics space to remove the object from.
+	*/
 	void Deinitialise(cpSpace* space);
 
+	///Destroys the physics data of the object.
 	virtual void Destroy() override;
+	
+	/**
+	* Updates the physics object.
+	* @param dt The delta time between the previous and current frame.
+	*/
 	virtual void Update(float dt) override;
 
+	///@return Gets the physics body as a void pointer (so it can be cast to a cpBody if necessary).
 	void* GetBody();
+	
+	///@return Gets the physics shape as a void pointer (so it can be cast to a cpShape if necessary).
 	void* GetShape();
 
+	///@return The density of the physics shape.
 	float GetDensity();
+
+	/**
+	* Sets the shape density.
+	* @param density The new density value of the physics shape.
+	*/
 	void SetDensity(float density);
 
+	///@return The friction of the physics shape.
 	float GetFriction();
+	
+	/**
+	* Sets the shape friction.
+	* @param friction The new friction value of the physics shape.
+	*/
 	void SetFriction(float friction);
 
+	///@return The surface velocity of the physics shape.
 	sf::Vector2f GetSurfaceVelocity();
+
+	/**
+	* Sets the surface velocity of the physics shape.
+	* @param surfaceVelocity The new surface velocity of the physics shape.
+	*/
 	void SetSurfaceVelocity(sf::Vector2f surfaceVelocity);
 
+	///@return The force of the physics body.
 	sf::Vector2f GetForce();
+
+	/**
+	* Sets the force of the physics body.
+	* @param force The new force value of the physics body.
+	*/
 	void SetForce(sf::Vector2f force);
 
+	///@return The torque of the physics body.
 	float GetTorque();
+	
+	/**
+	* Sets the torque of the physics body.
+	* @param torque The new torque of the physics body.
+	*/
 	void SetTorque(float torque);
 
+	/**
+	* Applys a force towards the phyics body at a point in world space.
+	* @param force The force to apply.
+	* @param point The point in world space to apply the force to.
+	*/
 	void ApplyForceAtWorldPoint(sf::Vector2f force, sf::Vector2f point);
+
+	/**
+	* Applys a force towards the phyics body at a point in local space.
+	* @param force The force to apply.
+	* @param point The point in local space to apply the force to.
+	*/
 	void ApplyForceAtLocalPoint(sf::Vector2f force, sf::Vector2f point);
 
+	/**
+	* Applys an impluse towards the phyics body at a point in world space.
+	* @param impulse The impulse to apply.
+	* @param point The point in world space to apply the force to.
+	*/
 	void ApplyImpulseAtWorldPoint(sf::Vector2f impulse, sf::Vector2f point);
+
+	/**
+	* Applys an impulse towards the phyics body at a point in local space.
+	* @param impulse The impulse to apply.
+	* @param point The point in local space to apply the force to.
+	*/
 	void ApplyImpulseAtLocalPoint(sf::Vector2f impulse, sf::Vector2f point);
 };
 #endif

@@ -2,8 +2,8 @@ var searchData=
 [
   ['imageexists',['ImageExists',['../class_v_content.html#ae765cda8cdac3d1f89b9fc455f0f2a27',1,'VContent']]],
   ['init',['Init',['../class_v_game.html#ac0927b7b1874f778a6e050b1e1a47034',1,'VGame']]],
-  ['initialise',['Initialise',['../class_v_collision.html#a0f25b32e6434961323fbb7ad5b3af505',1,'VCollision::Initialise()'],['../class_v_state.html#ab813731f8a1730a96c3e7105b96bc719',1,'VState::Initialise()'],['../class_v_sub_state.html#aea804e9383f2583de009a3780fb47a63',1,'VSubState::Initialise()']]],
-  ['isactive',['IsActive',['../class_v_typed_text.html#a55081e4573146b6915a2fe1148b0c0f5',1,'VTypedText']]],
+  ['initialise',['Initialise',['../class_v_collision.html#a0f25b32e6434961323fbb7ad5b3af505',1,'VCollision::Initialise()'],['../class_v_physics_object.html#a21829f1472d43e914b6d4b5f55e4b87e',1,'VPhysicsObject::Initialise()'],['../class_v_state.html#ab813731f8a1730a96c3e7105b96bc719',1,'VState::Initialise()'],['../class_v_sub_state.html#aea804e9383f2583de009a3780fb47a63',1,'VSubState::Initialise()']]],
+  ['isactive',['IsActive',['../class_v_path.html#a16be3c00ffbb8b73525d5ce7b10962d7',1,'VPath::IsActive()'],['../class_v_typed_text.html#a55081e4573146b6915a2fe1148b0c0f5',1,'VTypedText::IsActive()']]],
   ['isanybuttonpressed',['isAnyButtonPressed',['../classsf_1_1_x_input_device.html#a361aaeaa57e4ca009d7227cba194ee34',1,'sf::XInputDevice']]],
   ['isanyconnected',['isAnyConnected',['../classsf_1_1_x_input_device.html#ace60ef57dcf22d823d8c302836225d23',1,'sf::XInputDevice']]],
   ['isbuttondown',['IsButtonDown',['../class_v_input_handler.html#a65c1004b86fa205cf40bfc17fcf0094b',1,'VInputHandler']]],

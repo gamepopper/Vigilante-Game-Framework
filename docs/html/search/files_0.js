@@ -28,6 +28,7 @@ var searchData=
   ['vmusic_2eh',['VMusic.h',['../_v_music_8h.html',1,'']]],
   ['vobject_2eh',['VObject.h',['../_v_object_8h.html',1,'']]],
   ['vparticle_2eh',['VParticle.h',['../_v_particle_8h.html',1,'']]],
+  ['vpath_2eh',['VPath.h',['../_v_path_8h.html',1,'']]],
   ['vposteffect_2eh',['VPostEffect.h',['../_v_post_effect_8h.html',1,'']]],
   ['vrange_2eh',['VRange.h',['../_v_range_8h.html',1,'']]],
   ['vrendergroup_2eh',['VRenderGroup.h',['../_v_render_group_8h.html',1,'']]],

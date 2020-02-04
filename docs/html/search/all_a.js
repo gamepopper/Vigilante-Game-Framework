@@ -12,6 +12,7 @@ var searchData=
   ['light_5fcount',['LIGHT_COUNT',['../_v3_d_light_8h.html#a04f737f6f1242f7ca636b6d54c35510a',1,'V3DLight.h']]],
   ['lights',['Lights',['../class_v3_d_light_shader.html#aec916c5968996fadbd4625924b5066ce',1,'V3DLightShader']]],
   ['lighttype',['LightType',['../_v3_d_light_8h.html#adc3ec8293e6a97ebe43f0196b9a7f638',1,'V3DLight.h']]],
+  ['line',['LINE',['../class_v_path.html#a6732633f619ef3d035da3d4bda0a13efa339c67fca1e4ed96a68d1f298a8f859d',1,'VPath']]],
   ['linespacemodifier',['lineSpaceModifier',['../class_v_text.html#a8c8aea7c9c4fd86c5eff5474fde8ae44',1,'VText']]],
   ['lista',['listA',['../struct_v_quad_tree.html#a2a0ba4f87a571474d3905da942b97694',1,'VQuadTree']]],
   ['listb',['listB',['../struct_v_quad_tree.html#aa4a999d4669ef05997d91ab5398ca948',1,'VQuadTree']]],
@@ -30,7 +31,10 @@ var searchData=
   ['loadparticlesfromfile',['LoadParticlesFromFile',['../class_v_emitter.html#a849d70a3d2178d52b8e4ace5c14e27b1',1,'VEmitter']]],
   ['loadsound',['LoadSound',['../class_v_content.html#afdc7ccb477a1d0161e83775405485240',1,'VContent']]],
   ['loadtexture',['LoadTexture',['../class_v3_d_model.html#a74f10da43a2ed543932212b9b67fb495',1,'V3DModel::LoadTexture(const sf::String &amp;filename)'],['../class_v3_d_model.html#a2c4fc502881467de23a8d3b4df164651',1,'V3DModel::LoadTexture(const sf::Texture &amp;tex)'],['../class_v_content.html#a514a6be132312e357159b463297befe8',1,'VContent::LoadTexture()']]],
+  ['lockangle',['LockAngle',['../class_v_physics_object.html#a5dcb0892a185abff86b218dfb41ebfdc',1,'VPhysicsObject']]],
   ['lockon',['LOCKON',['../class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0da112937c85f12af168d548b121edfb896',1,'VCamera']]],
+  ['lockx',['LockX',['../class_v_physics_object.html#a9b1cd79af50a734b7842217958fab7dc',1,'VPhysicsObject']]],
+  ['locky',['LockY',['../class_v_physics_object.html#ab640fc6f859ea5841a6f38ac2eb8a431',1,'VPhysicsObject']]],
   ['lookat',['LookAt',['../class_v3_d_camera.html#a8e01e28ed7d7baf15fe0f75018d0d5ca',1,'V3DCamera']]],
   ['loop',['Loop',['../class_v_music.html#a0689e8e47b61762458d4573db15acf46',1,'VMusic']]]
 ];

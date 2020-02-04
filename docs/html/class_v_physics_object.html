@@ -90,16 +90,18 @@ Inheritance diagram for VPhysicsObject:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ae6a607763cbff0935a440465817457f5"><td class="memItemLeft" align="right" valign="top"><a id="ae6a607763cbff0935a440465817457f5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>VObjectShape</b> { <b>CIRCLE</b>, 
+<tr class="memitem:ae6a607763cbff0935a440465817457f5"><td class="memItemLeft" align="right" valign="top"><a id="ae6a607763cbff0935a440465817457f5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ae6a607763cbff0935a440465817457f5">VObjectShape</a> { <b>CIRCLE</b>, 
 <b>BOX</b>, 
 <b>LINE</b>, 
 <b>CUSTOM</b>
  }</td></tr>
+<tr class="memdesc:ae6a607763cbff0935a440465817457f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The shape of the collision area of the physics object. <br /></td></tr>
 <tr class="separator:ae6a607763cbff0935a440465817457f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad60190624dbcbba01a3f147d1873fcf5"><td class="memItemLeft" align="right" valign="top"><a id="ad60190624dbcbba01a3f147d1873fcf5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>VObjectType</b> { <b>KINEMATIC</b>, 
+<tr class="memitem:ad60190624dbcbba01a3f147d1873fcf5"><td class="memItemLeft" align="right" valign="top"><a id="ad60190624dbcbba01a3f147d1873fcf5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a> { <b>KINEMATIC</b>, 
 <b>DYNAMIC</b>, 
 <b>STATIC</b>
  }</td></tr>
+<tr class="memdesc:ad60190624dbcbba01a3f147d1873fcf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The physics type of the physics object. <br /></td></tr>
 <tr class="separator:ad60190624dbcbba01a3f147d1873fcf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64ca2fef3629e2ebe77188fa1dbe9af1"><td class="memItemLeft" align="right" valign="top"><a id="a64ca2fef3629e2ebe77188fa1dbe9af1"></a>
 typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="memItemRight" valign="bottom"><b>VSUPERCLASS</b></td></tr>
@@ -107,71 +109,51 @@ typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="me
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a997ff00061de04455e27d9b10cdf5df9"><td class="memItemLeft" align="right" valign="top"><a id="a997ff00061de04455e27d9b10cdf5df9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>VPhysicsObject</b> (<a class="el" href="class_v_object.html">VObject</a> *Object, VObjectType BodyType, VObjectShape Shape=VObjectShape::BOX, std::vector&lt; sf::Vector2f &gt; Verts={})</td></tr>
+<tr class="memitem:a997ff00061de04455e27d9b10cdf5df9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a997ff00061de04455e27d9b10cdf5df9">VPhysicsObject</a> (<a class="el" href="class_v_object.html">VObject</a> *Object, <a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a> BodyType, <a class="el" href="class_v_physics_object.html#ae6a607763cbff0935a440465817457f5">VObjectShape</a> Shape=VObjectShape::BOX, std::vector&lt; sf::Vector2f &gt; Verts={})</td></tr>
 <tr class="separator:a997ff00061de04455e27d9b10cdf5df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21829f1472d43e914b6d4b5f55e4b87e"><td class="memItemLeft" align="right" valign="top"><a id="a21829f1472d43e914b6d4b5f55e4b87e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Initialise</b> (cpSpace *space)</td></tr>
+<tr class="memitem:a21829f1472d43e914b6d4b5f55e4b87e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a21829f1472d43e914b6d4b5f55e4b87e">Initialise</a> (cpSpace *space)</td></tr>
 <tr class="separator:a21829f1472d43e914b6d4b5f55e4b87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d10f01cc83303e81c3845bf7f303da0"><td class="memItemLeft" align="right" valign="top"><a id="a4d10f01cc83303e81c3845bf7f303da0"></a>
-<a class="el" href="class_v_object.html">VObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetBaseObject</b> ()</td></tr>
+<tr class="memitem:a4d10f01cc83303e81c3845bf7f303da0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_object.html">VObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a4d10f01cc83303e81c3845bf7f303da0">GetBaseObject</a> ()</td></tr>
 <tr class="separator:a4d10f01cc83303e81c3845bf7f303da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5aae5629f2626c3534b9c6a2bab0ec2f"><td class="memItemLeft" align="right" valign="top"><a id="a5aae5629f2626c3534b9c6a2bab0ec2f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Deinitialise</b> (cpSpace *space)</td></tr>
+<tr class="memitem:a5aae5629f2626c3534b9c6a2bab0ec2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a5aae5629f2626c3534b9c6a2bab0ec2f">Deinitialise</a> (cpSpace *space)</td></tr>
 <tr class="separator:a5aae5629f2626c3534b9c6a2bab0ec2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d2d2ee7130b100d967f40674b057dad"><td class="memItemLeft" align="right" valign="top"><a id="a5d2d2ee7130b100d967f40674b057dad"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a5d2d2ee7130b100d967f40674b057dad">Destroy</a> () override</td></tr>
-<tr class="memdesc:a5d2d2ee7130b100d967f40674b057dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys object and any data that must be destroyed. <br /></td></tr>
+<tr class="memdesc:a5d2d2ee7130b100d967f40674b057dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the physics data of the object. <br /></td></tr>
 <tr class="separator:a5d2d2ee7130b100d967f40674b057dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e05ba004bbb0878634eb936fa3edc13"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a7e05ba004bbb0878634eb936fa3edc13">Update</a> (float dt) override</td></tr>
 <tr class="separator:a7e05ba004bbb0878634eb936fa3edc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65cb5c2942592b8ef769619ddd11f417"><td class="memItemLeft" align="right" valign="top"><a id="a65cb5c2942592b8ef769619ddd11f417"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>GetBody</b> ()</td></tr>
+<tr class="memitem:a65cb5c2942592b8ef769619ddd11f417"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a65cb5c2942592b8ef769619ddd11f417">GetBody</a> ()</td></tr>
 <tr class="separator:a65cb5c2942592b8ef769619ddd11f417"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c410829c131fbee4a3174958e1af775"><td class="memItemLeft" align="right" valign="top"><a id="a7c410829c131fbee4a3174958e1af775"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>GetShape</b> ()</td></tr>
+<tr class="memitem:a7c410829c131fbee4a3174958e1af775"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a7c410829c131fbee4a3174958e1af775">GetShape</a> ()</td></tr>
 <tr class="separator:a7c410829c131fbee4a3174958e1af775"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe780722d67b65f5571e4677a8a7a888"><td class="memItemLeft" align="right" valign="top"><a id="afe780722d67b65f5571e4677a8a7a888"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>GetDensity</b> ()</td></tr>
+<tr class="memitem:afe780722d67b65f5571e4677a8a7a888"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#afe780722d67b65f5571e4677a8a7a888">GetDensity</a> ()</td></tr>
 <tr class="separator:afe780722d67b65f5571e4677a8a7a888"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3de647909b0fe9703286df103bf9482e"><td class="memItemLeft" align="right" valign="top"><a id="a3de647909b0fe9703286df103bf9482e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetDensity</b> (float density)</td></tr>
+<tr class="memitem:a3de647909b0fe9703286df103bf9482e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a3de647909b0fe9703286df103bf9482e">SetDensity</a> (float density)</td></tr>
 <tr class="separator:a3de647909b0fe9703286df103bf9482e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a946bda2fedcf5dd6bb41cd3d20fa9939"><td class="memItemLeft" align="right" valign="top"><a id="a946bda2fedcf5dd6bb41cd3d20fa9939"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>GetFriction</b> ()</td></tr>
+<tr class="memitem:a946bda2fedcf5dd6bb41cd3d20fa9939"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a946bda2fedcf5dd6bb41cd3d20fa9939">GetFriction</a> ()</td></tr>
 <tr class="separator:a946bda2fedcf5dd6bb41cd3d20fa9939"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ea57fc23641c2abe1c6e1f6bbeb43f2"><td class="memItemLeft" align="right" valign="top"><a id="a2ea57fc23641c2abe1c6e1f6bbeb43f2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFriction</b> (float friction)</td></tr>
+<tr class="memitem:a2ea57fc23641c2abe1c6e1f6bbeb43f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a2ea57fc23641c2abe1c6e1f6bbeb43f2">SetFriction</a> (float friction)</td></tr>
 <tr class="separator:a2ea57fc23641c2abe1c6e1f6bbeb43f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab756f41fe2a71b52b4180811fe9d987d"><td class="memItemLeft" align="right" valign="top"><a id="ab756f41fe2a71b52b4180811fe9d987d"></a>
-sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>GetSurfaceVelocity</b> ()</td></tr>
+<tr class="memitem:ab756f41fe2a71b52b4180811fe9d987d"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ab756f41fe2a71b52b4180811fe9d987d">GetSurfaceVelocity</a> ()</td></tr>
 <tr class="separator:ab756f41fe2a71b52b4180811fe9d987d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2114c6385cab92882402282afc184152"><td class="memItemLeft" align="right" valign="top"><a id="a2114c6385cab92882402282afc184152"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetSurfaceVelocity</b> (sf::Vector2f surfaceVelocity)</td></tr>
+<tr class="memitem:a2114c6385cab92882402282afc184152"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a2114c6385cab92882402282afc184152">SetSurfaceVelocity</a> (sf::Vector2f surfaceVelocity)</td></tr>
 <tr class="separator:a2114c6385cab92882402282afc184152"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5430eddb4f1f270f77fad85b8bf2d5a3"><td class="memItemLeft" align="right" valign="top"><a id="a5430eddb4f1f270f77fad85b8bf2d5a3"></a>
-sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>GetForce</b> ()</td></tr>
+<tr class="memitem:a5430eddb4f1f270f77fad85b8bf2d5a3"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a5430eddb4f1f270f77fad85b8bf2d5a3">GetForce</a> ()</td></tr>
 <tr class="separator:a5430eddb4f1f270f77fad85b8bf2d5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44f1a7a5b90c31cb5621de00960300c4"><td class="memItemLeft" align="right" valign="top"><a id="a44f1a7a5b90c31cb5621de00960300c4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetForce</b> (sf::Vector2f force)</td></tr>
+<tr class="memitem:a44f1a7a5b90c31cb5621de00960300c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a44f1a7a5b90c31cb5621de00960300c4">SetForce</a> (sf::Vector2f force)</td></tr>
 <tr class="separator:a44f1a7a5b90c31cb5621de00960300c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3afac1e418a31cc39d68583c603c177"><td class="memItemLeft" align="right" valign="top"><a id="ad3afac1e418a31cc39d68583c603c177"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>GetTorque</b> ()</td></tr>
+<tr class="memitem:ad3afac1e418a31cc39d68583c603c177"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ad3afac1e418a31cc39d68583c603c177">GetTorque</a> ()</td></tr>
 <tr class="separator:ad3afac1e418a31cc39d68583c603c177"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae39f01d3706930250dfbd1b883306b0c"><td class="memItemLeft" align="right" valign="top"><a id="ae39f01d3706930250dfbd1b883306b0c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetTorque</b> (float torque)</td></tr>
+<tr class="memitem:ae39f01d3706930250dfbd1b883306b0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ae39f01d3706930250dfbd1b883306b0c">SetTorque</a> (float torque)</td></tr>
 <tr class="separator:ae39f01d3706930250dfbd1b883306b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a349a4808556f63d3d339e1f10795c865"><td class="memItemLeft" align="right" valign="top"><a id="a349a4808556f63d3d339e1f10795c865"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ApplyForceAtWorldPoint</b> (sf::Vector2f force, sf::Vector2f point)</td></tr>
+<tr class="memitem:a349a4808556f63d3d339e1f10795c865"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a349a4808556f63d3d339e1f10795c865">ApplyForceAtWorldPoint</a> (sf::Vector2f force, sf::Vector2f point)</td></tr>
 <tr class="separator:a349a4808556f63d3d339e1f10795c865"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0ea69ec066f6aee80af05807771314a"><td class="memItemLeft" align="right" valign="top"><a id="ac0ea69ec066f6aee80af05807771314a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ApplyForceAtLocalPoint</b> (sf::Vector2f force, sf::Vector2f point)</td></tr>
+<tr class="memitem:ac0ea69ec066f6aee80af05807771314a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ac0ea69ec066f6aee80af05807771314a">ApplyForceAtLocalPoint</a> (sf::Vector2f force, sf::Vector2f point)</td></tr>
 <tr class="separator:ac0ea69ec066f6aee80af05807771314a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92e21eadfa43affbd63914141668e672"><td class="memItemLeft" align="right" valign="top"><a id="a92e21eadfa43affbd63914141668e672"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ApplyImpulseAtWorldPoint</b> (sf::Vector2f impulse, sf::Vector2f point)</td></tr>
+<tr class="memitem:a92e21eadfa43affbd63914141668e672"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a92e21eadfa43affbd63914141668e672">ApplyImpulseAtWorldPoint</a> (sf::Vector2f impulse, sf::Vector2f point)</td></tr>
 <tr class="separator:a92e21eadfa43affbd63914141668e672"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a759752f9e3c329ab78758d3bca56c6ef"><td class="memItemLeft" align="right" valign="top"><a id="a759752f9e3c329ab78758d3bca56c6ef"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ApplyImpulseAtLocalPoint</b> (sf::Vector2f impulse, sf::Vector2f point)</td></tr>
+<tr class="memitem:a759752f9e3c329ab78758d3bca56c6ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a759752f9e3c329ab78758d3bca56c6ef">ApplyImpulseAtLocalPoint</a> (sf::Vector2f impulse, sf::Vector2f point)</td></tr>
 <tr class="separator:a759752f9e3c329ab78758d3bca56c6ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
 <tr class="memitem:a2d454eaacf1342b22a4367d359ce0827 inherit pub_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a2d454eaacf1342b22a4367d359ce0827">Kill</a> ()</td></tr>
@@ -186,13 +168,16 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a9b1cd79af50a734b7842217958fab7dc"><td class="memItemLeft" align="right" valign="top"><a id="a9b1cd79af50a734b7842217958fab7dc"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>LockX</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a9b1cd79af50a734b7842217958fab7dc">LockX</a> = false</td></tr>
+<tr class="memdesc:a9b1cd79af50a734b7842217958fab7dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock the X-Position of the object. <br /></td></tr>
 <tr class="separator:a9b1cd79af50a734b7842217958fab7dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab640fc6f859ea5841a6f38ac2eb8a431"><td class="memItemLeft" align="right" valign="top"><a id="ab640fc6f859ea5841a6f38ac2eb8a431"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>LockY</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ab640fc6f859ea5841a6f38ac2eb8a431">LockY</a> = false</td></tr>
+<tr class="memdesc:ab640fc6f859ea5841a6f38ac2eb8a431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock the Y-Position of the object. <br /></td></tr>
 <tr class="separator:ab640fc6f859ea5841a6f38ac2eb8a431"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5dcb0892a185abff86b218dfb41ebfdc"><td class="memItemLeft" align="right" valign="top"><a id="a5dcb0892a185abff86b218dfb41ebfdc"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>LockAngle</b> = false</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a5dcb0892a185abff86b218dfb41ebfdc">LockAngle</a> = false</td></tr>
+<tr class="memdesc:a5dcb0892a185abff86b218dfb41ebfdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock the Angle of the object. <br /></td></tr>
 <tr class="separator:a5dcb0892a185abff86b218dfb41ebfdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v_base')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
 <tr class="memitem:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="aa771f52f4fa755fb64b8dc8cc563250c"></a>
@@ -239,11 +224,11 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a67e3df80e9cef886e0ca669486debd4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of vertices of the shape if of type CUSTOM. <br /></td></tr>
 <tr class="separator:a67e3df80e9cef886e0ca669486debd4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e3ba74ecb5f12824e762e67e00b102c"><td class="memItemLeft" align="right" valign="top"><a id="a3e3ba74ecb5f12824e762e67e00b102c"></a>
-VObjectShape&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a3e3ba74ecb5f12824e762e67e00b102c">shapeType</a></td></tr>
+<a class="el" href="class_v_physics_object.html#ae6a607763cbff0935a440465817457f5">VObjectShape</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a3e3ba74ecb5f12824e762e67e00b102c">shapeType</a></td></tr>
 <tr class="memdesc:a3e3ba74ecb5f12824e762e67e00b102c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of shape of the physics object. <br /></td></tr>
 <tr class="separator:a3e3ba74ecb5f12824e762e67e00b102c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada140b33dfb3a0194106e4a39e1ae535"><td class="memItemLeft" align="right" valign="top"><a id="ada140b33dfb3a0194106e4a39e1ae535"></a>
-VObjectType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ada140b33dfb3a0194106e4a39e1ae535">bodyType</a></td></tr>
+<a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ada140b33dfb3a0194106e4a39e1ae535">bodyType</a></td></tr>
 <tr class="memdesc:ada140b33dfb3a0194106e4a39e1ae535"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of body of the physics object. <br /></td></tr>
 <tr class="separator:ada140b33dfb3a0194106e4a39e1ae535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -259,7 +244,509 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A special object class that represents the physics body that responds to the world and collisions using a specified shape, should be used by adding to <a class="el" href="class_v_physics_group.html" title="A special VGroup that sets up a physics world and updates VPhysicsObjects. It doesn&#39;t handle renderin...">VPhysicsGroup</a>. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a997ff00061de04455e27d9b10cdf5df9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a997ff00061de04455e27d9b10cdf5df9">&#9670;&nbsp;</a></span>VPhysicsObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VPhysicsObject::VPhysicsObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_v_object.html">VObject</a> *&#160;</td>
+          <td class="paramname"><em>Object</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a>&#160;</td>
+          <td class="paramname"><em>BodyType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_v_physics_object.html#ae6a607763cbff0935a440465817457f5">VObjectShape</a>&#160;</td>
+          <td class="paramname"><em>Shape</em> = <code>VObjectShape::BOX</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; sf::Vector2f &gt;&#160;</td>
+          <td class="paramname"><em>Verts</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Object</td><td>The game object to apply physics towards. </td></tr>
+    <tr><td class="paramname">BodyType</td><td>The type of physics body to set the physics object to. </td></tr>
+    <tr><td class="paramname">Shape</td><td>The type of collision shape the object will have. Default is BOX. </td></tr>
+    <tr><td class="paramname">Verts</td><td>If the shape set is LINE or CUSTOM, this parameter will define the shape in local space (relative to the top-left of the game object). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac0ea69ec066f6aee80af05807771314a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0ea69ec066f6aee80af05807771314a">&#9670;&nbsp;</a></span>ApplyForceAtLocalPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::ApplyForceAtLocalPoint </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>force</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>point</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Applys a force towards the phyics body at a point in local space. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">force</td><td>The force to apply. </td></tr>
+    <tr><td class="paramname">point</td><td>The point in local space to apply the force to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a349a4808556f63d3d339e1f10795c865"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a349a4808556f63d3d339e1f10795c865">&#9670;&nbsp;</a></span>ApplyForceAtWorldPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::ApplyForceAtWorldPoint </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>force</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>point</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Applys a force towards the phyics body at a point in world space. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">force</td><td>The force to apply. </td></tr>
+    <tr><td class="paramname">point</td><td>The point in world space to apply the force to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a759752f9e3c329ab78758d3bca56c6ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a759752f9e3c329ab78758d3bca56c6ef">&#9670;&nbsp;</a></span>ApplyImpulseAtLocalPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::ApplyImpulseAtLocalPoint </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>impulse</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>point</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Applys an impulse towards the phyics body at a point in local space. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">impulse</td><td>The impulse to apply. </td></tr>
+    <tr><td class="paramname">point</td><td>The point in local space to apply the force to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a92e21eadfa43affbd63914141668e672"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92e21eadfa43affbd63914141668e672">&#9670;&nbsp;</a></span>ApplyImpulseAtWorldPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::ApplyImpulseAtWorldPoint </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>impulse</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>point</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Applys an impluse towards the phyics body at a point in world space. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">impulse</td><td>The impulse to apply. </td></tr>
+    <tr><td class="paramname">point</td><td>The point in world space to apply the force to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5aae5629f2626c3534b9c6a2bab0ec2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aae5629f2626c3534b9c6a2bab0ec2f">&#9670;&nbsp;</a></span>Deinitialise()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::Deinitialise </td>
+          <td>(</td>
+          <td class="paramtype">cpSpace *&#160;</td>
+          <td class="paramname"><em>space</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Deinitises and removes the physics object from the world. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">space</td><td>The physics space to remove the object from. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4d10f01cc83303e81c3845bf7f303da0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d10f01cc83303e81c3845bf7f303da0">&#9670;&nbsp;</a></span>GetBaseObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_v_object.html">VObject</a>* VPhysicsObject::GetBaseObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Gets the base game object that physics is being applied to. </dd></dl>
+
+</div>
+</div>
+<a id="a65cb5c2942592b8ef769619ddd11f417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65cb5c2942592b8ef769619ddd11f417">&#9670;&nbsp;</a></span>GetBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* VPhysicsObject::GetBody </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Gets the physics body as a void pointer (so it can be cast to a cpBody if necessary). </dd></dl>
+
+</div>
+</div>
+<a id="afe780722d67b65f5571e4677a8a7a888"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe780722d67b65f5571e4677a8a7a888">&#9670;&nbsp;</a></span>GetDensity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float VPhysicsObject::GetDensity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The density of the physics shape. </dd></dl>
+
+</div>
+</div>
+<a id="a5430eddb4f1f270f77fad85b8bf2d5a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5430eddb4f1f270f77fad85b8bf2d5a3">&#9670;&nbsp;</a></span>GetForce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Vector2f VPhysicsObject::GetForce </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The force of the physics body. </dd></dl>
+
+</div>
+</div>
+<a id="a946bda2fedcf5dd6bb41cd3d20fa9939"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a946bda2fedcf5dd6bb41cd3d20fa9939">&#9670;&nbsp;</a></span>GetFriction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float VPhysicsObject::GetFriction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The friction of the physics shape. </dd></dl>
+
+</div>
+</div>
+<a id="a7c410829c131fbee4a3174958e1af775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c410829c131fbee4a3174958e1af775">&#9670;&nbsp;</a></span>GetShape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* VPhysicsObject::GetShape </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Gets the physics shape as a void pointer (so it can be cast to a cpShape if necessary). </dd></dl>
+
+</div>
+</div>
+<a id="ab756f41fe2a71b52b4180811fe9d987d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab756f41fe2a71b52b4180811fe9d987d">&#9670;&nbsp;</a></span>GetSurfaceVelocity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Vector2f VPhysicsObject::GetSurfaceVelocity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The surface velocity of the physics shape. </dd></dl>
+
+</div>
+</div>
+<a id="ad3afac1e418a31cc39d68583c603c177"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3afac1e418a31cc39d68583c603c177">&#9670;&nbsp;</a></span>GetTorque()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float VPhysicsObject::GetTorque </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The torque of the physics body. </dd></dl>
+
+</div>
+</div>
+<a id="a21829f1472d43e914b6d4b5f55e4b87e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21829f1472d43e914b6d4b5f55e4b87e">&#9670;&nbsp;</a></span>Initialise()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::Initialise </td>
+          <td>(</td>
+          <td class="paramtype">cpSpace *&#160;</td>
+          <td class="paramname"><em>space</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Initialises the physics object. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">space</td><td>The physics space to initialise the object to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3de647909b0fe9703286df103bf9482e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3de647909b0fe9703286df103bf9482e">&#9670;&nbsp;</a></span>SetDensity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::SetDensity </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>density</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the shape density. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">density</td><td>The new density value of the physics shape. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a44f1a7a5b90c31cb5621de00960300c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f1a7a5b90c31cb5621de00960300c4">&#9670;&nbsp;</a></span>SetForce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::SetForce </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>force</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the force of the physics body. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">force</td><td>The new force value of the physics body. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2ea57fc23641c2abe1c6e1f6bbeb43f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ea57fc23641c2abe1c6e1f6bbeb43f2">&#9670;&nbsp;</a></span>SetFriction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::SetFriction </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>friction</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the shape friction. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">friction</td><td>The new friction value of the physics shape. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2114c6385cab92882402282afc184152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2114c6385cab92882402282afc184152">&#9670;&nbsp;</a></span>SetSurfaceVelocity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::SetSurfaceVelocity </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>surfaceVelocity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the surface velocity of the physics shape. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">surfaceVelocity</td><td>The new surface velocity of the physics shape. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae39f01d3706930250dfbd1b883306b0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae39f01d3706930250dfbd1b883306b0c">&#9670;&nbsp;</a></span>SetTorque()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::SetTorque </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>torque</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the torque of the physics body. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">torque</td><td>The new torque of the physics body. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7e05ba004bbb0878634eb936fa3edc13"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7e05ba004bbb0878634eb936fa3edc13">&#9670;&nbsp;</a></span>Update()</h2>
 
@@ -283,9 +770,9 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Updates object and any data it contains. (Default does nothing) </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Updates the physics object. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dt</td><td>Delta Time between the previous and current frame. </td></tr>
+    <tr><td class="paramname">dt</td><td>The delta time between the previous and current frame. </td></tr>
   </table>
   </dd>
 </dl>

@@ -82,8 +82,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8ba3027e0f487ef3b33c6c903219a357"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40392bba48a0080f9167dd7b60544f0f"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#a40392bba48a0080f9167dd7b60544f0f">GetCurrentState</a> ()</td></tr>
 <tr class="separator:a40392bba48a0080f9167dd7b60544f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adeb5afc766070afe5cda0e40993e5657"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#adeb5afc766070afe5cda0e40993e5657">Add</a> (unsigned int stateID, std::function&lt; int(<a class="el" href="class_v_base.html">VBase</a> *, float)&gt; onUpdateFunc, std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *)&gt; onEnterFunc=nullptr, std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *)&gt; onExitFunc=nullptr)</td></tr>
-<tr class="separator:adeb5afc766070afe5cda0e40993e5657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48459db5669f1487619bca120688cb89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#a48459db5669f1487619bca120688cb89">SetNewState</a> (unsigned int state)</td></tr>
+<tr class="separator:a48459db5669f1487619bca120688cb89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0548887530658b64de8212c18a38e13"><td class="memItemLeft" align="right" valign="top"><a id="ab0548887530658b64de8212c18a38e13"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#ab0548887530658b64de8212c18a38e13">ResetState</a> ()</td></tr>
+<tr class="memdesc:ab0548887530658b64de8212c18a38e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the currently running state in the FSM. <br /></td></tr>
+<tr class="separator:ab0548887530658b64de8212c18a38e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a352bb42a051f46ec91c310d6cb65e4b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#a352bb42a051f46ec91c310d6cb65e4b2">Add</a> (unsigned int stateID, std::function&lt; int(<a class="el" href="class_v_base.html">VBase</a> *, float)&gt; onUpdateFunc, std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *)&gt; onEnterFunc=nullptr, std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *, unsigned int)&gt; onExitFunc=nullptr)</td></tr>
+<tr class="separator:a352bb42a051f46ec91c310d6cb65e4b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb863aa6de23e285294447718fa4d6d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#aeb863aa6de23e285294447718fa4d6d2">Update</a> (float dt)</td></tr>
 <tr class="separator:aeb863aa6de23e285294447718fa4d6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -126,8 +132,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="adeb5afc766070afe5cda0e40993e5657"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adeb5afc766070afe5cda0e40993e5657">&#9670;&nbsp;</a></span>Add()</h2>
+<a id="a352bb42a051f46ec91c310d6cb65e4b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a352bb42a051f46ec91c310d6cb65e4b2">&#9670;&nbsp;</a></span>Add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,7 +159,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *, unsigned int)&gt;&#160;</td>
           <td class="paramname"><em>onExitFunc</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
@@ -190,6 +196,30 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The ID number of the currently active state in the FSM. </dd></dl>
+
+</div>
+</div>
+<a id="a48459db5669f1487619bca120688cb89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48459db5669f1487619bca120688cb89">&#9670;&nbsp;</a></span>SetNewState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VFiniteStateMachine::SetNewState </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Exits the current state and enters the new state of the FSM from outside. Only works if the new state is not the current one, use <a class="el" href="class_v_finite_state_machine.html#ab0548887530658b64de8212c18a38e13" title="Resets the currently running state in the FSM. ">ResetState()</a> to exit and re-enter the current state. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>The ID number of the new state to run in the FSM. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
