@@ -26,7 +26,66 @@ void VPhysicsJointBase::Deinitialise(VPhysicsCPSpace* space)
 	cpSpaceRemoveConstraint(space, constraint);
 }
 
-sf::Vector2f VPhysicsJointBase::GetAnchorA()
+VPhysicsCPBody* VPhysicsJointBase::GetBodyA()
+{
+	return cpConstraintGetBodyA(constraint);
+}
+
+VPhysicsCPBody* VPhysicsJointBase::GetBodyB()
+{
+	return cpConstraintGetBodyB(constraint);
+}
+
+void VPhysicsJointBase::SetMaxForce(float Max)
+{
+	cpConstraintSetMaxForce(constraint, Max);
+}
+
+float VPhysicsJointBase::GetMaxForce()
+{
+	return (float)cpConstraintGetMaxForce(constraint);
+}
+
+void VPhysicsJointBase::SetErrorBias(float Bias)
+{
+	cpConstraintSetErrorBias(constraint, Bias);
+}
+
+float VPhysicsJointBase::GetErrorBias()
+{
+	return (float)cpConstraintGetErrorBias(constraint);
+}
+
+void VPhysicsJointBase::SetMaxBias(float Bias)
+{
+	cpConstraintSetMaxBias(constraint, Bias);
+}
+
+float VPhysicsJointBase::GetMaxBias()
+{
+	return cpConstraintGetMaxBias(constraint);
+}
+
+void VPhysicsJointBase::SetCollideBodies(bool value)
+{
+	cpConstraintSetCollideBodies(constraint, value);
+}
+
+bool VPhysicsJointBase::DoesCollideBodies()
+{
+	return cpConstraintGetCollideBodies(constraint);
+}
+
+float VPhysicsJointBase::GetImpulse()
+{
+	return cpConstraintGetImpulse(constraint);
+}
+
+VPhysicsAnchorBase::VPhysicsAnchorBase(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB) : VPhysicsJointBase(BodyA, BodyB)
+{
+}
+
+sf::Vector2f VPhysicsAnchorBase::GetAnchorA()
 {
 	cpVect anchor;
 
@@ -49,7 +108,7 @@ sf::Vector2f VPhysicsJointBase::GetAnchorA()
 	return sf::Vector2f((float)anchor.x, (float)anchor.x);
 }
 
-void VPhysicsJointBase::SetAnchorA(sf::Vector2f value)
+void VPhysicsAnchorBase::SetAnchorA(sf::Vector2f value)
 {
 	cpVect v = ToCPVect(value);
 
@@ -70,7 +129,7 @@ void VPhysicsJointBase::SetAnchorA(sf::Vector2f value)
 	}
 }
 
-sf::Vector2f VPhysicsJointBase::GetAnchorB()
+sf::Vector2f VPhysicsAnchorBase::GetAnchorB()
 {
 	cpVect anchor;
 
@@ -96,7 +155,7 @@ sf::Vector2f VPhysicsJointBase::GetAnchorB()
 	return sf::Vector2f((float)anchor.x, (float)anchor.x);
 }
 
-void VPhysicsJointBase::SetAnchorB(sf::Vector2f value)
+void VPhysicsAnchorBase::SetAnchorB(sf::Vector2f value)
 {
 	cpVect v = ToCPVect(value);
 
@@ -120,83 +179,43 @@ void VPhysicsJointBase::SetAnchorB(sf::Vector2f value)
 	}
 }
 
-sf::Vector2f VPhysicsJointBase::GetGrooveA()
+sf::Vector2f VPhysicsGrooveJoint::GetGrooveA()
 {
-	cpVect groove;
-
-	switch (type)
-	{
-	case GROOVE:
-		groove = cpGrooveJointGetGrooveA(constraint);
-		break;
-	}
-
-	return sf::Vector2f((float)groove.x, (float)groove.x);
+	return ToSFVector(cpGrooveJointGetGrooveA(constraint));
 }
 
-void VPhysicsJointBase::SetGrooveA(sf::Vector2f value)
+void VPhysicsGrooveJoint::SetGrooveA(sf::Vector2f value)
 {
 	cpVect groove = ToCPVect(value);
-
-	switch (type)
-	{
-	case GROOVE:
-		cpGrooveJointSetGrooveA(constraint, groove);
-		break;
-	}
+	cpGrooveJointSetGrooveA(constraint, groove);
 }
 
-sf::Vector2f VPhysicsJointBase::GetGrooveB()
+sf::Vector2f VPhysicsGrooveJoint::GetGrooveB()
 {
-	cpVect groove;
-
-	switch (type)
-	{
-	case GROOVE:
-		groove = cpGrooveJointGetGrooveB(constraint);
-		break;
-	}
-
-	return sf::Vector2f((float)groove.x, (float)groove.x);
+	return ToSFVector(cpGrooveJointGetGrooveB(constraint));
 }
 
-void VPhysicsJointBase::SetGrooveB(sf::Vector2f value)
+void VPhysicsGrooveJoint::SetGrooveB(sf::Vector2f value)
 {
 	cpVect groove = ToCPVect(value);
-
-	switch (type)
-	{
-	case GROOVE:
-		cpGrooveJointSetGrooveB(constraint, groove);
-		break;
-	}
+	cpGrooveJointSetGrooveB(constraint, groove);
 }
 
-float VPhysicsJointBase::GetDist()
+float VPhysicsPinJoint::GetDist()
 {
-	float dist = 0.0f;
-
-	switch (type)
-	{
-	case PIN:
-		dist = (float)cpPinJointGetDist(constraint);
-		break;
-	}
-
-	return dist;
+	return (float)cpPinJointGetDist(constraint);
 }
 
-void VPhysicsJointBase::SetDist(float value)
+void VPhysicsPinJoint::SetDist(float value)
 {
-	switch (type)
-	{
-	case PIN:
-		cpPinJointSetDist(constraint, value);
-		break;
-	}
+	cpPinJointSetDist(constraint, value);
 }
 
-float VPhysicsJointBase::GetMin()
+VPhysicsMinMaxBase::VPhysicsMinMaxBase(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB) : VPhysicsAnchorBase(BodyA, BodyB)
+{
+}
+
+float VPhysicsMinMaxBase::GetMin()
 {
 	float min = 0.0f;
 
@@ -213,7 +232,7 @@ float VPhysicsJointBase::GetMin()
 	return min;
 }
 
-void VPhysicsJointBase::SetMin(float value)
+void VPhysicsMinMaxBase::SetMin(float value)
 {
 	switch (type)
 	{
@@ -226,7 +245,7 @@ void VPhysicsJointBase::SetMin(float value)
 	}
 }
 
-float VPhysicsJointBase::GetMax()
+float VPhysicsMinMaxBase::GetMax()
 {
 	float max = 0.0f;
 
@@ -243,7 +262,7 @@ float VPhysicsJointBase::GetMax()
 	return max;
 }
 
-void VPhysicsJointBase::SetMax(float value)
+void VPhysicsMinMaxBase::SetMax(float value)
 {
 	switch (type)
 	{
@@ -256,55 +275,31 @@ void VPhysicsJointBase::SetMax(float value)
 	}
 }
 
-float VPhysicsJointBase::GetRestAngle()
+float VPhysicsDampedRotarySpring::GetRestAngle()
 {
-	float angle = 0.0f;
-
-	switch (type)
-	{
-	case DAMPEDROTARY:
-		angle = (float)cpDampedRotarySpringGetRestAngle(constraint);
-		break;
-	}
-
-	return angle;
+	return (float)cpDampedRotarySpringGetRestAngle(constraint);
 }
 
-void VPhysicsJointBase::SetRestAngle(float value)
+void VPhysicsDampedRotarySpring::SetRestAngle(float value)
 {
-	switch (type)
-	{
-	case DAMPEDROTARY:
-		cpDampedRotarySpringSetRestAngle(constraint, value);
-		break;
-	}
+	cpDampedRotarySpringSetRestAngle(constraint, value);
 }
 
-float VPhysicsJointBase::GetRestLength()
+float VPhysicsDampedSpring::GetRestLength()
 {
-	float length = 0.0f;
-
-	switch (type)
-	{
-	case DAMPED:
-		length = (float)cpDampedSpringGetRestLength(constraint);
-		break;
-	}
-
-	return length;
+	return (float)cpDampedSpringGetRestLength(constraint);
 }
 
-void VPhysicsJointBase::SetRestLength(float value)
+void VPhysicsDampedSpring::SetRestLength(float value)
 {
-	switch (type)
-	{
-	case DAMPED:
-		cpDampedSpringSetRestLength(constraint, value);
-		break;
-	}
+	cpDampedSpringSetRestLength(constraint, value);
 }
 
-float VPhysicsJointBase::GetStiffness()
+VPhysicsDampedBase::VPhysicsDampedBase(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB) : VPhysicsAnchorBase(BodyA, BodyB)
+{
+}
+
+float VPhysicsDampedBase::GetStiffness()
 {
 	float stiffness = 0.0f;
 
@@ -321,7 +316,7 @@ float VPhysicsJointBase::GetStiffness()
 	return stiffness;
 }
 
-void VPhysicsJointBase::SetStiffness(float value)
+void VPhysicsDampedBase::SetStiffness(float value)
 {
 	switch (type)
 	{
@@ -334,7 +329,7 @@ void VPhysicsJointBase::SetStiffness(float value)
 	}
 }
 
-float VPhysicsJointBase::GetDamping()
+float VPhysicsDampedBase::GetDamping()
 {
 	float damping = 0.0f;
 
@@ -351,7 +346,7 @@ float VPhysicsJointBase::GetDamping()
 	return damping;
 }
 
-void VPhysicsJointBase::SetDamping(float value)
+void VPhysicsDampedBase::SetDamping(float value)
 {
 	switch (type)
 	{
@@ -364,31 +359,21 @@ void VPhysicsJointBase::SetDamping(float value)
 	}
 }
 
-float VPhysicsJointBase::GetAngle()
+float VPhysicsRatchetJoint::GetAngle()
 {
-	float angle = 0.0f;
-
-	switch (type)
-	{
-	case RATCHET:
-		angle = (float)cpRatchetJointGetAngle(constraint);
-		break;
-	}
-
-	return angle;
+	return (float)cpRatchetJointGetAngle(constraint);
 }
 
-void VPhysicsJointBase::SetAngle(float value)
+void VPhysicsRatchetJoint::SetAngle(float value)
 {
-	switch (type)
-	{
-	case RATCHET:
-		cpRatchetJointSetAngle(constraint, value);
-		break;
-	}
+	cpRatchetJointSetAngle(constraint, value);
 }
 
-float VPhysicsJointBase::GetPhase()
+VPhysicsPhaseBase::VPhysicsPhaseBase(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB) : VPhysicsJointBase(BodyA, BodyB)
+{
+}
+
+float VPhysicsPhaseBase::GetPhase()
 {
 	float phase = 0.0f;
 
@@ -405,7 +390,7 @@ float VPhysicsJointBase::GetPhase()
 	return phase;
 }
 
-void VPhysicsJointBase::SetPhase(float value)
+void VPhysicsPhaseBase::SetPhase(float value)
 {
 	switch (type)
 	{
@@ -418,84 +403,42 @@ void VPhysicsJointBase::SetPhase(float value)
 	}
 }
 
-float VPhysicsJointBase::GetRatchet()
+float VPhysicsRatchetJoint::GetRatchet()
 {
-	float ratchet = 0.0f;
-
-	switch (type)
-	{
-	case RATCHET:
-		ratchet = (float)cpRatchetJointGetRatchet(constraint);
-		break;
-	}
-
-	return ratchet;
+	return (float)cpRatchetJointGetRatchet(constraint);
 }
 
-void VPhysicsJointBase::SetRatchet(float value)
+void VPhysicsRatchetJoint::SetRatchet(float value)
 {
-	switch (type)
-	{
-	case RATCHET:
-		cpRatchetJointSetRatchet(constraint, value);
-		break;
-	}
+	cpRatchetJointSetRatchet(constraint, value);
 }
 
-float VPhysicsJointBase::GetRatio()
+float VPhysicsGearJoint::GetRatio()
 {
-	float ratio = 0.0f;
-
-	switch (type)
-	{
-	case GEAR:
-		ratio = (float)cpGearJointGetRatio(constraint);
-		break;
-	}
-
-	return ratio;
+	return (float)cpGearJointGetRatio(constraint);
 }
 
-void VPhysicsJointBase::SetRatio(float value)
+void VPhysicsGearJoint::SetRatio(float value)
 {
-	switch (type)
-	{
-	case GEAR:
-		cpGearJointSetRatio(constraint, value);
-		break;
-	}
+	cpGearJointSetRatio(constraint, value);
 }
 
-float VPhysicsJointBase::GetRate()
+float VPhysicsSimpleMotor::GetRate()
 {
-	float rate = 0.0f;
-
-	switch (type)
-	{
-	case SIMPLEMOTOR:
-		rate = (float)cpSimpleMotorGetRate(constraint);
-		break;
-	}
-
-	return rate;
+	return (float)cpSimpleMotorGetRate(constraint);
 }
 
-void VPhysicsJointBase::SetRate(float value)
+void VPhysicsSimpleMotor::SetRate(float value)
 {
-	switch (type)
-	{
-	case SIMPLEMOTOR:
-		cpSimpleMotorSetRate(constraint, value);
-		break;
-	}
+	cpSimpleMotorSetRate(constraint, value);
 }
 
-VPhysicsPinJoint::VPhysicsPinJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, sf::Vector2f AnchorA, sf::Vector2f AnchorB) : VPhysicsJointBase(ObjectA->GetBody(), ObjectB->GetBody())
+VPhysicsPinJoint::VPhysicsPinJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, sf::Vector2f AnchorA, sf::Vector2f AnchorB) : VPhysicsAnchorBase(ObjectA->GetBody(), ObjectB->GetBody())
 {
 	Setup(ObjectA->GetBody(), ObjectB->GetBody(), AnchorA, AnchorB);
 }
 
-VPhysicsPinJoint::VPhysicsPinJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf::Vector2f AnchorA, sf::Vector2f AnchorB) : VPhysicsJointBase(BodyA, BodyB)
+VPhysicsPinJoint::VPhysicsPinJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf::Vector2f AnchorA, sf::Vector2f AnchorB) : VPhysicsAnchorBase(BodyA, BodyB)
 {
 	Setup(BodyA, BodyB, AnchorA, AnchorB);
 }
@@ -506,12 +449,12 @@ void VPhysicsPinJoint::Setup(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf::V
 	constraint = cpPinJointNew(BodyA, BodyB, ToCPVect(AnchorA), ToCPVect(AnchorB));
 }
 
-VPhysicsSlideJoint::VPhysicsSlideJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, sf::Vector2f AnchorA, sf::Vector2f AnchorB, float Min, float Max) : VPhysicsJointBase(ObjectA->GetBody(), ObjectB->GetBody())
+VPhysicsSlideJoint::VPhysicsSlideJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, sf::Vector2f AnchorA, sf::Vector2f AnchorB, float Min, float Max) : VPhysicsMinMaxBase(ObjectA->GetBody(), ObjectB->GetBody())
 {
 	Setup(ObjectA->GetBody(), ObjectB->GetBody(), AnchorA, AnchorB, Min, Max);
 }
 
-VPhysicsSlideJoint::VPhysicsSlideJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf::Vector2f AnchorA, sf::Vector2f AnchorB, float Min, float Max) : VPhysicsJointBase(BodyA, BodyB)
+VPhysicsSlideJoint::VPhysicsSlideJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf::Vector2f AnchorA, sf::Vector2f AnchorB, float Min, float Max) : VPhysicsMinMaxBase(BodyA, BodyB)
 {
 	Setup(BodyA, BodyB, AnchorA, AnchorB, Min, Max);
 }
@@ -522,12 +465,12 @@ void VPhysicsSlideJoint::Setup(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf:
 	constraint = cpSlideJointNew(BodyA, BodyB, ToCPVect(AnchorA), ToCPVect(AnchorB), Min, Max);
 }
 
-VPhysicsPivotJoint::VPhysicsPivotJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, sf::Vector2f Pivot) : VPhysicsJointBase(ObjectA->GetBody(), ObjectB->GetBody())
+VPhysicsPivotJoint::VPhysicsPivotJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, sf::Vector2f Pivot) : VPhysicsAnchorBase(ObjectA->GetBody(), ObjectB->GetBody())
 {
 	Setup(ObjectA->GetBody(), ObjectB->GetBody(), Pivot);
 }
 
-VPhysicsPivotJoint::VPhysicsPivotJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf::Vector2f Pivot) : VPhysicsJointBase(BodyA, BodyB)
+VPhysicsPivotJoint::VPhysicsPivotJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf::Vector2f Pivot) : VPhysicsAnchorBase(BodyA, BodyB)
 {
 	Setup(BodyA, BodyB, Pivot);
 }
@@ -554,12 +497,12 @@ void VPhysicsGrooveJoint::Setup(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf
 	constraint = cpGrooveJointNew(BodyA, BodyB, ToCPVect(GrooveA), ToCPVect(GrooveB), ToCPVect(AnchorB));
 }
 
-VPhysicsDampedSpring::VPhysicsDampedSpring(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, sf::Vector2f AnchorA, sf::Vector2f AnchorB, float RestLength, float Stiffness, float Damping) : VPhysicsJointBase(ObjectA->GetBody(), ObjectB->GetBody())
+VPhysicsDampedSpring::VPhysicsDampedSpring(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, sf::Vector2f AnchorA, sf::Vector2f AnchorB, float RestLength, float Stiffness, float Damping) : VPhysicsDampedBase(ObjectA->GetBody(), ObjectB->GetBody())
 {
 	Setup(ObjectA->GetBody(), ObjectB->GetBody(), AnchorA, AnchorB, RestLength, Stiffness, Damping);
 }
 
-VPhysicsDampedSpring::VPhysicsDampedSpring(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf::Vector2f AnchorA, sf::Vector2f AnchorB, float RestLength, float Stiffness, float Damping) : VPhysicsJointBase(BodyA, BodyB)
+VPhysicsDampedSpring::VPhysicsDampedSpring(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, sf::Vector2f AnchorA, sf::Vector2f AnchorB, float RestLength, float Stiffness, float Damping) : VPhysicsDampedBase(BodyA, BodyB)
 {
 	Setup(BodyA, BodyB, AnchorA, AnchorB, RestLength, Stiffness, Damping);
 }
@@ -570,12 +513,12 @@ void VPhysicsDampedSpring::Setup(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, s
 	constraint = cpDampedSpringNew(BodyA, BodyB, ToCPVect(AnchorA), ToCPVect(AnchorB), RestLength, Stiffness, Damping);
 }
 
-VPhysicsDampedRotarySpring::VPhysicsDampedRotarySpring(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, float RestLength, float Stiffness, float Damping) : VPhysicsJointBase(ObjectA->GetBody(), ObjectB->GetBody())
+VPhysicsDampedRotarySpring::VPhysicsDampedRotarySpring(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, float RestLength, float Stiffness, float Damping) : VPhysicsDampedBase(ObjectA->GetBody(), ObjectB->GetBody())
 {
 	Setup(ObjectA->GetBody(), ObjectB->GetBody(), RestLength, Stiffness, Damping);
 }
 
-VPhysicsDampedRotarySpring::VPhysicsDampedRotarySpring(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, float RestLength, float Stiffness, float Damping) : VPhysicsJointBase(BodyA, BodyB)
+VPhysicsDampedRotarySpring::VPhysicsDampedRotarySpring(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, float RestLength, float Stiffness, float Damping) : VPhysicsDampedBase(BodyA, BodyB)
 {
 	Setup(BodyA, BodyB, RestLength, Stiffness, Damping);
 }
@@ -586,12 +529,12 @@ void VPhysicsDampedRotarySpring::Setup(VPhysicsCPBody* BodyA, VPhysicsCPBody* Bo
 	constraint = cpDampedRotarySpringNew(BodyA, BodyB, RestLength, Stiffness, Damping);
 }
 
-VPhysicsRotaryLimitJoint::VPhysicsRotaryLimitJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, float Min, float Max) : VPhysicsJointBase(ObjectA->GetBody(), ObjectB->GetBody())
+VPhysicsRotaryLimitJoint::VPhysicsRotaryLimitJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, float Min, float Max) : VPhysicsMinMaxBase(ObjectA->GetBody(), ObjectB->GetBody())
 {
 	Setup(ObjectA->GetBody(), ObjectB->GetBody(), Min, Max);
 }
 
-VPhysicsRotaryLimitJoint::VPhysicsRotaryLimitJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, float Min, float Max) : VPhysicsJointBase(BodyA, BodyB)
+VPhysicsRotaryLimitJoint::VPhysicsRotaryLimitJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, float Min, float Max) : VPhysicsMinMaxBase(BodyA, BodyB)
 {
 	Setup(BodyA, BodyB, Min, Max);
 }
@@ -602,12 +545,12 @@ void VPhysicsRotaryLimitJoint::Setup(VPhysicsCPBody* BodyA, VPhysicsCPBody* Body
 	constraint = cpRotaryLimitJointNew(BodyA, BodyB, Min, Max);
 }
 
-VPhysicsRatchetJoint::VPhysicsRatchetJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, float Phase, float Ratchet) : VPhysicsJointBase(ObjectA->GetBody(), ObjectB->GetBody())
+VPhysicsRatchetJoint::VPhysicsRatchetJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, float Phase, float Ratchet) : VPhysicsPhaseBase(ObjectA->GetBody(), ObjectB->GetBody())
 {
 	Setup(ObjectA->GetBody(), ObjectB->GetBody(), Phase, Ratchet);
 }
 
-VPhysicsRatchetJoint::VPhysicsRatchetJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, float Phase, float Ratchet) : VPhysicsJointBase(BodyA, BodyB)
+VPhysicsRatchetJoint::VPhysicsRatchetJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, float Phase, float Ratchet) : VPhysicsPhaseBase(BodyA, BodyB)
 {
 	Setup(BodyA, BodyB, Phase, Ratchet);
 }
@@ -618,12 +561,12 @@ void VPhysicsRatchetJoint::Setup(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, f
 	constraint = cpRatchetJointNew(BodyA, BodyB, Phase, Ratchet);
 }
 
-VPhysicsGearJoint::VPhysicsGearJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, float Phase, float Ratio) : VPhysicsJointBase(ObjectA->GetBody(), ObjectB->GetBody())
+VPhysicsGearJoint::VPhysicsGearJoint(VPhysicsObject* ObjectA, VPhysicsObject* ObjectB, float Phase, float Ratio) : VPhysicsPhaseBase(ObjectA->GetBody(), ObjectB->GetBody())
 {
 	Setup(ObjectA->GetBody(), ObjectB->GetBody(), Phase, Ratio);
 }
 
-VPhysicsGearJoint::VPhysicsGearJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, float Phase, float Ratio) : VPhysicsJointBase(BodyA, BodyB)
+VPhysicsGearJoint::VPhysicsGearJoint(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, float Phase, float Ratio) : VPhysicsPhaseBase(BodyA, BodyB)
 {
 	Setup(BodyA, BodyB, Phase, Ratio);
 }
