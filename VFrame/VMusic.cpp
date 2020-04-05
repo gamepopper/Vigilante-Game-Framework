@@ -33,6 +33,7 @@ VMusic* VMusic::OpenMusicMemory(const void* data, size_t size)
 	}
 
 	valid = false;
+	return NULL;
 }
 
 /**
@@ -48,6 +49,7 @@ VMusic* VMusic::OpenMusicStream(sf::InputStream& stream)
 	}
 
 	valid = false;
+	return NULL;
 }
 
 void VMusic::Update(float dt)
