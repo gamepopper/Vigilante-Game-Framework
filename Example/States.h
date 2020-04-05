@@ -22,7 +22,6 @@
 #include "../VFrame/V3DModel.h"
 #include "../VFrame/V3DObjModel.h"
 #include "../VFrame/VPhysicsGroup.h"
-#include "../VFrame/VPhysicsObject.h"
 #include "../VFrame/VTimer.h"
 #include "../VFrame/VFiniteStateMachine.h"
 
@@ -1967,12 +1966,16 @@ public:
 			group->SetCollisionCallback(circle, slope2, std::bind(&PhysicsState::BounceCallback, this, std::placeholders::_1, std::placeholders::_2), VPhysicsGroup::SEPARATE, true);
 		}
 
+		VPhysicsObject* groundPhysics = group->AddObject(ground, VPhysicsObject::STATIC, VPhysicsObject::BOX);
+		groundPhysics->SetFriction(1.0f);
+
 		VPhysicsObject* boxPhysics = group->AddObject(box, VPhysicsObject::DYNAMIC, VPhysicsObject::BOX);
-		boxPhysics->LockX = boxPhysics->LockY = true;
 		boxPhysics->SetFriction(0.5f);
+		VPhysicsJointBase* joint = group->AddJoint(new VPhysicsPivotJoint(boxPhysics->GetBody(), group->GetBody(), box->Position + (box->Size / 2.0f)));
+
 		boxPhysics = group->AddObject(box2, VPhysicsObject::DYNAMIC, VPhysicsObject::BOX);
-		boxPhysics->LockX = boxPhysics->LockY = true;
 		boxPhysics->SetFriction(0.5f);
+		joint = group->AddJoint(new VPhysicsPivotJoint(boxPhysics->GetBody(), group->GetBody(), box2->Position + (box2->Size / 2.0f)));
 
 		VPhysicsObject* slopePhysics = group->AddObject(slope, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f) });
 		slopePhysics->SetFriction(1.0f);
@@ -1980,9 +1983,6 @@ public:
 		slopePhysics->SetFriction(1.0f);
 		slopePhysics = group->AddObject(slope2, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope2->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope2->Angle * (3.1415926f / 180.0f)) * 120.0f) });
 		slopePhysics->SetFriction(1.0f);
-
-		VPhysicsObject* groundPhysics = group->AddObject(ground, VPhysicsObject::STATIC, VPhysicsObject::BOX);
-		groundPhysics->SetFriction(1.0f);
 
 		group->AddObject(new VObject(-10.0f, 0.0f, 10.0f, (float)VGlobal::p()->Height), VPhysicsObject::STATIC);
 		group->AddObject(new VObject((float)VGlobal::p()->Width, 0.0f, 10.0f, (float)VGlobal::p()->Height), VPhysicsObject::STATIC);
@@ -1995,17 +1995,46 @@ public:
 		Add(group);
 	}
 
+	virtual void HandleEvents(const sf::Event& event)
+	{
+		if (event.type == sf::Event::MouseButtonPressed)
+		{
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				sf::Vector2f mousePos = VGlobal::p()->GetMousePosition();
+
+				float MaxDist = 100.0f;
+				float Impulse = 10.0f;
+				for (int i = 0; i < group->Length(); i++)
+				{
+					VPhysicsObject* ball = dynamic_cast<VPhysicsObject*>(group->GetGroupItem(i));
+
+					if (ball && ball->GetShapeType() == VPhysicsObject::CIRCLE)
+					{
+						sf::Vector2f ballPos = ball->GetBaseObject()->Position + (ball->GetBaseObject()->Size / 2.0f);
+						sf::Vector2f diff = mousePos - ballPos; 
+						float length = sqrtf((diff.x * diff.x) + (diff.y * diff.y));
+						if (length > MaxDist)
+						{
+							ballPos = sf::Vector2f();
+						}
+						else
+						{
+							diff = (diff / length) * (MaxDist - length) * Impulse;
+							ball->ApplyImpulseAtWorldPoint(-diff, mousePos);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	bool BounceCallback(VPhysicsObject* circle, VPhysicsObject* other)
 	{
 		float speed = sqrtf((circle->GetBaseObject()->Velocity.x * circle->GetBaseObject()->Velocity.x) + (circle->GetBaseObject()->Velocity.y * circle->GetBaseObject()->Velocity.y));
 		VGlobal::p()->Sound->Play("bounce", speed > 100 ? 100 : speed);
 
 		return true;
-	}
-
-	virtual void Update(float dt)
-	{
-		VSUPERCLASS::Update(dt);
 	}
 };
 #endif
