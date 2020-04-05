@@ -133,8 +133,6 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 	renderTex.clear(BackgroundTint);
 	VSUPERCLASS::Draw(renderTex);
 	renderTex.display();
-	
-	if (RenderOutside) VSUPERCLASS::Draw(RenderTarget);
 
 	if (PostEffect != nullptr && VPostEffectBase::isSupported())
 	{
@@ -159,4 +157,6 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 #endif
 
 	Sprite->Draw(RenderTarget);
+	
+	if (RenderOutside) VSUPERCLASS::Draw(RenderTarget);
 }
