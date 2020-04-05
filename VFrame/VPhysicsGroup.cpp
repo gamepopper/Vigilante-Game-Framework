@@ -72,7 +72,7 @@ bool VPhysicsGroup::RemoveObject(VObject* Object)
 	for (unsigned int i = 0; i < members.size(); i++)
 	{
 		VPhysicsObject* cur = dynamic_cast<VPhysicsObject*>(members[i]);
-		if (cur->GetBaseObject() == Object)
+		if (cur && cur->GetBaseObject() == Object)
 		{
 			obj = cur;
 			break;
@@ -89,6 +89,28 @@ bool VPhysicsGroup::RemoveObject(VObject* Object)
 	return false;
 }
 
+VPhysicsJointBase* VPhysicsGroup::AddJoint(VPhysicsJointBase* Joint)
+{
+	if (Add(Joint))
+	{
+		Joint->Initialise(space);
+		return Joint;
+	}
+
+	return nullptr;
+}
+
+bool VPhysicsGroup::RemoveJoint(VPhysicsJointBase* Joint)
+{
+	if (Remove(Joint))
+	{
+		Joint->Deinitialise(space);
+		return true;
+	}
+
+	return false;
+}
+
 void VPhysicsGroup::Destroy()
 {
 	callbackHelperList.clear();
@@ -98,10 +120,10 @@ void VPhysicsGroup::Destroy()
 
 void VPhysicsGroup::Update(float dt)
 {
-	timestep += dt;
+	/*timestep += dt;
 	float fixedTS = 1.0f / VGlobal::p()->FPS;
 
-	while (timestep > fixedTS)
+	while (timestep > fixedTS)*/
 	{
 		VSUPERCLASS::Update(dt);
 		cpSpaceStep(space, dt);
@@ -113,9 +135,10 @@ void VPhysicsGroup::Update(float dt)
 				callbackHelperList.erase(callbackHelperList.begin() + i);
 				i--;
 			}
-		}*/
+		}
 
-		timestep -= fixedTS;
+		timestep -= fixedTS;*/
+
 	}
 }
 
@@ -123,9 +146,10 @@ VPhysicsObject* VPhysicsGroup::getObjectFromBody(cpBody* body)
 {
 	for (unsigned int i = 0; i < members.size(); i++)
 	{
-		if ((cpBody*)dynamic_cast<VPhysicsObject*>(members[i])->GetBody() == body)
+		VPhysicsObject* obj = dynamic_cast<VPhysicsObject*>(members[i]);
+		if (obj && (cpBody*)obj->GetBody() == body)
 		{
-			return dynamic_cast<VPhysicsObject*>(members[i]);
+			return obj;
 		}
 	}
 
@@ -142,7 +166,7 @@ void VPhysicsGroup::SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, c
 	callbackHelperList.emplace_back(a->GetBaseObject(), b->GetBaseObject(), callback, type, persist);
 }
 
-bool VPhysicsGroup::ProcessCallback(cpArbiter *arb, cpSpace *space, VPhysicsCallbackType type)
+bool VPhysicsGroup::ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *space, VPhysicsCallbackType type)
 {
 	if (callbackHelperList.size() == 0)
 		return true;
@@ -305,6 +329,11 @@ unsigned int VPhysicsGroup::GetCollisionPersistence()
 void VPhysicsGroup::SetCollisionPersistence(unsigned int collisionPersistence)
 {
 	cpSpaceSetCollisionPersistence(space, collisionPersistence);
+}
+
+VPhysicsCPBody* VPhysicsGroup::GetBody()
+{
+	return cpSpaceGetStaticBody(space);
 }
 
 #ifdef _DEBUG

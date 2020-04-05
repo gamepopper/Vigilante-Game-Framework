@@ -90,17 +90,44 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 		cpBodySetAngle(body, Object->Angle * (3.1415926f / 180.0f));
 }
 
-void* VPhysicsObject::GetBody()
+VPhysicsCPBody* VPhysicsObject::GetBody()
 {
 	return body;
 }
 
-void* VPhysicsObject::GetShape()
+VPhysicsCPShape* VPhysicsObject::GetShape()
 {
 	return shape;
 }
 
-void VPhysicsObject::Initialise(cpSpace* space)
+//void VPhysicsObject::SetShapeType(VObjectShape shape)
+//{
+//	if (shape != shapeType)
+//	{
+//
+//	}
+//}
+
+VPhysicsObject::VObjectShape VPhysicsObject::GetShapeType()
+{
+	return shapeType;
+}
+
+void VPhysicsObject::SetBodyType(VObjectType newBodyType)
+{
+	if (newBodyType != bodyType)
+	{
+		cpBodySetType(body, (cpBodyType)newBodyType);
+		bodyType = newBodyType;
+	}
+}
+
+VPhysicsObject::VObjectType VPhysicsObject::GetBodyType()
+{
+	return bodyType;
+}
+
+void VPhysicsObject::Initialise(VPhysicsCPSpace* space)
 {
 	cpSpaceAddBody(space, body);
 	cpSpaceAddShape(space, shape);
@@ -111,7 +138,7 @@ VObject* VPhysicsObject::GetBaseObject()
 	return baseObject;
 }
 
-void VPhysicsObject::Deinitialise(cpSpace* space)
+void VPhysicsObject::Deinitialise(VPhysicsCPSpace* space)
 {
 	cpSpaceRemoveBody(space, body);
 	cpSpaceRemoveShape(space, shape);
@@ -134,13 +161,13 @@ void VPhysicsObject::Update(float dt)
 	cpVect pos = cpBodyGetPosition(body);
 	cpVect vel = cpBodyGetVelocity(body);
 
-	if (LockX || cpBodyGetType(body) == CP_BODY_TYPE_KINEMATIC)
+	if (cpBodyGetType(body) == CP_BODY_TYPE_KINEMATIC)
 	{
 		pos.x = baseObject->Position.x + (baseObject->Size.x / 2.0f);
 		vel.x = baseObject->Velocity.x;
 	}
 
-	if (LockY || cpBodyGetType(body) == CP_BODY_TYPE_KINEMATIC)
+	if (cpBodyGetType(body) == CP_BODY_TYPE_KINEMATIC)
 	{
 		pos.y = baseObject->Position.y + (baseObject->Size.y / 2.0f);
 		vel.y = baseObject->Velocity.y;
@@ -157,7 +184,7 @@ void VPhysicsObject::Update(float dt)
 		float angle		= (float)cpBodyGetAngle(body);
 		float angleVel	= (float)cpBodyGetAngularVelocity(body);
 
-		if (LockAngle || cpBodyGetType(body) == CP_BODY_TYPE_KINEMATIC)
+		if (cpBodyGetType(body) == CP_BODY_TYPE_KINEMATIC)
 		{
 			angle = baseObject->Angle * (3.1415926f / 180.0f);
 			angleVel = baseObject->AngleVelocity * (3.1415926f / 180.0f);

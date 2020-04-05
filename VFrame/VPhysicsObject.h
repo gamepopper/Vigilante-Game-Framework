@@ -1,5 +1,5 @@
 /**
-* @file    VVPhysicsObject.h
+* @file    VPhysicsObject.h
 * @author  Tim Stoddard <tim@gamepopper.co.uk>
 *
 * @section LICENSE
@@ -37,14 +37,19 @@
 #include "VBase.h"
 #include <vector>
 class VObject;
-struct cpBody;
-struct cpShape;
-struct cpSpace;
-struct cpArbiter;
-struct cpCollisionHandler;
 
+///Accessor to cpVect struct.
 typedef struct cpVect cpVect;
-typedef void * cpDataPointer;
+///Accessor to cpBody struct.
+typedef struct cpBody VPhysicsCPBody;
+///Accessor to cpShape struct.
+typedef struct cpShape VPhysicsCPShape;
+///Accessor to cpSpace struct.
+typedef struct cpSpace VPhysicsCPSpace;
+///Accessor to cpArbiter struct.
+typedef struct cpArbiter VPhysicsCPArbiter;
+///Accessor to cpCollisionHandler struct.
+typedef struct cpCollisionHandler VPhysicsCollision;
 
 /**
 * Helper function to convert a sf::Vector2f to a cpVect.
@@ -64,6 +69,7 @@ sf::Vector2f ToSFVector(const cpVect& v);
 class VPhysicsObject : public VBase
 {
 public:
+	///Used to call parent class functions when they are overrided in class.
 	typedef VBase VSUPERCLASS;
 
 	///The shape of the collision area of the physics object.
@@ -78,8 +84,8 @@ public:
 	///The physics type of the physics object.
 	enum VObjectType
 	{
-		KINEMATIC,
 		DYNAMIC,
+		KINEMATIC,
 		STATIC
 	};
 
@@ -106,18 +112,11 @@ public:
 	*/
 	VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectShape Shape = VObjectShape::BOX, std::vector<sf::Vector2f> Verts = {});
 
-	///Lock the X-Position of the object.
-	bool LockX = false;
-	///Lock the Y-Position of the object.
-	bool LockY = false;
-	///Lock the Angle of the object.
-	bool LockAngle = false;
-
 	/**
 	* Initialises the physics object.
 	* @param space The physics space to initialise the object to.
 	*/
-	void Initialise(cpSpace* space);
+	void Initialise(VPhysicsCPSpace* space);
 
 	///@return Gets the base game object that physics is being applied to.
 	VObject* GetBaseObject();
@@ -126,7 +125,7 @@ public:
 	* Deinitises and removes the physics object from the world.
 	* @param space The physics space to remove the object from.
 	*/
-	void Deinitialise(cpSpace* space);
+	void Deinitialise(VPhysicsCPSpace* space);
 
 	///Destroys the physics data of the object.
 	virtual void Destroy() override;
@@ -138,10 +137,23 @@ public:
 	virtual void Update(float dt) override;
 
 	///@return Gets the physics body as a void pointer (so it can be cast to a cpBody if necessary).
-	void* GetBody();
+	VPhysicsCPBody* GetBody();
 	
 	///@return Gets the physics shape as a void pointer (so it can be cast to a cpShape if necessary).
-	void* GetShape();
+	VPhysicsCPShape* GetShape();
+
+	//No direct way to change the shape of the physics object without replacing it.
+	//void SetShapeType(VObjectShape shape);
+	///@return The type of shape of the physics object.
+	VObjectShape GetShapeType();
+	
+	/**
+	* Set the physics body of the object.
+	* @param bodyType The new phyiscs body type.
+	*/
+	void SetBodyType(VObjectType bodyType);
+	///@return The tyoe of physics body of the physics object.
+	VObjectType GetBodyType();
 
 	///@return The density of the physics shape.
 	float GetDensity();

@@ -1,5 +1,5 @@
 /**
-* @file    VVPhysicsGroup.h
+* @file    VPhysicsGroup.h
 * @author  Tim Stoddard <tim@gamepopper.co.uk>
 *
 * @section LICENSE
@@ -36,11 +36,14 @@
 #ifndef VFRAME_NO_PHYSICS
 #include "VGroup.h"
 #include "VPhysicsObject.h"
+#include "VPhysicsJoints.h"
 
 ///A simple struct to represent the arbiter, a pair of colliding shapes.
 struct VPhysicsArbiter
 {
+	///Point A of Arbiter.
 	sf::Vector2f PointA;
+	///Point B of Arbiter.
 	sf::Vector2f PointB;
 };
 
@@ -53,21 +56,30 @@ private:
 	float timestep = 0.0f;
 
 protected:
-	cpSpace* space;
+	///The Physics World.
+	VPhysicsCPSpace* space;
+	///The Physics Collision Handler.
 	cpCollisionHandler* collisionHandler;
 	
+	///A list of callback helpers for collision responses.
 	std::vector<CollisionCallbackHelper> callbackHelperList;
 
+	/**
+	* Gets the physics object from the body.
+	* @param body The physics body.
+	* @return The Physics object. NULL if not found.
+	*/
 	VPhysicsObject* getObjectFromBody(cpBody* body);
 
 public:
+	///Used to call parent class functions when they are overrided in class.
 	typedef VGroup VSUPERCLASS;
 
 	///@param Amount The fixed length of the group. If 0, then the VGroup has no limit in size.
 	VPhysicsGroup(unsigned int Amount = 0);
-	
+
 	/**
-	* This functions adds an VPhysicsObject to the group. This should be used instead of the Add function unless you want to set up a VPhysicsObject yourself.
+	* This functions adds a VPhysicsObject to the group. This should be used instead of the Add function unless you want to set up a VPhysicsObject yourself.
 	* @param Object The game object you wish to apply physics to.
 	* @param BodyType This sets what type of physics body the object should have, see VObjectType for which types.
 	* @param Shape This sets what shape the collider should have.
@@ -75,12 +87,25 @@ public:
 	* @return VPhysicsObject created from this function, or nullptr if creation failed.
 	*/
 	VPhysicsObject* AddObject(VObject* Object, VPhysicsObject::VObjectType BodyType, VPhysicsObject::VObjectShape Shape = VPhysicsObject::BOX, std::vector<sf::Vector2f> Verts = {});
-	
+
 	/**
-	* Removes the VPhysicsObject from the group based on it's attached VObject, useful if you no longer have the VPhysicsObject at hand.
-	* @param Object The game object you wish to apply physics to.
+	* Removes the VPhysicsObject from the group based on it's attached VObject and destroys it, useful if you no longer have the VPhysicsObject at hand.
+	* @param Object The game object that you wish to remove the physics from.
 	*/
 	bool RemoveObject(VObject* Object);
+
+	/**
+	* This functions adds a VPhysicsJointBase object to the physics world.
+	* @param Joint The Physics Joint to add into the scene, it must be already set up with both physics objects.
+	* @return VPhysicsJointBase created from this function, or nullptr if creation failed.
+	*/
+	VPhysicsJointBase* AddJoint(VPhysicsJointBase* Joint);
+
+	/**
+	* Removes the VPhysicsJointBase from the group and destroys it.
+	* @param Joint The physics joint you wish to be removed.
+	*/
+	bool RemoveJoint(VPhysicsJointBase* Joint);
 	
 	///Destroys all VPhysicsObjects, this has no effect on the VObject that's attached to them.
 	virtual void Destroy() override;
@@ -128,8 +153,11 @@ public:
 
 	///@return The number of frames/steps to keep collision solutions. Default is 3.
 	unsigned int GetCollisionPersistence();
-	///@params The number of frames/steps to keep collision solutions.
+	///@param CollisionPersistence The number of frames/steps to keep collision solutions.
 	void SetCollisionPersistence(unsigned int CollisionPersistence);
+
+	///@return A pointer to the static body of the physics world, useful if you want to pin a physics object to the scene itself.
+	VPhysicsCPBody* GetBody();
 
 	///The types of collision callback.
 	enum VPhysicsCallbackType
@@ -150,7 +178,7 @@ public:
 	* @param a The first object to test collisions with for the callback.
 	* @param b The second object to test collisions with for the callback. Setting this to nullptr will apply the callback between object a and anything else.
 	* @param callback The function to call if the collision takes place, the two parameters are VPhysicsObject so you can adjust the collision properties and access the VObject at the same time.
-	* @param The type of collision callback to set (see VPhysicsCallbackType).
+	* @param type The type of collision callback to set (see VPhysicsCallbackType).
 	* @param persist If true, this callback will remain active for the duration of the space, otherwise this callback will be removed after one call. This way you aren't required to call it on each update.
 	*/
 	void SetCollisionCallback(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist = false);
@@ -161,7 +189,7 @@ public:
 	* @param a The first object to test collisions with for the callback.
 	* @param b The second object to test collisions with for the callback. Setting this to nullptr will apply the callback between object a and anything else.
 	* @param callback The function to call if the collision takes place, the two parameters are VPhysicsObject so you can adjust the collision properties and access the VObject at the same time.
-	* @param The type of collision callback to set (see VPhysicsCallbackType).
+	* @param type The type of collision callback to set (see VPhysicsCallbackType).
 	* @param persist If true, this callback will remain active for the duration of the space, otherwise this callback will be removed after one call. This way you aren't required to call it on each update.
 	*/
 	void SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist = false);
@@ -173,7 +201,7 @@ public:
 	* @param type The type of callback to process.
 	* @return A boolean value for the begin and presolve callbacks.
 	*/
-	bool ProcessCallback(cpArbiter *arb, cpSpace *space, VPhysicsCallbackType type);
+	bool ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *space, VPhysicsCallbackType type);
 
 #ifdef _DEBUG
 	/**
