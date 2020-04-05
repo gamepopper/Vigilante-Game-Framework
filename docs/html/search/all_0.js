@@ -7,6 +7,8 @@ var searchData=
   ['activeasyncfunctions',['ActiveAsyncFunctions',['../class_v_async.html#a63da78583837f9fde383a1191e684b64',1,'VAsync']]],
   ['add',['Add',['../class_v_finite_state_machine.html#a352bb42a051f46ec91c310d6cb65e4b2',1,'VFiniteStateMachine::Add()'],['../class_v_group.html#a17aae86a34926d85de448827c485947e',1,'VGroup::Add()']]],
   ['addanimation',['AddAnimation',['../class_v_animation_manager.html#a4929bc33132b0df254667690d2e1491c',1,'VAnimationManager::AddAnimation(const sf::String &amp;name, const std::vector&lt; int &gt; &amp;Frames, float FramesPerSecond=6.0f, bool Looping=false, bool Reverse=false)'],['../class_v_animation_manager.html#a9522881e3c4d8082ab76a41dc033572f',1,'VAnimationManager::AddAnimation(const sf::String &amp;name, int Begin, int Length, float FramesPerSecond=6.0f, bool Looping=false, bool Reverse=false)']]],
+  ['addevent',['AddEvent',['../class_v_timeline.html#ab3fd72add38a92f0df22d399e7de191f',1,'VTimeline::AddEvent(unsigned int time, std::function&lt; void()&gt; function)'],['../class_v_timeline.html#abb5882b014b2da8c397c5034e7b48009',1,'VTimeline::AddEvent(float time, std::function&lt; void()&gt; function)']]],
+  ['addjoint',['AddJoint',['../class_v_physics_group.html#a7d4a2272cb6320d38ff93b6132215d95',1,'VPhysicsGroup']]],
   ['addobject',['AddObject',['../class_v_physics_group.html#a1eb02433a06a39933f6b779c306755c4',1,'VPhysicsGroup']]],
   ['addpoint',['AddPoint',['../class_v_path.html#a8db99f1bbcd4b06313d0b2695bb69d36',1,'VPath::AddPoint()'],['../class_v_text_path.html#a0fd5d0b5b9263b31c9a7461f6429c586',1,'VTextPath::AddPoint()']]],
   ['addposteffect',['AddPostEffect',['../class_v_post_effect_multipass.html#aac19b25a551d459aa3fad3327c33d77a',1,'VPostEffectMultipass']]],

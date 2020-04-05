@@ -31,10 +31,7 @@ var searchData=
   ['loadparticlesfromfile',['LoadParticlesFromFile',['../class_v_emitter.html#a849d70a3d2178d52b8e4ace5c14e27b1',1,'VEmitter']]],
   ['loadsound',['LoadSound',['../class_v_content.html#afdc7ccb477a1d0161e83775405485240',1,'VContent']]],
   ['loadtexture',['LoadTexture',['../class_v3_d_model.html#a74f10da43a2ed543932212b9b67fb495',1,'V3DModel::LoadTexture(const sf::String &amp;filename)'],['../class_v3_d_model.html#a2c4fc502881467de23a8d3b4df164651',1,'V3DModel::LoadTexture(const sf::Texture &amp;tex)'],['../class_v_content.html#a514a6be132312e357159b463297befe8',1,'VContent::LoadTexture()']]],
-  ['lockangle',['LockAngle',['../class_v_physics_object.html#a5dcb0892a185abff86b218dfb41ebfdc',1,'VPhysicsObject']]],
-  ['lockon',['LOCKON',['../class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0da112937c85f12af168d548b121edfb896',1,'VCamera']]],
-  ['lockx',['LockX',['../class_v_physics_object.html#a9b1cd79af50a734b7842217958fab7dc',1,'VPhysicsObject']]],
-  ['locky',['LockY',['../class_v_physics_object.html#ab640fc6f859ea5841a6f38ac2eb8a431',1,'VPhysicsObject']]],
+  ['lockon',['LOCKON',['../class_v_camera.html#a9131b6c04b364daa7c9310c34abc596fa112937c85f12af168d548b121edfb896',1,'VCamera']]],
   ['lookat',['LookAt',['../class_v3_d_camera.html#a8e01e28ed7d7baf15fe0f75018d0d5ca',1,'V3DCamera']]],
   ['loop',['Loop',['../class_v_music.html#a0689e8e47b61762458d4573db15acf46',1,'VMusic']]]
 ];

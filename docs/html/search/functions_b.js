@@ -7,7 +7,7 @@ var searchData=
   ['makeparticles',['MakeParticles',['../class_v_emitter.html#ad21f1c336beaefa0a9c50fed61e5cef1',1,'VEmitter']]],
   ['masterpitch',['MasterPitch',['../class_v_sound_manager.html#aaec6f12701c7bf761784eeb6604c6b01',1,'VSoundManager']]],
   ['mastervolume',['MasterVolume',['../class_v_sound_manager.html#a06fee7d8b00ff63554fbe2f50b6661f4',1,'VSoundManager']]],
-  ['microseconds',['Microseconds',['../class_v_timer.html#a0ce0ccdec3b8880bf8b2796f3b253e28',1,'VTimer']]],
-  ['milliseconds',['Milliseconds',['../class_v_timer.html#af5dd424b93405b55f87df92c8679e208',1,'VTimer']]],
+  ['microseconds',['Microseconds',['../class_v_timer.html#a2de713b3718b5a9d88f1100ef83dbb9e',1,'VTimer']]],
+  ['milliseconds',['Milliseconds',['../class_v_timer.html#a94f5c6ba379d690698c17c65fc39c439',1,'VTimer']]],
   ['mindistance',['MinDistance',['../class_v_music.html#a2c784a1f16cf1616adc5b771b49790a5',1,'VMusic']]]
 ];

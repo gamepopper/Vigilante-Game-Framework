@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.6</span>
+   &#160;<span id="projectnumber">1.0.0.7</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -147,6 +147,14 @@ Public Member Functions</h2></td></tr>
 sf::Color const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tilemap.html#aa15c2544b322bb9aaa25f307e37a5c57">GetTint</a> ()</td></tr>
 <tr class="memdesc:aa15c2544b322bb9aaa25f307e37a5c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get overall tint of tilemap. <br /></td></tr>
 <tr class="separator:aa15c2544b322bb9aaa25f307e37a5c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad918c10cec5347a0459fecac68b8b6d3"><td class="memItemLeft" align="right" valign="top"><a id="ad918c10cec5347a0459fecac68b8b6d3"></a>
+int const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tilemap.html#ad918c10cec5347a0459fecac68b8b6d3">GetMapWidth</a> ()</td></tr>
+<tr class="memdesc:ad918c10cec5347a0459fecac68b8b6d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get width of tilemap grid. <br /></td></tr>
+<tr class="separator:ad918c10cec5347a0459fecac68b8b6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0044e56ae309a2adfdceaf52ece22454"><td class="memItemLeft" align="right" valign="top"><a id="a0044e56ae309a2adfdceaf52ece22454"></a>
+int const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tilemap.html#a0044e56ae309a2adfdceaf52ece22454">GetMapHeight</a> ()</td></tr>
+<tr class="memdesc:a0044e56ae309a2adfdceaf52ece22454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get height of tilemap grid. <br /></td></tr>
+<tr class="separator:a0044e56ae309a2adfdceaf52ece22454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac99b8b3e545ea098407c09902ed68a30"><td class="memItemLeft" align="right" valign="top"><a id="ac99b8b3e545ea098407c09902ed68a30"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tilemap.html#ac99b8b3e545ea098407c09902ed68a30">Reset</a> (sf::Vector2f newPos) override</td></tr>
 <tr class="memdesc:ac99b8b3e545ea098407c09902ed68a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not used in <a class="el" href="class_v_tilemap.html" title="Object that renders a 2D tilemap, with custom collision and autotiling support. ">VTilemap</a>. <br /></td></tr>
@@ -159,10 +167,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tilemap.html#ab8ac558afd3ed1698b8773574f03e12b">Hurt</a> (float damage) override</td></tr>
 <tr class="memdesc:ab8ac558afd3ed1698b8773574f03e12b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not used in <a class="el" href="class_v_tilemap.html" title="Object that renders a 2D tilemap, with custom collision and autotiling support. ">VTilemap</a>. <br /></td></tr>
 <tr class="separator:ab8ac558afd3ed1698b8773574f03e12b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70a8b0cd8f302f8759290ba4e38eb35c"><td class="memItemLeft" align="right" valign="top"><a id="a70a8b0cd8f302f8759290ba4e38eb35c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tilemap.html#a70a8b0cd8f302f8759290ba4e38eb35c">Kill</a> () override</td></tr>
-<tr class="memdesc:a70a8b0cd8f302f8759290ba4e38eb35c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not used in <a class="el" href="class_v_tilemap.html" title="Object that renders a 2D tilemap, with custom collision and autotiling support. ">VTilemap</a>. <br /></td></tr>
-<tr class="separator:a70a8b0cd8f302f8759290ba4e38eb35c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adac6a74aad323548ffa2dad0a4c7fb46"><td class="memItemLeft" align="right" valign="top"><a id="adac6a74aad323548ffa2dad0a4c7fb46"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tilemap.html#adac6a74aad323548ffa2dad0a4c7fb46">Destroy</a> () override</td></tr>
 <tr class="memdesc:adac6a74aad323548ffa2dad0a4c7fb46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes and clears all the tilemap data. <br /></td></tr>
@@ -183,6 +187,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:ad94a8aabc3efd92bb73c9712b067ea02 inherit pub_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#ad94a8aabc3efd92bb73c9712b067ea02">IsSolid</a> ()</td></tr>
 <tr class="separator:ad94a8aabc3efd92bb73c9712b067ea02 inherit pub_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
+<tr class="memitem:a2d454eaacf1342b22a4367d359ce0827 inherit pub_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a2d454eaacf1342b22a4367d359ce0827">Kill</a> ()</td></tr>
+<tr class="separator:a2d454eaacf1342b22a4367d359ce0827 inherit pub_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e6f48dc57252f66e365b409e0a8ecb8 inherit pub_methods_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="a3e6f48dc57252f66e365b409e0a8ecb8"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a3e6f48dc57252f66e365b409e0a8ecb8">Revive</a> ()</td></tr>
 <tr class="memdesc:a3e6f48dc57252f66e365b409e0a8ecb8 inherit pub_methods_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Revives the object by setting both alive and exists back to true. <br /></td></tr>
@@ -285,7 +291,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="separator:ad8cca6d32d58c38c9dc48b51da99d2c9 inherit pub_attribs_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3359d3e21642458bc5136fc184d328df inherit pub_attribs_class_v_object"><td class="memItemLeft" align="right" valign="top"><a id="a3359d3e21642458bc5136fc184d328df"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a3359d3e21642458bc5136fc184d328df">Health</a> = 100</td></tr>
-<tr class="memdesc:a3359d3e21642458bc5136fc184d328df inherit pub_attribs_class_v_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard health value (object dies if health is &lt;= 0) <br /></td></tr>
+<tr class="memdesc:a3359d3e21642458bc5136fc184d328df inherit pub_attribs_class_v_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard health value (object dies if health is &lt;= 0 when modified in the Hurt function) <br /></td></tr>
 <tr class="separator:a3359d3e21642458bc5136fc184d328df inherit pub_attribs_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa855ff3febc24222f08f2d8a29860f45 inherit pub_attribs_class_v_object"><td class="memItemLeft" align="right" valign="top"><a id="aa855ff3febc24222f08f2d8a29860f45"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#aa855ff3febc24222f08f2d8a29860f45">Immovable</a> = false</td></tr>

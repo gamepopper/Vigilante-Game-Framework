@@ -2,7 +2,7 @@ var searchData=
 [
   ['imageexists',['ImageExists',['../class_v_content.html#ae765cda8cdac3d1f89b9fc455f0f2a27',1,'VContent']]],
   ['init',['Init',['../class_v_game.html#ac0927b7b1874f778a6e050b1e1a47034',1,'VGame']]],
-  ['initialise',['Initialise',['../class_v_collision.html#a0f25b32e6434961323fbb7ad5b3af505',1,'VCollision::Initialise()'],['../class_v_physics_object.html#a21829f1472d43e914b6d4b5f55e4b87e',1,'VPhysicsObject::Initialise()'],['../class_v_state.html#ab813731f8a1730a96c3e7105b96bc719',1,'VState::Initialise()'],['../class_v_sub_state.html#aea804e9383f2583de009a3780fb47a63',1,'VSubState::Initialise()']]],
+  ['initialise',['Initialise',['../class_v_collision.html#a0f25b32e6434961323fbb7ad5b3af505',1,'VCollision::Initialise()'],['../class_v_physics_joint_base.html#ad89e20cb5fde215fd24a6304782ce5fb',1,'VPhysicsJointBase::Initialise()'],['../class_v_physics_object.html#a535f5a85176af289896a86271f58a2e5',1,'VPhysicsObject::Initialise()'],['../class_v_state.html#ab813731f8a1730a96c3e7105b96bc719',1,'VState::Initialise()'],['../class_v_sub_state.html#aea804e9383f2583de009a3780fb47a63',1,'VSubState::Initialise()']]],
   ['isactive',['IsActive',['../class_v_path.html#a16be3c00ffbb8b73525d5ce7b10962d7',1,'VPath::IsActive()'],['../class_v_typed_text.html#a55081e4573146b6915a2fe1148b0c0f5',1,'VTypedText::IsActive()']]],
   ['isanybuttonpressed',['isAnyButtonPressed',['../classsf_1_1_x_input_device.html#a361aaeaa57e4ca009d7227cba194ee34',1,'sf::XInputDevice']]],
   ['isanyconnected',['isAnyConnected',['../classsf_1_1_x_input_device.html#ace60ef57dcf22d823d8c302836225d23',1,'sf::XInputDevice']]],
@@ -13,6 +13,7 @@ var searchData=
   ['isconnected',['isConnected',['../classsf_1_1_x_input_device.html#a75c8ab8f4252a41ee69ac6381fd80553',1,'sf::XInputDevice']]],
   ['iserasing',['IsErasing',['../class_v_typed_text.html#a4b8f29fb0621d367c7d1818adbbd0249',1,'VTypedText']]],
   ['isfading',['IsFading',['../class_v_camera.html#ac517d9b28c4dbea08f4109d487a2c842',1,'VCamera']]],
+  ['isfinished',['IsFinished',['../class_v_timeline.html#a17fb510d3eeb8301aae34c4fd8369964',1,'VTimeline']]],
   ['isflashing',['IsFlashing',['../class_v_camera.html#a3fee73adacd683900298761adfeb02c3',1,'VCamera']]],
   ['isfullscreen',['IsFullscreen',['../class_v_global.html#aa6373d7a5065c0a140a48efb7189213c',1,'VGlobal']]],
   ['isgamepadactive',['IsGamepadActive',['../class_v_input_handler.html#a9ebc4e3ed3f3f20f05423d22245465a6',1,'VInputHandler']]],

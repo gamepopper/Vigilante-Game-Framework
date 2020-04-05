@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.6</span>
+   &#160;<span id="projectnumber">1.0.0.7</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -81,20 +81,17 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a9e6470bf1a9ab92878dd5762467d0e0d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">: unsigned char { <br />
-&#160;&#160;<a class="el" href="class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0da112937c85f12af168d548b121edfb896">LOCKON</a>, 
-<a class="el" href="class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0da58d7837102d65cf1bf6d3e4f39b0dee3">TOPDOWN</a>, 
-<a class="el" href="class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0da3dd51f2cffc395b6507d8fef47295166">PLATFORMER</a>, 
-<a class="el" href="class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0daf6157f6aacca8a42b4fee5d719f62c66">ROOM</a>, 
+<tr class="memitem:a9131b6c04b364daa7c9310c34abc596f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596f">CameraFollowMethod</a> : unsigned char { <br />
+&#160;&#160;<a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596fa112937c85f12af168d548b121edfb896">LOCKON</a>, 
+<a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596fa58d7837102d65cf1bf6d3e4f39b0dee3">TOPDOWN</a>, 
+<a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596fa3dd51f2cffc395b6507d8fef47295166">PLATFORMER</a>, 
+<a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596faf6157f6aacca8a42b4fee5d719f62c66">ROOM</a>, 
 <br />
-&#160;&#160;<a class="el" href="class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0dac5de46ff3670976b0734b3546639e301">ROOMLERP</a>
+&#160;&#160;<a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596fac5de46ff3670976b0734b3546639e301">ROOMLERP</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a9e6470bf1a9ab92878dd5762467d0e0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The method of how the camera shall follow a specific <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>.  <a href="class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0d">More...</a><br /></td></tr>
-<tr class="separator:a9e6470bf1a9ab92878dd5762467d0e0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81946d41cc1824c0facaff1d9437ba5b"><td class="memItemLeft" align="right" valign="top"><a id="a81946d41cc1824c0facaff1d9437ba5b"></a>
-typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>CameraFollowMethod</b></td></tr>
-<tr class="separator:a81946d41cc1824c0facaff1d9437ba5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a9131b6c04b364daa7c9310c34abc596f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The method of how the camera shall follow a specific <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>.  <a href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596f">More...</a><br /></td></tr>
+<tr class="separator:a9131b6c04b364daa7c9310c34abc596f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -173,7 +170,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:a19a1e0d2b72ed38108daca3e397fa89b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> that the camera will follow. Must not be nullptr if set to follow. <br /></td></tr>
 <tr class="separator:a19a1e0d2b72ed38108daca3e397fa89b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a610f84c5c3eb330453eb99338e5fb3ed"><td class="memItemLeft" align="right" valign="top"><a id="a610f84c5c3eb330453eb99338e5fb3ed"></a>
-CameraFollowMethod&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a610f84c5c3eb330453eb99338e5fb3ed">followMethod</a> = <a class="el" href="class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0da112937c85f12af168d548b121edfb896">LOCKON</a></td></tr>
+<a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596f">CameraFollowMethod</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a610f84c5c3eb330453eb99338e5fb3ed">followMethod</a> = <a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596fa112937c85f12af168d548b121edfb896">LOCKON</a></td></tr>
 <tr class="memdesc:a610f84c5c3eb330453eb99338e5fb3ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">The camera's current follow method. <br /></td></tr>
 <tr class="separator:a610f84c5c3eb330453eb99338e5fb3ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28cc4eccf6994091cba203c0c3b2f28b"><td class="memItemLeft" align="right" valign="top"><a id="a28cc4eccf6994091cba203c0c3b2f28b"></a>
@@ -260,29 +257,29 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The 2D camera that renders the scene. </p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="a9e6470bf1a9ab92878dd5762467d0e0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e6470bf1a9ab92878dd5762467d0e0d">&#9670;&nbsp;</a></span>anonymous enum</h2>
+<a id="a9131b6c04b364daa7c9310c34abc596f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9131b6c04b364daa7c9310c34abc596f">&#9670;&nbsp;</a></span>CameraFollowMethod</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">anonymous enum : unsigned char</td>
+          <td class="memname">enum <a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596f">VCamera::CameraFollowMethod</a> : unsigned char</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>The method of how the camera shall follow a specific <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9e6470bf1a9ab92878dd5762467d0e0da112937c85f12af168d548b121edfb896"></a>LOCKON&#160;</td><td class="fielddoc"><p>Locks on directly to the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> with no lerp or lead. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9131b6c04b364daa7c9310c34abc596fa112937c85f12af168d548b121edfb896"></a>LOCKON&#160;</td><td class="fielddoc"><p>Locks on directly to the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> with no lerp or lead. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9e6470bf1a9ab92878dd5762467d0e0da58d7837102d65cf1bf6d3e4f39b0dee3"></a>TOPDOWN&#160;</td><td class="fielddoc"><p>Locks onto the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> with lerp and lead, best if a game has a top-down perspective. </p>
+<tr><td class="fieldname"><a id="a9131b6c04b364daa7c9310c34abc596fa58d7837102d65cf1bf6d3e4f39b0dee3"></a>TOPDOWN&#160;</td><td class="fielddoc"><p>Locks onto the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> with lerp and lead, best if a game has a top-down perspective. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9e6470bf1a9ab92878dd5762467d0e0da3dd51f2cffc395b6507d8fef47295166"></a>PLATFORMER&#160;</td><td class="fielddoc"><p>Locks onto the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> with lerp and lead, but with no dead zone restrictions for moving up. Best if a game is a side-scrolling platformer. </p>
+<tr><td class="fieldname"><a id="a9131b6c04b364daa7c9310c34abc596fa3dd51f2cffc395b6507d8fef47295166"></a>PLATFORMER&#160;</td><td class="fielddoc"><p>Locks onto the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> with lerp and lead, but with no dead zone restrictions for moving up. Best if a game is a side-scrolling platformer. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9e6470bf1a9ab92878dd5762467d0e0daf6157f6aacca8a42b4fee5d719f62c66"></a>ROOM&#160;</td><td class="fielddoc"><p>Fixes to positions like a grid. best used for grid based levels where the screen size is evenly divisible to the world size. </p>
+<tr><td class="fieldname"><a id="a9131b6c04b364daa7c9310c34abc596faf6157f6aacca8a42b4fee5d719f62c66"></a>ROOM&#160;</td><td class="fielddoc"><p>Fixes to positions like a grid. best used for grid based levels where the screen size is evenly divisible to the world size. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9e6470bf1a9ab92878dd5762467d0e0dac5de46ff3670976b0734b3546639e301"></a>ROOMLERP&#160;</td><td class="fielddoc"><p>Same as Room, however instead of instantly changing positions, the camera will lerp to the next position. </p>
+<tr><td class="fieldname"><a id="a9131b6c04b364daa7c9310c34abc596fac5de46ff3670976b0734b3546639e301"></a>ROOMLERP&#160;</td><td class="fielddoc"><p>Same as Room, however instead of instantly changing positions, the camera will lerp to the next position. </p>
 </td></tr>
 </table>
 
@@ -434,8 +431,8 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">CameraFollowMethod&#160;</td>
-          <td class="paramname"><em>followmethod</em> = <code><a class="el" href="class_v_camera.html#a9e6470bf1a9ab92878dd5762467d0e0da112937c85f12af168d548b121edfb896">LOCKON</a></code>, </td>
+          <td class="paramtype"><a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596f">CameraFollowMethod</a>&#160;</td>
+          <td class="paramname"><em>followmethod</em> = <code><a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596fa112937c85f12af168d548b121edfb896">LOCKON</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

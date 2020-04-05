@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.6</span>
+   &#160;<span id="projectnumber">1.0.0.7</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -66,7 +66,6 @@ $(function() {
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_v_physics_object-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -97,36 +96,43 @@ Public Types</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ae6a607763cbff0935a440465817457f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The shape of the collision area of the physics object. <br /></td></tr>
 <tr class="separator:ae6a607763cbff0935a440465817457f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad60190624dbcbba01a3f147d1873fcf5"><td class="memItemLeft" align="right" valign="top"><a id="ad60190624dbcbba01a3f147d1873fcf5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a> { <b>KINEMATIC</b>, 
-<b>DYNAMIC</b>, 
+<tr class="memitem:ad60190624dbcbba01a3f147d1873fcf5"><td class="memItemLeft" align="right" valign="top"><a id="ad60190624dbcbba01a3f147d1873fcf5"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a> { <b>DYNAMIC</b>, 
+<b>KINEMATIC</b>, 
 <b>STATIC</b>
  }</td></tr>
 <tr class="memdesc:ad60190624dbcbba01a3f147d1873fcf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The physics type of the physics object. <br /></td></tr>
 <tr class="separator:ad60190624dbcbba01a3f147d1873fcf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64ca2fef3629e2ebe77188fa1dbe9af1"><td class="memItemLeft" align="right" valign="top"><a id="a64ca2fef3629e2ebe77188fa1dbe9af1"></a>
-typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="memItemRight" valign="bottom"><b>VSUPERCLASS</b></td></tr>
+typedef <a class="el" href="class_v_base.html">VBase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a64ca2fef3629e2ebe77188fa1dbe9af1">VSUPERCLASS</a></td></tr>
+<tr class="memdesc:a64ca2fef3629e2ebe77188fa1dbe9af1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to call parent class functions when they are overrided in class. <br /></td></tr>
 <tr class="separator:a64ca2fef3629e2ebe77188fa1dbe9af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a997ff00061de04455e27d9b10cdf5df9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a997ff00061de04455e27d9b10cdf5df9">VPhysicsObject</a> (<a class="el" href="class_v_object.html">VObject</a> *Object, <a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a> BodyType, <a class="el" href="class_v_physics_object.html#ae6a607763cbff0935a440465817457f5">VObjectShape</a> Shape=VObjectShape::BOX, std::vector&lt; sf::Vector2f &gt; Verts={})</td></tr>
 <tr class="separator:a997ff00061de04455e27d9b10cdf5df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21829f1472d43e914b6d4b5f55e4b87e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a21829f1472d43e914b6d4b5f55e4b87e">Initialise</a> (cpSpace *space)</td></tr>
-<tr class="separator:a21829f1472d43e914b6d4b5f55e4b87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a535f5a85176af289896a86271f58a2e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a535f5a85176af289896a86271f58a2e5">Initialise</a> (<a class="el" href="_v_physics_object_8h.html#a524052a7ddd2db51010fc89bfc8fea26">VPhysicsCPSpace</a> *space)</td></tr>
+<tr class="separator:a535f5a85176af289896a86271f58a2e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d10f01cc83303e81c3845bf7f303da0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_object.html">VObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a4d10f01cc83303e81c3845bf7f303da0">GetBaseObject</a> ()</td></tr>
 <tr class="separator:a4d10f01cc83303e81c3845bf7f303da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5aae5629f2626c3534b9c6a2bab0ec2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a5aae5629f2626c3534b9c6a2bab0ec2f">Deinitialise</a> (cpSpace *space)</td></tr>
-<tr class="separator:a5aae5629f2626c3534b9c6a2bab0ec2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a042c89a4dfcd3d4f196f957764dcb253"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a042c89a4dfcd3d4f196f957764dcb253">Deinitialise</a> (<a class="el" href="_v_physics_object_8h.html#a524052a7ddd2db51010fc89bfc8fea26">VPhysicsCPSpace</a> *space)</td></tr>
+<tr class="separator:a042c89a4dfcd3d4f196f957764dcb253"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d2d2ee7130b100d967f40674b057dad"><td class="memItemLeft" align="right" valign="top"><a id="a5d2d2ee7130b100d967f40674b057dad"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a5d2d2ee7130b100d967f40674b057dad">Destroy</a> () override</td></tr>
 <tr class="memdesc:a5d2d2ee7130b100d967f40674b057dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the physics data of the object. <br /></td></tr>
 <tr class="separator:a5d2d2ee7130b100d967f40674b057dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e05ba004bbb0878634eb936fa3edc13"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a7e05ba004bbb0878634eb936fa3edc13">Update</a> (float dt) override</td></tr>
 <tr class="separator:a7e05ba004bbb0878634eb936fa3edc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65cb5c2942592b8ef769619ddd11f417"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a65cb5c2942592b8ef769619ddd11f417">GetBody</a> ()</td></tr>
-<tr class="separator:a65cb5c2942592b8ef769619ddd11f417"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c410829c131fbee4a3174958e1af775"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a7c410829c131fbee4a3174958e1af775">GetShape</a> ()</td></tr>
-<tr class="separator:a7c410829c131fbee4a3174958e1af775"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e62a3f2ece7cfd37172859d2716718e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_v_physics_object_8h.html#ab76606b3a13a1d2a97fd7e57554af7cd">VPhysicsCPBody</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a1e62a3f2ece7cfd37172859d2716718e">GetBody</a> ()</td></tr>
+<tr class="separator:a1e62a3f2ece7cfd37172859d2716718e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88006f97a267d48c2a3ad6721f17e813"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_v_physics_object_8h.html#af7989ff7f8178fdb9eec744c6148754c">VPhysicsCPShape</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a88006f97a267d48c2a3ad6721f17e813">GetShape</a> ()</td></tr>
+<tr class="separator:a88006f97a267d48c2a3ad6721f17e813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d51d3dc95c233bb0eb89d09d04e5d16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_physics_object.html#ae6a607763cbff0935a440465817457f5">VObjectShape</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a0d51d3dc95c233bb0eb89d09d04e5d16">GetShapeType</a> ()</td></tr>
+<tr class="separator:a0d51d3dc95c233bb0eb89d09d04e5d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53eb23eb99af877f0e173bf15aa0ff11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a53eb23eb99af877f0e173bf15aa0ff11">SetBodyType</a> (<a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a> <a class="el" href="class_v_physics_object.html#ada140b33dfb3a0194106e4a39e1ae535">bodyType</a>)</td></tr>
+<tr class="separator:a53eb23eb99af877f0e173bf15aa0ff11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7f34732f2e3537a2cb72ececdf1e4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a8b7f34732f2e3537a2cb72ececdf1e4b">GetBodyType</a> ()</td></tr>
+<tr class="separator:a8b7f34732f2e3537a2cb72ececdf1e4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe780722d67b65f5571e4677a8a7a888"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#afe780722d67b65f5571e4677a8a7a888">GetDensity</a> ()</td></tr>
 <tr class="separator:afe780722d67b65f5571e4677a8a7a888"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3de647909b0fe9703286df103bf9482e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a3de647909b0fe9703286df103bf9482e">SetDensity</a> (float density)</td></tr>
@@ -165,46 +171,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:a1e21ec17d7d5cdf6cc8fd2283703c0e4 inherit pub_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a1e21ec17d7d5cdf6cc8fd2283703c0e4">Draw</a> (sf::RenderTarget &amp;RenderTarget)</td></tr>
 <tr class="separator:a1e21ec17d7d5cdf6cc8fd2283703c0e4 inherit pub_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a9b1cd79af50a734b7842217958fab7dc"><td class="memItemLeft" align="right" valign="top"><a id="a9b1cd79af50a734b7842217958fab7dc"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a9b1cd79af50a734b7842217958fab7dc">LockX</a> = false</td></tr>
-<tr class="memdesc:a9b1cd79af50a734b7842217958fab7dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock the X-Position of the object. <br /></td></tr>
-<tr class="separator:a9b1cd79af50a734b7842217958fab7dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab640fc6f859ea5841a6f38ac2eb8a431"><td class="memItemLeft" align="right" valign="top"><a id="ab640fc6f859ea5841a6f38ac2eb8a431"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#ab640fc6f859ea5841a6f38ac2eb8a431">LockY</a> = false</td></tr>
-<tr class="memdesc:ab640fc6f859ea5841a6f38ac2eb8a431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock the Y-Position of the object. <br /></td></tr>
-<tr class="separator:ab640fc6f859ea5841a6f38ac2eb8a431"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dcb0892a185abff86b218dfb41ebfdc"><td class="memItemLeft" align="right" valign="top"><a id="a5dcb0892a185abff86b218dfb41ebfdc"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_object.html#a5dcb0892a185abff86b218dfb41ebfdc">LockAngle</a> = false</td></tr>
-<tr class="memdesc:a5dcb0892a185abff86b218dfb41ebfdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock the Angle of the object. <br /></td></tr>
-<tr class="separator:a5dcb0892a185abff86b218dfb41ebfdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v_base')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
-<tr class="memitem:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="aa771f52f4fa755fb64b8dc8cc563250c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aa771f52f4fa755fb64b8dc8cc563250c">active</a> = true</td></tr>
-<tr class="memdesc:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base can be updated using Update if true. <br /></td></tr>
-<tr class="separator:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5979671ac709bfd012d5dc9e2ca2d2a3 inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="a5979671ac709bfd012d5dc9e2ca2d2a3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a5979671ac709bfd012d5dc9e2ca2d2a3">visible</a> = true</td></tr>
-<tr class="memdesc:a5979671ac709bfd012d5dc9e2ca2d2a3 inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base can be rendered using Draw if true. <br /></td></tr>
-<tr class="separator:a5979671ac709bfd012d5dc9e2ca2d2a3 inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae913dee5af562a94b17103a0198ea995 inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="ae913dee5af562a94b17103a0198ea995"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#ae913dee5af562a94b17103a0198ea995">alive</a> = true</td></tr>
-<tr class="memdesc:ae913dee5af562a94b17103a0198ea995 inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper member that is mainly used filter out behaviours to objects which aren't alive in the scene. <br /></td></tr>
-<tr class="separator:ae913dee5af562a94b17103a0198ea995 inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad01b0965bfe85e134161a42bd4a641d2 inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="ad01b0965bfe85e134161a42bd4a641d2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#ad01b0965bfe85e134161a42bd4a641d2">exists</a> = true</td></tr>
-<tr class="memdesc:ad01b0965bfe85e134161a42bd4a641d2 inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base can be updated and rendered if true, else it would no longer be treated as being part of the scene. <br /></td></tr>
-<tr class="separator:ad01b0965bfe85e134161a42bd4a641d2 inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb1c52bc63e25ecd2367b008bdf13f9f inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="afb1c52bc63e25ecd2367b008bdf13f9f"></a>
-<a class="el" href="_v_base_8h.html#a905dd6cddc3844c921cfcb2f2a635417">VType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f">type</a> = NONE</td></tr>
-<tr class="memdesc:afb1c52bc63e25ecd2367b008bdf13f9f inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base object type, typically set in the constructor of an inherited object to specify what type it is. <br /></td></tr>
-<tr class="separator:afb1c52bc63e25ecd2367b008bdf13f9f inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa42f189c6ad82085155573fbcaa44e65 inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="aa42f189c6ad82085155573fbcaa44e65"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aa42f189c6ad82085155573fbcaa44e65">RefCount</a> = 0</td></tr>
-<tr class="memdesc:aa42f189c6ad82085155573fbcaa44e65 inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counts the amount of times the object is referenced in groups, ensures an object is only destroyed when no longer part of a single group. <br /></td></tr>
-<tr class="separator:aa42f189c6ad82085155573fbcaa44e65 inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a92d5b7235a98080e6943309c09f82b95"><td class="memItemLeft" align="right" valign="top"><a id="a92d5b7235a98080e6943309c09f82b95"></a>
@@ -241,6 +207,31 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a51c63d85f3139497ad5574fcc4f1ae33 inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64b8ab259dd8135ddc2caf4a35e7822c inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a64b8ab259dd8135ddc2caf4a35e7822c">VClearLog</a> ()</td></tr>
 <tr class="separator:a64b8ab259dd8135ddc2caf4a35e7822c inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v_base')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
+<tr class="memitem:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="aa771f52f4fa755fb64b8dc8cc563250c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aa771f52f4fa755fb64b8dc8cc563250c">active</a> = true</td></tr>
+<tr class="memdesc:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base can be updated using Update if true. <br /></td></tr>
+<tr class="separator:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5979671ac709bfd012d5dc9e2ca2d2a3 inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="a5979671ac709bfd012d5dc9e2ca2d2a3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a5979671ac709bfd012d5dc9e2ca2d2a3">visible</a> = true</td></tr>
+<tr class="memdesc:a5979671ac709bfd012d5dc9e2ca2d2a3 inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base can be rendered using Draw if true. <br /></td></tr>
+<tr class="separator:a5979671ac709bfd012d5dc9e2ca2d2a3 inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae913dee5af562a94b17103a0198ea995 inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="ae913dee5af562a94b17103a0198ea995"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#ae913dee5af562a94b17103a0198ea995">alive</a> = true</td></tr>
+<tr class="memdesc:ae913dee5af562a94b17103a0198ea995 inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper member that is mainly used filter out behaviours to objects which aren't alive in the scene. <br /></td></tr>
+<tr class="separator:ae913dee5af562a94b17103a0198ea995 inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad01b0965bfe85e134161a42bd4a641d2 inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="ad01b0965bfe85e134161a42bd4a641d2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#ad01b0965bfe85e134161a42bd4a641d2">exists</a> = true</td></tr>
+<tr class="memdesc:ad01b0965bfe85e134161a42bd4a641d2 inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base can be updated and rendered if true, else it would no longer be treated as being part of the scene. <br /></td></tr>
+<tr class="separator:ad01b0965bfe85e134161a42bd4a641d2 inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb1c52bc63e25ecd2367b008bdf13f9f inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="afb1c52bc63e25ecd2367b008bdf13f9f"></a>
+<a class="el" href="_v_base_8h.html#a905dd6cddc3844c921cfcb2f2a635417">VType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f">type</a> = NONE</td></tr>
+<tr class="memdesc:afb1c52bc63e25ecd2367b008bdf13f9f inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base object type, typically set in the constructor of an inherited object to specify what type it is. <br /></td></tr>
+<tr class="separator:afb1c52bc63e25ecd2367b008bdf13f9f inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa42f189c6ad82085155573fbcaa44e65 inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="aa42f189c6ad82085155573fbcaa44e65"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aa42f189c6ad82085155573fbcaa44e65">RefCount</a> = 0</td></tr>
+<tr class="memdesc:aa42f189c6ad82085155573fbcaa44e65 inherit pub_attribs_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counts the amount of times the object is referenced in groups, ensures an object is only destroyed when no longer part of a single group. <br /></td></tr>
+<tr class="separator:aa42f189c6ad82085155573fbcaa44e65 inherit pub_attribs_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A special object class that represents the physics body that responds to the world and collisions using a specified shape, should be used by adding to <a class="el" href="class_v_physics_group.html" title="A special VGroup that sets up a physics world and updates VPhysicsObjects. It doesn&#39;t handle renderin...">VPhysicsGroup</a>. </p>
@@ -435,8 +426,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a5aae5629f2626c3534b9c6a2bab0ec2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5aae5629f2626c3534b9c6a2bab0ec2f">&#9670;&nbsp;</a></span>Deinitialise()</h2>
+<a id="a042c89a4dfcd3d4f196f957764dcb253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a042c89a4dfcd3d4f196f957764dcb253">&#9670;&nbsp;</a></span>Deinitialise()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -444,7 +435,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void VPhysicsObject::Deinitialise </td>
           <td>(</td>
-          <td class="paramtype">cpSpace *&#160;</td>
+          <td class="paramtype"><a class="el" href="_v_physics_object_8h.html#a524052a7ddd2db51010fc89bfc8fea26">VPhysicsCPSpace</a> *&#160;</td>
           <td class="paramname"><em>space</em></td><td>)</td>
           <td></td>
         </tr>
@@ -477,14 +468,14 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a65cb5c2942592b8ef769619ddd11f417"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65cb5c2942592b8ef769619ddd11f417">&#9670;&nbsp;</a></span>GetBody()</h2>
+<a id="a1e62a3f2ece7cfd37172859d2716718e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e62a3f2ece7cfd37172859d2716718e">&#9670;&nbsp;</a></span>GetBody()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* VPhysicsObject::GetBody </td>
+          <td class="memname"><a class="el" href="_v_physics_object_8h.html#ab76606b3a13a1d2a97fd7e57554af7cd">VPhysicsCPBody</a>* VPhysicsObject::GetBody </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -492,6 +483,24 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Gets the physics body as a void pointer (so it can be cast to a cpBody if necessary). </dd></dl>
+
+</div>
+</div>
+<a id="a8b7f34732f2e3537a2cb72ececdf1e4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b7f34732f2e3537a2cb72ececdf1e4b">&#9670;&nbsp;</a></span>GetBodyType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a> VPhysicsObject::GetBodyType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The tyoe of physics body of the physics object. </dd></dl>
 
 </div>
 </div>
@@ -549,14 +558,14 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a7c410829c131fbee4a3174958e1af775"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c410829c131fbee4a3174958e1af775">&#9670;&nbsp;</a></span>GetShape()</h2>
+<a id="a88006f97a267d48c2a3ad6721f17e813"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88006f97a267d48c2a3ad6721f17e813">&#9670;&nbsp;</a></span>GetShape()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* VPhysicsObject::GetShape </td>
+          <td class="memname"><a class="el" href="_v_physics_object_8h.html#af7989ff7f8178fdb9eec744c6148754c">VPhysicsCPShape</a>* VPhysicsObject::GetShape </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -564,6 +573,24 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Gets the physics shape as a void pointer (so it can be cast to a cpShape if necessary). </dd></dl>
+
+</div>
+</div>
+<a id="a0d51d3dc95c233bb0eb89d09d04e5d16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d51d3dc95c233bb0eb89d09d04e5d16">&#9670;&nbsp;</a></span>GetShapeType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_v_physics_object.html#ae6a607763cbff0935a440465817457f5">VObjectShape</a> VPhysicsObject::GetShapeType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The type of shape of the physics object. </dd></dl>
 
 </div>
 </div>
@@ -603,8 +630,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a21829f1472d43e914b6d4b5f55e4b87e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21829f1472d43e914b6d4b5f55e4b87e">&#9670;&nbsp;</a></span>Initialise()</h2>
+<a id="a535f5a85176af289896a86271f58a2e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a535f5a85176af289896a86271f58a2e5">&#9670;&nbsp;</a></span>Initialise()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -612,7 +639,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void VPhysicsObject::Initialise </td>
           <td>(</td>
-          <td class="paramtype">cpSpace *&#160;</td>
+          <td class="paramtype"><a class="el" href="_v_physics_object_8h.html#a524052a7ddd2db51010fc89bfc8fea26">VPhysicsCPSpace</a> *&#160;</td>
           <td class="paramname"><em>space</em></td><td>)</td>
           <td></td>
         </tr>
@@ -621,6 +648,30 @@ Additional Inherited Members</h2></td></tr>
 <p>Initialises the physics object. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">space</td><td>The physics space to initialise the object to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a53eb23eb99af877f0e173bf15aa0ff11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53eb23eb99af877f0e173bf15aa0ff11">&#9670;&nbsp;</a></span>SetBodyType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsObject::SetBodyType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_v_physics_object.html#ad60190624dbcbba01a3f147d1873fcf5">VObjectType</a>&#160;</td>
+          <td class="paramname"><em>bodyType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the physics body of the object. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bodyType</td><td>The new phyiscs body type. </td></tr>
   </table>
   </dd>
 </dl>

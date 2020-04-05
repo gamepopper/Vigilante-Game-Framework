@@ -9,8 +9,5 @@ var searchData=
   ['lights',['Lights',['../class_v3_d_light_shader.html#aec916c5968996fadbd4625924b5066ce',1,'V3DLightShader']]],
   ['linespacemodifier',['lineSpaceModifier',['../class_v_text.html#a8c8aea7c9c4fd86c5eff5474fde8ae44',1,'VText']]],
   ['lista',['listA',['../struct_v_quad_tree.html#a2a0ba4f87a571474d3905da942b97694',1,'VQuadTree']]],
-  ['listb',['listB',['../struct_v_quad_tree.html#aa4a999d4669ef05997d91ab5398ca948',1,'VQuadTree']]],
-  ['lockangle',['LockAngle',['../class_v_physics_object.html#a5dcb0892a185abff86b218dfb41ebfdc',1,'VPhysicsObject']]],
-  ['lockx',['LockX',['../class_v_physics_object.html#a9b1cd79af50a734b7842217958fab7dc',1,'VPhysicsObject']]],
-  ['locky',['LockY',['../class_v_physics_object.html#ab640fc6f859ea5841a6f38ac2eb8a431',1,'VPhysicsObject']]]
+  ['listb',['listB',['../struct_v_quad_tree.html#aa4a999d4669ef05997d91ab5398ca948',1,'VQuadTree']]]
 ];

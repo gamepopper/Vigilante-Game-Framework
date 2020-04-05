@@ -2,6 +2,7 @@ var searchData=
 [
   ['relativetolistener',['RelativeToListener',['../class_v_music.html#a4fb085f4c971313764ec3178a651dc60',1,'VMusic']]],
   ['remove',['Remove',['../class_v_group.html#aa06f789fb2777e26a230e4605ec1145f',1,'VGroup']]],
+  ['removejoint',['RemoveJoint',['../class_v_physics_group.html#a96ce22231fa5169b43c89de0e6da2fc3',1,'VPhysicsGroup']]],
   ['removeobject',['RemoveObject',['../class_v_physics_group.html#a399974de58a512cb83f4d673d6b30227',1,'VPhysicsGroup']]],
   ['removepoint',['RemovePoint',['../class_v_path.html#a7bdeb60d8f0b666602105219ed9f1799',1,'VPath']]],
   ['removeposteffect',['RemovePostEffect',['../class_v_post_effect_multipass.html#a5e4598232ef458af33095ea3b2b8dbc7',1,'VPostEffectMultipass']]],

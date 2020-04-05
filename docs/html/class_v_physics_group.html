@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.6</span>
+   &#160;<span id="projectnumber">1.0.0.7</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -99,7 +99,8 @@ Public Types</h2></td></tr>
 <tr class="memdesc:ac9557de337d5603278d14af2e345f0ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">The types of collision callback.  <a href="class_v_physics_group.html#ac9557de337d5603278d14af2e345f0ec">More...</a><br /></td></tr>
 <tr class="separator:ac9557de337d5603278d14af2e345f0ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab11e159449c56345fcc721223d21a98a"><td class="memItemLeft" align="right" valign="top"><a id="ab11e159449c56345fcc721223d21a98a"></a>
-typedef <a class="el" href="class_v_group.html">VGroup</a>&#160;</td><td class="memItemRight" valign="bottom"><b>VSUPERCLASS</b></td></tr>
+typedef <a class="el" href="class_v_group.html">VGroup</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#ab11e159449c56345fcc721223d21a98a">VSUPERCLASS</a></td></tr>
+<tr class="memdesc:ab11e159449c56345fcc721223d21a98a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to call parent class functions when they are overrided in class. <br /></td></tr>
 <tr class="separator:ab11e159449c56345fcc721223d21a98a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_class_v_group"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_v_group')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_v_group.html">VGroup</a></td></tr>
 <tr class="memitem:a27d466065c26f2ae00190b5ed468379d inherit pub_types_class_v_group"><td class="memItemLeft" align="right" valign="top"><a id="a27d466065c26f2ae00190b5ed468379d"></a>
@@ -115,6 +116,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1eb02433a06a39933f6b779c306755c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a399974de58a512cb83f4d673d6b30227"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a399974de58a512cb83f4d673d6b30227">RemoveObject</a> (<a class="el" href="class_v_object.html">VObject</a> *Object)</td></tr>
 <tr class="separator:a399974de58a512cb83f4d673d6b30227"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4a2272cb6320d38ff93b6132215d95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_physics_joint_base.html">VPhysicsJointBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a7d4a2272cb6320d38ff93b6132215d95">AddJoint</a> (<a class="el" href="class_v_physics_joint_base.html">VPhysicsJointBase</a> *Joint)</td></tr>
+<tr class="separator:a7d4a2272cb6320d38ff93b6132215d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96ce22231fa5169b43c89de0e6da2fc3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a96ce22231fa5169b43c89de0e6da2fc3">RemoveJoint</a> (<a class="el" href="class_v_physics_joint_base.html">VPhysicsJointBase</a> *Joint)</td></tr>
+<tr class="separator:a96ce22231fa5169b43c89de0e6da2fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8108aa85a3b8b8ab47a06db41915422b"><td class="memItemLeft" align="right" valign="top"><a id="a8108aa85a3b8b8ab47a06db41915422b"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a8108aa85a3b8b8ab47a06db41915422b">Destroy</a> () override</td></tr>
 <tr class="memdesc:a8108aa85a3b8b8ab47a06db41915422b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys all VPhysicsObjects, this has no effect on the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> that's attached to them. <br /></td></tr>
@@ -151,16 +156,16 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a4b0647cbbb68fadb3c7f0cd06fb3e5ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6d38842720243f483032d7c0d064a6d"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#af6d38842720243f483032d7c0d064a6d">GetCollisionPersistence</a> ()</td></tr>
 <tr class="separator:af6d38842720243f483032d7c0d064a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39c71511a41781d0021e13b904085c68"><td class="memItemLeft" align="right" valign="top"><a id="a39c71511a41781d0021e13b904085c68"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a39c71511a41781d0021e13b904085c68">SetCollisionPersistence</a> (unsigned int CollisionPersistence)</td></tr>
-<tr class="memdesc:a39c71511a41781d0021e13b904085c68"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of frames/steps to keep collision solutions. <br /></td></tr>
+<tr class="memitem:a39c71511a41781d0021e13b904085c68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a39c71511a41781d0021e13b904085c68">SetCollisionPersistence</a> (unsigned int CollisionPersistence)</td></tr>
 <tr class="separator:a39c71511a41781d0021e13b904085c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd76510bc24d8f0968fd9cc1ee72712"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_v_physics_object_8h.html#ab76606b3a13a1d2a97fd7e57554af7cd">VPhysicsCPBody</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a7dd76510bc24d8f0968fd9cc1ee72712">GetBody</a> ()</td></tr>
+<tr class="separator:a7dd76510bc24d8f0968fd9cc1ee72712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad77c7801f46d7bc0658ab6d3e88fb581"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#ad77c7801f46d7bc0658ab6d3e88fb581">SetCollisionCallback</a> (<a class="el" href="class_v_object.html">VObject</a> *a, <a class="el" href="class_v_object.html">VObject</a> *b, const std::function&lt; bool(<a class="el" href="class_v_physics_object.html">VPhysicsObject</a> *, <a class="el" href="class_v_physics_object.html">VPhysicsObject</a> *)&gt; &amp;callback, <a class="el" href="class_v_physics_group.html#ac9557de337d5603278d14af2e345f0ec">VPhysicsCallbackType</a> <a class="el" href="class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f">type</a>, bool persist=false)</td></tr>
 <tr class="separator:ad77c7801f46d7bc0658ab6d3e88fb581"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade3892803a71453b0d2212c764df7873"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#ade3892803a71453b0d2212c764df7873">SetCollisionCallback</a> (<a class="el" href="class_v_physics_object.html">VPhysicsObject</a> *a, <a class="el" href="class_v_physics_object.html">VPhysicsObject</a> *b, const std::function&lt; bool(<a class="el" href="class_v_physics_object.html">VPhysicsObject</a> *, <a class="el" href="class_v_physics_object.html">VPhysicsObject</a> *)&gt; &amp;callback, <a class="el" href="class_v_physics_group.html#ac9557de337d5603278d14af2e345f0ec">VPhysicsCallbackType</a> <a class="el" href="class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f">type</a>, bool persist=false)</td></tr>
 <tr class="separator:ade3892803a71453b0d2212c764df7873"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2da8d666b028f24ce9220225c33b45a5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a2da8d666b028f24ce9220225c33b45a5">ProcessCallback</a> (cpArbiter *arb, cpSpace *space, <a class="el" href="class_v_physics_group.html#ac9557de337d5603278d14af2e345f0ec">VPhysicsCallbackType</a> <a class="el" href="class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f">type</a>)</td></tr>
-<tr class="separator:a2da8d666b028f24ce9220225c33b45a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c10957348828a3e7e6057a8aea391cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a3c10957348828a3e7e6057a8aea391cf">ProcessCallback</a> (<a class="el" href="_v_physics_object_8h.html#a7f2218147a59abce9aa31bc0ecd233e6">VPhysicsCPArbiter</a> *arb, <a class="el" href="_v_physics_object_8h.html#a524052a7ddd2db51010fc89bfc8fea26">VPhysicsCPSpace</a> *<a class="el" href="class_v_physics_group.html#a0055c3b78ed4b43b4dd8923878c6c76b">space</a>, <a class="el" href="class_v_physics_group.html#ac9557de337d5603278d14af2e345f0ec">VPhysicsCallbackType</a> <a class="el" href="class_v_base.html#afb1c52bc63e25ecd2367b008bdf13f9f">type</a>)</td></tr>
+<tr class="separator:a3c10957348828a3e7e6057a8aea391cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_group"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_group')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_group.html">VGroup</a></td></tr>
 <tr class="memitem:a736b1356ae45778cce3acd58e33efa05 inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a736b1356ae45778cce3acd58e33efa05">VGroup</a> (unsigned int maxSize=0)</td></tr>
 <tr class="separator:a736b1356ae45778cce3acd58e33efa05 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -227,20 +232,22 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a515028532f971682b4e8c34707cd3646"><td class="memItemLeft" align="right" valign="top"><a id="a515028532f971682b4e8c34707cd3646"></a>
-<a class="el" href="class_v_physics_object.html">VPhysicsObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getObjectFromBody</b> (cpBody *body)</td></tr>
+<tr class="memitem:a515028532f971682b4e8c34707cd3646"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_physics_object.html">VPhysicsObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a515028532f971682b4e8c34707cd3646">getObjectFromBody</a> (cpBody *body)</td></tr>
 <tr class="separator:a515028532f971682b4e8c34707cd3646"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a013fe377e833eb7c67e24be34666877b"><td class="memItemLeft" align="right" valign="top"><a id="a013fe377e833eb7c67e24be34666877b"></a>
-cpSpace *&#160;</td><td class="memItemRight" valign="bottom"><b>space</b></td></tr>
-<tr class="separator:a013fe377e833eb7c67e24be34666877b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0055c3b78ed4b43b4dd8923878c6c76b"><td class="memItemLeft" align="right" valign="top"><a id="a0055c3b78ed4b43b4dd8923878c6c76b"></a>
+<a class="el" href="_v_physics_object_8h.html#a524052a7ddd2db51010fc89bfc8fea26">VPhysicsCPSpace</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a0055c3b78ed4b43b4dd8923878c6c76b">space</a></td></tr>
+<tr class="memdesc:a0055c3b78ed4b43b4dd8923878c6c76b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Physics World. <br /></td></tr>
+<tr class="separator:a0055c3b78ed4b43b4dd8923878c6c76b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3849ae9c6e01fe1ae0ad86aea816f065"><td class="memItemLeft" align="right" valign="top"><a id="a3849ae9c6e01fe1ae0ad86aea816f065"></a>
-cpCollisionHandler *&#160;</td><td class="memItemRight" valign="bottom"><b>collisionHandler</b></td></tr>
+cpCollisionHandler *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a3849ae9c6e01fe1ae0ad86aea816f065">collisionHandler</a></td></tr>
+<tr class="memdesc:a3849ae9c6e01fe1ae0ad86aea816f065"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Physics Collision Handler. <br /></td></tr>
 <tr class="separator:a3849ae9c6e01fe1ae0ad86aea816f065"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07130496b4e216ccf76373a75e4e7a27"><td class="memItemLeft" align="right" valign="top"><a id="a07130496b4e216ccf76373a75e4e7a27"></a>
-std::vector&lt; CollisionCallbackHelper &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>callbackHelperList</b></td></tr>
+std::vector&lt; CollisionCallbackHelper &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_physics_group.html#a07130496b4e216ccf76373a75e4e7a27">callbackHelperList</a></td></tr>
+<tr class="memdesc:a07130496b4e216ccf76373a75e4e7a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of callback helpers for collision responses. <br /></td></tr>
 <tr class="separator:a07130496b4e216ccf76373a75e4e7a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_v_group"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_v_group')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_v_group.html">VGroup</a></td></tr>
 <tr class="memitem:a32a58c66cc33805d37f569b5bc7f2f7e inherit pro_attribs_class_v_group"><td class="memItemLeft" align="right" valign="top"><a id="a32a58c66cc33805d37f569b5bc7f2f7e"></a>
@@ -346,6 +353,31 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7d4a2272cb6320d38ff93b6132215d95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d4a2272cb6320d38ff93b6132215d95">&#9670;&nbsp;</a></span>AddJoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_v_physics_joint_base.html">VPhysicsJointBase</a>* VPhysicsGroup::AddJoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_v_physics_joint_base.html">VPhysicsJointBase</a> *&#160;</td>
+          <td class="paramname"><em>Joint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This functions adds a <a class="el" href="class_v_physics_joint_base.html" title="The base class for all types of physics joints. The class itself does not set up the joint itself...">VPhysicsJointBase</a> object to the physics world. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Joint</td><td>The Physics Joint to add into the scene, it must be already set up with both physics objects. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_v_physics_joint_base.html" title="The base class for all types of physics joints. The class itself does not set up the joint itself...">VPhysicsJointBase</a> created from this function, or nullptr if creation failed. </dd></dl>
+
+</div>
+</div>
 <a id="a1eb02433a06a39933f6b779c306755c4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1eb02433a06a39933f6b779c306755c4">&#9670;&nbsp;</a></span>AddObject()</h2>
 
@@ -383,7 +415,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This functions adds an <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> to the group. This should be used instead of the Add function unless you want to set up a <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> yourself. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>This functions adds a <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> to the group. This should be used instead of the Add function unless you want to set up a <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> yourself. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Object</td><td>The game object you wish to apply physics to. </td></tr>
     <tr><td class="paramname">BodyType</td><td>This sets what type of physics body the object should have, see VObjectType for which types. </td></tr>
@@ -393,6 +425,24 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> created from this function, or nullptr if creation failed. </dd></dl>
+
+</div>
+</div>
+<a id="a7dd76510bc24d8f0968fd9cc1ee72712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd76510bc24d8f0968fd9cc1ee72712">&#9670;&nbsp;</a></span>GetBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_v_physics_object_8h.html#ab76606b3a13a1d2a97fd7e57554af7cd">VPhysicsCPBody</a>* VPhysicsGroup::GetBody </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the static body of the physics world, useful if you want to pin a physics object to the scene itself. </dd></dl>
 
 </div>
 </div>
@@ -522,6 +572,39 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
+<a id="a515028532f971682b4e8c34707cd3646"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a515028532f971682b4e8c34707cd3646">&#9670;&nbsp;</a></span>getObjectFromBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_v_physics_object.html">VPhysicsObject</a>* VPhysicsGroup::getObjectFromBody </td>
+          <td>(</td>
+          <td class="paramtype">cpBody *&#160;</td>
+          <td class="paramname"><em>body</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Gets the physics object from the body. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">body</td><td>The physics body. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The Physics object. NULL if not found. </dd></dl>
+
+</div>
+</div>
 <a id="a4e8599477161f955031563dd860108bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e8599477161f955031563dd860108bf">&#9670;&nbsp;</a></span>GetSleepTimeThreshold()</h2>
 
@@ -540,8 +623,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
-<a id="a2da8d666b028f24ce9220225c33b45a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2da8d666b028f24ce9220225c33b45a5">&#9670;&nbsp;</a></span>ProcessCallback()</h2>
+<a id="a3c10957348828a3e7e6057a8aea391cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c10957348828a3e7e6057a8aea391cf">&#9670;&nbsp;</a></span>ProcessCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -549,13 +632,13 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
         <tr>
           <td class="memname">bool VPhysicsGroup::ProcessCallback </td>
           <td>(</td>
-          <td class="paramtype">cpArbiter *&#160;</td>
+          <td class="paramtype"><a class="el" href="_v_physics_object_8h.html#a7f2218147a59abce9aa31bc0ecd233e6">VPhysicsCPArbiter</a> *&#160;</td>
           <td class="paramname"><em>arb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cpSpace *&#160;</td>
+          <td class="paramtype"><a class="el" href="_v_physics_object_8h.html#a524052a7ddd2db51010fc89bfc8fea26">VPhysicsCPSpace</a> *&#160;</td>
           <td class="paramname"><em>space</em>, </td>
         </tr>
         <tr>
@@ -583,6 +666,30 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
+<a id="a96ce22231fa5169b43c89de0e6da2fc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96ce22231fa5169b43c89de0e6da2fc3">&#9670;&nbsp;</a></span>RemoveJoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VPhysicsGroup::RemoveJoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_v_physics_joint_base.html">VPhysicsJointBase</a> *&#160;</td>
+          <td class="paramname"><em>Joint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Removes the <a class="el" href="class_v_physics_joint_base.html" title="The base class for all types of physics joints. The class itself does not set up the joint itself...">VPhysicsJointBase</a> from the group and destroys it. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Joint</td><td>The physics joint you wish to be removed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a399974de58a512cb83f4d673d6b30227"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a399974de58a512cb83f4d673d6b30227">&#9670;&nbsp;</a></span>RemoveObject()</h2>
 
@@ -598,9 +705,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Removes the <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> from the group based on it's attached <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>, useful if you no longer have the <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> at hand. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Removes the <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> from the group based on it's attached <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> and destroys it, useful if you no longer have the <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> at hand. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Object</td><td>The game object you wish to apply physics to. </td></tr>
+    <tr><td class="paramname">Object</td><td>The game object that you wish to remove the physics from. </td></tr>
   </table>
   </dd>
 </dl>
@@ -679,7 +786,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
     <tr><td class="paramname">a</td><td>The first object to test collisions with for the callback. </td></tr>
     <tr><td class="paramname">b</td><td>The second object to test collisions with for the callback. Setting this to nullptr will apply the callback between object a and anything else. </td></tr>
     <tr><td class="paramname">callback</td><td>The function to call if the collision takes place, the two parameters are <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> so you can adjust the collision properties and access the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> at the same time. </td></tr>
-    <tr><td class="paramname">The</td><td>type of collision callback to set (see VPhysicsCallbackType). </td></tr>
+    <tr><td class="paramname">type</td><td>The type of collision callback to set (see VPhysicsCallbackType). </td></tr>
     <tr><td class="paramname">persist</td><td>If true, this callback will remain active for the duration of the space, otherwise this callback will be removed after one call. This way you aren't required to call it on each update. </td></tr>
   </table>
   </dd>
@@ -735,8 +842,32 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
     <tr><td class="paramname">a</td><td>The first object to test collisions with for the callback. </td></tr>
     <tr><td class="paramname">b</td><td>The second object to test collisions with for the callback. Setting this to nullptr will apply the callback between object a and anything else. </td></tr>
     <tr><td class="paramname">callback</td><td>The function to call if the collision takes place, the two parameters are <a class="el" href="class_v_physics_object.html" title="A special object class that represents the physics body that responds to the world and collisions usi...">VPhysicsObject</a> so you can adjust the collision properties and access the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> at the same time. </td></tr>
-    <tr><td class="paramname">The</td><td>type of collision callback to set (see VPhysicsCallbackType). </td></tr>
+    <tr><td class="paramname">type</td><td>The type of collision callback to set (see VPhysicsCallbackType). </td></tr>
     <tr><td class="paramname">persist</td><td>If true, this callback will remain active for the duration of the space, otherwise this callback will be removed after one call. This way you aren't required to call it on each update. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a39c71511a41781d0021e13b904085c68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39c71511a41781d0021e13b904085c68">&#9670;&nbsp;</a></span>SetCollisionPersistence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VPhysicsGroup::SetCollisionPersistence </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>CollisionPersistence</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">CollisionPersistence</td><td>The number of frames/steps to keep collision solutions. </td></tr>
   </table>
   </dd>
 </dl>
