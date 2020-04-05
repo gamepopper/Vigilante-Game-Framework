@@ -73,7 +73,7 @@ void VFiniteStateMachine::Update(float dt)
 {
 	int newState = finiteStates[state].CallUpdate(base, dt);
 
-	if (newState >= 0 && newState < finiteStates.size())
+	if (newState >= 0 && newState < (int)finiteStates.size())
 	{
 		finiteStates[state].CallExit(base, newState);
 		state = (unsigned int)newState;
