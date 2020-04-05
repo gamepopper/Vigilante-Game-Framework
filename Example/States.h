@@ -1950,9 +1950,9 @@ public:
 		group->SetGravity(sf::Vector2f(0.0f, 910.0f));
 
 		VGlobal::p()->Sound->Load("Example/Assets/bounce.ogg", "bounce");
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 50; i++)
 		{
-			VShape* circle = new VShape(VGlobal::p()->Random->GetFloat(VGlobal::p()->Width - 10.0f, 10.0f), VGlobal::p()->Random->GetFloat(100.0f));
+			VShape* circle = new VShape(VGlobal::p()->Random->GetFloat(VGlobal::p()->Width - 100.0f, 100.0f), VGlobal::p()->Random->GetFloat(100.0f));
 			circle->SetCircle(10.0f);
 			circle->Elasticity = 0.8f;
 			circle->SetFillTint(VColour::HSVtoRGB(VGlobal::p()->Random->GetFloat(360.0f), 1.0f, 0.8f));
@@ -1967,14 +1967,47 @@ public:
 			group->SetCollisionCallback(circle, slope2, std::bind(&PhysicsState::BounceCallback, this, std::placeholders::_1, std::placeholders::_2), VPhysicsGroup::SEPARATE, true);
 		}
 
-		VPhysicsObject* groundPhysics = group->AddObject(ground, VPhysicsObject::STATIC, VPhysicsObject::BOX);
+		float width = 10.0f;
+		float height = 15.0f;
+		float spacing = width * 0.3f;
+		for (int i = 0; i < 8; i++)
+		{
+			VPhysicsObject* prev = NULL;
+
+			if (i > 1 && i < 6)
+				continue;
+
+			for (int j = 0; j < 10; j++)
+			{
+				sf::Vector2f pos((i+1) * (VGlobal::p()->Width / 9.0f), (j + 0.5f) * height - (j + 1)*spacing);
+				VShape* box = new VShape(pos.x - (width/2), pos.y - (height), width, height);
+				box->SetFillTint(VColour::HSVtoRGB(VGlobal::p()->Random->GetFloat(360.0f), 1.0f, 0.6f));
+				Add(box);
+
+				VPhysicsObject* chain = group->AddObject(box, VPhysicsObject::DYNAMIC);
+				chain->SetFriction(0.8f);
+
+				VPhysicsSlideJoint* joint = nullptr;
+				if (j == 0)
+					joint = new VPhysicsSlideJoint(chain->GetBody(), group->GetBody(), sf::Vector2f(0.0f, height / 2.0f), sf::Vector2f(pos.x, 0.0f), 0.0f, spacing);
+				else
+					joint = new VPhysicsSlideJoint(chain, prev, sf::Vector2f(0.0f, height / 2.0f), sf::Vector2f(0.0f, -height / 2.0f), 0.0f, spacing);
+
+				joint->SetCollideBodies(false);
+				group->AddJoint(joint);
+
+				prev = chain;
+			}
+		}
+
+		VPhysicsObject* groundPhysics = group->AddObject(ground, VPhysicsObject::STATIC);
 		groundPhysics->SetFriction(1.0f);
 
-		VPhysicsObject* boxPhysics = group->AddObject(box, VPhysicsObject::DYNAMIC, VPhysicsObject::BOX);
+		VPhysicsObject* boxPhysics = group->AddObject(box, VPhysicsObject::DYNAMIC);
 		boxPhysics->SetFriction(0.5f);
 		VPhysicsJointBase* joint = group->AddJoint(new VPhysicsPivotJoint(boxPhysics->GetBody(), group->GetBody(), box->Position + (box->Size / 2.0f)));
 
-		boxPhysics = group->AddObject(box2, VPhysicsObject::DYNAMIC, VPhysicsObject::BOX);
+		boxPhysics = group->AddObject(box2, VPhysicsObject::DYNAMIC);
 		boxPhysics->SetFriction(0.5f);
 		joint = group->AddJoint(new VPhysicsPivotJoint(boxPhysics->GetBody(), group->GetBody(), box2->Position + (box2->Size / 2.0f)));
 
@@ -2033,7 +2066,11 @@ public:
 	bool BounceCallback(VPhysicsObject* circle, VPhysicsObject* other)
 	{
 		float speed = sqrtf((circle->GetBaseObject()->Velocity.x * circle->GetBaseObject()->Velocity.x) + (circle->GetBaseObject()->Velocity.y * circle->GetBaseObject()->Velocity.y));
-		VGlobal::p()->Sound->Play("bounce", speed > 100 ? 100 : speed);
+		if (speed > 1000)
+			speed = 1000;
+
+		speed /= 10.0f;
+		VGlobal::p()->Sound->Play("bounce", speed);
 
 		return true;
 	}
