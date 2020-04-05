@@ -433,7 +433,7 @@ public:
 				player->Velocity = sf::Vector2f(0, 0);
 				player->MaxVelocity = sf::Vector2f(0, 0);
 				player->Acceleration = sf::Vector2f(0, 0);
-				player->AngleVelocity = player->FlipX ? -900 : 900;
+				player->AngleVelocity = player->FlipX ? -900.0f : 900.0f;
 			},
 			[](VBase* base, unsigned int state) //Exit
 			{
@@ -762,8 +762,9 @@ public:
 					AddPoint(playerControl->Position + (playerControl->Size / 2.0f));
 				}
 
-				playerPath->AddPoint(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
-				AddPoint(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+				sf::Vector2f mousePos = VGlobal::p()->GetMousePosition();
+				playerPath->AddPoint(mousePos);
+				AddPoint(mousePos);
 				playerPath->SetSpeed(1.0f / (playerPath->GetNumPoints() - 1));
 			}
 		}
