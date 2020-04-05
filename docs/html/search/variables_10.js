@@ -24,7 +24,7 @@ var searchData=
   ['space',['space',['../class_v_physics_group.html#a0055c3b78ed4b43b4dd8923878c6c76b',1,'VPhysicsGroup']]],
   ['specular',['Specular',['../struct_v3_d_material.html#a827b0b8d03cae3a6087a49e1d3e1f014',1,'V3DMaterial']]],
   ['speedrange',['SpeedRange',['../class_v_emitter.html#a4fb0498db7335fc4e436d55487c1914b',1,'VEmitter']]],
-  ['sprite',['Sprite',['../class_v_render_group.html#a1da609bd10bbaac2c89fa2af87b64f89',1,'VRenderGroup::Sprite()'],['../class_v_render_layer.html#aa0b3bc0de30a1eb751eb9469d6b4a94e',1,'VRenderLayer::sprite()']]],
+  ['sprite',['sprite',['../class_v_render_layer.html#aa0b3bc0de30a1eb751eb9469d6b4a94e',1,'VRenderLayer::sprite()'],['../class_v_render_group.html#a1da609bd10bbaac2c89fa2af87b64f89',1,'VRenderGroup::Sprite()']]],
   ['states',['states',['../class_v_state_manager.html#a2af3dc6e0cb9e5ff35f1d0e62cae6013',1,'VStateManager']]],
   ['style',['style',['../class_v_text.html#aa0c3f41b1569a5fc147e13e4f729d9c3',1,'VText']]],
   ['substate',['SubState',['../class_v_state.html#a0057234fcf4448aabf602d87dbfb176f',1,'VState']]]

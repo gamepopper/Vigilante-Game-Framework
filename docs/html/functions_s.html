@@ -129,13 +129,13 @@ $(function() {
 : <a class="el" href="class_v_text.html#a691e09b6468cdf53f83a6e8688984c05">VText</a>
 </li>
 <li>SetAnchorA()
-: <a class="el" href="class_v_physics_joint_base.html#a6fb3206e8378da3a6bfc3f82c6b72f44">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_anchor_base.html#a405dec3c1d150541ebb0532304e15699">VPhysicsAnchorBase</a>
 </li>
 <li>SetAnchorB()
-: <a class="el" href="class_v_physics_joint_base.html#aef66ae5b9eb9dff8d42e22110a0407db">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_anchor_base.html#a61dd20d5d9392e4645df4d04ec81b273">VPhysicsAnchorBase</a>
 </li>
 <li>SetAngle()
-: <a class="el" href="class_v_physics_joint_base.html#a4249d21fe2de01e373b0a630ede42d67">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_ratchet_joint.html#aecc20da9a4fbd8377dba4261e436c104">VPhysicsRatchetJoint</a>
 </li>
 <li>SetAspectRatio()
 : <a class="el" href="class_v3_d_perspective_camera.html#ac146c1c56f6f9f0f87107b01f18bbf01">V3DPerspectiveCamera</a>
@@ -164,6 +164,9 @@ $(function() {
 <li>SetCircle()
 : <a class="el" href="class_v_shape.html#a48d43f86313297d49c3af11de9a13f8d">VShape</a>
 </li>
+<li>SetCollideBodies()
+: <a class="el" href="class_v_physics_joint_base.html#aa0c17a0ffac27d8dbdd490596d1bfbdd">VPhysicsJointBase</a>
+</li>
 <li>SetCollisionBias()
 : <a class="el" href="class_v_physics_group.html#a4b0647cbbb68fadb3c7f0cd06fb3e5ea">VPhysicsGroup</a>
 </li>
@@ -190,8 +193,8 @@ $(function() {
 : <a class="el" href="class_v_shape.html#a05d97742f288cad3a5e8bed4e4d32624">VShape</a>
 </li>
 <li>SetDamping()
-: <a class="el" href="class_v_physics_group.html#a7797b281ad76e312a828656d6979da63">VPhysicsGroup</a>
-, <a class="el" href="class_v_physics_joint_base.html#afc9e5e8d887ba6d9b8a88e0078a9210e">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_damped_base.html#abdf96d3cf01644ab19437733349cd013">VPhysicsDampedBase</a>
+, <a class="el" href="class_v_physics_group.html#a7797b281ad76e312a828656d6979da63">VPhysicsGroup</a>
 </li>
 <li>SetDensity()
 : <a class="el" href="class_v_physics_object.html#a3de647909b0fe9703286df103bf9482e">VPhysicsObject</a>
@@ -200,7 +203,10 @@ $(function() {
 : <a class="el" href="class_v_text.html#a8af8659e28cf0b0e404f06a466fdaca3">VText</a>
 </li>
 <li>SetDist()
-: <a class="el" href="class_v_physics_joint_base.html#a3ad7c7418721bc323c4686461536e8bc">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_pin_joint.html#ab46b1fcefc38b1887dd1ab8429f5c5a9">VPhysicsPinJoint</a>
+</li>
+<li>SetErrorBias()
+: <a class="el" href="class_v_physics_joint_base.html#a1aab5f981636d8f24007c2f6da7181cf">VPhysicsJointBase</a>
 </li>
 <li>SetFillColour()
 : <a class="el" href="class_v_sub_state.html#afa250442b6224c6bd0e164540c28ec4e">VSubState</a>
@@ -231,10 +237,10 @@ $(function() {
 : <a class="el" href="class_v_physics_group.html#afbcf2bd8d548adbec775ad0d62a60d1f">VPhysicsGroup</a>
 </li>
 <li>SetGrooveA()
-: <a class="el" href="class_v_physics_joint_base.html#a99ebf43f459456feb9ad58fa06621344">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_groove_joint.html#a129acefdd6020c6266b6ff5fb4077c3b">VPhysicsGrooveJoint</a>
 </li>
 <li>SetGrooveB()
-: <a class="el" href="class_v_physics_joint_base.html#aa14d05830fb6e6ce6cbb5b44ee110074">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_groove_joint.html#a25e6075cb28409084b3832ce998ea6cd">VPhysicsGrooveJoint</a>
 </li>
 <li>SetIdleSpeedThreshold()
 : <a class="el" href="class_v_physics_group.html#a236a3506ac1f5c534aaf2134c1d619e5">VPhysicsGroup</a>
@@ -266,10 +272,16 @@ $(function() {
 : <a class="el" href="class_v_sound_manager.html#a08f3dfbccd58053189473572f594dd13">VSoundManager</a>
 </li>
 <li>SetMax()
-: <a class="el" href="class_v_physics_joint_base.html#a71a3ac8b95e5c12301c7cd75f3620f7d">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_min_max_base.html#a6b52d15a6859ca2ca1dfffe8865065ab">VPhysicsMinMaxBase</a>
+</li>
+<li>SetMaxBias()
+: <a class="el" href="class_v_physics_joint_base.html#a9600f15333899187677f576c0e45eed6">VPhysicsJointBase</a>
+</li>
+<li>SetMaxForce()
+: <a class="el" href="class_v_physics_joint_base.html#a25a72333c08fca4bf81f079d51a0697a">VPhysicsJointBase</a>
 </li>
 <li>SetMin()
-: <a class="el" href="class_v_physics_joint_base.html#a13ab0bc127a86267b87497c0edac9690">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_min_max_base.html#aa48c0619aac97a92e9aec85d685ea5b4">VPhysicsMinMaxBase</a>
 </li>
 <li>SetMinDistance()
 : <a class="el" href="class_v_music.html#a23401497ca6c8bcd9c97f54d687d2bf5">VMusic</a>
@@ -307,7 +319,7 @@ $(function() {
 : <a class="el" href="class_v_animation_manager.html#a6278f5f01f484554d2c4d981c9df0cd8">VAnimationManager</a>
 </li>
 <li>SetPhase()
-: <a class="el" href="class_v_physics_joint_base.html#a7f8ec65834076674fe67f9b00784c6e3">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_phase_base.html#a336af712c13ef156e6d4e39dfa3266d0">VPhysicsPhaseBase</a>
 </li>
 <li>SetPitch()
 : <a class="el" href="class_v_music.html#a15695dbed02ed73b185c241d232e80fa">VMusic</a>
@@ -328,13 +340,13 @@ $(function() {
 : <a class="el" href="class_v_typed_text.html#a18de0b72b57ca7b46c1bb141e48a3062">VTypedText</a>
 </li>
 <li>SetRatchet()
-: <a class="el" href="class_v_physics_joint_base.html#a39da80fc97281c4b0b9e0eefdb1ec73f">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_ratchet_joint.html#a4937f19f70cf22d35f1a5692e070994d">VPhysicsRatchetJoint</a>
 </li>
 <li>SetRate()
-: <a class="el" href="class_v_physics_joint_base.html#ad6e26e1715f516f772a7bc3f8c57b257">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_simple_motor.html#ae585476e0ab2c4c892592d624ae9e8c1">VPhysicsSimpleMotor</a>
 </li>
 <li>SetRatio()
-: <a class="el" href="class_v_physics_joint_base.html#a974bd3424cc07c5ffda53d7389d9f81a">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_gear_joint.html#a939043544b00fb9082c48025fe7af05b">VPhysicsGearJoint</a>
 </li>
 <li>SetRectangle()
 : <a class="el" href="class_v_shape.html#a1b7901912d7b13909803ac8e50d68e66">VShape</a>
@@ -343,10 +355,10 @@ $(function() {
 : <a class="el" href="class_v_music.html#a13843ffe527cfc56f8fef9f2b515918f">VMusic</a>
 </li>
 <li>SetRestAngle()
-: <a class="el" href="class_v_physics_joint_base.html#abcbaad2d227afe86899380e74ee3e7a5">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_damped_rotary_spring.html#acdefa7bffd516cb87610f3d2f02443b1">VPhysicsDampedRotarySpring</a>
 </li>
 <li>SetRestLength()
-: <a class="el" href="class_v_physics_joint_base.html#af1b6690c65be855f6b614ed0239afc12">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_damped_spring.html#a621128bb94993067ec6c3c85793885f9">VPhysicsDampedSpring</a>
 </li>
 <li>SetReverse()
 : <a class="el" href="class_v_animation.html#a30f978f146b13e3e5f1943c6bc3f7c4f">VAnimation</a>
@@ -366,7 +378,7 @@ $(function() {
 : <a class="el" href="class_v_path.html#a019e6877fd16e77166b8857a5f633f21">VPath</a>
 </li>
 <li>SetStiffness()
-: <a class="el" href="class_v_physics_joint_base.html#a763b5b9d6ce4863d8b4774cae2d7b341">VPhysicsJointBase</a>
+: <a class="el" href="class_v_physics_damped_base.html#a604e535677263ff6048145e39c3d3bb0">VPhysicsDampedBase</a>
 </li>
 <li>SetStyle()
 : <a class="el" href="class_v_text.html#a5a5ff14301918be1fabdba2afb6bdf37">VText</a>
@@ -428,7 +440,7 @@ $(function() {
 : <a class="el" href="class_v3_d_scene.html#aa734dec2df3f32cd403974fa05996d35">V3DScene</a>
 </li>
 <li>Shake()
-: <a class="el" href="class_v_camera.html#a996c2c1019f1ded18588325ecda1bb5f">VCamera</a>
+: <a class="el" href="class_v_camera.html#a3cd37c3b93dc6fb8cd61e4473a882abf">VCamera</a>
 </li>
 <li>shakeLength
 : <a class="el" href="class_v_camera.html#ab8051675c8df2d4ee50d1f1e24e4fcaf">VCamera</a>
