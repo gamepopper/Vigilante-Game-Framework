@@ -284,14 +284,17 @@ public:
 	///Get overall tint of tilemap.
 	sf::Color const& GetTint();
 
+	///Get width of tilemap grid.
+	int const& GetMapWidth();
+	///Get height of tilemap grid.
+	int const& GetMapHeight();
+
 	///Not used in VTilemap.
 	virtual void Reset(sf::Vector2f newPos) override {}
 	///Not used in VTilemap.
 	virtual void Reset(float x, float y) override {}
 	///Not used in VTilemap.
 	virtual void Hurt(float damage) override {}
-	///Not used in VTilemap.
-	virtual void Kill() override {};
 
 	///Deletes and clears all the tilemap data.
 	virtual void Destroy() override;

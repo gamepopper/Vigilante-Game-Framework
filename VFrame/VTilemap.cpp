@@ -322,12 +322,13 @@ void VTilemap::LoadFrom2DArray(vector<vector<char>> mapData, sf::String graphicF
 	mapWidth = mapData.size() ? mapData[0].size() : 0;
 	mapHeight = mapData.size();
 
-	tilemap = vector<char>(mapWidth * mapHeight);
+	tilemap.clear();
+	tilemap.reserve(mapWidth * mapHeight);
 	for (int y = 0; y < mapHeight; y++)
 	{
 		for (int x = 0; x < mapWidth; x++)
 		{
-			tilemap[(y * mapWidth) + x] = mapData[y][x];
+			tilemap.emplace_back(mapData[y][x]);
 		}
 	}
 
@@ -382,18 +383,23 @@ char VTilemap::GetTileIDFromPosition(sf::Vector2f tilemapPosition)
 
 void VTilemap::ChangeTile(int x, int y, char ID)
 {
-	tilemap[(y * mapWidth) + x] = ID;
-	dirty = true;
+	if (tilemap[(y * mapWidth) + x] != ID)
+	{
+		tilemap[(y * mapWidth) + x] = ID;
+		dirty = true;
+	}
 }
 
 void VTilemap::ChangeTile(const std::vector<sf::Vector2u>& positions, char ID)
 {
 	for (sf::Vector2u pos : positions)
 	{
-		tilemap[(pos.y * mapWidth) + pos.x] = ID;
+		if (tilemap[(pos.y * mapWidth) + pos.x] != ID)
+		{
+			tilemap[(pos.y * mapWidth) + pos.x] = ID;
+			dirty = true;
+		}
 	}
-
-	dirty = true;
 }
 
 void VTilemap::ResetCollision(const std::vector<char>& collision)
@@ -466,6 +472,16 @@ sf::Color const& VTilemap::GetTint()
 	return colour;
 }
 
+int const& VTilemap::GetMapWidth()
+{
+	return mapWidth;
+}
+
+int const& VTilemap::GetMapHeight()
+{
+	return mapHeight;
+}
+
 void VTilemap::Destroy()
 {
 	clearTiles();
@@ -483,6 +499,9 @@ void VTilemap::Destroy()
 
 void VTilemap::Update(float dt)
 {
+	if (!exists || !active)
+		return;
+
 	if (AutoTile != helperAutoTile)
 	{
 		helperAutoTile = AutoTile;
@@ -499,6 +518,9 @@ void VTilemap::Update(float dt)
 void VTilemap::Draw(sf::RenderTarget& RenderTarget)
 {
 	VSUPERCLASS::Draw(RenderTarget);
+
+	if (!exists || !visible)
+		return;
 
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();
