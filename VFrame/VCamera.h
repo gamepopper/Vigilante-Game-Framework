@@ -43,11 +43,8 @@
 class VCamera
 {
 public:
-
-	typedef unsigned char CameraFollowMethod;
-
 	///The method of how the camera shall follow a specific VObject.
-	enum : unsigned char
+	enum CameraFollowMethod : unsigned char
 	{
 		///Locks on directly to the VObject with no lerp or lead.
 		LOCKON,

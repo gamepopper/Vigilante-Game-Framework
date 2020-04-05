@@ -152,7 +152,7 @@ public:
 	float Elasticity = 0;
 	///Mass of object in comparison to other objects in world.
 	float Mass = 1;
-	///Standard health value (object dies if health is <= 0)
+	///Standard health value (object dies if health is <= 0 when modified in the Hurt function)
 	float Health = 100;
 	///If true, the object will not change its velocity on collision.
 	bool Immovable = false;

@@ -54,7 +54,7 @@ protected:
 	bool RepeatX;
 	///If true, the texture will appear repeated in the Y Axis, else the texture will lock in the Y axis.
 	bool RepeatY;
-
+	///Flag to tell class to dispose of texture if not part of the VContent manager.
 	bool disposable = false;
 
 public:
@@ -91,7 +91,10 @@ public:
 	///Destroy the VBackdrop.
 	virtual void Destroy() override;
 	
-	///@param filename Filepath and name of texture to use. Loads with VContent in VGlobal.
+	/**
+	* @param filename Filepath and name of texture to use. Loads with VContent in VGlobal.
+	* @param area Loads a specific section of the texture, otherwise uses the whole texture.
+	*/
 	VBackdrop* LoadGraphic(sf::String filename, const sf::IntRect& area = sf::IntRect());
 	///@param texture sf::Texture object to use.
 	VBackdrop* LoadGraphicFromTexture(sf::Texture& texture);
