@@ -232,8 +232,8 @@ void VInputHandler::Update(float dt)
 			bool mousePress = sf::Mouse::isButtonPressed(b.mouse) &&
 				(mousePosition.x >= window->getPosition().x &&
 					mousePosition.y >= window->getPosition().y &&
-					mousePosition.x < window->getPosition().x + window->getSize().x &&
-					mousePosition.y < window->getPosition().y + window->getSize().y);
+					mousePosition.x < (window->getPosition().x + window->getSize().x) &&
+					mousePosition.y < (window->getPosition().y + window->getSize().y));
 
 			if (sf::Keyboard::isKeyPressed(b.key) || mousePress || 
 #ifdef USE_GAMEPAD_API

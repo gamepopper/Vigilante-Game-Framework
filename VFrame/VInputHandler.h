@@ -161,7 +161,7 @@ protected:
 #endif
 
 public:
-
+	///@param window The Window object, used for testing if mouse input is out of bounds.
 	VInputHandler(sf::Window* window);
 	virtual ~VInputHandler();
 
