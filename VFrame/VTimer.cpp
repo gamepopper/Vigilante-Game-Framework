@@ -132,12 +132,88 @@ float VTimer::Seconds()
 	return time;
 }
 
-int VTimer::Milliseconds()
+unsigned int VTimer::Milliseconds()
 {
-	return static_cast<int>(time * 1000);
+	return static_cast<unsigned int>(time * 1000);
 }
 
-int VTimer::Microseconds()
+uint64_t VTimer::Microseconds()
 {
-	return Milliseconds() / 1000;
+	return static_cast<uint64_t>(time * 1000 * 1000);
+}
+
+VTimeline::VTimeline(bool looping, bool addToManager) : VTimer(addToManager)
+{
+}
+
+void VTimeline::AddEvent(unsigned int time, std::function<void()> function)
+{
+	events.emplace_back(std::make_unique<VTimelineEvent>(time, function));
+
+	if (lastEvent < time)
+		lastEvent = time;
+}
+
+void VTimeline::AddEvent(float time, std::function<void()> function)
+{
+	AddEvent(static_cast<unsigned int>(time * 1000), function);
+}
+
+void VTimeline::Start(bool clearWhenFinished)
+{
+	Restart();
+	destroyWhenDone = clearWhenFinished;
+}
+
+void VTimeline::Stop()
+{
+	ready = false;
+}
+
+bool VTimeline::IsFinished()
+{
+	return ready && Milliseconds() >= lastEvent;
+}
+
+void VTimeline::SetLooping(bool value)
+{
+	loop = value;
+}
+
+bool VTimeline::GetLooping()
+{
+	return loop;
+}
+
+float VTimeline::Update(float dt)
+{
+	float t = VSUPERCLASS::Update(dt);
+
+	if (!ready)
+		return t;
+
+	for (unsigned int i = 0; i < events.size(); i++)
+	{
+		if (!events[i]->done && events[i]->timePoint <= Milliseconds())
+		{
+			events[i]->function();
+			events[i]->done = true;
+		}
+	}
+
+	if (IsFinished())
+	{
+		ready = false;
+		
+		if (loop)
+		{
+			Start(false);
+		}
+		else if (destroyWhenDone)
+		{
+			events.clear();
+		}
+	}
+
+	return t;
 }
