@@ -26,6 +26,11 @@ void VPhysicsJointBase::Deinitialise(VPhysicsCPSpace* space)
 	cpSpaceRemoveConstraint(space, constraint);
 }
 
+VPhysicsCPConstraint * VPhysicsJointBase::GetConstraint()
+{
+	return constraint;
+}
+
 VPhysicsCPBody* VPhysicsJointBase::GetBodyA()
 {
 	return cpConstraintGetBodyA(constraint);
@@ -63,7 +68,7 @@ void VPhysicsJointBase::SetMaxBias(float Bias)
 
 float VPhysicsJointBase::GetMaxBias()
 {
-	return cpConstraintGetMaxBias(constraint);
+	return (float)cpConstraintGetMaxBias(constraint);
 }
 
 void VPhysicsJointBase::SetCollideBodies(bool value)
@@ -78,7 +83,7 @@ bool VPhysicsJointBase::DoesCollideBodies()
 
 float VPhysicsJointBase::GetImpulse()
 {
-	return cpConstraintGetImpulse(constraint);
+	return (float)cpConstraintGetImpulse(constraint);
 }
 
 VPhysicsAnchorBase::VPhysicsAnchorBase(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB) : VPhysicsJointBase(BodyA, BodyB)

@@ -2000,16 +2000,17 @@ public:
 			}
 		}
 
-		VPhysicsObject* groundPhysics = group->AddObject(ground, VPhysicsObject::STATIC);
-		groundPhysics->SetFriction(1.0f);
+		group->AddObject(ground, VPhysicsObject::STATIC)->SetFriction(1.0f);
+		group->AddObject(new VObject(-10.0f, 0.0f, 10.0f, (float)VGlobal::p()->Height), VPhysicsObject::STATIC);
+		group->AddObject(new VObject((float)VGlobal::p()->Width, 0.0f, 10.0f, (float)VGlobal::p()->Height), VPhysicsObject::STATIC);
 
 		VPhysicsObject* boxPhysics = group->AddObject(box, VPhysicsObject::DYNAMIC);
 		boxPhysics->SetFriction(0.5f);
-		VPhysicsJointBase* joint = group->AddJoint(new VPhysicsPivotJoint(boxPhysics->GetBody(), group->GetBody(), box->Position + (box->Size / 2.0f)));
+		group->AddJoint(new VPhysicsPivotJoint(boxPhysics->GetBody(), group->GetBody(), box->Position + (box->Size / 2.0f)));
 
 		boxPhysics = group->AddObject(box2, VPhysicsObject::DYNAMIC);
 		boxPhysics->SetFriction(0.5f);
-		joint = group->AddJoint(new VPhysicsPivotJoint(boxPhysics->GetBody(), group->GetBody(), box2->Position + (box2->Size / 2.0f)));
+		group->AddJoint(new VPhysicsPivotJoint(boxPhysics->GetBody(), group->GetBody(), box2->Position + (box2->Size / 2.0f)));
 
 		VPhysicsObject* slopePhysics = group->AddObject(slope, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f) });
 		slopePhysics->SetFriction(1.0f);
@@ -2017,9 +2018,6 @@ public:
 		slopePhysics->SetFriction(1.0f);
 		slopePhysics = group->AddObject(slope2, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope2->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope2->Angle * (3.1415926f / 180.0f)) * 120.0f) });
 		slopePhysics->SetFriction(1.0f);
-
-		group->AddObject(new VObject(-10.0f, 0.0f, 10.0f, (float)VGlobal::p()->Height), VPhysicsObject::STATIC);
-		group->AddObject(new VObject((float)VGlobal::p()->Width, 0.0f, 10.0f, (float)VGlobal::p()->Height), VPhysicsObject::STATIC);
 
 		Add(box);
 		Add(box2);

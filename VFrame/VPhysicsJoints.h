@@ -68,6 +68,8 @@ public:
 	*/
 	void Deinitialise(VPhysicsCPSpace* space);
 
+	///@return The constraint that makes up the joint.
+	VPhysicsCPConstraint* GetConstraint();
 	///@return The first body in the joint.
 	VPhysicsCPBody* GetBodyA();
 	///@return The second body in the joint.
@@ -115,11 +117,11 @@ protected:
 	///The Type of joint the object is. Used for Get/Set function calls.
 	unsigned int type = -1;
 	///The constraint object.
-	cpConstraint* constraint = NULL;
+	VPhysicsCPConstraint* constraint = NULL;
 
 private:
-	cpBody* bodyA = NULL;
-	cpBody* bodyB = NULL;
+	VPhysicsCPBody* bodyA = NULL;
+	VPhysicsCPBody* bodyB = NULL;
 };
 
 ///A Physics Joint Base class that provideds functions for getting and setting Anchor points. Used in Pin, Slide, Pivot or Damped type.
@@ -593,6 +595,7 @@ public:
 	void SetRate(float value);
 
 private:
+	struct VPhysicsConstraintCallbackHelper;
 	void Setup(VPhysicsCPBody* BodyA, VPhysicsCPBody* BodyB, float Rate);
 };
 
