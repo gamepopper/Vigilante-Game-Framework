@@ -47,29 +47,22 @@ struct VPhysicsArbiter
 	sf::Vector2f PointB;
 };
 
-struct CollisionCallbackHelper;
 
 ///A special VGroup that sets up a physics world and updates VPhysicsObjects. It doesn't handle rendering except for debugging, nor does it update the VObject.
 class VPhysicsGroup : public VGroup
 {
 private:
-	float timestep = 0.0f;
-
-protected:
-	///The Physics World.
 	VPhysicsCPSpace* space;
-	///The Physics Collision Handler.
-	cpCollisionHandler* collisionHandler;
+	VPhysicsCollision* collisionHandler;
 	
-	///A list of callback helpers for collision responses.
-	std::vector<CollisionCallbackHelper> callbackHelperList;
+	struct VPhysicsObjectCollisionCallbackHelper;
+	std::vector<VPhysicsObjectCollisionCallbackHelper> objectCallbackHelperList;
 
-	/**
-	* Gets the physics object from the body.
-	* @param body The physics body.
-	* @return The Physics object. NULL if not found.
-	*/
 	VPhysicsObject* getObjectFromBody(cpBody* body);
+	
+	struct VPhysicsConstraintCallbackHelper;
+	std::vector<VPhysicsConstraintCallbackHelper> constraintCallbackHelperList;
+	VPhysicsJointBase* getJointFromConstraint(cpConstraint* constraint);
 
 public:
 	///Used to call parent class functions when they are overrided in class.
@@ -195,13 +188,30 @@ public:
 	void SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist = false);
 
 	/**
+	* Here you can set callbacks for the pre and post solve conditions of a joint.
+	* @param joint The joint to test the callback with.
+	* @param callback The function to call if the joint is applied, the parameters are the VPhysicsJointBase and two VPhysicsObject so you can modify the joints or the objects.
+	* @param type The type of callback to set (see VPhysicsCallbackType). BEGIN and SEPARATE are ignored.
+	* @param persist If true, this callback will remain active for the duration of the space, otherwise this callback will be removed after one call. This way you aren't required to call it on each update.
+	*/
+	void SetConstraintCallback(VPhysicsJointBase* joint, const std::function<void(VPhysicsJointBase*, VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist = false);
+
+	/**
 	* This function is called to process all the callbacks, this should only be overridden if you want to manipulate the collision response directly.
 	* @param arb The collision arbiter, which essentially holds all the collision response infomation between two shapes.
 	* @param space The Physics world the collision took place in (always the one created in VPhysicsGroup).
 	* @param type The type of callback to process.
 	* @return A boolean value for the begin and presolve callbacks.
 	*/
-	bool ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *space, VPhysicsCallbackType type);
+	virtual bool ProcessCallback(VPhysicsCPArbiter* arb, VPhysicsCPSpace* space, VPhysicsCallbackType type);
+
+	/**
+	* This function is called to process all the callbacks, this should only be overridden if you want to manipulate the collision response directly.
+	* @param constraint The collision arbiter, which essentially holds all the collision response infomation between two shapes.
+	* @param space The Physics world the collision took place in (always the one created in VPhysicsGroup).
+	* @param type The type of callback to process.
+	*/
+	virtual void ProcessCallback(VPhysicsCPConstraint* constraint, VPhysicsCPSpace* space, VPhysicsCallbackType type);
 
 #ifdef _DEBUG
 	/**

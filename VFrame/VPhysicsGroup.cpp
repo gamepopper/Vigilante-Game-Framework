@@ -6,7 +6,7 @@
 #include "VGlobal.h"
 #include <cstring>
 
-struct CollisionCallbackHelper
+struct VPhysicsGroup::VPhysicsObjectCollisionCallbackHelper
 {
 	VObject* A;
 	VObject* B;
@@ -14,10 +14,26 @@ struct CollisionCallbackHelper
 	VPhysicsGroup::VPhysicsCallbackType Type;
 	std::function<bool(VPhysicsObject*, VPhysicsObject*)> CallbackFunc;
 
-	CollisionCallbackHelper(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsGroup::VPhysicsCallbackType type, bool persist = false)
+	VPhysicsObjectCollisionCallbackHelper(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsGroup::VPhysicsCallbackType type, bool persist = false)
 	{
 		A = a;
 		B = b;
+		Persist = persist;
+		Type = type;
+		CallbackFunc = callback;
+	}
+};
+
+struct VPhysicsGroup::VPhysicsConstraintCallbackHelper
+{
+	VPhysicsJointBase* Joint;
+	bool Persist;
+	VPhysicsGroup::VPhysicsCallbackType Type;
+	std::function<void(VPhysicsJointBase*,VPhysicsObject*,VPhysicsObject*)> CallbackFunc;
+
+	VPhysicsConstraintCallbackHelper(VPhysicsJointBase* joint, const std::function<void(VPhysicsJointBase*, VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsGroup::VPhysicsCallbackType type, bool persist = false)
+	{
+		Joint = joint;
 		Persist = persist;
 		Type = type;
 		CallbackFunc = callback;
@@ -50,7 +66,7 @@ VPhysicsGroup::VPhysicsGroup(unsigned int Amount) : VGroup(Amount)
 		group->ProcessCallback(arb, space, VPhysicsCallbackType::SEPARATE);
 	};
 
-	callbackHelperList.reserve(5);
+	objectCallbackHelperList.reserve(5);
 }
 
 VPhysicsObject* VPhysicsGroup::AddObject(VObject* Object, VPhysicsObject::VObjectType BodyType, VPhysicsObject::VObjectShape Shape, std::vector<sf::Vector2f> Verts)
@@ -113,7 +129,7 @@ bool VPhysicsGroup::RemoveJoint(VPhysicsJointBase* Joint)
 
 void VPhysicsGroup::Destroy()
 {
-	callbackHelperList.clear();
+	objectCallbackHelperList.clear();
 	cpSpaceFree(space);
 	VSUPERCLASS::Destroy();
 }
@@ -156,19 +172,59 @@ VPhysicsObject* VPhysicsGroup::getObjectFromBody(cpBody* body)
 	return nullptr;
 }
 
+VPhysicsJointBase* VPhysicsGroup::getJointFromConstraint(cpConstraint* constraint)
+{
+	for (unsigned int i = 0; i < members.size(); i++)
+	{
+		VPhysicsJointBase* obj = dynamic_cast<VPhysicsJointBase*>(members[i]);
+		if (obj && obj->GetConstraint() == constraint)
+		{
+			return obj;
+		}
+	}
+
+	return nullptr;
+}
+
 void VPhysicsGroup::SetCollisionCallback(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist)
 {
-	callbackHelperList.emplace_back(a, b, callback, type, persist);
+	objectCallbackHelperList.emplace_back(a, b, callback, type, persist);
 }
 
 void VPhysicsGroup::SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist)
 {
-	callbackHelperList.emplace_back(a->GetBaseObject(), b->GetBaseObject(), callback, type, persist);
+	objectCallbackHelperList.emplace_back(a->GetBaseObject(), b->GetBaseObject(), callback, type, persist);
+}
+
+void VPhysicsGroup::SetConstraintCallback(VPhysicsJointBase* joint, const std::function<void(VPhysicsJointBase*, VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist)
+{
+	VPhysicsCPConstraint* constraint = joint->GetConstraint();
+	cpConstraintSetUserData(constraint, (void*)this);
+
+	if (cpConstraintGetPreSolveFunc(constraint) == NULL)
+	{
+		cpConstraintSetPreSolveFunc(constraint, [](cpConstraint* constraint, cpSpace* space)
+		{
+			VPhysicsGroup* group = (VPhysicsGroup*)cpConstraintGetUserData(constraint);
+			group->ProcessCallback(constraint, space, VPhysicsCallbackType::PRESOLVE);
+		});
+	}
+
+	if (cpConstraintGetPostSolveFunc(constraint) == NULL)
+	{
+		cpConstraintSetPostSolveFunc(constraint, [](cpConstraint* constraint, cpSpace* space)
+		{
+			VPhysicsGroup* group = (VPhysicsGroup*)cpConstraintGetUserData(constraint);
+			group->ProcessCallback(constraint, space, VPhysicsCallbackType::POSTSOLVE);
+		});
+	}
+
+	constraintCallbackHelperList.emplace_back(joint, callback, type, persist);
 }
 
 bool VPhysicsGroup::ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *space, VPhysicsCallbackType type)
 {
-	if (callbackHelperList.size() == 0)
+	if (objectCallbackHelperList.size() == 0)
 		return true;
 
 	cpBody* bodyA;
@@ -209,35 +265,35 @@ bool VPhysicsGroup::ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *spa
 	}*/
 
 	bool result = true;
-	for (int i = 0; i < (int)callbackHelperList.size(); i++)
+	for (int i = 0; i < (int)objectCallbackHelperList.size(); i++)
 	{
-		if (callbackHelperList[i].Type != type)
+		if (objectCallbackHelperList[i].Type != type)
 			continue;
 
-		if (callbackHelperList[i].A == physicsA->GetBaseObject() &&
-			(callbackHelperList[i].B == physicsB->GetBaseObject() ||
-				callbackHelperList[i].B == nullptr))
+		if (objectCallbackHelperList[i].A == physicsA->GetBaseObject() &&
+			(objectCallbackHelperList[i].B == physicsB->GetBaseObject() ||
+				objectCallbackHelperList[i].B == nullptr))
 		{
-			result = callbackHelperList[i].CallbackFunc(physicsA, physicsB);
+			result = objectCallbackHelperList[i].CallbackFunc(physicsA, physicsB);
 
-			if (!callbackHelperList[i].Persist)
+			if (!objectCallbackHelperList[i].Persist)
 			{
-				callbackHelperList.erase(callbackHelperList.begin() + i);
+				objectCallbackHelperList.erase(objectCallbackHelperList.begin() + i);
 				i--;
 			}
 
 			break;
 		}
 
-		if ((callbackHelperList[i].B == physicsA->GetBaseObject() ||
-			callbackHelperList[i].B == nullptr) &&
-			callbackHelperList[i].A == physicsB->GetBaseObject())
+		if ((objectCallbackHelperList[i].B == physicsA->GetBaseObject() ||
+			objectCallbackHelperList[i].B == nullptr) &&
+			objectCallbackHelperList[i].A == physicsB->GetBaseObject())
 		{
-			result = callbackHelperList[i].CallbackFunc(physicsB, physicsA);
+			result = objectCallbackHelperList[i].CallbackFunc(physicsB, physicsA);
 
-			if (!callbackHelperList[i].Persist)
+			if (!objectCallbackHelperList[i].Persist)
 			{
-				callbackHelperList.erase(callbackHelperList.begin() + i);
+				objectCallbackHelperList.erase(objectCallbackHelperList.begin() + i);
 				i--;
 			}
 
@@ -246,6 +302,42 @@ bool VPhysicsGroup::ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *spa
 	}
 
 	return result;
+}
+
+void VPhysicsGroup::ProcessCallback(VPhysicsCPConstraint* constraint, VPhysicsCPSpace* space, VPhysicsCallbackType type)
+{
+	if (constraintCallbackHelperList.size() == 0)
+		return;
+
+	cpBody* bodyA = cpConstraintGetBodyA(constraint);
+	cpBody* bodyB = cpConstraintGetBodyB(constraint);
+
+	VPhysicsJointBase* joint = getJointFromConstraint(constraint);
+
+	if (joint)
+	{
+		VPhysicsObject* objA = getObjectFromBody(bodyA);
+		VPhysicsObject* objB = getObjectFromBody(bodyB);
+
+		for (int i = 0; i < (int)constraintCallbackHelperList.size(); i++)
+		{
+			if (constraintCallbackHelperList[i].Type != type)
+				continue;
+
+			if (constraintCallbackHelperList[i].Joint == joint)
+			{
+				constraintCallbackHelperList[i].CallbackFunc(joint, objA, objB);
+
+				if (constraintCallbackHelperList[i].Persist == false)
+				{
+					constraintCallbackHelperList.erase(constraintCallbackHelperList.begin() + i);
+					i--;
+				}
+
+				break;
+			}
+		}
+	}
 }
 
 int VPhysicsGroup::GetIterations()
