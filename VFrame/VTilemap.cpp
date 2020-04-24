@@ -482,6 +482,19 @@ int const& VTilemap::GetMapHeight()
 	return mapHeight;
 }
 
+const VTile* VTilemap::GetCollisionTile(unsigned int index)
+{
+	if (index >= GetCollisionTileCount())
+		return nullptr;
+
+	return tiles[index];
+}
+
+const unsigned int VTilemap::GetCollisionTileCount()
+{
+	return tiles.size();
+}
+
 void VTilemap::Destroy()
 {
 	clearTiles();

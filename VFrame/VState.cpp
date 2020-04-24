@@ -6,14 +6,19 @@ using std::vector;
 
 VState::VState() : VGroup()
 {
-	Cameras.emplace_back();
-	Cameras[0] = new VCamera();
-	DefaultCamera = Cameras[0];
+	
 }
 
 VState::~VState()
 {
 	Cleanup();
+}
+
+void VState::Initialise()
+{
+	Cameras.emplace_back();
+	Cameras[0] = new VCamera();
+	DefaultCamera = Cameras[0];
 }
 
 void VState::Cleanup()

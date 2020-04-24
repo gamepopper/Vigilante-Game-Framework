@@ -560,6 +560,12 @@ void VObject::Update(float dt)
 
 	WasTouching = Touching;
 	Touching = TOUCHNONE;
+
+	if (Health <= 0)
+	{
+		Health = 0;
+		Kill();
+	}
 }
 
 void VObject::Draw(sf::RenderTarget &RenderTarget)

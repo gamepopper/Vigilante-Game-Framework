@@ -119,7 +119,6 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	#endif
 	VBase::VLog("\nStarting Game: %s", title.toUtf8().c_str());
 
-	initialState->DefaultCamera->Reset();
 	VGlobal::p()->ChangeState(initialState);
 	VGlobal::p()->ChangeState(nullptr);
 

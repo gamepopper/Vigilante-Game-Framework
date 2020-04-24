@@ -58,7 +58,7 @@ public:
 		ROOMLERP,
 	};
 
-protected:
+private:
 	///The current view the Camera applies to the render target.
 	sf::View view;
 	///Used to render a fade in or out.
@@ -108,7 +108,9 @@ protected:
 	///If true, the camera shall be bound to the WorldBounds set in VGlobal.
 	bool boundToWorld = true;
 	///The Position in the last frame.
-	sf::Vector2f LastPosition; 
+	sf::Vector2f LastPosition;
+	///The default view size for zooming.
+	sf::Vector2f DefaultZoom;
 
 public:
 	///The current position of the camera.
@@ -120,17 +122,15 @@ public:
 	///The camera is only used for rendering if Active is set to true.
 	bool Active = true;
 
-	VCamera()
-	{
-		Reset();
-	}
+	///The default constructor sets up the camera with a default view that is the size of the game's display.
+	VCamera();
 
 	/**
 	* @param View the sf::View that the Camera should use instead of the default one.
 	*/
 	VCamera(sf::View& View) : view(View)
 	{
-		
+		Reset();
 	}
 
 	virtual ~VCamera()

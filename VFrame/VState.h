@@ -70,8 +70,8 @@ public:
 	///Handles the opening and closing of substates.
 	void ResetSubState();
 
-	///Initialises new state, first function called before changing states.
-	virtual void Initialise() {}
+	///Initialises new state and sets up the default camera, first function called before changing states.
+	virtual void Initialise();
 	///Cleanup state data, last function called before destruction of state.
 	virtual void Cleanup();
 	///Function called when pausing state (when pushing a new state onto VStateManager).

@@ -289,6 +289,12 @@ public:
 	///Get height of tilemap grid.
 	int const& GetMapHeight();
 
+	///@return Tile object used for collisions, size of each tile is based on an area of tiles with the same ID.
+	const VTile* GetCollisionTile(unsigned int index);
+
+	///@return The amount of tile objects for collisions.
+	const unsigned int GetCollisionTileCount();
+
 	///Not used in VTilemap.
 	virtual void Reset(sf::Vector2f newPos) override {}
 	///Not used in VTilemap.

@@ -46,9 +46,7 @@
 class VTimer
 {
 private:
-	///If it's currently running.
 	bool running = true;
-	///Current time in seconds.
 	float time = 0.0f;
 
 public:
@@ -84,74 +82,31 @@ public:
 	uint64_t Microseconds();
 };
 
-///Special VTimer that can perform events at set intervals. VTimer functions are usable, but the new functions need to be called in order for events to take effect.
-class VTimeline : public VTimer
+///Special VTimer that can perform an event at a set interval. Like VTimer, it can be paused or restarted at any point. It can also be looped.
+class VTimerEvent : public VTimer
 {
 private:
+	bool done = false;
 	bool loop = false;
-	bool ready = false;
-	bool destroyWhenDone = false;
-	unsigned int lastEvent = 0;
+	unsigned int timePoint = 0;
+	std::function<void()> function = nullptr;
 
 public:
 	///Used to call parent class functions when they are overrided in class.
 	typedef VTimer VSUPERCLASS;
 
 	/**
-	* @param looping If true, the timeline will start at the beginning once finished.
+	* @param time Time in milliseconds for the event to occur.
+	* @param eventFunction The event to call.
+	* @param looping If true, the timeline will start at the beginning once finished, otherwise it will destroy itself.
 	* @param addToManager If true, this will automatically add the timer to VTimeManager. If it's not added to the VTimeManager it has to be updated manually.
 	*/
-	VTimeline(bool looping, bool addToManager = true);
+	VTimerEvent(unsigned int time, std::function<void()> eventFunction, bool looping = false, bool addToManager = true);
 
-	///An event struct that holds the function to call as well as the point in time for the event to occur.
-	struct VTimelineEvent
-	{
-		///The point in time to run the event in milliseconds.
-		unsigned int timePoint;
-		///The function to call to perform the event.
-		std::function<void()> function;
-		///Flag to indicate that the event has occured in the timeline.
-		bool done;
-		
-		/**
-		* @param time The point in time to run the event in milliseconds.
-		* @param function The function to call to perform the event.
-		*/
-		VTimelineEvent(unsigned int time, std::function<void()> function)
-		{
-			this->timePoint = time;
-			this->function = function;
-			done = false;
-		}
-	};
-
-	/**
-	* Adds an event to the timeline.
-	* @param time The point in time to run the event in milliseconds.
-	* @param function The function to call to perform the event.
-	*/
-	void AddEvent(unsigned int time, std::function<void()> function);
-
-	/**
-	* Adds an event to the timeline.
-	* @param time The point in time to run the event in seconds.
-	* @param function The function to call to perform the event.
-	*/
-	void AddEvent(float time, std::function<void()> function);
-
-	/**
-	* Starts the timeline.
-	* @param clearWhenFinished If true, all the events will be removed when the timeline is finished.
-	*/
-	void Start(bool clearWhenFinished);
-
-	///Stop the timeline (resets the time.
+	///Stops the timer and automatically removes it from the VTimeManager. It won't destroy itself however, so this has to be handled by the user.
 	void Stop();
 
-	///Returns true if the timeline has played through all events.
-	bool IsFinished();
-
-	///@param value If true, the timeline will start from the beginning instead of stopping and/or clearing.
+	///@param value If true, the timeline will start from the beginning instead of being destroyed.
 	void SetLooping(bool value);
 	///@return If the timeline is looping or not.
 	bool GetLooping();
@@ -162,9 +117,6 @@ public:
 	* @return The resulting time once updated.
 	*/
 	virtual float Update(float dt);
-
-private:
-	std::vector<std::unique_ptr<VTimelineEvent>> events;
 };
 
 ///Manages multiple timers at once in a singleton data structure.

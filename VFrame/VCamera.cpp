@@ -7,15 +7,21 @@ sf::View VCameraList::Default;
 
 void VCamera::Reset()
 {
-	view = VCameraList::Default;
-	block.setSize(view.getSize());
 	Position = view.getCenter();
-	LastPosition = Position;
+	DefaultZoom = view.getSize();
 	Rotation = view.getRotation();
 	Zoom = 1.0f;
 	followObject = nullptr;
 	isFollowing = false;
 	isShaking = false;
+	block.setSize(view.getSize());
+	LastPosition = Position;
+}
+
+VCamera::VCamera()
+{
+	view = VCameraList::Default;
+	Reset();
 }
 
 void VCamera::Follow(VObject* target, float deadzone, CameraFollowMethod followmethod, float lead, float lerp)
@@ -273,7 +279,7 @@ void VCamera::Update(float dt)
 
 	view.setCenter(position);
 	view.setRotation(rotation);
-	view.setSize(VCameraList::Default.getSize() * zoom);
+	view.setSize(DefaultZoom * zoom);
 }
 
 void VCamera::Render(sf::RenderTarget &RenderTarget)
