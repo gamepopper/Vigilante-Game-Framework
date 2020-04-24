@@ -19,6 +19,32 @@
 int VBase::DebugObjectCount = 0;
 #endif
 
+const wchar_t* VBase::VString(const char* format, ...)
+{
+	char    buf[4096], *p = buf;
+	va_list args;
+	int     n;
+
+	va_start(args, format);
+	n = vsnprintf(p, sizeof buf - 3, format, args); // buf-3 is room for CR/LF/NUL
+
+	int len = strlen(buf);
+	buf[len] = '\0';
+	va_end(args);
+
+	p += (n < 0) ? sizeof buf - 3 : n;
+
+	while (p > buf  &&  isspace(p[-1]))
+		*--p = '\0';
+
+	wchar_t output[4096];
+	for (unsigned int i = 0; i < strlen(buf); i++)
+		output[i] = (wchar_t)buf[i];
+	output[strlen(buf)] = L'\0';
+
+	return output;
+}
+
 void VBase::VLog(const char* format, ...)
 {
 	char    buf[4096], *p = buf;

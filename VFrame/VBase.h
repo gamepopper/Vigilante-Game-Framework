@@ -130,6 +130,13 @@ public:
 	* @param RenderTarget The game's sf::RenderTarget object to render data onto.
 	*/
 	virtual void Draw(sf::RenderTarget &RenderTarget)	{}
+	
+	/**
+	* Helper to create strings with format parameters.
+	* @param fmt Formatted string that will be printed (for example: %d will print an integer value).
+	* @param ... You must pass in all values of each specified type that are required for the formatted string.
+	*/
+	static const wchar_t* VString(const char* fmt, ...);
 
 	/**
 	* Outputs text for logging purposes (to Console, Output Window ect...).
