@@ -3,6 +3,8 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
 
+#include "VGlobal.h"
+
 VShape::VShape(float x, float y, float width, float height) : VObject(x, y, width, height)
 {
 	SetRectangle(width, height);
@@ -25,6 +27,15 @@ VShape::VShape(sf::Vector2f Position, sf::Vector2f Size) : VObject(Position, Siz
 #ifdef _DEBUG
 	DebugColor = sf::Color::Green;
 #endif
+}
+
+void VShape::Destroy()
+{
+	if (disposable && tex != nullptr)
+	{
+		delete tex;
+		disposable = false;
+	}
 }
 
 void VShape::updateTransform()
@@ -144,6 +155,33 @@ float VShape::GetOutlineThickness()
 	return shape->getOutlineThickness();
 }
 
+void VShape::SetTexture(sf::Texture* texture)
+{
+	if (disposable && tex)
+		delete tex;
+
+	tex = texture;
+	disposable = true;
+	shape->setTexture(tex, true);
+}
+
+void VShape::SetTextureFromFile(const sf::String& filename)
+{
+	if (disposable && tex)
+	{
+		delete tex;
+		disposable = false;
+	}
+
+	tex = &VGlobal::p()->Content->LoadTexture(filename);
+	shape->setTexture(tex, true);
+}
+
+void VShape::SetTextureRect(const sf::IntRect& rect)
+{
+	shape->setTextureRect(rect);
+}
+
 void VShape::Draw(sf::RenderTarget& RenderTarget)
 {
 	VSUPERCLASS::Draw(RenderTarget);
@@ -154,7 +192,7 @@ void VShape::Draw(sf::RenderTarget& RenderTarget)
 	if (TestInView(renderTargetView, &scrollView, this, shape->getGlobalBounds()))
 	{
 		RenderTarget.setView(scrollView);
-		RenderTarget.draw(*shape, RenderState);
+		RenderTarget.draw(*shape);
 		RenderTarget.setView(renderTargetView);
 	}
 }

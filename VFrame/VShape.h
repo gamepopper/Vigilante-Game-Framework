@@ -34,6 +34,7 @@
 #pragma once
 #include "VObject.h"
 #include <SFML/Graphics/Shape.hpp>
+#include <SFML/System/String.hpp>
 #include <memory>
 
 ///An object class that renders primitive shapes. Arguably more optimal than creating a VSprite and calling any of the Make graphic functions.
@@ -42,6 +43,8 @@ class VShape : public VObject
 protected:
 	///The shape object that holds the rendering and transform infomation of the object.
 	std::unique_ptr<sf::Shape> shape;
+	sf::Texture* tex;
+	bool disposable = false;
 	virtual void updateTransform() override;
 
 public:
@@ -70,6 +73,8 @@ public:
 	* @param Size Size of the shape.
 	*/
 	VShape(sf::Vector2f Position, sf::Vector2f Size);
+
+	virtual void Destroy() override;
 
 	/**
 	* Set the shape to a rectangle.
@@ -114,6 +119,12 @@ public:
 	const sf::Color& GetOutlineTint();
 	///@return The thickness of the outline in thickness.
 	float GetOutlineThickness();
+	///@param texture The texture you want to set to, gets destroyed once removed. NULL by default.
+	void SetTexture(sf::Texture* texture);
+	///@param filename The file of the texture you want to set to.
+	void SetTextureFromFile(const sf::String& filename);
+	///@param rect The area of the texture you want to be displayed on the shape, by default it's the full area.
+	void SetTextureRect(const sf::IntRect& rect);
 
 	/**
 	* Renders the shape.
