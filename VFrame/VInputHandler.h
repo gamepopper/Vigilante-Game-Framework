@@ -102,7 +102,7 @@ protected:
 		GAMEPAD_BUTTON gamepad;
 #elif defined(USE_SFML_JOYSTICK)
 		///Gamepad Button
-		int gamepad;
+		Button gamepad;
 #else
 		///Gamepad Button
 		sf::XInputDevice::XButton gamepad;
@@ -116,6 +116,20 @@ protected:
 		bool down[CONTROLLER_COUNT];
 		///True if released at frame.
 		bool released[CONTROLLER_COUNT];
+
+		ButtonInput()
+		{
+			memset(down, NULL, sizeof(down));
+			memset(pressed, NULL, sizeof(pressed));
+			memset(released, NULL, sizeof(released));
+		}
+
+		~ButtonInput()
+		{
+			memset(down, NULL, sizeof(down));
+			memset(pressed, NULL, sizeof(pressed));
+			memset(released, NULL, sizeof(released));
+		}
 	};
 
 	///Axis Input Data
@@ -139,6 +153,18 @@ protected:
 		float lastValue[CONTROLLER_COUNT];
 		///Current frame's axis value.
 		float value[CONTROLLER_COUNT];
+
+		AxisInput()
+		{
+			memset(lastValue, NULL, sizeof(lastValue));
+			memset(value, NULL, sizeof(value));
+		}
+
+		~AxisInput()
+		{
+			memset(lastValue, NULL, sizeof(lastValue));
+			memset(value, NULL, sizeof(value));
+		}
 	};
 
 	///Set of button inputs.
@@ -158,6 +184,8 @@ protected:
 #ifdef USE_SFML_JOYSTICK
 	///SFML requires you to keep record of the joystick ID for each player.
 	int JoystickID[CONTROLLER_COUNT];
+	///Joystick needs a deadzone.
+	float deadzone = 0.0f;
 #endif
 
 public:
@@ -205,8 +233,15 @@ public:
 #ifdef USE_SFML_JOYSTICK
 	/**
 	* Gets JoystickID when using sf::Joystick.
+	* @param ControllerIndex The specified index for the controller.
+	* @return The Joystick ID for the provided index.
 	*/
 	int GetJoystickID(int ControllerIndex);
+
+	///@param value The Deadzone value for axis inputs.
+	void SetDeadzone(float value);
+	///@param The deadzone for axis inputs.
+	float GetDeadzone();
 #endif
 
 	/**

@@ -14,9 +14,12 @@ VInputHandler::~VInputHandler()
 {
 	buttonInputs.clear();
 	axisInputs.clear();
+	window = nullptr;
 
 #ifdef USE_GAMEPAD_API
 	GamepadShutdown();
+#elif USE_SFML_JOYSTICK
+	memset(JoystickID, NULL, sizeof(JoystickID));
 #endif
 }
 
@@ -38,7 +41,7 @@ void VInputHandler::SetButtonInput(const sf::String& name, int key, int gamepad,
 #ifdef USE_GAMEPAD_API
 	button.gamepad = (GAMEPAD_BUTTON)(gamepad);
 #elif defined(USE_SFML_JOYSTICK)
-	button.gamepad = (sf::Joystick::Axis)gamepad;
+	button.gamepad = (Button)gamepad;
 	sf::Joystick::update();
 #else
 	if (gamepad > 0)
@@ -48,11 +51,6 @@ void VInputHandler::SetButtonInput(const sf::String& name, int key, int gamepad,
 #endif
 
 	button.mouse = (sf::Mouse::Button)mouse;
-
-	memset(button.down, NULL, sizeof(button.down));
-	memset(button.pressed, NULL, sizeof(button.pressed));
-	memset(button.released, NULL, sizeof(button.released));
-
 	buttonInputs[name] = button;
 }
 
@@ -120,7 +118,15 @@ int VInputHandler::GetJoystickID(int ControllerIndex)
 	if (ControllerIndex < 0 || ControllerIndex >= CONTROLLER_COUNT)
 		return -1;
 
-	return JoystickID[ControllerIndex];
+	return ControllerIndex;
+}
+void VInputHandler::SetDeadzone(float value)
+{
+	deadzone = value;
+}
+float VInputHandler::GetDeadzone()
+{
+	return deadzone;
 }
 #endif
 
@@ -208,12 +214,16 @@ void VInputHandler::Update(float dt)
 	GamepadUpdate();
 #elif defined(USE_SFML_JOYSTICK)
 	int count = 0;
-	for (int i = 0; (i < sf::Joystick::Count && count < CONTROLLER_COUNT); i++)
+	memset(JoystickID, NULL, sizeof(JoystickID));
+	for (int i = 0; i < sf::Joystick::Count; i++)
 	{
-		JoystickID[i] = -1;
+		if (count >= CONTROLLER_COUNT)
+			break;
+
 		if (sf::Joystick::isConnected(i))
 		{
-			JoystickID[count++] = i;
+			JoystickID[count] = i + 1;
+			count++;
 		}
 	}
 #endif
@@ -232,17 +242,18 @@ void VInputHandler::Update(float dt)
 			bool mousePress = sf::Mouse::isButtonPressed(b.mouse) &&
 				(mousePosition.x >= window->getPosition().x &&
 					mousePosition.y >= window->getPosition().y &&
-					mousePosition.x < (window->getPosition().x + window->getSize().x) &&
-					mousePosition.y < (window->getPosition().y + window->getSize().y));
+					mousePosition.x < (window->getPosition().x + (int)window->getSize().x) &&
+					mousePosition.y < (window->getPosition().y + (int)window->getSize().y));
 
-			if (sf::Keyboard::isKeyPressed(b.key) || mousePress || 
+			if (sf::Keyboard::isKeyPressed(b.key) || mousePress
 #ifdef USE_GAMEPAD_API
-				(GamepadIsConnected((GAMEPAD_DEVICE)i) && GamepadButtonDown((GAMEPAD_DEVICE)i, b.gamepad)))
+				|| (GamepadIsConnected((GAMEPAD_DEVICE)i) && GamepadButtonDown((GAMEPAD_DEVICE)i, b.gamepad))
 #elif defined(USE_SFML_JOYSTICK)
-				(JoystickID[i] >= 0 && b.gamepad >= 0 && sf::Joystick::isButtonPressed(JoystickID[i], b.gamepad)))
+				 || (JoystickID[i] > 0 && b.gamepad >= 0 && b.gamepad < sf::Joystick::getButtonCount(JoystickID[i] - 1) && sf::Joystick::isButtonPressed(JoystickID[i] - 1, b.gamepad))
 #else
-				(sf::XInputDevice::isConnected(i) && sf::XInputDevice::isButtonPressed(i, b.gamepad)))
+				|| (sf::XInputDevice::isConnected(i) && sf::XInputDevice::isButtonPressed(i, b.gamepad))
 #endif
+				)
 			{
 				if (!b.down[i])
 					b.pressed[i] = true;
@@ -328,16 +339,20 @@ void VInputHandler::Update(float dt)
 
 					val1 *= 100.0f;
 
-					if ((int)val1 != 0)
+					if (fabs(val1) > deadzone)
 					{
 						a.value[i] = val1;
 						isGamepadActive = true;
 					}
+					else
+					{
+						a.value[i] = 0;
+					}
 				}
 
 #elif defined(USE_SFML_JOYSTICK)
-				float axis = JoystickID[i] >= 0 && a.gamepad >= 0 ? sf::Joystick::getAxisPosition(JoystickID[i], a.gamepad) : 0.0f;
-				if (axis != 0.0f) //Deadzone
+				float axis = JoystickID[i] > 0 && a.gamepad >= 0 ? sf::Joystick::getAxisPosition(JoystickID[i] - 1, a.gamepad) : 0.0f;
+				if (fabsf(axis) >= deadzone) //Deadzone
 				{
 					a.value[i] = axis;
 					isGamepadActive = true;
@@ -348,10 +363,14 @@ void VInputHandler::Update(float dt)
 				}
 #else
 				float axis = sf::XInputDevice::isConnected(i) ? sf::XInputDevice::getAxisPosition(i, a.gamepad) : 0.0f;
-				if (axis != 0)
+				if ((int)axis != 0)
 				{
 					a.value[i] = axis;
 					isGamepadActive = true;
+				}
+				else
+				{
+					a.value[i] = 0;
 				}
 #endif
 			}
