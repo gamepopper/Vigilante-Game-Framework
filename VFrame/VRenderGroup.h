@@ -34,6 +34,7 @@
 #pragma once
 #include "VGroup.h"
 #include "VSprite.h"
+#include "VCamera.h"
 #include "VPostEffect.h"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
@@ -61,10 +62,21 @@ public:
 	sf::Color BackgroundTint = sf::Color::Transparent;
 	///Post Process (Shader) Effect to apply to the sprite.
 	std::unique_ptr<VPostEffectBase> PostEffect = nullptr;
-	///If true, the sprite's render view will be transformed based on the sprite's current transform, else it will use the default view.
+	///Camera for the sprite's render view.
+	std::unique_ptr<VCamera> Camera = nullptr;
+	///If true, the camera's render view will be transformed based on the sprite's current transform, else it will use the camera's render view.
 	bool RenderViewTransform = true;
+
+	enum VRenderGroupOutside : unsigned char
+	{
+		VRENDERGROUP_NO,
+		VRENDERGROUP_BEFORE,
+		VRENDERGROUP_AFTER,
+		VRENDERGROUP_BOTH,
+	};
+
 	///If true, the content data would also be rendered outside of the sprite area. Used if you want an effect to apply to a specific area.
-	bool RenderOutside = false;
+	VRenderGroupOutside RenderOutside = VRENDERGROUP_NO;
 
 	///Default Constructor for VRenderGroup
 	VRenderGroup(unsigned int maxSize = 0);

@@ -30,6 +30,7 @@ public:
 VRenderGroup::VRenderGroup(unsigned int maxSize) : VGroup(maxSize)
 {
 	Sprite = std::make_unique<VRenderSprite>(0.0f, 0.0f);
+	Camera = std::make_unique<VCamera>();
 	type = RENDERGROUP;
 }
 
@@ -40,6 +41,8 @@ VRenderGroup::VRenderGroup(float x, float y, unsigned int width, unsigned int he
 	Sprite->Radius = Sprite->Size.x < Sprite->Size.y ? Sprite->Size.x / 2 : Sprite->Size.y / 2;
 
 	renderTex.create(width, height);
+	sf::View defaultView = renderTex.getDefaultView();
+	Camera = std::make_unique<VCamera>(defaultView);
 
 	type = RENDERGROUP;
 }
@@ -51,13 +54,15 @@ VRenderGroup::VRenderGroup(sf::Vector2f position, sf::Vector2u size, unsigned in
 	Sprite->Radius = Sprite->Size.x < Sprite->Size.y ? Sprite->Size.x / 2 : Sprite->Size.y / 2;
 
 	renderTex.create(size.x, size.y);
+	sf::View defaultView = renderTex.getDefaultView();
+	Camera = std::make_unique<VCamera>(defaultView);
 
 	type = RENDERGROUP;
 }
 
 void VRenderGroup::updateTransform()
 {
-	sf::View NewView = renderTex.getDefaultView();
+	sf::View NewView = Camera->GetView();
 
 	if (RenderViewTransform)
 	{
@@ -98,6 +103,7 @@ void VRenderGroup::Destroy()
 {
 	VSUPERCLASS::Destroy();
 
+	Camera = nullptr;
 	Sprite = nullptr;
 	PostEffect = nullptr;
 }
@@ -116,6 +122,7 @@ void VRenderGroup::Update(float dt)
 	VSUPERCLASS::Update(dt);
 	updateTransform();
 	Sprite->Update(dt);
+	Camera->Update(dt);
 
 	if (PostEffect != nullptr)
 	{
@@ -156,7 +163,10 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 	VGlobal::p()->DrawDebug = drawDebug;
 #endif
 
+	if ((RenderOutside & VRENDERGROUP_BEFORE) != 0) VSUPERCLASS::Draw(RenderTarget);
+
 	Sprite->Draw(RenderTarget);
+	Camera->Render(RenderTarget);
 	
-	if (RenderOutside) VSUPERCLASS::Draw(RenderTarget);
+	if ((RenderOutside & VRENDERGROUP_AFTER) != 0) VSUPERCLASS::Draw(RenderTarget);
 }
