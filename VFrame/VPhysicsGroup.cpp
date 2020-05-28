@@ -502,7 +502,7 @@ void ChipmunkDebugDrawCircle(cpVect pos, cpFloat angle, cpFloat radius, cpSpaceD
 {
 	cpFloat r = radius + 1.0f;
 	int circleDivisions = 16;
-	float anglePerDiv = 3.1415926f * (2.0f / circleDivisions);
+	float anglePerDiv = VFRAME_PI * (2.0f / circleDivisions);
 
 	for (int i = 0; i < circleDivisions; i++)
 	{

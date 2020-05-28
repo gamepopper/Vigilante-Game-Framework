@@ -34,7 +34,7 @@ void VTilemap::updateTransform()
 		updateCollisionBox();
 	}
 
-	float angle = -Angle * 3.141592654f / 180.f;
+	float angle = -Angle * VFRAME_PI / 180.f;
 	float cosine = static_cast<float>(std::cos(angle));
 	float sine = static_cast<float>(std::sin(angle));
 	float sxc = Scale.x * cosine;

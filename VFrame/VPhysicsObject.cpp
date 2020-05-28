@@ -87,7 +87,7 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 	cpBodySetPosition(body, ToCPVect(Object->Position + (Object->Size / 2.0f)));
 
 	if (Shape != VObjectShape::LINE)
-		cpBodySetAngle(body, Object->Angle * (3.1415926f / 180.0f));
+		cpBodySetAngle(body, Object->Angle * (VFRAME_PI / 180.0f));
 }
 
 VPhysicsCPBody* VPhysicsObject::GetBody()
@@ -186,12 +186,12 @@ void VPhysicsObject::Update(float dt)
 
 		if (cpBodyGetType(body) == CP_BODY_TYPE_KINEMATIC)
 		{
-			angle = baseObject->Angle * (3.1415926f / 180.0f);
-			angleVel = baseObject->AngleVelocity * (3.1415926f / 180.0f);
+			angle = baseObject->Angle * (VFRAME_PI / 180.0f);
+			angleVel = baseObject->AngleVelocity * (VFRAME_PI / 180.0f);
 		}
 
-		baseObject->Angle = angle * (180.0f / 3.1415926f);
-		baseObject->AngleVelocity = angleVel * (180.0f / 3.1415926f);
+		baseObject->Angle = angle * (180.0f / VFRAME_PI);
+		baseObject->AngleVelocity = angleVel * (180.0f / VFRAME_PI);
 
 		cpBodySetAngle(body, angle);
 		cpBodySetAngularVelocity(body, angleVel);

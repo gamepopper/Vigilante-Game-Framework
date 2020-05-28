@@ -1,4 +1,5 @@
 #include "VInterpolate.h"
+#include "VBase.h"
 #include <math.h>
 
 // Easing functions based on equations by Robert Penner
@@ -14,8 +15,6 @@
 //b - end
 //t - current time
 //d - destination time
-
-const float PI = 3.14159265f;
 
 float VInterpolate::backIn(float t, float b, float c, float d)
 {
@@ -106,7 +105,7 @@ float VInterpolate::elasticIn(float t, float b, float c, float d)
 	float a = c;
 	float s = p / 4;
 	float postFix = a*powf(2, 10 * (t -= 1)); // this is a fix, again, with post-increment operators
-	return -(postFix * sinf((t*d - s)*(2 * PI) / p)) + b;
+	return -(postFix * sinf((t*d - s)*(2 * VFRAME_PI) / p)) + b;
 }
 
 float VInterpolate::elasticOut(float t, float b, float c, float d)
@@ -115,7 +114,7 @@ float VInterpolate::elasticOut(float t, float b, float c, float d)
 	float p = d*.3f;
 	float a = c;
 	float s = p / 4;
-	return (a*powf(2, -10 * t) * sinf((t*d - s)*(2 * PI) / p) + c + b);
+	return (a*powf(2, -10 * t) * sinf((t*d - s)*(2 * VFRAME_PI) / p) + c + b);
 }
 
 float VInterpolate::elasticInOut(float t, float b, float c, float d)
@@ -127,10 +126,10 @@ float VInterpolate::elasticInOut(float t, float b, float c, float d)
 
 	if (t < 1) {
 		float postFix = a*powf(2, 10 * (t -= 1)); // postIncrement is evil
-		return -.5f*(postFix* sinf((t*d - s)*(2 * PI) / p)) + b;
+		return -.5f*(postFix* sinf((t*d - s)*(2 * VFRAME_PI) / p)) + b;
 	}
 	float postFix = a*powf(2, -10 * (t -= 1)); // postIncrement is evil
-	return postFix * sinf((t*d - s)*(2 * PI) / p)*.5f + c + b;
+	return postFix * sinf((t*d - s)*(2 * VFRAME_PI) / p)*.5f + c + b;
 }
 
 float VInterpolate::expoIn(float t, float b, float c, float d)
@@ -214,17 +213,17 @@ float VInterpolate::quintInOut(float t, float b, float c, float d)
 
 float VInterpolate::sineIn(float t, float b, float c, float d)
 {
-	return -c * cosf(t / d * (PI / 2)) + c + b;
+	return -c * cosf(t / d * (VFRAME_PI / 2)) + c + b;
 }
 
 float VInterpolate::sineOut(float t, float b, float c, float d)
 {
-	return c * sinf(t / d * (PI / 2)) + b;
+	return c * sinf(t / d * (VFRAME_PI / 2)) + b;
 }
 
 float VInterpolate::sineInOut(float t, float b, float c, float d)
 {
-	return -c / 2 * (cosf(PI*t / d) - 1) + b;
+	return -c / 2 * (cosf(VFRAME_PI*t / d) - 1) + b;
 }
 
 float VInterpolate::Angle(float a, float b, float t, float d, VInterpolateType type)

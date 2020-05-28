@@ -169,7 +169,7 @@ void VPath::Update(float dt)
 		if (angle)
 		{
 			sf::Vector2f diff = p1 - lastPos;
-			object->Angle = atan2f(diff.y, diff.x) * (180 / 3.1415926f);
+			object->Angle = atan2f(diff.y, diff.x) * (180 / VFRAME_PI);
 		}
 	}	
 

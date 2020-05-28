@@ -37,9 +37,9 @@ void V3DModel::updateTransform()
 	// Represent each stored rotation as a different matrix, because 
 	// we store angles. 
 	//          x  y  z 
-	glm::mat4 matrix_rotX = glm::rotate(Rotation.x * (3.1415926f / 180.0f), glm::vec3(1, 0, 0));
-	glm::mat4 matrix_rotY = glm::rotate(Rotation.y * (3.1415926f / 180.0f),	glm::vec3(0, 1, 0));
-	glm::mat4 matrix_rotZ = glm::rotate(Rotation.z * (3.1415926f / 180.0f),	glm::vec3(0, 0, 1));
+	glm::mat4 matrix_rotX = glm::rotate(Rotation.x * (VFRAME_PI / 180.0f), glm::vec3(1, 0, 0));
+	glm::mat4 matrix_rotY = glm::rotate(Rotation.y * (VFRAME_PI / 180.0f),	glm::vec3(0, 1, 0));
+	glm::mat4 matrix_rotZ = glm::rotate(Rotation.z * (VFRAME_PI / 180.0f),	glm::vec3(0, 0, 1));
 	// Create a rotation matrix. 
 	// Multiply in reverse order it needs to be applied. 
 	glm::mat4 matrix_rotation = matrix_rotZ * matrix_rotY * matrix_rotX;

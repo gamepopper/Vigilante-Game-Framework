@@ -325,7 +325,7 @@ void VEmitter::EmitParticle()
 
 		if (Circular)
 		{
-			float angle = random.GetFloat(EmittingAngle.B, EmittingAngle.A) * (3.1415926f / 180);
+			float angle = random.GetFloat(EmittingAngle.B, EmittingAngle.A) * (VFRAME_PI / 180);
 			float speed = random.GetFloat(SpeedRange.B, SpeedRange.A);
 			particle->Velocity = sf::Vector2f(cos(angle), sinf(angle)) * speed;
 		}
