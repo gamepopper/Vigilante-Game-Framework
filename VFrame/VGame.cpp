@@ -199,7 +199,11 @@ void VGame::HandleEvents()
 			VGlobal::p()->CurrentState()->SubState->HandleEvents(event);
 		}
 
-		VGlobal::p()->CurrentState()->HandleEvents(event);
+		if (VGlobal::p()->CurrentState()->active)
+		{
+			VGlobal::p()->CurrentState()->HandleEvents(event);
+		}
+
 		if (event.type == sf::Event::Closed)
 		{
 			VGlobal::p()->Exit();
