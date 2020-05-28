@@ -87,6 +87,8 @@ private:
 	sf::Clock shakeTimer;
 	///The callback function used when the camera finishes shaking.
 	std::function<void()> OnShakeComplete = nullptr;
+	///Custom world bounderies that can be set by the user.
+	sf::FloatRect worldBounds;
 	///The timer for fading and flashing.
 	sf::Clock fadeFlashTimer;
 	///If true, the camera is currently fading.
@@ -188,11 +190,13 @@ public:
 	bool Flash(sf::Color colour = sf::Color::Black, float time = 1.0f, std::function<void()> OnComplete = nullptr);
 	
 	/**
-	* @param bound If true, the game will bound to the WorldBounds set in VGlobal.
+	* @param bound If true, the game will bound to the defined world bounderies.
+	* @param bounderies Custom bounderies to set the camera to, defaults to WorldBounds in VGlobal if none is set.
 	*/
-	void SetToBounds(bool bound)
+	void SetToBounds(bool bound, sf::FloatRect bounderies = sf::FloatRect())
 	{
 		boundToWorld = bound;
+		worldBounds = bounderies;
 	}
 
 	/**

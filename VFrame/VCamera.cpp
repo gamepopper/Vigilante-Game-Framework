@@ -190,15 +190,18 @@ void VCamera::Update(float dt)
 	//Constrain Bounderies
 	if (boundToWorld)
 	{
-		sf::FloatRect worldBounds = VGlobal::p()->WorldBounds;
-		if (position.x - HalfWidth.x < worldBounds.left)
+		sf::FloatRect world = worldBounds;
+		if (world == sf::FloatRect())
+			world = VGlobal::p()->WorldBounds;
+
+		if (position.x - HalfWidth.x < world.left)
 			position.x = HalfWidth.x;
-		if (position.y - HalfWidth.y < worldBounds.top)
+		if (position.y - HalfWidth.y < world.top)
 			position.y = HalfWidth.y;
-		if (position.x + HalfWidth.x > worldBounds.left + worldBounds.width)
-			position.x = worldBounds.width - HalfWidth.x;
-		if (position.y + HalfWidth.y > worldBounds.top + worldBounds.height)
-			position.y = worldBounds.height - HalfWidth.y;
+		if (position.x + HalfWidth.x > world.left + world.width)
+			position.x = world.width - HalfWidth.x;
+		if (position.y + HalfWidth.y > world.top + world.height)
+			position.y = world.height - HalfWidth.y;
 	}
 
 	LastPosition = position;
