@@ -137,6 +137,9 @@ sf::Vector2f VPath::GetPoint(float t)
 	{
 		return getBezierPoint(t);
 	}break;
+	default:
+		return getBezierPoint(0);
+		break;
 	}
 }
 
