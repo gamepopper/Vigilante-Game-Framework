@@ -229,21 +229,21 @@ public:
 	* @param y Y Coordinate in Tiles.
 	* @return Tile ID as a char value. Returns \0 of coordinates are invalid.
 	*/
-	char GetTileID(unsigned int x, unsigned int y);
+	char GetTileID(unsigned int x, unsigned int y) const;
 	
 	/**
 	* Get tile at specified map coordinate.
 	* @param position Coordinate in Tiles.
 	* @return Tile ID as a char value. Returns \0 of coordinates are invalid.
 	*/
-	char GetTileID(sf::Vector2i position);
+	char GetTileID(sf::Vector2i position) const;
 	
 	/**
 	* Get tile at specified world position.
 	* @param tilemapPosition Gets a tile at a specific position in the world (Position / TileSize).
 	* @return Tile ID as a char value. Returns \0 of coordinates are invalid.
 	*/
-	char GetTileIDFromPosition(sf::Vector2f tilemapPosition);
+	char GetTileIDFromPosition(sf::Vector2f tilemapPosition) const;
 
 	/**
 	* Change the tile at a specific point to an ID.

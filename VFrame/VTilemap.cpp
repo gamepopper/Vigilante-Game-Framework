@@ -176,6 +176,7 @@ void VTilemap::updateCollisionBox()
 				t->AllowCollisions = collisionDir[tile]->AllowCollisions;
 				t->Callback = collisionDir[tile]->Callback;
 				t->MainTile = tile;
+				t->Tilemap = this;
 				t->Update(0);
 				tiles.push_back(t);
 				continue;
@@ -254,6 +255,7 @@ void VTilemap::updateCollisionBox()
 			if (width * height > 0)
 			{
 				VTile* tile = new VTile(static_cast<float>(x * TileSize.x) + Position.x, static_cast<float>(y * TileSize.y) + Position.y, static_cast<float>(width * TileSize.x), static_cast<float>(height * TileSize.y));
+				tile->Tilemap = this;
 				tile->Update(0);
 				tiles.push_back(tile);
 			}
@@ -361,9 +363,9 @@ void VTilemap::SetTileCollisionID(char ID, int AllowCollisions, std::function<vo
 	dirty = true;
 }
 
-char VTilemap::GetTileID(unsigned int x, unsigned int y)
+char VTilemap::GetTileID(unsigned int x, unsigned int y) const
 {
-	if ((y * mapWidth) + x < tilemap.size())
+	if ((int)x < mapWidth && (y * mapWidth) + x < tilemap.size())
 	{
 		return tilemap[(y * mapWidth) + x];
 	}
@@ -371,12 +373,12 @@ char VTilemap::GetTileID(unsigned int x, unsigned int y)
 	return -1;
 }
 
-char VTilemap::GetTileID(sf::Vector2i position)
+char VTilemap::GetTileID(sf::Vector2i position) const
 {
 	return GetTileID(position.x, position.y);
 }
 
-char VTilemap::GetTileIDFromPosition(sf::Vector2f tilemapPosition)
+char VTilemap::GetTileIDFromPosition(sf::Vector2f tilemapPosition) const
 {
 	return GetTileID((unsigned int)(tilemapPosition.x / TileSize.x), (unsigned int)(tilemapPosition.y / TileSize.y));
 }
@@ -578,6 +580,8 @@ VTile::VTile(sf::Vector2f position, sf::Vector2f size) : VObject(position, size)
 	Moves = false;
 	type = TILE;
 
+	relativePos = Position;
+
 #if _DEBUG
 	DebugColor = sf::Color::Red;
 #endif
@@ -589,7 +593,15 @@ VTile::VTile(float x, float y, float width, float height) : VObject(x, y, width,
 	Moves = false;
 	type = TILE;
 
+	relativePos = Position;
+
 #if _DEBUG
 	DebugColor = sf::Color::Red;
 #endif
+}
+
+void VTile::Update(float dt)
+{
+	Position = relativePos + Tilemap->Position;
+	VSUPERCLASS::Update(dt);
 }

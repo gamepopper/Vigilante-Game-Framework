@@ -35,14 +35,24 @@
 #include "VObject.h"
 #include <functional>
 
+class VTIlemap;
+
 ///Class for representing a set of tiles for collision purposes.
 class VTile : public VObject
 {
+private:
+	sf::Vector2f relativePos;
+
 public:
+
+	typedef VObject VSUPERCLASS;
+
 	///Callback for tile collisions.
 	std::function<void(VObject*, VObject*)> Callback = nullptr;
 	///For any tile specific collision behaviour, this specifies the tile ID the tile uses.
 	char MainTile = (char)0;
+
+	VTilemap* Tilemap;
 
 	/**
 	* @param position Position of the tile.
@@ -57,4 +67,6 @@ public:
 	* @param height Height of the of the tile, can be bigger than a single tile if it represents a single group of tiles.
 	*/
 	VTile(float x, float y, float width, float height);
+
+	virtual void Update(float dt) override;
 };
