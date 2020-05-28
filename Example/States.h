@@ -1058,7 +1058,7 @@ public:
 		render = new VRenderGroup(0, 0, 200, 200);
 		render->Sprite->Drag = sf::Vector2f(500, 500);
 		render->Sprite->MaxVelocity = sf::Vector2f(200, 200);
-		render->RenderOutside = true;
+		render->RenderOutside = VRenderGroup::VRENDERGROUP_BEFORE;
 		render->Sprite->SetPositionAtCentre(320, 200);
 
 		VPostEffect* postEffect = new VPostEffect("Example/Assets/AlphaThreshold.frag", sf::Shader::Fragment);
@@ -1432,7 +1432,7 @@ public:
 		render->AlphaMultiplier = 0.99f;
 		render->Delay = 0.05f;
 		render->Add(playerControl);
-		render->RenderOutside = true;
+		render->RenderOutside = VRenderGroup::VRENDERGROUP_BEFORE;
 		Add(render);
 
 		VShape* separator = new VShape();
