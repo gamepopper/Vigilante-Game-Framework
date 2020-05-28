@@ -44,12 +44,12 @@ private:
 	sf::Music music;
 	///Music file is value if true.
 	bool valid = false;
-	///Music is looping if true.
+	/*///Music is looping if true.
 	bool looping = false;
 	///The point in time when the music will start looping.
 	float loopStartPoint = 0;
 	///The point in time when the music will go back to the loop start point.
-	float loopEndPoint = 0;
+	float loopEndPoint = 0;*/
 	///Music volume will fade in if true.
 	bool fadein = false;
 	///Music volume will fade out if true.

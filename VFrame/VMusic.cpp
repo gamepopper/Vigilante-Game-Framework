@@ -185,7 +185,7 @@ bool VMusic::Loop()
 	if (!valid)
 		return false;
 
-	return looping;
+	return music.getLoop();
 }
 
 float VMusic::Pitch()
@@ -249,13 +249,14 @@ void VMusic::SetLoop(bool loop, float loopStart, float loopEnd)
 	if (!valid)
 		return;
 
-	looping = loop;
+	/*looping = loop;
 	loopStartPoint = loopStart;
 	if (loopEnd == 0)
-		loopEndPoint = music.getDuration().asSeconds();
-	
+		loopEndPoint = music.getDuration().asSeconds();*/
+
+	sf::Music::TimeSpan timespan = sf::Music::TimeSpan(sf::seconds(loopStart), sf::seconds(loopEnd - loopStart));	
+	music.setLoopPoints(timespan);
 	music.setLoop(loop);
-	music.setLoopPoints(sf::Music::TimeSpan(sf::seconds(loopStartPoint), sf::seconds(loopEndPoint - loopStartPoint)));
 }
 
 void VMusic::SetPitch(float pitch)
