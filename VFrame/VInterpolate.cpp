@@ -18,22 +18,22 @@
 
 float VInterpolate::backIn(float t, float b, float c, float d)
 {
-	float s = 1.70158f;
-	float postFix = t /= d;
-	return c*(postFix)*t*((s + 1)*t - s) + b;
+	float s = 1.70158f;	t /= d;
+	return c * t*t*((s + 1)*t - s) + b;
 }
+
 float VInterpolate::backOut(float t, float b, float c, float d)
 {
-	float s = 1.70158f;
-	return c*((t = t / d - 1)*t*((s + 1)*t + s) + 1) + b;
+	float s = 1.70158f;	t = t / d - 1;
+	return c * (t*t*((s + 1)*t + s) + 1) + b;
 }
 
 float VInterpolate::backInOut(float t, float b, float c, float d)
 {
-	float s = 1.70158f;
-	if ((t /= d / 2) < 1) return c / 2 * (t*t*(((s *= (1.525f)) + 1)*t - s)) + b;
+	float s = 1.70158f * 1.525f;
+	if ((t /= d / 2) < 1) return c / 2 * (t*t*((s + 1)*t - s)) + b;
 	float postFix = t -= 2;
-	return c / 2 * ((postFix)*t*(((s *= (1.525f)) + 1)*t + s) + 2) + b;
+	return c / 2 * ((postFix)*t*((s + 1)*t + s) + 2) + b;
 }
 
 float VInterpolate::bounceIn(float t, float b, float c, float d)
@@ -44,74 +44,80 @@ float VInterpolate::bounceIn(float t, float b, float c, float d)
 float VInterpolate::bounceOut(float t, float b, float c, float d)
 {
 	if ((t /= d) < (1 / 2.75f)) {
-		return c*(7.5625f*t*t) + b;
+		return c * (7.5625f*t*t) + b;
 	}
 	else if (t < (2 / 2.75f)) {
 		float postFix = t -= (1.5f / 2.75f);
-		return c*(7.5625f*(postFix)*t + .75f) + b;
+		return c * (7.5625f*(postFix)*t + .75f) + b;
 	}
 	else if (t < (2.5 / 2.75)) {
 		float postFix = t -= (2.25f / 2.75f);
-		return c*(7.5625f*(postFix)*t + .9375f) + b;
+		return c * (7.5625f*(postFix)*t + .9375f) + b;
 	}
 	else {
 		float postFix = t -= (2.625f / 2.75f);
-		return c*(7.5625f*(postFix)*t + .984375f) + b;
+		return c * (7.5625f*(postFix)*t + .984375f) + b;
 	}
 }
 
 float VInterpolate::bounceInOut(float t, float b, float c, float d)
 {
 	if (t < d / 2) return bounceIn(t * 2, 0, c, d) * .5f + b;
-	else return bounceOut(t * 2 - d, 0, c, d) * .5f + c*.5f + b;
+	else return bounceOut(t * 2 - d, 0, c, d) * .5f + c * .5f + b;
 }
 
 float VInterpolate::circIn(float t, float b, float c, float d)
 {
-	return -c * (sqrtf(1 - (t /= d)*t) - 1) + b;
+	t /= d;
+	return -c * (sqrtf(1 - t * t) - 1) + b;
 }
 
 float VInterpolate::circOut(float t, float b, float c, float d)
 {
-	return c * sqrtf(1 - (t = t / d - 1)*t) + b;
+	t = t / d - 1;
+	return c * sqrtf(1 - t * t) + b;
 }
 
 float VInterpolate::circInOut(float t, float b, float c, float d)
 {
-	if ((t /= d / 2) < 1) return -c / 2 * (sqrtf(1 - t*t) - 1) + b;
-	return c / 2 * (sqrtf(1 - t*(t -= 2)) + 1) + b;
+	if ((t /= d / 2) < 1) return -c / 2 * (sqrtf(1 - t * t) - 1) + b;
+	t -= 2;
+	return c / 2 * (sqrtf(1 - t * t) + 1) + b;
 }
 
 float VInterpolate::cubicIn(float t, float b, float c, float d)
 {
-	return c*(t /= d)*t*t + b;
+	t /= d;
+	return c * t*t*t + b;
 }
 
 float VInterpolate::cubicOut(float t, float b, float c, float d)
 {
-	return c*((t = t / d - 1)*t*t + 1) + b;
+	t = t / d - 1;
+	return c * (t*t*t + 1) + b;
 }
 
 float VInterpolate::cubicInOut(float t, float b, float c, float d)
 {
 	if ((t /= d / 2) < 1) return c / 2 * t*t*t + b;
-	return c / 2 * ((t -= 2)*t*t + 2) + b;
+	t -= 2;
+	return c / 2 * (t*t*t + 2) + b;
 }
 
 float VInterpolate::elasticIn(float t, float b, float c, float d)
 {
 	if (t == 0) return b;  if ((t /= d) == 1) return b + c;
-	float p = d*.3f;
+	float p = d * .3f;
 	float a = c;
 	float s = p / 4;
-	float postFix = a*powf(2, 10 * (t -= 1)); // this is a fix, again, with post-increment operators
+	float postFix = a * powf(2, 10 * (t -= 1)); // this is a fix, again, with post-increment operators
 	return -(postFix * sinf((t*d - s)*(2 * VFRAME_PI) / p)) + b;
 }
 
 float VInterpolate::elasticOut(float t, float b, float c, float d)
 {
 	if (t == 0) return b;  if ((t /= d) == 1) return b + c;
-	float p = d*.3f;
+	float p = d * .3f;
 	float a = c;
 	float s = p / 4;
 	return (a*powf(2, -10 * t) * sinf((t*d - s)*(2 * VFRAME_PI) / p) + c + b);
@@ -120,15 +126,15 @@ float VInterpolate::elasticOut(float t, float b, float c, float d)
 float VInterpolate::elasticInOut(float t, float b, float c, float d)
 {
 	if (t == 0) return b;  if ((t /= d / 2) == 2) return b + c;
-	float p = d*(.3f*1.5f);
+	float p = d * (.3f*1.5f);
 	float a = c;
 	float s = p / 4;
 
 	if (t < 1) {
-		float postFix = a*powf(2, 10 * (t -= 1)); // postIncrement is evil
+		float postFix = a * powf(2, 10 * (t -= 1)); // postIncrement is evil
 		return -.5f*(postFix* sinf((t*d - s)*(2 * VFRAME_PI) / p)) + b;
 	}
-	float postFix = a*powf(2, -10 * (t -= 1)); // postIncrement is evil
+	float postFix = a * powf(2, -10 * (t -= 1)); // postIncrement is evil
 	return postFix * sinf((t*d - s)*(2 * VFRAME_PI) / p)*.5f + c + b;
 }
 
@@ -152,23 +158,26 @@ float VInterpolate::expoInOut(float t, float b, float c, float d)
 
 float VInterpolate::linear(float t, float b, float c, float d)
 {
-	return c*t / d + b;
+	return c * t / d + b;
 }
 
 float VInterpolate::quadIn(float t, float b, float c, float d)
 {
-	return c*(t /= d)*t + b;
+	t /= d;
+	return c * t*t + b;
 }
 
 float VInterpolate::quadOut(float t, float b, float c, float d)
 {
-	return -c *(t /= d)*(t - 2) + b;
+	t /= d;
+	return -c * t*(t - 2) + b;
 }
 
 float VInterpolate::quadInOut(float t, float b, float c, float d)
 {
 	if ((t /= d / 2) < 1) return ((c / 2)*(t*t)) + b;
-	return -c / 2 * (((t - 2)*(--t)) - 1) + b;
+	t--;
+	return -c / 2 * (((t - 2)*t) - 1) + b;
 	/*
 	originally return -c/2 * (((t-2)*(--t)) - 1) + b;
 
@@ -181,34 +190,40 @@ float VInterpolate::quadInOut(float t, float b, float c, float d)
 
 float VInterpolate::quartIn(float t, float b, float c, float d)
 {
-	return c*(t /= d)*t*t*t + b;
+	t /= d;
+	return c * t*t*t*t + b;
 }
 
 float VInterpolate::quartOut(float t, float b, float c, float d)
 {
-	return -c * ((t = t / d - 1)*t*t*t - 1) + b;
+	t = t / d - 1;
+	return -c * (t*t*t*t - 1) + b;
 }
 
 float VInterpolate::quartInOut(float t, float b, float c, float d)
 {
 	if ((t /= d / 2) < 1) return c / 2 * t*t*t*t + b;
-	return -c / 2 * ((t -= 2)*t*t*t - 2) + b;
+	t -= 2;
+	return -c / 2 * (t*t*t*t - 2) + b;
 }
 
 float VInterpolate::quintIn(float t, float b, float c, float d)
 {
-	return c*(t /= d)*t*t*t*t + b;
+	t /= d;
+	return c * t*t*t*t*t + b;
 }
 
 float VInterpolate::quintOut(float t, float b, float c, float d)
 {
-	return c*((t = t / d - 1)*t*t*t*t + 1) + b;
+	t = t / d - 1;
+	return c * (t*t*t*t*t + 1) + b;
 }
 
 float VInterpolate::quintInOut(float t, float b, float c, float d)
 {
 	if ((t /= d / 2) < 1) return c / 2 * t*t*t*t*t + b;
-	return c / 2 * ((t -= 2)*t*t*t*t + 2) + b;
+	t -= 2;
+	return c / 2 * (t*t*t*t*t + 2) + b;
 }
 
 float VInterpolate::sineIn(float t, float b, float c, float d)
