@@ -187,6 +187,7 @@ void DemoStatesManager::Initialise()
 	VGlobal::p()->Input->SetButtonInput("Back", sf::Keyboard::BackSpace, VInputHandler::BUTTON_BACK);
 	VGlobal::p()->Input->SetButtonInput("Start", sf::Keyboard::Return, VInputHandler::BUTTON_START);
 	VGlobal::p()->Input->SetButtonInput("Home", sf::Keyboard::Home, VInputHandler::BUTTON_HOME);
+	VGlobal::p()->Input->SetDeadzone(20.0f);
 #else
 	VGlobal::p()->Input->SetAxisInput("leftX", sf::Keyboard::D, sf::Keyboard::A, sf::XInputDevice::XAxis::PovX);
 	VGlobal::p()->Input->SetAxisInput("leftY", sf::Keyboard::S, sf::Keyboard::W, sf::XInputDevice::XAxis::PovY);

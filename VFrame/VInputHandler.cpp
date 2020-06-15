@@ -339,7 +339,7 @@ void VInputHandler::Update(float dt)
 
 					val1 *= 100.0f;
 
-					if (fabs(val1) > deadzone)
+					if (fabs(val1) > 0.0f)
 					{
 						a.value[i] = val1;
 						isGamepadActive = true;
