@@ -251,11 +251,6 @@ void VGame::ResizeCheck()
 
 void VGame::Update(float dt)
 {
-	if (VTimeManager::AnyActiveTimers())
-	{
-		VTimeManager::p()->Update(dt);
-	}
-
 	VGlobal::p()->Input->Update(dt);
 
 	if (VGlobal::p()->CurrentState()->active)

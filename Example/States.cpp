@@ -106,11 +106,6 @@ void DemoStatesManager::SetNewPage()
 	Cameras[0]->Reset();
 	VGlobal::p()->BackgroundColor = sf::Color::Black;
 
-	if (VTimeManager::AnyActiveTimers())
-	{
-		VTimeManager::p()->Clear();
-	}
-
 	ResetSubState();
 	subState->Add(stateText);
 }

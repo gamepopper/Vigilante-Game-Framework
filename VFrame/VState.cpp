@@ -1,5 +1,4 @@
 #include "VState.h"
-#include "VCamera.h"
 #include "VGlobal.h"
 
 using std::vector;
@@ -19,6 +18,7 @@ void VState::Initialise()
 	Cameras.emplace_back();
 	Cameras[0] = new VCamera();
 	DefaultCamera = Cameras[0];
+	TimeManager = new VTimeManager();
 }
 
 void VState::Cleanup()
@@ -35,6 +35,8 @@ void VState::Cleanup()
 
 		Cameras.clear();
 		Cameras.shrink_to_fit();
+
+		delete TimeManager;
 
 		VLog("State cleanup successful");
 	}
@@ -109,6 +111,12 @@ void VSubState::Cleanup()
 	{
 		Destroy();
 		VLog("Substate cleanup successful.");
+
+		vertices.clear();
+		ParentState = nullptr;
+
+		delete TimeManager;
+		TimeManager = nullptr;
 	}
 }
 
@@ -118,6 +126,25 @@ void VSubState::SetFillColour(const sf::Color& colour)
 	vertices[1].color = colour;
 	vertices[2].color = colour;
 	vertices[3].color = colour;
+}
+
+
+/**
+* @param colour The background colour of the substate.
+*/
+
+VSubState::VSubState(sf::Color colour) : VGroup()
+{
+	vertices.setPrimitiveType(sf::Quads);
+	vertices.resize(4);
+	SetFillColour(colour);
+
+	TimeManager = new VTimeManager();
+}
+
+VSubState::~VSubState()
+{
+	Cleanup();
 }
 
 void VSubState::Close()

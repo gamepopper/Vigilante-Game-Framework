@@ -50,9 +50,8 @@ private:
 	float time = 0.0f;
 
 public:
-	///@param addToManager If true, this will automatically add the timer to VTimeManager. If it's not added to the VTimeManager it has to be updated manually.
-	VTimer(bool addToManager = true);
-	~VTimer();
+	VTimer();
+	virtual ~VTimer();
 
 	/**
 	* Updates the time.
@@ -86,7 +85,6 @@ public:
 class VTimerEvent : public VTimer
 {
 private:
-	bool done = false;
 	bool loop = false;
 	unsigned int timePoint = 0;
 	std::function<void()> function = nullptr;
@@ -99,11 +97,11 @@ public:
 	* @param time Time in milliseconds for the event to occur.
 	* @param eventFunction The event to call.
 	* @param looping If true, the timeline will start at the beginning once finished, otherwise it will destroy itself.
-	* @param addToManager If true, this will automatically add the timer to VTimeManager. If it's not added to the VTimeManager it has to be updated manually.
 	*/
-	VTimerEvent(unsigned int time, std::function<void()> eventFunction, bool looping = false, bool addToManager = true);
+	VTimerEvent(unsigned int time, std::function<void()> eventFunction, bool looping = false);
+	virtual ~VTimerEvent();
 
-	///Stops the timer and automatically removes it from the VTimeManager. It won't destroy itself however, so this has to be handled by the user.
+	///Stops the timer and removes its event function.
 	void Stop();
 
 	///@param value If true, the timeline will start from the beginning instead of being destroyed.
@@ -119,30 +117,31 @@ public:
 	virtual float Update(float dt);
 };
 
-///Manages multiple timers at once in a singleton data structure.
+/**
+* Manages multiple timers at once in a singleton data structure.
+* An independent VTimeManager can also be created, however any VTimer or VTimeEvent objects must be constructed with the AddToManager parameter set to false.
+*/
 class VTimeManager
 {
 private:
-	///Singleton Instance
-	static VTimeManager* Instance;
-	VTimeManager();
-	~VTimeManager();
-
-	///List of VTimer objects.
 	std::vector<VTimer*> timers;
 
 public:
-	///@return True if any timers are currently active.
-	static bool AnyActiveTimers();
+	///Constructor
+	VTimeManager();
+	///Destructor
+	~VTimeManager();
 
-	///@returns The singleton instance as a pointer.
-	static VTimeManager* p();
+	///@return The VTimer object that was added directly to the time manager.
+	VTimer* AddTimer();
 
 	/**
-	* Updates all timers.
-	* @param dt Delta Time to increment the time by.
+	* @param time Time in milliseconds for the event to occur.
+	* @param eventFunction The event to call.
+	* @param looping If true, the timeline will start at the beginning once finished, otherwise it will destroy itself.
+	* @return The VTimerEvent object that was added directly to the time manager.
 	*/
-	void Update(float dt);
+	VTimerEvent* AddTimerEvent(unsigned int time, std::function<void()> eventFunction, bool looping = false);
 
 	/**
 	* Adds a timer from the list.
@@ -155,6 +154,12 @@ public:
 	* @param timer The VTimer object to remove from the list.
 	*/
 	void RemoveTimer(VTimer* timer);
+
+	/**
+	* Updates all timers.
+	* @param dt Delta Time to increment the time by.
+	*/
+	void Update(float dt);
 
 	/**
 	* Reserves a set amount of timers in the list, good for optimization purposes.

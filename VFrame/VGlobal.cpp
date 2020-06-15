@@ -190,11 +190,6 @@ void VGlobal::ChangeState(VState* state)
 	{
 		if (!Async->ActiveAsyncFunctions())
 		{
-			if (VTimeManager::AnyActiveTimers())
-			{
-				VTimeManager::p()->Clear();
-			}
-
 			gsm->ChangeState(nextState);
 			nextState = nullptr;
 			IfChangedState = false;

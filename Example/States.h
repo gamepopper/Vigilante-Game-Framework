@@ -333,7 +333,7 @@ public:
 			}
 		}
 
-		timer = new VTimer();
+		timer = TimeManager->AddTimer();
 
 		enum PlayerStates
 		{

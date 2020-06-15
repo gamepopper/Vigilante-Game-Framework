@@ -1,7 +1,5 @@
 #include "VTimer.h"
 
-VTimeManager* VTimeManager::Instance = nullptr;
-
 VTimeManager::VTimeManager()
 {
 
@@ -12,24 +10,11 @@ VTimeManager::~VTimeManager()
 	Clear(true);
 }
 
-VTimeManager* VTimeManager::p()
+VTimer* VTimeManager::AddTimer()
 {
-	if (!Instance)
-	{
-		Instance = new VTimeManager();
-	}
-
-	return Instance;
-}
-
-bool VTimeManager::AnyActiveTimers()
-{
-	if (Instance != nullptr)
-	{
-		return Instance->Count() > 0;
-	}
-
-	return false;
+	VTimer* t = new VTimer();
+	AddTimer(t);
+	return t;
 }
 
 void VTimeManager::Update(float dt)
@@ -41,6 +26,13 @@ void VTimeManager::Update(float dt)
 			timers[i]->Update(dt);
 		}
 	}
+}
+
+VTimerEvent* VTimeManager::AddTimerEvent(unsigned int time, std::function<void()> eventFunction, bool looping)
+{
+	VTimerEvent* t = new VTimerEvent(time, eventFunction, looping);
+	AddTimer(t);
+	return t;
 }
 
 void VTimeManager::AddTimer(VTimer* timer)
@@ -70,8 +62,11 @@ void VTimeManager::Clear(bool destroy)
 	{
 		for (int i = 0; i < (int)timers.size(); i++)
 		{
-			delete timers[i];
-			i--;
+			if (timers[i])
+			{
+				delete timers[i];
+				timers[i] = nullptr;
+			}
 		}
 	}
 
@@ -83,18 +78,15 @@ int VTimeManager::Count()
 	return (int)timers.size();
 }
 
-VTimer::VTimer(bool addToManager)
+VTimer::VTimer()
 {
 	running = true;
 	time = 0.0f;
-
-	if (addToManager)
-		VTimeManager::p()->AddTimer(this);
 }
 
 VTimer::~VTimer()
 {
-	VTimeManager::p()->RemoveTimer(this);
+	
 }
 
 float VTimer::Update(float dt)
@@ -144,17 +136,22 @@ uint64_t VTimer::Microseconds()
 	return static_cast<uint64_t>(time * 1000 * 1000);
 }
 
-VTimerEvent::VTimerEvent(unsigned int time, std::function<void()> eventFunction, bool looping, bool addToManager) : VTimer(addToManager)
+VTimerEvent::VTimerEvent(unsigned int time, std::function<void()> eventFunction, bool looping) : VTimer()
+, loop(looping)
 , timePoint(time)
 , function(eventFunction)
-, loop(looping)
 {
+}
+
+VTimerEvent::~VTimerEvent()
+{
+	function = nullptr;
 }
 
 void VTimerEvent::Stop()
 {
-	Restart();
-	VTimeManager::p()->RemoveTimer(this);
+	Pause();
+	function = nullptr;
 }
 
 void VTimerEvent::SetLooping(bool value)
@@ -171,18 +168,14 @@ float VTimerEvent::Update(float dt)
 {
 	float t = VSUPERCLASS::Update(dt);
 
-	if (!done && timePoint <= Milliseconds())
+	if (function != nullptr && timePoint <= Milliseconds())
 	{
 		function();
 
 		if (loop)
 			Restart();
 		else
-			done = true;
-	}
-	else if (done)
-	{
-		delete this;
+			function = nullptr;
 	}
 
 	return t;

@@ -34,6 +34,7 @@
 #pragma once
 #include "VGroup.h"
 #include "VCamera.h"
+#include "VTimer.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <functional>
@@ -60,8 +61,10 @@ public:
 	std::vector<VCamera*> Cameras;
 	///Pointer to first camera in array.
 	VCamera* DefaultCamera = nullptr;
-	///Substate of main state (Useful for stuff where you want activity to be separate from main game).
+	///Substate of main state.
 	VSubState* SubState = nullptr;
+	///Local TimeManager of the main state (Useful if you want timers that are exclusively controlled by a specific state).
+	VTimeManager* TimeManager = nullptr;
 
 	///@param subState The VSubState to open.
 	void OpenSubState(VSubState* subState);
@@ -105,25 +108,14 @@ public:
 	VState* ParentState = nullptr;
 	///If true, the substate's transform is based on the parent state's camera.
 	bool UseParentCamera = false;
+	///Local TimeManager of the substate.
+	VTimeManager* TimeManager = nullptr;
 
 	/**
 	* @param colour The background colour of the substate.
 	*/
-	VSubState(sf::Color colour = sf::Color::Transparent) : VGroup()
-	{
-		vertices.setPrimitiveType(sf::Quads);
-		vertices.resize(4);
-		vertices[0].color = colour;
-		vertices[1].color = colour;
-		vertices[2].color = colour;
-		vertices[3].color = colour;
-	}
-	virtual ~VSubState()
-	{
-		Cleanup();
-		vertices.clear();
-		ParentState = nullptr;
-	}
+	VSubState(sf::Color colour = sf::Color::Transparent);
+	virtual ~VSubState();
 
 	///Closes the substate.
 	void Close();
