@@ -112,7 +112,7 @@ public:
 	VPathType GetPathType();
 
 	/**
-	* Sets the speed of the current path, defined as 1 / time. Default value is 1, which assumes the object will complete the path in one second. 0.5 = 2 seconds. 2 = 0.5 seconds.
+	* Sets the speed of the current path, defined as 1 / time. Default value is 1, which assumes the object will complete the path in one second. 0.5 = 2 seconds. 2 = 0.5 seconds, etc.
 	* @param speed The new speed of the path following.
 	*/
 	void SetSpeed(float speed);
