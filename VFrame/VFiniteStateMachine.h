@@ -45,6 +45,7 @@ class VFiniteStateMachine
 {
 private:
 	VBase* base;
+	void* userData;
 	unsigned int state;
 	std::vector<VFiniteState> finiteStates;
 
@@ -53,8 +54,9 @@ public:
 	/**
 	* @param base A base object to set the behavior of. It can be anything that inherits from VBase.
 	* @param maxSize The maximum number of states the FSM can have. Needs to be greater than zero to be used.
+	* @param data A custom data pointer that could be set to anything usable within the game states. Defaults as nullptr.
 	*/
-	VFiniteStateMachine(VBase* base, unsigned int maxSize);
+	VFiniteStateMachine(VBase* base, unsigned int maxSize, void* data = nullptr);
 
 	///@return The ID number of the currently active state in the FSM.
 	unsigned int GetCurrentState();
@@ -73,7 +75,7 @@ public:
 	* @param onEnterFunc The function that gets called when the FSM first enters a state. Needs to be a function that passes in a VBase object as a parameter. (optional)
 	* @param onExitFunc The function that gets called when the FSM exits a state. Needs to be a function that passes in a VBase object as a parameter. (optional)
 	*/
-	void Add(unsigned int stateID, std::function<int(VBase*,float)> onUpdateFunc, std::function<void(VBase*)> onEnterFunc = nullptr, std::function<void(VBase*, unsigned int)> onExitFunc = nullptr);
+	void Add(unsigned int stateID, std::function<int(VBase*, float, void*)> onUpdateFunc, std::function<void(VBase*, void*)> onEnterFunc = nullptr, std::function<void(VBase*, unsigned int, void*)> onExitFunc = nullptr);
 
 	/**
 	* Updates the FSM.

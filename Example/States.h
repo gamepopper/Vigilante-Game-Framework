@@ -364,7 +364,7 @@ public:
 
 		playerFSM = new VFiniteStateMachine(playerControl, NUM_PLAYER_STATES);
 		playerFSM->Add(PLAYER_WALKING, 
-			[](VBase* base, float dt) -> int //Update
+			[](VBase* base, float dt, void* data) -> int //Update
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 				bool touchFloor = (player->Touching & VObject::TOUCHBOTTOM) > 0;
@@ -377,7 +377,7 @@ public:
 
 				return -1;
 			},
-			[](VBase* base) //Enter
+			[](VBase* base, void* data) //Enter
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 				player->Drag = sf::Vector2f(500, 500);
@@ -386,7 +386,7 @@ public:
 			}
 		);
 		playerFSM->Add(PLAYER_JUMPING,
-			[](VBase* base, float dt) -> int //Update
+			[](VBase* base, float dt, void* data) -> int //Update
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 
@@ -401,13 +401,13 @@ public:
 
 				return -1;
 			},
-			[](VBase* base) //Enter
+			[](VBase* base, void* data) //Enter
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 				player->Velocity.y = -450.0f;
 				player->Touching = 0;
 			},
-			[](VBase* base, unsigned int state) //Exit
+			[](VBase* base, unsigned int state, void* data) //Exit
 			{
 				VSprite* player = dynamic_cast<VSprite*>(base);
 				if ((player->Touching & VObject::TOUCHRIGHT) > 0)
@@ -417,7 +417,7 @@ public:
 					player->FlipX = false;
 			});
 		playerFSM->Add(PLAYER_STILL,
-			[](VBase* base, float dt) -> int //Update
+			[](VBase* base, float dt, void* data) -> int //Update
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 
@@ -426,7 +426,7 @@ public:
 
 				return -1;
 			},
-			[](VBase* base) //Enter
+			[](VBase* base, void* data) //Enter
 			{
 				VSprite* player = dynamic_cast<VSprite*>(base);
 				player->Drag = sf::Vector2f(0, 0);
@@ -435,7 +435,7 @@ public:
 				player->Acceleration = sf::Vector2f(0, 0);
 				player->AngleVelocity = player->FlipX ? -900.0f : 900.0f;
 			},
-			[](VBase* base, unsigned int state) //Exit
+			[](VBase* base, unsigned int state, void* data) //Exit
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 				player->Angle = 0;
@@ -445,7 +445,7 @@ public:
 			});
 
 		playerFSM->Add(PLAYER_POUND,
-			[](VBase* base, float dt) -> int //Update
+			[](VBase* base, float dt, void* data) -> int //Update
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 
@@ -455,13 +455,13 @@ public:
 				return -1;
 			},
 			nullptr, //Enter
-			[this](VBase* base, unsigned int state) //Exit
+			[this](VBase* base, unsigned int state, void* data) //Exit
 			{
 				ParentState->Cameras[0]->Shake(0.03f, 0.5f);
 			});
 
 		playerFSM->Add(PLAYER_WALL,
-			[this](VBase* base, float dt) -> int //Update
+			[this](VBase* base, float dt, void* data) -> int //Update
 			{
 				VSprite* player = dynamic_cast<VSprite*>(base);
 
@@ -479,13 +479,13 @@ public:
 
 				return -1;
 			},
-			[](VBase* base) //Enter
+			[](VBase* base, void* data) //Enter
 			{
 				VSprite* player = dynamic_cast<VSprite*>(base);
 				player->MaxVelocity *= 0.9f;
 				player->MaxVelocity.x = 0.0f;
 			},
-			[](VBase* base, unsigned int state) //Exit
+			[](VBase* base, unsigned int state, void* data) //Exit
 			{
 				VSprite* player = dynamic_cast<VSprite*>(base);
 				player->Drag.x = 200;
