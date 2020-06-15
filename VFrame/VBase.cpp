@@ -142,6 +142,7 @@ void VBase::VLogError(const char* format, ...)
 	//throw output;
 #else
 	MessageBoxW(NULL, output, NULL, MB_TASKMODAL | MB_ICONERROR | MB_OK);
+	DebugBreak();
 	//throw std::exception(buf);
 #endif
 }
