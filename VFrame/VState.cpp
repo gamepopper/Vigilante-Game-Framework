@@ -42,6 +42,12 @@ void VState::Cleanup()
 	}
 }
 
+void VState::Update(float dt)
+{
+	VSUPERCLASS::Update(dt);
+	TimeManager->Update(dt);
+}
+
 void VState::OpenSubState(VSubState* subState)
 {
 	if (VGlobal::p()->Async->ActiveAsyncFunctions())
@@ -151,6 +157,12 @@ void VSubState::Close()
 {
 	if (ParentState)
 		ParentState->CloseSubState();
+}
+
+void VSubState::Update(float dt)
+{
+	VSUPERCLASS::Update(dt);
+	TimeManager->Update(dt);
 }
 
 void VSubState::Draw(sf::RenderTarget &RenderTarget)

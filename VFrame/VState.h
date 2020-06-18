@@ -85,6 +85,12 @@ public:
 	virtual void HandleEvents(const sf::Event& event) {}
 
 	/**
+	* Update the state.
+	* @param dt The delta time.
+	*/
+	virtual void Update(float dt);
+
+	/**
 	* If overridden, allows the opportunity to render objects directly to the window, instead of the scene itself.
 	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
 	*/
@@ -127,6 +133,12 @@ public:
 	virtual void Cleanup();
 	///@param event The current event that can be processed.
 	virtual void HandleEvents(const sf::Event& event) {}
+
+	/**
+	* Update the substate.
+	* @param dt The delta time.
+	*/
+	virtual void Update(float dt);
 
 	/**
 	* Draws the substate's background and the content of the substate.
