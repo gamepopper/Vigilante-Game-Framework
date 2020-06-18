@@ -79,7 +79,7 @@ public:
 	* Sets a path based on a list of points.
 	* @param points The list of points to set the path. Path follows the points in order of the list.
 	*/
-	void SetPath(std::vector<sf::Vector2f> points);
+	void SetPath(const std::vector<sf::Vector2f>& points);
 
 	/**
 	* Add a point to the end of the path.
