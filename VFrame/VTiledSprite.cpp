@@ -102,10 +102,8 @@ void VTiledSprite::Destroy()
 	image.reset();
 }
 
-void VTiledSprite::Update(float dt)
+void VTiledSprite::Draw(sf::RenderTarget& RenderTarget)
 {
-	VSUPERCLASS::Update(dt);
-
 	vertexArray[0].position = sf::Vector2f(0,		0);
 	vertexArray[1].position = sf::Vector2f(Size.x,	0);
 	vertexArray[2].position = sf::Vector2f(Size.x,	Size.y);
@@ -115,9 +113,6 @@ void VTiledSprite::Update(float dt)
 	vertexArray[1].texCoords = sf::Vector2f(Size.x,	0);
 	vertexArray[2].texCoords = sf::Vector2f(Size.x,	Size.y);
 	vertexArray[3].texCoords = sf::Vector2f(0,		Size.y);
-}
 
-void VTiledSprite::Draw(sf::RenderTarget& RenderTarget)
-{
 	VSUPERCLASS::Draw(RenderTarget);
 }

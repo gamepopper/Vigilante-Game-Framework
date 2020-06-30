@@ -232,12 +232,6 @@ public:
 	virtual void Destroy() override;
 
 	/**
-	* Updates text transform and rendering info.
-	* @param dt Delta Time between the previous and current frame.
-	*/
-	virtual void Update(float dt) override;
-
-	/**
 	* Renders the text.
 	* @param RenderTarget The game's sf::RenderTarget object to render data onto.
 	*/

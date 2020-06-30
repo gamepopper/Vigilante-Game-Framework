@@ -18,7 +18,7 @@ sf::Vector2f VPath::getBezierPoint(float t)
 
 void VPath::SetPath(const std::vector<sf::Vector2f>& p)
 {
-	points.reserve(points.size());
+	points.resize(p.size());
 	std::copy(p.begin(), p.end(), points.begin());
 	dirty = true;
 }

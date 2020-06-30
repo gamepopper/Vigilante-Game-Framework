@@ -120,7 +120,6 @@ const sf::Texture& VRenderGroup::GetTexture()
 void VRenderGroup::Update(float dt)
 {
 	VSUPERCLASS::Update(dt);
-	updateTransform();
 	Sprite->Update(dt);
 	Camera->Update(dt);
 
@@ -132,6 +131,8 @@ void VRenderGroup::Update(float dt)
 
 void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 {
+	updateTransform();
+
 #ifdef _DEBUG
 	bool drawDebug = VGlobal::p()->DrawDebug;
 	VGlobal::p()->DrawDebug = false;

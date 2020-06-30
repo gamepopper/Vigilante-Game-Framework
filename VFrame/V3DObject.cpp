@@ -188,12 +188,11 @@ void V3DObject::Update(float dt)
 
 		updateMotion(dt);
 	}
-
-	updateTransform();
 }
 
 void V3DObject::Draw(sf::RenderTarget &RenderTarget)
 {
+	updateTransform();
 	VSUPERCLASS::Draw(RenderTarget);
 }
 #endif

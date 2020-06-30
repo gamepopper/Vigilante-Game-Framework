@@ -226,9 +226,13 @@ void VSprite::Destroy()
 void VSprite::Update(float dt)
 {
 	VSUPERCLASS::Update(dt);
-
 	Animation.Update(dt);
-	
+}
+
+void VSprite::Draw(sf::RenderTarget& RenderTarget)
+{
+	VSUPERCLASS::Draw(RenderTarget);
+
 	bool updateTexture = false;
 	if (Animation.GetLastFrame() != Animation.GetCurrentFrame())
 		updateTexture = true;
@@ -240,14 +244,7 @@ void VSprite::Update(float dt)
 		updateTexture = true;
 
 	if (updateTexture)
-	{
 		updateFrame();
-	}
-}
-
-void VSprite::Draw(sf::RenderTarget& RenderTarget)
-{
-	VSUPERCLASS::Draw(RenderTarget);
 
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();

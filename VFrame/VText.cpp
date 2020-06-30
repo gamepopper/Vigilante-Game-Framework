@@ -439,9 +439,9 @@ void VText::Destroy()
 	}
 }
 
-void VText::Update(float dt)
+void VText::Draw(sf::RenderTarget& RenderTarget)
 {
-	VSUPERCLASS::Update(dt);
+	VSUPERCLASS::Draw(RenderTarget);
 
 	if (dirty)
 	{
@@ -450,11 +450,6 @@ void VText::Update(float dt)
 		const_cast<sf::Texture*>(RenderState.texture)->setSmooth(false);
 		dirty = false;
 	}
-}
-
-void VText::Draw(sf::RenderTarget& RenderTarget)
-{
-	VSUPERCLASS::Draw(RenderTarget);
 
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();

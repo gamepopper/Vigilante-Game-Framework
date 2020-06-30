@@ -121,7 +121,6 @@ public:
 	virtual VSprite* MakeGraphicConvex(const std::vector<sf::Vector2f>& points, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) { return this; }
 
 	virtual void Destroy() override;
-	virtual void Update(float dt) override;
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
 };
 

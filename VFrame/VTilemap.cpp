@@ -522,12 +522,6 @@ void VTilemap::Update(float dt)
 		helperAutoTile = AutoTile;
 		dirty = true;
 	}
-
-	if (dirty)
-	{
-		updateTilemap();
-		updateCollisionBox();
-	}
 }
 
 void VTilemap::Draw(sf::RenderTarget& RenderTarget)
@@ -536,6 +530,12 @@ void VTilemap::Draw(sf::RenderTarget& RenderTarget)
 
 	if (!exists || !visible)
 		return;
+
+	if (dirty)
+	{
+		updateTilemap();
+		updateCollisionBox();
+	}
 
 	sf::View renderTargetView = RenderTarget.getView();
 	sf::View scrollView = RenderTarget.getDefaultView();

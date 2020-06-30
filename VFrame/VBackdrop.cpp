@@ -187,12 +187,12 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	float maxSize = fmaxf(scrollView.getSize().x, scrollView.getSize().y);
 	sf::FloatRect scrollBox = sf::FloatRect(scrollView.getCenter() - sf::Vector2f(maxSize, maxSize) / 2.0f, sf::Vector2f(maxSize, maxSize));
 
+	updateTransform();
 	if (renderBox.left < scrollBox.left + scrollBox.width &&
 		renderBox.left + renderBox.width > scrollBox.left &&
 		renderBox.top <	 scrollBox.top + scrollBox.height &&
 		renderBox.top + renderBox.height > scrollBox.top)
 	{
-		updateTransform();
 
 		RenderState.texture = texture;
 		RenderState.transform = transform;
