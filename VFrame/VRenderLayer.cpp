@@ -3,7 +3,7 @@
 
 VRenderLayer::VRenderLayer(unsigned int maxSize) : VGroup(maxSize)
 {
-	renderTex.create(VGlobal::p()->Width, VGlobal::p()->Height);
+	
 }
 
 void VRenderLayer::Destroy()
@@ -45,6 +45,9 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 {
 	sf::View MainView = RenderTarget.getView();
 
+	if (renderTex.getSize() != sf::Vector2u(MainView.getSize()))
+		renderTex.create(MainView.getSize().x, MainView.getSize().y);
+
 	renderTex.setView(MainView);
 	renderTex.clear(sf::Color::Transparent);
 	VSUPERCLASS::Draw(renderTex);
@@ -58,7 +61,7 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 	}
 	else
 	{
-		postProcessTex.create(VGlobal::p()->Width, VGlobal::p()->Height);
+		postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
 
 		postProcessTex.clear(sf::Color::Transparent);
 		PostEffect->Apply(renderTex.getTexture(), postProcessTex);
