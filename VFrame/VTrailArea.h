@@ -75,12 +75,6 @@ public:
 	VTrailArea(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize = 0);
 
 	/**
-	* Updates all alive and active objects in the group and renders all objects to the render texture to apply to the trail area.
-	* @param dt Delta Time between the previous and current frame.
-	*/
-	virtual void Update(float dt) override;
-
-	/**
 	* Applies the renderTex to the sprite and renders the sprite to the scene.
 	* @param RenderTarget The game's sf::RenderTarget object to render data onto.
 	*/

@@ -159,11 +159,6 @@ void VTypedText::onErased()
 	}
 }
 
-void VTypedText::Destroy()
-{
-	VSUPERCLASS::Destroy();
-}
-
 void VTypedText::Update(float dt)
 {
 	if (waiting && !Paused)

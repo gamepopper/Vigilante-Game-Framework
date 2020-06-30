@@ -163,8 +163,6 @@ public:
 	bool IsErasing()	{ return erasing; }
 	///@return True if text if currently waiting before erasing.
 	bool IsWaiting()	{ return waiting; }
-	///Destroys the text rendering data (and font if disposable is set for true).
-	virtual void Destroy() override;
 
 	/**
 	* Updates text transform and rendering info.

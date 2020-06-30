@@ -11,11 +11,6 @@ VTrailArea::VTrailArea(sf::Vector2f position, sf::Vector2u size, unsigned int ma
 	renderTex.clear(sf::Color::Transparent);
 }
 
-void VTrailArea::Update(float dt)
-{
-	VSUPERCLASS::Update(dt);
-}
-
 void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 {
 	float time = fadeTimer.getElapsedTime().asSeconds();
