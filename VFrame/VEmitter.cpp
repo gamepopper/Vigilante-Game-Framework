@@ -357,7 +357,7 @@ void VEmitter::EmitParticle()
 
 		particle->Elasticity = VGlobal::p()->Random->GetFloat(ElasticityRange.B, ElasticityRange.A);
 
-		particle->Position = VGlobal::p()->Random->GetVector2f(Position + Size, Position) - (Size / 2.0f);
+		particle->Position = VGlobal::p()->Random->GetVector2f(Position + (Size / 2.0f), Position - (Size / 2.0f));
 
 		particle->OnEmit();
 	}
