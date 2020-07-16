@@ -121,6 +121,7 @@ void VText::setDimensions()
 	updateTextRender(printText);
 
 	origin = sf::Vector2f(Size.x * Origin.x, Size.y * Origin.y);
+	updateTransform();
 }
 
 void VText::updateTransform()
@@ -424,6 +425,17 @@ void VText::SetOutlineOffset(const sf::Vector2f& offset)
 		outlineOffset = offset;
 		dirty = true;
 	}
+}
+
+void VText::SetTextWidth(float width)
+{
+	Size.x = width;
+	dirty = true;
+}
+
+float VText::GetTextWidth()
+{
+	return Size.x;
 }
 
 void VText::Destroy()

@@ -192,18 +192,20 @@ public:
 	void SetFillTint(const sf::Color &colour);
 	///@param colour The text outline (requires OutlineThickness to be greater than 0).
 	void SetOutlineTint(const sf::Color &colour);
-	///@return Size of the text per character.
+	///@param size Size of the text per character.
 	void SetFontSize(unsigned int size);
-	///@return Text wrapping mode.
+	///@param wrapMode Text wrapping mode.
 	void SetWrap(const VTextWrap& wrapMode);
-	///@return Used for adjusting the distance between lines different to the default.
+	///@param lineSpacing Used for adjusting the distance between lines different to the default.
 	void SetLineSpaceModifier(int lineSpacing);
-	///@return Text alignment property.
+	///@param align Text alignment property.
 	void SetAlignment(const VTextAlign& align);
-	///@return The thickness of the outline.
+	///@param thickness The thickness of the outline.
 	void SetOutlineThickness(float thickness);
-	///@return The position offset of the outline. Good to modify if you want to display the outline like a shadow.
+	///@param offset The position offset of the outline. Good to modify if you want to display the outline like a shadow.
 	void SetOutlineOffset(const sf::Vector2f& offset);
+	///@param width The maximum width area of text to display on. (Use this over the Size property to update the text rendering)
+	void SetTextWidth(float width);
 
 	///@return The text that will be rendered.
 	const sf::String& GetText() { return text; }
@@ -218,15 +220,17 @@ public:
 	///@return Size of the text per character.
 	unsigned int GetFontSize() { return fontSize; }
 	///@return Text wrapping mode.
-	VTextWrap const&  GetWrap() { return wrap; }
+	VTextWrap const& GetWrap() { return wrap; }
 	///@return Used for adjusting the distance between lines different to the default.
 	int GetLineSpaceModifier() { return lineSpaceModifier; }
 	///@return Text alignment property.
-	VTextAlign const&  GetAlignment() { return alignment; }
+	VTextAlign const& GetAlignment() { return alignment; }
 	///@return The thickness of the outline.
 	float GetOutlineThickness() { return outlineThickness; }
 	///@return The position offset of the outline. Good to modify if you want to display the outline like a shadow.
-	sf::Vector2f const&  GetOutlineOffset() { return outlineOffset; }
+	sf::Vector2f const& GetOutlineOffset() { return outlineOffset; }
+	///@return The maximum width area of text to display on. (Use this over the Size property to update the text rendering)
+	float GetTextWidth();
 
 	///Destroys the text rendering data (and font if disposable is set for true).
 	virtual void Destroy() override;
