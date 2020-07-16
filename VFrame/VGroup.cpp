@@ -142,7 +142,7 @@ VBase* VGroup::FirstDead()
 	return nullptr;
 }
 
-int VGroup::CountAlive()
+int VGroup::CountAlive(bool Recursive)
 {
 	int count = 0;
 	for (unsigned int i = 0; i < members.size(); i++)
@@ -151,14 +151,29 @@ int VGroup::CountAlive()
 
 		if (base != nullptr && base->exists && base->alive)
 		{
-			count++;
+			if (Recursive)
+			{
+				VGroup* group = dynamic_cast<VGroup*>(base);
+				if (group)
+				{
+					count += group->CountAlive(Recursive);
+				}
+				else
+				{
+					count++;
+				}
+			}
+			else
+			{
+				count++;
+			}
 		}
 	}
 
 	return count;
 }
 
-int VGroup::CountDead()
+int VGroup::CountDead(bool Recursive)
 {
 	int count = 0;
 	for (unsigned int i = 0; i < members.size(); i++)
@@ -167,7 +182,22 @@ int VGroup::CountDead()
 
 		if (base != nullptr && !base->alive)
 		{
-			count++;
+			if (Recursive)
+			{
+				VGroup* group = dynamic_cast<VGroup*>(base);
+				if (group)
+				{
+					count += group->CountDead(Recursive);
+				}
+				else
+				{
+					count++;
+				}
+			}
+			else
+			{
+				count++;
+			}
 		}
 	}
 

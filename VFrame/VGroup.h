@@ -110,9 +110,9 @@ public:
 	VBase* FirstDead();
 
 	///@return Amount of alive objects.
-	int CountAlive();
+	int CountAlive(bool Recursive = false);
 	///@return Amount of dead objects.
-	int CountDead();
+	int CountDead(bool Recursive = false);
 	///@return Random object from a set range. Min and Max will be clamped to 0 and maxSize.
 	VBase* GetRandom(int min = 0, int max = 0);
 
