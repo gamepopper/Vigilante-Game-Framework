@@ -62,8 +62,8 @@ public:
 				static_cast<unsigned int>(a * 255));
 		}
 
-		hh = h;
-		hh = hh >= 360 ? 0 : hh;
+		hh = static_cast<unsigned int>(h) + fmodf(h, 1.0f);
+		hh = fmodf(hh, 360.0f);
 		hh /= 60.0f;
 		i = static_cast<int>(hh);
 		ff = hh - i;
