@@ -276,24 +276,6 @@ void VInputHandler::Update(float dt)
 			a.lastValue[i] = a.value[i];
 			a.value[i] = 0;
 
-			if (a.keyA >= 0)
-			{
-				if (sf::Keyboard::isKeyPressed(a.keyA))
-				{
-					a.value[i] = 100.0f;
-					isGamepadActive = false;
-				}
-			}
-
-			if (a.keyB >= 0)
-			{
-				if (sf::Keyboard::isKeyPressed(a.keyB))
-				{
-					a.value[i] = -100.0f;
-					isGamepadActive = false;
-				}
-			}
-
 			if (a.gamepad >= 0)
 			{
 #ifdef USE_GAMEPAD_API
@@ -373,6 +355,24 @@ void VInputHandler::Update(float dt)
 					a.value[i] = 0;
 				}
 #endif
+
+				if (a.keyA >= 0)
+				{
+					if (sf::Keyboard::isKeyPressed(a.keyA))
+					{
+						a.value[i] = 100.0f;
+						isGamepadActive = false;
+					}
+				}
+
+				if (a.keyB >= 0)
+				{
+					if (sf::Keyboard::isKeyPressed(a.keyB))
+					{
+						a.value[i] = -100.0f;
+						isGamepadActive = false;
+					}
+				}
 			}
 		}
 	}
