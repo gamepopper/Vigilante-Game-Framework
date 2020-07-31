@@ -10,6 +10,7 @@
 #include "../VFrame/VRenderGroup.h"
 #include "../VFrame/VRenderLayer.h"
 #include "../VFrame/VTiledSprite.h"
+#include "../VFrame/V9Slice.h"
 #include "../VFrame/VTilemap.h"
 #include "../VFrame/VTrailArea.h"
 #include "../VFrame/VTextPath.h"
@@ -206,8 +207,48 @@ public:
 
 		standardSprite->Size += sf::Vector2f(x1Resize, y1Resize) * dt;
 		animatedSprite->Size += sf::Vector2f(x2Resize, y2Resize) * dt;
+	}
+};
 
-		VGlobal::p()->Sound->Status("switch");
+//Static and Animated Tiled Sprites
+/*
+Tiled sprites are like regular sprites, except the texture can repeat.
+*/
+class NineSliceState : public VSubState
+{
+	typedef VSubState VSUPERCLASS;
+
+	V9Slice* nineSlice;
+
+public:
+	NineSliceState() : VSubState() {}
+	~NineSliceState() = default;
+
+	virtual void Initialise()
+	{
+		VSUPERCLASS::Initialise();
+
+		nineSlice = new V9Slice(0.0f, 0.0f, 100.0f, 100.0f, "Example/Assets/Box.png", sf::Vector2f(20.0f, 20.0f));
+		nineSlice->Size = sf::Vector2f(100, 100);
+		nineSlice->SetPositionAtCentre(VGlobal::p()->Width / 2.0f, VGlobal::p()->Height / 2.0f);
+		Add(nineSlice);
+
+		auto sprite1 = new VText(nineSlice->Position.x, 80, nineSlice->Size.x, "9 Slice Object", 16);
+		sprite1->SetAlignment(VText::ALIGNCENTRE);
+
+		auto text = new VText(VGlobal::p()->Width / 2.0f - 270.0f, 300, 540, "Press WASD: Resize 9-Slice Object", 21);
+
+		Add(sprite1);
+		Add(text);
+	}
+
+	virtual void Update(float dt)
+	{
+		VSUPERCLASS::Update(dt);
+
+		float x1Resize = VGlobal::p()->Input->CurrentAxisValue("leftX");
+		float y1Resize = VGlobal::p()->Input->CurrentAxisValue("leftY");
+		nineSlice->Size += sf::Vector2f(x1Resize, y1Resize) * dt;
 	}
 };
 

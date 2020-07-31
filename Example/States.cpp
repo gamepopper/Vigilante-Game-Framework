@@ -4,6 +4,7 @@ enum DemoPages
 {
 	PAGE_SPRITE,
 	PAGE_TILED,
+	PAGE_9SLICE,
 	PAGE_TEXT,
 	PAGE_TEXTPATH,
 	PAGE_CONTROLLER,
@@ -33,6 +34,9 @@ void DemoStatesManager::SetNewPage()
 	VSubState* subState;
 	switch (CurrentPage)
 	{
+		case PAGE_9SLICE:
+			subState = new NineSliceState();
+			break;
 		case PAGE_ASCII:
 			subState = new ASCIITestState();
 			break;
