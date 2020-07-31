@@ -146,13 +146,13 @@ public:
 	virtual void Destroy() override;
 
 	/**
-	* Updates sprite transform and rendering info.
+	* Updates animation data.
 	* @param dt Delta Time between the previous and current frame.
 	*/
 	virtual void Update(float dt) override;
 
 	/**
-	* Renders the sprite.
+	* Renders the sprite. Updates sprite transform and rendering info.
 	* @param RenderTarget The game's sf::RenderTarget object to render data onto.
 	*/
 	virtual void Draw(sf::RenderTarget& RenderTarget) override;
