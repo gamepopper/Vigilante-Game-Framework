@@ -254,8 +254,12 @@ void VMusic::SetLoop(bool loop, float loopStart, float loopEnd)
 	if (loopEnd == 0)
 		loopEndPoint = music.getDuration().asSeconds();*/
 
-	sf::Music::TimeSpan timespan = sf::Music::TimeSpan(sf::seconds(loopStart), sf::seconds(loopEnd - loopStart));	
-	music.setLoopPoints(timespan);
+	if (loopEnd != 0)
+	{
+		sf::Music::TimeSpan timespan = sf::Music::TimeSpan(sf::seconds(loopStart), sf::seconds(loopEnd - loopStart));
+		music.setLoopPoints(timespan);
+	}
+
 	music.setLoop(loop);
 }
 
