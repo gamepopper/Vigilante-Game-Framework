@@ -46,7 +46,7 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 	sf::View MainView = RenderTarget.getView();
 
 	if (renderTex.getSize() != sf::Vector2u(MainView.getSize()))
-		renderTex.create(MainView.getSize().x, MainView.getSize().y);
+		renderTex.create((unsigned int)MainView.getSize().x, (unsigned int)MainView.getSize().y);
 
 	renderTex.setView(MainView);
 	renderTex.clear(sf::Color::Transparent);
