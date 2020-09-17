@@ -84,10 +84,7 @@ public:
 	}
 
 	///@return The current size of the group based on amount of active elements.
-	int Length()
-	{
-		return length;
-	}
+	int Length();
 
 	///@param object The VBase object to add to the group.
 	VBase* Add(VBase* object);
@@ -140,6 +137,15 @@ public:
 	* Gets an object from a specified index in group.
 	*/
 	VBase* GetGroupItem(int index);
+
+	/**
+	* Gets an object from a specified index in group.
+	*/
+	template<class T>
+	T* GetGroupItemAsType(int index)
+	{
+		return dynamic_cast<T*>(GetGroupItem(index));
+	}
 
 	/**
 	* Gets the index of a specific object.

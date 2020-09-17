@@ -3,6 +3,14 @@
 
 using std::vector;
 
+
+///@return The current size of the group based on amount of active elements.
+
+int VGroup::Length()
+{
+	return length;
+}
+
 VBase* VGroup::Add(VBase* object)
 {
 	if (object == nullptr)
