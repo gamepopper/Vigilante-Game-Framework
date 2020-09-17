@@ -33,7 +33,7 @@ void VBackdrop::updateTransform()
 	transform.scale(Scale);
 }
 
-VBackdrop* VBackdrop::LoadGraphic(sf::String filename, const sf::IntRect& area)
+VBackdrop* VBackdrop::LoadGraphic(const sf::String& filename, const sf::IntRect& area)
 {
 	if (disposable)
 	{

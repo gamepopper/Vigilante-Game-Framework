@@ -114,7 +114,7 @@ protected:
 	* @param collision A list of tiles that are collideable in the tilemap data.
 	* @param graphicsArea The area of the texture to use. Default is the entire texture area.
 	*/
-	void setupTilemap(sf::String graphicFile,
+	void setupTilemap(const sf::String& graphicFile,
 		int tileWidth = 0, int tileHeight = 0, bool autoTile = false,
 		const std::vector<char>& collision = { '#' }, const sf::IntRect& graphicsArea = sf::IntRect());
 
@@ -171,7 +171,7 @@ public:
 	* @param collision A list of chars in the mapData that are completely collideable.
 	* @param graphicsArea The area of the texture to display. Default is the entire texture.
 	*/
-	void LoadFromCSV(sf::String mapData, sf::String graphicFile, 
+	void LoadFromCSV(const sf::String& mapData, const sf::String& graphicFile,
 		int tileWidth = 0, int tileHeight = 0, bool autoTile = false,
 		const std::vector<char>& collision = { '#' }, const sf::IntRect& graphicsArea = sf::IntRect());
 
@@ -189,7 +189,7 @@ public:
 	* @param graphicsArea The area of the texture to display. Default is the entire texture.
 	*/
 	void LoadFromArray(std::vector<char> mapData, int mapWidth, int mapHeight,
-		sf::String graphicFile, int tileWidth = 0, int tileHeight = 0, bool autoTile = false,
+		const sf::String& graphicFile, int tileWidth = 0, int tileHeight = 0, bool autoTile = false,
 		const std::vector<char>& collision = { '#' }, const sf::IntRect& graphicsArea = sf::IntRect());
 
 	/**
@@ -203,7 +203,7 @@ public:
 	* @param collision A list of chars in the mapData that are completely collideable.
 	* @param graphicsArea The area of the texture to display. Default is the entire texture.
 	*/
-	void LoadFrom2DArray(std::vector<std::vector<char>> mapData, sf::String graphicFile, 
+	void LoadFrom2DArray(std::vector<std::vector<char>> mapData, const sf::String& graphicFile,
 		int tileWidth = 0, int tileHeight = 0, bool autoTile = false,
 		const std::vector<char>& collision = { '#' }, const sf::IntRect& graphicsArea = sf::IntRect());
 

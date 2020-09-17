@@ -19,7 +19,7 @@ void VTextPath::Update(float dt)
 	VSUPERCLASS::Update(dt);
 }
 
-void VTextPath::updateTextRender(sf::String text)
+void VTextPath::updateTextRender(const sf::String& text)
 {
 	std::wstringstream ss(text);
 

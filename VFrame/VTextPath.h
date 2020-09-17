@@ -38,7 +38,7 @@
 class VTextPath : public VText
 {
 protected:
-	virtual void updateTextRender(sf::String text) override;
+	virtual void updateTextRender(const sf::String& text) override;
 
 public:
 	///Used to set how the path should curve like.

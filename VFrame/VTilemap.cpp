@@ -10,7 +10,7 @@
 using std::wifstream;
 using std::vector;
 
-void VTilemap::setupTilemap(sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
+void VTilemap::setupTilemap(const sf::String& graphicFile, int tileWidth, int tileHeight, bool autoTile,
 	const std::vector<char>& collision, const sf::IntRect& graphicsArea)
 {
 	RenderState.texture = &VGlobal::p()->Content->LoadTexture(graphicFile);
@@ -275,7 +275,7 @@ void VTilemap::clearTiles()
 	tiles.clear();
 }
 
-void VTilemap::LoadFromCSV(sf::String mapData, sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
+void VTilemap::LoadFromCSV(const sf::String& mapData, const sf::String& graphicFile, int tileWidth, int tileHeight, bool autoTile,
 	const std::vector<char>& collision, const sf::IntRect& rect)
 {
 	tilemap.clear();
@@ -302,7 +302,7 @@ void VTilemap::LoadFromCSV(sf::String mapData, sf::String graphicFile, int tileW
 }
 
 void VTilemap::LoadFromArray(vector<char> mapData, int mapWidth, int mapHeight,
-	sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
+	const sf::String& graphicFile, int tileWidth, int tileHeight, bool autoTile,
 	const std::vector<char>& collision, const sf::IntRect& rect)
 {
 	tilemap = mapData;
@@ -318,7 +318,7 @@ void VTilemap::LoadFromArray(vector<char> mapData, int mapWidth, int mapHeight,
 	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision, rect);
 }
 
-void VTilemap::LoadFrom2DArray(vector<vector<char>> mapData, sf::String graphicFile, int tileWidth, int tileHeight, bool autoTile,
+void VTilemap::LoadFrom2DArray(vector<vector<char>> mapData, const sf::String& graphicFile, int tileWidth, int tileHeight, bool autoTile,
 	const std::vector<char>& collision, const sf::IntRect& rect)
 {
 	mapWidth = mapData.size() ? mapData[0].size() : 0;

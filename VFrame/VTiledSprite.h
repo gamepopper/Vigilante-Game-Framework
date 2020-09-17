@@ -79,7 +79,7 @@ public:
 		Animation.GetCurrentFrame();
 	}
 
-	virtual VSprite* LoadGraphic(sf::String filename, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect()) override;
+	virtual VSprite* LoadGraphic(const sf::String& filename, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect()) override;
 	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect()) override;
 
 	/**

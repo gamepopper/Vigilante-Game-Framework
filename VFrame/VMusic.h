@@ -73,7 +73,7 @@ public:
 	* Opens music data from file.
 	* Various properties will only have an effect once music data is open.
 	*/
-	VMusic* OpenMusicFile(sf::String filename);
+	VMusic* OpenMusicFile(const sf::String& filename);
 
 	/**
 	* Opens music data from memory.

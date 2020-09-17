@@ -7,7 +7,7 @@ VTypedText::VTypedText(float x, float y, float width, const sf::String& text, in
 	ResetText(text);
 }
 
-void VTypedText::SetSound(sf::String id, float volume, sf::String filename)
+void VTypedText::SetSound(const sf::String& id, float volume, const sf::String& filename)
 {
 	if (filename != "")
 	{
@@ -88,7 +88,7 @@ void VTypedText::Erase(float Delay, bool ForceRestart, std::function<void()> OnE
 	this->OnErased = OnErased;
 }
 
-void VTypedText::ResetText(sf::String text)
+void VTypedText::ResetText(const sf::String& text)
 {
 	this->text = "";
 	finalText = text;

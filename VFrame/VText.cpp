@@ -142,7 +142,7 @@ void VText::updateTransform()
 			0.f, 0.f, 1.f);
 }
 
-void VText::updateTextRender(sf::String text)
+void VText::updateTextRender(const sf::String& text)
 {
 	std::wstringstream ss(text);
 

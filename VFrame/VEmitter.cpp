@@ -1,7 +1,7 @@
 #include "VEmitter.h"
 #include "VGlobal.h"
 
-VEmitter* VEmitter::LoadParticlesFromFile(int Amount, sf::String Filename, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
+VEmitter* VEmitter::LoadParticlesFromFile(int Amount, const sf::String& Filename, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
 	MaxSize = Amount;
 	RenderState.texture = &VGlobal::p()->Content->LoadTexture(Filename);

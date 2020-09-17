@@ -56,81 +56,81 @@ bool VPostEffectBase::isSupported()
 	return sf::Shader::isAvailable();
 }
 
-VPostEffect::VPostEffect(sf::String filename, sf::Shader::Type type)
+VPostEffect::VPostEffect(const sf::String& filename, sf::Shader::Type type)
 {
 	shader.loadFromFile(filename, type);
 }
 
-VPostEffect::VPostEffect(sf::String vertFile, sf::String fragFile)
+VPostEffect::VPostEffect(const sf::String& vertFile, const sf::String& fragFile)
 {
 	shader.loadFromFile(vertFile, fragFile);
 }
 
-VPostEffect::VPostEffect(sf::String vertFile, sf::String geomFile, sf::String fragFile)
+VPostEffect::VPostEffect(const sf::String& vertFile, const sf::String& geomFile, const sf::String& fragFile)
 {
 	shader.loadFromFile(vertFile, geomFile, fragFile);
 }
 
-void VPostEffect::SetInputTextureName(sf::String name)
+void VPostEffect::SetInputTextureName(const sf::String& name)
 {
 	sourceTextureName = name;
 }
 
-void VPostEffect::SetParameter(sf::String paramName, sf::Shader::CurrentTextureType currentTextureType)
+void VPostEffect::SetParameter(const sf::String& paramName, sf::Shader::CurrentTextureType currentTextureType)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, currentTextureType);
 }
 
-void VPostEffect::SetParameter(sf::String paramName, const sf::Texture& texture)
+void VPostEffect::SetParameter(const sf::String& paramName, const sf::Texture& texture)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, texture);
 }
 
-void VPostEffect::SetParameter(sf::String paramName, const sf::Transform& transform)
+void VPostEffect::SetParameter(const sf::String& paramName, const sf::Transform& transform)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, (sf::Glsl::Mat4)transform);
 }
 
-void VPostEffect::SetParameter(sf::String paramName, const sf::Color& colour)
+void VPostEffect::SetParameter(const sf::String& paramName, const sf::Color& colour)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, (sf::Glsl::Vec4)colour);
 }
 
-void VPostEffect::SetParameter(sf::String paramName, const sf::Vector3f& vec3)
+void VPostEffect::SetParameter(const sf::String& paramName, const sf::Vector3f& vec3)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, vec3);
 }
 
-void VPostEffect::SetParameter(sf::String paramName, const sf::Vector2f& vec2)
+void VPostEffect::SetParameter(const sf::String& paramName, const sf::Vector2f& vec2)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, vec2);
 }
 
-void VPostEffect::SetParameter(sf::String paramName, float x, float y, float z, float w)
+void VPostEffect::SetParameter(const sf::String& paramName, float x, float y, float z, float w)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, sf::Glsl::Vec4(x, y, z, w));
 }
 
-void VPostEffect::SetParameter(sf::String paramName, float x, float y, float z)
+void VPostEffect::SetParameter(const sf::String& paramName, float x, float y, float z)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, sf::Glsl::Vec3(x, y, z));
 }
 
-void VPostEffect::SetParameter(sf::String paramName, float x, float y)
+void VPostEffect::SetParameter(const sf::String& paramName, float x, float y)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, sf::Glsl::Vec2(x, y));
 }
 
-void VPostEffect::SetParameter(sf::String paramName, float x)
+void VPostEffect::SetParameter(const sf::String& paramName, float x)
 {
 	if (paramName != sourceTextureName)
 		shader.setUniform(paramName, x);

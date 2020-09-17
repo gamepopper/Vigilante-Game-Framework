@@ -44,7 +44,7 @@ void VTiledSprite::updateFrame()
 		const_cast<sf::Texture*>(RenderState.texture)->loadFromImage(*image, rect);
 }
 
-VSprite* VTiledSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, const sf::IntRect& area)
+VSprite* VTiledSprite::LoadGraphic(const sf::String& filename, bool animated, int width, int height, const sf::IntRect& area)
 {
 	if (RenderState.texture && disposible)
 	{

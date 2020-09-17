@@ -111,7 +111,7 @@ public:
 	* @param height Height of sprite, ignored if animated is false.
 	* @param rect Only use a certain area of the texture, whether you are animated or not. Default value assumes whole texture is used. (Ignored if VTiledSprite or VBackdrop)
 	*/
-	virtual VSprite* LoadGraphic(sf::String filename, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect());
+	virtual VSprite* LoadGraphic(const sf::String& filename, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect());
 	
 	/**
 	* Load Graphic from an sf::Texture object.

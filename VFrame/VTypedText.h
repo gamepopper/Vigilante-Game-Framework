@@ -118,7 +118,7 @@ public:
 	* @param volume Volume as a percentage (Range 0 - 100).
 	* @param filename File path and name of sound effect file.
 	*/
-	void SetSound(sf::String id, float volume = 100.0f, sf::String filename = "");
+	void SetSound(const sf::String& id, float volume = 100.0f, const sf::String& filename = "");
 
 	/**
 	* Set a random delay when each letter is typed.
@@ -154,7 +154,7 @@ public:
 	* Reset the text that will be typed out, use this when changing text!
 	* @param Text The string to set the text to.
 	*/
-	void ResetText(sf::String Text);
+	void ResetText(const sf::String& Text);
 	///Skip the current typing out process.
 	void Skip();
 	///@return True if currently typing out.

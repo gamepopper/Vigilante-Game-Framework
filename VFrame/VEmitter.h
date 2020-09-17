@@ -202,7 +202,7 @@ public:
 	* @param RandomFrames Whether the emitter should set frames in order from first to last, or random frames.
 	* @return The VEmitter that is being loaded, typically the one that the function is being called from.
 	*/
-	VEmitter* LoadParticlesFromFile(int Amount, sf::String Filename, bool Animated = false, int Width = 1, int Height = 1, const sf::IntRect& Rect = sf::IntRect(), bool RandomFrames = true);
+	VEmitter* LoadParticlesFromFile(int Amount, const sf::String& Filename, bool Animated = false, int Width = 1, int Height = 1, const sf::IntRect& Rect = sf::IntRect(), bool RandomFrames = true);
 	
 	/**
 	* Load set amount of particles from an sf::Texture object.

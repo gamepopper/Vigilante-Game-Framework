@@ -107,7 +107,7 @@ void VSprite::updateFrame()
 	vertexArray[3].texCoords = sf::Vector2f(rect.left,				rect.top + rect.height);
 }
 
-VSprite* VSprite::LoadGraphic(sf::String filename, bool animated, int width, int height, const sf::IntRect& area)
+VSprite* VSprite::LoadGraphic(const sf::String& filename, bool animated, int width, int height, const sf::IntRect& area)
 {
 	RenderState.texture = &VGlobal::p()->Content->LoadTexture(filename);
 

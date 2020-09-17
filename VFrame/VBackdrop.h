@@ -95,7 +95,7 @@ public:
 	* @param filename Filepath and name of texture to use. Loads with VContent in VGlobal.
 	* @param area Loads a specific section of the texture, otherwise uses the whole texture.
 	*/
-	VBackdrop* LoadGraphic(sf::String filename, const sf::IntRect& area = sf::IntRect());
+	VBackdrop* LoadGraphic(const sf::String& filename, const sf::IntRect& area = sf::IntRect());
 	///@param texture sf::Texture object to use.
 	VBackdrop* LoadGraphicFromTexture(sf::Texture& texture);
 

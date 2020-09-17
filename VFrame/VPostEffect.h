@@ -142,66 +142,66 @@ public:
 	* @param filename File path and name of shader file.
 	* @param type The Type of shader.
 	*/
-	VPostEffect(sf::String filename, sf::Shader::Type type);
+	VPostEffect(const sf::String& filename, sf::Shader::Type type);
 
 	/**
 	* @param vertFile File path and name of the vertex shader file.
 	* @param fragFile File path and name of the fragment shader file.
 	*/
-	VPostEffect(sf::String vertFile, sf::String fragFile);
+	VPostEffect(const sf::String& vertFile, const sf::String& fragFile);
 
 	/**
 	* @param vertFile File path and name of the vertex shader file.
 	* @param geomFile File path and name of the geometry shader file.
 	* @param fragFile File path and name of the fragment shader file.
 	*/
-	VPostEffect(sf::String vertFile, sf::String geomFile, sf::String fragFile);
+	VPostEffect(const sf::String& vertFile, const sf::String& geomFile, const sf::String& fragFile);
 	~VPostEffect() = default;
 
 	///@param name The name for the Input Texture (the default texture assuming no texture is set to the Uniform variable).
-	void SetInputTextureName(sf::String name);
+	void SetInputTextureName(const sf::String& name);
 
 	/**
 	* Sets Texture Type Parameter.
 	* @param paramName The name of the uniform parameter.
 	* @param currentTextureType Special type that represents the texture of the object being drawn.
 	*/
-	void SetParameter(sf::String paramName, sf::Shader::CurrentTextureType currentTextureType);
+	void SetParameter(const sf::String& paramName, sf::Shader::CurrentTextureType currentTextureType);
 
 	/**
 	* Sets Texture Parameter.
 	* @param paramName The name of the uniform parameter.
 	* @param texture The texture to use for texture.
 	*/
-	void SetParameter(sf::String paramName, const sf::Texture& texture);
+	void SetParameter(const sf::String& paramName, const sf::Texture& texture);
 
 	/**
 	* Sets Transform Parameter.
 	* @param paramName The name of the uniform parameter.
 	* @param transform The transform matrix to set.
 	*/
-	void SetParameter(sf::String paramName, const sf::Transform& transform);
+	void SetParameter(const sf::String& paramName, const sf::Transform& transform);
 
 	/**
 	* Sets Colour (Vec4) Parameter
 	* @param paramName The name of the uniform parameter.
 	* @param colour The colour that will be converted to Vec4.
 	*/
-	void SetParameter(sf::String paramName, const sf::Color& colour);
+	void SetParameter(const sf::String& paramName, const sf::Color& colour);
 
 	/**
 	* Sets Vec3 Parameter
 	* @param paramName The name of the uniform parameter.
 	* @param vec3 The Vector3f that will be converted to Vec3.
 	*/
-	void SetParameter(sf::String paramName, const sf::Vector3f& vec3);
+	void SetParameter(const sf::String& paramName, const sf::Vector3f& vec3);
 
 	/**
 	* Sets Vec2 Parameter
 	* @param paramName The name of the uniform parameter.
 	* @param vec2 The Vector3f that will be converted to Vec2.
 	*/
-	void SetParameter(sf::String paramName, const sf::Vector2f& vec2);
+	void SetParameter(const sf::String& paramName, const sf::Vector2f& vec2);
 
 	/**
 	* Sets Vec4 Parameter from individual floats.
@@ -211,7 +211,7 @@ public:
 	* @param z Z coordinate.
 	* @param w W coordinate.
 	*/
-	void SetParameter(sf::String paramName, float x, float y, float z, float w);
+	void SetParameter(const sf::String& paramName, float x, float y, float z, float w);
 
 	/**
 	* Sets Vec3 Parameter from individual floats.
@@ -220,7 +220,7 @@ public:
 	* @param y Y coordinate.
 	* @param z Z coordinate.
 	*/
-	void SetParameter(sf::String paramName, float x, float y, float z);
+	void SetParameter(const sf::String& paramName, float x, float y, float z);
 
 	/**
 	* Sets Vec2 Parameter from individual floats.
@@ -228,14 +228,14 @@ public:
 	* @param x X coordinate.
 	* @param y Y coordinate.
 	*/
-	void SetParameter(sf::String paramName, float x, float y);
+	void SetParameter(const sf::String& paramName, float x, float y);
 
 	/**
 	* Sets float parameter.
 	* @param paramName The name of the uniform parameter.
 	* @param x Float value.
 	*/
-	void SetParameter(sf::String paramName, float x);
+	void SetParameter(const sf::String& paramName, float x);
 
 	/**
 	* Apply post effect from an input RenderTexture to an output RenderTarget (which may be a RenderTexture or Window).

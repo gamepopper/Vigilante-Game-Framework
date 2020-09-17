@@ -7,7 +7,7 @@ VMusic::~VMusic() {}
 /**
 * Opens music data from file.
 */
-VMusic* VMusic::OpenMusicFile(sf::String filename)
+VMusic* VMusic::OpenMusicFile(const sf::String& filename)
 {
 	if (music.openFromFile(filename))
 	{

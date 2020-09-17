@@ -99,7 +99,7 @@ protected:
 	* Update the vertex data to display text and outline.
 	* @param text The string that will be used for displaying text.
 	*/
-	virtual void updateTextRender(sf::String text);
+	virtual void updateTextRender(const sf::String& text);
 	///Update the transformable object.
 	virtual void updateTransform() override;
 	///Setup the string of text so that it fits within the text width.
