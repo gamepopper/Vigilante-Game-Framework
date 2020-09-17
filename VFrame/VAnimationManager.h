@@ -106,7 +106,7 @@ public:
 	/**
 	*  @return returns the String name/id of the currently playing animation.
 	*/
-	sf::String CurrentAnimationName();
+	const sf::String& CurrentAnimationName();
 
 	/**
 	* Plays an animation. If the animation specified is already being played then nothing will happen. If you wish to replay the current animation, use the Reset function.

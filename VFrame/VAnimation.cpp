@@ -139,7 +139,7 @@ void VAnimationManager::AddAnimation(const sf::String& name, int Begin, int Leng
 	AddAnimation(name, frames, FramesPerSecond, Looping, Reverse);
 }
 
-sf::String VAnimationManager::CurrentAnimationName()
+const sf::String& VAnimationManager::CurrentAnimationName()
 {
 	return currentAnim;
 }
