@@ -172,16 +172,6 @@ V9Slice* V9Slice::LoadGraphicFromTexture(sf::Texture& texture, const sf::Vector2
 	return this;
 }
 
-void V9Slice::Destroy()
-{
-	VSUPERCLASS::Destroy();
-}
-
-void V9Slice::Update(float dt)
-{
-	VSUPERCLASS::Update(dt);
-}
-
 void V9Slice::Draw(sf::RenderTarget& RenderTarget)
 {
 	VSUPERCLASS::Draw(RenderTarget);

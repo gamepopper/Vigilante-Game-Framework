@@ -53,7 +53,6 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 	VSUPERCLASS::Draw(renderTex);
 	renderTex.display();
 
-	RenderTarget.setView(RenderTarget.getDefaultView());
 
 	if (PostEffect == nullptr || !VPostEffectBase::isSupported())
 	{
@@ -70,6 +69,7 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 		sprite.setTexture(postProcessTex.getTexture());
 	}
 	
+	RenderTarget.setView(RenderTarget.getDefaultView());
 	RenderTarget.draw(sprite, RenderState);
 	RenderTarget.setView(MainView);
 }

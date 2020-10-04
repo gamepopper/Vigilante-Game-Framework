@@ -309,12 +309,12 @@ void VInputHandler::Update(float dt)
 					}
 					case L:
 					{
-						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_LEFT) / 32767.0f;
+						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_LEFT) / 255.0f;
 						break;
 					}
 					case R:
 					{
-						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_RIGHT) / 32767.0f;
+						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_RIGHT) / 255.0f;
 						break;
 					}
 					}

@@ -140,7 +140,7 @@ void VCamera::Update(float dt)
 
 			sf::Vector2f relativePos = FollowPos - position;
 
-			if (relativePos.x - (followObject->Size.x/2.0f) < -DeadZoneArea.x)
+			if (relativePos.x - (followObject->Size.x / 2.0f) < -DeadZoneArea.x)
 				relativePos.x = -DeadZoneArea.x + (followObject->Size.x / 2.0f);
 			if (relativePos.y - (followObject->Size.y / 2.0f) < -DeadZoneArea.y)
 				relativePos.y = -DeadZoneArea.y + (followObject->Size.y / 2.0f);

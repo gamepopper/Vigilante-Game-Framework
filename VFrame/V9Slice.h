@@ -102,15 +102,6 @@ public:
 	*/
 	virtual V9Slice* LoadGraphicFromTexture(sf::Texture& texture, const sf::Vector2f& corner, const sf::IntRect& rect = sf::IntRect());
 
-	///Destroys the 9-slice rendering data (and texture if disposable is set for true).
-	virtual void Destroy() override;
-
-	/**
-	* Updates the 9-slice.
-	* @param dt Delta Time between the previous and current frame.
-	*/
-	virtual void Update(float dt) override;
-
 	/**
 	* Renders the 9-slice object.
 	* @param RenderTarget The game's sf::RenderTarget object to render data onto.

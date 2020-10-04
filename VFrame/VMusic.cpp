@@ -252,7 +252,7 @@ void VMusic::SetLoop(bool loop, float loopStart, float loopEnd)
 	/*looping = loop;
 	loopStartPoint = loopStart;
 	if (loopEnd == 0)
-		loopEndPoint = music.getDuration().asSeconds();*/
+		loopEnd = music.getDuration().asSeconds();*/
 
 	if (loopEnd != 0)
 	{
