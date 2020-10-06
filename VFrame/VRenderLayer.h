@@ -34,7 +34,7 @@
 #pragma once
 #include "VGroup.h"
 #include "VPostEffect.h"
-#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 
 #include <memory>
@@ -44,7 +44,7 @@ class VRenderLayer : public VGroup
 {
 protected:
 	///The render and transform infomation of the layer.
-	sf::Sprite sprite;
+	sf::VertexArray vertexArray;
 	///The sf::RenderTexture to render all the objects to.
 	sf::RenderTexture renderTex;
 	///Another sf::RenderTexture for outputting the post process effect onto.
