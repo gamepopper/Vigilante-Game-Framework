@@ -28,7 +28,7 @@
 *
 * @section DESCRIPTION
 *
-* Render object that generates and displays a gradient texture. This is done by generating a pixel-high texture as a gradient line, rendering it to the correct shape and applying it to the texture.
+* VObject that generates and displays a gradient texture.
 */
 
 #pragma once
@@ -40,6 +40,7 @@
 
 #include <memory>
 
+///VObject that generates and displays a gradient texture. This is done by generating a pixel-high texture as a gradient line, rendering it to the correct shape and applying it to the texture.
 class VGradient : public VObject
 {
 public:
@@ -89,6 +90,8 @@ protected:
 	virtual void updateFrame();
 
 public:
+	
+	///Used to call parent class functions when they are overrided in class.
 	typedef VObject VSUPERCLASS;
 
 	///Origin of the 9-slice object in percentage (0.0f - 1.0f) for rotation.

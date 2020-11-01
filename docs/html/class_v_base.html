@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -97,13 +97,15 @@ Inheritance diagram for VBase:</div>
 <area href="class_v_render_layer.html" title="Processes group of objects to a sprite. Unlike the VRenderGroup, the sprite cannot be moved and will ..." alt="VRenderLayer" shape="rect" coords="447,336,586,360"/>
 <area href="class_v_state.html" title="Processes the game&#39;s current scene as well as 2D cameras and substates. " alt="VState" shape="rect" coords="447,392,586,416"/>
 <area href="class_v_sub_state.html" title="A different kind of state class that would update and render over the top of the main state..." alt="VSubState" shape="rect" coords="447,448,586,472"/>
-<area href="class_v_backdrop.html" title="Renders and endless scrolling scene that takes up the whole screen. Good for scrolling backgrounds..." alt="VBackdrop" shape="rect" coords="745,112,884,136"/>
-<area href="class_v_particle.html" title="A base particle class for use with VEmitter. This does not override VSprite as it does not handle ren..." alt="VParticle" shape="rect" coords="745,168,884,192"/>
-<area href="class_v_shape.html" title="An object class that renders primitive shapes. Arguably more optimal than creating a VSprite and call..." alt="VShape" shape="rect" coords="745,224,884,248"/>
-<area href="class_v_sprite.html" title="A sprite rendering object class. " alt="VSprite" shape="rect" coords="745,280,884,304"/>
-<area href="class_v_text.html" title="Object that renders text. " alt="VText" shape="rect" coords="745,336,884,360"/>
-<area href="class_v_tile.html" title="Class for representing a set of tiles for collision purposes. " alt="VTile" shape="rect" coords="745,392,884,416"/>
-<area href="class_v_tilemap.html" title="Object that renders a 2D tilemap, with custom collision and autotiling support. " alt="VTilemap" shape="rect" coords="745,448,884,472"/>
+<area href="class_v9_slice.html" title="A renderable object that slices a texture into nine pieces, four of which are unscalable. " alt="V9Slice" shape="rect" coords="745,112,884,136"/>
+<area href="class_v_backdrop.html" title="Renders and endless scrolling scene that takes up the whole screen. Good for scrolling backgrounds..." alt="VBackdrop" shape="rect" coords="745,168,884,192"/>
+<area href="class_v_gradient.html" title="VObject that generates and displays a gradient texture. This is done by generating a pixel-high textu..." alt="VGradient" shape="rect" coords="745,224,884,248"/>
+<area href="class_v_particle.html" title="A base particle class for use with VEmitter. This does not override VSprite as it does not handle ren..." alt="VParticle" shape="rect" coords="745,280,884,304"/>
+<area href="class_v_shape.html" title="An object class that renders primitive shapes. Arguably more optimal than creating a VSprite and call..." alt="VShape" shape="rect" coords="745,336,884,360"/>
+<area href="class_v_sprite.html" title="A sprite rendering object class. " alt="VSprite" shape="rect" coords="745,392,884,416"/>
+<area href="class_v_text.html" title="Object that renders text. " alt="VText" shape="rect" coords="745,448,884,472"/>
+<area href="class_v_tile.html" title="Class for representing a set of tiles for collision purposes. " alt="VTile" shape="rect" coords="745,504,884,528"/>
+<area href="class_v_tilemap.html" title="Object that renders a 2D tilemap, with custom collision and autotiling support. " alt="VTilemap" shape="rect" coords="745,560,884,584"/>
 <area href="class_v_physics_anchor_base.html" title="A Physics Joint Base class that provideds functions for getting and setting Anchor points..." alt="VPhysicsAnchorBase" shape="rect" coords="1043,112,1182,136"/>
 <area href="class_v_physics_groove_joint.html" title="The Groove Joint, similar to pivot joints but the B anchor is a line that the pivot can slide..." alt="VPhysicsGrooveJoint" shape="rect" coords="1043,168,1182,192"/>
 <area href="class_v_physics_phase_base.html" title="A Physics Joint Base class that provideds functions for getting and setting the Phase value..." alt="VPhysicsPhaseBase" shape="rect" coords="1043,224,1182,248"/>
@@ -130,6 +132,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aeebe5634440d368a2583c0ba8558cab4"><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a> (const char *fmt,...)</td></tr>
+<tr class="separator:aeebe5634440d368a2583c0ba8558cab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24901d5efbff21bcb040ade5d2efdc1d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a24901d5efbff21bcb040ade5d2efdc1d">VLog</a> (const char *fmt,...)</td></tr>
 <tr class="separator:a24901d5efbff21bcb040ade5d2efdc1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c63d85f3139497ad5574fcc4f1ae33"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a51c63d85f3139497ad5574fcc4f1ae33">VLogError</a> (const char *fmt,...)</td></tr>
@@ -197,7 +201,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_v_object.html#a20b4da39a4a1ec552cef2c618fcb9f7e">VObject</a>, <a class="el" href="class_v_tilemap.html#a6952b646b00ddcc4d872995718e3b98e">VTilemap</a>, <a class="el" href="class_v_emitter.html#a11d0da26b3d5fe1768de9e3b9c922507">VEmitter</a>, <a class="el" href="class_v_text.html#aa1eff3228052e62d063aa3a6b17b1e52">VText</a>, <a class="el" href="class_v3_d_model.html#a7bac9e376dd8c91cb5950a93525b3a51">V3DModel</a>, <a class="el" href="class_v_group.html#af157774a90025a5cf35a3e3fec431455">VGroup</a>, <a class="el" href="class_v3_d_object.html#ae1abf5caee4103931a513aa58fc4be2e">V3DObject</a>, <a class="el" href="class_v_sprite.html#a421bc7aedc683200c2033dcf2854f954">VSprite</a>, <a class="el" href="class_v_sub_state.html#a981d41d45e410037d3725ac5b2d45633">VSubState</a>, <a class="el" href="class_v_tiled_sprite.html#a17c03c13c098cd57ef2b2c0d0948d282">VTiledSprite</a>, <a class="el" href="class_v_shape.html#a7d8df410a3fe58ba75e50b96818ef8b9">VShape</a>, <a class="el" href="class_v_backdrop.html#af806ecd39dc7c6ee8206a156ea6e79da">VBackdrop</a>, <a class="el" href="class_v3_d_obj_model.html#a2ee224234ab64fb9504f37127b991b18">V3DObjModel</a>, <a class="el" href="class_v_render_group.html#af2f90447e04bba5cb2aa50c5482266bf">VRenderGroup</a>, <a class="el" href="class_v3_d_scene.html#a1f79edc2c4416e6e1e86b5bc642ef8a1">V3DScene</a>, <a class="el" href="class_v_render_layer.html#a6b101678a697475c024934206929df76">VRenderLayer</a>, <a class="el" href="class_v_trail_area.html#a057095117e22a3dd85202e6014bfdc6b">VTrailArea</a>, and <a class="el" href="class_v3_d_batch_model_group.html#adda376f2139c324c5f0637b3d7651acb">V3DBatchModelGroup</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v_object.html#a20b4da39a4a1ec552cef2c618fcb9f7e">VObject</a>, <a class="el" href="class_v_tilemap.html#a6952b646b00ddcc4d872995718e3b98e">VTilemap</a>, <a class="el" href="class_v_emitter.html#a11d0da26b3d5fe1768de9e3b9c922507">VEmitter</a>, <a class="el" href="class_v_text.html#aa1eff3228052e62d063aa3a6b17b1e52">VText</a>, <a class="el" href="class_v3_d_model.html#a7bac9e376dd8c91cb5950a93525b3a51">V3DModel</a>, <a class="el" href="class_v_group.html#af157774a90025a5cf35a3e3fec431455">VGroup</a>, <a class="el" href="class_v_gradient.html#a9d092c0d970552649776155b84f60ab4">VGradient</a>, <a class="el" href="class_v3_d_object.html#ae1abf5caee4103931a513aa58fc4be2e">V3DObject</a>, <a class="el" href="class_v_sprite.html#a421bc7aedc683200c2033dcf2854f954">VSprite</a>, <a class="el" href="class_v_sub_state.html#a981d41d45e410037d3725ac5b2d45633">VSubState</a>, <a class="el" href="class_v_shape.html#a7d8df410a3fe58ba75e50b96818ef8b9">VShape</a>, <a class="el" href="class_v_render_group.html#af2f90447e04bba5cb2aa50c5482266bf">VRenderGroup</a>, <a class="el" href="class_v_tiled_sprite.html#a17c03c13c098cd57ef2b2c0d0948d282">VTiledSprite</a>, <a class="el" href="class_v_backdrop.html#af806ecd39dc7c6ee8206a156ea6e79da">VBackdrop</a>, <a class="el" href="class_v3_d_obj_model.html#a2ee224234ab64fb9504f37127b991b18">V3DObjModel</a>, <a class="el" href="class_v3_d_scene.html#a1f79edc2c4416e6e1e86b5bc642ef8a1">V3DScene</a>, <a class="el" href="class_v9_slice.html#a2b36f785680dadc333d1b776b23bd329">V9Slice</a>, <a class="el" href="class_v_render_layer.html#a6b101678a697475c024934206929df76">VRenderLayer</a>, <a class="el" href="class_v_trail_area.html#a057095117e22a3dd85202e6014bfdc6b">VTrailArea</a>, and <a class="el" href="class_v3_d_batch_model_group.html#adda376f2139c324c5f0637b3d7651acb">V3DBatchModelGroup</a>.</p>
 
 </div>
 </div>
@@ -259,7 +263,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </dd>
 </dl>
 
-<p>Reimplemented in <a class="el" href="class_v_object.html#a1f1073c17fee9f0e64370e5ef97dcf3f">VObject</a>, <a class="el" href="class_v_tilemap.html#a04bc869d159495fd038424be8d6e1de3">VTilemap</a>, <a class="el" href="class_v_emitter.html#a552fbd947049a48139beb5c1aab35d3f">VEmitter</a>, <a class="el" href="class_v_text.html#aab017afcb7c2ac8849aac9ad8ccab78b">VText</a>, <a class="el" href="class_v_group.html#ad450bfb3735d2f0f8ee4dba034aab1a1">VGroup</a>, <a class="el" href="class_v_typed_text.html#a385f8feb3f56997d5f001260475a0522">VTypedText</a>, <a class="el" href="class_v3_d_object.html#ae4729e50f60a636420d86553cd59e459">V3DObject</a>, <a class="el" href="class_v_sprite.html#a0d8b45faf83c81a2ee450aad9ffe64b7">VSprite</a>, <a class="el" href="class_v_physics_object.html#a7e05ba004bbb0878634eb936fa3edc13">VPhysicsObject</a>, <a class="el" href="class_v_tiled_sprite.html#a8896f34c0dea851eefe6990d1a020bed">VTiledSprite</a>, <a class="el" href="class_v_physics_group.html#a09673f4e4892369fd69a7f37cfeca784">VPhysicsGroup</a>, <a class="el" href="class_v_backdrop.html#a9fd10d37d5d65e0c5d75225eb0d12b85">VBackdrop</a>, <a class="el" href="class_v_render_group.html#a53444be5035899abf90e7e580bcc7e83">VRenderGroup</a>, <a class="el" href="class_v3_d_scene.html#a87382ab8d64b07a3a8a47c271a5679cb">V3DScene</a>, <a class="el" href="class_v_render_layer.html#aa48c0ed838c61a3e0aab2ebf6c108aee">VRenderLayer</a>, <a class="el" href="class_v_trail_area.html#ad3e42907adde46a21cde5a129c0f1d2e">VTrailArea</a>, <a class="el" href="class_v_particle.html#a1558e35466cbc35ca9b2d8d7ad05f32f">VParticle</a>, and <a class="el" href="class_v_text_path.html#a21aa8f64b0d001834c7a222ea4a30d2b">VTextPath</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v_object.html#a1f1073c17fee9f0e64370e5ef97dcf3f">VObject</a>, <a class="el" href="class_v_tilemap.html#a04bc869d159495fd038424be8d6e1de3">VTilemap</a>, <a class="el" href="class_v_emitter.html#a552fbd947049a48139beb5c1aab35d3f">VEmitter</a>, <a class="el" href="class_v_group.html#ad450bfb3735d2f0f8ee4dba034aab1a1">VGroup</a>, <a class="el" href="class_v_typed_text.html#a385f8feb3f56997d5f001260475a0522">VTypedText</a>, <a class="el" href="class_v3_d_object.html#ae4729e50f60a636420d86553cd59e459">V3DObject</a>, <a class="el" href="class_v_sprite.html#a0d8b45faf83c81a2ee450aad9ffe64b7">VSprite</a>, <a class="el" href="class_v_sub_state.html#a6e6ec11d600c53f0bfcc8938e214c6db">VSubState</a>, <a class="el" href="class_v_physics_object.html#a7e05ba004bbb0878634eb936fa3edc13">VPhysicsObject</a>, <a class="el" href="class_v_render_group.html#a53444be5035899abf90e7e580bcc7e83">VRenderGroup</a>, <a class="el" href="class_v_backdrop.html#a9fd10d37d5d65e0c5d75225eb0d12b85">VBackdrop</a>, <a class="el" href="class_v_physics_group.html#a09673f4e4892369fd69a7f37cfeca784">VPhysicsGroup</a>, <a class="el" href="class_v3_d_scene.html#a87382ab8d64b07a3a8a47c271a5679cb">V3DScene</a>, <a class="el" href="class_v_state.html#a1c3c745223b46ef8f04fcbae6338a876">VState</a>, <a class="el" href="class_v_render_layer.html#aa48c0ed838c61a3e0aab2ebf6c108aee">VRenderLayer</a>, <a class="el" href="class_v_particle.html#a1558e35466cbc35ca9b2d8d7ad05f32f">VParticle</a>, <a class="el" href="class_v_tile.html#a3acbae4f6174300edd5a060b268504fb">VTile</a>, and <a class="el" href="class_v_text_path.html#a21aa8f64b0d001834c7a222ea4a30d2b">VTextPath</a>.</p>
 
 </div>
 </div>
@@ -366,6 +370,49 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </table>
 </div><div class="memdoc">
 <p>Outputs text for logging purposes (to Console, Output Window ect...) but will also throw a runtime error or show a popup window of the specific error. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fmt</td><td>Formatted string that will be printed (for example: d will print an integer value). </td></tr>
+    <tr><td class="paramname">...</td><td>You must pass in all values of each specified type that are required for the formatted string. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aeebe5634440d368a2583c0ba8558cab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeebe5634440d368a2583c0ba8558cab4">&#9670;&nbsp;</a></span>VString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const wchar_t* VBase::VString </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>fmt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Helper to create strings with format parameters. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fmt</td><td>Formatted string that will be printed (for example: d will print an integer value). </td></tr>
     <tr><td class="paramname">...</td><td>You must pass in all values of each specified type that are required for the formatted string. </td></tr>

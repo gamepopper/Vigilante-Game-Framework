@@ -13,7 +13,6 @@ var searchData=
   ['isconnected',['isConnected',['../classsf_1_1_x_input_device.html#a75c8ab8f4252a41ee69ac6381fd80553',1,'sf::XInputDevice']]],
   ['iserasing',['IsErasing',['../class_v_typed_text.html#a4b8f29fb0621d367c7d1818adbbd0249',1,'VTypedText']]],
   ['isfading',['IsFading',['../class_v_camera.html#ac517d9b28c4dbea08f4109d487a2c842',1,'VCamera']]],
-  ['isfinished',['IsFinished',['../class_v_timeline.html#a17fb510d3eeb8301aae34c4fd8369964',1,'VTimeline']]],
   ['isflashing',['IsFlashing',['../class_v_camera.html#a3fee73adacd683900298761adfeb02c3',1,'VCamera']]],
   ['isfullscreen',['IsFullscreen',['../class_v_global.html#aa6373d7a5065c0a140a48efb7189213c',1,'VGlobal']]],
   ['isgamepadactive',['IsGamepadActive',['../class_v_input_handler.html#a9ebc4e3ed3f3f20f05423d22245465a6',1,'VInputHandler']]],

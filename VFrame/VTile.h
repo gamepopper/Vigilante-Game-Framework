@@ -44,14 +44,14 @@ private:
 	sf::Vector2f relativePos;
 
 public:
-
+	///Used to call parent class functions when they are overrided in class.
 	typedef VObject VSUPERCLASS;
 
 	///Callback for tile collisions.
 	std::function<void(VObject*, VObject*)> Callback = nullptr;
 	///For any tile specific collision behaviour, this specifies the tile ID the tile uses.
 	char MainTile = (char)0;
-
+	///Reference of the VTilemap object this tile is in.
 	VTilemap* Tilemap;
 
 	/**

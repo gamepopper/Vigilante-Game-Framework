@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -81,7 +81,7 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a9dd17d4a6444a9d567949343ac97f806">AngleVelocity</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_object.html#a912708fc0c91f1fb12aa61d49fb42634">CollisionXDrag</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a4cffad74d30e7b13d4931198bf0d16e4">computeVelocity</a>(float v, float a, float d, float max, float dt)</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_base.html#a2017adacc8701de1caac66ffa0030db1">Destroy</a>()</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_shape.html#a37f1ba27237017fec675619c4e5920c9">Destroy</a>() override</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a593f297077bae51f3846a0722141295d">Drag</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_shape.html#a7d8df410a3fe58ba75e50b96818ef8b9">Draw</a>(sf::RenderTarget &amp;RenderTarget) override</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a57389af5c3d0db1952072287c2c7a6a1">Elasticity</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
@@ -122,7 +122,9 @@ $(function() {
   <tr><td class="entry"><a class="el" href="class_v_object.html#ae1ebef206961b216e544a60e580577d1">SetPositionAtCentre</a>(float x, float y)</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a25bfcfac7d08284f5dc88ffc7e201018">SetPositionAtCentre</a>(sf::Vector2f newPos)</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_shape.html#a1b7901912d7b13909803ac8e50d68e66">SetRectangle</a>(float width, float height)</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_v_shape.html#a2313747218071cfbecd86af4f2356a3d">shape</a></td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_shape.html#a0abe98dd642343e403967791fadb66cd">SetTexture</a>(sf::Texture *texture)</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_shape.html#a09c9e79839e8d02945a6c7673716e111">SetTextureFromFile</a>(const sf::String &amp;filename)</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_shape.html#af2187fe3ace02a01af20735e1a29bb92">SetTextureRect</a>(const sf::IntRect &amp;rect)</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_object.html#a20898dbea7f47fc05919dcadb5b1f3a6">SidesTouching</a> enum name</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#afe54a682d5d03cc9e65f3d545fd3938e">Size</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_object.html#acfc159100fd819b7500cbbe02ed21c67">TestInView</a>(const sf::View &amp;renderTargetView, sf::View *defaultView, VObject *o, const sf::FloatRect &amp;renderBox=sf::FloatRect())</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
@@ -149,10 +151,11 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a8dd935a818eefb5e2278d315cb42ec3e">VObject</a>(float x=0, float y=0, float width=0, float height=0)</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_shape.html#ab5cef659814faac306ec5d3f9d51c8fe">VShape</a>(float x=0, float y=0, float width=0, float height=0)</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_shape.html#aa9f3169b30cd10268b176d0166969352">VShape</a>(sf::Vector2f Position, sf::Vector2f Size)</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_shape.html#a74814858b5c805a41d870fb4b0fff994">VSUPERCLASS</a> typedef</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a9707f2b8e452f956d05572a5fa287c43">WasTouching</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_object.html#a0acf58f64958931c1a17be3e2a886b9e">ZoomFactor</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~VBase</b>() (defined in <a class="el" href="class_v_base.html">VBase</a>)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a>(const char *fmt,...)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_shape.html#a74814858b5c805a41d870fb4b0fff994">VSUPERCLASS</a> typedef</td><td class="entry"><a class="el" href="class_v_shape.html">VShape</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_object.html#a9707f2b8e452f956d05572a5fa287c43">WasTouching</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a0acf58f64958931c1a17be3e2a886b9e">ZoomFactor</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~VBase</b>() (defined in <a class="el" href="class_v_base.html">VBase</a>)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

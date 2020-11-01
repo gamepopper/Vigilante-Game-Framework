@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -110,21 +110,23 @@ $(function() {
 , <a class="el" href="class_v_render_group.html#a53444be5035899abf90e7e580bcc7e83">VRenderGroup</a>
 , <a class="el" href="class_v_render_layer.html#aa48c0ed838c61a3e0aab2ebf6c108aee">VRenderLayer</a>
 , <a class="el" href="class_v_sprite.html#a0d8b45faf83c81a2ee450aad9ffe64b7">VSprite</a>
-, <a class="el" href="class_v_text.html#aab017afcb7c2ac8849aac9ad8ccab78b">VText</a>
+, <a class="el" href="class_v_state.html#a1c3c745223b46ef8f04fcbae6338a876">VState</a>
+, <a class="el" href="class_v_sub_state.html#a6e6ec11d600c53f0bfcc8938e214c6db">VSubState</a>
 , <a class="el" href="class_v_text_path.html#a21aa8f64b0d001834c7a222ea4a30d2b">VTextPath</a>
-, <a class="el" href="class_v_tiled_sprite.html#a8896f34c0dea851eefe6990d1a020bed">VTiledSprite</a>
+, <a class="el" href="class_v_tile.html#a3acbae4f6174300edd5a060b268504fb">VTile</a>
 , <a class="el" href="class_v_tilemap.html#a04bc869d159495fd038424be8d6e1de3">VTilemap</a>
-, <a class="el" href="class_v_timeline.html#a177db93d1179561c6d8ac91611e6ffc5">VTimeline</a>
 , <a class="el" href="class_v_time_manager.html#a193a1f5f52cb7c419826c11cc50c0919">VTimeManager</a>
 , <a class="el" href="class_v_timer.html#a40841a3cf5e1af731ef68e84e35f097e">VTimer</a>
-, <a class="el" href="class_v_trail_area.html#ad3e42907adde46a21cde5a129c0f1d2e">VTrailArea</a>
+, <a class="el" href="class_v_timer_event.html#a0b7580fe549368b042957835bca4c101">VTimerEvent</a>
 , <a class="el" href="class_v_typed_text.html#a385f8feb3f56997d5f001260475a0522">VTypedText</a>
 </li>
 <li>updateCollisionBox()
 : <a class="el" href="class_v_tilemap.html#a4bb81882759428ac590611bc11b3557d">VTilemap</a>
 </li>
 <li>updateFrame()
-: <a class="el" href="class_v_sprite.html#a73ae8c1524a76da123fb897653f7c3d3">VSprite</a>
+: <a class="el" href="class_v9_slice.html#ab7af008ecef18d7e6dbc253c9a7a8c0d">V9Slice</a>
+, <a class="el" href="class_v_gradient.html#a17d7510e4977d1ecbc05d703ff237ba3">VGradient</a>
+, <a class="el" href="class_v_sprite.html#a73ae8c1524a76da123fb897653f7c3d3">VSprite</a>
 , <a class="el" href="class_v_tiled_sprite.html#af7f05a8771cc8b6e1f1b0643964de26b">VTiledSprite</a>
 </li>
 <li>updateMotion()
@@ -135,7 +137,14 @@ $(function() {
 : <a class="el" href="class_v3_d_camera.html#a0ec8b00af64b0a8d149480255f65625f">V3DCamera</a>
 </li>
 <li>UpdatePoint()
-: <a class="el" href="class_v_text_path.html#afe038087bb67e2e33dd82a6df93ede25">VTextPath</a>
+: <a class="el" href="class_v_gradient.html#ac94c151d41b14168ca193d654f53cdcb">VGradient</a>
+, <a class="el" href="class_v_text_path.html#afe038087bb67e2e33dd82a6df93ede25">VTextPath</a>
+</li>
+<li>UpdatePointColour()
+: <a class="el" href="class_v_gradient.html#af664e68f5a8cbf1587c98f898ee05017">VGradient</a>
+</li>
+<li>UpdatePointPosition()
+: <a class="el" href="class_v_gradient.html#a2217015e503be51e00eadba25f6c65ff">VGradient</a>
 </li>
 <li>UpdateShader()
 : <a class="el" href="class_v3_d_batch_model_group.html#a5cdd20d8919ccb6c87f165f5c330d3c0">V3DBatchModelGroup</a>
@@ -144,8 +153,8 @@ $(function() {
 , <a class="el" href="class_v3_d_obj_model.html#a17a8367467a146615577278abcb1b35a">V3DObjModel</a>
 </li>
 <li>updateTextRender()
-: <a class="el" href="class_v_text.html#ae85d1eb5d563409cfc6cef5d6ee4d421">VText</a>
-, <a class="el" href="class_v_text_path.html#abe21fb34db2ecc55aa9f3bedddc23d7d">VTextPath</a>
+: <a class="el" href="class_v_text.html#add279f98ff5ab70fa5823b834930a8c9">VText</a>
+, <a class="el" href="class_v_text_path.html#a515c66dc8c35c151b8534bf9669d9ab6">VTextPath</a>
 </li>
 <li>updateTexture()
 : <a class="el" href="class_v_render_group.html#a395f999ea938d54b89d3b669e660bbbe">VRenderGroup</a>
@@ -157,7 +166,9 @@ $(function() {
 : <a class="el" href="class_v3_d_model.html#afed9146cf5a55676c97a7db8b6cd9120">V3DModel</a>
 , <a class="el" href="class_v3_d_object.html#a2002d11f5bef66b82825e0e5a8b67af6">V3DObject</a>
 , <a class="el" href="class_v3_d_obj_model.html#a433426f8e6c8bdc48a3a19c1fd8caeef">V3DObjModel</a>
+, <a class="el" href="class_v9_slice.html#a4ae618e7d8d2ecc8d87ec8a62575f775">V9Slice</a>
 , <a class="el" href="class_v_backdrop.html#ac5348c09002c399bcbb7aa9ca9ec3f28">VBackdrop</a>
+, <a class="el" href="class_v_gradient.html#a1a6852daa594b9ba6d24b756082f0cc6">VGradient</a>
 , <a class="el" href="class_v_object.html#a4b169dc323027569de75c5c8256725dc">VObject</a>
 , <a class="el" href="class_v_render_group.html#a2f5b346cb08b4fe4a94a9d758ad3de54">VRenderGroup</a>
 , <a class="el" href="class_v_shape.html#aedef66637bac220147c7d41bd7d4681e">VShape</a>

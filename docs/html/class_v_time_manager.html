@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -65,45 +65,64 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_v_time_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">VTimeManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Manages multiple timers at once in a singleton data structure.  
- <a href="class_v_time_manager.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="_v_timer_8h_source.html">VTimer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a193a1f5f52cb7c419826c11cc50c0919"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#a193a1f5f52cb7c419826c11cc50c0919">Update</a> (float dt)</td></tr>
-<tr class="separator:a193a1f5f52cb7c419826c11cc50c0919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20f7b9992acafe5b59dd5da6735fdf0f"><td class="memItemLeft" align="right" valign="top"><a id="a20f7b9992acafe5b59dd5da6735fdf0f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#a20f7b9992acafe5b59dd5da6735fdf0f">VTimeManager</a> ()</td></tr>
+<tr class="memdesc:a20f7b9992acafe5b59dd5da6735fdf0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:a20f7b9992acafe5b59dd5da6735fdf0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae63d482d50dea1f99aeb4b512e93fc74"><td class="memItemLeft" align="right" valign="top"><a id="ae63d482d50dea1f99aeb4b512e93fc74"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#ae63d482d50dea1f99aeb4b512e93fc74">~VTimeManager</a> ()</td></tr>
+<tr class="memdesc:ae63d482d50dea1f99aeb4b512e93fc74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:ae63d482d50dea1f99aeb4b512e93fc74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60bce2e5cd2a414a7cc796e9f581a63a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_timer.html">VTimer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#a60bce2e5cd2a414a7cc796e9f581a63a">AddTimer</a> ()</td></tr>
+<tr class="separator:a60bce2e5cd2a414a7cc796e9f581a63a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e9a6bed370e1fec012cfe9f16f3f45d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_timer_event.html">VTimerEvent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#a9e9a6bed370e1fec012cfe9f16f3f45d">AddTimerEvent</a> (unsigned int time, std::function&lt; void()&gt; eventFunction, bool looping=false)</td></tr>
+<tr class="separator:a9e9a6bed370e1fec012cfe9f16f3f45d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dfb4029ac77ef9ef5762caef9c979ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#a9dfb4029ac77ef9ef5762caef9c979ba">AddTimer</a> (<a class="el" href="class_v_timer.html">VTimer</a> *timer)</td></tr>
 <tr class="separator:a9dfb4029ac77ef9ef5762caef9c979ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5a5280db3fb486340183ab99c61a1fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#aa5a5280db3fb486340183ab99c61a1fd">RemoveTimer</a> (<a class="el" href="class_v_timer.html">VTimer</a> *timer)</td></tr>
 <tr class="separator:aa5a5280db3fb486340183ab99c61a1fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a193a1f5f52cb7c419826c11cc50c0919"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#a193a1f5f52cb7c419826c11cc50c0919">Update</a> (float dt)</td></tr>
+<tr class="separator:a193a1f5f52cb7c419826c11cc50c0919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82cbe54e425d3cde38a8193cdcba1cd6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#a82cbe54e425d3cde38a8193cdcba1cd6">Reserve</a> (size_t size)</td></tr>
 <tr class="separator:a82cbe54e425d3cde38a8193cdcba1cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5ce19fec7211a2691bc624565ed203a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#ae5ce19fec7211a2691bc624565ed203a">Clear</a> (bool destroy=true)</td></tr>
 <tr class="separator:ae5ce19fec7211a2691bc624565ed203a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff940235afa960267a6f97efa5699193"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#aff940235afa960267a6f97efa5699193">Count</a> ()</td></tr>
 <tr class="separator:aff940235afa960267a6f97efa5699193"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a7d6c904e90ff43cd43ee54bebd7aae11"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#a7d6c904e90ff43cd43ee54bebd7aae11">AnyActiveTimers</a> ()</td></tr>
-<tr class="separator:a7d6c904e90ff43cd43ee54bebd7aae11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ac29f7df08a0dbb1be415be29ce4ae2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_v_time_manager.html">VTimeManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html#a6ac29f7df08a0dbb1be415be29ce4ae2">p</a> ()</td></tr>
-<tr class="separator:a6ac29f7df08a0dbb1be415be29ce4ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages multiple timers at once in a singleton data structure. </p>
+<div class="textblock"><p>Manages multiple timers at once in a singleton data structure. An independent <a class="el" href="class_v_time_manager.html">VTimeManager</a> can also be created, however any <a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a> or VTimeEvent objects must be constructed with the AddToManager parameter set to false. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a60bce2e5cd2a414a7cc796e9f581a63a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60bce2e5cd2a414a7cc796e9f581a63a">&#9670;&nbsp;</a></span>AddTimer() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_v_timer.html">VTimer</a>* VTimeManager::AddTimer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a> object that was added directly to the time manager. </dd></dl>
+
+</div>
+</div>
 <a id="a9dfb4029ac77ef9ef5762caef9c979ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9dfb4029ac77ef9ef5762caef9c979ba">&#9670;&nbsp;</a></span>AddTimer()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dfb4029ac77ef9ef5762caef9c979ba">&#9670;&nbsp;</a></span>AddTimer() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,29 +145,46 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7d6c904e90ff43cd43ee54bebd7aae11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d6c904e90ff43cd43ee54bebd7aae11">&#9670;&nbsp;</a></span>AnyActiveTimers()</h2>
+<a id="a9e9a6bed370e1fec012cfe9f16f3f45d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e9a6bed370e1fec012cfe9f16f3f45d">&#9670;&nbsp;</a></span>AddTimerEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool VTimeManager::AnyActiveTimers </td>
+          <td class="memname"><a class="el" href="class_v_timer_event.html">VTimerEvent</a>* VTimeManager::AddTimerEvent </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>eventFunction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>looping</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>True if any timers are currently active. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>Time in milliseconds for the event to occur. </td></tr>
+    <tr><td class="paramname">eventFunction</td><td>The event to call. </td></tr>
+    <tr><td class="paramname">looping</td><td>If true, the timeline will start at the beginning once finished, otherwise it will destroy itself. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="class_v_timer_event.html" title="Special VTimer that can perform an event at a set interval. Like VTimer, it can be paused or restarte...">VTimerEvent</a> object that was added directly to the time manager. </dd></dl>
 
 </div>
 </div>
@@ -191,32 +227,6 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Amount of timers in the manager. </dd></dl>
-
-</div>
-</div>
-<a id="a6ac29f7df08a0dbb1be415be29ce4ae2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ac29f7df08a0dbb1be415be29ce4ae2">&#9670;&nbsp;</a></span>p()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="class_v_time_manager.html">VTimeManager</a>* VTimeManager::p </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>The singleton instance as a pointer. </dd></dl>
 
 </div>
 </div>

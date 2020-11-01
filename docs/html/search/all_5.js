@@ -1,10 +1,6 @@
 var searchData=
 [
   ['fade',['Fade',['../class_v_camera.html#a4a0a5fd93fb80cf64397d1b08319fc7d',1,'VCamera::Fade()'],['../class_v_music.html#aef62578ef45c03e115782b7a4aa331e3',1,'VMusic::Fade()']]],
-  ['fadecolour',['fadeColour',['../class_v_camera.html#a2e116e2487e68114e00642b5ab5d59dd',1,'VCamera']]],
-  ['fadeflashtimer',['fadeFlashTimer',['../class_v_camera.html#a55ef3fdeb12061a0d03c0e7cb6cd79bc',1,'VCamera']]],
-  ['fadein',['fadeIn',['../class_v_camera.html#a7273bfde74c52abf03641cf0d92ac53d',1,'VCamera']]],
-  ['fadetime',['fadeTime',['../class_v_camera.html#ab9da28d5aa15cfcef73873f523bd6657',1,'VCamera']]],
   ['ffar',['ffar',['../class_v3_d_camera.html#a501589b83801673443b450871970a236',1,'V3DCamera']]],
   ['fillcolour',['fillColour',['../class_v_text.html#ae21f0f35ef22d49bf465535ee27c6593',1,'VText']]],
   ['firstalive',['FirstAlive',['../class_v_group.html#a271c0b461d0876136fe1e7114d3c44bc',1,'VGroup']]],
@@ -19,10 +15,6 @@ var searchData=
   ['fnear',['fnear',['../class_v3_d_camera.html#a24c7b92ad9382e09f3542f99156f4d96',1,'V3DCamera']]],
   ['focuspause',['FocusPause',['../class_v_global.html#a75e67b8e02b98be46ac4fa04e6e31cdf',1,'VGlobal']]],
   ['follow',['Follow',['../class_v_camera.html#a505189c7b250531aa87552e7b3e6333c',1,'VCamera']]],
-  ['followlead',['followLead',['../class_v_camera.html#a28cc4eccf6994091cba203c0c3b2f28b',1,'VCamera']]],
-  ['followlerp',['followLerp',['../class_v_camera.html#a6541310b2ab9c003f9ee20e0feb5e347',1,'VCamera']]],
-  ['followmethod',['followMethod',['../class_v_camera.html#a610f84c5c3eb330453eb99338e5fb3ed',1,'VCamera']]],
-  ['followobject',['followObject',['../class_v_camera.html#a19a1e0d2b72ed38108daca3e397fa89b',1,'VCamera']]],
   ['font',['font',['../class_v_text.html#a7e4a450740059e52aa29a01cb137cac6',1,'VText']]],
   ['fontexists',['FontExists',['../class_v_content.html#ac6019cf233f38b5333e52e2a057e9102',1,'VContent']]],
   ['fontsize',['fontSize',['../class_v_text.html#aa0bf9eea7422a3b56c418bcaa6997d24',1,'VText']]],
@@ -34,6 +26,5 @@ var searchData=
   ['fps',['FPS',['../class_v_global.html#a577c23481b1a2269a25afe4f8de803ea',1,'VGlobal']]],
   ['framesize',['FrameSize',['../class_v_sprite.html#aeefb012d54a7d951636553e0e0458b5f',1,'VSprite']]],
   ['frequency',['Frequency',['../class_v_emitter.html#a9d5c924d0c44616901c49cd97caa6bc0',1,'VEmitter']]],
-  ['frustumplane',['FrustumPlane',['../class_v3_d_camera.html#a5ead7d655d898a1a74f768908d6f95b4',1,'V3DCamera']]],
-  ['function',['function',['../struct_v_timeline_1_1_v_timeline_event.html#a80cf27733c4e9f5d96b9e15bf051669f',1,'VTimeline::VTimelineEvent']]]
+  ['frustumplane',['FrustumPlane',['../class_v3_d_camera.html#a5ead7d655d898a1a74f768908d6f95b4',1,'V3DCamera']]]
 ];

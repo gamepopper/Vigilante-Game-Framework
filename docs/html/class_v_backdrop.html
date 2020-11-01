@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -123,8 +123,8 @@ Public Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_backdrop.html#ab8cced243b9c38e07b939b0c2494d185">Destroy</a> () override</td></tr>
 <tr class="memdesc:ab8cced243b9c38e07b939b0c2494d185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_v_backdrop.html" title="Renders and endless scrolling scene that takes up the whole screen. Good for scrolling backgrounds...">VBackdrop</a>. <br /></td></tr>
 <tr class="separator:ab8cced243b9c38e07b939b0c2494d185"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f3d336a76f51460bf2524efdf5ed039"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_backdrop.html">VBackdrop</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_backdrop.html#a5f3d336a76f51460bf2524efdf5ed039">LoadGraphic</a> (sf::String filename, const sf::IntRect &amp;area=sf::IntRect())</td></tr>
-<tr class="separator:a5f3d336a76f51460bf2524efdf5ed039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06fd57f815f3769f5effaddf534eb2c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_backdrop.html">VBackdrop</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_backdrop.html#a06fd57f815f3769f5effaddf534eb2c8">LoadGraphic</a> (const sf::String &amp;filename, const sf::IntRect &amp;area=sf::IntRect())</td></tr>
+<tr class="separator:a06fd57f815f3769f5effaddf534eb2c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0037a1cb70f34a9ddc76b5d81f0bec82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_backdrop.html">VBackdrop</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_backdrop.html#a0037a1cb70f34a9ddc76b5d81f0bec82">LoadGraphicFromTexture</a> (sf::Texture &amp;<a class="el" href="class_v_backdrop.html#a1185cf94fe1706b4897dd833bca5b3b8">texture</a>)</td></tr>
 <tr class="separator:a0037a1cb70f34a9ddc76b5d81f0bec82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c2e9bce517c538a0a889062b5a6ba26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_backdrop.html#a0c2e9bce517c538a0a889062b5a6ba26">SetTint</a> (const sf::Color &amp;tint)</td></tr>
@@ -372,6 +372,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#acfc159100fd819b7500cbbe02ed21c67">TestInView</a> (const sf::View &amp;renderTargetView, sf::View *defaultView, <a class="el" href="class_v_object.html">VObject</a> *o, const sf::FloatRect &amp;renderBox=sf::FloatRect())</td></tr>
 <tr class="separator:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
+<tr class="memitem:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a> (const char *fmt,...)</td></tr>
+<tr class="separator:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a24901d5efbff21bcb040ade5d2efdc1d">VLog</a> (const char *fmt,...)</td></tr>
 <tr class="separator:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c63d85f3139497ad5574fcc4f1ae33 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a51c63d85f3139497ad5574fcc4f1ae33">VLogError</a> (const char *fmt,...)</td></tr>
@@ -496,8 +498,8 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
-<a id="a5f3d336a76f51460bf2524efdf5ed039"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f3d336a76f51460bf2524efdf5ed039">&#9670;&nbsp;</a></span>LoadGraphic()</h2>
+<a id="a06fd57f815f3769f5effaddf534eb2c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06fd57f815f3769f5effaddf534eb2c8">&#9670;&nbsp;</a></span>LoadGraphic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -505,7 +507,7 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
         <tr>
           <td class="memname"><a class="el" href="class_v_backdrop.html">VBackdrop</a>* VBackdrop::LoadGraphic </td>
           <td>(</td>
-          <td class="paramtype">sf::String&#160;</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
           <td class="paramname"><em>filename</em>, </td>
         </tr>
         <tr>

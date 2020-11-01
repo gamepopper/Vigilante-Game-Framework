@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -71,7 +71,9 @@ $(function() {
 </li>
 <li>Scale
 : <a class="el" href="class_v3_d_object.html#a48bc2ffa59e9ebaf8705c28c1c43b244">V3DObject</a>
+, <a class="el" href="class_v9_slice.html#a61257833270c8cde1f03fec07659bf16">V9Slice</a>
 , <a class="el" href="class_v_backdrop.html#a68f7e5321ebe2c08b1616b92eaca463d">VBackdrop</a>
+, <a class="el" href="class_v_gradient.html#a54b82353e798001205aa7fa06d847861">VGradient</a>
 , <a class="el" href="class_v_particle.html#ad20d699349d55c7ccbf8c791319a68d9">VParticle</a>
 , <a class="el" href="class_v_shape.html#a5b6e7132c8b31db530177db0033e5865">VShape</a>
 , <a class="el" href="class_v_sprite.html#a3f0251c4d10a903c66d09b7ac114d210">VSprite</a>
@@ -179,6 +181,9 @@ $(function() {
 <li>SetCollisionSlop()
 : <a class="el" href="class_v_physics_group.html#af7f86298079623a639a06281ebae807b">VPhysicsGroup</a>
 </li>
+<li>SetConstraintCallback()
+: <a class="el" href="class_v_physics_group.html#ab95dbaf2616daf145919a527a13eb2d3">VPhysicsGroup</a>
+</li>
 <li>SetConvex()
 : <a class="el" href="class_v_shape.html#ac625c7edb24bed89ecd917a8eb048b5b">VShape</a>
 </li>
@@ -246,7 +251,7 @@ $(function() {
 : <a class="el" href="class_v_physics_group.html#a236a3506ac1f5c534aaf2134c1d619e5">VPhysicsGroup</a>
 </li>
 <li>SetInputTextureName()
-: <a class="el" href="class_v_post_effect.html#a9f4591144aa4072621abb98b84ca9aa1">VPostEffect</a>
+: <a class="el" href="class_v_post_effect.html#a7c6a164d7bcb7bdfb4b8753129e7a439">VPostEffect</a>
 </li>
 <li>SetInterpolationType()
 : <a class="el" href="class_v_path.html#ae80d43224df194c739604b5862190cc5">VPath</a>
@@ -263,7 +268,7 @@ $(function() {
 <li>SetLooping()
 : <a class="el" href="class_v_animation.html#a2192f6d55346d2691ce4688d225f8fc1">VAnimation</a>
 , <a class="el" href="class_v_animation_manager.html#a5239ecc5880c82e4f343bbdebe9dde3f">VAnimationManager</a>
-, <a class="el" href="class_v_timeline.html#a0fad2c00f4aaf06d7a600c9972a885d2">VTimeline</a>
+, <a class="el" href="class_v_timer_event.html#a966344cee303216f146bd781ed9498d8">VTimerEvent</a>
 </li>
 <li>SetMasterPitch()
 : <a class="el" href="class_v_sound_manager.html#a9a8ede3acc47a7d7c119d2a207b010a3">VSoundManager</a>
@@ -304,10 +309,10 @@ $(function() {
 , <a class="el" href="class_v_text.html#afeb34f8f3137c5da2c7a241ee17fc07e">VText</a>
 </li>
 <li>SetParameter()
-: <a class="el" href="class_v_post_effect.html#a10df8bfd780b4660b0aed14b6f8a801e">VPostEffect</a>
+: <a class="el" href="class_v_post_effect.html#a9c53851e3eb148a9f2a0daf20332f469">VPostEffect</a>
 </li>
 <li>SetPath()
-: <a class="el" href="class_v_path.html#abad0c182e48a2106abcf574f00e5d000">VPath</a>
+: <a class="el" href="class_v_path.html#a0e16fb58c2741d36bd50228c8f189ce8">VPath</a>
 </li>
 <li>SetPathOffset()
 : <a class="el" href="class_v_text_path.html#ab3b4c550c4302c73452c9e7b97f7a4ca">VTextPath</a>
@@ -331,7 +336,7 @@ $(function() {
 : <a class="el" href="class_v_text_path.html#a85b5e336e77e481a0d73fa2389113aaf">VTextPath</a>
 </li>
 <li>SetPosition()
-: <a class="el" href="class_v_music.html#a29fe093ce41c0e36a3e71114f26b7600">VMusic</a>
+: <a class="el" href="class_v_music.html#a7d2d8a11215189cff5173cd185e7f3dd">VMusic</a>
 </li>
 <li>SetPositionAtCentre()
 : <a class="el" href="class_v_object.html#ae1ebef206961b216e544a60e580577d1">VObject</a>
@@ -354,6 +359,9 @@ $(function() {
 <li>SetRelativeToListener()
 : <a class="el" href="class_v_music.html#a13843ffe527cfc56f8fef9f2b515918f">VMusic</a>
 </li>
+<li>SetResolution()
+: <a class="el" href="class_v_gradient.html#a7cdcf826c5e90ad3133e5d0823bd108c">VGradient</a>
+</li>
 <li>SetRestAngle()
 : <a class="el" href="class_v_physics_damped_rotary_spring.html#acdefa7bffd516cb87610f3d2f02443b1">VPhysicsDampedRotarySpring</a>
 </li>
@@ -372,7 +380,7 @@ $(function() {
 : <a class="el" href="class_v_physics_group.html#ae135c07830d7471b41696f3a7076b7c1">VPhysicsGroup</a>
 </li>
 <li>SetSound()
-: <a class="el" href="class_v_typed_text.html#a1dfb8a55600ff4ba935c043ed9469a12">VTypedText</a>
+: <a class="el" href="class_v_typed_text.html#a907262cd2aa872d6e78e54a91806bcd6">VTypedText</a>
 </li>
 <li>SetSpeed()
 : <a class="el" href="class_v_path.html#a019e6877fd16e77166b8857a5f633f21">VPath</a>
@@ -392,6 +400,18 @@ $(function() {
 <li>setTextLine()
 : <a class="el" href="class_v_text.html#ae7966effff554624d0d537873c559ce6">VText</a>
 </li>
+<li>SetTexture()
+: <a class="el" href="class_v_shape.html#a0abe98dd642343e403967791fadb66cd">VShape</a>
+</li>
+<li>SetTextureFromFile()
+: <a class="el" href="class_v_shape.html#a09c9e79839e8d02945a6c7673716e111">VShape</a>
+</li>
+<li>SetTextureRect()
+: <a class="el" href="class_v_shape.html#af2187fe3ace02a01af20735e1a29bb92">VShape</a>
+</li>
+<li>SetTextWidth()
+: <a class="el" href="class_v_text.html#aecd2b797ff3bbb92fae8bfbf2cf44fa7">VText</a>
+</li>
 <li>SetTileCollisionID()
 : <a class="el" href="class_v_tilemap.html#ab329b4d701461ad08d4d4698f62937e5">VTilemap</a>
 </li>
@@ -410,16 +430,19 @@ $(function() {
 : <a class="el" href="class_v_global.html#abf3d07c7b0f6d1c64a8e200dbc3f6c62">VGlobal</a>
 </li>
 <li>SetToBounds()
-: <a class="el" href="class_v_camera.html#a7e0a20b67316cfe3ef66b2a3e40aeb44">VCamera</a>
+: <a class="el" href="class_v_camera.html#a85257333585016962c1a250290c8ca9b">VCamera</a>
 </li>
 <li>SetTorque()
 : <a class="el" href="class_v_physics_object.html#ae39f01d3706930250dfbd1b883306b0c">VPhysicsObject</a>
+</li>
+<li>SetType()
+: <a class="el" href="class_v_gradient.html#ad49db66b1c64fc1d99bb6bc8988001a3">VGradient</a>
 </li>
 <li>SetUpdateAngle()
 : <a class="el" href="class_v_path.html#afd786e0eecda72a1b07f226a2d47509c">VPath</a>
 </li>
 <li>setupTilemap()
-: <a class="el" href="class_v_tilemap.html#adaf5629794ce58b1c671ece2792ca421">VTilemap</a>
+: <a class="el" href="class_v_tilemap.html#a301ca68223066312a0029dff5afa2144">VTilemap</a>
 </li>
 <li>SetViewDimensions()
 : <a class="el" href="class_v3_d_orthographic_camera.html#aa65cc2cb91be6bb2bfaa01977ab87597">V3DOrthographicCamera</a>
@@ -440,23 +463,10 @@ $(function() {
 : <a class="el" href="class_v3_d_scene.html#aa734dec2df3f32cd403974fa05996d35">V3DScene</a>
 </li>
 <li>Shake()
-: <a class="el" href="class_v_camera.html#a3cd37c3b93dc6fb8cd61e4473a882abf">VCamera</a>
-</li>
-<li>shakeLength
-: <a class="el" href="class_v_camera.html#ab8051675c8df2d4ee50d1f1e24e4fcaf">VCamera</a>
-</li>
-<li>shakeTimer
-: <a class="el" href="class_v_camera.html#a88fc62dcfba5b3acf7d88dec95707a0a">VCamera</a>
-</li>
-<li>shakeX
-: <a class="el" href="class_v_camera.html#a0a16b5234fbf4bd35544b3dc9ce8ca89">VCamera</a>
-</li>
-<li>shakeY
-: <a class="el" href="class_v_camera.html#a2fc3f403164f8996d54234a3ead93ca8">VCamera</a>
+: <a class="el" href="class_v_camera.html#a996c2c1019f1ded18588325ecda1bb5f">VCamera</a>
 </li>
 <li>shape
 : <a class="el" href="class_v_physics_object.html#a9c3e314d88e2d645f62f94a771c1d74b">VPhysicsObject</a>
-, <a class="el" href="class_v_shape.html#a2313747218071cfbecd86af4f2356a3d">VShape</a>
 </li>
 <li>shapeType
 : <a class="el" href="class_v_physics_object.html#a3e3ba74ecb5f12824e762e67e00b102c">VPhysicsObject</a>
@@ -480,14 +490,14 @@ $(function() {
 <li>Sort()
 : <a class="el" href="class_v_group.html#a835dc20068a6d0ab096d613e14e33f49">VGroup</a>
 </li>
+<li>sortedPoints
+: <a class="el" href="class_v_gradient.html#abc2a8161818843e9335bda07c199fae3">VGradient</a>
+</li>
 <li>Sound
 : <a class="el" href="class_v_global.html#a5fa2cc64f368f1e7ac5d88124b269f1b">VGlobal</a>
 </li>
 <li>SoundExists()
 : <a class="el" href="class_v_content.html#a9ca0d40019fb4659a128ac2af5f65a24">VContent</a>
-</li>
-<li>space
-: <a class="el" href="class_v_physics_group.html#a0055c3b78ed4b43b4dd8923878c6c76b">VPhysicsGroup</a>
 </li>
 <li>Specular
 : <a class="el" href="struct_v3_d_material.html#a827b0b8d03cae3a6087a49e1d3e1f014">V3DMaterial</a>
@@ -501,12 +511,8 @@ $(function() {
 <li>Sprite
 : <a class="el" href="class_v_render_group.html#a1da609bd10bbaac2c89fa2af87b64f89">VRenderGroup</a>
 </li>
-<li>sprite
-: <a class="el" href="class_v_render_layer.html#aa0b3bc0de30a1eb751eb9469d6b4a94e">VRenderLayer</a>
-</li>
 <li>Start()
 : <a class="el" href="class_v_emitter.html#a87d76f34748747a3e8512d9a2dada6d9">VEmitter</a>
-, <a class="el" href="class_v_timeline.html#a366935e36d2e16a0f4f7971270f5e202">VTimeline</a>
 , <a class="el" href="class_v_typed_text.html#a78bf58b0906711175186fef011dbdb5a">VTypedText</a>
 </li>
 <li>StartFollowing()
@@ -524,7 +530,7 @@ $(function() {
 , <a class="el" href="class_v_emitter.html#af8c680783c46e0be078aae4ae73c258b">VEmitter</a>
 , <a class="el" href="class_v_music.html#a69877a54e2b871faf2bbdfc01bb0ac99">VMusic</a>
 , <a class="el" href="class_v_sound_manager.html#a7d7ee616c1f10dc114268c9e703cf66a">VSoundManager</a>
-, <a class="el" href="class_v_timeline.html#a25dac3aadf6e2f000fc83bf6c2c7bf17">VTimeline</a>
+, <a class="el" href="class_v_timer_event.html#ad5965e78c81409b9cf738add5f5ef697">VTimerEvent</a>
 </li>
 <li>StopAll()
 : <a class="el" href="class_v_sound_manager.html#ab074c80528b242912a30fc536150c418">VSoundManager</a>

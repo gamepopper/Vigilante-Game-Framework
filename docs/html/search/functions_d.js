@@ -1,7 +1,7 @@
 var searchData=
 [
   ['onemit',['OnEmit',['../class_v_particle.html#ab8bba1156342445dea2be80c04195806',1,'VParticle']]],
-  ['openmusicfile',['OpenMusicFile',['../class_v_music.html#a1254c63669b8ed194bc52ca3183a75b4',1,'VMusic']]],
+  ['openmusicfile',['OpenMusicFile',['../class_v_music.html#ab24bb4f28e2f7273b28a20b370b72eb7',1,'VMusic']]],
   ['openmusicmemory',['OpenMusicMemory',['../class_v_music.html#ae0e17b5f263c7c77f5ea8684c99c1103',1,'VMusic']]],
   ['openmusicstream',['OpenMusicStream',['../class_v_music.html#a5d76ff693ea2ab7ea6f4ecd3a637ac93',1,'VMusic']]],
   ['opensubstate',['OpenSubState',['../class_v_state.html#a6e43951d4eb72c8685956c6e1daa45ba',1,'VState']]],

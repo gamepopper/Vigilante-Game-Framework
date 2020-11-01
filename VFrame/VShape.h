@@ -40,11 +40,13 @@
 ///An object class that renders primitive shapes. Arguably more optimal than creating a VSprite and calling any of the Make graphic functions.
 class VShape : public VObject
 {
-protected:
+private:
 	///The shape object that holds the rendering and transform infomation of the object.
 	std::unique_ptr<sf::Shape> shape;
 	sf::Texture* tex;
 	bool disposable = false;
+
+protected:
 	virtual void updateTransform() override;
 
 public:

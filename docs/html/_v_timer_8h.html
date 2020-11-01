@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -84,14 +84,10 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_timer.html">VTimer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single timer class for measuring the length of time between function calls.  <a href="class_v_timer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_timeline.html">VTimeline</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Special <a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a> that can perform events at set intervals. <a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a> functions are usable, but the new functions need to be called in order for events to take effect.  <a href="class_v_timeline.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_v_timeline_1_1_v_timeline_event.html">VTimeline::VTimelineEvent</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An event struct that holds the function to call as well as the point in time for the event to occur.  <a href="struct_v_timeline_1_1_v_timeline_event.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_timer_event.html">VTimerEvent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Special <a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a> that can perform an event at a set interval. Like <a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a>, it can be paused or restarted at any point. It can also be looped.  <a href="class_v_timer_event.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_time_manager.html">VTimeManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages multiple timers at once in a singleton data structure.  <a href="class_v_time_manager.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -105,7 +101,7 @@ LICENSE</h1>
 <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 <h1><a class="anchor" id="DESCRIPTION"></a>
 DESCRIPTION</h1>
-<p><a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a> updates and gets the amount of time since the object's creation or since Restart() is called. <a class="el" href="class_v_timeline.html" title="Special VTimer that can perform events at set intervals. VTimer functions are usable, but the new functions need to be called in order for events to take effect. ">VTimeline</a> is a special timer that also calls events at points in time. <a class="el" href="class_v_time_manager.html" title="Manages multiple timers at once in a singleton data structure. ">VTimeManager</a> updates <a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a> objects, as a singleton it can be updated even after </p>
+<p><a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a> updates and gets the amount of time since the object's creation or since Restart() is called. VTimeline is a special timer that also calls events at points in time. <a class="el" href="class_v_time_manager.html">VTimeManager</a> updates <a class="el" href="class_v_timer.html" title="Single timer class for measuring the length of time between function calls. ">VTimer</a> objects, as a singleton it can be updated even after </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -9,7 +9,7 @@ var searchData=
   ['materialid',['materialID',['../struct_v3_d_obj_model_1_1_v3_d_model_data.html#a696c2e20e94a24687a22cf427fed7f97',1,'V3DObjModel::V3DModelData']]],
   ['materials',['materials',['../class_v3_d_obj_model.html#a62849bd0fca3a20f12a0ced8f6a0119e',1,'V3DObjModel']]],
   ['maximum',['maximum',['../class_v3_d_object.html#a4c5051c0689213b28e7ac48b72889887',1,'V3DObject']]],
-  ['maxsize',['maxSize',['../class_v_post_effect_multipass.html#a497bbf0bee10517c44025112bff89067',1,'VPostEffectMultipass::maxSize()'],['../class_v_group.html#ae27aa128f5863f383a25fcd80963b54f',1,'VGroup::MaxSize()']]],
+  ['maxsize',['MaxSize',['../class_v_group.html#ae27aa128f5863f383a25fcd80963b54f',1,'VGroup::MaxSize()'],['../class_v_post_effect_multipass.html#a497bbf0bee10517c44025112bff89067',1,'VPostEffectMultipass::maxSize()']]],
   ['maxvelocity',['MaxVelocity',['../class_v3_d_object.html#aeb1cf4ba89091640a14bb3896de1562a',1,'V3DObject::MaxVelocity()'],['../class_v_object.html#a99a32993c290bed06a36c423c51e9b12',1,'VObject::MaxVelocity()']]],
   ['members',['members',['../class_v_group.html#a32a58c66cc33805d37f569b5bc7f2f7e',1,'VGroup']]],
   ['minimum',['minimum',['../class_v3_d_object.html#a6286828b476be3431708a36c8423e9dc',1,'V3DObject']]],
