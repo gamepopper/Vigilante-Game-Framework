@@ -48,6 +48,11 @@ void VGradient::updateFrame()
 		offset += length;
 	}
 
+	if (renderTex.getSize().x != Size.x || renderTex.getSize().y != Size.y)
+	{
+		renderTex.create(Size.x, Size.y);
+	}
+	
 	sf::Texture gradTexture;
 	gradTexture.loadFromImage(gradImage);
 	gradTexture.setSmooth(true);
@@ -130,18 +135,16 @@ void VGradient::updateFrame()
 		break;
 	}
 
-	if (renderTex.getSize().x != Size.x || renderTex.getSize().y != Size.y)
-	{
-		renderTex.create(Size.x, Size.y);
-	}
-
+	renderState.blendMode = sf::BlendNone;
 	renderState.transform = sf::Transform::Identity;
 	renderTex.clear(sortedPoints[sortedPoints.size() - 1]->Tint);
 	renderTex.draw(vertexArray, renderState);
 	renderTex.display();
 
-	vertexArray.setPrimitiveType(sf::PrimitiveType::Quads);
+	renderState.blendMode = sf::RenderStates::Default.blendMode;
+
 	vertexArray.clear();
+	vertexArray.setPrimitiveType(sf::PrimitiveType::Quads);
 	vertexArray.append(sf::Vertex(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(0.0f, 0.0f)));
 	vertexArray.append(sf::Vertex(sf::Vector2f(Size.x, 0.0f), sf::Vector2f(Size.x, 0.0f)));
 	vertexArray.append(sf::Vertex(sf::Vector2f(Size.x, Size.y), sf::Vector2f(Size.x, Size.y)));
