@@ -79,6 +79,8 @@ protected:
 	std::vector<VColourPoint*> sortedPoints;
 	///The type of gradiant to use.
 	VGradientType gradientType;
+	///Gradient strip
+	sf::Image gradImage;
 	///Gradient resolution;
 	float gradResolution;
 	///Render texture

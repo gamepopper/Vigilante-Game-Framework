@@ -33,9 +33,10 @@ void VGradient::updateFrame()
 		return first->Position < second->Position;
 	});
 
-	sf::Image gradImage;
-	gradImage.create(static_cast<unsigned int>(1 * gradResolution), 1);
-	unsigned int imageWidth = gradImage.getSize().x;
+	unsigned int imageWidth = static_cast<unsigned int>(1 * gradResolution);
+	if (gradImage.getSize().x != imageWidth)
+		gradImage.create(imageWidth, 1);
+	
 	unsigned int offset = 0;
 	for (unsigned int i = 0; i < sortedPoints.size() - 1; i++)
 	{
@@ -49,9 +50,7 @@ void VGradient::updateFrame()
 	}
 
 	if (renderTex.getSize().x != Size.x || renderTex.getSize().y != Size.y)
-	{
 		renderTex.create(Size.x, Size.y);
-	}
 	
 	sf::Texture gradTexture;
 	gradTexture.loadFromImage(gradImage);
