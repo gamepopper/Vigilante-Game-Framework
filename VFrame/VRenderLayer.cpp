@@ -4,11 +4,10 @@
 VRenderLayer::VRenderLayer(unsigned int maxSize) : VGroup(maxSize)
 {
 	vertexArray.setPrimitiveType(sf::Quads);
-	vertexArray.append(sf::Vertex(sf::Vector2f(0.0f, VGlobal::p()->Height), sf::Color::White, sf::Vector2f(0.0f, VGlobal::p()->Height)));
-	vertexArray.append(sf::Vertex(sf::Vector2f(0.0f, 0.0f), sf::Color::White, sf::Vector2f()));
-	vertexArray.append(sf::Vertex(sf::Vector2f(VGlobal::p()->Width, 0.0f), sf::Color::White, sf::Vector2f(VGlobal::p()->Width, 0.0f)));
-	vertexArray.append(sf::Vertex(sf::Vector2f(VGlobal::p()->Width, VGlobal::p()->Height), sf::Color::White, sf::Vector2f(VGlobal::p()->Width, VGlobal::p()->Height)));
-	renderTex.create(VGlobal::p()->Width, VGlobal::p()->Height);
+	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
+	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
+	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
+	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
 }
 
 void VRenderLayer::Destroy()
@@ -53,6 +52,17 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 {
 	sf::View MainView = RenderTarget.getView();
 	sf::View DefaultView = RenderTarget.getDefaultView();
+
+	if (renderTex.getSize() != sf::Vector2u(MainView.getSize()))
+	{
+		float Width = MainView.getSize().x;
+		float Height = MainView.getSize().y;
+		vertexArray[0] = sf::Vertex(sf::Vertex(sf::Vector2f(0.0f, Height), sf::Color::White, sf::Vector2f(0.0f, Height)));
+		vertexArray[1] = sf::Vertex(sf::Vertex(sf::Vector2f(0.0f, 0.0f), sf::Color::White, sf::Vector2f()));
+		vertexArray[2] = sf::Vertex(sf::Vertex(sf::Vector2f(Width, 0.0f), sf::Color::White, sf::Vector2f(Width, 0.0f)));
+		vertexArray[3] = sf::Vertex(sf::Vertex(sf::Vector2f(Width, Height), sf::Color::White, sf::Vector2f(Width, Height)));
+		renderTex.create((unsigned int)Width, (unsigned int)Height);
+	}
 
 	renderTex.setView(MainView);
 	renderTex.clear(sf::Color::Transparent);
