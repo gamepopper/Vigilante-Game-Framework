@@ -26,7 +26,7 @@ void VPhysicsJointBase::Deinitialise(VPhysicsCPSpace* space)
 	cpSpaceRemoveConstraint(space, constraint);
 }
 
-VPhysicsCPConstraint * VPhysicsJointBase::GetConstraint()
+VPhysicsCPConstraint* VPhysicsJointBase::GetConstraint()
 {
 	return constraint;
 }

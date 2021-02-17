@@ -12,9 +12,9 @@ struct VPhysicsGroup::VPhysicsObjectCollisionCallbackHelper
 	VObject* B;
 	bool Persist;
 	VPhysicsGroup::VPhysicsCallbackType Type;
-	std::function<bool(VPhysicsObject*, VPhysicsObject*)> CallbackFunc;
+	std::function<bool(VPhysicsObject*, VPhysicsObject*, VPhysicsArbiter*)> CallbackFunc;
 
-	VPhysicsObjectCollisionCallbackHelper(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsGroup::VPhysicsCallbackType type, bool persist = false)
+	VPhysicsObjectCollisionCallbackHelper(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*, VPhysicsArbiter*)>& callback, VPhysicsGroup::VPhysicsCallbackType type, bool persist = false)
 	{
 		A = a;
 		B = b;
@@ -117,8 +117,8 @@ VPhysicsJointBase* VPhysicsGroup::AddJoint(VPhysicsJointBase* Joint)
 }
 
 bool VPhysicsGroup::RemoveJoint(VPhysicsJointBase* Joint)
-{
-	if (Remove(Joint))
+{	
+	if (cpSpaceContainsConstraint(space, Joint->GetConstraint()))
 	{
 		Joint->Deinitialise(space);
 		return true;
@@ -136,25 +136,15 @@ void VPhysicsGroup::Destroy()
 
 void VPhysicsGroup::Update(float dt)
 {
-	/*timestep += dt;
+	timestep += dt;
 	float fixedTS = 1.0f / VGlobal::p()->FPS;
 
-	while (timestep > fixedTS)*/
+	//while (timestep > fixedTS)
 	{
 		VSUPERCLASS::Update(dt);
 		cpSpaceStep(space, dt);
 
-		/*for (int i = 0; i < (int)callbackHelperList.size(); i++)
-		{
-			if (!callbackHelperList[i].Persist)
-			{
-				callbackHelperList.erase(callbackHelperList.begin() + i);
-				i--;
-			}
-		}
-
-		timestep -= fixedTS;*/
-
+		timestep -= fixedTS;
 	}
 }
 
@@ -186,13 +176,19 @@ VPhysicsJointBase* VPhysicsGroup::getJointFromConstraint(cpConstraint* constrain
 	return nullptr;
 }
 
-void VPhysicsGroup::SetCollisionCallback(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist)
+void VPhysicsGroup::SetCollisionCallback(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*, VPhysicsArbiter*)>& callback, VPhysicsCallbackType type, bool persist)
 {
+	if (a == b)
+		return;
+
 	objectCallbackHelperList.emplace_back(a, b, callback, type, persist);
 }
 
-void VPhysicsGroup::SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist)
+void VPhysicsGroup::SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*, VPhysicsArbiter*)>& callback, VPhysicsCallbackType type, bool persist)
 {
+	if (a == b)
+		return;
+
 	objectCallbackHelperList.emplace_back(a->GetBaseObject(), b->GetBaseObject(), callback, type, persist);
 }
 
@@ -230,14 +226,23 @@ bool VPhysicsGroup::ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *spa
 	cpBody* bodyA;
 	cpBody* bodyB;
 
+	VPhysicsArbiter arbiter(arb);
+
+	unsigned int oldLock = 0;
 	cpArbiterGetBodies(arb, &bodyA, &bodyB);
 
 	VPhysicsObject* physicsA = getObjectFromBody(bodyA);
+	oldLock = physicsA->Lock;
+	physicsA->Lock = 0;
 	physicsA->Update(0.0f);
+	physicsA->Lock = oldLock;
 	VPhysicsObject* physicsB = getObjectFromBody(bodyB);
+	oldLock = physicsB->Lock;
+	physicsB->Lock = 0;
 	physicsB->Update(0.0f);
+	physicsB->Lock = oldLock;
 
-	/*if (type == VPhysicsCallbackType::PRESOLVE)
+	/*if (type == PRESOLVE)
 	{
 		cpShape* shapeA;
 		cpShape* shapeB;
@@ -251,7 +256,7 @@ bool VPhysicsGroup::ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *spa
 		cpShapeSetElasticity(shapeA, elasticityA);
 		cpShapeSetElasticity(shapeB, elasticityB);
 	}
-	else if (type == VPhysicsCallbackType::POSTSOLVE)
+	else if (type == POSTSOLVE)
 	{
 		cpShape* shapeA;
 		cpShape* shapeB;
@@ -274,30 +279,26 @@ bool VPhysicsGroup::ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *spa
 			(objectCallbackHelperList[i].B == physicsB->GetBaseObject() ||
 				objectCallbackHelperList[i].B == nullptr))
 		{
-			result = objectCallbackHelperList[i].CallbackFunc(physicsA, physicsB);
+			result = objectCallbackHelperList[i].CallbackFunc(physicsA, physicsB, &arbiter);
 
 			if (!objectCallbackHelperList[i].Persist)
 			{
 				objectCallbackHelperList.erase(objectCallbackHelperList.begin() + i);
 				i--;
 			}
-
-			break;
 		}
 
 		if ((objectCallbackHelperList[i].B == physicsA->GetBaseObject() ||
 			objectCallbackHelperList[i].B == nullptr) &&
 			objectCallbackHelperList[i].A == physicsB->GetBaseObject())
 		{
-			result = objectCallbackHelperList[i].CallbackFunc(physicsB, physicsA);
+			result = objectCallbackHelperList[i].CallbackFunc(physicsB, physicsA, &arbiter);
 
 			if (!objectCallbackHelperList[i].Persist)
 			{
 				objectCallbackHelperList.erase(objectCallbackHelperList.begin() + i);
 				i--;
 			}
-
-			break;
 		}
 	}
 
@@ -426,6 +427,20 @@ void VPhysicsGroup::SetCollisionPersistence(unsigned int collisionPersistence)
 VPhysicsCPBody* VPhysicsGroup::GetBody()
 {
 	return cpSpaceGetStaticBody(space);
+}
+
+VPhysicsObject* VPhysicsGroup::FindPhysicsObject(VObject* object)
+{
+	auto it = std::find_if(members.begin(), members.end(), [object](VBase* o) 
+	{
+		VPhysicsObject* obj = dynamic_cast<VPhysicsObject*>(o);
+		return obj && obj->GetBaseObject() == object; 
+	});
+
+	if (it != members.end())
+		return dynamic_cast<VPhysicsObject*>(*it);
+
+	return nullptr;
 }
 
 #ifdef _DEBUG
@@ -669,6 +684,91 @@ void VPhysicsGroup::Draw(sf::RenderTarget& RenderTarget)
 
 		RenderTarget.draw(m_DebugVertexArray);
 	}
+}
+
+VPhysicsArbiter::VPhysicsArbiter(VPhysicsCPArbiter* arbiter)
+{
+	arb = arbiter;
+}
+
+int VPhysicsArbiter::GetCount()
+{
+	return cpArbiterGetCount(arb);
+}
+
+float VPhysicsArbiter::GetFriction()
+{
+	return (float)cpArbiterGetFriction(arb);
+}
+
+sf::Vector2f VPhysicsArbiter::GetNormal()
+{
+	return ToSFVector(cpArbiterGetNormal(arb));
+}
+
+float VPhysicsArbiter::GetDepth(int contact)
+{
+	return (float)cpArbiterGetDepth(arb, contact);
+}
+
+sf::Vector2f VPhysicsArbiter::GetPointA(int contact)
+{
+	return ToSFVector(cpArbiterGetPointA(arb, contact));
+}
+
+sf::Vector2f VPhysicsArbiter::GetPointB(int contact)
+{
+	return ToSFVector(cpArbiterGetPointB(arb, contact));
+}
+
+float VPhysicsArbiter::GetRestitution()
+{
+	return (float)cpArbiterGetRestitution(arb);
+}
+
+sf::Vector2f VPhysicsArbiter::GetSurfaceVelocity()
+{
+	return ToSFVector(cpArbiterGetSurfaceVelocity(arb));
+}
+
+bool VPhysicsArbiter::Ignore()
+{
+	return cpArbiterIgnore(arb);
+}
+
+bool VPhysicsArbiter::IsFirstContact()
+{
+	return cpArbiterIsFirstContact(arb);
+}
+
+bool VPhysicsArbiter::IsRemoval()
+{
+	return cpArbiterIsRemoval(arb);
+}
+
+sf::Vector2f VPhysicsArbiter::GetTotalImpulse()
+{
+	return ToSFVector(cpArbiterTotalImpulse(arb));
+}
+
+float VPhysicsArbiter::GetTotalKE()
+{
+	return (float)cpArbiterTotalKE(arb);
+}
+
+void VPhysicsArbiter::SetFriction(float friction)
+{
+	cpArbiterSetFriction(arb, friction);
+}
+
+void VPhysicsArbiter::SetRestitution(float restitution)
+{
+	cpArbiterSetRestitution(arb, restitution);
+}
+
+void VPhysicsArbiter::SetSurfaceVelocity(sf::Vector2f vel)
+{
+	cpArbiterSetSurfaceVelocity(arb, ToCPVect(vel));
 }
 #endif
 #endif
