@@ -685,6 +685,7 @@ void VPhysicsGroup::Draw(sf::RenderTarget& RenderTarget)
 		RenderTarget.draw(m_DebugVertexArray);
 	}
 }
+#endif
 
 VPhysicsArbiter::VPhysicsArbiter(VPhysicsCPArbiter* arbiter)
 {
@@ -770,5 +771,4 @@ void VPhysicsArbiter::SetSurfaceVelocity(sf::Vector2f vel)
 {
 	cpArbiterSetSurfaceVelocity(arb, ToCPVect(vel));
 }
-#endif
 #endif

@@ -32,7 +32,7 @@
 */
 
 #pragma once
-#include <VFrame/VObject.h>
+#include "VObject.h"
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/Transformable.hpp>
