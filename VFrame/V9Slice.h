@@ -92,7 +92,7 @@ public:
 	* @param corner The width and height of the corner areas.
 	* @param rect Only use a certain area of the texture, whether you are animated or not. Default value assumes whole texture is used. (Ignored if VTiledSprite or VBackdrop)
 	*/
-	virtual V9Slice* LoadGraphic(sf::String filename, const sf::Vector2f& corner, const sf::IntRect& rect = sf::IntRect());
+	virtual V9Slice* LoadGraphic(const sf::String& filename, const sf::Vector2f& corner, const sf::IntRect& rect = sf::IntRect());
 
 	/**
 	* Load Graphic from an sf::Texture object.
