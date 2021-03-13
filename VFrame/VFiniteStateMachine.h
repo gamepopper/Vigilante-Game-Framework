@@ -57,6 +57,7 @@ public:
 	* @param data A custom data pointer that could be set to anything usable within the game states. Defaults as nullptr.
 	*/
 	VFiniteStateMachine(VBase* base, unsigned int maxSize, void* data = nullptr);
+	~VFiniteStateMachine();
 
 	///@return The ID number of the currently active state in the FSM.
 	unsigned int GetCurrentState();

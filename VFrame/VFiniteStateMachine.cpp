@@ -49,6 +49,11 @@ VFiniteStateMachine::VFiniteStateMachine(VBase* baseObj, unsigned int MaxSize, v
 	state = 0;
 }
 
+VFiniteStateMachine::~VFiniteStateMachine()
+{
+	finiteStates.clear();
+}
+
 unsigned int VFiniteStateMachine::GetCurrentState()
 {
 	return state;
