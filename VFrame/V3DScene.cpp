@@ -71,7 +71,7 @@ void V3DScene::RenderGroup(VGroup* group)
 {
 	for (int i = 0; i < group->Length(); i++)
 	{
-		V3DObject* base = dynamic_cast<V3DObject*>(group->GetGroupItem(i));
+		V3DObject* base = group->GetGroupItemAsType<V3DObject>(i);
 
 		if (base != nullptr)
 		{
@@ -83,7 +83,7 @@ void V3DScene::RenderGroup(VGroup* group)
 		}
 		else
 		{
-			V3DBatchModelGroup* batchGroup = dynamic_cast<V3DBatchModelGroup*>(group->GetGroupItem(i));
+			V3DBatchModelGroup* batchGroup = group->GetGroupItemAsType<V3DBatchModelGroup>(i);
 
 			if (batchGroup != nullptr)
 			{
@@ -92,7 +92,7 @@ void V3DScene::RenderGroup(VGroup* group)
 			}
 			else
 			{
-				VGroup* childGroup = dynamic_cast<VGroup*>(group->GetGroupItem(i));
+				VGroup* childGroup = group->GetGroupItemAsType<VGroup>(i);
 				if (childGroup != nullptr)
 				{
 					RenderGroup(childGroup); //If regular group.
