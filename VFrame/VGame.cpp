@@ -160,7 +160,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 			{
 				Update(dt * deltaScale * VGlobal::p()->TimeScale);
 
-				if (!VGlobal::p()->IfChangedState && !VGlobal::p()->IfPushedState && frameDelay >= dt)
+				if (VGlobal::p()->ForceFrame || (!VGlobal::p()->IfChangedState && !VGlobal::p()->IfPushedState && frameDelay >= dt))
 				{
 					PreRender();
 					for (unsigned int c = 0; c < VGlobal::p()->CurrentState()->Cameras.size(); c++)
@@ -169,6 +169,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 					}
 					PostRender();
 					frameDelay = 0.0f;
+					VGlobal::p()->ForceFrame = false;
 				}
 			}
 		}

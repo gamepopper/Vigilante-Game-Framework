@@ -119,6 +119,8 @@ public:
 	bool IfChangedState = false;
 	///Value is true if the a new VState is being pushed onto the stack in the state manager.
 	bool IfPushedState = false;
+	///Value is true if user wants to force the game to render a single frame, regardless of state handling or frame delay.
+	bool ForceFrame = false;
 	///Random Number Generator
 	std::unique_ptr<VRandom> Random;
 	///Input Handling for Keyboard, Mouse and Controllers.
