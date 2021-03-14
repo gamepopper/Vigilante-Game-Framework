@@ -128,7 +128,7 @@ void V9Slice::updateFrame()
 	vertexArray[(8 * 4) + 3].texCoords = sf::Vector2f(textureRect.left + textureRect.width - cornerSize.x, textureRect.top + textureRect.height);
 }
 
-V9Slice::V9Slice(sf::Vector2f Position, sf::Vector2f Size, const sf::String& Filename, const sf::Vector2f& Corner)
+V9Slice::V9Slice(sf::Vector2f Position, sf::Vector2f Size, const sf::String& Filename, const sf::Vector2f& Corner) : VObject(Position, Size)
 {
 	vertexArray.setPrimitiveType(sf::Quads);
 	vertexArray.resize(4 * 9);
@@ -154,7 +154,7 @@ V9Slice::V9Slice(float x, float y, float width, float height, const sf::String& 
 #endif
 }
 
-V9Slice* V9Slice::LoadGraphic(sf::String filename, const sf::Vector2f& corner, const sf::IntRect& rect)
+V9Slice* V9Slice::LoadGraphic(const sf::String& filename, const sf::Vector2f& corner, const sf::IntRect& rect)
 {
 	renderState.texture = &VGlobal::p()->Content->LoadTexture(filename);
 	cornerSize = corner;

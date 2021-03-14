@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -70,12 +70,12 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="class_v_finite_state_machine.html">VFiniteStateMachine</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_v_finite_state_machine.html#a352bb42a051f46ec91c310d6cb65e4b2">Add</a>(unsigned int stateID, std::function&lt; int(VBase *, float)&gt; onUpdateFunc, std::function&lt; void(VBase *)&gt; onEnterFunc=nullptr, std::function&lt; void(VBase *, unsigned int)&gt; onExitFunc=nullptr)</td><td class="entry"><a class="el" href="class_v_finite_state_machine.html">VFiniteStateMachine</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_finite_state_machine.html#a05dce4f243bbbc05de230331121e356a">Add</a>(unsigned int stateID, std::function&lt; int(VBase *, float, void *)&gt; onUpdateFunc, std::function&lt; void(VBase *, void *)&gt; onEnterFunc=nullptr, std::function&lt; void(VBase *, unsigned int, void *)&gt; onExitFunc=nullptr)</td><td class="entry"><a class="el" href="class_v_finite_state_machine.html">VFiniteStateMachine</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_finite_state_machine.html#a40392bba48a0080f9167dd7b60544f0f">GetCurrentState</a>()</td><td class="entry"><a class="el" href="class_v_finite_state_machine.html">VFiniteStateMachine</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_finite_state_machine.html#ab0548887530658b64de8212c18a38e13">ResetState</a>()</td><td class="entry"><a class="el" href="class_v_finite_state_machine.html">VFiniteStateMachine</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_finite_state_machine.html#a48459db5669f1487619bca120688cb89">SetNewState</a>(unsigned int state)</td><td class="entry"><a class="el" href="class_v_finite_state_machine.html">VFiniteStateMachine</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_finite_state_machine.html#aeb863aa6de23e285294447718fa4d6d2">Update</a>(float dt)</td><td class="entry"><a class="el" href="class_v_finite_state_machine.html">VFiniteStateMachine</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_finite_state_machine.html#a8ba3027e0f487ef3b33c6c903219a357">VFiniteStateMachine</a>(VBase *base, unsigned int maxSize)</td><td class="entry"><a class="el" href="class_v_finite_state_machine.html">VFiniteStateMachine</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_finite_state_machine.html#a27a2facbcf905524a080057e18063351">VFiniteStateMachine</a>(VBase *base, unsigned int maxSize, void *data=nullptr)</td><td class="entry"><a class="el" href="class_v_finite_state_machine.html">VFiniteStateMachine</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

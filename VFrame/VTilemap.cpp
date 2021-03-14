@@ -301,7 +301,7 @@ void VTilemap::LoadFromCSV(const sf::String& mapData, const sf::String& graphicF
 	setupTilemap(graphicFile, tileWidth, tileHeight, autoTile, collision, rect);
 }
 
-void VTilemap::LoadFromArray(vector<char> mapData, int mapWidth, int mapHeight,
+void VTilemap::LoadFromArray(const vector<char>& mapData, int mapWidth, int mapHeight,
 	const sf::String& graphicFile, int tileWidth, int tileHeight, bool autoTile,
 	const std::vector<char>& collision, const sf::IntRect& rect)
 {
@@ -342,11 +342,21 @@ void VTilemap::LoadFrom2DArray(vector<vector<char>> mapData, const sf::String& g
 
 void VTilemap::SetTileRenderID(char ID, int tileNumber, int autoTileNumber)
 {
-	VTileRenderInfo* tileInfo = new VTileRenderInfo();
+	VTileRenderInfo* tileInfo = nullptr;
+	
+	if (renderDir.find(ID) == renderDir.end())
+	{
+		tileInfo = new VTileRenderInfo();
+		renderDir.insert(renderDir.begin(), std::make_pair(ID, tileInfo));
+	}
+	else
+	{
+		tileInfo = renderDir[ID];
+	}
+
 	tileInfo->TileNumber = tileNumber;
 	tileInfo->AutoTileLevel = autoTileNumber;
 
-	renderDir.insert(renderDir.begin(), std::make_pair(ID, tileInfo));
 	dirty = true;
 }
 

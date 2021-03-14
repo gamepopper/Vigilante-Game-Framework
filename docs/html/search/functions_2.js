@@ -18,9 +18,9 @@ var searchData=
   ['color',['Color',['../class_v_interpolate.html#a2f925be0cf10cf0bfbd76ff98a8b581b',1,'VInterpolate']]],
   ['computevelocity',['computeVelocity',['../class_v_object.html#a4cffad74d30e7b13d4931198bf0d16e4',1,'VObject']]],
   ['count',['Count',['../class_v_animation_manager.html#a872d6995545f014951509ba92e00aba8',1,'VAnimationManager::Count()'],['../class_v_time_manager.html#aff940235afa960267a6f97efa5699193',1,'VTimeManager::Count()']]],
-  ['countalive',['CountAlive',['../class_v_group.html#a5bd328057cb8d2c441e8e4398b1b1db6',1,'VGroup']]],
-  ['countdead',['CountDead',['../class_v_group.html#aa7952e1dbf2adee3d3f7705bb45eaca5',1,'VGroup']]],
-  ['currentanimationname',['CurrentAnimationName',['../class_v_animation_manager.html#ac3bce75d33d7c9f7fa3a36efe7747da3',1,'VAnimationManager']]],
+  ['countalive',['CountAlive',['../class_v_group.html#a7ca1c5d8af433de5f3c4f649aca37337',1,'VGroup']]],
+  ['countdead',['CountDead',['../class_v_group.html#a1ba10ed568107481f38887ef01f8a78f',1,'VGroup']]],
+  ['currentanimationname',['CurrentAnimationName',['../class_v_animation_manager.html#adca743e002f96b1cea41cc9d38decb3a',1,'VAnimationManager']]],
   ['currentaxisvalue',['CurrentAxisValue',['../class_v_input_handler.html#ab1bc5ab4a6daa89a0d1cb89981fe4da1',1,'VInputHandler']]],
   ['currentstate',['CurrentState',['../class_v_global.html#a93e9f40a3df5f860b8ab3f3a18763fe8',1,'VGlobal::CurrentState()'],['../class_v_state_manager.html#a4e04888f7667fcb602ec7b6e09904ee8',1,'VStateManager::CurrentState()']]]
 ];

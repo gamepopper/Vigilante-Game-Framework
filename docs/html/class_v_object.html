@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -86,17 +86,16 @@ Inheritance diagram for VObject:</div>
  <div class="center">
   <img src="class_v_object.png" usemap="#VObject_map" alt=""/>
   <map id="VObject_map" name="VObject_map">
-<area href="class_v_base.html" title="Base class that any object that updates or renders (including VState) inherints from this class..." alt="VBase" shape="rect" coords="273,0,354,24"/>
-<area href="class_v_backdrop.html" title="Renders and endless scrolling scene that takes up the whole screen. Good for scrolling backgrounds..." alt="VBackdrop" shape="rect" coords="0,112,81,136"/>
-<area href="class_v_particle.html" title="A base particle class for use with VEmitter. This does not override VSprite as it does not handle ren..." alt="VParticle" shape="rect" coords="91,112,172,136"/>
-<area href="class_v_shape.html" title="An object class that renders primitive shapes. Arguably more optimal than creating a VSprite and call..." alt="VShape" shape="rect" coords="182,112,263,136"/>
-<area href="class_v_sprite.html" title="A sprite rendering object class. " alt="VSprite" shape="rect" coords="273,112,354,136"/>
-<area href="class_v_text.html" title="Object that renders text. " alt="VText" shape="rect" coords="409,112,490,136"/>
-<area href="class_v_tile.html" title="Class for representing a set of tiles for collision purposes. " alt="VTile" shape="rect" coords="500,112,581,136"/>
-<area href="class_v_tilemap.html" title="Object that renders a 2D tilemap, with custom collision and autotiling support. " alt="VTilemap" shape="rect" coords="591,112,672,136"/>
-<area href="class_v_tiled_sprite.html" title="Tiled Sprites display a regular texture in a tiled format, so instead of scaling it repeats..." alt="VTiledSprite" shape="rect" coords="273,168,354,192"/>
-<area href="class_v_text_path.html" title="Special text object that renders text along a specific curve. " alt="VTextPath" shape="rect" coords="364,168,445,192"/>
-<area href="class_v_typed_text.html" title="Special Text class that displays text in a typewriter effect. " alt="VTypedText" shape="rect" coords="455,168,536,192"/>
+<area href="class_v_base.html" title="Base class that any object that updates or renders (including VState) inherints from this class..." alt="VBase" shape="rect" coords="0,0,75,24"/>
+<area href="class_v9_slice.html" title="A renderable object that slices a texture into nine pieces, four of which are unscalable. " alt="V9Slice" shape="rect" coords="85,112,160,136"/>
+<area href="class_v_backdrop.html" title="Renders and endless scrolling scene that takes up the whole screen. Good for scrolling backgrounds..." alt="VBackdrop" shape="rect" coords="85,168,160,192"/>
+<area href="class_v_gradient.html" title="VObject that generates and displays a gradient texture. This is done by generating a pixel-high textu..." alt="VGradient" shape="rect" coords="85,224,160,248"/>
+<area href="class_v_particle.html" title="A base particle class for use with VEmitter. This does not override VSprite as it does not handle ren..." alt="VParticle" shape="rect" coords="85,280,160,304"/>
+<area href="class_v_shape.html" title="An object class that renders primitive shapes. Arguably more optimal than creating a VSprite and call..." alt="VShape" shape="rect" coords="85,336,160,360"/>
+<area href="class_v_sprite.html" title="A sprite rendering object class. " alt="VSprite" shape="rect" coords="85,392,160,416"/>
+<area href="class_v_text.html" title="Object that renders text. " alt="VText" shape="rect" coords="85,448,160,472"/>
+<area href="class_v_tile.html" title="Class for representing a set of tiles for collision purposes. " alt="VTile" shape="rect" coords="85,504,160,528"/>
+<area href="class_v_tilemap.html" title="Object that renders a 2D tilemap, with custom collision and autotiling support. " alt="VTilemap" shape="rect" coords="85,560,160,584"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -167,6 +166,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:acfc159100fd819b7500cbbe02ed21c67"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#acfc159100fd819b7500cbbe02ed21c67">TestInView</a> (const sf::View &amp;renderTargetView, sf::View *defaultView, <a class="el" href="class_v_object.html">VObject</a> *o, const sf::FloatRect &amp;renderBox=sf::FloatRect())</td></tr>
 <tr class="separator:acfc159100fd819b7500cbbe02ed21c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
+<tr class="memitem:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a> (const char *fmt,...)</td></tr>
+<tr class="separator:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a24901d5efbff21bcb040ade5d2efdc1d">VLog</a> (const char *fmt,...)</td></tr>
 <tr class="separator:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c63d85f3139497ad5574fcc4f1ae33 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a51c63d85f3139497ad5574fcc4f1ae33">VLogError</a> (const char *fmt,...)</td></tr>
@@ -519,7 +520,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 <p>Reimplemented from <a class="el" href="class_v_base.html#a1e21ec17d7d5cdf6cc8fd2283703c0e4">VBase</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_v_tilemap.html#a6952b646b00ddcc4d872995718e3b98e">VTilemap</a>, <a class="el" href="class_v_text.html#aa1eff3228052e62d063aa3a6b17b1e52">VText</a>, <a class="el" href="class_v_sprite.html#a421bc7aedc683200c2033dcf2854f954">VSprite</a>, <a class="el" href="class_v_tiled_sprite.html#a17c03c13c098cd57ef2b2c0d0948d282">VTiledSprite</a>, <a class="el" href="class_v_shape.html#a7d8df410a3fe58ba75e50b96818ef8b9">VShape</a>, and <a class="el" href="class_v_backdrop.html#af806ecd39dc7c6ee8206a156ea6e79da">VBackdrop</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v_tilemap.html#a6952b646b00ddcc4d872995718e3b98e">VTilemap</a>, <a class="el" href="class_v_text.html#aa1eff3228052e62d063aa3a6b17b1e52">VText</a>, <a class="el" href="class_v_gradient.html#a9d092c0d970552649776155b84f60ab4">VGradient</a>, <a class="el" href="class_v_sprite.html#a421bc7aedc683200c2033dcf2854f954">VSprite</a>, <a class="el" href="class_v_shape.html#a7d8df410a3fe58ba75e50b96818ef8b9">VShape</a>, <a class="el" href="class_v_tiled_sprite.html#a17c03c13c098cd57ef2b2c0d0948d282">VTiledSprite</a>, <a class="el" href="class_v_backdrop.html#af806ecd39dc7c6ee8206a156ea6e79da">VBackdrop</a>, and <a class="el" href="class_v9_slice.html#a2b36f785680dadc333d1b776b23bd329">V9Slice</a>.</p>
 
 </div>
 </div>
@@ -935,7 +936,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 <p>Reimplemented from <a class="el" href="class_v_base.html#ab5ed834847bc1539c0f30b98da1c1f6e">VBase</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_v_tilemap.html#a04bc869d159495fd038424be8d6e1de3">VTilemap</a>, <a class="el" href="class_v_text.html#aab017afcb7c2ac8849aac9ad8ccab78b">VText</a>, <a class="el" href="class_v_typed_text.html#a385f8feb3f56997d5f001260475a0522">VTypedText</a>, <a class="el" href="class_v_sprite.html#a0d8b45faf83c81a2ee450aad9ffe64b7">VSprite</a>, <a class="el" href="class_v_tiled_sprite.html#a8896f34c0dea851eefe6990d1a020bed">VTiledSprite</a>, <a class="el" href="class_v_backdrop.html#a9fd10d37d5d65e0c5d75225eb0d12b85">VBackdrop</a>, <a class="el" href="class_v_particle.html#a1558e35466cbc35ca9b2d8d7ad05f32f">VParticle</a>, and <a class="el" href="class_v_text_path.html#a21aa8f64b0d001834c7a222ea4a30d2b">VTextPath</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v_tilemap.html#a04bc869d159495fd038424be8d6e1de3">VTilemap</a>, <a class="el" href="class_v_typed_text.html#a385f8feb3f56997d5f001260475a0522">VTypedText</a>, <a class="el" href="class_v_sprite.html#a0d8b45faf83c81a2ee450aad9ffe64b7">VSprite</a>, <a class="el" href="class_v_backdrop.html#a9fd10d37d5d65e0c5d75225eb0d12b85">VBackdrop</a>, <a class="el" href="class_v_particle.html#a1558e35466cbc35ca9b2d8d7ad05f32f">VParticle</a>, <a class="el" href="class_v_tile.html#a3acbae4f6174300edd5a060b268504fb">VTile</a>, and <a class="el" href="class_v_text_path.html#a21aa8f64b0d001834c7a222ea4a30d2b">VTextPath</a>.</p>
 
 </div>
 </div>

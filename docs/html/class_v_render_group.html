@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -94,6 +94,13 @@ Inheritance diagram for VRenderGroup:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
+<tr class="memitem:a227734599439166e4d36f9f4313c839d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a227734599439166e4d36f9f4313c839d">VRenderGroupOutside</a> : unsigned char { <a class="el" href="class_v_render_group.html#a227734599439166e4d36f9f4313c839da7e49bf92e8f0099f08ba911ebfaf4a9b">VRENDERGROUP_NO</a>, 
+<a class="el" href="class_v_render_group.html#a227734599439166e4d36f9f4313c839dae5a3da24a337a6f3a9640707ebf4c83c">VRENDERGROUP_BEFORE</a>, 
+<a class="el" href="class_v_render_group.html#a227734599439166e4d36f9f4313c839da6dba0f2d0178cc494159a6d92d04106f">VRENDERGROUP_AFTER</a>, 
+<a class="el" href="class_v_render_group.html#a227734599439166e4d36f9f4313c839da67f479dcfbd9fcc7a0c7e0362b93a092">VRENDERGROUP_BOTH</a>
+ }</td></tr>
+<tr class="memdesc:a227734599439166e4d36f9f4313c839d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Options for what happens to renderable objects outside of the <a class="el" href="class_v_render_group.html" title="Processes a group of objects and renders them all to a sprite object. ">VRenderGroup</a> area.  <a href="class_v_render_group.html#a227734599439166e4d36f9f4313c839d">More...</a><br /></td></tr>
+<tr class="separator:a227734599439166e4d36f9f4313c839d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1aabd93785373826cfe47c68da7f3118"><td class="memItemLeft" align="right" valign="top"><a id="a1aabd93785373826cfe47c68da7f3118"></a>
 typedef <a class="el" href="class_v_group.html">VGroup</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a1aabd93785373826cfe47c68da7f3118">VSUPERCLASS</a></td></tr>
 <tr class="memdesc:a1aabd93785373826cfe47c68da7f3118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to call parent class functions when they are overrided in class. <br /></td></tr>
@@ -153,10 +160,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a271c0b461d0876136fe1e7114d3c44bc inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5537f5cf3122a96d0b1e07337cc23f75 inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_base.html">VBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a5537f5cf3122a96d0b1e07337cc23f75">FirstDead</a> ()</td></tr>
 <tr class="separator:a5537f5cf3122a96d0b1e07337cc23f75 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bd328057cb8d2c441e8e4398b1b1db6 inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a5bd328057cb8d2c441e8e4398b1b1db6">CountAlive</a> ()</td></tr>
-<tr class="separator:a5bd328057cb8d2c441e8e4398b1b1db6 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7952e1dbf2adee3d3f7705bb45eaca5 inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#aa7952e1dbf2adee3d3f7705bb45eaca5">CountDead</a> ()</td></tr>
-<tr class="separator:aa7952e1dbf2adee3d3f7705bb45eaca5 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ca1c5d8af433de5f3c4f649aca37337 inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a7ca1c5d8af433de5f3c4f649aca37337">CountAlive</a> (bool Recursive=false)</td></tr>
+<tr class="separator:a7ca1c5d8af433de5f3c4f649aca37337 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ba10ed568107481f38887ef01f8a78f inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a1ba10ed568107481f38887ef01f8a78f">CountDead</a> (bool Recursive=false)</td></tr>
+<tr class="separator:a1ba10ed568107481f38887ef01f8a78f inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac02eefaac6471c3577f41e8e48981446 inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_base.html">VBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#ac02eefaac6471c3577f41e8e48981446">GetRandom</a> (int min=0, int max=0)</td></tr>
 <tr class="separator:ac02eefaac6471c3577f41e8e48981446 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c0c6c1fa6e672b299a4d288a1c7d52b inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a4c0c6c1fa6e672b299a4d288a1c7d52b">ForEach</a> (std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *)&gt; function, bool recursive=false)</td></tr>
@@ -169,6 +176,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a95154655e11e1357c4fc539fcf5574d3 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89032075a3434ea39ca431da86a231cb inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_base.html">VBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a89032075a3434ea39ca431da86a231cb">GetGroupItem</a> (int index)</td></tr>
 <tr class="separator:a89032075a3434ea39ca431da86a231cb inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84958eaa5d4e189f4771b3498c766fe5 inherit pub_methods_class_v_group"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a84958eaa5d4e189f4771b3498c766fe5 inherit pub_methods_class_v_group"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_v_group.html#a84958eaa5d4e189f4771b3498c766fe5">GetGroupItemAsType</a> (int index)</td></tr>
+<tr class="separator:a84958eaa5d4e189f4771b3498c766fe5 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fa144c3d24a75018a818dc5a95eab55 inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a6fa144c3d24a75018a818dc5a95eab55">GetIndexOfItem</a> (<a class="el" href="class_v_base.html">VBase</a> *object)</td></tr>
 <tr class="separator:a6fa144c3d24a75018a818dc5a95eab55 inherit pub_methods_class_v_group"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf8371c2205be6aade9ec8d1e654600a inherit pub_methods_class_v_group"><td class="memItemLeft" align="right" valign="top"><a id="acf8371c2205be6aade9ec8d1e654600a"></a>
@@ -202,14 +212,18 @@ sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 std::unique_ptr&lt; <a class="el" href="class_v_post_effect_base.html">VPostEffectBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a45325fa672c0c85231330990f5463b54">PostEffect</a> = nullptr</td></tr>
 <tr class="memdesc:a45325fa672c0c85231330990f5463b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Post Process (Shader) Effect to apply to the sprite. <br /></td></tr>
 <tr class="separator:a45325fa672c0c85231330990f5463b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdebab632566df078169f7679390c81d"><td class="memItemLeft" align="right" valign="top"><a id="acdebab632566df078169f7679390c81d"></a>
+std::unique_ptr&lt; <a class="el" href="class_v_camera.html">VCamera</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#acdebab632566df078169f7679390c81d">Camera</a> = nullptr</td></tr>
+<tr class="memdesc:acdebab632566df078169f7679390c81d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Camera for the sprite's render view. <br /></td></tr>
+<tr class="separator:acdebab632566df078169f7679390c81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a938623c35e32110a5bea33fb0cadf248"><td class="memItemLeft" align="right" valign="top"><a id="a938623c35e32110a5bea33fb0cadf248"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a938623c35e32110a5bea33fb0cadf248">RenderViewTransform</a> = true</td></tr>
-<tr class="memdesc:a938623c35e32110a5bea33fb0cadf248"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the sprite's render view will be transformed based on the sprite's current transform, else it will use the default view. <br /></td></tr>
+<tr class="memdesc:a938623c35e32110a5bea33fb0cadf248"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the camera's render view will be transformed based on the sprite's current transform, else it will use the camera's render view. <br /></td></tr>
 <tr class="separator:a938623c35e32110a5bea33fb0cadf248"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b03d59605f8083ffb5574c8926eeb11"><td class="memItemLeft" align="right" valign="top"><a id="a4b03d59605f8083ffb5574c8926eeb11"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#a4b03d59605f8083ffb5574c8926eeb11">RenderOutside</a> = false</td></tr>
-<tr class="memdesc:a4b03d59605f8083ffb5574c8926eeb11"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the content data would also be rendered outside of the sprite area. Used if you want an effect to apply to a specific area. <br /></td></tr>
-<tr class="separator:a4b03d59605f8083ffb5574c8926eeb11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad816a1e5d7682c96cbb94363649f39b8"><td class="memItemLeft" align="right" valign="top"><a id="ad816a1e5d7682c96cbb94363649f39b8"></a>
+<a class="el" href="class_v_render_group.html#a227734599439166e4d36f9f4313c839d">VRenderGroupOutside</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_render_group.html#ad816a1e5d7682c96cbb94363649f39b8">RenderOutside</a> = <a class="el" href="class_v_render_group.html#a227734599439166e4d36f9f4313c839da7e49bf92e8f0099f08ba911ebfaf4a9b">VRENDERGROUP_NO</a></td></tr>
+<tr class="memdesc:ad816a1e5d7682c96cbb94363649f39b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the content data would also be rendered outside of the sprite area. Used if you want an effect to apply to a specific area. <br /></td></tr>
+<tr class="separator:ad816a1e5d7682c96cbb94363649f39b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_v_base')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
 <tr class="memitem:aa771f52f4fa755fb64b8dc8cc563250c inherit pub_attribs_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="aa771f52f4fa755fb64b8dc8cc563250c"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aa771f52f4fa755fb64b8dc8cc563250c">active</a> = true</td></tr>
@@ -274,6 +288,8 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
+<tr class="memitem:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a> (const char *fmt,...)</td></tr>
+<tr class="separator:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a24901d5efbff21bcb040ade5d2efdc1d">VLog</a> (const char *fmt,...)</td></tr>
 <tr class="separator:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c63d85f3139497ad5574fcc4f1ae33 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a51c63d85f3139497ad5574fcc4f1ae33">VLogError</a> (const char *fmt,...)</td></tr>
@@ -283,7 +299,34 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Processes a group of objects and renders them all to a sprite object. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a227734599439166e4d36f9f4313c839d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a227734599439166e4d36f9f4313c839d">&#9670;&nbsp;</a></span>VRenderGroupOutside</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_v_render_group.html#a227734599439166e4d36f9f4313c839d">VRenderGroup::VRenderGroupOutside</a> : unsigned char</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Options for what happens to renderable objects outside of the <a class="el" href="class_v_render_group.html" title="Processes a group of objects and renders them all to a sprite object. ">VRenderGroup</a> area. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a227734599439166e4d36f9f4313c839da7e49bf92e8f0099f08ba911ebfaf4a9b"></a>VRENDERGROUP_NO&#160;</td><td class="fielddoc"><p>No rendering. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a227734599439166e4d36f9f4313c839dae5a3da24a337a6f3a9640707ebf4c83c"></a>VRENDERGROUP_BEFORE&#160;</td><td class="fielddoc"><p>Render before the final texture of the render group. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a227734599439166e4d36f9f4313c839da6dba0f2d0178cc494159a6d92d04106f"></a>VRENDERGROUP_AFTER&#160;</td><td class="fielddoc"><p>Render after the final texture of the render group. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a227734599439166e4d36f9f4313c839da67f479dcfbd9fcc7a0c7e0362b93a092"></a>VRENDERGROUP_BOTH&#160;</td><td class="fielddoc"><p>Render both before and after the final texture of the render group. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6cb68693168e28bed3c35ad98873498d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6cb68693168e28bed3c35ad98873498d">&#9670;&nbsp;</a></span>VRenderGroup() <span class="overload">[1/2]</span></h2>
 
@@ -524,7 +567,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_v_group.html#ad450bfb3735d2f0f8ee4dba034aab1a1">VGroup</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_v3_d_scene.html#a87382ab8d64b07a3a8a47c271a5679cb">V3DScene</a>, and <a class="el" href="class_v_trail_area.html#ad3e42907adde46a21cde5a129c0f1d2e">VTrailArea</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v3_d_scene.html#a87382ab8d64b07a3a8a47c271a5679cb">V3DScene</a>.</p>
 
 </div>
 </div>

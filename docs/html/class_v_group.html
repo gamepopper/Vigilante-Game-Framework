@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -123,10 +123,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a271c0b461d0876136fe1e7114d3c44bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5537f5cf3122a96d0b1e07337cc23f75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_base.html">VBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a5537f5cf3122a96d0b1e07337cc23f75">FirstDead</a> ()</td></tr>
 <tr class="separator:a5537f5cf3122a96d0b1e07337cc23f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bd328057cb8d2c441e8e4398b1b1db6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a5bd328057cb8d2c441e8e4398b1b1db6">CountAlive</a> ()</td></tr>
-<tr class="separator:a5bd328057cb8d2c441e8e4398b1b1db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7952e1dbf2adee3d3f7705bb45eaca5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#aa7952e1dbf2adee3d3f7705bb45eaca5">CountDead</a> ()</td></tr>
-<tr class="separator:aa7952e1dbf2adee3d3f7705bb45eaca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ca1c5d8af433de5f3c4f649aca37337"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a7ca1c5d8af433de5f3c4f649aca37337">CountAlive</a> (bool Recursive=false)</td></tr>
+<tr class="separator:a7ca1c5d8af433de5f3c4f649aca37337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ba10ed568107481f38887ef01f8a78f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a1ba10ed568107481f38887ef01f8a78f">CountDead</a> (bool Recursive=false)</td></tr>
+<tr class="separator:a1ba10ed568107481f38887ef01f8a78f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac02eefaac6471c3577f41e8e48981446"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_base.html">VBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#ac02eefaac6471c3577f41e8e48981446">GetRandom</a> (int min=0, int max=0)</td></tr>
 <tr class="separator:ac02eefaac6471c3577f41e8e48981446"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c0c6c1fa6e672b299a4d288a1c7d52b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a4c0c6c1fa6e672b299a4d288a1c7d52b">ForEach</a> (std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *)&gt; function, bool recursive=false)</td></tr>
@@ -139,6 +139,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a95154655e11e1357c4fc539fcf5574d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89032075a3434ea39ca431da86a231cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_v_base.html">VBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a89032075a3434ea39ca431da86a231cb">GetGroupItem</a> (int index)</td></tr>
 <tr class="separator:a89032075a3434ea39ca431da86a231cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84958eaa5d4e189f4771b3498c766fe5"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a84958eaa5d4e189f4771b3498c766fe5"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_v_group.html#a84958eaa5d4e189f4771b3498c766fe5">GetGroupItemAsType</a> (int index)</td></tr>
+<tr class="separator:a84958eaa5d4e189f4771b3498c766fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fa144c3d24a75018a818dc5a95eab55"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_group.html#a6fa144c3d24a75018a818dc5a95eab55">GetIndexOfItem</a> (<a class="el" href="class_v_base.html">VBase</a> *object)</td></tr>
 <tr class="separator:a6fa144c3d24a75018a818dc5a95eab55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf8371c2205be6aade9ec8d1e654600a"><td class="memItemLeft" align="right" valign="top"><a id="acf8371c2205be6aade9ec8d1e654600a"></a>
@@ -192,6 +195,8 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
+<tr class="memitem:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a> (const char *fmt,...)</td></tr>
+<tr class="separator:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a24901d5efbff21bcb040ade5d2efdc1d">VLog</a> (const char *fmt,...)</td></tr>
 <tr class="separator:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c63d85f3139497ad5574fcc4f1ae33 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a51c63d85f3139497ad5574fcc4f1ae33">VLogError</a> (const char *fmt,...)</td></tr>
@@ -284,8 +289,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
-<a id="a5bd328057cb8d2c441e8e4398b1b1db6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5bd328057cb8d2c441e8e4398b1b1db6">&#9670;&nbsp;</a></span>CountAlive()</h2>
+<a id="a7ca1c5d8af433de5f3c4f649aca37337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ca1c5d8af433de5f3c4f649aca37337">&#9670;&nbsp;</a></span>CountAlive()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -293,7 +298,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
         <tr>
           <td class="memname">int VGroup::CountAlive </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>Recursive</em> = <code>false</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -302,8 +308,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
-<a id="aa7952e1dbf2adee3d3f7705bb45eaca5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7952e1dbf2adee3d3f7705bb45eaca5">&#9670;&nbsp;</a></span>CountDead()</h2>
+<a id="a1ba10ed568107481f38887ef01f8a78f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ba10ed568107481f38887ef01f8a78f">&#9670;&nbsp;</a></span>CountDead()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -311,7 +317,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
         <tr>
           <td class="memname">int VGroup::CountDead </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>Recursive</em> = <code>false</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -581,6 +588,35 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
+<a id="a84958eaa5d4e189f4771b3498c766fe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84958eaa5d4e189f4771b3498c766fe5">&#9670;&nbsp;</a></span>GetGroupItemAsType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T* VGroup::GetGroupItemAsType </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Gets an object from a specified index in group. </p>
+
+</div>
+</div>
 <a id="a6fa144c3d24a75018a818dc5a95eab55"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6fa144c3d24a75018a818dc5a95eab55">&#9670;&nbsp;</a></span>GetIndexOfItem()</h2>
 
@@ -634,9 +670,6 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int VGroup::Length </td>
@@ -645,11 +678,6 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The current size of the group based on amount of active elements. </dd></dl>
 
@@ -770,7 +798,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 <p>Reimplemented from <a class="el" href="class_v_base.html#ab5ed834847bc1539c0f30b98da1c1f6e">VBase</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_v_emitter.html#a552fbd947049a48139beb5c1aab35d3f">VEmitter</a>, <a class="el" href="class_v_physics_group.html#a09673f4e4892369fd69a7f37cfeca784">VPhysicsGroup</a>, <a class="el" href="class_v_render_group.html#a53444be5035899abf90e7e580bcc7e83">VRenderGroup</a>, <a class="el" href="class_v3_d_scene.html#a87382ab8d64b07a3a8a47c271a5679cb">V3DScene</a>, <a class="el" href="class_v_render_layer.html#aa48c0ed838c61a3e0aab2ebf6c108aee">VRenderLayer</a>, and <a class="el" href="class_v_trail_area.html#ad3e42907adde46a21cde5a129c0f1d2e">VTrailArea</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v_emitter.html#a552fbd947049a48139beb5c1aab35d3f">VEmitter</a>, <a class="el" href="class_v_sub_state.html#a6e6ec11d600c53f0bfcc8938e214c6db">VSubState</a>, <a class="el" href="class_v_render_group.html#a53444be5035899abf90e7e580bcc7e83">VRenderGroup</a>, <a class="el" href="class_v_physics_group.html#a09673f4e4892369fd69a7f37cfeca784">VPhysicsGroup</a>, <a class="el" href="class_v3_d_scene.html#a87382ab8d64b07a3a8a47c271a5679cb">V3DScene</a>, <a class="el" href="class_v_state.html#a1c3c745223b46ef8f04fcbae6338a876">VState</a>, and <a class="el" href="class_v_render_layer.html#aa48c0ed838c61a3e0aab2ebf6c108aee">VRenderLayer</a>.</p>
 
 </div>
 </div>

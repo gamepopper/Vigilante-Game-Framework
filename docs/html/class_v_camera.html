@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -67,7 +67,6 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_v_camera-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">VCamera Class Reference</div>  </div>
@@ -95,6 +94,10 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:af45c60345b483262b102d04acc6f8ecb"><td class="memItemLeft" align="right" valign="top"><a id="af45c60345b483262b102d04acc6f8ecb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#af45c60345b483262b102d04acc6f8ecb">VCamera</a> ()</td></tr>
+<tr class="memdesc:af45c60345b483262b102d04acc6f8ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor sets up the camera with a default view that is the size of the game's display. <br /></td></tr>
+<tr class="separator:af45c60345b483262b102d04acc6f8ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45e9b8a3683b1c4e8e1d821f1bc5fe4b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a45e9b8a3683b1c4e8e1d821f1bc5fe4b">VCamera</a> (sf::View &amp;View)</td></tr>
 <tr class="separator:a45e9b8a3683b1c4e8e1d821f1bc5fe4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a505189c7b250531aa87552e7b3e6333c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a505189c7b250531aa87552e7b3e6333c">Follow</a> (<a class="el" href="class_v_object.html">VObject</a> *target, float deadzone=0.5f, CameraFollowMethod followmethod=LOCKON, float lead=0.0f, float lerp=0.0f)</td></tr>
@@ -111,8 +114,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a4a0a5fd93fb80cf64397d1b08319fc7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2a8ea657436bc7aac1ffc97b2ce76ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#ac2a8ea657436bc7aac1ffc97b2ce76ae">Flash</a> (sf::Color colour=sf::Color::Black, float time=1.0f, std::function&lt; void()&gt; OnComplete=nullptr)</td></tr>
 <tr class="separator:ac2a8ea657436bc7aac1ffc97b2ce76ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e0a20b67316cfe3ef66b2a3e40aeb44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a7e0a20b67316cfe3ef66b2a3e40aeb44">SetToBounds</a> (bool bound)</td></tr>
-<tr class="separator:a7e0a20b67316cfe3ef66b2a3e40aeb44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85257333585016962c1a250290c8ca9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a85257333585016962c1a250290c8ca9b">SetToBounds</a> (bool bound, sf::FloatRect bounderies=sf::FloatRect())</td></tr>
+<tr class="separator:a85257333585016962c1a250290c8ca9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96de78b78771cd0ad42fd48c7d543fcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a96de78b78771cd0ad42fd48c7d543fcf">SetViewport</a> (sf::FloatRect &amp;viewport)</td></tr>
 <tr class="separator:a96de78b78771cd0ad42fd48c7d543fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3d79dd6e051e2f2aac452408eee628e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#ac3d79dd6e051e2f2aac452408eee628e">Update</a> (float dt)</td></tr>
@@ -150,109 +153,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a999f2bc7195de88c48ea8f9bbb8b01fc">Active</a> = true</td></tr>
 <tr class="memdesc:a999f2bc7195de88c48ea8f9bbb8b01fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The camera is only used for rendering if Active is set to true. <br /></td></tr>
 <tr class="separator:a999f2bc7195de88c48ea8f9bbb8b01fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a6fe1d36146c61c6b0f45b8623cecf830"><td class="memItemLeft" align="right" valign="top"><a id="a6fe1d36146c61c6b0f45b8623cecf830"></a>
-sf::View&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a6fe1d36146c61c6b0f45b8623cecf830">view</a></td></tr>
-<tr class="memdesc:a6fe1d36146c61c6b0f45b8623cecf830"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current view the Camera applies to the render target. <br /></td></tr>
-<tr class="separator:a6fe1d36146c61c6b0f45b8623cecf830"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ceddb2bbfe8262556fe2bc391c19bf6"><td class="memItemLeft" align="right" valign="top"><a id="a5ceddb2bbfe8262556fe2bc391c19bf6"></a>
-sf::RectangleShape&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a5ceddb2bbfe8262556fe2bc391c19bf6">block</a></td></tr>
-<tr class="memdesc:a5ceddb2bbfe8262556fe2bc391c19bf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to render a fade in or out. <br /></td></tr>
-<tr class="separator:a5ceddb2bbfe8262556fe2bc391c19bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a456f07be917ed8f280b6f53d750c9d11"><td class="memItemLeft" align="right" valign="top"><a id="a456f07be917ed8f280b6f53d750c9d11"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a456f07be917ed8f280b6f53d750c9d11">isFollowing</a> = false</td></tr>
-<tr class="memdesc:a456f07be917ed8f280b6f53d750c9d11"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the camera will follow a specific <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>. <br /></td></tr>
-<tr class="separator:a456f07be917ed8f280b6f53d750c9d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19a1e0d2b72ed38108daca3e397fa89b"><td class="memItemLeft" align="right" valign="top"><a id="a19a1e0d2b72ed38108daca3e397fa89b"></a>
-<a class="el" href="class_v_object.html">VObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a19a1e0d2b72ed38108daca3e397fa89b">followObject</a> = nullptr</td></tr>
-<tr class="memdesc:a19a1e0d2b72ed38108daca3e397fa89b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a> that the camera will follow. Must not be nullptr if set to follow. <br /></td></tr>
-<tr class="separator:a19a1e0d2b72ed38108daca3e397fa89b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a610f84c5c3eb330453eb99338e5fb3ed"><td class="memItemLeft" align="right" valign="top"><a id="a610f84c5c3eb330453eb99338e5fb3ed"></a>
-<a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596f">CameraFollowMethod</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a610f84c5c3eb330453eb99338e5fb3ed">followMethod</a> = <a class="el" href="class_v_camera.html#a9131b6c04b364daa7c9310c34abc596fa112937c85f12af168d548b121edfb896">LOCKON</a></td></tr>
-<tr class="memdesc:a610f84c5c3eb330453eb99338e5fb3ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">The camera's current follow method. <br /></td></tr>
-<tr class="separator:a610f84c5c3eb330453eb99338e5fb3ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28cc4eccf6994091cba203c0c3b2f28b"><td class="memItemLeft" align="right" valign="top"><a id="a28cc4eccf6994091cba203c0c3b2f28b"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a28cc4eccf6994091cba203c0c3b2f28b">followLead</a> = 0</td></tr>
-<tr class="memdesc:a28cc4eccf6994091cba203c0c3b2f28b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount the camera should lead in front of the followed <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>. <br /></td></tr>
-<tr class="separator:a28cc4eccf6994091cba203c0c3b2f28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6541310b2ab9c003f9ee20e0feb5e347"><td class="memItemLeft" align="right" valign="top"><a id="a6541310b2ab9c003f9ee20e0feb5e347"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a6541310b2ab9c003f9ee20e0feb5e347">followLerp</a> = 0</td></tr>
-<tr class="memdesc:a6541310b2ab9c003f9ee20e0feb5e347"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount the camera should lerp towards the followed object. Can cause the camera to fall behind the <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>. <br /></td></tr>
-<tr class="separator:a6541310b2ab9c003f9ee20e0feb5e347"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93e30d52593df27ab747f90804cc36ef"><td class="memItemLeft" align="right" valign="top"><a id="a93e30d52593df27ab747f90804cc36ef"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a93e30d52593df27ab747f90804cc36ef">deadZone</a> = 0.5f</td></tr>
-<tr class="memdesc:a93e30d52593df27ab747f90804cc36ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">The deadzone area as a decimal percentage (range 0.0 - 1.0) of what area the camera cannot surpass relative to the followed <a class="el" href="class_v_object.html" title="Base object class that handles movement, rotation and collisions. ">VObject</a>. <br /></td></tr>
-<tr class="separator:a93e30d52593df27ab747f90804cc36ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8c9f0350f8c686ab6b0a478c3e678bd"><td class="memItemLeft" align="right" valign="top"><a id="ae8c9f0350f8c686ab6b0a478c3e678bd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#ae8c9f0350f8c686ab6b0a478c3e678bd">isShaking</a> = false</td></tr>
-<tr class="memdesc:ae8c9f0350f8c686ab6b0a478c3e678bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the camera is currently shaking. <br /></td></tr>
-<tr class="separator:ae8c9f0350f8c686ab6b0a478c3e678bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a16b5234fbf4bd35544b3dc9ce8ca89"><td class="memItemLeft" align="right" valign="top"><a id="a0a16b5234fbf4bd35544b3dc9ce8ca89"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a0a16b5234fbf4bd35544b3dc9ce8ca89">shakeX</a> = 0</td></tr>
-<tr class="memdesc:a0a16b5234fbf4bd35544b3dc9ce8ca89"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum offset in the X axis from the current position the camera should shake from. <br /></td></tr>
-<tr class="separator:a0a16b5234fbf4bd35544b3dc9ce8ca89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fc3f403164f8996d54234a3ead93ca8"><td class="memItemLeft" align="right" valign="top"><a id="a2fc3f403164f8996d54234a3ead93ca8"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a2fc3f403164f8996d54234a3ead93ca8">shakeY</a> = 0</td></tr>
-<tr class="memdesc:a2fc3f403164f8996d54234a3ead93ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum offset in the Y axis from the current position the camera should shake from. <br /></td></tr>
-<tr class="separator:a2fc3f403164f8996d54234a3ead93ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8051675c8df2d4ee50d1f1e24e4fcaf"><td class="memItemLeft" align="right" valign="top"><a id="ab8051675c8df2d4ee50d1f1e24e4fcaf"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#ab8051675c8df2d4ee50d1f1e24e4fcaf">shakeLength</a> = 0</td></tr>
-<tr class="memdesc:ab8051675c8df2d4ee50d1f1e24e4fcaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of time the camera should shake for. <br /></td></tr>
-<tr class="separator:ab8051675c8df2d4ee50d1f1e24e4fcaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88fc62dcfba5b3acf7d88dec95707a0a"><td class="memItemLeft" align="right" valign="top"><a id="a88fc62dcfba5b3acf7d88dec95707a0a"></a>
-sf::Clock&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a88fc62dcfba5b3acf7d88dec95707a0a">shakeTimer</a></td></tr>
-<tr class="memdesc:a88fc62dcfba5b3acf7d88dec95707a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The timer for camera shaking. <br /></td></tr>
-<tr class="separator:a88fc62dcfba5b3acf7d88dec95707a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c780148ff667c9ea7ae461c587e1ac7"><td class="memItemLeft" align="right" valign="top"><a id="a3c780148ff667c9ea7ae461c587e1ac7"></a>
-std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a3c780148ff667c9ea7ae461c587e1ac7">OnShakeComplete</a> = nullptr</td></tr>
-<tr class="memdesc:a3c780148ff667c9ea7ae461c587e1ac7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The callback function used when the camera finishes shaking. <br /></td></tr>
-<tr class="separator:a3c780148ff667c9ea7ae461c587e1ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55ef3fdeb12061a0d03c0e7cb6cd79bc"><td class="memItemLeft" align="right" valign="top"><a id="a55ef3fdeb12061a0d03c0e7cb6cd79bc"></a>
-sf::Clock&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a55ef3fdeb12061a0d03c0e7cb6cd79bc">fadeFlashTimer</a></td></tr>
-<tr class="memdesc:a55ef3fdeb12061a0d03c0e7cb6cd79bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The timer for fading and flashing. <br /></td></tr>
-<tr class="separator:a55ef3fdeb12061a0d03c0e7cb6cd79bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61572558f5c4f7195eae9315d099e539"><td class="memItemLeft" align="right" valign="top"><a id="a61572558f5c4f7195eae9315d099e539"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a61572558f5c4f7195eae9315d099e539">isFading</a> = false</td></tr>
-<tr class="memdesc:a61572558f5c4f7195eae9315d099e539"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the camera is currently fading. <br /></td></tr>
-<tr class="separator:a61572558f5c4f7195eae9315d099e539"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7273bfde74c52abf03641cf0d92ac53d"><td class="memItemLeft" align="right" valign="top"><a id="a7273bfde74c52abf03641cf0d92ac53d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a7273bfde74c52abf03641cf0d92ac53d">fadeIn</a> = false</td></tr>
-<tr class="memdesc:a7273bfde74c52abf03641cf0d92ac53d"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the camera is fading, this bool determines whether it's a fade in (fades from a colour) or a fade out (fades to a colour). <br /></td></tr>
-<tr class="separator:a7273bfde74c52abf03641cf0d92ac53d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9da28d5aa15cfcef73873f523bd6657"><td class="memItemLeft" align="right" valign="top"><a id="ab9da28d5aa15cfcef73873f523bd6657"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#ab9da28d5aa15cfcef73873f523bd6657">fadeTime</a> = 0.0f</td></tr>
-<tr class="memdesc:ab9da28d5aa15cfcef73873f523bd6657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time to fade. <br /></td></tr>
-<tr class="separator:ab9da28d5aa15cfcef73873f523bd6657"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e116e2487e68114e00642b5ab5d59dd"><td class="memItemLeft" align="right" valign="top"><a id="a2e116e2487e68114e00642b5ab5d59dd"></a>
-sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a2e116e2487e68114e00642b5ab5d59dd">fadeColour</a> = sf::Color::Black</td></tr>
-<tr class="memdesc:a2e116e2487e68114e00642b5ab5d59dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colour to fade to/from. <br /></td></tr>
-<tr class="separator:a2e116e2487e68114e00642b5ab5d59dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a411d61c57d6925cf3f5e00b9d291babe"><td class="memItemLeft" align="right" valign="top"><a id="a411d61c57d6925cf3f5e00b9d291babe"></a>
-sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a411d61c57d6925cf3f5e00b9d291babe">overlay</a> = sf::Color::Black</td></tr>
-<tr class="memdesc:a411d61c57d6925cf3f5e00b9d291babe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colour to apply the fade. <br /></td></tr>
-<tr class="separator:a411d61c57d6925cf3f5e00b9d291babe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fb5db5ae881ee2bdb48f1ecf579ec1c"><td class="memItemLeft" align="right" valign="top"><a id="a7fb5db5ae881ee2bdb48f1ecf579ec1c"></a>
-std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a7fb5db5ae881ee2bdb48f1ecf579ec1c">OnFadeComplete</a> = nullptr</td></tr>
-<tr class="memdesc:a7fb5db5ae881ee2bdb48f1ecf579ec1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The callback function used when the camera finishes fading. <br /></td></tr>
-<tr class="separator:a7fb5db5ae881ee2bdb48f1ecf579ec1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f72923ef4509ee392e2f0bf02cbde33"><td class="memItemLeft" align="right" valign="top"><a id="a7f72923ef4509ee392e2f0bf02cbde33"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a7f72923ef4509ee392e2f0bf02cbde33">isFlashing</a> = false</td></tr>
-<tr class="memdesc:a7f72923ef4509ee392e2f0bf02cbde33"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the camera is currently flashing. <br /></td></tr>
-<tr class="separator:a7f72923ef4509ee392e2f0bf02cbde33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bfe1293674c6d43018b990fe0921c0e"><td class="memItemLeft" align="right" valign="top"><a id="a0bfe1293674c6d43018b990fe0921c0e"></a>
-std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a0bfe1293674c6d43018b990fe0921c0e">OnFlashComplete</a> = nullptr</td></tr>
-<tr class="memdesc:a0bfe1293674c6d43018b990fe0921c0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The callback function used when the camera finishes flashing. <br /></td></tr>
-<tr class="separator:a0bfe1293674c6d43018b990fe0921c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86ad4ec81b7d4587f3d222f608ea6c7d"><td class="memItemLeft" align="right" valign="top"><a id="a86ad4ec81b7d4587f3d222f608ea6c7d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a86ad4ec81b7d4587f3d222f608ea6c7d">boundToWorld</a> = true</td></tr>
-<tr class="memdesc:a86ad4ec81b7d4587f3d222f608ea6c7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the camera shall be bound to the WorldBounds set in <a class="el" href="class_v_global.html" title="A singleton class that holds a lot of global properties other object require. ">VGlobal</a>. <br /></td></tr>
-<tr class="separator:a86ad4ec81b7d4587f3d222f608ea6c7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a778a1659017552ec83af027ac5035a3e"><td class="memItemLeft" align="right" valign="top"><a id="a778a1659017552ec83af027ac5035a3e"></a>
-sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_camera.html#a778a1659017552ec83af027ac5035a3e">LastPosition</a></td></tr>
-<tr class="memdesc:a778a1659017552ec83af027ac5035a3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Position in the last frame. <br /></td></tr>
-<tr class="separator:a778a1659017552ec83af027ac5035a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The 2D camera that renders the scene. </p>
@@ -630,8 +530,8 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
-<a id="a7e0a20b67316cfe3ef66b2a3e40aeb44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e0a20b67316cfe3ef66b2a3e40aeb44">&#9670;&nbsp;</a></span>SetToBounds()</h2>
+<a id="a85257333585016962c1a250290c8ca9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85257333585016962c1a250290c8ca9b">&#9670;&nbsp;</a></span>SetToBounds()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -643,8 +543,18 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
           <td class="memname">void VCamera::SetToBounds </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>bound</em></td><td>)</td>
+          <td class="paramname"><em>bound</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">sf::FloatRect&#160;</td>
+          <td class="paramname"><em>bounderies</em> = <code>sf::FloatRect()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -655,7 +565,8 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">bound</td><td>If true, the game will bound to the WorldBounds set in <a class="el" href="class_v_global.html" title="A singleton class that holds a lot of global properties other object require. ">VGlobal</a>. </td></tr>
+    <tr><td class="paramname">bound</td><td>If true, the game will bound to the defined world bounderies. </td></tr>
+    <tr><td class="paramname">bounderies</td><td>Custom bounderies to set the camera to, defaults to WorldBounds in <a class="el" href="class_v_global.html" title="A singleton class that holds a lot of global properties other object require. ">VGlobal</a> if none is set. </td></tr>
   </table>
   </dd>
 </dl>

@@ -1686,16 +1686,6 @@ public:
 		ParentState->Cameras[0]->SetToBounds(false);
 	}
 
-	virtual void Cleanup()
-	{
-		VSUPERCLASS::Cleanup();
-		ParentState->Cameras[0]->SetToBounds(true);
-
-		ParentState->Cameras[0]->Position.x = 320.0f;
-		ParentState->Cameras[0]->Position.y = 180.0f;
-		ParentState->Cameras[0]->Zoom = 1.0f;
-	}
-
 	virtual void Update(float dt)
 	{
 		VSUPERCLASS::Update(dt);
@@ -1988,7 +1978,7 @@ public:
 		Add(ground);
 
 		group = new VPhysicsGroup();
-		group->SetGravity(sf::Vector2f(0.0f, 910.0f));
+		group->SetGravity(sf::Vector2f(0.0f, 200.0f));
 
 		VGlobal::p()->Sound->Load("Example/Assets/bounce.ogg", "bounce");
 		for (int i = 0; i < 50; i++)

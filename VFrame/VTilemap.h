@@ -188,7 +188,7 @@ public:
 	* @param collision A list of chars in the mapData that are completely collideable.
 	* @param graphicsArea The area of the texture to display. Default is the entire texture.
 	*/
-	void LoadFromArray(std::vector<char> mapData, int mapWidth, int mapHeight,
+	void LoadFromArray(const std::vector<char>& mapData, int mapWidth, int mapHeight,
 		const sf::String& graphicFile, int tileWidth = 0, int tileHeight = 0, bool autoTile = false,
 		const std::vector<char>& collision = { '#' }, const sf::IntRect& graphicsArea = sf::IntRect());
 

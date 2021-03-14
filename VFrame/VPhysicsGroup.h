@@ -38,20 +38,77 @@
 #include "VPhysicsObject.h"
 #include "VPhysicsJoints.h"
 
-///A simple struct to represent the arbiter, a pair of colliding shapes.
-struct VPhysicsArbiter
+class VPhysicsArbiter
 {
-	///Point A of Arbiter.
-	sf::Vector2f PointA;
-	///Point B of Arbiter.
-	sf::Vector2f PointB;
-};
+private:
+	VPhysicsCPArbiter* arb;
 
+public:
+	VPhysicsArbiter(VPhysicsCPArbiter* arbiter);
+
+	///@return The number of contacts between the two object, when in doubt assume there will be a maximum of two.
+	int GetCount();
+
+	///@return The friction coefficient calculated on PRESOLVE.
+	float GetFriction();
+
+	///@return The normal the collision between both objects.
+	sf::Vector2f GetNormal();
+
+	/**
+	* @param contact The contact to test, max can be obtained from GetCount(), when in doubt assume there will be two contacts maximum.
+	* @return The depth of the contact.
+	*/
+	float GetDepth(int contact);
+
+	/**
+	* @param contact The contact to test, max can be obtained from GetCount(), when in doubt assume there will be two contacts maximum.
+	* @return The position of point A.
+	*/
+	sf::Vector2f GetPointA(int contact);
+
+	/**
+	* @param contact The contact to test, max can be obtained from GetCount(), when in doubt assume there will be two contacts maximum.
+	* @return The position of point B.
+	*/
+	sf::Vector2f GetPointB(int contact);
+
+	///@return The restitution value from the contact.
+	float GetRestitution();
+
+	///@return The surface velocity of the contact calculated at PRESOLVE.
+	sf::Vector2f GetSurfaceVelocity();
+
+	///@return Returns true if this collision will be ignored due to collision filters.
+	bool Ignore();
+
+	///@return Return true if this is the first contact between the two shapes.
+	bool IsFirstContact();
+
+	///@return Return true during SEPARATE if the type of callback was invoked due to an object removal.
+	bool IsRemoval();
+
+	///&return The combined impulse to resolve the collision.
+	sf::Vector2f GetTotalImpulse();
+
+	///@return The calculated energy loss in a collision including static, but not dynamic friction. This should only be called from POSTSOLVE.
+	float GetTotalKE();
+
+	///@param friction The new friction coefficient calculated on PRESOLVE.
+	void SetFriction(float friction);
+
+	///@param restitution The new restitution from the contact.
+	void SetRestitution(float restitution);
+
+	///@param velocity The new surface velocity of the contact calculated at PRESOLVE.
+	void SetSurfaceVelocity(sf::Vector2f velocity);
+};
 
 ///A special VGroup that sets up a physics world and updates VPhysicsObjects. It doesn't handle rendering except for debugging, nor does it update the VObject.
 class VPhysicsGroup : public VGroup
 {
 private:
+	float timestep = 0.0f;
 	VPhysicsCPSpace* space;
 	VPhysicsCollision* collisionHandler;
 	
@@ -152,6 +209,13 @@ public:
 	///@return A pointer to the static body of the physics world, useful if you want to pin a physics object to the scene itself.
 	VPhysicsCPBody* GetBody();
 
+	/**
+	* Helper function for getting the physics object using the base object.
+	* @param object The base VObject to compare.
+	* @return The physics object, NULL if no physics object could be found.
+	*/
+	VPhysicsObject* FindPhysicsObject(VObject* object);
+
 	///The types of collision callback.
 	enum VPhysicsCallbackType
 	{
@@ -174,7 +238,7 @@ public:
 	* @param type The type of collision callback to set (see VPhysicsCallbackType).
 	* @param persist If true, this callback will remain active for the duration of the space, otherwise this callback will be removed after one call. This way you aren't required to call it on each update.
 	*/
-	void SetCollisionCallback(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist = false);
+	void SetCollisionCallback(VObject* a, VObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*, VPhysicsArbiter*)>& callback, VPhysicsCallbackType type, bool persist = false);
 
 	/**
 	* Collision callbacks act slightly differently from VCollision.
@@ -185,7 +249,7 @@ public:
 	* @param type The type of collision callback to set (see VPhysicsCallbackType).
 	* @param persist If true, this callback will remain active for the duration of the space, otherwise this callback will be removed after one call. This way you aren't required to call it on each update.
 	*/
-	void SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*)>& callback, VPhysicsCallbackType type, bool persist = false);
+	void SetCollisionCallback(VPhysicsObject* a, VPhysicsObject* b, const std::function<bool(VPhysicsObject*, VPhysicsObject*, VPhysicsArbiter*)>& callback, VPhysicsCallbackType type, bool persist = false);
 
 	/**
 	* Here you can set callbacks for the pre and post solve conditions of a joint.

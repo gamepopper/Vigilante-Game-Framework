@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -131,8 +131,17 @@ $(function() {
 <li>GetCollisionSlop()
 : <a class="el" href="class_v_physics_group.html#a588efe229d044df153e080d56b7fa6cd">VPhysicsGroup</a>
 </li>
+<li>GetCollisionTile()
+: <a class="el" href="class_v_tilemap.html#a867307b47333fe5b3e8c2219c53e1ce1">VTilemap</a>
+</li>
+<li>GetCollisionTileCount()
+: <a class="el" href="class_v_tilemap.html#a0b11efb0bc22e141bdf1cefa489b1317">VTilemap</a>
+</li>
 <li>GetColor()
 : <a class="el" href="class_v_random.html#a6ba3680d8aa4b5c7d3b6de36235f9841">VRandom</a>
+</li>
+<li>GetConstraint()
+: <a class="el" href="class_v_physics_joint_base.html#a064a7f57c4ad92cc3b96dc1b5bb5492a">VPhysicsJointBase</a>
 </li>
 <li>GetCurrentFrame()
 : <a class="el" href="class_v_animation.html#aafce2f78a15032f74471ec7718a42c6f">VAnimation</a>
@@ -194,6 +203,9 @@ $(function() {
 <li>GetGroupItem()
 : <a class="el" href="class_v_group.html#a89032075a3434ea39ca431da86a231cb">VGroup</a>
 </li>
+<li>GetGroupItemAsType()
+: <a class="el" href="class_v_group.html#a84958eaa5d4e189f4771b3498c766fe5">VGroup</a>
+</li>
 <li>GetIdleSpeedThreshold()
 : <a class="el" href="class_v_physics_group.html#a1672638ff57d740730636db47896f01f">VPhysicsGroup</a>
 </li>
@@ -222,7 +234,7 @@ $(function() {
 : <a class="el" href="class_v_text.html#aad7c12557dd8265382b96bd4e4829aad">VText</a>
 </li>
 <li>GetLooping()
-: <a class="el" href="class_v_timeline.html#a4cb9ee5fa4b01faab1ab7faf739500a4">VTimeline</a>
+: <a class="el" href="class_v_timer_event.html#a0262c631e9b4225f52cdb7c4a969e9a7">VTimerEvent</a>
 </li>
 <li>GetMapHeight()
 : <a class="el" href="class_v_tilemap.html#a0044e56ae309a2adfdceaf52ece22454">VTilemap</a>
@@ -253,9 +265,6 @@ $(function() {
 </li>
 <li>GetNumPoints()
 : <a class="el" href="class_v_path.html#a5ace3c45b8638ca0d6c4a61b9654deee">VPath</a>
-</li>
-<li>getObjectFromBody()
-: <a class="el" href="class_v_physics_group.html#a515028532f971682b4e8c34707cd3646">VPhysicsGroup</a>
 </li>
 <li>GetOutlineOffset()
 : <a class="el" href="class_v_text.html#ade7f2ff28f6c43a3df8378ab8bf5166b">VText</a>
@@ -342,18 +351,21 @@ $(function() {
 : <a class="el" href="class_v_text.html#ae786d2434cba19afd5a04f09ccf0b9e2">VText</a>
 </li>
 <li>GetTexture()
-: <a class="el" href="class_v3_d_scene.html#a72746d6fcf87b8ebcfb4e0efbf59aa75">V3DScene</a>
+: <a class="el" href="class_v3_d_scene.html#a605cbbc68b3052c3b9302f5e4d17a09b">V3DScene</a>
 , <a class="el" href="class_v_render_group.html#a612d9000f97cbf0f2e0d0d25bdd00bcb">VRenderGroup</a>
 , <a class="el" href="class_v_render_layer.html#a3a59c9d58c53a20260613af7f95940be">VRenderLayer</a>
 </li>
 <li>GetTextureArea()
 : <a class="el" href="class_v_animation_manager.html#a9e7500ab9533261964f2f38f3113b7c5">VAnimationManager</a>
 </li>
+<li>GetTextWidth()
+: <a class="el" href="class_v_text.html#ae55f10854455fb7e9536a9e658afb199">VText</a>
+</li>
 <li>GetTileID()
-: <a class="el" href="class_v_tilemap.html#a44693acb0bb1aff8ac6d7757480ba12d">VTilemap</a>
+: <a class="el" href="class_v_tilemap.html#a1943e1e6ec16ddfebb95d798c28d03b0">VTilemap</a>
 </li>
 <li>GetTileIDFromPosition()
-: <a class="el" href="class_v_tilemap.html#a23a393ae43eb79bbb54fd21001a03e3d">VTilemap</a>
+: <a class="el" href="class_v_tilemap.html#ae739e4c3d537c4d555ec6eff75b82423">VTilemap</a>
 </li>
 <li>GetTint()
 : <a class="el" href="class_v_backdrop.html#ab32b8a9df62cb2117f01cac0d7206b51">VBackdrop</a>
@@ -392,6 +404,12 @@ $(function() {
 </li>
 <li>GetWrap()
 : <a class="el" href="class_v_text.html#a1ca48c72dd534e94e662a51d5c60cf5c">VText</a>
+</li>
+<li>gradientType
+: <a class="el" href="class_v_gradient.html#a31c57c57b659da439174783d4b9a029b">VGradient</a>
+</li>
+<li>gradResolution
+: <a class="el" href="class_v_gradient.html#ae533fd464af4c8ba3c1019e51402c8db">VGradient</a>
 </li>
 <li>GreenMultiplier
 : <a class="el" href="class_v_trail_area.html#aff12288a095705e67d53db592081b337">VTrailArea</a>

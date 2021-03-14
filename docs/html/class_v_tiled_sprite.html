@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -125,8 +125,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad0ae2baebd91f27e591181a8dc5188c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50da7d17ab47eccb058ca1cb63cf8268"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tiled_sprite.html#a50da7d17ab47eccb058ca1cb63cf8268">VTiledSprite</a> (float x=0, float y=0, const sf::String &amp;Filename=&quot;&quot;)</td></tr>
 <tr class="separator:a50da7d17ab47eccb058ca1cb63cf8268"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41b139fa6abafd5ed21687ec22085441"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tiled_sprite.html#a41b139fa6abafd5ed21687ec22085441">LoadGraphic</a> (sf::String filename, bool animated=false, int width=0, int height=0, const sf::IntRect &amp;rect=sf::IntRect()) override</td></tr>
-<tr class="separator:a41b139fa6abafd5ed21687ec22085441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4169811a1e3407b526a4d73b09f236e4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tiled_sprite.html#a4169811a1e3407b526a4d73b09f236e4">LoadGraphic</a> (const sf::String &amp;filename, bool animated=false, int width=0, int height=0, const sf::IntRect &amp;rect=sf::IntRect()) override</td></tr>
+<tr class="separator:a4169811a1e3407b526a4d73b09f236e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafa530eebf6f6ba3042ad8b071b5baf6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tiled_sprite.html#aafa530eebf6f6ba3042ad8b071b5baf6">LoadGraphicFromTexture</a> (sf::Texture &amp;texture, bool animated=false, int width=0, int height=0, const sf::IntRect &amp;rect=sf::IntRect()) override</td></tr>
 <tr class="separator:aafa530eebf6f6ba3042ad8b071b5baf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbc796ed3ba4a0dd539fc501baf6f4ec"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_v_sprite.html">VSprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tiled_sprite.html#adbc796ed3ba4a0dd539fc501baf6f4ec">MakeGraphic</a> (int width, int height, sf::Color color, float outline=0, sf::Color outlineColor=sf::Color::Transparent) override</td></tr>
@@ -141,8 +141,6 @@ Public Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tiled_sprite.html#aea525f190137a1c9ffeaf1534e6a3fdd">Destroy</a> () override</td></tr>
 <tr class="memdesc:aea525f190137a1c9ffeaf1534e6a3fdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the sprite rendering data (and texture if disposable is set for true). <br /></td></tr>
 <tr class="separator:aea525f190137a1c9ffeaf1534e6a3fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8896f34c0dea851eefe6990d1a020bed"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tiled_sprite.html#a8896f34c0dea851eefe6990d1a020bed">Update</a> (float dt) override</td></tr>
-<tr class="separator:a8896f34c0dea851eefe6990d1a020bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17c03c13c098cd57ef2b2c0d0948d282"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_tiled_sprite.html#a17c03c13c098cd57ef2b2c0d0948d282">Draw</a> (sf::RenderTarget &amp;RenderTarget) override</td></tr>
 <tr class="separator:a17c03c13c098cd57ef2b2c0d0948d282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_sprite"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_sprite')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_sprite.html">VSprite</a></td></tr>
@@ -150,6 +148,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a488476c61f6d5594d04f7b04d8554abc inherit pub_methods_class_v_sprite"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa309d1d4394834a6c86aa1f9b99988a0 inherit pub_methods_class_v_sprite"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#aa309d1d4394834a6c86aa1f9b99988a0">VSprite</a> (float x=0, float y=0, const sf::String &amp;filename=&quot;&quot;)</td></tr>
 <tr class="separator:aa309d1d4394834a6c86aa1f9b99988a0 inherit pub_methods_class_v_sprite"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d8b45faf83c81a2ee450aad9ffe64b7 inherit pub_methods_class_v_sprite"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_sprite.html#a0d8b45faf83c81a2ee450aad9ffe64b7">Update</a> (float dt) override</td></tr>
+<tr class="separator:a0d8b45faf83c81a2ee450aad9ffe64b7 inherit pub_methods_class_v_sprite"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_object.html">VObject</a></td></tr>
 <tr class="memitem:a56e969e9d4ab7145396196b7bb6d034a inherit pub_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a56e969e9d4ab7145396196b7bb6d034a">VObject</a> (sf::Vector2f position, sf::Vector2f size=sf::Vector2f())</td></tr>
 <tr class="separator:a56e969e9d4ab7145396196b7bb6d034a inherit pub_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,6 +206,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#acfc159100fd819b7500cbbe02ed21c67">TestInView</a> (const sf::View &amp;renderTargetView, sf::View *defaultView, <a class="el" href="class_v_object.html">VObject</a> *o, const sf::FloatRect &amp;renderBox=sf::FloatRect())</td></tr>
 <tr class="separator:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
+<tr class="memitem:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a> (const char *fmt,...)</td></tr>
+<tr class="separator:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a24901d5efbff21bcb040ade5d2efdc1d">VLog</a> (const char *fmt,...)</td></tr>
 <tr class="separator:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c63d85f3139497ad5574fcc4f1ae33 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a51c63d85f3139497ad5574fcc4f1ae33">VLogError</a> (const char *fmt,...)</td></tr>
@@ -510,7 +512,7 @@ sf::VertexArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Renders the sprite. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Renders the sprite. Updates sprite transform and rendering info. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">RenderTarget</td><td>The game's sf::RenderTarget object to render data onto. </td></tr>
   </table>
@@ -521,8 +523,8 @@ sf::VertexArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 </div>
 </div>
-<a id="a41b139fa6abafd5ed21687ec22085441"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41b139fa6abafd5ed21687ec22085441">&#9670;&nbsp;</a></span>LoadGraphic()</h2>
+<a id="a4169811a1e3407b526a4d73b09f236e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4169811a1e3407b526a4d73b09f236e4">&#9670;&nbsp;</a></span>LoadGraphic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -533,7 +535,7 @@ sf::VertexArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
         <tr>
           <td class="memname">virtual <a class="el" href="class_v_sprite.html">VSprite</a>* VTiledSprite::LoadGraphic </td>
           <td>(</td>
-          <td class="paramtype">sf::String&#160;</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
           <td class="paramname"><em>filename</em>, </td>
         </tr>
         <tr>
@@ -583,7 +585,7 @@ sf::VertexArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_v_sprite.html#afae3a7519cec966a32bc72866b9534a1">VSprite</a>.</p>
+<p>Reimplemented from <a class="el" href="class_v_sprite.html#a3e4a8474519b980fbc51f865ad7cbd13">VSprite</a>.</p>
 
 </div>
 </div>
@@ -896,40 +898,6 @@ sf::VertexArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a8896f34c0dea851eefe6990d1a020bed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8896f34c0dea851eefe6990d1a020bed">&#9670;&nbsp;</a></span>Update()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void VTiledSprite::Update </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>dt</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Updates sprite transform and rendering info. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">dt</td><td>Delta Time between the previous and current frame. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented from <a class="el" href="class_v_sprite.html#a0d8b45faf83c81a2ee450aad9ffe64b7">VSprite</a>.</p>
 
 </div>
 </div>

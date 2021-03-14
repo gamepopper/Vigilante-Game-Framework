@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -97,7 +97,7 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#ad94a8aabc3efd92bb73c9712b067ea02">IsSolid</a>()</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_base.html#a2d454eaacf1342b22a4367d359ce0827">Kill</a>()</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a390b08e01aeebd476fff3bb803990d09">Last</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_sprite.html#afae3a7519cec966a32bc72866b9534a1">LoadGraphic</a>(sf::String filename, bool animated=false, int width=0, int height=0, const sf::IntRect &amp;rect=sf::IntRect())</td><td class="entry"><a class="el" href="class_v_sprite.html">VSprite</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_sprite.html#a3e4a8474519b980fbc51f865ad7cbd13">LoadGraphic</a>(const sf::String &amp;filename, bool animated=false, int width=0, int height=0, const sf::IntRect &amp;rect=sf::IntRect())</td><td class="entry"><a class="el" href="class_v_sprite.html">VSprite</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_sprite.html#a9c3a0bd9136fe879a89e281e839680b0">LoadGraphicFromTexture</a>(sf::Texture &amp;texture, bool animated=false, int width=0, int height=0, const sf::IntRect &amp;rect=sf::IntRect())</td><td class="entry"><a class="el" href="class_v_sprite.html">VSprite</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_sprite.html#a71a87036258418524b1ed15413ba484d">MakeGraphic</a>(int width, int height, sf::Color color, float outline=0, sf::Color outlineColor=sf::Color::Transparent)</td><td class="entry"><a class="el" href="class_v_sprite.html">VSprite</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_sprite.html#a4d7317320ca3619b80927c2b7ab649a8">MakeGraphicCircle</a>(int radius, sf::Color color, float outline=0, sf::Color outlineColor=sf::Color::Transparent)</td><td class="entry"><a class="el" href="class_v_sprite.html">VSprite</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
@@ -151,10 +151,11 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a8dd935a818eefb5e2278d315cb42ec3e">VObject</a>(float x=0, float y=0, float width=0, float height=0)</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_sprite.html#a488476c61f6d5594d04f7b04d8554abc">VSprite</a>(sf::Vector2f Position, const sf::String &amp;Filename=&quot;&quot;)</td><td class="entry"><a class="el" href="class_v_sprite.html">VSprite</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_sprite.html#aa309d1d4394834a6c86aa1f9b99988a0">VSprite</a>(float x=0, float y=0, const sf::String &amp;filename=&quot;&quot;)</td><td class="entry"><a class="el" href="class_v_sprite.html">VSprite</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_sprite.html#a92e1c30e74208eecaba095e4f40eb90f">VSUPERCLASS</a> typedef</td><td class="entry"><a class="el" href="class_v_sprite.html">VSprite</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a9707f2b8e452f956d05572a5fa287c43">WasTouching</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_object.html#a0acf58f64958931c1a17be3e2a886b9e">ZoomFactor</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~VBase</b>() (defined in <a class="el" href="class_v_base.html">VBase</a>)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a>(const char *fmt,...)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_sprite.html#a92e1c30e74208eecaba095e4f40eb90f">VSUPERCLASS</a> typedef</td><td class="entry"><a class="el" href="class_v_sprite.html">VSprite</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_object.html#a9707f2b8e452f956d05572a5fa287c43">WasTouching</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a0acf58f64958931c1a17be3e2a886b9e">ZoomFactor</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~VBase</b>() (defined in <a class="el" href="class_v_base.html">VBase</a>)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

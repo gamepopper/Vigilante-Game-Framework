@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -78,8 +78,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8ba3027e0f487ef3b33c6c903219a357"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#a8ba3027e0f487ef3b33c6c903219a357">VFiniteStateMachine</a> (<a class="el" href="class_v_base.html">VBase</a> *base, unsigned int maxSize)</td></tr>
-<tr class="separator:a8ba3027e0f487ef3b33c6c903219a357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27a2facbcf905524a080057e18063351"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#a27a2facbcf905524a080057e18063351">VFiniteStateMachine</a> (<a class="el" href="class_v_base.html">VBase</a> *base, unsigned int maxSize, void *data=nullptr)</td></tr>
+<tr class="separator:a27a2facbcf905524a080057e18063351"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40392bba48a0080f9167dd7b60544f0f"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#a40392bba48a0080f9167dd7b60544f0f">GetCurrentState</a> ()</td></tr>
 <tr class="separator:a40392bba48a0080f9167dd7b60544f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48459db5669f1487619bca120688cb89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#a48459db5669f1487619bca120688cb89">SetNewState</a> (unsigned int state)</td></tr>
@@ -88,16 +88,16 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#ab0548887530658b64de8212c18a38e13">ResetState</a> ()</td></tr>
 <tr class="memdesc:ab0548887530658b64de8212c18a38e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the currently running state in the FSM. <br /></td></tr>
 <tr class="separator:ab0548887530658b64de8212c18a38e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a352bb42a051f46ec91c310d6cb65e4b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#a352bb42a051f46ec91c310d6cb65e4b2">Add</a> (unsigned int stateID, std::function&lt; int(<a class="el" href="class_v_base.html">VBase</a> *, float)&gt; onUpdateFunc, std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *)&gt; onEnterFunc=nullptr, std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *, unsigned int)&gt; onExitFunc=nullptr)</td></tr>
-<tr class="separator:a352bb42a051f46ec91c310d6cb65e4b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05dce4f243bbbc05de230331121e356a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#a05dce4f243bbbc05de230331121e356a">Add</a> (unsigned int stateID, std::function&lt; int(<a class="el" href="class_v_base.html">VBase</a> *, float, void *)&gt; onUpdateFunc, std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *, void *)&gt; onEnterFunc=nullptr, std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *, unsigned int, void *)&gt; onExitFunc=nullptr)</td></tr>
+<tr class="separator:a05dce4f243bbbc05de230331121e356a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb863aa6de23e285294447718fa4d6d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_finite_state_machine.html#aeb863aa6de23e285294447718fa4d6d2">Update</a> (float dt)</td></tr>
 <tr class="separator:aeb863aa6de23e285294447718fa4d6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The Finite State Machine (FSM) Management class, which handles running each of the states. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8ba3027e0f487ef3b33c6c903219a357"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ba3027e0f487ef3b33c6c903219a357">&#9670;&nbsp;</a></span>VFiniteStateMachine()</h2>
+<a id="a27a2facbcf905524a080057e18063351"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27a2facbcf905524a080057e18063351">&#9670;&nbsp;</a></span>VFiniteStateMachine()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -112,7 +112,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>maxSize</em>&#160;</td>
+          <td class="paramname"><em>maxSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -125,6 +131,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   <table class="params">
     <tr><td class="paramname">base</td><td>A base object to set the behavior of. It can be anything that inherits from <a class="el" href="class_v_base.html" title="Base class that any object that updates or renders (including VState) inherints from this class...">VBase</a>. </td></tr>
     <tr><td class="paramname">maxSize</td><td>The maximum number of states the FSM can have. Needs to be greater than zero to be used. </td></tr>
+    <tr><td class="paramname">data</td><td>A custom data pointer that could be set to anything usable within the game states. Defaults as nullptr. </td></tr>
   </table>
   </dd>
 </dl>
@@ -132,8 +139,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a352bb42a051f46ec91c310d6cb65e4b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a352bb42a051f46ec91c310d6cb65e4b2">&#9670;&nbsp;</a></span>Add()</h2>
+<a id="a05dce4f243bbbc05de230331121e356a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05dce4f243bbbc05de230331121e356a">&#9670;&nbsp;</a></span>Add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,19 +154,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; int(<a class="el" href="class_v_base.html">VBase</a> *, float)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; int(<a class="el" href="class_v_base.html">VBase</a> *, float, void *)&gt;&#160;</td>
           <td class="paramname"><em>onUpdateFunc</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *, void *)&gt;&#160;</td>
           <td class="paramname"><em>onEnterFunc</em> = <code>nullptr</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *, unsigned int)&gt;&#160;</td>
+          <td class="paramtype">std::function&lt; void(<a class="el" href="class_v_base.html">VBase</a> *, unsigned int, void *)&gt;&#160;</td>
           <td class="paramname"><em>onExitFunc</em> = <code>nullptr</code>&#160;</td>
         </tr>
         <tr>

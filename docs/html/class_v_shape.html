@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -68,7 +68,6 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_v_shape-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">VShape Class Reference</div>  </div>
@@ -121,13 +120,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab5cef659814faac306ec5d3f9d51c8fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9f3169b30cd10268b176d0166969352"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#aa9f3169b30cd10268b176d0166969352">VShape</a> (sf::Vector2f <a class="el" href="class_v_object.html#a6c6e1312cd20cb56b5396fde6a38db26">Position</a>, sf::Vector2f <a class="el" href="class_v_object.html#afe54a682d5d03cc9e65f3d545fd3938e">Size</a>)</td></tr>
 <tr class="separator:aa9f3169b30cd10268b176d0166969352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37f1ba27237017fec675619c4e5920c9"><td class="memItemLeft" align="right" valign="top"><a id="a37f1ba27237017fec675619c4e5920c9"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a37f1ba27237017fec675619c4e5920c9">Destroy</a> () override</td></tr>
+<tr class="memdesc:a37f1ba27237017fec675619c4e5920c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys object and any data that must be destroyed. <br /></td></tr>
+<tr class="separator:a37f1ba27237017fec675619c4e5920c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b7901912d7b13909803ac8e50d68e66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a1b7901912d7b13909803ac8e50d68e66">SetRectangle</a> (float width, float height)</td></tr>
 <tr class="separator:a1b7901912d7b13909803ac8e50d68e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48d43f86313297d49c3af11de9a13f8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a48d43f86313297d49c3af11de9a13f8d">SetCircle</a> (float radius, unsigned int pointCount=30)</td></tr>
 <tr class="separator:a48d43f86313297d49c3af11de9a13f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac625c7edb24bed89ecd917a8eb048b5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#ac625c7edb24bed89ecd917a8eb048b5b">SetConvex</a> (std::vector&lt; sf::Vector2f &gt; &amp;points)</td></tr>
 <tr class="separator:ac625c7edb24bed89ecd917a8eb048b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05d97742f288cad3a5e8bed4e4d32624"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a05d97742f288cad3a5e8bed4e4d32624">SetCustom</a> (sf::Shape *<a class="el" href="class_v_shape.html#a2313747218071cfbecd86af4f2356a3d">shape</a>, float width, float height)</td></tr>
+<tr class="memitem:a05d97742f288cad3a5e8bed4e4d32624"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a05d97742f288cad3a5e8bed4e4d32624">SetCustom</a> (sf::Shape *shape, float width, float height)</td></tr>
 <tr class="separator:a05d97742f288cad3a5e8bed4e4d32624"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addfc0a86768d4cf1a1bd8755e6eec169"><td class="memItemLeft" align="right" valign="top">sf::Shape *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#addfc0a86768d4cf1a1bd8755e6eec169">GetShape</a> ()</td></tr>
 <tr class="separator:addfc0a86768d4cf1a1bd8755e6eec169"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +146,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a55c71bb42bc0ad38b3608e25de462729"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a610b92bf5864b7eedf6ce9940f3aeabc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a610b92bf5864b7eedf6ce9940f3aeabc">GetOutlineThickness</a> ()</td></tr>
 <tr class="separator:a610b92bf5864b7eedf6ce9940f3aeabc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0abe98dd642343e403967791fadb66cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a0abe98dd642343e403967791fadb66cd">SetTexture</a> (sf::Texture *texture)</td></tr>
+<tr class="separator:a0abe98dd642343e403967791fadb66cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09c9e79839e8d02945a6c7673716e111"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a09c9e79839e8d02945a6c7673716e111">SetTextureFromFile</a> (const sf::String &amp;filename)</td></tr>
+<tr class="separator:a09c9e79839e8d02945a6c7673716e111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2187fe3ace02a01af20735e1a29bb92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#af2187fe3ace02a01af20735e1a29bb92">SetTextureRect</a> (const sf::IntRect &amp;rect)</td></tr>
+<tr class="separator:af2187fe3ace02a01af20735e1a29bb92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d8df410a3fe58ba75e50b96818ef8b9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a7d8df410a3fe58ba75e50b96818ef8b9">Draw</a> (sf::RenderTarget &amp;RenderTarget) override</td></tr>
 <tr class="separator:a7d8df410a3fe58ba75e50b96818ef8b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_object.html">VObject</a></td></tr>
@@ -165,10 +174,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f1073c17fee9f0e64370e5ef97dcf3f inherit pub_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a1f1073c17fee9f0e64370e5ef97dcf3f">Update</a> (float dt)</td></tr>
 <tr class="separator:a1f1073c17fee9f0e64370e5ef97dcf3f inherit pub_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
-<tr class="memitem:a2017adacc8701de1caac66ffa0030db1 inherit pub_methods_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="a2017adacc8701de1caac66ffa0030db1"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a2017adacc8701de1caac66ffa0030db1">Destroy</a> ()</td></tr>
-<tr class="memdesc:a2017adacc8701de1caac66ffa0030db1 inherit pub_methods_class_v_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys object and any data that must be destroyed. <br /></td></tr>
-<tr class="separator:a2017adacc8701de1caac66ffa0030db1 inherit pub_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d454eaacf1342b22a4367d359ce0827 inherit pub_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a2d454eaacf1342b22a4367d359ce0827">Kill</a> ()</td></tr>
 <tr class="separator:a2d454eaacf1342b22a4367d359ce0827 inherit pub_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e6f48dc57252f66e365b409e0a8ecb8 inherit pub_methods_class_v_base"><td class="memItemLeft" align="right" valign="top"><a id="a3e6f48dc57252f66e365b409e0a8ecb8"></a>
@@ -327,13 +332,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:a5a4e6fa3c3024fcdd3370dd8e856f3a2 inherit pro_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#a5a4e6fa3c3024fcdd3370dd8e856f3a2">updateMotion</a> (float dt)</td></tr>
 <tr class="separator:a5a4e6fa3c3024fcdd3370dd8e856f3a2 inherit pro_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a2313747218071cfbecd86af4f2356a3d"><td class="memItemLeft" align="right" valign="top"><a id="a2313747218071cfbecd86af4f2356a3d"></a>
-std::unique_ptr&lt; sf::Shape &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_shape.html#a2313747218071cfbecd86af4f2356a3d">shape</a></td></tr>
-<tr class="memdesc:a2313747218071cfbecd86af4f2356a3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The shape object that holds the rendering and transform infomation of the object. <br /></td></tr>
-<tr class="separator:a2313747218071cfbecd86af4f2356a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_class_v_object"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_object')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_object.html">VObject</a></td></tr>
@@ -348,6 +346,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_object.html#acfc159100fd819b7500cbbe02ed21c67">TestInView</a> (const sf::View &amp;renderTargetView, sf::View *defaultView, <a class="el" href="class_v_object.html">VObject</a> *o, const sf::FloatRect &amp;renderBox=sf::FloatRect())</td></tr>
 <tr class="separator:acfc159100fd819b7500cbbe02ed21c67 inherit pub_static_methods_class_v_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_v_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_class_v_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_v_base.html">VBase</a></td></tr>
+<tr class="memitem:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static const wchar_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a> (const char *fmt,...)</td></tr>
+<tr class="separator:aeebe5634440d368a2583c0ba8558cab4 inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a24901d5efbff21bcb040ade5d2efdc1d">VLog</a> (const char *fmt,...)</td></tr>
 <tr class="separator:a24901d5efbff21bcb040ade5d2efdc1d inherit pub_static_methods_class_v_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c63d85f3139497ad5574fcc4f1ae33 inherit pub_static_methods_class_v_base"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_base.html#a51c63d85f3139497ad5574fcc4f1ae33">VLogError</a> (const char *fmt,...)</td></tr>
@@ -756,6 +756,78 @@ static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
   <table class="params">
     <tr><td class="paramname">width</td><td>Width of the new rectangle. </td></tr>
     <tr><td class="paramname">height</td><td>Height of the new rectangle. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0abe98dd642343e403967791fadb66cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0abe98dd642343e403967791fadb66cd">&#9670;&nbsp;</a></span>SetTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VShape::SetTexture </td>
+          <td>(</td>
+          <td class="paramtype">sf::Texture *&#160;</td>
+          <td class="paramname"><em>texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">texture</td><td>The texture you want to set to, gets destroyed once removed. NULL by default. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a09c9e79839e8d02945a6c7673716e111"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09c9e79839e8d02945a6c7673716e111">&#9670;&nbsp;</a></span>SetTextureFromFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VShape::SetTextureFromFile </td>
+          <td>(</td>
+          <td class="paramtype">const sf::String &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>The file of the texture you want to set to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af2187fe3ace02a01af20735e1a29bb92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2187fe3ace02a01af20735e1a29bb92">&#9670;&nbsp;</a></span>SetTextureRect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VShape::SetTextureRect </td>
+          <td>(</td>
+          <td class="paramtype">const sf::IntRect &amp;&#160;</td>
+          <td class="paramname"><em>rect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rect</td><td>The area of the texture you want to be displayed on the shape, by default it's the full area. </td></tr>
   </table>
   </dd>
 </dl>

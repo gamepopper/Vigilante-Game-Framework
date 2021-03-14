@@ -50,6 +50,8 @@ typedef struct cpSpace VPhysicsCPSpace;
 typedef struct cpArbiter VPhysicsCPArbiter;
 ///Accessor to cpCollisionHandler struct.
 typedef struct cpCollisionHandler VPhysicsCollision;
+///Accessor to cpShapeFilter struct.
+typedef struct cpShapeFilter VPhysicsCollisionFilter;
 
 /**
 * Helper function to convert a sf::Vector2f to a cpVect.
@@ -73,7 +75,7 @@ public:
 	typedef VBase VSUPERCLASS;
 
 	///The shape of the collision area of the physics object.
-	enum VObjectShape
+	enum VObjectShape : unsigned char
 	{
 		CIRCLE,
 		BOX,
@@ -82,12 +84,24 @@ public:
 	};
 
 	///The physics type of the physics object.
-	enum VObjectType
+	enum VObjectType : unsigned char
 	{
 		DYNAMIC,
 		KINEMATIC,
 		STATIC
 	};
+
+	enum VPhysicsLock
+	{
+		XPOS = 1 << 0,
+		XVEL = 1 << 1,
+		YPOS = 1 << 2,
+		YVEL = 1 << 3,
+		ANGLE = 1 << 4,
+		ANGLEVEL = 1 << 5,
+	};
+
+	unsigned int Lock = 0;
 
 protected:
 	///The object to apply the angle and position from the physics body.
@@ -102,6 +116,8 @@ protected:
 	VObjectShape shapeType;
 	///The type of body of the physics object.
 	VObjectType bodyType;
+	///A fast collision filter, defaults to allowing collisions from all objects.
+	cpShapeFilter* filter;
 
 public:
 	/**
@@ -146,6 +162,14 @@ public:
 	//void SetShapeType(VObjectShape shape);
 	///@return The type of shape of the physics object.
 	VObjectShape GetShapeType();
+
+	/**
+	* Update the Collisionfilter.
+	* @param group Group id, for filtering out all shapes that have the same id. No Group = 0
+	* @param category Category id, for other objects to filter out if their category is in the mask.
+	* @param mask Mask for objects to filter out by a specific category.
+	*/
+	void UpdateCollisionFilter(unsigned int group = 0, unsigned int category = -1, unsigned int mask = -1);
 	
 	/**
 	* Set the physics body of the object.

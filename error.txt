@@ -1,0 +1,2 @@
+Error loading texture: Examples/Assets/Box.png
+

@@ -3,7 +3,11 @@
 
 VRenderLayer::VRenderLayer(unsigned int maxSize) : VGroup(maxSize)
 {
-	
+	vertexArray.setPrimitiveType(sf::Quads);
+	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
+	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
+	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
+	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
 }
 
 void VRenderLayer::Destroy()
@@ -14,12 +18,15 @@ void VRenderLayer::Destroy()
 
 void VRenderLayer::SetTint(const sf::Color& tint)
 {
-	sprite.setColor(tint);
+	vertexArray[0].color = tint;
+	vertexArray[1].color = tint;
+	vertexArray[2].color = tint;
+	vertexArray[3].color = tint;
 }
 
 const sf::Color& VRenderLayer::GetTint()
 {
-	return sprite.getColor();
+	return vertexArray[0].color;
 }
 
 void VRenderLayer::Update(float dt)
@@ -44,32 +51,43 @@ const sf::Texture& VRenderLayer::GetTexture()
 void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 {
 	sf::View MainView = RenderTarget.getView();
+	sf::View DefaultView = RenderTarget.getDefaultView();
 
 	if (renderTex.getSize() != sf::Vector2u(MainView.getSize()))
-		renderTex.create((unsigned int)MainView.getSize().x, (unsigned int)MainView.getSize().y);
+	{
+		float Width = MainView.getSize().x;
+		float Height = MainView.getSize().y;
+		vertexArray[0] = sf::Vertex(sf::Vertex(sf::Vector2f(0.0f, Height), sf::Color::White, sf::Vector2f(0.0f, Height)));
+		vertexArray[1] = sf::Vertex(sf::Vertex(sf::Vector2f(0.0f, 0.0f), sf::Color::White, sf::Vector2f()));
+		vertexArray[2] = sf::Vertex(sf::Vertex(sf::Vector2f(Width, 0.0f), sf::Color::White, sf::Vector2f(Width, 0.0f)));
+		vertexArray[3] = sf::Vertex(sf::Vertex(sf::Vector2f(Width, Height), sf::Color::White, sf::Vector2f(Width, Height)));
+		renderTex.create((unsigned int)Width, (unsigned int)Height);
+	}
 
 	renderTex.setView(MainView);
 	renderTex.clear(sf::Color::Transparent);
 	VSUPERCLASS::Draw(renderTex);
 	renderTex.display();
 
-
 	if (PostEffect == nullptr || !VPostEffectBase::isSupported())
 	{
-		sprite.setTexture(renderTex.getTexture());
+		RenderState.texture = &renderTex.getTexture();
 	}
 	else
 	{
-		postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
+		if (postProcessTex.getSize() != renderTex.getSize())
+			postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
 
 		postProcessTex.clear(sf::Color::Transparent);
 		PostEffect->Apply(renderTex.getTexture(), postProcessTex);
 		postProcessTex.display();
 
-		sprite.setTexture(postProcessTex.getTexture());
+		RenderState.texture = &postProcessTex.getTexture();
 	}
 	
-	RenderTarget.setView(RenderTarget.getDefaultView());
-	RenderTarget.draw(sprite, RenderState);
+	RenderState.transform = sf::Transform::Identity;
+
+	RenderTarget.setView(DefaultView);
+	RenderTarget.draw(vertexArray, RenderState);
 	RenderTarget.setView(MainView);
 }

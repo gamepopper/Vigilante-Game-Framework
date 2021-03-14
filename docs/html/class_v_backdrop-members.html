@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -95,7 +95,7 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#ad94a8aabc3efd92bb73c9712b067ea02">IsSolid</a>()</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_base.html#a2d454eaacf1342b22a4367d359ce0827">Kill</a>()</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a390b08e01aeebd476fff3bb803990d09">Last</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_backdrop.html#a5f3d336a76f51460bf2524efdf5ed039">LoadGraphic</a>(sf::String filename, const sf::IntRect &amp;area=sf::IntRect())</td><td class="entry"><a class="el" href="class_v_backdrop.html">VBackdrop</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_backdrop.html#a06fd57f815f3769f5effaddf534eb2c8">LoadGraphic</a>(const sf::String &amp;filename, const sf::IntRect &amp;area=sf::IntRect())</td><td class="entry"><a class="el" href="class_v_backdrop.html">VBackdrop</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_backdrop.html#a0037a1cb70f34a9ddc76b5d81f0bec82">LoadGraphicFromTexture</a>(sf::Texture &amp;texture)</td><td class="entry"><a class="el" href="class_v_backdrop.html">VBackdrop</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_object.html#ad8cca6d32d58c38c9dc48b51da99d2c9">Mass</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a99a32993c290bed06a36c423c51e9b12">MaxVelocity</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
@@ -151,10 +151,11 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_v_base.html#a51c63d85f3139497ad5574fcc4f1ae33">VLogError</a>(const char *fmt,...)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_v_object.html#a56e969e9d4ab7145396196b7bb6d034a">VObject</a>(sf::Vector2f position, sf::Vector2f size=sf::Vector2f())</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a8dd935a818eefb5e2278d315cb42ec3e">VObject</a>(float x=0, float y=0, float width=0, float height=0)</td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_backdrop.html#ad9d455fef82e0f9f0d0d0fc77274f3d6">VSUPERCLASS</a> typedef</td><td class="entry"><a class="el" href="class_v_backdrop.html">VBackdrop</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a9707f2b8e452f956d05572a5fa287c43">WasTouching</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_v_object.html#a0acf58f64958931c1a17be3e2a886b9e">ZoomFactor</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~VBase</b>() (defined in <a class="el" href="class_v_base.html">VBase</a>)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_base.html#aeebe5634440d368a2583c0ba8558cab4">VString</a>(const char *fmt,...)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_backdrop.html#ad9d455fef82e0f9f0d0d0fc77274f3d6">VSUPERCLASS</a> typedef</td><td class="entry"><a class="el" href="class_v_backdrop.html">VBackdrop</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_v_object.html#a9707f2b8e452f956d05572a5fa287c43">WasTouching</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_v_object.html#a0acf58f64958931c1a17be3e2a886b9e">ZoomFactor</a></td><td class="entry"><a class="el" href="class_v_object.html">VObject</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>~VBase</b>() (defined in <a class="el" href="class_v_base.html">VBase</a>)</td><td class="entry"><a class="el" href="class_v_base.html">VBase</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

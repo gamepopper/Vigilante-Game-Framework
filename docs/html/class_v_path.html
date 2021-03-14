@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -88,8 +88,8 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abad0c182e48a2106abcf574f00e5d000"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_path.html#abad0c182e48a2106abcf574f00e5d000">SetPath</a> (std::vector&lt; sf::Vector2f &gt; points)</td></tr>
-<tr class="separator:abad0c182e48a2106abcf574f00e5d000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e16fb58c2741d36bd50228c8f189ce8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_path.html#a0e16fb58c2741d36bd50228c8f189ce8">SetPath</a> (const std::vector&lt; sf::Vector2f &gt; &amp;points)</td></tr>
+<tr class="separator:a0e16fb58c2741d36bd50228c8f189ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8db99f1bbcd4b06313d0b2695bb69d36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_path.html#a8db99f1bbcd4b06313d0b2695bb69d36">AddPoint</a> (sf::Vector2f point)</td></tr>
 <tr class="separator:a8db99f1bbcd4b06313d0b2695bb69d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bdeb60d8f0b666602105219ed9f1799"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_path.html#a7bdeb60d8f0b666602105219ed9f1799">RemovePoint</a> (unsigned int index)</td></tr>
@@ -365,8 +365,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a id="abad0c182e48a2106abcf574f00e5d000"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abad0c182e48a2106abcf574f00e5d000">&#9670;&nbsp;</a></span>SetPath()</h2>
+<a id="a0e16fb58c2741d36bd50228c8f189ce8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e16fb58c2741d36bd50228c8f189ce8">&#9670;&nbsp;</a></span>SetPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -374,7 +374,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">void VPath::SetPath </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; sf::Vector2f &gt;&#160;</td>
+          <td class="paramtype">const std::vector&lt; sf::Vector2f &gt; &amp;&#160;</td>
           <td class="paramname"><em>points</em></td><td>)</td>
           <td></td>
         </tr>
@@ -428,7 +428,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the speed of the current path, defined as 1 / time. Default value is 1, which assumes the object will complete the path in one second. 0.5 = 2 seconds. 2 = 0.5 seconds. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Sets the speed of the current path, defined as 1 / time. Default value is 1, which assumes the object will complete the path in one second. 0.5 = 2 seconds. 2 = 0.5 seconds, etc. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">speed</td><td>The new speed of the path following. </td></tr>
   </table>

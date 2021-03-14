@@ -78,6 +78,9 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 		}
 	}
 
+	filter = &cpShapeFilterNew(CP_NO_GROUP, CP_ALL_CATEGORIES, CP_ALL_CATEGORIES);
+	cpShapeSetFilter(shape, *filter);
+
 	if (BodyType == VObjectType::DYNAMIC)
 	{
 		cpBodySetMoment(body, moment);
@@ -111,6 +114,15 @@ VPhysicsCPShape* VPhysicsObject::GetShape()
 VPhysicsObject::VObjectShape VPhysicsObject::GetShapeType()
 {
 	return shapeType;
+}
+
+void VPhysicsObject::UpdateCollisionFilter(unsigned int group, unsigned int category, unsigned int mask)
+{
+	filter->group = group;
+	filter->categories = category;
+	filter->mask = mask;
+
+	cpShapeSetFilter(shape, *filter);
 }
 
 void VPhysicsObject::SetBodyType(VObjectType newBodyType)
@@ -173,6 +185,18 @@ void VPhysicsObject::Update(float dt)
 		vel.y = baseObject->Velocity.y;
 	}
 
+	if ((Lock & VPhysicsLock::XPOS) != 0)
+		pos.x = baseObject->Position.x + (baseObject->Size.x / 2.0f);
+
+	if ((Lock & VPhysicsLock::XVEL) != 0)
+		vel.x = baseObject->Velocity.x;
+
+	if ((Lock & VPhysicsLock::YPOS) != 0)
+		pos.y = baseObject->Position.y + (baseObject->Size.y / 2.0f);
+
+	if ((Lock & VPhysicsLock::YVEL) != 0)
+		vel.y = baseObject->Velocity.y;
+
 	baseObject->SetPositionAtCentre(ToSFVector(pos));
 	baseObject->Velocity = ToSFVector(vel);
 
@@ -189,6 +213,12 @@ void VPhysicsObject::Update(float dt)
 			angle = baseObject->Angle * (VFRAME_PI / 180.0f);
 			angleVel = baseObject->AngleVelocity * (VFRAME_PI / 180.0f);
 		}
+
+		if ((Lock & VPhysicsLock::ANGLE) != 0)
+			angle = baseObject->Angle * (VFRAME_PI / 180.0f);
+
+		if ((Lock & VPhysicsLock::ANGLEVEL) != 0)
+			angleVel = baseObject->AngleVelocity * (VFRAME_PI / 180.0f);
 
 		baseObject->Angle = angle * (180.0f / VFRAME_PI);
 		baseObject->AngleVelocity = angleVel * (180.0f / VFRAME_PI);

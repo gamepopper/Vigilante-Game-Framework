@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Vigilante Game Framework
-   &#160;<span id="projectnumber">1.0.0.7</span>
+   &#160;<span id="projectnumber">1.0.0.8</span>
    </div>
    <div id="projectbrief">A 2D/3D C++ Game Framework using SFML.</div>
   </td>
@@ -81,14 +81,12 @@ Inheritance diagram for VTimer:</div>
  <div class="center">
   <img src="class_v_timer.png" usemap="#VTimer_map" alt=""/>
   <map id="VTimer_map" name="VTimer_map">
-<area href="class_v_timeline.html" title="Special VTimer that can perform events at set intervals. VTimer functions are usable, but the new functions need to be called in order for events to take effect. " alt="VTimeline" shape="rect" coords="0,56,67,80"/>
+<area href="class_v_timer_event.html" title="Special VTimer that can perform an event at a set interval. Like VTimer, it can be paused or restarte..." alt="VTimerEvent" shape="rect" coords="0,56,84,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac8922e0048640cdeaf49963858803a6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_timer.html#ac8922e0048640cdeaf49963858803a6b">VTimer</a> (bool addToManager=true)</td></tr>
-<tr class="separator:ac8922e0048640cdeaf49963858803a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40841a3cf5e1af731ef68e84e35f097e"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_timer.html#a40841a3cf5e1af731ef68e84e35f097e">Update</a> (float dt)</td></tr>
 <tr class="separator:a40841a3cf5e1af731ef68e84e35f097e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a030877a6c9c2e2ce2277543ff5726ad7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_v_timer.html#a030877a6c9c2e2ce2277543ff5726ad7">IsPaused</a> ()</td></tr>
@@ -112,32 +110,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Single timer class for measuring the length of time between function calls. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac8922e0048640cdeaf49963858803a6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8922e0048640cdeaf49963858803a6b">&#9670;&nbsp;</a></span>VTimer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">VTimer::VTimer </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>addToManager</em> = <code>true</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">addToManager</td><td>If true, this will automatically add the timer to <a class="el" href="class_v_time_manager.html" title="Manages multiple timers at once in a singleton data structure. ">VTimeManager</a>. If it's not added to the <a class="el" href="class_v_time_manager.html" title="Manages multiple timers at once in a singleton data structure. ">VTimeManager</a> it has to be updated manually. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a030877a6c9c2e2ce2277543ff5726ad7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a030877a6c9c2e2ce2277543ff5726ad7">&#9670;&nbsp;</a></span>IsPaused()</h2>
 
@@ -259,7 +232,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The resulting time once updated. </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_v_timeline.html#a177db93d1179561c6d8ac91611e6ffc5">VTimeline</a>.</p>
+<p>Reimplemented in <a class="el" href="class_v_timer_event.html#a0b7580fe549368b042957835bca4c101">VTimerEvent</a>.</p>
 
 </div>
 </div>

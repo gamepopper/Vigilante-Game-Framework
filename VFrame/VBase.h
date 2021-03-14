@@ -39,6 +39,7 @@
 #include <iostream>
 #endif
 
+///PI constant value
 #define VFRAME_PI 3.14159265358979323846264338327950288f
 
 ///Types of objects the base class could have. This is mainly used for collision tests.

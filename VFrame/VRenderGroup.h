@@ -67,11 +67,16 @@ public:
 	///If true, the camera's render view will be transformed based on the sprite's current transform, else it will use the camera's render view.
 	bool RenderViewTransform = true;
 
+	///Options for what happens to renderable objects outside of the VRenderGroup area.
 	enum VRenderGroupOutside : unsigned char
 	{
+		///No rendering.
 		VRENDERGROUP_NO,
+		///Render before the final texture of the render group.
 		VRENDERGROUP_BEFORE,
+		///Render after the final texture of the render group.
 		VRENDERGROUP_AFTER,
+		///Render both before and after the final texture of the render group.
 		VRENDERGROUP_BOTH,
 	};
 
