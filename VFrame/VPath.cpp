@@ -1,4 +1,5 @@
 #include "VPath.h"
+#include <math.h>
 
 sf::Vector2f VPath::getBezierPoint(float t)
 {
@@ -175,7 +176,7 @@ void VPath::Update(float dt)
 			sf::Vector2f diff = p1 - lastPos;
 			object->Angle = atan2f(diff.y, diff.x) * (180 / VFRAME_PI);
 		}
-	}	
+	}
 
 	lastPos = p1;
 }

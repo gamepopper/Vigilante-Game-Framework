@@ -1,11 +1,12 @@
 #include "VGradient.h"
 #include "VInterpolate.h"
+#include <math.h>
 
 void VGradient::updateTransform()
 {
 	float angle = -Angle * VFRAME_PI / 180.f;
-	float cosine = static_cast<float>(std::cos(angle));
-	float sine = static_cast<float>(std::sin(angle));
+	float cosine = static_cast<float>(cos(angle));
+	float sine = static_cast<float>(sin(angle));
 	float sxc = Scale.x * cosine;
 	float syc = Scale.y * cosine;
 	float sxs = Scale.x * sine;
@@ -27,8 +28,8 @@ void VGradient::updateFrame()
 	for (unsigned int i = 0; i < sortedPoints.size(); i++)
 		sortedPoints[i] = points[i].get();
 
-	std::sort(sortedPoints.begin(), sortedPoints.end(), 
-		[](VColourPoint* first, VColourPoint* second) 
+	std::sort(sortedPoints.begin(), sortedPoints.end(),
+		[](VColourPoint* first, VColourPoint* second)
 	{
 		return first->Position < second->Position;
 	});
@@ -36,7 +37,7 @@ void VGradient::updateFrame()
 	unsigned int imageWidth = static_cast<unsigned int>(1 * gradResolution);
 	if (gradImage.getSize().x != imageWidth)
 		gradImage.create(imageWidth, 1);
-	
+
 	unsigned int offset = 0;
 	for (unsigned int i = 0; i < sortedPoints.size() - 1; i++)
 	{
@@ -51,7 +52,7 @@ void VGradient::updateFrame()
 
 	if (renderTex.getSize().x != Size.x || renderTex.getSize().y != Size.y)
 		renderTex.create(Size.x, Size.y);
-	
+
 	sf::Texture gradTexture;
 	gradTexture.loadFromImage(gradImage);
 	gradTexture.setSmooth(true);
@@ -238,7 +239,7 @@ void VGradient::Draw(sf::RenderTarget& RenderTarget)
 {
 	if (dirty)
 		updateFrame();
-	
+
 	VSUPERCLASS::Draw(RenderTarget);
 
 	sf::View renderTargetView = RenderTarget.getView();
