@@ -2,11 +2,6 @@
 
 #if defined(_WIN32)
 #include <windows.h>
-#elif defined(__linux__)
-#include <unistd.h>
-#include <term.h>
-#include <curses.h>
-//#include <gtk/gtk.h>
 #endif
 
 #include <stdarg.h>
@@ -187,14 +182,8 @@ void VBase::VClearLog()
 #endif
 
 #ifdef __linux__
-	if (!cur_term)
-	{
-		int result;
-		setupterm(NULL, STDOUT_FILENO, &result);
-		if (result <= 0) return;
-	}
-
-	putp(tigetstr("clear"));
+	for (int n = 0; n < 10; n++)
+		printf("\n\n\n\n\n\n\n\n\n\n");
 #endif
 }
 

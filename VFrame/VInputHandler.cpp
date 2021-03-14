@@ -1,5 +1,6 @@
 #include "VInputHandler.h"
-#include <cstring>
+#include <string.h>
+#include <math.h>
 
 VInputHandler::VInputHandler(sf::Window* window)
 {
@@ -283,6 +284,12 @@ void VInputHandler::Update(float dt)
 				{
 					float val1 = 0, val2 = 0;
 
+					#ifdef WIN32
+					const float TriggerMax = 255.0f;
+					#else
+					const float TriggerMax = 32768.0f;
+					#endif
+
 					switch (a.gamepad)
 					{
 					case PovX:
@@ -309,12 +316,12 @@ void VInputHandler::Update(float dt)
 					}
 					case L:
 					{
-						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_LEFT) / 255.0f;
+						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_LEFT) / TriggerMax;
 						break;
 					}
 					case R:
 					{
-						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_RIGHT) / 255.0f;
+						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_RIGHT) / TriggerMax;
 						break;
 					}
 					}

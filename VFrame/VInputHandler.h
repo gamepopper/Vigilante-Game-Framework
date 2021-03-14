@@ -49,6 +49,7 @@
 
 #include <map>
 #include <iostream>
+#include <string.h>
 
 ///Maximum amount of controllers.
 #define CONTROLLER_COUNT 4
@@ -96,7 +97,7 @@ protected:
 	struct ButtonInput
 	{
 		///Keyboard Key Code
-		sf::Keyboard::Key key; 
+		sf::Keyboard::Key key;
 #if	defined(USE_GAMEPAD_API)
 		///Gamepad Button
 		GAMEPAD_BUTTON gamepad;
@@ -180,7 +181,7 @@ protected:
 	sf::Vector2i lastMousePos = sf::Vector2i();
 	///Reference to window for mouse inputs.
 	sf::Window* window = nullptr;
-	
+
 #ifdef USE_SFML_JOYSTICK
 	///SFML requires you to keep record of the joystick ID for each player.
 	int JoystickID[CONTROLLER_COUNT];
