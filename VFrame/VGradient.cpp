@@ -50,8 +50,9 @@ void VGradient::updateFrame()
 		offset += length;
 	}
 
-	if (renderTex.getSize().x != Size.x || renderTex.getSize().y != Size.y)
-		renderTex.create(Size.x, Size.y);
+	sf::Vector2i iSize(Size);
+	if (renderTex.getSize().x != iSize.x || renderTex.getSize().y != iSize.y)
+		renderTex.create(iSize.x, iSize.y);
 
 	sf::Texture gradTexture;
 	gradTexture.loadFromImage(gradImage);
