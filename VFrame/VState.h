@@ -91,7 +91,13 @@ public:
 	virtual void Update(float dt);
 
 	/**
-	* If overridden, allows the opportunity to render objects directly to the window, instead of the scene itself.
+	* If overridden, allows the opportunity to render objects directly to the entire window before the scene is rendered.
+	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
+	*/
+	virtual void PreDraw(sf::RenderTarget& RenderTarget) {}
+
+	/**
+	* If overridden, allows the opportunity to render objects directly to the entire window after the scene is rendered.
 	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
 	*/
 	virtual void PostDraw(sf::RenderTarget& RenderTarget) {}
