@@ -23,15 +23,26 @@ VGlobal::VGlobal()
 
 		rectCollision = [](VObject* a, VObject* b)
 		{
-			if (a->Position.x < b->Position.x + b->Size.x &&
-				a->Position.x + a->Size.x > b->Position.x &&
-				a->Position.y < b->Position.y + b->Size.y &&
-				a->Position.y + a->Size.y > b->Position.y)
-			{
-				return true;
-			}
+			// Compute the min and max of the first rectangle on both axes
+			float r1MinX = std::min(a->Position.x, a->Position.x + a->Size.x);
+			float r1MaxX = std::max(a->Position.x, a->Position.x + a->Size.x);
+			float r1MinY = std::min(a->Position.y, a->Position.y + a->Size.y);
+			float r1MaxY = std::max(a->Position.y, a->Position.y + a->Size.y);
 
-			return false;
+			// Compute the min and max of the second rectangle on both axes
+			float r2MinX = std::min(b->Position.x, b->Position.x + b->Size.x);
+			float r2MaxX = std::max(b->Position.x, b->Position.x + b->Size.x);
+			float r2MinY = std::min(b->Position.y, b->Position.y + b->Size.y);
+			float r2MaxY = std::max(b->Position.y, b->Position.y + b->Size.y);
+
+			// Compute the intersection boundaries
+			float interLeft = std::max(r1MinX, r2MinX);
+			float interTop = std::max(r1MinY, r2MinY);
+			float interRight = std::min(r1MaxX, r2MaxX);
+			float interBottom = std::min(r1MaxY, r2MaxY);
+
+			// If the intersection is valid (positive non zero area), then there is an intersection
+			return (interLeft < interRight) && (interTop < interBottom);
 		};
 
 		circleCollision = [](VObject* a, VObject* b)
@@ -42,12 +53,7 @@ VGlobal::VGlobal()
 			sf::Vector2f diff = aCentre - bCentre;
 			float length = sqrtf((diff.x * diff.x) + (diff.y * diff.y));
 
-			if (length < a->Radius + b->Radius)
-			{
-				return true;
-			}
-
-			return false;
+			return length < a->Radius + b->Radius;
 		};
 	}
 }

@@ -34,6 +34,7 @@
 #pragma once
 #include "VObject.h"
 
+#include <map>
 #include <vector>
 #include <functional>
 #include <memory>
@@ -77,6 +78,8 @@ class VCollision
 {
 	///List of quads to test for.
 	std::vector<std::unique_ptr<VQuadTree>> quads;
+	///Check up of already tested collisions in the event two objects are in the same set of quads.
+	std::map<void*, std::vector<void*>> hash;
 	///The amount of quads to generate.
 	unsigned int quadCount = 0;
 	///The rectangle for the entire scene.

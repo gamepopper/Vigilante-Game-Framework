@@ -12,7 +12,26 @@ bool VQuadTree::checkBounds(VObject* object, VCollideList list)
 {
 	sf::FloatRect objRect = sf::FloatRect(object->Position, object->Size);
 
-	if (bounds.intersects(objRect))
+	// Compute the min and max of the first rectangle on both axes
+	float r1MinX = std::min(bounds.left, bounds.left + bounds.width);
+	float r1MaxX = std::max(bounds.left, bounds.left + bounds.width);
+	float r1MinY = std::min(bounds.top, bounds.top + bounds.height);
+	float r1MaxY = std::max(bounds.top, bounds.top + bounds.height);
+
+	// Compute the min and max of the second rectangle on both axes
+	float r2MinX = std::min(objRect.left, objRect.left + objRect.width);
+	float r2MaxX = std::max(objRect.left, objRect.left + objRect.width);
+	float r2MinY = std::min(objRect.top, objRect.top + objRect.height);
+	float r2MaxY = std::max(objRect.top, objRect.top + objRect.height);
+
+	// Compute the intersection boundaries
+	float interLeft = std::max(r1MinX, r2MinX);
+	float interTop = std::max(r1MinY, r2MinY);
+	float interRight = std::min(r1MaxX, r2MaxX);
+	float interBottom = std::min(r1MaxY, r2MaxY);
+
+	// If the intersection is valid (positive non zero area), then there is an intersection
+	if ((interLeft < interRight) && (interTop < interBottom))
 	{
 		if (list == A)
 			listA.push_back(object);
@@ -67,6 +86,8 @@ void VCollision::Cleanup()
 	{
 		quads[i]->clear();
 	}
+
+	hash.clear();
 }
 
 void VCollision::setupQuad(const sf::FloatRect& subsection, int remaining, bool create)
@@ -203,18 +224,19 @@ bool VCollision::Run(std::function<bool(VObject*, VObject*)> testOverlap, std::f
 				if (tree->listA[a] == tree->listB[b]) //Skip if both elements are the same object.
 					continue;
 
-				if (testOverlap(tree->listA[a], tree->listB[b]))
-				{
-					if (process != nullptr)
-					{
-						process(tree->listA[a], tree->listB[b]);
-					}
+				if (hash[tree->listA[a]].size() > 0 &&
+					std::find(hash[tree->listA[a]].begin(), hash[tree->listA[a]].end(), tree->listB[b]) != hash[tree->listA[a]].end())
+					continue;
 
+				if (testOverlap(tree->listA[a], tree->listB[b]) && 
+					(process == nullptr || process(tree->listA[a], tree->listB[b])))
+				{
 					if (response != nullptr)
 					{
 						response(tree->listA[a], tree->listB[b]);
 					}
 
+					hash[tree->listA[a]].push_back(tree->listB[b]);
 					overlapFound = true;
 				}
 			}
