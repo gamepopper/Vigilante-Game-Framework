@@ -43,16 +43,7 @@ void VCamera::StopFollow()
 
 bool VCamera::Shake(float intensity, float time, std::function<void()> OnComplete)
 {
-	if (!isShaking)
-	{
-		shakeX = shakeY = intensity;
-		shakeLength = time;
-		shakeTimer.restart();
-		OnShakeComplete = OnComplete;
-		isShaking = true;
-		return true;
-	}
-	return false;
+	return Shake(sf::Vector2f(intensity, intensity), time, OnComplete);
 }
 
 
