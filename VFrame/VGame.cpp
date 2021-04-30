@@ -330,6 +330,14 @@ void VGame::PreRender()
 {
 	renderTarget->clear(VGlobal::p()->BackgroundColor);
 	VGlobal::p()->App->clear();
+
+	VState* currentState = VGlobal::p()->CurrentState();
+
+	if (currentState && currentState->visible)
+		currentState->PreDraw(*VGlobal::p()->App);
+
+	if (currentState->SubState && currentState->SubState->visible)
+		currentState->SubState->PreDraw(*VGlobal::p()->App);
 }
 
 void VGame::Render(VCamera* camera)
