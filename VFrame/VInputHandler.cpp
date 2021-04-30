@@ -282,55 +282,51 @@ void VInputHandler::Update(float dt)
 #ifdef USE_GAMEPAD_API
 				if (GamepadIsConnected((GAMEPAD_DEVICE)i))
 				{
-					float val1 = 0, val2 = 0;
+					int val1 = 0, val2 = 0;
 
-					#ifdef WIN32
-					const float TriggerMax = 255.0f;
-					#else
 					const float TriggerMax = 32768.0f;
-					#endif
 
 					switch (a.gamepad)
 					{
 					case PovX:
 					{
-						GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_LEFT, &val1, &val2);
+						GamepadStickXY((GAMEPAD_DEVICE)i, STICK_LEFT, &val1, &val2);
 						break;
 					}
 					case PovY:
 					{
-						GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_LEFT, &val2, &val1);
+						GamepadStickXY((GAMEPAD_DEVICE)i, STICK_LEFT, &val2, &val1);
 						val1 *= -1;
 						break;
 					}
 					case Z:
 					{
-						GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_RIGHT, &val1, &val2);
+						GamepadStickXY((GAMEPAD_DEVICE)i, STICK_RIGHT, &val1, &val2);
 						break;
 					}
 					case V:
 					{
-						GamepadStickNormXY((GAMEPAD_DEVICE)i, STICK_RIGHT, &val2, &val1);
+						GamepadStickXY((GAMEPAD_DEVICE)i, STICK_RIGHT, &val2, &val1);
 						val1 *= -1;
 						break;
 					}
 					case L:
 					{
-						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_LEFT) / TriggerMax;
+						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_LEFT);
 						break;
 					}
 					case R:
 					{
-						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_RIGHT) / TriggerMax;
+						val1 = GamepadTriggerValue((GAMEPAD_DEVICE)i, TRIGGER_RIGHT);
 						break;
 					}
 					}
 
-					val1 *= 100.0f;
+					float val = val1 * (100.0f / TriggerMax);
 
-					if (fabs(val1) > 0.0f)
+					if (fabs(val) > 0.0f)
 					{
-						a.value[i] = val1;
+						a.value[i] = val;
 						isGamepadActive = true;
 					}
 					else
