@@ -2,11 +2,7 @@
 
 VAnimation::VAnimation(const std::vector<int>& Frames, float FramesPerSecond, bool Looping, bool Reverse) : frames(Frames), looping(Looping), reverse(Reverse)
 {
-	if (FramesPerSecond > 0)
-		frameDelay = 1 / FramesPerSecond;
-	else
-		frameDelay = 0;
-
+	frameDelay = static_cast<int>(FramesPerSecond > 0) / FramesPerSecond;
 	totalFrames = frames.size();
 }
 
@@ -51,45 +47,42 @@ void VAnimation::SetReverse(bool Reverse)
 
 void VAnimation::Update(float dt)
 {
-	if (frameDelay > 0)
+	frameTime += dt;
+	if (frameDelay > 0 && frameTime >= frameDelay)
 	{
-		frameTime += dt;
-
-		if (frameTime >= frameDelay)
+		//If true
+		int amount = !reverse - reverse;
+		/*if (!reverse)
 		{
-			int amount = 0;
-			if (!reverse)
-			{
-				amount = 1;
-			}
-			else
-			{
-				amount = -1;
-			}
-
-			if (looping)
-			{
-				currentFrame = (currentFrame + totalFrames + amount) % totalFrames;
-			}
-			else
-			{
-				if (onCompleteCallback != nullptr)
-				{
-					if ((reverse && currentFrame == 0) ||
-						(!reverse && currentFrame == totalFrames - 1))
-					{
-						onCompleteCallback();
-						onCompleteCallback = nullptr;
-					}
-				}
-
-				currentFrame = currentFrame + amount < 0 ?
-					0 : currentFrame + amount >= totalFrames ?
-					totalFrames - 1 : currentFrame + amount;
-			}
-
-			frameTime = 0;
+			amount = 1;
 		}
+		else
+		{
+			amount = -1;
+		}*/
+
+		if (looping)
+		{
+			currentFrame = (currentFrame + totalFrames + amount) % totalFrames;
+		}
+		else
+		{
+			if (onCompleteCallback != nullptr)
+			{
+				if ((reverse && currentFrame == 0) ||
+					(!reverse && currentFrame == totalFrames - 1))
+				{
+					onCompleteCallback();
+					onCompleteCallback = nullptr;
+				}
+			}
+
+			currentFrame = currentFrame + amount < 0 ?
+				0 : currentFrame + amount >= totalFrames ?
+				totalFrames - 1 : currentFrame + amount;
+		}
+
+		frameTime = 0;
 	}
 }
 

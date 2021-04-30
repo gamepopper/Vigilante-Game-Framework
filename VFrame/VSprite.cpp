@@ -48,12 +48,12 @@ void VSprite::setSize(unsigned int texWidth, unsigned int texHeight, bool animat
 	if (Size.x <= 0)
 	{
 		Size.x = static_cast<float>(animated ? texHeight : texWidth);
-		Size.x = static_cast<float>(Size.x > texWidth ? texWidth : Size.x);
+		Size.x = std::fminf(Size.x, static_cast<float>(texWidth));
 	}
 	if (Size.y <= 0)
 	{
 		Size.y = static_cast<float>(animated ? Size.x : texHeight);
-		Size.y = static_cast<float>(Size.y > texHeight ? texHeight : Size.y);
+		Size.y = std::fminf(Size.y, static_cast<float>(texHeight));
 	}
 
 	FrameSize = sf::Vector2u(Size);

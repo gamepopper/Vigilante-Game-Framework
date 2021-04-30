@@ -251,18 +251,12 @@ bool V3DObjModel::LoadModelData(const char* filename)
 
 			for (unsigned int v = 0; v < vb.size(); v += 10)
 			{
-				if (vb[v + 0] < minimum.x)
-					minimum.x = vb[v + 0];
-				if (vb[v + 0] > maximum.x)
-					maximum.x = vb[v + 0];
-				if (vb[v + 1] < minimum.y)
-					minimum.y = vb[v + 1];
-				if (vb[v + 1] > maximum.y)
-					maximum.y = vb[v + 1];
-				if (vb[v + 2] < minimum.z)
-					minimum.z = vb[v + 2];
-				if (vb[v + 2] > maximum.z)
-					maximum.z = vb[v + 2];
+				minimum.x = std::fminf(vb[v + 0], minimum.x);
+				maximum.x = std::fmaxf(vb[v + 0], maximum.x);
+				minimum.y = std::fminf(vb[v + 1], minimum.y);
+				maximum.y = std::fmaxf(vb[v + 1], maximum.y);
+				minimum.z = std::fminf(vb[v + 2], minimum.z);
+				maximum.z = std::fmaxf(vb[v + 2], maximum.z);
 			}
 		}
 	}
@@ -281,10 +275,8 @@ bool V3DObjModel::LoadModelData(const char* filename)
 	Origin.z = maximum.z + (Size.z / 2.0f);
 
 	Radius = Size.x;
-	if (Radius < Size.y)
-		Radius = Size.y;
-	if (Radius < Size.z)
-		Radius = Size.z;
+	Radius = std::fminf(Radius, Size.y);
+	Radius = std::fminf(Radius, Size.z);
 
 	Radius /= 2.0f;
 
@@ -315,7 +307,8 @@ void V3DObjModel::CalcNormal(float N[3], float v0[3], float v1[3], float v2[3])
 	N[2] = v20[0] * v10[1] - v20[1] * v10[0];
 
 	float len2 = (N[0] * N[0]) + (N[1] * N[1]) + (N[2] * N[2]);
-	if (len2 > 0.0f) {
+	if (len2 > 0.0f) 
+	{
 		float len = sqrtf(len2);
 
 		N[0] /= len;

@@ -60,18 +60,12 @@ bool V3DModel::LoadModelData(const V3DVertexArray& vertexArray, const std::vecto
 
 	for (unsigned int v = 0; v < vertexArray.size(); v++)
 	{
-		if (vertexArray[v].position.x < minimum.x)
-			minimum.x = vertexArray[v].position.x;
-		if (vertexArray[v].position.x > maximum.x)
-			maximum.x = vertexArray[v].position.x;
-		if (vertexArray[v].position.y < minimum.y)
-			minimum.y = vertexArray[v].position.y;
-		if (vertexArray[v].position.y > maximum.y)
-			maximum.y = vertexArray[v].position.y;
-		if (vertexArray[v].position.z < minimum.z)
-			minimum.z = vertexArray[v].position.z;
-		if (vertexArray[v].position.z > maximum.z)
-			maximum.z = vertexArray[v].position.z;
+		minimum.x = std::fminf(vertexArray[v].position.x, minimum.x);
+		minimum.y = std::fminf(vertexArray[v].position.y, minimum.y);
+		minimum.z = std::fminf(vertexArray[v].position.z, minimum.z);
+		maximum.x = std::fmaxf(vertexArray[v].position.x, maximum.x);
+		maximum.y = std::fmaxf(vertexArray[v].position.y, maximum.y);
+		maximum.z = std::fmaxf(vertexArray[v].position.z, maximum.z);
 	}
 
 	sf::Vector3f Size;
@@ -84,10 +78,8 @@ bool V3DModel::LoadModelData(const V3DVertexArray& vertexArray, const std::vecto
 	Origin.z = minimum.z + (Size.z / 2.0f);
 
 	Radius = Size.x;
-	if (Radius < Size.y)
-		Radius = Size.y;
-	if (Radius < Size.z)
-		Radius = Size.z;
+	Radius = std::fminf(Radius, Size.y);
+	Radius = std::fminf(Radius, Size.z);
 
 	Radius /= 2.0f;
 
@@ -146,9 +138,7 @@ bool V3DModel::LoadTexture(const sf::Texture& tex)
 void V3DModel::UpdateShader(V3DShader* shader, V3DCamera* camera)
 {
 	if (texture.getSize().x == 0 || texture.getSize().y == 0)
-	{
 		GenerateDefaultTexture();
-	}
 
 	if (camera)
 	{

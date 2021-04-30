@@ -78,14 +78,10 @@ void VShape::SetConvex(std::vector<sf::Vector2f>& points)
 	sf::Vector2f offset = sf::Vector2f();
 	for (unsigned int i = 0; i < points.size(); i++)
 	{
-		if (points[i].x < offset.x)
-			offset.x = points[i].x;
-		if (points[i].y < offset.y)
-			offset.y = points[i].y;
-		if (points[i].x > Size.x)
-			Size.x = points[i].x;
-		if (points[i].y > Size.y)
-			Size.y = points[i].y;
+		offset.x = std::min(offset.x, points[i].x);
+		offset.y = std::min(offset.y, points[i].y);
+		Size.x = std::max(Size.x, points[i].x);
+		Size.y = std::max(Size.y, points[i].y);
 	}
 
 	sf::ConvexShape* newShape = new sf::ConvexShape(points.size());
@@ -99,10 +95,7 @@ void VShape::SetConvex(std::vector<sf::Vector2f>& points)
 	Size -= offset;
 	Origin = Size / 2.0f;
 
-	if (Origin.x > Origin.y)
-		Radius = Origin.y;
-	else
-		Radius = Origin.x;
+	Radius = Origin.y * (Origin.x > Origin.y) + Origin.x * (Origin.x <= Origin.y);
 
 	shape.reset(newShape);
 }

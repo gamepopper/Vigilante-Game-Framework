@@ -84,21 +84,20 @@ bool V3DCamera::SphereInView(sf::Vector3f p, float radius)
 {
 	updatePlanes();
 
-	float distance;
+	bool view = true;
+	float distance = 0.0f;
 	for (int i = 0; i < 6; i++)
 	{
 		distance = pointPlaneDistance(planes[i], glm::vec3(p.x, p.y, p.z));
-		if (distance < -radius)
-			return false;
+		view = view && (distance < -radius);
 	}
 
-	return true;
+	return view;
 }
 
 bool V3DCamera::BoxInView(sf::Vector3f p, sf::Vector3f min, sf::Vector3f max)
 {
 	updatePlanes();
-
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -108,23 +107,14 @@ bool V3DCamera::BoxInView(sf::Vector3f p, sf::Vector3f min, sf::Vector3f max)
 		const float pos = planes[i].w;
 		const glm::vec3 normal = glm::vec3(planes[i]);
 
-		if (normal.x >= 0.0f)
-		{
-			positive.x = max.x;
-			negative.x = min.x;
-		}
-
-		if (normal.y >= 0.0f)
-		{
-			positive.y = max.y;
-			negative.y = min.y;
-		}
-
-		if (normal.z >= 0.0f)
-		{
-			positive.z = max.z;
-			negative.z = min.z;
-		}
+		positive.x = (normal.x >= 0.0f) ? max.x : positive.x;
+		negative.x = (normal.x >= 0.0f) ? min.x : negative.x;
+									    
+		positive.y = (normal.y >= 0.0f) ? max.y : positive.y;
+		negative.y = (normal.y >= 0.0f) ? min.y : negative.y;
+									    
+		positive.z = (normal.z >= 0.0f) ? max.z : positive.z;
+		negative.z = (normal.z >= 0.0f) ? min.z : negative.z;
 
 		positive += p;
 		negative += p;
@@ -232,10 +222,7 @@ float V3DPerspectiveCamera::GetFOV()
 
 void V3DPerspectiveCamera::SetFOV(float value)
 {
-	if (value < 0 || value >= 180.0f)
-		return;
-
-	fov = value;
+	fov = fov * !(value > 0 && value < 180.0f) + value * (value > 0 && value < 180.0f);
 }
 
 V3DOrthographicCamera::V3DOrthographicCamera(const sf::Vector3f& pos, float width, float height, float zNear, float zFar)

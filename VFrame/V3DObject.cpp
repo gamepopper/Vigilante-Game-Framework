@@ -173,18 +173,12 @@ void V3DObject::Update(float dt)
 
 	if (Moves)
 	{
-		if (Velocity.x > MaxVelocity.x)
-			Velocity.x = MaxVelocity.x;
-		if (Velocity.x < -MaxVelocity.x)
-			Velocity.x = -MaxVelocity.x;
-		if (Velocity.y > MaxVelocity.y)
-			Velocity.y = MaxVelocity.y;
-		if (Velocity.y < -MaxVelocity.y)
-			Velocity.y = -MaxVelocity.y;
-		if (Velocity.z > MaxVelocity.z)
-			Velocity.z = MaxVelocity.z;
-		if (Velocity.z < -MaxVelocity.z)
-			Velocity.z = -MaxVelocity.z;
+		Velocity.x = std::fminf(Velocity.x, MaxVelocity.x);
+		Velocity.x = std::fmaxf(Velocity.x, -MaxVelocity.x);
+		Velocity.y = std::fminf(Velocity.y, MaxVelocity.y);
+		Velocity.y = std::fmaxf(Velocity.y, -MaxVelocity.y);
+		Velocity.z = std::fminf(Velocity.z, MaxVelocity.z);
+		Velocity.z = std::fmaxf(Velocity.z, -MaxVelocity.z);
 
 		updateMotion(dt);
 	}

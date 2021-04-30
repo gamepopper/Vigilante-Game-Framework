@@ -58,10 +58,8 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const s
 	}
 	else
 	{
-		if (Rect == sf::IntRect())
-			Size = sf::Vector2f(RenderState.texture->getSize());
-		else
-			Size = sf::Vector2f(sf::Vector2i(Rect.width, Rect.height));
+		sf::Vector2u texRect = RenderState.texture->getSize();
+		Size = sf::Vector2f(sf::Vector2i(Rect.width * (Rect.width > 0) + texRect.x * (Rect.width == 0), Rect.height * (Rect.height > 0) + texRect.y * (Rect.height == 0)));
 
 		FrameCount = 1;
 		FrameCountY = 1;

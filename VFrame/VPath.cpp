@@ -116,8 +116,7 @@ void VPath::StopFollowing()
 
 sf::Vector2f VPath::GetPoint(float t)
 {
-	if (t > 1.0f)
-		t = 1.0f;
+	t = std::min(t, 1.0f);
 
 	switch (pathType)
 	{
