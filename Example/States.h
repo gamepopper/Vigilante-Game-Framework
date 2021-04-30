@@ -360,6 +360,7 @@ public:
 
 		VGlobal::p()->WorldBounds.width = tilemap->Size.x;
 		VGlobal::p()->WorldBounds.height = tilemap->Size.y;
+		ParentState->Cameras[0]->SetToBounds(true);
 
 		sf::Vector2f playerPos;
 		for (int y = 0; y < tilemap->Size.y / tilemap->TileSize.y; y++)
