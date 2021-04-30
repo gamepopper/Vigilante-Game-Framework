@@ -72,9 +72,24 @@ private:
 public: 
 	///Access and creation of VGlobal
 	static VGlobal* p();
- 
+
+	///How to orientate the screen
+	enum OrientationOption : unsigned char
+	{
+		///No rotation
+		ANGLE_NONE,
+		///Rotate the screen 90 degrees, so the top of the screen faces right.
+		ANGLE_90,
+		///Rotate the screen 180 degrees, so the top of the screen faces right.
+		ANGLE_180,
+		///Rotate the screen 270 degrees, so the top of the screen faces right.
+		ANGLE_270
+	};
+
 	///Window the game is rendered on.
 	std::unique_ptr<sf::RenderWindow> App;
+	///The last frame rendered.
+	const sf::RenderTexture* Frame;
 	 ///sf::RenderStates object used for rendering the target to the scene with additional features like transform and blend mode.
 	sf::RenderStates RenderState;
 	///Offset for the main game's viewport, important for the game window being resized and the screen needing to be repositioned in the window.
@@ -119,8 +134,9 @@ public:
 	bool IfChangedState = false;
 	///Value is true if the a new VState is being pushed onto the stack in the state manager.
 	bool IfPushedState = false;
-	///Value is true if user wants to force the game to render a single frame, regardless of state handling or frame delay.
-	bool ForceFrame = false;
+	
+	///Orientation of the whole in-game screen, default is ANGLE_NONE or no rotation of the in-game screen.
+	OrientationOption Orientation = ANGLE_NONE;
 	///Random Number Generator
 	std::unique_ptr<VRandom> Random;
 	///Input Handling for Keyboard, Mouse and Controllers.
