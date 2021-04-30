@@ -229,25 +229,71 @@ void VGame::ResizeCheck()
 {
 	sf::Vector2u windowSize = VGlobal::p()->App->getSize();
 
-	if (windowSize.x != VGlobal::p()->WindowWidth || windowSize.y != VGlobal::p()->WindowHeight)
+	if (windowSize.x != VGlobal::p()->WindowWidth || windowSize.y != VGlobal::p()->WindowHeight ||
+		orientation != VGlobal::p()->Orientation)
 	{
+		orientation = VGlobal::p()->Orientation;
+
 		VGlobal::p()->WindowWidth = windowSize.x;
 		VGlobal::p()->WindowHeight = windowSize.y;
 		VGlobal::p()->App->setView(sf::View(sf::FloatRect(0, 0, (float)windowSize.x, (float)windowSize.y)));
 
-		float sx = VGlobal::p()->App->getSize().x / (float)VGlobal::p()->Width;
-		float sy = VGlobal::p()->App->getSize().y / (float)VGlobal::p()->Height;
-		float scale = std::fminf(sx, sy);
+		if (orientation == VGlobal::ANGLE_NONE || orientation == VGlobal::ANGLE_180)
+		{
+			float sx = VGlobal::p()->App->getSize().x / (float)VGlobal::p()->Width;
+			float sy = VGlobal::p()->App->getSize().y / (float)VGlobal::p()->Height;
+			float scale = std::fminf(sx, sy);
 
-		float scaleW = VGlobal::p()->Width * scale;
-		float scaleH = VGlobal::p()->Height * scale;
-		float scaleX = (VGlobal::p()->App->getSize().x - scaleW) / 2;
-		float scaleY = (VGlobal::p()->App->getSize().y - scaleH) / 2;
-		vertexArray[0].position = sf::Vector2f(scaleX, scaleY);
-		vertexArray[1].position = sf::Vector2f(scaleX + scaleW, scaleY);
-		vertexArray[2].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
-		vertexArray[3].position = sf::Vector2f(scaleX, scaleY + scaleH);
-		VGlobal::p()->ViewportOffset = vertexArray[0].position;
+			float scaleW = VGlobal::p()->Width * scale;
+			float scaleH = VGlobal::p()->Height * scale;
+			float scaleX = (VGlobal::p()->App->getSize().x - scaleW) / 2;
+			float scaleY = (VGlobal::p()->App->getSize().y - scaleH) / 2;
+
+			if (orientation == VGlobal::ANGLE_NONE)
+			{
+				vertexArray[0].position = sf::Vector2f(scaleX, scaleY);
+				vertexArray[1].position = sf::Vector2f(scaleX + scaleW, scaleY);
+				vertexArray[2].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
+				vertexArray[3].position = sf::Vector2f(scaleX, scaleY + scaleH);
+				VGlobal::p()->ViewportOffset = vertexArray[0].position;
+			}
+			else
+			{
+				vertexArray[2].position = sf::Vector2f(scaleX, scaleY);
+				vertexArray[3].position = sf::Vector2f(scaleX + scaleW, scaleY);
+				vertexArray[0].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
+				vertexArray[1].position = sf::Vector2f(scaleX, scaleY + scaleH);
+				VGlobal::p()->ViewportOffset = vertexArray[2].position;
+			}
+		}
+		else
+		{
+			float sx = VGlobal::p()->App->getSize().x / (float)VGlobal::p()->Height;
+			float sy = VGlobal::p()->App->getSize().y / (float)VGlobal::p()->Width;
+			float scale = std::fminf(sx, sy);
+
+			float scaleW = VGlobal::p()->Height * scale;
+			float scaleH = VGlobal::p()->Width * scale;
+			float scaleX = (VGlobal::p()->App->getSize().x - scaleW) / 2;
+			float scaleY = (VGlobal::p()->App->getSize().y - scaleH) / 2;
+
+			if (orientation == VGlobal::ANGLE_90)
+			{
+				vertexArray[3].position = sf::Vector2f(scaleX, scaleY);
+				vertexArray[0].position = sf::Vector2f(scaleX + scaleW, scaleY);
+				vertexArray[1].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
+				vertexArray[2].position = sf::Vector2f(scaleX, scaleY + scaleH);
+				VGlobal::p()->ViewportOffset = vertexArray[3].position;
+			}
+			else
+			{
+				vertexArray[1].position = sf::Vector2f(scaleX, scaleY);
+				vertexArray[2].position = sf::Vector2f(scaleX + scaleW, scaleY);
+				vertexArray[3].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
+				vertexArray[0].position = sf::Vector2f(scaleX, scaleY + scaleH);
+				VGlobal::p()->ViewportOffset = vertexArray[1].position;
+			}
+		}
 	}
 }
 
@@ -316,27 +362,13 @@ void VGame::PostRender()
 	app->setActive(true);
 	app->setVerticalSyncEnabled(VGlobal::p()->VSync);
 
-	sf::View view = app->getView();
-
 	VGlobal::p()->RenderState.texture = &renderTarget->getTexture();
-	if (VGlobal::p()->PostProcess == nullptr || !VPostEffectBase::isSupported())
+	if (VGlobal::p()->PostProcess && VPostEffectBase::isSupported())
 	{
-		view.setViewport(sf::FloatRect(0, 0, 1, 1));
-		app->draw(vertexArray, VGlobal::p()->RenderState);
-	}
-	else
-	{
-		sf::Vector2f position = VGlobal::p()->ViewportOffset;
-		sf::Vector2f size = view.getSize();
-
-		float left = position.x / size.x;
-		float top = position.y / size.y;
-		view.setViewport(sf::FloatRect(left, top, 1 - (left * 2), 1 - (top * 2)));
-
-		VGlobal::p()->PostProcess->Apply(renderTarget->getTexture(), *app);
+		VGlobal::p()->PostProcess->Apply(*VGlobal::p()->RenderState.texture, *renderTarget);
 	}
 
-	app->setView(view);
+	app->draw(vertexArray, VGlobal::p()->RenderState);
 
 	VState* currentState = VGlobal::p()->CurrentState();
 

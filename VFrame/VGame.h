@@ -143,4 +143,6 @@ private:
 	bool cleaned = false;
 	///Used in event handling to check if the game is currently in focus. Stops update and render if false.
 	bool focused = true;
+	///Check the orientation
+	unsigned char orientation = 0;
 };
