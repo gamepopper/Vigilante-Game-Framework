@@ -102,6 +102,8 @@ void VFiniteState::CallEnter(VBase* base, void* data)
 {
 	if (onEnter != nullptr)
 		onEnter(base, data);
+
+	hasEntered = true;
 }
 
 int VFiniteState::CallUpdate(VBase* base, float dt, void* data)
@@ -109,7 +111,6 @@ int VFiniteState::CallUpdate(VBase* base, float dt, void* data)
 	if (!hasEntered)
 	{
 		CallEnter(base, data);
-		hasEntered = true;
 	}
 
 	if (onUpdate)
