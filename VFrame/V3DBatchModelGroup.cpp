@@ -27,17 +27,14 @@ void V3DBatchModelGroup::Draw(sf::RenderTarget& RenderTarget)
 	{
 		V3DObject* base = dynamic_cast<V3DObject*>(members[i]);
 
-		if (base != nullptr && base->exists && base->visible)
+		if (base != nullptr && base->exists && base->visible && currentCamera->BoxInView(base->Position, baseObject->GetMinimum(), baseObject->GetMaximum()))
 		{
-			if (currentCamera->BoxInView(base->Position, baseObject->GetMinimum(), baseObject->GetMaximum()))
-			{
-				baseObject->Position = base->Position;
-				baseObject->Rotation = base->Rotation;
-				baseObject->Scale = base->Scale;
-				baseObject->UpdateShader(currentShader, currentCamera);
-				baseObject->Update(0.0f);
-				baseObject->Draw(RenderTarget);
-			}
+			baseObject->Position = base->Position;
+			baseObject->Rotation = base->Rotation;
+			baseObject->Scale = base->Scale;
+			baseObject->UpdateShader(currentShader, currentCamera);
+			baseObject->Update(0.0f);
+			baseObject->Draw(RenderTarget);
 		}
 	}
 }
