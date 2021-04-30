@@ -152,6 +152,13 @@ public:
 	sf::Vector2f GetPoint(float t);
 
 	/**
+	* Sets an exact point in the entire path from a single point in time.
+	* @param index The position in the point in the points array.
+	* @param point The coordinates to set.
+	*/
+	void SetPoint(unsigned int index, sf::Vector2f point);
+
+	/**
 	* Updates the Path following.
 	* @param dt Delta Time between the previous and current frame.
 	*/

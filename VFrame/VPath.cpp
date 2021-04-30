@@ -114,34 +114,40 @@ void VPath::StopFollowing()
 	object = NULL;
 }
 
+#include "VInterpolate.h"
 sf::Vector2f VPath::GetPoint(float t)
 {
 	t = std::min(t, 1.0f);
 
 	switch (pathType)
 	{
-	case VPath::LINE:
-	{
-		unsigned int size = points.size() - 1;
-		float frac = 1.0f / size;
-		unsigned int part = static_cast<int>(t / frac);
+		case VPath::LINE:
+		{
+			unsigned int size = points.size() - 1;
+			float frac = 1.0f / size;
+			unsigned int part = static_cast<int>(t / frac);
 
-		if (part >= size)
-			return points[part];
+			if (part >= size)
+				return points.back();
 
-		float partT = t - (part * frac);
-		float pT = partT / frac;
-
-		return points[part] + (points[part + 1] - points[part]) * pT;
-	}break;
-	case VPath::CURVE:
-	{
-		return getBezierPoint(t);
-	}break;
-	default:
-		return getBezierPoint(0);
-		break;
+			float partT = t - (part * frac);
+			return VInterpolate::Vector2f(points[part], points[part + 1], partT, frac);
+		}
+		case VPath::CURVE:
+		{
+			return getBezierPoint(t);
+		}
+		default:
+		{
+			return getBezierPoint(0);
+		}
 	}
+}
+
+void VPath::SetPoint(unsigned int index, sf::Vector2f point)
+{
+	if (index < points.size())
+		points[index] = point;
 }
 
 void VPath::Update(float dt)
