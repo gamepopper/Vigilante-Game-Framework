@@ -13,6 +13,8 @@ VTrailArea::VTrailArea(sf::Vector2f position, sf::Vector2u size, unsigned int ma
 
 void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 {
+	updateTransform();
+
 	float time = fadeTimer.getElapsedTime().asSeconds();
 	if (time > Delay)
 	{
