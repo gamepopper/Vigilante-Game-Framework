@@ -170,3 +170,5 @@ public:
 			static_cast<unsigned int>(a * 255));
 	}
 };
+
+typedef VColour VColor;
