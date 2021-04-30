@@ -116,22 +116,35 @@ public:
 	/**
 	* Applies function for each object in group.
 	*/
-	void ForEach(std::function<void(VBase*)> function, bool recursive = false);
+	void ForEach(const std::function<void(VBase*)>& function, bool recursive = false);
 
 	/**
 	* Applies function for each object in group that's alive.
 	*/
-	void ForEachAlive(std::function<void(VBase*)> function, bool recursive = false);
+	void ForEachAlive(const std::function<void(VBase*)>& function, bool recursive = false);
 
 	/**
 	* Applies function for each object in group that's dead.
 	*/
-	void ForEachDead(std::function<void(VBase*)> function, bool recursive = false);
+	void ForEachDead(const std::function<void(VBase*)>& function, bool recursive = false);
 
 	/**
 	* Applies function for each object in group that exists.
 	*/
-	void ForEachExists(std::function<void(VBase*)> function, bool recursive = false);
+	void ForEachExists(const std::function<void(VBase*)>& function, bool recursive = false);
+
+	/**
+	* Applies function for each object in group that's a specified type.
+	*/
+	template<class T>
+	void ForEachAsType(const std::function<void(T*)>& function, bool recursive = false)
+	{
+		ForEach([function] (VBase* b)
+		{
+			T* t = dynamic_cast<T*>(b);
+			if (t) function(t);
+		}, recursive);
+	}
 
 	/**
 	* Gets an object from a specified index in group.

@@ -219,7 +219,7 @@ VBase* VGroup::GetRandom(int min, int max)
 	return members[VGlobal::p()->Random->GetInt(max - 1, min)];
 }
 
-void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
+void VGroup::ForEach(const std::function<void(VBase*)>& function, bool recursive)
 {
 	VBase* base = nullptr;
 
@@ -249,7 +249,7 @@ void VGroup::ForEach(std::function<void(VBase*)> function, bool recursive)
 	}
 }
 
-void VGroup::ForEachAlive(std::function<void(VBase*)> function, bool recursive)
+void VGroup::ForEachAlive(const std::function<void(VBase*)>& function, bool recursive)
 {
 	VBase* base = nullptr;
 
@@ -279,7 +279,7 @@ void VGroup::ForEachAlive(std::function<void(VBase*)> function, bool recursive)
 	}
 }
 
-void VGroup::ForEachDead(std::function<void(VBase*)> function, bool recursive)
+void VGroup::ForEachDead(const std::function<void(VBase*)>& function, bool recursive)
 {
 	VBase* base = nullptr;
 
@@ -309,7 +309,7 @@ void VGroup::ForEachDead(std::function<void(VBase*)> function, bool recursive)
 	}
 }
 
-void VGroup::ForEachExists(std::function<void(VBase*)> function, bool recursive)
+void VGroup::ForEachExists(const std::function<void(VBase*)>& function, bool recursive)
 {
 	VBase* base = nullptr;
 
