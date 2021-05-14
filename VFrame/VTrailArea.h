@@ -35,14 +35,16 @@
 #include "VRenderGroup.h"
 #include <SFML/System/Clock.hpp>
 
+class VTimer;
+
 ///Special VRenderGroup that applies a trail to objects it contains within the area.
 class VTrailArea : public VRenderGroup
 {
 private:
 	sf::Sprite trailSprite;
 	sf::Texture trailTexture;
-	sf::Clock fadeTimer;
 	sf::Vector2f lastPos;
+	VTimer* timer;
 
 public:
 	///Used to call parent class functions when they are overrided in class.
@@ -73,6 +75,10 @@ public:
 	* @param maxSize The fixed length of the group. If 0, then the VGroup has no limit in size.
 	*/
 	VTrailArea(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize = 0);
+
+	virtual void Destroy() override;
+
+	virtual void Update(float dt) override;
 
 	/**
 	* Applies the renderTex to the sprite and renders the sprite to the scene.
