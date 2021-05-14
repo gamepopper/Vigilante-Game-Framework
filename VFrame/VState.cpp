@@ -18,7 +18,7 @@ void VState::Initialise()
 	Cameras.emplace_back();
 	Cameras[0] = new VCamera();
 	DefaultCamera = Cameras[0];
-	TimeManager = new VTimeManager();
+	TimeManager = std::make_unique<VTimeManager>();
 }
 
 void VState::Cleanup()
@@ -36,10 +36,13 @@ void VState::Cleanup()
 		Cameras.clear();
 		Cameras.shrink_to_fit();
 
-		delete TimeManager;
-
 		VLog("State cleanup successful");
 	}
+}
+
+void VState::HandleEvents(const sf::Event& event)
+{
+	subState ? subState->HandleEvents(event) : 0;
 }
 
 void VState::Update(float dt)
@@ -48,7 +51,22 @@ void VState::Update(float dt)
 	TimeManager->Update(dt);
 }
 
-void VState::OpenSubState(VSubState* subState)
+void VState::PreDraw(sf::RenderTarget& RenderTarget)
+{
+	subState && subState->visible ? subState->PreDraw(RenderTarget) : 0;
+}
+
+void VState::PostDraw(sf::RenderTarget& RenderTarget)
+{
+	subState && subState->visible ? subState->PostDraw(RenderTarget) : 0;
+}
+
+VSubState* VState::SubState() const
+{
+	return subState.get();
+}
+
+void VState::OpenSubState(VSubState* sub)
 {
 	if (VGlobal::p()->Async->ActiveAsyncFunctions())
 	{
@@ -56,13 +74,13 @@ void VState::OpenSubState(VSubState* subState)
 		return;
 	}
 
-	if (SubState) //If substate is already active, close it and reset the substate.
+	if (subState) //If substate is already active, close it and reset the substate.
 	{
 		CloseSubState();
 		ResetSubState();
 	}
 
-	SubState = subState;
+	subState = std::unique_ptr<VSubState>(sub);
 	openSubState = true;
 
 	VLog("Substate open.");
@@ -76,10 +94,10 @@ void VState::CloseSubState()
 		return;
 	}
 
-	if (SubState)
+	if (subState)
 	{
-		if (SubState->OnClose)
-			SubState->OnClose();
+		if (subState->OnClose)
+			subState->OnClose();
 
 		active = true;
 		closeSubstate = true;
@@ -92,20 +110,18 @@ void VState::ResetSubState()
 {
 	if (openSubState)
 	{ 
-		if (SubState)
+		if (subState)
 		{
-			SubState->ParentState = this;
-			SubState->Initialise();
+			subState->ParentState = this;
+			subState->Initialise();
 		}
 		openSubState = false;
 	}
 
 	if (closeSubstate)
 	{
-		SubState->Cleanup();
-
-		delete SubState;
-		SubState = nullptr;
+		subState->Cleanup();
+		subState = nullptr;
 
 		closeSubstate = false;
 	}
@@ -120,9 +136,6 @@ void VSubState::Cleanup()
 
 		vertices.clear();
 		ParentState = nullptr;
-
-		delete TimeManager;
-		TimeManager = nullptr;
 	}
 }
 
@@ -145,7 +158,7 @@ VSubState::VSubState(sf::Color colour) : VGroup()
 	vertices.resize(4);
 	SetFillColour(colour);
 
-	TimeManager = new VTimeManager();
+	TimeManager = std::make_unique<VTimeManager>();
 }
 
 VSubState::~VSubState()

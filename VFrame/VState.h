@@ -50,6 +50,7 @@ class VState : public VGroup
 private:
 	bool openSubState = false;
 	bool closeSubstate = false;
+	std::unique_ptr<VSubState> subState = nullptr;
 
 public:
 	///Used to call parent class functions when they are overrided in class.
@@ -61,11 +62,11 @@ public:
 	std::vector<VCamera*> Cameras;
 	///Pointer to first camera in array.
 	VCamera* DefaultCamera = nullptr;
-	///Substate of main state.
-	VSubState* SubState = nullptr;
 	///Local TimeManager of the main state (Useful if you want timers that are exclusively controlled by a specific state).
-	VTimeManager* TimeManager = nullptr;
+	std::unique_ptr<VTimeManager> TimeManager = nullptr;
 
+	///Substate of main state.
+	VSubState* SubState() const;
 	///@param subState The VSubState to open.
 	void OpenSubState(VSubState* subState);
 	///Close a current substate.
@@ -82,7 +83,7 @@ public:
 	///Function called when resuming state (after higher stake is poped from the VStateManager).
 	virtual void Resume() {}
 	///@param event The current event that can be processed.
-	virtual void HandleEvents(const sf::Event& event) {}
+	virtual void HandleEvents(const sf::Event& event);
 
 	/**
 	* Update the state.
@@ -94,13 +95,13 @@ public:
 	* If overridden, allows the opportunity to render objects directly to the entire window before the scene is rendered.
 	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
 	*/
-	virtual void PreDraw(sf::RenderTarget& RenderTarget) {}
+	virtual void PreDraw(sf::RenderTarget& RenderTarget);
 
 	/**
 	* If overridden, allows the opportunity to render objects directly to the entire window after the scene is rendered.
 	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
 	*/
-	virtual void PostDraw(sf::RenderTarget& RenderTarget) {}
+	virtual void PostDraw(sf::RenderTarget& RenderTarget);
 };
 
 ///A different kind of state class that would update and render over the top of the main state. Good for pause screens, menus, battle screens and even GUI.
@@ -121,7 +122,7 @@ public:
 	///If true, the substate's transform is based on the parent state's camera.
 	bool UseParentCamera = false;
 	///Local TimeManager of the substate.
-	VTimeManager* TimeManager = nullptr;
+	std::unique_ptr<VTimeManager> TimeManager = nullptr;
 
 	/**
 	* @param colour The background colour of the substate.
@@ -147,13 +148,19 @@ public:
 	virtual void Update(float dt);
 
 	/**
+	* If overridden, allows the opportunity to render objects directly to the entire window before the scene is rendered.
+	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
+	*/
+	virtual void PreDraw(sf::RenderTarget& RenderTarget) {}
+
+	/**
 	* Draws the substate's background and the content of the substate.
 	* @param RenderTarget The game's sf::RenderTarget object to render data onto.
 	*/
 	virtual void Draw(sf::RenderTarget &RenderTarget);
 
 	/**
-	* If overridden, allows the opportunity to render objects directly to the window, instead of the scene itself.
+	* If overridden, allows the opportunity to render objects directly to the entire window after the scene is rendered.
 	* @param RenderTarget The game's sf::RenderWindow, after the scene had been rendered and post-processed effects had been applied.
 	*/
 	virtual void PostDraw(sf::RenderTarget& RenderTarget) {}
