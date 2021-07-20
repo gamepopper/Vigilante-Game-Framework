@@ -5,7 +5,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 link_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-find_package(SFML 2.4.2 REQUIRED system window graphics network audio main)
+find_package(SFML 2.5 COMPONENTS system window graphics network audio main REQUIRED)
 if (SFML_FOUND)
 	include_directories(${SFML_INCLUDE_DIR})
 	link_libraries(${SFML_LIBRARIES})
