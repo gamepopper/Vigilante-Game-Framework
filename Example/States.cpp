@@ -20,6 +20,9 @@ enum DemoPages
 #ifndef VFRAME_NO_3D
 	PAGE_GRAPHICS3D,
 #endif
+#ifndef VFRAME_NO_CANDLE
+	PAGE_CANDLE,
+#endif
 	PAGE_ASCII,
 	PAGE_LIGHTING2D,
 	PAGE_BACKDROP,
@@ -46,6 +49,11 @@ void DemoStatesManager::SetNewPage()
 		case PAGE_BACKDROP:
 			subState = new BackdropState();
 			break;
+#ifndef VFRAME_NO_CANDLE
+		case PAGE_CANDLE:
+			subState = new CandleState();
+			break;
+#endif
 		case PAGE_COLLISION:
 			subState = new CollisionState();
 			break;

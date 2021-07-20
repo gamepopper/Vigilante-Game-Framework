@@ -1,0 +1,55 @@
+#
+# Try to find Chipmunk2D libraries and include paths.
+# Once done this will define
+#
+# CHIPMUNK2D_FOUND
+# CHIPMUNK2D_INCLUDE_DIR
+# CHIPMUNK2D_LIBRARY
+#
+
+set(CANDLE_DEBUG_FOLDER /Debug/)
+set(CANDLE_RELEASE_FOLDER /Release/)
+
+if(CANDLE_LIBRARY_DIR)
+	set (CANDLE_VC_PATH ${CANDLE_LIBRARY_DIR})
+else()
+	set (CANDLE_VC_PATH ${CANDLE_ROOT}/lib)
+endif()
+
+message(STATUS ${CANDLE_VC_PATH})
+
+set(CANDLE_INCLUDE_DIR ${CANDLE_ROOT}/include)
+				
+if (CANDLE_INCLUDE_DIR AND EXISTS "${CANDLE_VC_PATH}/")
+	if(CANDLE_STATIC)
+		set(CANDLE_LIBRARY_DEBUG ${CANDLE_VC_PATH}${CANDLE_DEBUG_FOLDER}candle-s.lib)
+		set(CANDLE_LIBRARY_RELEASE ${CANDLE_VC_PATH}${CANDLE_RELEASE_FOLDER}candle-s.lib)
+	else()
+		set(CANDLE_LIBRARY_DEBUG ${CANDLE_VC_PATH}${CANDLE_DEBUG_FOLDER}candle.lib)
+		set(CANDLE_LIBRARY_RELEASE ${CANDLE_VC_PATH}${CANDLE_RELEASE_FOLDER}candle.lib)
+	endif()
+	set(CANDLE_FOUND TRUE)
+	
+	if (CANDLE_LIBRARY_DEBUG AND CANDLE_LIBRARY_RELEASE)
+		set(CANDLE_LIBRARY 	debug 		${CANDLE_LIBRARY_DEBUG}
+								optimized 	${CANDLE_LIBRARY_RELEASE})
+	elseif(CANDLE_LIBRARY_DEBUG AND NOT CANDLE_LIBRARY_RELEASE)
+            # debug and not release
+            set(CANDLE_LIBRARY 	debug		${CANDLE_LIBRARY_DEBUG}
+									optimized 	${CANDLE_LIBRARY_DEBUG})
+    else(CANDLE_LIBRARY_RELEASE AND NOT CANDLE_LIBRARY_DEBUG)
+        # release and not debug
+            set(CANDLE_LIBRARY 	debug		${CANDLE_LIBRARY_RELEASE}
+									optimized 	${CANDLE_LIBRARY_RELEASE})
+    endif()
+	
+	message(STATUS "CANDLE found in ${CANDLE_INCLUDE_DIR}.")
+else()
+	set(CANDLE_FOUND FALSE)
+	set(CANDLE_LIBRARY "")
+	message(STATUS "CANDLE not found, Candle code will be disabled.")
+endif()
+
+MARK_AS_ADVANCED(CANDLE_LIBRARY
+				 CANDLE_LIBRARY_RELEASE
+				 CANDLE_LIBRARY_DEBUG)

@@ -25,6 +25,7 @@
 #include "../VFrame/VPhysicsGroup.h"
 #include "../VFrame/VTimer.h"
 #include "../VFrame/VFiniteStateMachine.h"
+#include "../VFrame/VCandle.h"
 
 #include <iostream>
 #include <sstream>
@@ -1638,6 +1639,76 @@ public:
 	}
 };
 
+#ifndef VFRAME_NO_CANDLE
+class CandleState : public VSubState
+{
+	typedef VSubState VSUPERCLASS;
+public:
+	CandleState() : VSubState() {}
+	~CandleState() = default;
+
+	VCandleArea* area;
+	VLight* light;
+
+	virtual void Initialise()
+	{
+		VSUPERCLASS::Initialise();
+
+		VGlobal::p()->BackgroundColor = sf::Color::White;
+
+		area = new VCandleArea(true, sf::Vector2f(0.f, 0.f), sf::Vector2f(VGlobal::p()->Width, VGlobal::p()->Height));
+		area->SetAreaColor(sf::Color::Black);
+		area->SetAreaOpacity(0.75f);
+
+		light = area->AddRadialLight();
+		light->SetRange(300);
+
+		VEdge* edge = area->MakeLineEdge();
+		edge->Position = sf::Vector2f(VGlobal::p()->Width / 2.f, VGlobal::p()->Height / 2.f);
+		edge->Size = sf::Vector2f(-10.f, 50.f);
+
+		edge = area->MakeLineEdge();
+		edge->Position = sf::Vector2f((VGlobal::p()->Width / 2.f) - 10.f, (VGlobal::p()->Height / 2.f) + 50.f);
+		edge->Size = sf::Vector2f(10.f, 0.f);
+
+		VObject* box = area->MakeBoxEdge();
+		box->Position = sf::Vector2f(200.f, 100.f);
+		box->Size = sf::Vector2f(50.f, 50.f);
+
+		box = area->MakeBoxEdge();
+		box->Position = sf::Vector2f(VGlobal::p()->Width - 200.f, 100.f);
+		box->Size = sf::Vector2f(50.f, 50.f);
+
+		box = area->MakeBoxEdge();
+		box->Position = sf::Vector2f(100.f, 250.f);
+		box->Size = sf::Vector2f(50.f, 50.f);
+
+		box = area->MakeBoxEdge();
+		box->Position = sf::Vector2f(200.f, 300.f);
+		box->Size = sf::Vector2f(50.f, 50.f);
+
+		box = area->MakeBoxEdge();
+		box->Position = sf::Vector2f(320.f, 300.f);
+		box->Size = sf::Vector2f(50.f, 50.f);
+
+		box = area->MakeBoxEdge();
+		box->Position = sf::Vector2f(440.f, 300.f);
+		box->Size = sf::Vector2f(50.f, 50.f);
+
+		box = area->MakeBoxEdge();
+		box->Position = sf::Vector2f(540.f, 250.f);
+		box->Size = sf::Vector2f(50.f, 50.f);
+
+		Add(area);
+	}
+
+	virtual void Update(float dt)
+	{
+		light->SetPosition(VGlobal::p()->GetMousePosition());
+		VSUPERCLASS::Update(dt);
+	}
+};
+#endif
 
 //Backdrops
 /*
