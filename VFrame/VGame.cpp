@@ -122,7 +122,6 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	VBase::VLog("\nStarting Game: %s", title.toUtf8().c_str());
 
 	VGlobal::p()->ChangeState(initialState);
-	VGlobal::p()->ChangeState(nullptr);
 
 	sf::Clock clock;
 	VBase::VLog("Initialisation finished");
@@ -146,15 +145,8 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 
 			frameDelay += passed;
 
-			if (VGlobal::p()->IfChangedState)
-			{
-				VGlobal::p()->ChangeState(nullptr);
-			}
-
-			if (VGlobal::p()->IfPushedState)
-			{
-				VGlobal::p()->PushState(nullptr);
-			}
+			VGlobal::p()->ChangeState(nullptr);
+			VGlobal::p()->PushState(nullptr);
 
 			HandleEvents();
 
@@ -162,12 +154,13 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 			{
 				Update(dt * deltaScale * VGlobal::p()->TimeScale);
 
-				if (!VGlobal::p()->IfChangedState && !VGlobal::p()->IfPushedState && frameDelay >= dt)
+				if (!VGlobal::p()->IfChangedState() && !VGlobal::p()->IfPushedState() && frameDelay >= dt)
 				{
 					PreRender();
-					for (unsigned int c = 0; c < VGlobal::p()->CurrentState()->Cameras.size(); c++)
+					std::vector<VCamera*>& cameras = VGlobal::p()->CurrentState()->Cameras;
+					for (unsigned int c = 0; c < cameras.size(); c++)
 					{
-						Render(VGlobal::p()->CurrentState()->Cameras[c]);
+						Render(cameras[c]);
 					}
 					PostRender();
 					frameDelay = 0.0f;
@@ -194,34 +187,21 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 void VGame::HandleEvents()
 {
 	sf::Event event;
+	VState* currentState = VGlobal::p()->CurrentState();
 	while (VGlobal::p()->App->pollEvent(event))
 	{
-		if (VGlobal::p()->CurrentState()->SubState)
-		{
-			VGlobal::p()->CurrentState()->SubState->HandleEvents(event);
-		}
+		currentState->active ? currentState->HandleEvents(event) : 0;
+		event.type == sf::Event::Closed ? VGlobal::p()->Exit() : 0;
 
-		if (VGlobal::p()->CurrentState()->active)
-		{
-			VGlobal::p()->CurrentState()->HandleEvents(event);
-		}
-
-		if (event.type == sf::Event::Closed)
-		{
-			VGlobal::p()->Exit();
-		}
 		if (VGlobal::p()->FocusPause)
 		{
 			if (event.type == sf::Event::LostFocus)
-			{
 				focused = false;
-			}
 			if (event.type == sf::Event::GainedFocus)
-			{
 				focused = true;
-			}
 		}
 	}
+
 	ResizeCheck();
 }
 
@@ -229,7 +209,8 @@ void VGame::ResizeCheck()
 {
 	sf::Vector2u windowSize = VGlobal::p()->App->getSize();
 
-	if (windowSize.x != VGlobal::p()->WindowWidth || windowSize.y != VGlobal::p()->WindowHeight ||
+	if (windowSize.x != VGlobal::p()->WindowWidth || 
+		windowSize.y != VGlobal::p()->WindowHeight ||
 		orientation != VGlobal::p()->Orientation)
 	{
 		orientation = VGlobal::p()->Orientation;
@@ -301,29 +282,20 @@ void VGame::Update(float dt)
 {
 	VGlobal::p()->Input->Update(dt);
 
-	if (VGlobal::p()->CurrentState()->active)
+	VState* currentState = VGlobal::p()->CurrentState();
+	currentState->active ? currentState->Update(dt) : 0;
+
+	std::vector<VCamera*>& cameras = currentState->Cameras;
+	for (unsigned int c = 0; c < cameras.size(); c++)
 	{
-		VGlobal::p()->CurrentState()->Update(dt);
+		cameras[c]->Update(dt);
 	}
 
-	VGlobal::p()->CurrentState()->ResetSubState();
-
-	if (VGlobal::p()->CurrentState()->SubState)
-	{
-		VGlobal::p()->CurrentState()->SubState->Update(dt);
-	}
-
-	for (unsigned int c = 0; c < VGlobal::p()->CurrentState()->Cameras.size(); c++)
-	{
-		VGlobal::p()->CurrentState()->Cameras[c]->Update(dt);
-	}
-
+	currentState->ResetSubState();
+	VSubState* subState = currentState->SubState();
+	subState ? subState->Update(dt) : 0;
 	VGlobal::p()->Music->Update(dt);
-
-	if (VGlobal::p()->PostProcess != nullptr && VPostEffectBase::isSupported())
-	{
-		VGlobal::p()->PostProcess->Update(dt);
-	}
+	VGlobal::p()->PostProcess != nullptr && VPostEffectBase::isSupported() ? VGlobal::p()->PostProcess->Update(dt) : 0;
 }
 
 void VGame::PreRender()
@@ -335,9 +307,6 @@ void VGame::PreRender()
 
 	if (currentState && currentState->visible)
 		currentState->PreDraw(*VGlobal::p()->App);
-
-	if (currentState->SubState && currentState->SubState->visible)
-		currentState->SubState->PreDraw(*VGlobal::p()->App);
 }
 
 void VGame::Render(VCamera* camera)
@@ -348,11 +317,8 @@ void VGame::Render(VCamera* camera)
 	renderTarget->setView(camera->GetView());
 	VState* currentState = VGlobal::p()->CurrentState();
 
-	if (currentState && currentState->visible)
-		currentState->Draw(*renderTarget);
-
-	if (currentState->SubState && currentState->SubState->visible)
-		currentState->SubState->Draw(*renderTarget);
+	currentState->Draw(*renderTarget);
+	currentState->SubState() ? currentState->SubState()->Draw(*renderTarget) : 0;
 
 	camera->Render(*renderTarget);
 }
@@ -360,10 +326,7 @@ void VGame::Render(VCamera* camera)
 void VGame::PostRender()
 {
 	renderTarget->display();
-	if (renderTarget->isSmooth() != VGlobal::p()->Antialiasing)
-	{
-		renderTarget->setSmooth(VGlobal::p()->Antialiasing);
-	}
+	renderTarget->isSmooth() != VGlobal::p()->Antialiasing ? renderTarget->setSmooth(VGlobal::p()->Antialiasing) : 0;
 
 	sf::RenderWindow* app = VGlobal::p()->App.get();
 
@@ -371,20 +334,16 @@ void VGame::PostRender()
 	app->setVerticalSyncEnabled(VGlobal::p()->VSync);
 
 	VGlobal::p()->RenderState.texture = &renderTarget->getTexture();
-	if (VGlobal::p()->PostProcess && VPostEffectBase::isSupported())
-	{
-		VGlobal::p()->PostProcess->Apply(*VGlobal::p()->RenderState.texture, *renderTarget);
-	}
+	VGlobal::p()->PostProcess && VPostEffectBase::isSupported() ? 
+		VGlobal::p()->PostProcess->Apply(*VGlobal::p()->RenderState.texture, *renderTarget) : 0;
 
 	app->draw(vertexArray, VGlobal::p()->RenderState);
 
 	VState* currentState = VGlobal::p()->CurrentState();
+	VSubState* subState = currentState->SubState();
 
-	if (currentState && currentState->visible)
-		currentState->PostDraw(*VGlobal::p()->App);
-
-	if (currentState->SubState && currentState->SubState->visible)
-		currentState->SubState->PostDraw(*VGlobal::p()->App);
+	currentState && currentState->visible ? currentState->PostDraw(*VGlobal::p()->App) : 0;
+	subState && subState->visible ? subState->PostDraw(*VGlobal::p()->App) : 0;
 
 	app->display();
 }

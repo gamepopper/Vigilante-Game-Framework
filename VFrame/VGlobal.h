@@ -130,10 +130,6 @@ public:
 	std::unique_ptr<VPostEffectBase> PostProcess;
 	///Frames Per Second - used to calculate average framerate
 	float FPS = 0;
-	///Value is true if the current VState is being changed in the state manager.
-	bool IfChangedState = false;
-	///Value is true if the a new VState is being pushed onto the stack in the state manager.
-	bool IfPushedState = false;
 	
 	///Orientation of the whole in-game screen, default is ANGLE_NONE or no rotation of the in-game screen.
 	OrientationOption Orientation = ANGLE_NONE;
@@ -159,6 +155,10 @@ public:
 	bool IsFullscreen();
 	///@return True if the game is running.
 	bool IsRunning();
+	///@return True if the current VState is being changed in the state manager.
+	bool IfChangedState();
+	///@return True if the a new VState is being pushed onto the stack in the state manager.
+	bool IfPushedState();
 	///@return Position of the mouse relative to the game screen (even when resized).
 	sf::Vector2f GetMousePosition();
 	/// @param set Sets mouse cursor to be visible or not, depending of if you want an in-game cursor.
@@ -240,6 +240,11 @@ private:
 	bool mouseCursorVisible = true; ///Sets for when the system mouse cursor is visible.
 	bool running = true;
 	const char* title = "";
+
+	///Value is true if the current VState is being changed in the state manager.
+	bool ifChangedState = false;
+	///Value is true if the a new VState is being pushed onto the stack in the state manager.
+	bool ifPushedState = false;
 
 	std::unique_ptr<VCollision> collision; ///The game's collision handling system.
 	std::function<bool(VObject*, VObject*)> rectCollision; ///Function for handling rectangle collisions.

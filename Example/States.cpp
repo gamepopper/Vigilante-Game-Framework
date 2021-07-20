@@ -97,11 +97,11 @@ void DemoStatesManager::SetNewPage()
 			break;
 	}
 
-	if (SubState != nullptr)
+	if (SubState() != nullptr)
 	{
-		if (SubState->GetIndexOfItem(stateText) >= 0)
+		if (SubState()->GetIndexOfItem(stateText) >= 0)
 		{
-			SubState->Remove(stateText);
+			SubState()->Remove(stateText);
 		}
 	}
 
@@ -142,7 +142,7 @@ void DemoStatesManager::Initialise()
 	stateText->Add(version);
 
 	SetNewPage();
-	SubState->Add(stateText);
+	SubState()->Add(stateText);
 
 	if (VGlobal::p()->Music->Status() != sf::Music::Playing)
 	{

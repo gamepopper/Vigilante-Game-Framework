@@ -1469,8 +1469,6 @@ public:
 		playerControl->MaxVelocity = sf::Vector2f(200, 200);
 
 		render = new VTrailArea(VGlobal::p()->Width / 2.0f, 0, VGlobal::p()->Width / 2, VGlobal::p()->Height);
-		render->Sprite->Drag = sf::Vector2f(500, 500);
-		render->Sprite->MaxVelocity = sf::Vector2f(200, 200);
 		render->AlphaMultiplier = 0.99f;
 		render->Delay = 0.05f;
 		render->Add(playerControl);

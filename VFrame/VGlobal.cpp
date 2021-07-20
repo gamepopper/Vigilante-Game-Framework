@@ -162,6 +162,16 @@ bool VGlobal::IsRunning()
 	return running;
 }
 
+bool VGlobal::IfChangedState()
+{
+	return ifChangedState;
+}
+
+bool VGlobal::IfPushedState()
+{
+	return ifPushedState;
+}
+
 sf::Vector2f VGlobal::GetMousePosition()
 {
 	sf::Vector2f actualMousePos = sf::Vector2f(sf::Mouse::getPosition(*App));
@@ -192,34 +202,32 @@ VState* VGlobal::CurrentState()
 
 void VGlobal::ChangeState(VState* state)
 {
-	if (IfChangedState && state == nullptr)
+	if (ifChangedState && state == nullptr)
 	{
 		if (!Async->ActiveAsyncFunctions())
 		{
 			gsm->ChangeState(nextState);
 			nextState = nullptr;
-			IfChangedState = false;
+			ifChangedState = false;
 		}
 	}
 	else if (nextState == nullptr)
 	{
-		nextState = state;
-		IfChangedState = true;
+		ifChangedState = nextState = state;
 	}
 }
 
 void VGlobal::PushState(VState* state)
 {
-	if (IfPushedState && state == nullptr)
+	if (ifPushedState && state == nullptr)
 	{
 		gsm->PushState(nextState);
 		nextState = nullptr;
-		IfPushedState = false;
+		ifPushedState = false;
 	}
 	else if (nextState == nullptr)
 	{
-		nextState = state;
-		IfPushedState = true;
+		ifChangedState = nextState = state;
 	}
 }
 
