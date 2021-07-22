@@ -16,8 +16,6 @@ else()
 	set (CANDLE_VC_PATH ${CANDLE_ROOT}/lib)
 endif()
 
-message(STATUS ${CANDLE_VC_PATH})
-
 set(CANDLE_INCLUDE_DIR ${CANDLE_ROOT}/include)
 				
 if (CANDLE_INCLUDE_DIR AND EXISTS "${CANDLE_VC_PATH}/")
@@ -46,6 +44,7 @@ if (CANDLE_INCLUDE_DIR AND EXISTS "${CANDLE_VC_PATH}/")
 	message(STATUS "CANDLE found in ${CANDLE_INCLUDE_DIR}.")
 else()
 	set(CANDLE_FOUND FALSE)
+	set(CANDLE_INCLUDE_DIR "")
 	set(CANDLE_LIBRARY "")
 	message(STATUS "CANDLE not found, Candle code will be disabled.")
 endif()

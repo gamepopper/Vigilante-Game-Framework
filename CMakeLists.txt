@@ -24,6 +24,7 @@ endif(${WIN32})
 link_directories(${PROJECT_BINARY_DIR})
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
+cmake_policy(SET CMP0074 NEW)
 
 add_subdirectory(VFrame)
 add_subdirectory(Example)

@@ -1,4 +1,4 @@
-file(GLOB_RECURSE SOURCES_VGF "*.cpp")
+file(GLOB_RECURSE SOURCES_VGF "*.c*")
 message(STATUS "Setting up VFrame Project")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

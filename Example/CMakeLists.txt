@@ -1,4 +1,5 @@
 file(GLOB_RECURSE SOURCES_DEMO "*.cpp")
+file(REMOVE_RECURSE "*.NX.cpp")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 message(STATUS "Setting up Example Project")
 
@@ -16,8 +17,12 @@ else()
 	add_definitions(-DVFRAME_NO_3D)
 endif()
 
-find_package(CHIPMUNK2D)
 if (CHIPMUNK2D_FOUND)
+else()
+	add_definitions(-DVFRAME_NO_PHYSICS)
+endif()
+
+if (CANDLE_FOUND)
 else()
 	add_definitions(-DVFRAME_NO_PHYSICS)
 endif()

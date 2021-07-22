@@ -36,8 +36,6 @@ else()
 	set (CHIPMUNK2D_VC_PATH ${CHIPMUNK2D_ROOT}/lib)
 endif()
 
-message(STATUS ${CHIPMUNK2D_VC_PATH})
-
 find_path(CHIPMUNK2D_INCLUDE_DIR chipmunk/chipmunk.h
 				PATHS ${CHIPMUNK2D_ROOT})
 				
@@ -62,6 +60,7 @@ if (CHIPMUNK2D_INCLUDE_DIR AND EXISTS "${CHIPMUNK2D_VC_PATH}/")
 	message(STATUS "Chipmunk2D found in ${CHIPMUNK2D_INCLUDE_DIR}.")
 else()
 	set(CHIPMUNK2D_FOUND FALSE)
+	set(CHIPMUNK2D_INCLUDE_DIR "")
 	set(CHIPMUNK2D_LIBRARY "")
 	message(STATUS "Chipmunk2D not found, physics code will be disabled.")
 endif()
