@@ -230,14 +230,14 @@ void VTypedText::Update(float dt)
 		{
 			cursorBlink = true;
 			length = (int)(prefix.size() + finalText.size()) + 1;
-			dirty = cursorTimer <= CursorBlinkSpeed / 2;
+			dirty = true;
 		}
 
 		if (futureCursorTime > CursorBlinkSpeed)
 		{
 			cursorBlink = false;
 			length = (int)(prefix.size() + finalText.size());
-			dirty = cursorTimer <= CursorBlinkSpeed;
+			dirty = true;
 			futureCursorTime = 0;
 		}
 
