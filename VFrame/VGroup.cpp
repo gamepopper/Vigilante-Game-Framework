@@ -214,6 +214,9 @@ int VGroup::CountDead(bool Recursive)
 
 VBase* VGroup::GetRandom(int min, int max)
 {
+	if (members.size() == 0)
+		return NULL;
+
 	min = min >= 0 ? min : 0;
 	max = max - 1 < (int)members.size() - 1 && max > 0 ? max : (int)members.size();
 	return members[VGlobal::p()->Random->GetInt(max - 1, min)];
