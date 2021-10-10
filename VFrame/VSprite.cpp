@@ -140,6 +140,10 @@ VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outl
 {
 	if (disposible && RenderState.texture)
 	{
+		if (RenderState.texture->getSize().x == width &&
+			RenderState.texture->getSize().y == height)
+			return this;
+
 		delete RenderState.texture;
 		RenderState.texture = nullptr;
 		disposible = false;
