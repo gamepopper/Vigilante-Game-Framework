@@ -57,10 +57,6 @@ enum VType : unsigned char
 ///Base class that any object that updates or renders (including VState) inherints from this class.
 class VBase
 {
-private:
-	///True when the base has been destroyed using the Destroy function.
-	bool destroyed = false;
-
 public:
 	///Base can be updated using Update if true.
 	bool active = true;
@@ -70,6 +66,8 @@ public:
 	bool alive = true;
 	///Base can be updated and rendered if true, else it would no longer be treated as being part of the scene.
 	bool exists = true;
+	///True when the base has been destroyed using the Destroy function.
+	bool destroyed = false;
 	///Base object type, typically set in the constructor of an inherited object to specify what type it is.
 	VType type = NONE;
 	///Counts the amount of times the object is referenced in groups, ensures an object is only destroyed when no longer part of a single group.
