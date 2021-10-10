@@ -587,8 +587,17 @@ public:
 		}
 
 		VGlobal::p()->Collides(playerControl, tilemap);
-		VGlobal::p()->Collides(playerControl, platform[0], std::bind(&TilemapState::CloudPlatform, this, std::placeholders::_1, std::placeholders::_2));
-		VGlobal::p()->Collides(playerControl, platform[1], std::bind(&TilemapState::CloudPlatform, this, std::placeholders::_1, std::placeholders::_2));
+		ProcessCloudPlatform(platform[0]);
+		ProcessCloudPlatform(platform[1]);
+	}
+
+	void ProcessCloudPlatform(VObject* platform)
+	{
+		VGlobal::p()->Collides(playerControl, platform, std::bind(&TilemapState::CloudPlatform, this, std::placeholders::_1, std::placeholders::_2));
+		if (playerControl->Position.y + playerControl->Size.y < platform->Position.y)
+		{
+			platform->AllowCollisions = VObject::TOUCHTOP;
+		}
 	}
 
 	void CloudPlatform(VBase* player, VBase* platform)
@@ -599,10 +608,6 @@ public:
 		if (VGlobal::p()->Input->CurrentAxisValue("leftY") > 20.0f) //Down Press
 		{
 			p->AllowCollisions = VObject::TOUCHNONE;
-		}
-		else if (o->Position.y < p->Position.y)
-		{
-			p->AllowCollisions = VObject::TOUCHTOP;
 		}
 	}
 };
