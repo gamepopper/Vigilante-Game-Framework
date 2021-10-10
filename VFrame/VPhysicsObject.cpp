@@ -69,7 +69,7 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 			std::vector<cpVect> verts(getPolyVertCount);
 			for (unsigned int i = 0; i < verts.size(); i++)
 			{
-				verts[i] = ToCPVect(Verts[i]);
+				verts[i] = ToCPVect(Verts[i] - Object->Size * 0.5f);
 			}
 
 			moment = (float)cpMomentForPoly((cpFloat)Object->Mass, verts.size(), verts.data(), cpVect(), (cpFloat)0);

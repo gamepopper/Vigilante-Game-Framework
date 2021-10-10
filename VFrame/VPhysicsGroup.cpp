@@ -136,15 +136,13 @@ void VPhysicsGroup::Destroy()
 
 void VPhysicsGroup::Update(float dt)
 {
-	timestep += dt;
-	float fixedTS = 1.0f / VGlobal::p()->FPS;
+	//timestep += dt;
 
 	//while (timestep > fixedTS)
+	if (dt < 2 / VGlobal::p()->FPS)
 	{
 		VSUPERCLASS::Update(dt);
 		cpSpaceStep(space, dt);
-
-		timestep -= fixedTS;
 	}
 }
 
