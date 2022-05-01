@@ -26,7 +26,7 @@ Documentation for the Vigilante Framework can be found [on this link](https://ga
 ![3D Graphics and Visual Effects](https://i.imgur.com/qxDljfZ.gif)
 
 ## Games Featured
-* [Gemstone Keeper](http://gemstonekeeper.co.uk/)
+* [Gemstone Keeper](https://www.nintendo.com/store/products/gemstone-keeper-switch/)
 * [Dungeon Racer](https://gamepopper.itch.io/dungeon-racer)
 * [Berzerkatron](https://gamepopper.itch.io/berzerkatron)
 * [Tunnel Bug](https://gamepopper.itch.io/tunnel-bug)
