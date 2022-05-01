@@ -1,4 +1,4 @@
-# Vigilante-Game-Framework
+# [Vigilante-Game-Framework](https://github.com/gamepopper/Vigilante-Game-Framework/)
 Vigilante Framework (or VFrame for short) is a high level framework built to run with SFML to make 2D games with basic 3D rendering.
 
 ## Features
@@ -44,3 +44,5 @@ Despite being marked as version 1.0, this framework still has room for improveme
 * [Robert Penner's Easing Functions](http://robertpenner.com/easing/)
 * [SFML Game Development (Henrik Vogelius Hansson, Jan Haller)](https://github.com/SFML/SFML-Game-Development-Book)
 * [Mastering SFML Game Development (Raimondas Pupius)](https://github.com/PacktPublishing/Mastering-SFML-Game-Development)
+
+[View on GitHub](https://github.com/gamepopper/Vigilante-Game-Framework/)
