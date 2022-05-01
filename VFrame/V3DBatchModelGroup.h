@@ -56,6 +56,8 @@ public:
 	///Revives all dead objects before reviving the group itself.
 	virtual void Destroy() override;
 
+	V3DShader* GetOverrideShader();
+
 	/**
 	* Updates the shader with the current camera and object specific values.
 	* @param shader The scene shader.

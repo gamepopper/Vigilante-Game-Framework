@@ -75,7 +75,11 @@ void V3DScene::RenderGroup(VGroup* group)
 
 		if (base != nullptr)
 		{
-			base->UpdateShader(Shader.get(), Camera[CurrentCamera].get());
+			if (base->OverrideShader != nullptr)
+				base->UpdateShader(base->OverrideShader, Camera[CurrentCamera].get());
+			else
+				base->UpdateShader(Shader.get(), Camera[CurrentCamera].get());
+
 			if (Camera[CurrentCamera]->BoxInView(base->Position, base->GetMinimum(), base->GetMaximum()) && base->exists && base->visible)
 			{
 				base->Draw(renderTex); //If Renderable 3D Object
@@ -87,8 +91,12 @@ void V3DScene::RenderGroup(VGroup* group)
 
 			if (batchGroup != nullptr)
 			{
-				batchGroup->UpdateShader(Camera[CurrentCamera].get(), Shader.get()); //If RenderBatch Group
-				batchGroup->Draw(renderTex);
+				if (batchGroup->GetOverrideShader())
+					batchGroup->UpdateShader(Camera[CurrentCamera].get(), batchGroup->GetOverrideShader());
+				else
+					batchGroup->UpdateShader(Camera[CurrentCamera].get(), Shader.get());
+				
+				batchGroup->Draw(renderTex); //If RenderBatch Group
 			}
 			else
 			{

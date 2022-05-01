@@ -15,6 +15,11 @@ void V3DBatchModelGroup::Destroy()
 	delete baseObject;
 }
 
+V3DShader* V3DBatchModelGroup::GetOverrideShader()
+{
+	return baseObject->OverrideShader;
+}
+
 void V3DBatchModelGroup::UpdateShader(V3DCamera* Camera, V3DShader* Shader)
 {
 	currentCamera = Camera;

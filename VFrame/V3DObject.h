@@ -93,6 +93,8 @@ public:
 	float Radius;
 	///Centre of the 3D object, useful for collisions.
 	sf::Vector3f Origin;
+	///Shader specifically for object instead of the V3DScene shader.
+	V3DShader* OverrideShader = nullptr;
 
 	/**
 	* @param position Position of the object.
