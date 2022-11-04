@@ -5,7 +5,7 @@ using std::vector;
 
 VState::VState() : VGroup()
 {
-	
+
 }
 
 VState::~VState()
@@ -42,7 +42,7 @@ void VState::Cleanup()
 
 void VState::HandleEvents(const sf::Event& event)
 {
-	subState ? subState->HandleEvents(event) : 0;
+	subState ? subState->HandleEvents(event) : (void)0;
 }
 
 void VState::Update(float dt)
@@ -53,12 +53,12 @@ void VState::Update(float dt)
 
 void VState::PreDraw(sf::RenderTarget& RenderTarget)
 {
-	subState && subState->visible ? subState->PreDraw(RenderTarget) : 0;
+	subState && subState->visible ? subState->PreDraw(RenderTarget) : (void)0;
 }
 
 void VState::PostDraw(sf::RenderTarget& RenderTarget)
 {
-	subState && subState->visible ? subState->PostDraw(RenderTarget) : 0;
+	subState && subState->visible ? subState->PostDraw(RenderTarget) : (void)0;
 }
 
 VSubState* VState::SubState() const
@@ -109,7 +109,7 @@ void VState::CloseSubState()
 void VState::ResetSubState()
 {
 	if (openSubState)
-	{ 
+	{
 		if (subState)
 		{
 			subState->ParentState = this;
@@ -249,7 +249,7 @@ void VStateManager::Clear()
 		delete states[i];
 		states[i] = nullptr;
 	}
-	
+
 	states.clear();
 	states.shrink_to_fit();
 
