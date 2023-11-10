@@ -561,7 +561,7 @@ void VObject::Update(float dt)
 	WasTouching = Touching;
 	Touching = TOUCHNONE;
 
-	if (Health <= 0)
+	if (alive && Health <= 0)
 	{
 		Health = 0;
 		Kill();
