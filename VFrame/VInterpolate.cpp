@@ -262,8 +262,8 @@ float VInterpolate::Angle(float a, float b, float t, float d, VInterpolateType t
 
 float VInterpolate::Float(float a, float b, float t, float d, VInterpolateType type)
 {
-	t = std::fmaxf(t, 0);
-	t = std::fminf(t, d);
+	t = std::max(t, 0.0f);
+	t = std::min(t, d);
 
 	switch (type)
 	{
