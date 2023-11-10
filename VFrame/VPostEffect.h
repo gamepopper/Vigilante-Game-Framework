@@ -58,8 +58,8 @@ protected:
 	static void passThrough(const sf::Texture& input, sf::RenderTarget& output);
 
 public:
-	VPostEffectBase() = default;
-	virtual ~VPostEffectBase() = default;
+	VPostEffectBase();
+	virtual ~VPostEffectBase();
 
 	///@return True if Shaders are supported on specific platform, shaders won't apply automatically if not.
 	static bool isSupported();

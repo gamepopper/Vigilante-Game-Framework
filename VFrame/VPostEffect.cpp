@@ -3,6 +3,41 @@
 
 #include <SFML/Graphics/VertexArray.hpp>
 
+static unsigned int postEffectInstance = 0;
+static sf::Shader* passThroughShader = nullptr;
+
+VPostEffectBase::VPostEffectBase()
+{
+	postEffectInstance++;
+	if (passThroughShader == nullptr)
+	{
+		const std::string fragment = \
+			"uniform sampler2D texture;" \
+			"void main()" \
+			"{" \
+			"	vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);" \
+			"	gl_FragColor = gl_Color * pixel;" \
+			"}";
+
+		passThroughShader = new sf::Shader();
+		if (!passThroughShader->loadFromMemory(fragment, sf::Shader::Fragment))
+		{
+			delete passThroughShader;
+			passThroughShader = nullptr;
+		}
+	}
+}
+
+VPostEffectBase::~VPostEffectBase()
+{
+	postEffectInstance--;
+	if (postEffectInstance == 0)
+	{
+		delete passThroughShader;
+		passThroughShader = nullptr;
+	}
+}
+
 void VPostEffectBase::applyShader(const sf::Shader& shader, sf::RenderTarget& output)
 {
 	sf::Vector2f outputSize = static_cast<sf::Vector2f>(output.getSize());
@@ -22,18 +57,9 @@ void VPostEffectBase::applyShader(const sf::Shader& shader, sf::RenderTarget& ou
 
 void VPostEffectBase::passThrough(const sf::Texture& input, sf::RenderTarget& output)
 {
-	const std::string fragment = \
-		"uniform sampler2D texture;" \
-		"void main()" \
-		"{" \
-		"	vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);" \
-		"	gl_FragColor = gl_Color * pixel;" \
-		"}";
-
-	sf::Shader shader;
-	if (shader.loadFromMemory(fragment, sf::Shader::Fragment))
+	if (passThroughShader)
 	{
-		shader.setUniform("texture", input);
+		passThroughShader->setUniform("texture", input);
 
 		sf::Vector2f outputSize = static_cast<sf::Vector2f>(output.getSize());
 
@@ -44,7 +70,7 @@ void VPostEffectBase::passThrough(const sf::Texture& input, sf::RenderTarget& ou
 		vertices[3] = sf::Vertex(sf::Vector2f(outputSize), sf::Vector2f(1, 0));
 
 		sf::RenderStates states;
-		states.shader = &shader;
+		states.shader = passThroughShader;
 		states.blendMode = sf::BlendNone;
 
 		output.draw(vertices, states);
@@ -145,8 +171,10 @@ void VPostEffect::Apply(const sf::Texture& input, sf::RenderTarget& output)
 VPostEffectMultipass::VPostEffectMultipass(int MaxSize)
 {
 	maxSize = MaxSize;
-	renderTextures.reserve(MaxSize);
-	for (int i = 0; i < MaxSize; i++)
+
+	unsigned int amount = maxSize - 1 > 0 ? maxSize - 1 : 0;
+	renderTextures.reserve(amount);
+	for (unsigned int i = 0; i < amount; ++i)
 	{
 		renderTextures.push_back(std::make_unique<sf::RenderTexture>());
 		renderTextures[i]->create(VGlobal::p()->Width, VGlobal::p()->Height);
@@ -155,7 +183,7 @@ VPostEffectMultipass::VPostEffectMultipass(int MaxSize)
 
 VPostEffectMultipass::~VPostEffectMultipass()
 {
-	for (unsigned int i = 0; i < postEffects.size(); i++)
+	for (unsigned int i = 0; i < postEffects.size(); ++i)
 	{
 		delete postEffects[i];
 		postEffects[i] = nullptr;
@@ -167,7 +195,7 @@ VPostEffectMultipass::~VPostEffectMultipass()
 	enabled.clear();
 	enabled.shrink_to_fit();
 
-	for (unsigned int i = 0; i < renderTextures.size(); i++)
+	for (unsigned int i = 0; i < renderTextures.size(); ++i)
 	{
 		renderTextures[i].reset();
 	}
@@ -218,9 +246,9 @@ void VPostEffectMultipass::Apply(const sf::Texture& input, sf::RenderTarget& out
 	int inputRenderId = -1;
 	int outputRenderId = 0;
 
-	for (unsigned int i = 0; i < postEffects.size(); i++)
+	for (unsigned int i = 0; i < postEffects.size(); ++i)
 	{
-		sf::RenderTarget* renderOutput = renderTextures[outputRenderId].get();
+		sf::RenderTarget* renderOutput = outputRenderId < (int)postEffects.size() - 1 ? renderTextures[outputRenderId].get() : &output;
 
 		if (enabled[i])
 		{
@@ -240,13 +268,11 @@ void VPostEffectMultipass::Apply(const sf::Texture& input, sf::RenderTarget& out
 		inputRenderId++;
 		outputRenderId++;
 	}
-
-	passThrough(renderTextures[outputRenderId - 1]->getTexture(), output);
 }
 
 void VPostEffectMultipass::Update(float dt)
 {
-	for (unsigned int i = 0; i < postEffects.size(); i++)
+	for (unsigned int i = 0; i < postEffects.size(); ++i)
 	{
 		if (enabled[i])
 		{
