@@ -227,16 +227,24 @@ void VGlobal::PushState(VState* state)
 	}
 	else if (nextState == nullptr)
 	{
-		ifChangedState = nextState = state;
+		ifPushedState = nextState = state;
 	}
 }
 
-void VGlobal::PopState()
+void VGlobal::PopState(bool preUpdate)
 {
-	gsm->PopState();
+	if (ifPoppedState && preUpdate)
+	{
+		gsm->PopState();
+		ifPoppedState = false;
+	}
+	else if (preUpdate == false)
+	{
+		ifPoppedState = true;
+	}
 }
 
-void VGlobal::ClearState()
+void VGlobal::ClearStates()
 {
 	gsm->Clear();
 }

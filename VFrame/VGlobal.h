@@ -170,9 +170,9 @@ public:
 	/// @param state A new VState to push onto the stack to run without changing the current one.
 	void PushState(VState* state);
 	/// Pop the current state from the stack.
-	void PopState();
+	void PopState(bool preUpdate = false);
 	/// Clear all states from the stack.
-	void ClearState();
+	void ClearStates();
 	/// Close window and close out game.
 	void Exit();
 
@@ -245,6 +245,8 @@ private:
 	bool ifChangedState = false;
 	///Value is true if the a new VState is being pushed onto the stack in the state manager.
 	bool ifPushedState = false;
+	///Value is true if the a new VState is being popped off the stack in the state manager.
+	bool ifPoppedState = false;
 
 	std::unique_ptr<VCollision> collision; ///The game's collision handling system.
 	std::function<bool(VObject*, VObject*)> rectCollision; ///Function for handling rectangle collisions.
