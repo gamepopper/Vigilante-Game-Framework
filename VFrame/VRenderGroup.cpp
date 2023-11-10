@@ -164,10 +164,12 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 	VGlobal::p()->DrawDebug = drawDebug;
 #endif
 
-	if ((RenderOutside & VRENDERGROUP_BEFORE) != 0) VSUPERCLASS::Draw(RenderTarget);
+	if ((RenderOutside & VRENDERGROUP_BEFORE) != 0) 
+		VSUPERCLASS::Draw(RenderTarget);
 
 	Sprite->Draw(RenderTarget);
 	Camera->Render(RenderTarget);
 	
-	if ((RenderOutside & VRENDERGROUP_AFTER) != 0) VSUPERCLASS::Draw(RenderTarget);
+	if ((RenderOutside & VRENDERGROUP_AFTER) != 0) 
+		VSUPERCLASS::Draw(RenderTarget);
 }
