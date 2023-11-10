@@ -1,5 +1,6 @@
 #include "VMusic.h"
 #include "VInterpolate.h"
+#include "VGlobal.h"
 
 VMusic::VMusic() {}
 VMusic::~VMusic() {}
@@ -33,7 +34,7 @@ VMusic* VMusic::OpenMusicMemory(const void* data, size_t size)
 	}
 
 	valid = false;
-	return NULL;
+	return nullptr;
 }
 
 /**
@@ -49,7 +50,7 @@ VMusic* VMusic::OpenMusicStream(sf::InputStream& stream)
 	}
 
 	valid = false;
-	return NULL;
+	return nullptr;
 }
 
 void VMusic::Update(float dt)
@@ -59,7 +60,7 @@ void VMusic::Update(float dt)
 
 	if (Status() == music.Playing)
 	{
-		if (fadein)
+		if (fadein || fadeout)
 		{
 			fadeTimer += dt / fadeTime;
 			music.setVolume(VInterpolate::Float(startVolume, finishVolume, fadeTimer) * (masterVolume / 100.0f));
@@ -67,17 +68,6 @@ void VMusic::Update(float dt)
 			if (fadeTimer > 1.0f)
 			{
 				fadein = false;
-				fadeTimer = 0;
-			}
-		}
-
-		if (fadeout)
-		{
-			fadeTimer += dt / fadeTime;
-			music.setVolume(VInterpolate::Float(startVolume, finishVolume, fadeTimer) * (masterVolume / 100.0f));
-
-			if (fadeTimer > 1.0f)
-			{
 				fadeout = false;
 				fadeTimer = 0;
 			}
@@ -140,7 +130,7 @@ void VMusic::Fade(bool fadeIn, float fadeLength, float maxVolume, float minVolum
 	}
 }
 
-sf::Time VMusic::Duration() 
+sf::Time VMusic::Duration()
 {
 	if (!valid)
 		return sf::Time::Zero;
@@ -148,7 +138,7 @@ sf::Time VMusic::Duration()
 	return music.getDuration();
 }
 
-unsigned int VMusic::ChannelCount() 
+unsigned int VMusic::ChannelCount()
 {
 	if (!valid)
 		return 0;
@@ -156,7 +146,7 @@ unsigned int VMusic::ChannelCount()
 	return music.getChannelCount();
 }
 
-unsigned int VMusic::SampleRate() 
+unsigned int VMusic::SampleRate()
 {
 	if (!valid)
 		return 0;
@@ -164,7 +154,7 @@ unsigned int VMusic::SampleRate()
 	return music.getSampleRate();
 }
 
-sf::SoundStream::Status VMusic::Status() 
+sf::SoundStream::Status VMusic::Status()
 {
 	if (!valid)
 		return sf::SoundStream::Stopped;
@@ -172,7 +162,7 @@ sf::SoundStream::Status VMusic::Status()
 	return music.getStatus();
 }
 
-float VMusic::Attenuation() 
+float VMusic::Attenuation()
 {
 	if (!valid)
 		return 0;
@@ -252,14 +242,10 @@ void VMusic::SetLoop(bool loop, float loopStart, float loopEnd)
 	/*looping = loop;
 	loopStartPoint = loopStart;
 	if (loopEnd == 0)
-		loopEnd = music.getDuration().asSeconds();*/
+		loopEndPoint = music.getDuration().asSeconds();*/
 
-	if (loopEnd != 0)
-	{
-		sf::Music::TimeSpan timespan = sf::Music::TimeSpan(sf::seconds(loopStart), sf::seconds(loopEnd - loopStart));
-		music.setLoopPoints(timespan);
-	}
-
+	sf::Music::TimeSpan timespan = sf::Music::TimeSpan(sf::seconds(loopStart), sf::seconds(loopEnd - loopStart));
+	music.setLoopPoints(timespan);
 	music.setLoop(loop);
 }
 
