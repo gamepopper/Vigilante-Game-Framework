@@ -248,7 +248,7 @@ void VText::updateTextRender(const sf::String& text)
 
 		int vertOffset = vertices.getVertexCount();
 		vertices.resize(vertOffset + verts.getVertexCount());
-		for (size_t i = 0; i < verts.getVertexCount(); i++)
+		for (size_t i = 0; i < verts.getVertexCount(); ++i)
 		{
 			verts[i].position.x += xOffset;
 			vertices[vertOffset + i] = verts[i];

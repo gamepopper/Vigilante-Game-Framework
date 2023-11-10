@@ -77,13 +77,11 @@ VBase* VGroup::Remove(VBase* object, bool splice)
 
 VBase* VGroup::FirstAvailable()
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && !base->exists)
 		{
-			return members[i];
+			return base;
 		}
 	}
 
@@ -92,7 +90,7 @@ VBase* VGroup::FirstAvailable()
 
 int VGroup::FirstNULL()
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (unsigned int i = 0; i < members.size(); ++i)
 	{
 		VBase* base = dynamic_cast<VBase*>(members[i]);
 
@@ -107,13 +105,11 @@ int VGroup::FirstNULL()
 
 VBase* VGroup::FirstExisting()
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && base->exists)
 		{
-			return members[i];
+			return base;
 		}
 	}
 
@@ -122,13 +118,11 @@ VBase* VGroup::FirstExisting()
 
 VBase* VGroup::FirstAlive()
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && base->exists && base->alive)
 		{
-			return members[i];
+			return base;
 		}
 	}
 
@@ -137,13 +131,11 @@ VBase* VGroup::FirstAlive()
 
 VBase* VGroup::FirstDead()
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && !base->alive)
 		{
-			return members[i];
+			return base;
 		}
 	}
 
@@ -153,10 +145,8 @@ VBase* VGroup::FirstDead()
 int VGroup::CountAlive(bool Recursive)
 {
 	int count = 0;
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && base->exists && base->alive)
 		{
 			if (Recursive)
@@ -184,10 +174,8 @@ int VGroup::CountAlive(bool Recursive)
 int VGroup::CountDead(bool Recursive)
 {
 	int count = 0;
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && !base->alive)
 		{
 			if (Recursive)
@@ -226,10 +214,8 @@ void VGroup::ForEach(const std::function<void(VBase*)>& function, bool recursive
 {
 	VBase* base = nullptr;
 
-	for (int i = 0; i < length; i++)
+	for (VBase* base : members)
 	{
-		base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr)
 		{
 			if (recursive)
@@ -256,10 +242,8 @@ void VGroup::ForEachAlive(const std::function<void(VBase*)>& function, bool recu
 {
 	VBase* base = nullptr;
 
-	for (int i = 0; i < length; i++)
+	for (VBase* base : members)
 	{
-		base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && base->exists && base->alive)
 		{
 			if (recursive)
@@ -286,10 +270,8 @@ void VGroup::ForEachDead(const std::function<void(VBase*)>& function, bool recur
 {
 	VBase* base = nullptr;
 
-	for (int i = 0; i < length; i++)
+	for (VBase* base : members)
 	{
-		base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && !base->alive)
 		{
 			if (recursive)
@@ -316,10 +298,8 @@ void VGroup::ForEachExists(const std::function<void(VBase*)>& function, bool rec
 {
 	VBase* base = nullptr;
 
-	for (int i = 0; i < length; i++)
+	for (VBase* base : members)
 	{
-		base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && base->exists)
 		{
 			if (recursive)
@@ -364,7 +344,7 @@ int VGroup::GetIndexOfItem(VBase* object)
 
 void VGroup::OrganiseNULLS()
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (unsigned int i = 0; i < members.size(); ++i)
 	{
 		int first = FirstNULL();
 
@@ -404,14 +384,14 @@ void VGroup::Reverse()
 
 void VGroup::Clear()
 {
-	for (int i = 0; i < length; i++)
+	for (VBase* base : members)
 	{
-		if (members[i] != nullptr)
+		if (base != nullptr)
 		{
-			if (members[i]->RefCount > 1)
+			if (base->RefCount > 1)
 			{
-				members[i]->RefCount--;
-				members[i] = nullptr;
+				base->RefCount--;
+				base = nullptr;
 			}
 		}
 	}
@@ -425,19 +405,20 @@ void VGroup::Destroy()
 {
 	VSUPERCLASS::Destroy();
 
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (unsigned int i = 0; i < members.size(); ++i)
 	{
-		if (members[i] != nullptr)
+		VBase* base = dynamic_cast<VBase*>(members[i]);
+		if (base != nullptr)
 		{
-			if (members[i]->RefCount <= 1)
+			if (base->RefCount <= 1)
 			{
-				members[i]->Destroy();
-				delete members[i];
+				base->Destroy();
+				delete base;
 				members[i] = nullptr;
 			}
 			else
 			{
-				members[i]->RefCount--;
+				base->RefCount--;
 				members[i] = nullptr;
 			}
 		}
@@ -448,10 +429,8 @@ void VGroup::Destroy()
 
 void VGroup::Kill()
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && base->exists)
 			base->Kill();
 	}
@@ -461,10 +440,8 @@ void VGroup::Kill()
 
 void VGroup::Revive()
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && !base->exists)
 			base->Revive();
 	}
@@ -477,10 +454,8 @@ void VGroup::Update(float dt)
 	if (!active)
 		return;
 	
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && base->exists && base->active)
 		{
 			base->Update(dt);
@@ -495,10 +470,8 @@ void VGroup::Draw(sf::RenderTarget& RenderTarget)
 	if (!visible)
 		return;
 
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-
 		if (base != nullptr && base->exists && base->visible)
 		{
 			base->Draw(RenderTarget);
@@ -510,18 +483,18 @@ void VGroup::Draw(sf::RenderTarget& RenderTarget)
 	{
 		int memberLength = members.size();
 		debuggingVertices.resize(memberLength * 8);
-		for (unsigned int i = 0; i < members.size(); i++)
+		for (unsigned int i = 0; i < members.size(); ++i)
 		{
 			VObject* object = dynamic_cast<VObject*>(members[i]);
 
-			if (object == nullptr && members[i] != nullptr && members[i]->type == RENDERGROUP)
-			{
-				VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(members[i]);
-				object = renderGroup->Sprite.get();
-			}
-
 			if (object == nullptr)
 				continue;
+
+			if (object->type == RENDERGROUP)
+			{
+				VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(object);
+				object = renderGroup->Sprite.get();
+			}
 
 			if (object->exists)
 			{

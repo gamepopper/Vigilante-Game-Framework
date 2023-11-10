@@ -184,7 +184,7 @@ void VTilemap::updateCollisionBox()
 
 			//If tilemap is a wall, find largest width.
 			int width = 1, height = 1;
-			for (int i = x + 1; i < mapWidth; i++)
+			for (int i = x + 1; i < mapWidth; ++i)
 			{
 				char nextTile = tilemap[(y * mapWidth) + i];
 
@@ -214,7 +214,7 @@ void VTilemap::updateCollisionBox()
 				for (int j = y + 1; j < mapHeight; j++)
 				{
 					bool clear = true;
-					for (int i = x; i < (x + width); i++)
+					for (int i = x; i < (x + width); ++i)
 					{
 						char nextTile = tilemap[(j * mapWidth) + i];
 						if (collisionDir.find(nextTile) == collisionDir.end() || processed[(j * mapWidth) + i] == true)
@@ -242,7 +242,7 @@ void VTilemap::updateCollisionBox()
 					else
 					{
 						//else, reset flags to unprocessed.
-						for (int i = x; i < (x + width); i++)
+						for (int i = x; i < (x + width); ++i)
 						{
 							processed[(j * mapWidth) + i] = false;
 						}
@@ -424,7 +424,7 @@ void VTilemap::ResetCollision(const std::vector<char>& collision)
 
 	collisionDir.clear();
 	
-	for (unsigned int i = 0; i < collision.size(); i++)
+	for (unsigned int i = 0; i < collision.size(); ++i)
 		collisionDir[collision[i]] = new VTileCollisionInfo();
 
 	dirty = true;
@@ -434,7 +434,7 @@ bool VTilemap::OverlapWithCallback(VObject* object, std::function<bool(VObject*,
 {
 	bool results = false;
 
-	for (unsigned int i = 0; i < tiles.size(); i++)
+	for (unsigned int i = 0; i < tiles.size(); ++i)
 	{
 		VTile* t = tiles[i];
 		bool overlapFound =
@@ -472,7 +472,7 @@ void VTilemap::SetTint(const sf::Color& color)
 	if (colour != color)
 	{
 		colour = color;
-		for (unsigned int i = 0; i < vertices.getVertexCount(); i++)
+		for (unsigned int i = 0; i < vertices.getVertexCount(); ++i)
 		{
 			vertices[i].color = color;
 		}

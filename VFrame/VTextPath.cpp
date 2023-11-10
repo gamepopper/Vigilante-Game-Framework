@@ -41,7 +41,7 @@ void VTextPath::updateTextRender(const sf::String& text)
 	float right = -(float)0xFFFFFF;
 	float bottom = -(float)0xFFFFFF;
 
-	for (unsigned int i = 0; i < pointList.size(); i++)
+	for (unsigned int i = 0; i < pointList.size(); ++i)
 	{
 		left = pointList[i].x < left ? pointList[i].x : left;
 		right = pointList[i].x > right ? pointList[i].x : right;
@@ -131,7 +131,7 @@ void VTextPath::updateTextRender(const sf::String& text)
 
 		int vertOffset = vertices.getVertexCount();
 		vertices.resize(vertOffset + verts.getVertexCount());
-		for (size_t i = 0; i < verts.getVertexCount(); i++)
+		for (size_t i = 0; i < verts.getVertexCount(); ++i)
 		{
 			verts[i].position.x += xOffset;
 			vertices[vertOffset + i] = verts[i];

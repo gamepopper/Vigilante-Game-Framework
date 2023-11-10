@@ -67,7 +67,7 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 		{
 			getPolyVertCount = Verts.size();
 			std::vector<cpVect> verts(getPolyVertCount);
-			for (unsigned int i = 0; i < verts.size(); i++)
+			for (unsigned int i = 0; i < verts.size(); ++i)
 			{
 				verts[i] = ToCPVect(Verts[i] - Object->Size * 0.5f);
 			}
@@ -253,7 +253,7 @@ void VPhysicsObject::Update(float dt)
 			case VObjectShape::CUSTOM:
 			{
 				std::vector<cpVect> verts(getPolyVertCount);
-				for (unsigned int i = 0; i < getPolyVertCount; i++)
+				for (unsigned int i = 0; i < getPolyVertCount; ++i)
 				{
 					verts[i] = cpPolyShapeGetVert(shape, i);
 				}

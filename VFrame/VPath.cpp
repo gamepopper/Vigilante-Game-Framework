@@ -7,7 +7,7 @@ sf::Vector2f VPath::getBezierPoint(float t)
 	std::copy(points.begin(), points.end(), tmp.begin());
 
 	unsigned int maxi = points.size() - 1;
-	for (unsigned int i = 0; i < maxi; i++)
+	for (unsigned int i = 0; i < maxi; ++i)
 	{
 		unsigned int maxj = maxi - i;
 		for (unsigned int j = 0; j < maxj; j++)

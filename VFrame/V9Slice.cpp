@@ -22,7 +22,7 @@ void V9Slice::updateTransform()
 
 	if (vertexArray[0].color != Tint)
 	{
-		for (unsigned int i = 0; i < vertexArray.getVertexCount(); i++)
+		for (unsigned int i = 0; i < vertexArray.getVertexCount(); ++i)
 			vertexArray[i].color = Tint;
 	}
 }

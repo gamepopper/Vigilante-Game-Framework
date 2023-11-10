@@ -47,7 +47,7 @@ V3DShader::V3DShader() : program(0)
 
 V3DShader::~V3DShader()
 {
-	for (unsigned int i = 0; i < static_cast<unsigned int>(ShaderType::Count); i++)
+	for (unsigned int i = 0; i < static_cast<unsigned int>(ShaderType::Count); ++i)
 	{
 		if (shader[i] > 0)
 		{

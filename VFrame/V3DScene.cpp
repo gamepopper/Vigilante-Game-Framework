@@ -69,7 +69,7 @@ void V3DScene::Update(float dt)
 
 void V3DScene::RenderGroup(VGroup* group)
 {
-	for (int i = 0; i < group->Length(); i++)
+	for (int i = 0; i < group->Length(); ++i)
 	{
 		V3DObject* base = group->GetGroupItemAsType<V3DObject>(i);
 

@@ -76,7 +76,7 @@ bool V3DObjModel::LoadModelData(const char* filename)
 		materials.push_back(tinyobj::material_t());
 		tinyobj::InitMaterial(&materials.back());
 
-		for (unsigned int i = 0; i < materials.size(); i++)
+		for (unsigned int i = 0; i < materials.size(); ++i)
 		{
 			tinyobj::material_t* mp = &materials[i];
 
@@ -115,7 +115,7 @@ bool V3DObjModel::LoadModelData(const char* filename)
 				}
 
 				float diffuse[3];
-				for (unsigned int i = 0; i < 3; i++) 
+				for (unsigned int i = 0; i < 3; ++i) 
 				{
 					diffuse[i] = materials[currentMatID].diffuse[i];
 				}
@@ -344,7 +344,7 @@ void V3DObjModel::Destroy()
 {
 	VSUPERCLASS::Destroy();
 
-	for (unsigned int i = 0; i < modelData.size(); i++)
+	for (unsigned int i = 0; i < modelData.size(); ++i)
 	{
 		glCheck(glDeleteBuffers(1, &modelData[i].vb));
 		glCheck(glDeleteVertexArrays(1, &modelData[i].vao));
@@ -362,7 +362,7 @@ void V3DObjModel::Draw(sf::RenderTarget& RenderTarget)
 {
 	VSUPERCLASS::Draw(RenderTarget);
 
-	for (unsigned int i = 0; i < modelData.size(); i++)
+	for (unsigned int i = 0; i < modelData.size(); ++i)
 	{
 		V3DModelData &md = modelData[i];
 

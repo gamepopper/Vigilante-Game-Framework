@@ -33,7 +33,7 @@ const wchar_t* VBase::VString(const char* format, ...)
 	while (p > buf  &&  isspace(p[-1]))
 		*--p = '\0';
 
-	for (unsigned int i = 0; i < strlen(buf); i++)
+	for (unsigned int i = 0; i < strlen(buf); ++i)
 		output[i] = (wchar_t)buf[i];
 	output[strlen(buf)] = L'\0';
 
@@ -65,7 +65,7 @@ void VBase::VLog(const char* format, ...)
 	*p++ = '\n';
 	*p = '\0';
 
-	for (unsigned int i = 0; i < strlen(buf); i++)
+	for (unsigned int i = 0; i < strlen(buf); ++i)
 		output[i] = (wchar_t)buf[i];
 	output[strlen(buf)] = L'\0';
 
@@ -105,7 +105,7 @@ void VBase::VLogError(const char* format, ...)
 	*p++ = '\n';
 	*p = '\0';
 
-	for (unsigned int i = 0; i < strlen(buf); i++)
+	for (unsigned int i = 0; i < strlen(buf); ++i)
 		output[i] = (wchar_t)buf[i];
 	output[strlen(buf)] = L'\0';
 

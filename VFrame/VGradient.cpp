@@ -25,7 +25,7 @@ void VGradient::updateFrame()
 	unsigned int numPoints = points.size();
 	sortedPoints.clear();
 	sortedPoints.resize(numPoints);
-	for (unsigned int i = 0; i < sortedPoints.size(); i++)
+	for (unsigned int i = 0; i < sortedPoints.size(); ++i)
 		sortedPoints[i] = points[i].get();
 
 	std::sort(sortedPoints.begin(), sortedPoints.end(),
@@ -39,7 +39,7 @@ void VGradient::updateFrame()
 		gradImage.create(imageWidth, 1);
 
 	unsigned int offset = 0;
-	for (unsigned int i = 0; i < sortedPoints.size() - 1; i++)
+	for (unsigned int i = 0; i < sortedPoints.size() - 1; ++i)
 	{
 		unsigned int length = static_cast<unsigned int>((sortedPoints[i + 1]->Position - sortedPoints[i]->Position) * imageWidth);
 		for (unsigned int j = 0; j < length; j++)
@@ -77,7 +77,7 @@ void VGradient::updateFrame()
 
 		vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleFan);
 		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f), sf::Vector2f(0.0f, 0.0f)));
-		for (int i = 0; i < 33; i++)
+		for (int i = 0; i < 33; ++i)
 		{
 			float angle = (i / 32.0f) * (VFRAME_PI * 2.0f);
 			float sinV = sinf(angle) * radius;
@@ -92,7 +92,7 @@ void VGradient::updateFrame()
 		float radius = sqrtf((Size.x * Size.x) + (Size.y * Size.y)) / 2.0f;
 
 		vertexArray.setPrimitiveType(sf::PrimitiveType::Lines);
-		for (int i = 0; i < radius * 10; i++)
+		for (int i = 0; i < radius * 10; ++i)
 		{
 			float angle = i / (radius * 10);
 			float sinV = sinf(angle * VFRAME_PI * 2.0f) * radius;
@@ -125,7 +125,7 @@ void VGradient::updateFrame()
 
 		vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleFan);
 		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f), sf::Vector2f(0.0f, 0.0f)));
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 5; ++i)
 		{
 			float angle = (i / 4.0f) * (VFRAME_PI * 2.0f);
 			float sinV = sinf(angle) * radius;

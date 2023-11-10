@@ -19,11 +19,11 @@ VTimer* VTimeManager::AddTimer()
 
 void VTimeManager::Update(float dt)
 {
-	for (unsigned int i = 0; i < timers.size(); i++)
+	for (VTimer* time : timers)
 	{
-		if (!timers[i]->IsPaused())
+		if (!time->IsPaused())
 		{
-			timers[i]->Update(dt);
+			time->Update(dt);
 		}
 	}
 }
@@ -60,17 +60,14 @@ void VTimeManager::Clear(bool destroy)
 {
 	if (destroy)
 	{
-		for (int i = 0; i < (int)timers.size(); i++)
+		for (VTimer* time : timers)
 		{
-			if (timers[i])
-			{
-				delete timers[i];
-				timers[i] = nullptr;
-			}
+			delete time;
 		}
 	}
 
 	timers.clear();
+	timers.shrink_to_fit();
 }
 
 int VTimeManager::Count()

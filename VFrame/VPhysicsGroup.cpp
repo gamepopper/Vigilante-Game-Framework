@@ -85,9 +85,9 @@ VPhysicsObject* VPhysicsGroup::AddObject(VObject* Object, VPhysicsObject::VObjec
 bool VPhysicsGroup::RemoveObject(VObject* Object)
 {
 	VPhysicsObject* obj = nullptr;
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VPhysicsObject* cur = dynamic_cast<VPhysicsObject*>(members[i]);
+		VPhysicsObject* cur = dynamic_cast<VPhysicsObject*>(base);
 		if (cur && cur->GetBaseObject() == Object)
 		{
 			obj = cur;
@@ -148,9 +148,9 @@ void VPhysicsGroup::Update(float dt)
 
 VPhysicsObject* VPhysicsGroup::getObjectFromBody(cpBody* body)
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VPhysicsObject* obj = dynamic_cast<VPhysicsObject*>(members[i]);
+		VPhysicsObject* obj = dynamic_cast<VPhysicsObject*>(base);
 		if (obj && (cpBody*)obj->GetBody() == body)
 		{
 			return obj;
@@ -162,9 +162,9 @@ VPhysicsObject* VPhysicsGroup::getObjectFromBody(cpBody* body)
 
 VPhysicsJointBase* VPhysicsGroup::getJointFromConstraint(cpConstraint* constraint)
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* base : members)
 	{
-		VPhysicsJointBase* obj = dynamic_cast<VPhysicsJointBase*>(members[i]);
+		VPhysicsJointBase* obj = dynamic_cast<VPhysicsJointBase*>(base);
 		if (obj && obj->GetConstraint() == constraint)
 		{
 			return obj;
@@ -268,7 +268,7 @@ bool VPhysicsGroup::ProcessCallback(VPhysicsCPArbiter *arb, VPhysicsCPSpace *spa
 	}*/
 
 	bool result = true;
-	for (int i = 0; i < (int)objectCallbackHelperList.size(); i++)
+	for (int i = 0; i < (int)objectCallbackHelperList.size(); ++i)
 	{
 		if (objectCallbackHelperList[i].Type != type)
 			continue;
@@ -318,7 +318,7 @@ void VPhysicsGroup::ProcessCallback(VPhysicsCPConstraint* constraint, VPhysicsCP
 		VPhysicsObject* objA = getObjectFromBody(bodyA);
 		VPhysicsObject* objB = getObjectFromBody(bodyB);
 
-		for (int i = 0; i < (int)constraintCallbackHelperList.size(); i++)
+		for (int i = 0; i < (int)constraintCallbackHelperList.size(); ++i)
 		{
 			if (constraintCallbackHelperList[i].Type != type)
 				continue;
@@ -517,7 +517,7 @@ void ChipmunkDebugDrawCircle(cpVect pos, cpFloat angle, cpFloat radius, cpSpaceD
 	int circleDivisions = 16;
 	float anglePerDiv = VFRAME_PI * (2.0f / circleDivisions);
 
-	for (int i = 0; i < circleDivisions; i++)
+	for (int i = 0; i < circleDivisions; ++i)
 	{
 		ChipmunkDebugDrawSegment(
 			cpvadd(pos, cpvmult(cpvforangle(anglePerDiv * i), r)),
@@ -535,7 +535,7 @@ void ChipmunkDebugDrawPolygon(int count, const cpVect *verts, cpFloat radius, cp
 	struct ExtrudeVerts *extrude = (struct ExtrudeVerts *)alloca(bytes);
 	memset(extrude, 0, bytes);
 
-	for (int i = 0; i < count; i++) {
+	for (int i = 0; i < count; ++i) {
 		cpVect v0 = verts[(i - 1 + count) % count];
 		cpVect v1 = verts[i];
 		cpVect v2 = verts[(i + 1) % count];
@@ -548,7 +548,7 @@ void ChipmunkDebugDrawPolygon(int count, const cpVect *verts, cpFloat radius, cp
 	}
 
 	cpFloat inset = -cpfmax(0.0f, 1.0f - radius);
-	for (int i = 0; i < count - 2; i++) {
+	for (int i = 0; i < count - 2; ++i) {
 		sf::Vector2f v0 = ToSFVector(cpvadd(verts[0], cpvmult(extrude[0].offset, inset)));
 		sf::Vector2f v1 = ToSFVector(cpvadd(verts[i + 1], cpvmult(extrude[i + 1].offset, inset)));
 		sf::Vector2f v2 = ToSFVector(cpvadd(verts[i + 2], cpvmult(extrude[i + 2].offset, inset)));
@@ -559,7 +559,7 @@ void ChipmunkDebugDrawPolygon(int count, const cpVect *verts, cpFloat radius, cp
 	}
 
 	cpFloat outset = 1.0f + radius - inset;
-	for (int i = 0, j = count - 1; i < count; j = i, i++) {
+	for (int i = 0, j = count - 1; i < count; j = i, ++i) {
 		cpVect vA = verts[i];
 		cpVect vB = verts[j];
 

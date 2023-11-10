@@ -128,7 +128,7 @@ unsigned int VCandle::numberOfEdges(VBase* b)
 		numberEdges = 4 * tilemap->GetCollisionTileCount();
 	else if (group = dynamic_cast<VGroup*>(b))
 	{
-		for (int i = 0; i < group->Length(); i++)
+		for (int i = 0; i < group->Length(); ++i)
 			numberEdges += numberOfEdges(group->GetGroupItem(i));
 	}
 	else if (dynamic_cast<VObject*>(b))
@@ -221,7 +221,7 @@ void VCandle::AddEdgesFromObjects(VBase* o)
 
 		members.push_back(o);
 		edgeList->edges.reserve(edgeList->edges.size() + edgeCount);
-		for (unsigned int i = 0; i < edgeCount; i++)
+		for (unsigned int i = 0; i < edgeCount; ++i)
 		{
 			edgeList->edges.emplace_back(sf::Vector2f(), sf::Vector2f());
 		}

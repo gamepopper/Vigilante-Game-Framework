@@ -71,7 +71,7 @@ bool V3DCamera::PointInView(sf::Vector3f p)
 {
 	updatePlanes();
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 6; ++i)
 	{
 		if (pointPlaneDistance(planes[i], glm::vec3(p.x, p.y, p.z)) < 0)
 			return false;
@@ -86,7 +86,7 @@ bool V3DCamera::SphereInView(sf::Vector3f p, float radius)
 
 	bool view = true;
 	float distance = 0.0f;
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 6; ++i)
 	{
 		distance = pointPlaneDistance(planes[i], glm::vec3(p.x, p.y, p.z));
 		view = view && (distance < -radius);
@@ -99,7 +99,7 @@ bool V3DCamera::BoxInView(sf::Vector3f p, sf::Vector3f min, sf::Vector3f max)
 {
 	updatePlanes();
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 6; ++i)
 	{
 		sf::Vector3f positive = min;
 		sf::Vector3f negative = max;
@@ -185,7 +185,7 @@ void V3DCamera::updatePlanes()
 	planes[PFAR].z = clipMatrix[3][2] - clipMatrix[2][2];
 	planes[PFAR].w = clipMatrix[3][3] - clipMatrix[2][3];
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 6; ++i)
 	{
 		float mag = glm::length(glm::vec3(planes[i]));
 		planes[i] /= mag;

@@ -76,16 +76,16 @@ void VShape::SetConvex(std::vector<sf::Vector2f>& points)
 {
 	Size = sf::Vector2f();
 	sf::Vector2f offset = sf::Vector2f();
-	for (unsigned int i = 0; i < points.size(); i++)
+	for (sf::Vector2f& point : points)
 	{
-		offset.x = std::min(offset.x, points[i].x);
-		offset.y = std::min(offset.y, points[i].y);
-		Size.x = std::max(Size.x, points[i].x);
-		Size.y = std::max(Size.y, points[i].y);
+		offset.x = std::min(offset.x, point.x);
+		offset.y = std::min(offset.y, point.y);
+		Size.x = std::max(Size.x, point.x);
+		Size.y = std::max(Size.y, point.y);
 	}
 
 	sf::ConvexShape* newShape = new sf::ConvexShape(points.size());
-	for (unsigned int i = 0; i < points.size(); i++)
+	for (unsigned int i = 0; i < points.size(); ++i)
 	{
 		points[i].x -= offset.x;
 		points[i].y -= offset.y;

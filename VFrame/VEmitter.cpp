@@ -70,7 +70,7 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const s
 	vertices.clear();
 	vertices.resize(Amount * 4);
 
-	for (int i = 0; i < Amount; i++)
+	for (int i = 0; i < Amount; ++i)
 	{
 		VParticle* particle = new VParticle(*ParticleInstance);
 		Add(particle);
@@ -116,7 +116,7 @@ void VEmitter::Update(float dt)
 	{
 		if (Explosion)
 		{
-			for (int i = 0; i < amount; i++)
+			for (int i = 0; i < amount; ++i)
 			{
 				EmitParticle();
 			}
@@ -129,7 +129,7 @@ void VEmitter::Update(float dt)
 		{
 			if (Frequency <= 0)
 			{
-				for (unsigned int i = 0; i < AmountPerEmit; i++) EmitParticle();
+				for (unsigned int i = 0; i < AmountPerEmit; ++i) EmitParticle();
 
 				if (!Constant && ++counter >= amount)
 				{
@@ -145,7 +145,7 @@ void VEmitter::Update(float dt)
 				while (timer > Frequency)
 				{
 					timer -= Frequency;
-					for (unsigned int i = 0; i < AmountPerEmit; i++) EmitParticle();
+					for (unsigned int i = 0; i < AmountPerEmit; ++i) EmitParticle();
 
 					if (!Constant && ++counter >= amount)
 					{
@@ -201,7 +201,7 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 	scrollView.zoom(zoom);
 	scrollView.setViewport(renderTargetView.getViewport());
 
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (unsigned int i = 0; i < members.size(); ++i)
 	{
 		base = dynamic_cast<VParticle*>(members[i]);
 

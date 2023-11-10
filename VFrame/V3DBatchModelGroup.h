@@ -56,6 +56,9 @@ public:
 	///Revives all dead objects before reviving the group itself.
 	virtual void Destroy() override;
 
+	/**
+	* @return The V3DShader object which will be used in lieu of the  
+	*/
 	V3DShader* GetOverrideShader();
 
 	/**

@@ -28,9 +28,9 @@ void V3DBatchModelGroup::UpdateShader(V3DCamera* Camera, V3DShader* Shader)
 
 void V3DBatchModelGroup::Draw(sf::RenderTarget& RenderTarget)
 {
-	for (unsigned int i = 0; i < members.size(); i++)
+	for (VBase* it : members)
 	{
-		V3DObject* base = dynamic_cast<V3DObject*>(members[i]);
+		V3DObject* base = dynamic_cast<V3DObject*>(it);
 
 		if (base != nullptr && base->exists && base->visible && currentCamera->BoxInView(base->Position, baseObject->GetMinimum(), baseObject->GetMaximum()))
 		{

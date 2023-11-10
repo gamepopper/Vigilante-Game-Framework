@@ -82,7 +82,7 @@ void VCollision::Initialise(const sf::FloatRect& initialRect)
 
 void VCollision::Cleanup()
 {
-	for (unsigned int i = 0; i < quads.size(); i++)
+	for (unsigned int i = 0; i < quads.size(); ++i)
 	{
 		quads[i]->clear();
 	}
@@ -160,7 +160,7 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 
 		if (group != nullptr)
 		{
-			for (int i = 0; i < group->Length(); i++)
+			for (int i = 0; i < group->Length(); ++i)
 			{
 				AddToList(group->GetGroupItem(i), list);
 			}
@@ -173,7 +173,7 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 
 		if (tilemap != nullptr)
 		{
-			for (unsigned int i = 0; i < quads.size(); i++)
+			for (unsigned int i = 0; i < quads.size(); ++i)
 			{
 				quads[i]->checkBounds(tilemap, list);
 			}
@@ -195,7 +195,7 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 
 		if (object && object->exists)
 		{
-			for (unsigned int i = 0; i < quads.size(); i++)
+			for (unsigned int i = 0; i < quads.size(); ++i)
 			{
 				quads[i]->checkBounds(object, list);
 			}
@@ -207,7 +207,7 @@ bool VCollision::Run(std::function<bool(VObject*, VObject*)> testOverlap, std::f
 {
 	bool overlapFound = false;
 
-	for (unsigned int i = 0; i < quads.size(); i++)
+	for (unsigned int i = 0; i < quads.size(); ++i)
 	{
 		VQuadTree* tree = quads[i].get();
 
