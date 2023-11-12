@@ -1,4 +1,5 @@
 #include "VDebugRenderer.h"
+#if _DEBUG
 #include "VGlobal.h"
 #include "VRenderGroup.h"
 #include "VEmitter.h"
@@ -84,3 +85,4 @@ void VDebugRenderer::Draw(sf::RenderTarget& RenderTarget)
 	if (visible)
 		RenderTarget.draw(debuggingVertices);
 }
+#endif

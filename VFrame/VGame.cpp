@@ -307,7 +307,8 @@ void VGame::Update(float dt)
 	if (VGlobal::p()->PostProcess != nullptr && VPostEffectBase::isSupported())
 		VGlobal::p()->PostProcess->Update(dt);
 
-	debugRenderer->Update(dt);
+	if (debugRenderer != nullptr)
+		debugRenderer->Update(dt);
 }
 
 void VGame::PreRender()
@@ -333,7 +334,8 @@ void VGame::Render(VCamera* camera)
 	if (currentState->SubState()) 
 		currentState->SubState()->Draw(*renderTarget);
 
-	debugRenderer->Draw(*renderTarget);
+	if (debugRenderer != nullptr)
+		debugRenderer->Draw(*renderTarget);
 
 	camera->Render(*renderTarget);
 }

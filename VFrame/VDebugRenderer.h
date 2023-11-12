@@ -1,4 +1,5 @@
 #pragma once
+#if _DEBUG
 #include "VBase.h"
 #include <SFML/Graphics/VertexArray.hpp>
 
@@ -21,4 +22,4 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderTarget& RenderTarget) override;
 };
-
+#endif
