@@ -27,7 +27,7 @@ void VState::Cleanup()
 	{
 		Destroy();
 
-		for (unsigned int i = 0; i < Cameras.size(); i++)
+		for (unsigned int i = 0; i < Cameras.size(); ++i)
 		{
 			delete Cameras[i];
 			Cameras[i] = nullptr;
@@ -36,13 +36,17 @@ void VState::Cleanup()
 		Cameras.clear();
 		Cameras.shrink_to_fit();
 
+		CloseSubState();
+		ResetSubState();
+
 		VLog("State cleanup successful");
 	}
 }
 
 void VState::HandleEvents(const sf::Event& event)
 {
-	subState ? subState->HandleEvents(event) : 0;
+	if (subState && subState->visible)
+		subState->HandleEvents(event);
 }
 
 void VState::Update(float dt)
@@ -53,12 +57,14 @@ void VState::Update(float dt)
 
 void VState::PreDraw(sf::RenderTarget& RenderTarget)
 {
-	subState && subState->visible ? subState->PreDraw(RenderTarget) : 0;
+	if (subState && subState->visible)
+		subState->PreDraw(RenderTarget);
 }
 
 void VState::PostDraw(sf::RenderTarget& RenderTarget)
 {
-	subState && subState->visible ? subState->PostDraw(RenderTarget) : 0;
+	if (subState && subState->visible)
+		subState->PostDraw(RenderTarget);
 }
 
 VSubState* VState::SubState() const
@@ -115,14 +121,19 @@ void VState::ResetSubState()
 			subState->ParentState = this;
 			subState->Initialise();
 		}
+
 		openSubState = false;
+		closeSubstate = false;
 	}
 
 	if (closeSubstate)
 	{
-		subState->Cleanup();
+		if (subState)
+			subState->Cleanup();
+		
 		subState = nullptr;
 
+		openSubState = false;
 		closeSubstate = false;
 	}
 }
@@ -228,7 +239,7 @@ void VStateManager::PushState(VState* state)
 
 void VStateManager::PopState()
 {
-	if (states.size())
+	if (states.size() > 1)
 	{
 		states.back()->Cleanup();
 		delete states.back();
@@ -243,7 +254,7 @@ void VStateManager::PopState()
 
 void VStateManager::Clear()
 {
-	for (unsigned int i = 0; i < states.size(); i++)
+	for (unsigned int i = 0; i < states.size(); ++i)
 	{
 		states[i]->Cleanup();
 		delete states[i];
