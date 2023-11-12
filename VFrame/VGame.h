@@ -135,6 +135,8 @@ private:
 	*/
 	void ResizeCheck();
 
+	///Draws debug bounds if visible.
+	VBase* debugRenderer;
 	///The screen the game is rendered to before being applied to the window.
 	std::unique_ptr<sf::RenderTexture> renderTarget;
 	///The vertices used to render the screen to a window.

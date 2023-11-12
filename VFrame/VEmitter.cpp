@@ -3,6 +3,8 @@
 
 VEmitter* VEmitter::LoadParticlesFromFile(int Amount, const sf::String& Filename, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
+	Clear(true);
+
 	MaxSize = Amount;
 	RenderState.texture = &VGlobal::p()->Content->LoadTexture(Filename);
 	setSize(Amount, Animated, Width, Height, Rect, RandomFrames);
@@ -12,6 +14,8 @@ VEmitter* VEmitter::LoadParticlesFromFile(int Amount, const sf::String& Filename
 
 VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture& Texture, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
+	Clear(true);
+
 	MaxSize = Amount;
 	RenderState.texture = &Texture;
 	setSize(Amount, Animated, Width, Height, Rect, RandomFrames);
@@ -21,6 +25,8 @@ VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture& Texture, bool Animate
 
 VEmitter* VEmitter::MakeParticles(int Amount, int Width, int Height, sf::Color Color)
 {
+	Clear(true);
+
 	MaxSize = Amount;
 
 	if (disposible)
@@ -84,11 +90,6 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const s
 		vertices[2 + (i * 4)].texCoords = Offset + sf::Vector2f((FrameX + 1) * Size.x, (FrameY + 1) * Size.y);
 		vertices[3 + (i * 4)].texCoords = Offset + sf::Vector2f(FrameX * Size.x, (FrameY + 1) * Size.y);
 	}
-
-#if _DEBUG
-	debuggingVertices.clear();
-	debuggingVertices.resize(8);
-#endif
 }
 
 void VEmitter::Destroy()
@@ -248,20 +249,6 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 	{
 		RenderTarget.setView(scrollView);
 		RenderTarget.draw(vertices, RenderState);
-
-#ifdef _DEBUG
-		if (VGlobal::p()->DrawDebug)
-		{
-			debuggingVertices[0].position = sf::Vector2f(renderBox.left, renderBox.top);
-			debuggingVertices[1].position = sf::Vector2f(renderBox.left + renderBox.width, renderBox.top);
-			debuggingVertices[2].position = sf::Vector2f(renderBox.left + renderBox.width, renderBox.top);
-			debuggingVertices[3].position = sf::Vector2f(renderBox.left + renderBox.width, renderBox.top + renderBox.height);
-			debuggingVertices[4].position = sf::Vector2f(renderBox.left + renderBox.width, renderBox.top + renderBox.height);
-			debuggingVertices[5].position = sf::Vector2f(renderBox.left, renderBox.top + renderBox.height);
-			debuggingVertices[6].position = sf::Vector2f(renderBox.left, renderBox.top + renderBox.height);
-			debuggingVertices[7].position = sf::Vector2f(renderBox.left, renderBox.top);
-		}
-#endif
 		RenderTarget.setView(renderTargetView);
 	}
 }
