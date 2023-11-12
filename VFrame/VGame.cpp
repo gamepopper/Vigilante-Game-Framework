@@ -10,6 +10,7 @@
 #include "VTimer.h"
 #include "VPostEffect.h"
 #include "VState.h"
+#include "VDebugRenderer.h"
 
 #include <SFML/System/Clock.hpp>
 
@@ -60,6 +61,10 @@ int VGame::Init()
 		vertexArray[3] = sf::Vertex(sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.height),
 			sf::Color::White,
 			sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.height));
+
+#if _DEBUG
+		debugRenderer = new VDebugRenderer();
+#endif
 
 		ResizeCheck();
 	}
@@ -200,7 +205,8 @@ void VGame::HandleEvents()
 			if (event.type == sf::Event::GainedFocus)
 				focused = true;
 		}
-		else if (currentState->active)
+		
+		if (currentState->active)
 			currentState->HandleEvents(event);
 	}
 
@@ -299,6 +305,8 @@ void VGame::Update(float dt)
 	VGlobal::p()->Music->Update(dt);
 	if (VGlobal::p()->PostProcess != nullptr && VPostEffectBase::isSupported())
 		VGlobal::p()->PostProcess->Update(dt);
+
+	debugRenderer->Update(dt);
 }
 
 void VGame::PreRender()
@@ -323,6 +331,8 @@ void VGame::Render(VCamera* camera)
 	currentState->Draw(*renderTarget);
 	if (currentState->SubState()) 
 		currentState->SubState()->Draw(*renderTarget);
+
+	debugRenderer->Draw(*renderTarget);
 
 	camera->Render(*renderTarget);
 }

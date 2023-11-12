@@ -61,6 +61,10 @@ public:
 		Lifespan = 0;
 		Age = 0;
 		exists = false;
+
+#if _DEBUG
+		DebugColor = sf::Color::Yellow;
+#endif
 	}
 
 	///@param src The source particle to copy.
