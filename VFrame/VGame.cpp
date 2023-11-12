@@ -190,10 +190,8 @@ void VGame::HandleEvents()
 	sf::Event event;
 	VState* currentState = VGlobal::p()->CurrentState();
 	while (VGlobal::p()->App->pollEvent(event))
-	{
-		if (currentState->active)
-			currentState->HandleEvents(event);
-		else if (event.type == sf::Event::Closed)
+	{		
+		if (event.type == sf::Event::Closed)
 			VGlobal::p()->Exit();
 		else if (VGlobal::p()->FocusPause)
 		{
@@ -202,6 +200,8 @@ void VGame::HandleEvents()
 			if (event.type == sf::Event::GainedFocus)
 				focused = true;
 		}
+		else if (currentState->active)
+			currentState->HandleEvents(event);
 	}
 
 	ResizeCheck();
