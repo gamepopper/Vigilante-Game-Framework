@@ -224,7 +224,7 @@ std::vector<std::vector<float>> PerlinNoise::GenerateFloat(
 				float amplitude = 1.0f;
 
 				// Average all octaves
-				for (unsigned int i = 0; i < octaves; i++){
+				for (unsigned int i = 0; i < octaves; ++i){
 					value += amplitude * perlin->get(
 						x * frequency * (float)pow(2, i) / width,
 						y * frequency * (float)pow(2, i) / height,

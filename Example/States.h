@@ -915,7 +915,7 @@ public:
 		axis = new VGroup(axisCount);
 		text = new VGroup(buttonCount + axisCount);
 
-		for (unsigned int i = 0; i < buttonCount; i++)
+		for (unsigned int i = 0; i < buttonCount; ++i)
 		{
 			float x = (i % 15) * 40.0f;
 			float y = (i / 15) * 40.0f;
@@ -931,7 +931,7 @@ public:
 
 		int buttonOffset = (buttonCount / 10) + 1;
 
-		for (unsigned int i = 0; i < axisCount; i++)
+		for (unsigned int i = 0; i < axisCount; ++i)
 		{
 			float x = (i % 12) * 40.0f;
 			float y = (i / 12) * 40.0f;
@@ -958,7 +958,7 @@ public:
 
 #ifdef USE_GAMEPAD_API
 
-		for (unsigned int i = 0; i < buttonCount; i++)
+		for (unsigned int i = 0; i < buttonCount; ++i)
 		{
 			VShape* b = dynamic_cast<VShape*>(buttons->GetGroupItem(i));
 
@@ -972,7 +972,7 @@ public:
 			}
 		}
 
-		for (unsigned int i = 0; i < axisCount; i++)
+		for (unsigned int i = 0; i < axisCount; ++i)
 		{
 			VShape* b = dynamic_cast<VShape*>(axis->GetGroupItem(i));
 
@@ -1019,7 +1019,7 @@ public:
 
 #elif defined(USE_SFML_JOYSTICK)
 
-		for (unsigned int i = 0; i < buttonCount; i++)
+		for (unsigned int i = 0; i < buttonCount; ++i)
 		{
 			VShape* b = dynamic_cast<VShape*>(buttons->GetGroupItem(i));
 
@@ -1033,7 +1033,7 @@ public:
 			}
 		}
 
-		for (unsigned int i = 0; i < axisCount; i++)
+		for (unsigned int i = 0; i < axisCount; ++i)
 		{
 			VShape* b = dynamic_cast<VShape*>(axis->GetGroupItem(i));
 			b->Scale.y = sf::Joystick::getAxisPosition(VGlobal::p()->Input->GetJoystickID(0), (sf::Joystick::Axis)i) / 100.0f;
@@ -1057,7 +1057,7 @@ public:
 			sf::XInputDevice::XButton::Y,
 		};
 
-		for (unsigned int i = 0; i < buttonCount; i++)
+		for (unsigned int i = 0; i < buttonCount; ++i)
 		{
 			VShape* b = dynamic_cast<VShape*>(buttons->GetGroupItem(i));
 
@@ -1071,7 +1071,7 @@ public:
 			}
 		}
 
-		for (unsigned int i = 0; i < axisCount; i++)
+		for (unsigned int i = 0; i < axisCount; ++i)
 		{
 			VShape* b = dynamic_cast<VShape*>(axis->GetGroupItem(i));
 			b->Scale.y = sf::XInputDevice::getAxisPosition(0, (sf::XInputDevice::XAxis)i);
@@ -1557,7 +1557,7 @@ public:
 		text->SetAlignment(VText::ALIGNLEFT);
 		Add(text);
 
-		for (int i = 0; i < VInterpolate::NumInterpolationTypes; i++)
+		for (int i = 0; i < VInterpolate::NumInterpolationTypes; ++i)
 		{
 			ease[i] = new VShape();
 			ease[i]->SetRectangle(6, 6);
@@ -1580,7 +1580,7 @@ public:
 			t = 0.0f;
 		}
 
-		for (int i = 0; i < VInterpolate::NumInterpolationTypes; i++)
+		for (int i = 0; i < VInterpolate::NumInterpolationTypes; ++i)
 		{
 			if (forward)
 			{
@@ -1749,7 +1749,7 @@ public:
 
 		int length = sizeof(backdrop) / sizeof(VBackdrop*);
 
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; ++i)
 		{
 			backdrop[i]->CameraScroll = true;
 			backdrop[i]->Scale *= backdrop[i]->ScrollFactor.x;
@@ -1795,7 +1795,7 @@ public:
 	{
 		VSUPERCLASS::Initialise();
 
-		for (int i = 0; i < TEXT_COUNT; i++)
+		for (int i = 0; i < TEXT_COUNT; ++i)
 		{
 			VTextPath* t = new VTextPath(0.0f, (i * 18) + 8.0f, 640.0f);
 			t->SetText("Pixelation Art Jam - GDC 2017 ");
@@ -1839,7 +1839,7 @@ public:
 			points[j] = sf::Vector2f(j * 32.0f, sinF * 16.0f);
 		}
 
-		for (int i = 0; i < TEXT_COUNT; i++)
+		for (int i = 0; i < TEXT_COUNT; ++i)
 		{
 			VTextPath* text = pathText[i];
 			text->SetPathOffset(((i % 2 == 0) ? t : -t) + (0.005f * i));
@@ -1902,7 +1902,7 @@ public:
 	{
 		VSUPERCLASS::Initialise();
 
-		for (int i = 0; i < CircleCount; i++)
+		for (int i = 0; i < CircleCount; ++i)
 		{
 			VShape* c = new VShape();
 			c->SetCircle(5);
@@ -1963,7 +1963,7 @@ public:
 		normalText->SetFillTint(sf::Color::Black);
 		normalText->SetText("LOAD COMPLETE");
 
-		for (int i = 0; i < CircleCount; i++)
+		for (int i = 0; i < CircleCount; ++i)
 		{
 			circle[i]->Kill();
 		}
@@ -1988,7 +1988,7 @@ public:
 		if (pixel->Position.y + pixel->Size.y < VGlobal::p()->Height)
 			pixel->Position.y = VGlobal::p()->Height - pixel->Size.y;
 
-		for (int i = 0; i < CircleCount; i++)
+		for (int i = 0; i < CircleCount; ++i)
 		{
 			float angle = offset * i;
 			float sin = sinf(timer.getElapsedTime().asSeconds() + angle);
@@ -2056,7 +2056,7 @@ public:
 		group->SetGravity(sf::Vector2f(0.0f, 200.0f));
 
 		VGlobal::p()->Sound->Load("Example/Assets/bounce.ogg", "bounce");
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < 50; ++i)
 		{
 			VShape* circle = new VShape(VGlobal::p()->Random->GetFloat(VGlobal::p()->Width - 100.0f, 100.0f), VGlobal::p()->Random->GetFloat(100.0f));
 			circle->SetCircle(10.0f);
@@ -2076,7 +2076,7 @@ public:
 		float width = 10.0f;
 		float height = 15.0f;
 		float spacing = width * 0.3f;
-		for (int i = 0; i < 8; i++)
+		for (int i = 0; i < 8; ++i)
 		{
 			VPhysicsObject* prev = NULL;
 
@@ -2143,7 +2143,7 @@ public:
 
 				float MaxDist = 100.0f;
 				float Impulse = 10.0f;
-				for (int i = 0; i < group->Length(); i++)
+				for (int i = 0; i < group->Length(); ++i)
 				{
 					VPhysicsObject* ball = dynamic_cast<VPhysicsObject*>(group->GetGroupItem(i));
 
