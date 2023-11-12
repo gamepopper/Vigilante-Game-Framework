@@ -5,7 +5,7 @@ using std::vector;
 
 VState::VState() : VGroup()
 {
-	
+
 }
 
 VState::~VState()
@@ -115,7 +115,7 @@ void VState::CloseSubState()
 void VState::ResetSubState()
 {
 	if (openSubState)
-	{ 
+	{
 		if (subState)
 		{
 			subState->ParentState = this;
@@ -260,7 +260,7 @@ void VStateManager::Clear()
 		delete states[i];
 		states[i] = nullptr;
 	}
-	
+
 	states.clear();
 	states.shrink_to_fit();
 

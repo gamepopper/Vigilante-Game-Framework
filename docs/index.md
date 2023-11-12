@@ -1,4 +1,4 @@
-# Vigilante-Game-Framework
+# [Vigilante-Game-Framework](https://github.com/gamepopper/Vigilante-Game-Framework/)
 Vigilante Framework (or VFrame for short) is a high level framework built to run with SFML to make 2D games with basic 3D rendering.
 
 ## Features
@@ -26,7 +26,7 @@ Documentation for the Vigilante Framework can be found [on this link](https://ga
 ![3D Graphics and Visual Effects](https://i.imgur.com/qxDljfZ.gif)
 
 ## Games Featured
-* [Gemstone Keeper](http://gemstonekeeper.co.uk/)
+* [Gemstone Keeper](https://www.nintendo.com/store/products/gemstone-keeper-switch/)
 * [Dungeon Racer](https://gamepopper.itch.io/dungeon-racer)
 * [Berzerkatron](https://gamepopper.itch.io/berzerkatron)
 * [Tunnel Bug](https://gamepopper.itch.io/tunnel-bug)
@@ -44,3 +44,5 @@ Despite being marked as version 1.0, this framework still has room for improveme
 * [Robert Penner's Easing Functions](http://robertpenner.com/easing/)
 * [SFML Game Development (Henrik Vogelius Hansson, Jan Haller)](https://github.com/SFML/SFML-Game-Development-Book)
 * [Mastering SFML Game Development (Raimondas Pupius)](https://github.com/PacktPublishing/Mastering-SFML-Game-Development)
+
+[View on GitHub](https://github.com/gamepopper/Vigilante-Game-Framework/)

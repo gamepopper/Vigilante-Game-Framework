@@ -217,7 +217,7 @@ void VGame::ResizeCheck()
 {
 	sf::Vector2u windowSize = VGlobal::p()->App->getSize();
 
-	if (windowSize.x != VGlobal::p()->WindowWidth || 
+	if (windowSize.x != VGlobal::p()->WindowWidth ||
 		windowSize.y != VGlobal::p()->WindowHeight ||
 		orientation != VGlobal::p()->Orientation)
 	{
@@ -291,7 +291,8 @@ void VGame::Update(float dt)
 	VGlobal::p()->Input->Update(dt);
 
 	VState* currentState = VGlobal::p()->CurrentState();
-	if (currentState->active) currentState->Update(dt);
+	if (currentState->active) 
+		currentState->Update(dt);
 
 	std::vector<VCamera*>& cameras = currentState->Cameras;
 	for (unsigned int c = 0; c < cameras.size(); c++)
@@ -349,6 +350,7 @@ void VGame::PostRender()
 	app->setVerticalSyncEnabled(VGlobal::p()->VSync);
 
 	VGlobal::p()->RenderState.texture = &renderTarget->getTexture();
+	
 	renderTarget->setView(renderTarget->getDefaultView());
 	if (VGlobal::p()->PostProcess && VPostEffectBase::isSupported()) 
 		VGlobal::p()->PostProcess->Apply(*VGlobal::p()->RenderState.texture, *renderTarget);
@@ -356,8 +358,11 @@ void VGame::PostRender()
 	app->draw(vertexArray, VGlobal::p()->RenderState);
 
 	VState* currentState = VGlobal::p()->CurrentState();
-	if (currentState && currentState->visible)
-		currentState->PostDraw(*VGlobal::p()->App);
+	currentState->PostDraw(*VGlobal::p()->App);
+	
+	VSubState* subState = currentState->SubState();
+	if (subState && subState->visible)
+		subState->PostDraw(*VGlobal::p()->App);
 
 	app->display();
 }
