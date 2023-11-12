@@ -92,10 +92,12 @@ public:
 	};
 #endif
 
-protected:
 	///Button Input Data
 	struct ButtonInput
 	{
+		///If true, inputs can be set.
+		bool enabled;
+
 		///Keyboard Key Code
 		sf::Keyboard::Key key;
 #if	defined(USE_GAMEPAD_API)
@@ -120,6 +122,7 @@ protected:
 
 		ButtonInput()
 		{
+			enabled = true;
 			memset(down, NULL, sizeof(down));
 			memset(pressed, NULL, sizeof(pressed));
 			memset(released, NULL, sizeof(released));
@@ -136,6 +139,9 @@ protected:
 	///Axis Input Data
 	struct AxisInput
 	{
+		///If true, inputs can be set.
+		bool enabled;
+
 		///Key Code for Negative Axis Input
 		sf::Keyboard::Key keyA;
 		///Key Code for Positive Axis Input
@@ -157,6 +163,7 @@ protected:
 
 		AxisInput()
 		{
+			enabled = true;
 			memset(lastValue, NULL, sizeof(lastValue));
 			memset(value, NULL, sizeof(value));
 		}
@@ -168,6 +175,7 @@ protected:
 		}
 	};
 
+protected:
 	///Set of button inputs.
 	std::map<sf::String, ButtonInput> buttonInputs;
 	///Set of axis inputs.
@@ -218,7 +226,7 @@ public:
 	* @param input Reference to Button Input.
 	* @return True if reference has been found and set to the input parameter.
 	*/
-	bool GetButtonInput(const sf::String& name, ButtonInput& input);
+	ButtonInput* GetButtonInput(const sf::String& name);
 
 	/**
 	* Gets specific Axis input data.
@@ -226,7 +234,21 @@ public:
 	* @param input Reference to Axis Input.
 	* @return True if reference has been found and set to the input parameter.
 	*/
-	bool GetAxisInput(const sf::String& name, AxisInput& input);
+	AxisInput* GetAxisInput(const sf::String& name);
+
+	/**
+	* Populates a list of names of the buttons.
+	* @param names A vector to store the names of all available inputs.
+	* @param clearList If true, list is cleared prior to population.
+	*/
+	void GetButtonList(std::vector<sf::String>& names, bool clearList = true);
+
+	/**
+	* Populates a list of names of the buttons.
+	* @param names A vector to store the names of all available inputs.
+	* @param clearList If true, list is cleared prior to population.
+	*/
+	void GetAxisList(std::vector<sf::String>& names, bool clearList = true);
 
 	///@return True if any gamepad input is recieved, returns false if other input is recieved.
 	bool IsGamepadActive();
@@ -276,6 +298,13 @@ public:
 	* @return True if button has been released.
 	*/
 	bool IsButtonReleased(const sf::String& name, int ControllerIndex = 0);
+
+	/**
+	* Checks if a gamepad is connected.
+	* @param ControllerIndex Player Index for specific controller. (e.g. 0 = Player 1, 1 = Player 2 ect)
+	* @return True if gamepad is connected.
+	*/
+	bool IsGamepadConnected(int ControllerIndex = 0);
 
 	/**
 	* Gets the Axis value of the current frame.
