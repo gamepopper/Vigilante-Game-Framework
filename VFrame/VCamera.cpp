@@ -7,6 +7,7 @@ sf::View VCameraList::Default;
 
 void VCamera::Reset()
 {
+	view = VCameraList::Default;
 	Position = view.getCenter();
 	DefaultZoom = view.getSize();
 	Rotation = view.getRotation();
