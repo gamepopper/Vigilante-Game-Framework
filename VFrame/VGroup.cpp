@@ -382,16 +382,23 @@ void VGroup::Reverse()
 	OrganiseNULLS();
 }
 
-void VGroup::Clear()
+void VGroup::Clear(bool destroy)
 {
-	for (VBase* base : members)
+	for (unsigned int i = 0; i < members.size(); ++i)
 	{
+		VBase* base = dynamic_cast<VBase*>(members[i]);
 		if (base != nullptr)
 		{
 			if (base->RefCount > 1)
 			{
 				base->RefCount--;
-				base = nullptr;
+				members[i] = nullptr;
+			}
+			else if (destroy)
+			{
+				base->Destroy();
+				delete base;
+				members[i] = nullptr;
 			}
 		}
 	}
@@ -404,27 +411,7 @@ void VGroup::Clear()
 void VGroup::Destroy()
 {
 	VSUPERCLASS::Destroy();
-
-	for (unsigned int i = 0; i < members.size(); ++i)
-	{
-		VBase* base = dynamic_cast<VBase*>(members[i]);
-		if (base != nullptr)
-		{
-			if (base->RefCount <= 1)
-			{
-				base->Destroy();
-				delete base;
-				members[i] = nullptr;
-			}
-			else
-			{
-				base->RefCount--;
-				members[i] = nullptr;
-			}
-		}
-	}
-
-	Clear();
+	Clear(true);
 }
 
 void VGroup::Kill()
@@ -477,54 +464,4 @@ void VGroup::Draw(sf::RenderTarget& RenderTarget)
 			base->Draw(RenderTarget);
 		}
 	}
-
-#if _DEBUG
-	if (VGlobal::p()->DrawDebug)
-	{
-		int memberLength = members.size();
-		debuggingVertices.resize(memberLength * 8);
-		for (unsigned int i = 0; i < members.size(); ++i)
-		{
-			VObject* object = dynamic_cast<VObject*>(members[i]);
-
-			if (object == nullptr)
-				continue;
-
-			if (object->type == RENDERGROUP)
-			{
-				VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(object);
-				object = renderGroup->Sprite.get();
-			}
-
-			if (object->exists)
-			{
-				debuggingVertices[0 + (i * 8)].position = object->Position;													debuggingVertices[0 + (i * 8)].color = object->DebugColor;
-				debuggingVertices[1 + (i * 8)].position = object->Position + sf::Vector2f(object->Size.x, 0);				debuggingVertices[1 + (i * 8)].color = object->DebugColor;
-				debuggingVertices[2 + (i * 8)].position = object->Position + sf::Vector2f(object->Size.x, 0);				debuggingVertices[2 + (i * 8)].color = object->DebugColor;
-				debuggingVertices[3 + (i * 8)].position = object->Position + sf::Vector2f(object->Size.x, object->Size.y);	debuggingVertices[3 + (i * 8)].color = object->DebugColor;
-				debuggingVertices[4 + (i * 8)].position = object->Position + sf::Vector2f(object->Size.x, object->Size.y);	debuggingVertices[4 + (i * 8)].color = object->DebugColor;
-				debuggingVertices[5 + (i * 8)].position = object->Position + sf::Vector2f(0, object->Size.y);				debuggingVertices[5 + (i * 8)].color = object->DebugColor;
-				debuggingVertices[6 + (i * 8)].position = object->Position + sf::Vector2f(0, object->Size.y);				debuggingVertices[6 + (i * 8)].color = object->DebugColor;
-				debuggingVertices[7 + (i * 8)].position = object->Position;													debuggingVertices[7 + (i * 8)].color = object->DebugColor;
-			}
-			else
-			{
-				debuggingVertices[0 + (i * 8)].color = sf::Color::Transparent;
-				debuggingVertices[1 + (i * 8)].color = sf::Color::Transparent;
-				debuggingVertices[2 + (i * 8)].color = sf::Color::Transparent;
-				debuggingVertices[3 + (i * 8)].color = sf::Color::Transparent;
-				debuggingVertices[4 + (i * 8)].color = sf::Color::Transparent;
-				debuggingVertices[5 + (i * 8)].color = sf::Color::Transparent;
-				debuggingVertices[6 + (i * 8)].color = sf::Color::Transparent;
-				debuggingVertices[7 + (i * 8)].color = sf::Color::Transparent;
-			}
-		}
-
-		RenderTarget.draw(debuggingVertices);
-	}
-	else
-	{
-		debuggingVertices.clear();
-	}
-#endif
 }

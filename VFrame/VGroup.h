@@ -34,11 +34,6 @@
 #pragma once
 #include "VBase.h"
 
-#if _DEBUG
-#include <iostream>
-#include <SFML/Graphics/RectangleShape.hpp>
-#endif
-
 #include <vector>
 #include <functional>
 
@@ -53,11 +48,6 @@ protected:
 	///Maximum Size of the list, used if VGroup is set to have a fixed size.
 	unsigned int MaxSize = 0;
 
-#if _DEBUG
-	///Render vertices for drawing collision bounderies of all the objects. Used when in Debug mode with DebugDraw = true.
-	sf::VertexArray debuggingVertices;
-#endif
-
 public:
 	///Used to call parent class functions when they are overrided in class.
 	typedef VBase VSUPERCLASS;
@@ -70,17 +60,9 @@ public:
 		if (MaxSize > 0)
 		{
 			members.reserve(MaxSize);
-
-#if _DEBUG
-			debuggingVertices.resize(length * 8);
-#endif
 		}
 
 		type = VType::GROUP;
-
-#if _DEBUG
-		debuggingVertices.setPrimitiveType(sf::Lines);
-#endif
 	}
 
 	///@return The current size of the group based on amount of active elements.
@@ -180,8 +162,8 @@ public:
 
 	///Reverse order of group.
 	void Reverse();
-	///Clears the whole group (does not destroy any of the members, that must be done using the Destroy method).
-	void Clear();
+	///Clears the whole group, if you want to destroy all the objects (if there are no more references) then set destroy to true.
+	void Clear(bool destroy = false);
 	///Removes and/or destroys all objects inside the group before destroying extra data. (If an object is referenced in another VGroup, the object won't be destroyed)
 	virtual void Destroy() override;
 	///Kills all living objects before killing the group itself.
