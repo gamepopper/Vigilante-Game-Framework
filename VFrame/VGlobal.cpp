@@ -278,8 +278,8 @@ bool VGlobal::Overlaps(VBase* a, VBase* b, std::function<void(VObject*, VObject*
 	}
 
 	collision->Initialise(WorldBounds);
-	collision->AddToList(a, A);
-	collision->AddToList(b, B);
+	collision->AddToList(a, VCollideList::A);
+	collision->AddToList(b, VCollideList::B);
 	result = collision->Run(rectCollision, responseCall, processCall);
 
 	return result;
@@ -314,8 +314,8 @@ bool VGlobal::OverlapsCircle(VBase* a, VBase* b, std::function<void(VObject*, VO
 	}
 
 	collision->Initialise(WorldBounds);
-	collision->AddToList(a, A);
-	collision->AddToList(b, B);
+	collision->AddToList(a, VCollideList::A);
+	collision->AddToList(b, VCollideList::B);
 	result = collision->Run(circleCollision, responseCall, processCall);
 
 	return result;

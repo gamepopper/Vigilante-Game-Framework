@@ -31,7 +31,7 @@ VRenderGroup::VRenderGroup(unsigned int maxSize) : VGroup(maxSize)
 {
 	Sprite = std::make_unique<VRenderSprite>(0.0f, 0.0f);
 	Camera = std::make_unique<VCamera>();
-	type = RENDERGROUP;
+	type = VType::RENDERGROUP;
 }
 
 VRenderGroup::VRenderGroup(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize) : VGroup(maxSize)
@@ -44,7 +44,7 @@ VRenderGroup::VRenderGroup(float x, float y, unsigned int width, unsigned int he
 	sf::View defaultView = renderTex.getDefaultView();
 	Camera = std::make_unique<VCamera>(defaultView);
 
-	type = RENDERGROUP;
+	type = VType::RENDERGROUP;
 }
 
 VRenderGroup::VRenderGroup(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize) : VGroup(maxSize)
@@ -57,7 +57,7 @@ VRenderGroup::VRenderGroup(sf::Vector2f position, sf::Vector2u size, unsigned in
 	sf::View defaultView = renderTex.getDefaultView();
 	Camera = std::make_unique<VCamera>(defaultView);
 
-	type = RENDERGROUP;
+	type = VType::RENDERGROUP;
 }
 
 void VRenderGroup::updateTransform()

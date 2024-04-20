@@ -59,7 +59,7 @@ void VText::setDimensions()
 	bool bold = style & sf::Text::Bold;
 	int newLineCount = 1;
 
-	if (wrap != VTextWrap::WRAPNONE)
+	if (wrap != VTextWrap::NONE)
 	{
 		unsigned int currentOffset = 0;
 		bool firstWord = true;
@@ -84,7 +84,7 @@ void VText::setDimensions()
 			sf::Glyph glyph = font->getGlyph(currentChar, fontSize, bold);
 			currentOffset += static_cast<unsigned int>(glyph.advance);
 
-			if (wrap == WRAPWORD)
+			if (wrap == VTextWrap::WORD)
 			{
 				if (!firstWord && currentOffset > Size.x)
 				{
@@ -95,7 +95,7 @@ void VText::setDimensions()
 					currentOffset = 0;
 				}
 			}
-			else if (wrap == WRAPLETTER)
+			else if (wrap == VTextWrap::LETTER)
 			{
 				if (currentOffset > Size.x)
 				{
@@ -117,7 +117,7 @@ void VText::setDimensions()
 		}
 	}
 
-	Size.y = font->getLineSpacing(fontSize) * (wrap != WRAPNONE ? newLineCount : 1);
+	Size.y = font->getLineSpacing(fontSize) * (wrap != VTextWrap::NONE ? newLineCount : 1);
 	updateTextRender(printText);
 
 	origin = sf::Vector2f(Size.x * Origin.x, Size.y * Origin.y);
@@ -239,9 +239,9 @@ void VText::updateTextRender(const sf::String& text)
 		}
 
 		float textWidth = verts.getBounds().width;
-		if (alignment == VTextAlign::ALIGNCENTRE)
+		if (alignment == VTextAlign::CENTRE)
 			xOffset = (Size.x / 2) - (textWidth / 2);
-		else if (alignment == VTextAlign::ALIGNRIGHT)
+		else if (alignment == VTextAlign::RIGHT)
 			xOffset = Size.x - textWidth;
 		else
 			xOffset = 0;

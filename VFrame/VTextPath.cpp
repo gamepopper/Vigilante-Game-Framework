@@ -15,7 +15,7 @@ VTextPath::VTextPath(float x, float y, float width, const sf::String& text, int 
 
 void VTextPath::Update(float dt)
 {
-	wrap = WRAPNONE;
+	wrap = VTextWrap::NONE;
 	VSUPERCLASS::Update(dt);
 }
 
@@ -122,9 +122,9 @@ void VTextPath::updateTextRender(const sf::String& text)
 		}
 
 		float textWidth = verts.getBounds().width;
-		if (alignment == VTextAlign::ALIGNCENTRE)
+		if (alignment == VTextAlign::CENTRE)
 			xOffset = (Size.x / 2) - (textWidth / 2);
-		else if (alignment == VTextAlign::ALIGNRIGHT)
+		else if (alignment == VTextAlign::RIGHT)
 			xOffset = Size.x - textWidth;
 		else
 			xOffset = 0;

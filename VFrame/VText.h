@@ -41,27 +41,26 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/String.hpp>
 
+///Propertry for aligning the text within the text box.
+enum class VTextAlign : unsigned char
+{
+	LEFT = 0,
+	CENTER = 1,
+	CENTRE = 1,
+	RIGHT = 2,
+};
+
+///Property for the method of wrapping the text when it reaches the edge of the box.
+enum class VTextWrap : unsigned char
+{
+	NONE = 0,
+	LETTER = 1,
+	WORD = 2,
+};
+
 ///Object that renders text.
 class VText : public VObject
 {
-public:
-	///Propertry for aligning the text within the text box.
-	enum VTextAlign : unsigned char
-	{
-		ALIGNLEFT = 0,
-		ALIGNCENTER = 1,
-		ALIGNCENTRE = 1,
-		ALIGNRIGHT = 2,
-	};
-
-	///Property for the method of wrapping the text when it reaches the edge of the box.
-	enum VTextWrap : unsigned char
-	{
-		WRAPNONE = 0,
-		WRAPLETTER = 1,
-		WRAPWORD = 2,
-	};
-
 protected:
 	///Vertex Data.
 	sf::VertexArray vertices;
@@ -76,11 +75,11 @@ protected:
 	///Flags for setting a text's display style.
 	unsigned int style = sf::Text::Regular;
 	///Text wrapping mode.
-	VTextWrap wrap = WRAPWORD;
+	VTextWrap wrap = VTextWrap::WORD;
 	///Used for adjusting the distance between lines different to the default.
 	int lineSpaceModifier = 0;
 	///Text alignment property.
-	VTextAlign alignment = ALIGNLEFT;
+	VTextAlign alignment = VTextAlign::LEFT;
 	///The thickness of the outline.
 	float outlineThickness = 0.0f;
 	///The position offset of the outline. Good to modify if you want to display the outline like a shadow.
@@ -171,7 +170,7 @@ public:
 	* @param style Text font styles (i.e. bold, italic, strikethrough, ect).
 	*/
 	VText* SetFormat(const sf::String& filename, int charSize = 8, sf::Color colour = sf::Color::White,
-		VTextAlign alignment = VTextAlign::ALIGNLEFT, int style = sf::Text::Regular);
+		VTextAlign alignment = VTextAlign::LEFT, int style = sf::Text::Regular);
 
 	/**
 	* Sets up the main format of how the text will be rendered.
@@ -182,7 +181,7 @@ public:
 	* @param style Text font styles (i.e. bold, italic, strikethrough, ect).
 	*/
 	VText* SetFormat(sf::Font& fontData, int charSize = 8, sf::Color colour = sf::Color::White,
-		VTextAlign alignment = VTextAlign::ALIGNLEFT, int style = sf::Text::Regular);
+		VTextAlign alignment = VTextAlign::LEFT, int style = sf::Text::Regular);
 
 	///@param text sf::String of text that will be rendered.
 	void SetText(const sf::String& text);

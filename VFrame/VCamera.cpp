@@ -115,11 +115,11 @@ void VCamera::Update(float dt)
 		sf::Vector2f DeadZoneArea = HalfWidth * deadZone;
 		sf::Vector2f FollowPos = followObject->Position + (followObject->Size / 2.0f);
 
-		if (followMethod == LOCKON)
+		if (followMethod == CameraFollowMethod::LOCKON)
 		{
 			position = FollowPos;
 		}
-		else if (followMethod == TOPDOWN)
+		else if (followMethod == CameraFollowMethod::TOPDOWN)
 		{
 			if (followLead > 0)
 			{
@@ -143,7 +143,7 @@ void VCamera::Update(float dt)
 
 			position = FollowPos - relativePos;
 		}
-		else if (followMethod == PLATFORMER)
+		else if (followMethod == CameraFollowMethod::PLATFORMER)
 		{
 			if (followLead > 0)
 			{
@@ -165,14 +165,14 @@ void VCamera::Update(float dt)
 
 			position = FollowPos - relativePos;
 		}
-		else if (followMethod == ROOM || followMethod == ROOMLERP)
+		else if (followMethod == CameraFollowMethod::ROOM || followMethod == CameraFollowMethod::ROOMLERP)
 		{
 			sf::Vector2f relativePos;
 			relativePos.x = floorf(FollowPos.x / VGlobal::p()->Width) * VGlobal::p()->Width;
 			relativePos.y = floorf(FollowPos.y / VGlobal::p()->Height) * VGlobal::p()->Height;
 			relativePos += sf::Vector2f(VGlobal::p()->Width / 2.0f, VGlobal::p()->Height / 2.0f);
 
-			if (followMethod == ROOM)
+			if (followMethod == CameraFollowMethod::ROOM)
 				position = relativePos;
 			else
 				position = VInterpolate::Vector2f(position, relativePos, 1 - powf(followLerp, dt));

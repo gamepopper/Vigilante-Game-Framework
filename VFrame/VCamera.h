@@ -39,25 +39,24 @@
 #include <vector>
 #include <functional>
 
+///The method of how the camera shall follow a specific VObject.
+enum class CameraFollowMethod : unsigned char
+{
+	///Locks on directly to the VObject with no lerp or lead.
+	LOCKON,
+	///Locks onto the VObject with lerp and lead, best if a game has a top-down perspective.
+	TOPDOWN,
+	///Locks onto the VObject with lerp and lead, but with no dead zone restrictions for moving up. Best if a game is a side-scrolling platformer.
+	PLATFORMER,
+	///Fixes to positions like a grid. best used for grid based levels where the screen size is evenly divisible to the world size.
+	ROOM,
+	///Same as Room, however instead of instantly changing positions, the camera will lerp to the next position.
+	ROOMLERP,
+};
+
 ///The 2D camera that renders the scene.
 class VCamera
 {
-public:
-	///The method of how the camera shall follow a specific VObject.
-	enum CameraFollowMethod : unsigned char
-	{
-		///Locks on directly to the VObject with no lerp or lead.
-		LOCKON,
-		///Locks onto the VObject with lerp and lead, best if a game has a top-down perspective.
-		TOPDOWN,
-		///Locks onto the VObject with lerp and lead, but with no dead zone restrictions for moving up. Best if a game is a side-scrolling platformer.
-		PLATFORMER,
-		///Fixes to positions like a grid. best used for grid based levels where the screen size is evenly divisible to the world size.
-		ROOM,
-		///Same as Room, however instead of instantly changing positions, the camera will lerp to the next position.
-		ROOMLERP,
-	};
-
 private:
 	///The current view the Camera applies to the render target.
 	sf::View view;
@@ -68,7 +67,7 @@ private:
 	///The VObject that the camera will follow. Must not be nullptr if set to follow.
 	VObject* followObject = nullptr;
 	///The camera's current follow method.
-	CameraFollowMethod followMethod = LOCKON;
+	CameraFollowMethod followMethod = CameraFollowMethod::LOCKON;
 	///The amount the camera should lead in front of the followed VObject.
 	float followLead = 0;
 	///The amount the camera should lerp towards the followed object. Can cause the camera to fall behind the VObject.
@@ -151,7 +150,7 @@ public:
 	* @param lead The amount the camera should lead in front of the target.
 	* @param lerp The amount the camera should lerp towards the target.
 	*/
-	void Follow(VObject* target, float deadzone = 0.5f, CameraFollowMethod followmethod = LOCKON, float lead = 0.0f, float lerp = 0.0f);
+	void Follow(VObject* target, float deadzone = 0.5f, CameraFollowMethod followmethod = CameraFollowMethod::LOCKON, float lead = 0.0f, float lerp = 0.0f);
 
 	///Stop following a game object.
 	void StopFollow();

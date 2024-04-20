@@ -43,7 +43,7 @@
 #define VFRAME_PI 3.14159265358979323846264338327950288f
 
 ///Types of objects the base class could have. This is mainly used for collision tests.
-enum VType : unsigned char
+enum class VType : unsigned char
 {
 	NONE,
 	OBJECT,
@@ -69,7 +69,7 @@ public:
 	///True when the base has been destroyed using the Destroy function.
 	bool destroyed = false;
 	///Base object type, typically set in the constructor of an inherited object to specify what type it is.
-	VType type = NONE;
+	VType type = VType::NONE;
 	///Counts the amount of times the object is referenced in groups, ensures an object is only destroyed when no longer part of a single group.
 	uint32_t RefCount = 0;
 

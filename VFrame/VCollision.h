@@ -40,7 +40,7 @@
 #include <memory>
 
 ///Determines whether the object testing is the left or right list.
-enum VCollideList : bool
+enum class VCollideList : bool
 {
 	A,
 	B

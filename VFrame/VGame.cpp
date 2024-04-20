@@ -70,6 +70,7 @@ int VGame::Init()
 	}
 	catch (int e)
 	{
+		VBase::VLog("Init error: %d", e);
 		return e;
 	}
 

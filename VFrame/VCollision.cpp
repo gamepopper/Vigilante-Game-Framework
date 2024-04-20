@@ -33,7 +33,7 @@ bool VQuadTree::checkBounds(VObject* object, VCollideList list)
 	// If the intersection is valid (positive non zero area), then there is an intersection
 	if ((interLeft < interRight) && (interTop < interBottom))
 	{
-		if (list == A)
+		if (list == VCollideList::A)
 			listA.push_back(object);
 		else
 			listB.push_back(object);
@@ -153,7 +153,7 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 	if (item == nullptr)
 		return;
 	
-	if (item->type == GROUP)
+	if (item->type == VType::GROUP)
 	{
 		//If group, add all members to list.
 		VGroup* group = dynamic_cast<VGroup*>(item);
@@ -166,7 +166,7 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 			}
 		}
 	}
-	else if (item->type == TILEMAP)
+	else if (item->type == VType::TILEMAP)
 	{
 		//If Tilemap, add to list. Tilemap object will handle individual tile collisions.
 		VTilemap* tilemap = dynamic_cast<VTilemap*>(item);
@@ -179,7 +179,7 @@ void VCollision::AddToList(VBase* item, VCollideList list)
 			}
 		}
 	}
-	else if (item->type == RENDERGROUP)
+	else if (item->type == VType::RENDERGROUP)
 	{
 		//If RenderGroup, add sprite object from renderGroup to list.
 		VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(item);

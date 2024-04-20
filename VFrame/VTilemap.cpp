@@ -146,11 +146,12 @@ void VTilemap::updateTilemap()
 
 void VTilemap::updateCollisionBox()
 {
-	vector<bool> processed(mapWidth * mapHeight);
 	clearTiles();
 
 	if (collisionDir.empty())
 		return;
+
+	vector<bool> processed(mapWidth * mapHeight);
 
 	for (int y = 0; y < mapHeight; y++)
 	{
@@ -557,38 +558,14 @@ void VTilemap::Draw(sf::RenderTarget& RenderTarget)
 		states.transform = RenderState.transform;
 		RenderTarget.draw(vertices, states);
 		RenderTarget.setView(renderTargetView);
-
-#if _DEBUG
-		if (VGlobal::p()->DrawDebug)
-		{
-			debuggingVertices.resize(tiles.size() * 8);
-			for (unsigned int t = 0; t < tiles.size(); t++)
-			{
-				VTile* tile = tiles[t];
-				debuggingVertices[(t * 8) + 0] = sf::Vertex(tile->Position, tile->DebugColor);
-				debuggingVertices[(t * 8) + 1] = sf::Vertex(tile->Position + sf::Vector2f(tile->Size.x, 0), tile->DebugColor);
-				debuggingVertices[(t * 8) + 2] = sf::Vertex(tile->Position + sf::Vector2f(tile->Size.x, 0), tile->DebugColor);
-				debuggingVertices[(t * 8) + 3] = sf::Vertex(tile->Position + tile->Size, tile->DebugColor);
-				debuggingVertices[(t * 8) + 4] = sf::Vertex(tile->Position + tile->Size, tile->DebugColor);
-				debuggingVertices[(t * 8) + 5] = sf::Vertex(tile->Position + sf::Vector2f(0, tile->Size.y), tile->DebugColor);
-				debuggingVertices[(t * 8) + 6] = sf::Vertex(tile->Position + sf::Vector2f(0, tile->Size.y), tile->DebugColor);
-				debuggingVertices[(t * 8) + 7] = sf::Vertex(tile->Position, tile->DebugColor);
-			}
-			RenderTarget.draw(debuggingVertices);
-		}
-		else
-		{
-			debuggingVertices.clear();
-		}
-#endif
 	}
 }
 
-VTile::VTile(sf::Vector2f position, sf::Vector2f size) : VObject(position, size)
+VTile::VTile(sf::Vector2f position, sf::Vector2f size) : VObject(position, size), Tilemap(nullptr)
 {
 	Immovable = true;
 	Moves = false;
-	type = TILE;
+	type = VType::TILE;
 
 	relativePos = Position;
 
@@ -597,11 +574,11 @@ VTile::VTile(sf::Vector2f position, sf::Vector2f size) : VObject(position, size)
 #endif
 }
 
-VTile::VTile(float x, float y, float width, float height) : VObject(x, y, width, height)
+VTile::VTile(float x, float y, float width, float height) : VObject(x, y, width, height), Tilemap(nullptr)
 {
 	Immovable = true;
 	Moves = false;
-	type = TILE;
+	type = VType::TILE;
 
 	relativePos = Position;
 
