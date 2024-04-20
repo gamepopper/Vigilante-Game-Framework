@@ -61,7 +61,7 @@ public:
 		standardSprite->SetPositionAtCentre(VGlobal::p()->Width / 3.0f, VGlobal::p()->Height / 2.0f - 50.0f);
 
 		auto sprite1 = new VText(standardSprite->Position.x, 50, standardSprite->Size.x, "Regular Sprite", 16);
-		sprite1->SetAlignment(VText::ALIGNCENTRE);
+		sprite1->SetAlignment(VTextAlign::CENTRE);
 
 		animatedSprite = new VSprite(0, 0);
 		animatedSprite->LoadGraphic("Example/Assets/Turret.png", true, 128, 128);
@@ -73,7 +73,7 @@ public:
 		animatedSprite->Animation.Play("start");
 
 		auto sprite2 = new VText(animatedSprite->Position.x, 50, animatedSprite->Size.x, "Animated Sprite", 16);
-		sprite2->SetAlignment(VText::ALIGNCENTRE);
+		sprite2->SetAlignment(VTextAlign::CENTRE);
 
 		auto text = new VText(VGlobal::p()->Width / 2.0f - 250.0f, 200, 500, "Press 1: Start Animation\nPress 2: Shotgun Animation\nPress 3: Railgun Animation\nPress 4: Double Barrel Animation", 21);
 
@@ -177,7 +177,7 @@ public:
 		Add(standardSprite);
 
 		auto sprite1 = new VText(standardSprite->Position.x, 80, standardSprite->Size.x, "Regular TiledSprite", 16);
-		sprite1->SetAlignment(VText::ALIGNCENTRE);
+		sprite1->SetAlignment(VTextAlign::CENTRE);
 
 		animatedSprite = new VTiledSprite(0, 0);
 		animatedSprite->LoadGraphic("Example/Assets/Waterfall.png", true, 32, 32);
@@ -188,7 +188,7 @@ public:
 		Add(animatedSprite);
 
 		auto sprite2 = new VText(animatedSprite->Position.x, 80, animatedSprite->Size.x, "Animated TiledSprite", 16);
-		sprite2->SetAlignment(VText::ALIGNCENTRE);
+		sprite2->SetAlignment(VTextAlign::CENTRE);
 
 		auto text = new VText(VGlobal::p()->Width / 2.0f - 270.0f, 300, 540, "Press WASD: Resize Standard Tiled Sprite\nPress IJKL: Resize Animated Tiled Sprite", 21);
 
@@ -235,7 +235,7 @@ public:
 		Add(nineSlice);
 
 		auto sprite1 = new VText(nineSlice->Position.x, 80, nineSlice->Size.x, "9 Slice Object", 16);
-		sprite1->SetAlignment(VText::ALIGNCENTRE);
+		sprite1->SetAlignment(VTextAlign::CENTRE);
 
 		auto text = new VText(VGlobal::p()->Width / 2.0f - 270.0f, 300, 540, "Press WASD: Resize 9-Slice Object", 21);
 
@@ -273,17 +273,17 @@ public:
 		VSUPERCLASS::Initialise();
 
 		normalText = new VText(10.0f, 120.0f, VGlobal::p()->Width - 20.0f);
-		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VText::ALIGNRIGHT, sf::Text::Italic | sf::Text::Underlined);
+		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::RIGHT, sf::Text::Italic | sf::Text::Underlined);
 		normalText->SetText(L"!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬-®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſƒǺǻǼǽǾǿȘșȚțˆˇˉ˘˙˚˛˜˝;΄΅Ά·ΈΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώЁЂЃЄЅІЇЈЉЊЋЌЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяёђѓєѕіїјљњћќўџҐґẀẁẂẃẄẅỲỳ–—―‗‘’‚“”„†‡•…‰‹›‼‾⁄ⁿ₣₤₧€№™Ω⅛⅜⅝⅞←↑→↓↔↕↨∂∆∏∑−∙√∞∟∩∫≈≠≡≤≥⌂⌐⌠⌡─│┌┐└┘├┤┬┴┼═║╒╓╔╕╖╗╘╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬▀▄█▌▐░▒▓■▬▲►▼◄◊○◘◙☺☻☼♀♂♠♣♥♦♪♫ﬁﬂ");
-		normalText->SetWrap(VText::WRAPLETTER);
+		normalText->SetWrap(VTextWrap::LETTER);
 		Add(normalText);
 
 		typedText = new VTypedText(10.0f, 50.0f, (float)VGlobal::p()->Width - 20.0f);
-		typedText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VText::ALIGNLEFT, sf::Text::Bold);
+		typedText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::LEFT, sf::Text::Bold);
 		typedText->ResetText("Religion and politics often make some people lose all perspective and give way to ranting and raving and carrying on like emotional children");
 		typedText->CursorChar = '_';
 		typedText->CursorBlinkSpeed = 0.5f;
-		typedText->SetWrap(VText::WRAPWORD);
+		typedText->SetWrap(VTextWrap::WORD);
 		typedText->ShowCursor = true;
 		typedText->Start(0.05f);
 		Add(typedText);
@@ -395,14 +395,14 @@ public:
 		Add(playerControl);
 
 		stateText = new VText(10.0f, 120.0f, VGlobal::p()->Width - 20.0f);
-		stateText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VText::ALIGNCENTRE);
+		stateText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16, sf::Color::White, VTextAlign::CENTRE);
 		stateText->SetText("");
 		stateText->SetOutlineThickness(2.0f);
 		stateText->SetOutlineTint(sf::Color::Black);
 		stateText->ScrollFactor *= 0.0f;
 		Add(stateText);
 
-		ParentState->Cameras[0]->Follow(playerControl, 0.5f, VCamera::PLATFORMER, 0.8f, 0.05f);
+		ParentState->Cameras[0]->Follow(playerControl, 0.5f, CameraFollowMethod::PLATFORMER, 0.8f, 0.05f);
 		UseParentCamera = true;
 
 		playerFSM = new VFiniteStateMachine(playerControl, NUM_PLAYER_STATES);
@@ -695,10 +695,10 @@ public:
 
 		auto overlapText = new VText(sprite1->Position.x, 100.0f, 160, "Overlap These", 16);
 		overlapText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16);
-		overlapText->SetAlignment(VText::ALIGNCENTRE);
+		overlapText->SetAlignment(VTextAlign::CENTRE);
 		auto collideText = new VText(sprite3->Position.x, 100.0f, 160, "Collide These", 16);
 		collideText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 16);
-		collideText->SetAlignment(VText::ALIGNCENTRE);
+		collideText->SetAlignment(VTextAlign::CENTRE);
 
 		layer->Add(overlapText);
 		layer->Add(collideText);
@@ -764,7 +764,7 @@ public:
 		Add(playerControl);
 
 		stateText = new VText(10.0f, 60.0f, VGlobal::p()->Width - 20.0f);
-		stateText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VText::ALIGNLEFT);
+		stateText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 12, sf::Color::White, VTextAlign::LEFT);
 		stateText->SetText("");
 		stateText->SetOutlineThickness(2.0f);
 		stateText->SetOutlineTint(sf::Color::Black);
@@ -1200,7 +1200,7 @@ public:
 
 		std::wstringstream ws;
 		auto copyright = new VText(10.0f, VGlobal::p()->Height - 18.0f, (float)VGlobal::p()->Width - 20.0f, "Remade by hand by Gamepopper.\tOriginal logo by GridSageGames.", 14);
-		copyright->SetAlignment(VText::ALIGNCENTRE);
+		copyright->SetAlignment(VTextAlign::CENTRE);
 
 		ws = std::wstringstream();
 		ws << L"                                                 ▄" << std::endl <<
@@ -1226,7 +1226,7 @@ public:
 			L"                    ╥              |└└┴╜      ┼";
 
 		VTypedText* cLayer1 = new VTypedText(10.0f, 40.0f, (float)VGlobal::p()->Width);
-		cLayer1->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(255, 255, 255, 24), VText::ALIGNLEFT);
+		cLayer1->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(255, 255, 255, 24), VTextAlign::LEFT);
 		cLayer1->ResetText(ws.str());
 		cLayer1->CharactersPerIteration = 4;
 		cLayer1->SetSound("type", 20.0f, "Example/Assets/type.ogg");
@@ -1251,7 +1251,7 @@ public:
 			L"                    ¦   ˝             |  ─┼           ¦                     ";
 
 		VTypedText* cLayer2 = new VTypedText(10.0f, 40.0f, (float)VGlobal::p()->Width);
-		cLayer2->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 64), VText::ALIGNLEFT);
+		cLayer2->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 64), VTextAlign::LEFT);
 		cLayer2->ResetText(ws.str());
 		cLayer2->CharactersPerIteration = 4;
 		Add(cLayer2);
@@ -1275,7 +1275,7 @@ public:
 			L"";
 
 		VTypedText* cLayer3 = new VTypedText(10.0f, 40.0f, (float)VGlobal::p()->Width);
-		cLayer3->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 200), VText::ALIGNLEFT);
+		cLayer3->SetFormat("Example/Assets/DejaVuSansMono.ttf", 13, sf::Color(0, 255, 0, 200), VTextAlign::LEFT);
 		cLayer3->ResetText(ws.str());
 		cLayer3->CharactersPerIteration = 4;
 		Add(cLayer3);
@@ -1554,7 +1554,7 @@ public:
 		};
 
 		auto text = new VText(15.0f, 50.0f - 4, (float)VGlobal::p()->Width - 20.0f, "", 9);
-		text->SetAlignment(VText::ALIGNLEFT);
+		text->SetAlignment(VTextAlign::LEFT);
 		Add(text);
 
 		for (int i = 0; i < VInterpolate::NumInterpolationTypes; ++i)
@@ -1915,7 +1915,7 @@ public:
 		Add(pixel);
 
 		normalText = new VText(0.0f, VGlobal::p()->Height / 2.0f, VGlobal::p()->Width * 1.0f, "GENERATING MAP");
-		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 32, sf::Color::White, VText::ALIGNCENTER);
+		normalText->SetFormat("Example/Assets/DejaVuSansMono.ttf", 32, sf::Color::White, VTextAlign::CENTER);
 		Add(normalText);
 
         future = std::async(std::launch::async, std::bind(&AsyncTestState::LoadMap, this));
