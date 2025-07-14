@@ -97,7 +97,7 @@ bool VCamera::Flash(sf::Color colour, float time, std::function<void()> OnComple
 sf::View VCamera::GetDefaultView()
 {
 	sf::View defaultView;
-	defaultView.reset(sf::FloatRect(0.0f, 0.0f, view.getSize().x, view.getSize().y));
+	defaultView.setViewport(sf::FloatRect({ 0.0f, 0.0f }, view.getSize()));
 
 	return defaultView;
 }
@@ -105,7 +105,7 @@ sf::View VCamera::GetDefaultView()
 void VCamera::Update(float dt)
 {
 	sf::Vector2f position = Position;
-	float rotation = Rotation;
+	sf::Angle rotation = Rotation;
 	float zoom = Zoom;
 
 	sf::Vector2f HalfWidth = view.getSize() / 2.0f;
@@ -186,14 +186,14 @@ void VCamera::Update(float dt)
 		if (world == sf::FloatRect())
 			world = VGlobal::p()->WorldBounds;
 
-		if (position.x - HalfWidth.x < world.left)
+		if (position.x - HalfWidth.x < world.position.x)
 			position.x = HalfWidth.x;
-		if (position.y - HalfWidth.y < world.top)
+		if (position.y - HalfWidth.y < world.position.y)
 			position.y = HalfWidth.y;
-		if (position.x + HalfWidth.x > world.left + world.width)
-			position.x = world.width - HalfWidth.x;
-		if (position.y + HalfWidth.y > world.top + world.height)
-			position.y = world.height - HalfWidth.y;
+		if (position.x + HalfWidth.x > world.position.x + world.size.x)
+			position.x = world.size.x - HalfWidth.x;
+		if (position.y + HalfWidth.y > world.position.y + world.size.y)
+			position.y = world.size.y - HalfWidth.y;
 	}
 
 	LastPosition = position;

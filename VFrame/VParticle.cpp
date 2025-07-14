@@ -17,7 +17,7 @@ void VParticle::Update(float dt)
 	float percent = Lifespan > 0 ? Age / Lifespan : 0;
 	Scale = VInterpolate::Vector2f(ScaleRange.A, ScaleRange.B, percent);
 	Tint = VInterpolate::Color(ColourRange.A, ColourRange.B, percent);
-	Tint.a = sf::Uint8(VInterpolate::Float(AlphaRange.A, AlphaRange.B, percent) * 255);
+	Tint.a = uint8_t(VInterpolate::Float(AlphaRange.A, AlphaRange.B, percent) * 255);
 
 	VSUPERCLASS::Update(dt);
 }

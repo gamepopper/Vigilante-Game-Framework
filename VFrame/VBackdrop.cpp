@@ -7,7 +7,7 @@ VBackdrop::VBackdrop(float scrollX, float scrollY, bool repeatX, bool repeatY, c
 	if (filename != "")
 		LoadGraphic(filename);
 
-	vertices.setPrimitiveType(sf::Quads);
+	vertices.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
 	vertices.resize(4);
 
 	Size.x = 0;
@@ -50,8 +50,7 @@ VBackdrop* VBackdrop::LoadGraphic(const sf::String& filename, const sf::IntRect&
 	{
 		texture = new sf::Texture();
 		sf::Texture* tex = &VGlobal::p()->Content->LoadTexture(filename);
-		texture->loadFromImage(tex->copyToImage(), area);
-		disposable = true;
+		disposable |= texture->loadFromImage(tex->copyToImage(), false, area);
 	}
 
 	return this;
@@ -129,7 +128,7 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	bScroll.x *= ScrollFactor.x;
 	bScroll.y *= ScrollFactor.y;
 
-	float rotate = renderTargetView.getRotation() - scrollView.getRotation();
+	sf::Angle rotate = renderTargetView.getRotation() - scrollView.getRotation();
 	rotate *= RotateFactor;
 
 	float zoom = renderTargetView.getSize().x / scrollView.getSize().x;
@@ -172,14 +171,14 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	vertices[0].position = sf::Vector2f(0, 0);
 	vertices[0].texCoords = texPos + sf::Vector2f(0, 0);
 
-	vertices[1].position = sf::Vector2f(Size.x, 0);
-	vertices[1].texCoords = texPos + sf::Vector2f(texSize.x, 0);
+	vertices[2].position = sf::Vector2f(Size.x, 0);
+	vertices[2].texCoords = texPos + sf::Vector2f(texSize.x, 0);
 
-	vertices[2].position = sf::Vector2f(Size.x, Size.y);
-	vertices[2].texCoords = texPos + sf::Vector2f(texSize.x, texSize.y);
+	vertices[3].position = sf::Vector2f(Size.x, Size.y);
+	vertices[3].texCoords = texPos + sf::Vector2f(texSize.x, texSize.y);
 
-	vertices[3].position = sf::Vector2f(0, Size.y);
-	vertices[3].texCoords = texPos + sf::Vector2f(0, texSize.y);
+	vertices[1].position = sf::Vector2f(0, Size.y);
+	vertices[1].texCoords = texPos + sf::Vector2f(0, texSize.y);
 
 	scrollView.setRotation(rotate);
 
@@ -188,10 +187,10 @@ void VBackdrop::Draw(sf::RenderTarget& RenderTarget)
 	sf::FloatRect scrollBox = sf::FloatRect(scrollView.getCenter() - sf::Vector2f(maxSize, maxSize) / 2.0f, sf::Vector2f(maxSize, maxSize));
 
 	updateTransform();
-	if (renderBox.left < scrollBox.left + scrollBox.width &&
-		renderBox.left + renderBox.width > scrollBox.left &&
-		renderBox.top <	 scrollBox.top + scrollBox.height &&
-		renderBox.top + renderBox.height > scrollBox.top)
+	if (renderBox.position.x < scrollBox.position.x + scrollBox.size.x &&
+		renderBox.position.x + renderBox.size.x > scrollBox.position.x &&
+		renderBox.position.y < scrollBox.position.y + scrollBox.size.y &&
+		renderBox.position.y + renderBox.size.y > scrollBox.position.y)
 	{
 
 		RenderState.texture = texture;

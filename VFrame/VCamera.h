@@ -117,7 +117,7 @@ public:
 	///The current position of the camera.
 	sf::Vector2f Position;
 	///The current angle of the camera.
-	float Rotation = 0.0f;
+	sf::Angle Rotation;
 	///The current amount of zoom (default 1.0f) for the camera.
 	float Zoom = 1.0f;
 	///The camera is only used for rendering if Active is set to true.

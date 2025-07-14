@@ -29,9 +29,9 @@ void VInputHandler::SetButtonInput(const sf::String& name, int key, int gamepad,
 	if (name.getSize() == 0 || buttonInputs.find(name) != buttonInputs.end())
 	{
 		if (name.getSize() == 0 || 
-			(buttonInputs[name].key == key &&
+			(buttonInputs[name].key == sf::Keyboard::Key(key) &&
 			buttonInputs[name].gamepad == gamepad &&
-			buttonInputs[name].mouse == mouse))
+			buttonInputs[name].mouse == sf::Mouse::Button(mouse)))
 		{
 			return;
 		}
@@ -61,9 +61,9 @@ void VInputHandler::SetAxisInput(const sf::String& name, int keyA, int keyB, int
 	if (name.getSize() == 0 || axisInputs.find(name) != axisInputs.end())
 	{
 		if (name.getSize() == 0 || 
-			(axisInputs[name].keyA == keyA &&
+			(axisInputs[name].keyA == sf::Keyboard::Key(keyA) &&
 			axisInputs[name].gamepad == gamepad &&
-			axisInputs[name].keyB == keyB))
+			axisInputs[name].keyB == sf::Keyboard::Key(keyB)))
 		{
 			return;
 		}
@@ -229,9 +229,9 @@ void VInputHandler::ResetScrollWheel()
 
 void VInputHandler::HandleEvents(const sf::Event& event)
 {
-	if (event.type == sf::Event::MouseWheelScrolled)
+	if (const auto* mouseWheelScrolled = event.getIf<sf::Event::MouseWheelScrolled>())
 	{
-		scrollWheel = event.mouseWheelScroll.delta;
+		scrollWheel = mouseWheelScrolled->delta;
 	}
 }
 
@@ -394,7 +394,7 @@ void VInputHandler::Update(float dt)
 				}
 #endif
 
-				if (a.keyA >= 0)
+				if (a.keyA != sf::Keyboard::Key::Unknown)
 				{
 					if (sf::Keyboard::isKeyPressed(a.keyA))
 					{
@@ -403,7 +403,7 @@ void VInputHandler::Update(float dt)
 					}
 				}
 
-				if (a.keyB >= 0)
+				if (a.keyB != sf::Keyboard::Key::Unknown)
 				{
 					if (sf::Keyboard::isKeyPressed(a.keyB))
 					{

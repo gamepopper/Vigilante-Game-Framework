@@ -20,7 +20,7 @@ VPostEffectBase::VPostEffectBase()
 			"}";
 
 		passThroughShader = new sf::Shader();
-		if (!passThroughShader->loadFromMemory(fragment, sf::Shader::Fragment))
+		if (!passThroughShader->loadFromMemory(fragment, sf::Shader::Type::Fragment))
 		{
 			delete passThroughShader;
 			passThroughShader = nullptr;
@@ -42,11 +42,11 @@ void VPostEffectBase::applyShader(const sf::Shader& shader, sf::RenderTarget& ou
 {
 	sf::Vector2f outputSize = static_cast<sf::Vector2f>(output.getSize());
 
-	sf::VertexArray vertices(sf::TrianglesStrip, 4);
-	vertices[0] = sf::Vertex(sf::Vector2f(0, 0),			sf::Vector2f(0, 1));
-	vertices[1] = sf::Vertex(sf::Vector2f(outputSize.x, 0), sf::Vector2f(1, 1));
-	vertices[2] = sf::Vertex(sf::Vector2f(0, outputSize.y), sf::Vector2f(0, 0));
-	vertices[3] = sf::Vertex(sf::Vector2f(outputSize),		sf::Vector2f(1, 0));
+	sf::VertexArray vertices(sf::PrimitiveType::TriangleStrip, 4);
+	vertices[0] = {sf::Vector2f(0, 0),				sf::Color::White, sf::Vector2f(0, 1)};
+	vertices[1] = {sf::Vector2f(outputSize.x, 0),	sf::Color::White, sf::Vector2f(1, 1)};
+	vertices[2] = {sf::Vector2f(0, outputSize.y),	sf::Color::White, sf::Vector2f(0, 0)};
+	vertices[3] = {sf::Vector2f(outputSize),		sf::Color::White, sf::Vector2f(1, 0)};
 
 	sf::RenderStates states;
 	states.shader = &shader;
@@ -63,11 +63,11 @@ void VPostEffectBase::passThrough(const sf::Texture& input, sf::RenderTarget& ou
 
 		sf::Vector2f outputSize = static_cast<sf::Vector2f>(output.getSize());
 
-		sf::VertexArray vertices(sf::TrianglesStrip, 4);
-		vertices[0] = sf::Vertex(sf::Vector2f(0, 0), sf::Vector2f(0, 1));
-		vertices[1] = sf::Vertex(sf::Vector2f(outputSize.x, 0), sf::Vector2f(1, 1));
-		vertices[2] = sf::Vertex(sf::Vector2f(0, outputSize.y), sf::Vector2f(0, 0));
-		vertices[3] = sf::Vertex(sf::Vector2f(outputSize), sf::Vector2f(1, 0));
+		sf::VertexArray vertices(sf::PrimitiveType::TriangleStrip, 4);
+		vertices[0] = {sf::Vector2f(0, 0),				sf::Color::White, sf::Vector2f(0, 1)};
+		vertices[1] = {sf::Vector2f(outputSize.x, 0),	sf::Color::White, sf::Vector2f(1, 1)};
+		vertices[2] = {sf::Vector2f(0, outputSize.y),	sf::Color::White, sf::Vector2f(0, 0)};
+		vertices[3] = {sf::Vector2f(outputSize),		sf::Color::White, sf::Vector2f(1, 0)};
 
 		sf::RenderStates states;
 		states.shader = passThroughShader;
@@ -84,17 +84,20 @@ bool VPostEffectBase::isSupported()
 
 VPostEffect::VPostEffect(const sf::String& filename, sf::Shader::Type type)
 {
-	shader.loadFromFile(filename, type);
+	if (!shader.loadFromFile(filename.toAnsiString(), type))
+		VBase::VLogError("Error loading shader: %s", filename.toAnsiString().c_str());
 }
 
 VPostEffect::VPostEffect(const sf::String& vertFile, const sf::String& fragFile)
 {
-	shader.loadFromFile(vertFile, fragFile);
+	if (!shader.loadFromFile(vertFile.toAnsiString(), fragFile.toAnsiString()))
+		VBase::VLogError("Error loading shaders: %s %s", vertFile.toAnsiString().c_str(), fragFile.toAnsiString().c_str());
 }
 
 VPostEffect::VPostEffect(const sf::String& vertFile, const sf::String& geomFile, const sf::String& fragFile)
 {
-	shader.loadFromFile(vertFile, geomFile, fragFile);
+	if (!shader.loadFromFile(vertFile.toAnsiString(), geomFile.toAnsiString(), fragFile.toAnsiString()))
+		VBase::VLogError("Error loading shaders: %s %s %s", vertFile.toAnsiString().c_str(), geomFile.toAnsiString().c_str(), fragFile.toAnsiString().c_str());
 }
 
 void VPostEffect::SetInputTextureName(const sf::String& name)
@@ -177,7 +180,10 @@ VPostEffectMultipass::VPostEffectMultipass(int MaxSize)
 	for (unsigned int i = 0; i < amount; ++i)
 	{
 		renderTextures.push_back(std::make_unique<sf::RenderTexture>());
-		renderTextures[i]->create(VGlobal::p()->Width, VGlobal::p()->Height);
+		if (!renderTextures[i]->resize({ VGlobal::p()->Width, VGlobal::p()->Height }))
+		{
+			VBase::VLogError("Invalid texture size for VPostEffect");
+		}
 	}
 }
 

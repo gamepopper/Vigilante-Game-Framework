@@ -37,6 +37,7 @@
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/Image.hpp>
 
 #include <memory>
 

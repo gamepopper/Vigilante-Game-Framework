@@ -4,7 +4,7 @@
 
 void VGradient::updateTransform()
 {
-	float angle = -Angle * VFRAME_PI / 180.f;
+	float angle = -Angle.asRadians();
 	float cosine = static_cast<float>(cos(angle));
 	float sine = static_cast<float>(sin(angle));
 	float sxc = Scale.x * cosine;
@@ -36,7 +36,7 @@ void VGradient::updateFrame()
 
 	unsigned int imageWidth = static_cast<unsigned int>(1 * gradResolution);
 	if (gradImage.getSize().x != imageWidth)
-		gradImage.create(imageWidth, 1);
+		gradImage.resize({ imageWidth, 1 });
 
 	unsigned int offset = 0;
 	for (unsigned int i = 0; i < sortedPoints.size() - 1; ++i)
@@ -44,18 +44,26 @@ void VGradient::updateFrame()
 		unsigned int length = static_cast<unsigned int>((sortedPoints[i + 1]->Position - sortedPoints[i]->Position) * imageWidth);
 		for (unsigned int j = 0; j < length; j++)
 		{
-			gradImage.setPixel(offset + j, 0, VInterpolate::Color(sortedPoints[i]->Tint, sortedPoints[i + 1]->Tint, (float)j, (float)length));
+			gradImage.setPixel({ offset + j, 0 }, VInterpolate::Color(sortedPoints[i]->Tint, sortedPoints[i + 1]->Tint, (float)j, (float)length));
 		}
 
 		offset += length;
 	}
 
-	sf::Vector2i iSize(Size);
-	if (renderTex.getSize().x != iSize.x || renderTex.getSize().y != iSize.y)
-		renderTex.create(iSize.x, iSize.y);
+	sf::Vector2u uSize(Size);
+	if (renderTex.getSize().x != uSize.x || renderTex.getSize().y != uSize.y)
+	{
+		if (!renderTex.resize(uSize))
+		{
+			VLogError("Invalid Texture Size for Gradient");
+		}
+	}
 
 	sf::Texture gradTexture;
-	gradTexture.loadFromImage(gradImage);
+	if (!gradTexture.loadFromImage(gradImage))
+	{
+		VLogError("Unable to load texture from image");
+	}
 	gradTexture.setSmooth(true);
 	renderState.texture = &gradTexture;
 
@@ -64,11 +72,11 @@ void VGradient::updateFrame()
 	{
 	case LINEAR:
 	{
-		vertexArray.setPrimitiveType(sf::PrimitiveType::Quads);
-		vertexArray.append(sf::Vertex(sf::Vector2f(0.0f, Size.y), sf::Vector2f(0.0f, 1.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(0.0f, 0.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x, 0.0f), sf::Vector2f((float)imageWidth, 0.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x, Size.y), sf::Vector2f((float)imageWidth, 1.0f)));
+		vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
+		vertexArray.append({ sf::Vector2f(0.0f, Size.y), sf::Color::White, sf::Vector2f(0.0f, 1.0f) });
+		vertexArray.append({ sf::Vector2f(0.0f, 0.0f), sf::Color::White, sf::Vector2f(0.0f, 0.0f) });
+		vertexArray.append({ sf::Vector2f(Size.x, 0.0f), sf::Color::White, sf::Vector2f((float)imageWidth, 0.0f) });
+		vertexArray.append({ sf::Vector2f(Size.x, Size.y), sf::Color::White, sf::Vector2f((float)imageWidth, 1.0f) });
 	}
 		break;
 	case RADIAL:
@@ -76,14 +84,14 @@ void VGradient::updateFrame()
 		float radius = (Size.x < Size.y ? Size.x : Size.y) / 2.0f;
 
 		vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleFan);
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f), sf::Vector2f(0.0f, 0.0f)));
+		vertexArray.append({ sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f), sf::Color::White, sf::Vector2f(0.0f, 0.0f) });
 		for (int i = 0; i < 33; ++i)
 		{
 			float angle = (i / 32.0f) * (VFRAME_PI * 2.0f);
 			float sinV = sinf(angle) * radius;
 			float cosV = cosf(angle) * radius;
 
-			vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f) + sf::Vector2f(cosV, sinV), sf::Vector2f((float)imageWidth, 1.0f)));
+			vertexArray.append({ sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f) + sf::Vector2f(cosV, sinV), sf::Color::White, sf::Vector2f((float)imageWidth, 1.0f) });
 		}
 	}
 		break;
@@ -98,40 +106,35 @@ void VGradient::updateFrame()
 			float sinV = sinf(angle * VFRAME_PI * 2.0f) * radius;
 			float cosV = cosf(angle * VFRAME_PI * 2.0f) * radius;
 
-			/*vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * angle, 0.0f), sf::Vector2f(angle * imageWidth, 0.0f)));
-			vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * angle, Size.y), sf::Vector2f(angle * imageWidth, 1.0f)));
-			vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * angle1, Size.y), sf::Vector2f(angle1 * imageWidth, 1.0f)));
-			vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * angle1, 0.0f), sf::Vector2f(angle1 * imageWidth, 0.0f)));*/
-			vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f), sf::Vector2f(angle * imageWidth, 0.0f)));
-			vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f) + sf::Vector2f(cosV, sinV), sf::Vector2f(angle * imageWidth, 1.0f)));
+			vertexArray.append({ sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f), sf::Color::White, sf::Vector2f(angle * imageWidth, 0.0f) });
+			vertexArray.append({ sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f) + sf::Vector2f(cosV, sinV), sf::Color::White, sf::Vector2f(angle * imageWidth, 1.0f) });
 		}
 	}
 		break;
 	case REFLECTIVE:
 	{
-		vertexArray.setPrimitiveType(sf::PrimitiveType::Quads);
-		vertexArray.append(sf::Vertex(sf::Vector2f(0.0f, Size.y), sf::Vector2f(0.0f, 1.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(0.0f, 0.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, 0.0f), sf::Vector2f((float)imageWidth, 0.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y), sf::Vector2f((float)imageWidth, 1.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y), sf::Vector2f((float)imageWidth, 1.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, 0.0f), sf::Vector2f((float)imageWidth, 0.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x, 0.0f), sf::Vector2f(0.0f, 0.0f)));
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x, Size.y), sf::Vector2f(0.0f, 1.0f)));
+		vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
+		vertexArray.append({ sf::Vector2f(0.0f, Size.y), sf::Color::White, sf::Vector2f(0.0f, 1.0f) });
+		vertexArray.append({ sf::Vector2f(0.0f, 0.0f), sf::Color::White, sf::Vector2f(0.0f, 0.0f) });
+		vertexArray.append({ sf::Vector2f(Size.x * 0.5f, 0.0f), sf::Color::White, sf::Vector2f((float)imageWidth, 0.0f) });
+		vertexArray.append({ sf::Vector2f(Size.x * 0.5f, Size.y), sf::Color::White, sf::Vector2f((float)imageWidth, 1.0f) });
+		vertexArray.append({ sf::Vector2f(Size.x, 0.0f), sf::Color::White, sf::Vector2f(0.0f, 0.0f) });
+		vertexArray.append({ sf::Vector2f(Size.x, Size.y), sf::Color::White, sf::Vector2f(0.0f, 1.0f) });
+
 	}
 		break;
 	case DIAMOND:
 		float radius = (Size.x < Size.y ? Size.x : Size.y) / 2.0f;
 
 		vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleFan);
-		vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f), sf::Vector2f(0.0f, 0.0f)));
+		vertexArray.append({ sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f), sf::Color::White, sf::Vector2f(0.0f, 0.0f) });
 		for (int i = 0; i < 5; ++i)
 		{
 			float angle = (i / 4.0f) * (VFRAME_PI * 2.0f);
 			float sinV = sinf(angle) * radius;
 			float cosV = cosf(angle) * radius;
 
-			vertexArray.append(sf::Vertex(sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f) + sf::Vector2f(cosV, sinV), sf::Vector2f((float)imageWidth, 1.0f)));
+			vertexArray.append({ sf::Vector2f(Size.x * 0.5f, Size.y * 0.5f) + sf::Vector2f(cosV, sinV), sf::Color::White, sf::Vector2f((float)imageWidth, 1.0f) });
 		}
 		break;
 	}
@@ -145,11 +148,11 @@ void VGradient::updateFrame()
 	renderState.blendMode = sf::RenderStates::Default.blendMode;
 
 	vertexArray.clear();
-	vertexArray.setPrimitiveType(sf::PrimitiveType::Quads);
-	vertexArray.append(sf::Vertex(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(0.0f, 0.0f)));
-	vertexArray.append(sf::Vertex(sf::Vector2f(Size.x, 0.0f), sf::Vector2f(Size.x, 0.0f)));
-	vertexArray.append(sf::Vertex(sf::Vector2f(Size.x, Size.y), sf::Vector2f(Size.x, Size.y)));
-	vertexArray.append(sf::Vertex(sf::Vector2f(0.0f, Size.y), sf::Vector2f(0.0f, Size.y)));
+	vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
+	vertexArray.append({ sf::Vector2f(0.0f, 0.0f), sf::Color::White, sf::Vector2f(0.0f, 0.0f) });
+	vertexArray.append({ sf::Vector2f(Size.x, 0.0f), sf::Color::White, sf::Vector2f(Size.x, 0.0f) });
+	vertexArray.append({ sf::Vector2f(Size.x, Size.y), sf::Color::White, sf::Vector2f(Size.x, Size.y) });
+	vertexArray.append({ sf::Vector2f(0.0f, Size.y), sf::Color::White, sf::Vector2f(0.0f, Size.y) });
 
 	renderState.texture = &renderTex.getTexture();
 

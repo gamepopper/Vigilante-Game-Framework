@@ -288,11 +288,11 @@ float VObject::overlapX(VObject* a, VObject *b, bool maxOverlap)
 		float bDiffAbs = (bDiff >= 0) ? bDiff : -bDiff;
 
 		//Use the Last Y position instead of current to avoid floor collisions due to gravity.
-		sf::FloatRect aRect = sf::FloatRect(a->Position.x - ((aDiff > 0) ? aDiff : 0), a->Last.y, a->Size.x + aDiffAbs, a->Size.y);
-		sf::FloatRect bRect = sf::FloatRect(b->Position.x - ((bDiff > 0) ? bDiff : 0), b->Last.y, b->Size.x + bDiffAbs, b->Size.y);
+		sf::FloatRect aRect = sf::FloatRect({a->Position.x - ((aDiff > 0) ? aDiff : 0), a->Last.y}, {a->Size.x + aDiffAbs, a->Size.y});
+		sf::FloatRect bRect = sf::FloatRect({b->Position.x - ((bDiff > 0) ? bDiff : 0), b->Last.y}, {b->Size.x + bDiffAbs, b->Size.y});
 
-		if ((aRect.left + aRect.width > bRect.left) && (aRect.left < bRect.left + bRect.width) &&
-			(aRect.top + aRect.height > bRect.top) && (aRect.top < bRect.top + bRect.height))
+		if ((aRect.position.x + aRect.size.x > bRect.position.x) && (aRect.position.x < bRect.position.x + bRect.size.x) &&
+			(aRect.position.y + aRect.size.y > bRect.position.y) && (aRect.position.y < bRect.position.y + bRect.size.y))
 		{
 			float maxOverlapDist = maxOverlap ? (aDiffAbs + bDiffAbs + SeparateBias) : 0;
 
@@ -341,11 +341,11 @@ float VObject::overlapY(VObject* a, VObject *b, bool maxOverlap)
 		float aDiffAbs = (aDiff >= 0) ? aDiff : -aDiff;
 		float bDiffAbs = (bDiff >= 0) ? bDiff : -bDiff;
 
-		sf::FloatRect aRect = sf::FloatRect(a->Position.x, a->Position.y - ((aDiff > 0) ? aDiff : 0), a->Size.x, a->Size.y + aDiffAbs);
-		sf::FloatRect bRect = sf::FloatRect(b->Position.x, b->Position.y - ((bDiff > 0) ? bDiff : 0), b->Size.x, b->Size.y + bDiffAbs);
+		sf::FloatRect aRect = sf::FloatRect({a->Position.x, a->Position.y - ((aDiff > 0) ? aDiff : 0)}, {a->Size.x, a->Size.y + aDiffAbs});
+		sf::FloatRect bRect = sf::FloatRect({b->Position.x, b->Position.y - ((bDiff > 0) ? bDiff : 0)}, {b->Size.x, b->Size.y + bDiffAbs});
 
-		if ((aRect.left + aRect.width > bRect.left) && (aRect.left < bRect.left + bRect.width) &&
-			(aRect.top + aRect.height > bRect.top) && (aRect.top < bRect.top + bRect.height))
+		if ((aRect.position.x + aRect.size.x > bRect.position.x) && (aRect.position.x < bRect.position.x + bRect.size.x) &&
+			(aRect.position.y + aRect.size.y > bRect.position.y) && (aRect.position.y < bRect.position.y + bRect.size.y))
 		{
 			float maxOverlapDist = maxOverlap ? (aDiffAbs + bDiffAbs + SeparateBias) : 0;
 
@@ -463,7 +463,7 @@ void VObject::updateMotion(float dt)
 
 	deltaV = 0.5f * (computeVelocity(AngleVelocity, AngleAcceleration, AngleDrag, AngleMax, dt) - AngleVelocity);
 	AngleVelocity += deltaV;
-	Angle += AngleVelocity * dt;
+	Angle += sf::degrees(AngleVelocity * dt);
 	AngleVelocity += deltaV;
 
 	deltaV = 0.5f * (computeVelocity(Velocity.x, Acceleration.x, Drag.x, MaxVelocity.x, dt) - Velocity.x);
@@ -524,7 +524,7 @@ bool VObject::TestInView(const sf::View& renderTargetView, sf::View* scrollView,
 	scroll.x *= o->ScrollFactor.x;
 	scroll.y *= o->ScrollFactor.y;
 
-	float rotate = renderTargetView.getRotation() - scrollView->getRotation();
+	sf::Angle rotate = renderTargetView.getRotation() - scrollView->getRotation();
 	rotate *= o->RotateFactor;
 
 	float zoom = renderTargetView.getSize().x / scrollView->getSize().x;
@@ -537,14 +537,14 @@ bool VObject::TestInView(const sf::View& renderTargetView, sf::View* scrollView,
 	scrollView->zoom(zoom);
 	scrollView->setViewport(renderTargetView.getViewport());
 
-	sf::FloatRect box = renderBox.width > 0 || renderBox.height > 0 ? renderBox : sf::FloatRect(o->Position, o->Size);
+	sf::FloatRect box = renderBox.size.x > 0 || renderBox.size.y > 0 ? renderBox : sf::FloatRect(o->Position, o->Size);
 	float maxSize = scrollView->getSize().x > scrollView->getSize().y ? scrollView->getSize().x : scrollView->getSize().y;
 	sf::FloatRect scrollBox = sf::FloatRect(scrollView->getCenter() - sf::Vector2f(maxSize, maxSize) / 2.0f, sf::Vector2f(maxSize, maxSize));
 
-	return	box.left < scrollBox.left + scrollBox.width &&
-			box.left + box.width > scrollBox.left &&
-			box.top < scrollBox.top + scrollBox.height &&
-			box.top + box.height > scrollBox.top;
+	return	box.position.x < scrollBox.position.x + scrollBox.size.x &&
+			box.position.x + box.size.x > scrollBox.position.x &&
+			box.position.y < scrollBox.position.y + scrollBox.size.y &&
+			box.position.y + box.size.y > scrollBox.position.y;
 }
 
 void VObject::Update(float dt)

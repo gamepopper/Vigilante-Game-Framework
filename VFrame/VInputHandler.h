@@ -96,22 +96,22 @@ public:
 	struct ButtonInput
 	{
 		///If true, inputs can be set.
-		bool enabled;
+		bool enabled = false;
 
 		///Keyboard Key Code
-		sf::Keyboard::Key key;
+		sf::Keyboard::Key key = sf::Keyboard::Key();
 #if	defined(USE_GAMEPAD_API)
 		///Gamepad Button
 		GAMEPAD_BUTTON gamepad;
 #elif defined(USE_SFML_JOYSTICK)
 		///Gamepad Button
-		Button gamepad;
+		sf::Joystick::Button gamepad = sf::Joystick::Button();
 #else
 		///Gamepad Button
-		sf::XInputDevice::XButton gamepad;
+		sf::XInputDevice::XButton gamepad = sf::XInputDevice::XButton();
 #endif
 		///Mouse Button
-		sf::Mouse::Button mouse;
+		sf::Mouse::Button mouse = sf::Mouse::Button();
 
 		///True if pressed at frame.
 		bool pressed[CONTROLLER_COUNT];
@@ -143,18 +143,18 @@ public:
 		bool enabled;
 
 		///Key Code for Negative Axis Input
-		sf::Keyboard::Key keyA;
+		sf::Keyboard::Key keyA = sf::Keyboard::Key();
 		///Key Code for Positive Axis Input
-		sf::Keyboard::Key keyB;
+		sf::Keyboard::Key keyB = sf::Keyboard::Key();
 #ifdef USE_GAMEPAD_API
 		///Gamepad Axis
 		XAxis gamepad;
 #elif defined(USE_SFML_JOYSTICK)
 		///Gamepad Axis
-		sf::Joystick::Axis gamepad;
+		sf::Joystick::Axis gamepad = sf::Joystick::Axis();
 #else
 		///Gamepad Axis
-		sf::XInputDevice::XAxis gamepad;
+		sf::XInputDevice::XAxis gamepad = sf::XInputDevice::XAxis();
 #endif
 		///Previous frame's axis value.
 		float lastValue[CONTROLLER_COUNT];

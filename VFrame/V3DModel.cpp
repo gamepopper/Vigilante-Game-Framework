@@ -126,7 +126,7 @@ bool V3DModel::LoadModelData(const V3DVertexArray& vertexArray, const std::vecto
 
 bool V3DModel::LoadTexture(const sf::String& filename)
 {
-	return texture.loadFromFile(filename);
+	return texture.loadFromFile(filename.toAnsiString());
 }
 
 bool V3DModel::LoadTexture(const sf::Texture& tex)

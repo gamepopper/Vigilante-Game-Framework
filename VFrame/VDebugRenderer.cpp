@@ -8,14 +8,16 @@
 
 void VDebugRenderer::forEachExistingObject(VBase* b)
 {
-	VObject* object = dynamic_cast<VObject*>(b);
-
-	if (object == nullptr && object->active)
+	if (b == nullptr)
 		return;
 
-	if (object->type == VType::RENDERGROUP)
+	VObject* object = dynamic_cast<VObject*>(b);
+	if (object != nullptr && !object->active)
+		return;
+
+	if (object == nullptr && b->type == VType::RENDERGROUP)
 	{
-		VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(object);
+		VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(b);
 		object = renderGroup->Sprite.get();
 	}
 	else if (object->type == VType::TILEMAP)
@@ -88,7 +90,7 @@ void VDebugRenderer::hideExcessVertices()
 
 VDebugRenderer::VDebugRenderer() : vertexSet(0)
 {
-	debuggingVertices.setPrimitiveType(sf::Lines);
+	debuggingVertices.setPrimitiveType(sf::PrimitiveType::Lines);
 }
 
 void VDebugRenderer::Update(float dt)

@@ -3,9 +3,9 @@
 
 ScoreboardEffect::ScoreboardEffect()
 {
-	downSample.loadFromFile("Example/Assets/DownSample.frag", sf::Shader::Fragment);
-	maskSample.loadFromFile("Example/Assets/CircleMask.frag", sf::Shader::Fragment);
-	gaussianBlur.loadFromFile("Example/Assets/GaussianBlur.frag", sf::Shader::Fragment);
+	downSample.loadFromFile("Example/Assets/DownSample.frag", sf::Shader::Type::Fragment);
+	maskSample.loadFromFile("Example/Assets/CircleMask.frag", sf::Shader::Type::Fragment);
+	gaussianBlur.loadFromFile("Example/Assets/GaussianBlur.frag", sf::Shader::Type::Fragment);
 
 	SetPointSize(1.0f);
 	SetPointAmount(1);
@@ -58,11 +58,11 @@ void ScoreboardEffect::prepareTextures(sf::Vector2u size)
 
 	if (mDownSampleTexture.getSize() != texSize || mBlurPassTextures[0].getSize() != blurSize)
 	{
-		mDownSampleTexture.create(texSize.x, texSize.y);
+		mDownSampleTexture.resize(texSize);
 		
-		mBlurPassTextures[0].create(blurSize.x, blurSize.y);
+		mBlurPassTextures[0].resize(blurSize);
 		mBlurPassTextures[0].setSmooth(true);
-		mBlurPassTextures[1].create(blurSize.x, blurSize.y);
+		mBlurPassTextures[1].resize(blurSize);
 		mBlurPassTextures[1].setSmooth(true);
 	}
 }

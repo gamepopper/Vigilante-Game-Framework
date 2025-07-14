@@ -146,7 +146,7 @@ public:
 		Moves = false;
 #if _DEBUG
 		DebugColor = sf::Color::Transparent;
-		debuggingVertices.setPrimitiveType(sf::Lines);
+		debuggingVertices.setPrimitiveType(sf::PrimitiveType::Lines);
 #endif
 	}
 

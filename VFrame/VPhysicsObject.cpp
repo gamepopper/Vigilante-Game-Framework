@@ -90,7 +90,7 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 	cpBodySetPosition(body, ToCPVect(Object->Position + (Object->Size / 2.0f)));
 
 	if (Shape != VObjectShape::LINE)
-		cpBodySetAngle(body, Object->Angle * (VFRAME_PI / 180.0f));
+		cpBodySetAngle(body, Object->Angle.asRadians());
 }
 
 VPhysicsCPBody* VPhysicsObject::GetBody()
@@ -210,17 +210,17 @@ void VPhysicsObject::Update(float dt)
 
 		if (cpBodyGetType(body) == CP_BODY_TYPE_KINEMATIC)
 		{
-			angle = baseObject->Angle * (VFRAME_PI / 180.0f);
+			angle = baseObject->Angle.asRadians();
 			angleVel = baseObject->AngleVelocity * (VFRAME_PI / 180.0f);
 		}
 
 		if ((Lock & VPhysicsLock::ANGLE) != 0)
-			angle = baseObject->Angle * (VFRAME_PI / 180.0f);
+			angle = baseObject->Angle.asRadians();
 
 		if ((Lock & VPhysicsLock::ANGLEVEL) != 0)
 			angleVel = baseObject->AngleVelocity * (VFRAME_PI / 180.0f);
 
-		baseObject->Angle = angle * (180.0f / VFRAME_PI);
+		baseObject->Angle = sf::degrees(angle * (180.0f / VFRAME_PI));
 		baseObject->AngleVelocity = angleVel * (180.0f / VFRAME_PI);
 
 		cpBodySetAngle(body, angle);

@@ -3,11 +3,11 @@
 
 VRenderLayer::VRenderLayer(unsigned int maxSize) : VGroup(maxSize)
 {
-	vertexArray.setPrimitiveType(sf::Quads);
-	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
-	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
-	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
-	vertexArray.append(sf::Vertex(sf::Vector2f(0.f, 0.f), sf::Color::White, sf::Vector2f(0.f, 0.f)));
+	vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
+	vertexArray.append({});
+	vertexArray.append({});
+	vertexArray.append({});
+	vertexArray.append({});
 }
 
 void VRenderLayer::Destroy()
@@ -57,11 +57,14 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 	{
 		float Width = MainView.getSize().x;
 		float Height = MainView.getSize().y;
-		vertexArray[0] = sf::Vertex(sf::Vector2f(0.0f, Height), vertexArray[0].color, sf::Vector2f(0.0f, Height));
-		vertexArray[1] = sf::Vertex(sf::Vector2f(0.0f, 0.0f), vertexArray[0].color, sf::Vector2f());
-		vertexArray[2] = sf::Vertex(sf::Vector2f(Width, 0.0f), vertexArray[0].color, sf::Vector2f(Width, 0.0f));
-		vertexArray[3] = sf::Vertex(sf::Vector2f(Width, Height), vertexArray[0].color, sf::Vector2f(Width, Height));
-		renderTex.create((unsigned int)Width, (unsigned int)Height);
+		vertexArray[0] = { sf::Vector2f(0.0f, 0.0f),	vertexArray[0].color, sf::Vector2f() };
+		vertexArray[1] = { sf::Vector2f(Width, 0.0f),	vertexArray[0].color, sf::Vector2f(Width, 0.0f) };
+		vertexArray[2] = { sf::Vector2f(0.0f, Height),	vertexArray[0].color, sf::Vector2f(0.0f, Height) };
+		vertexArray[3] = { sf::Vector2f(Width, Height),	vertexArray[0].color, sf::Vector2f(Width, Height) };
+		if (!renderTex.resize({ (unsigned int)Width, (unsigned int)Height }))
+		{
+			VLogError("Invalid size for a RenderLayer");
+		}
 	}
 
 	renderTex.setView(MainView);
@@ -76,7 +79,12 @@ void VRenderLayer::Draw(sf::RenderTarget& RenderTarget)
 	else
 	{
 		if (postProcessTex.getSize() != renderTex.getSize())
-			postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
+		{
+			if (!postProcessTex.resize(renderTex.getSize()))
+			{
+				VLogError("Invalid Texture Size to resize post processing texture in RenderGroup");
+			}
+		}
 
 		postProcessTex.clear(sf::Color::Transparent);
 		PostEffect->Apply(renderTex.getTexture(), postProcessTex);

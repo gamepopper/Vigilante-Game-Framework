@@ -5,7 +5,7 @@ void V9Slice::updateTransform()
 {
 	sf::Vector2f origin = sf::Vector2f(Origin.x * Size.x, Origin.y * Size.y);
 
-	float angle = -Angle * VFRAME_PI / 180.f;
+	float angle = -Angle.asRadians();
 	float cosine = static_cast<float>(std::cos(angle));
 	float sine = static_cast<float>(std::sin(angle));
 	float sxc = Scale.x * cosine;
@@ -38,100 +38,136 @@ void V9Slice::updateFrame()
 	//0 3
 
 	//Top Left Corner
-	vertexArray[(0 * 4) + 0].position = sf::Vector2f();
-	vertexArray[(0 * 4) + 1].position = sf::Vector2f(cornerSize.x, 0.0f);
-	vertexArray[(0 * 4) + 2].position = sf::Vector2f(cornerSize.x, cornerSize.y);
-	vertexArray[(0 * 4) + 3].position = sf::Vector2f(0.0f, cornerSize.y);
-	vertexArray[(0 * 4) + 0].texCoords = sf::Vector2f((float)textureRect.left, (float)textureRect.top);
-	vertexArray[(0 * 4) + 1].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top);
-	vertexArray[(0 * 4) + 2].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + cornerSize.y);
-	vertexArray[(0 * 4) + 3].texCoords = sf::Vector2f((float)textureRect.left, (float)textureRect.top + cornerSize.y);
+	vertexArray[(0 * 6) + 0].position = sf::Vector2f();
+	vertexArray[(0 * 6) + 1].position = sf::Vector2f(cornerSize.x, 0.0f);
+	vertexArray[(0 * 6) + 2].position = sf::Vector2f(cornerSize.x, cornerSize.y);
+	vertexArray[(0 * 6) + 3].position = sf::Vector2f(cornerSize.x, cornerSize.y);
+	vertexArray[(0 * 6) + 4].position = sf::Vector2f(0.0f, cornerSize.y);
+	vertexArray[(0 * 6) + 5].position = sf::Vector2f();
+	vertexArray[(0 * 6) + 0].texCoords = sf::Vector2f((float)textureRect.position.x, (float)textureRect.position.y);
+	vertexArray[(0 * 6) + 1].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y);
+	vertexArray[(0 * 6) + 2].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(0 * 6) + 3].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(0 * 6) + 4].texCoords = sf::Vector2f((float)textureRect.position.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(0 * 6) + 5].texCoords = sf::Vector2f((float)textureRect.position.x, (float)textureRect.position.y);
 
 	//Top Bar
-	vertexArray[(1 * 4) + 0].position = sf::Vector2f(cornerSize.x, 0.0f);
-	vertexArray[(1 * 4) + 1].position = sf::Vector2f(cornerSize.x + barSize.x, 0.0f);
-	vertexArray[(1 * 4) + 2].position = sf::Vector2f(cornerSize.x + barSize.x, cornerSize.y);
-	vertexArray[(1 * 4) + 3].position = sf::Vector2f(cornerSize.x, cornerSize.y);
-	vertexArray[(1 * 4) + 0].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top);
-	vertexArray[(1 * 4) + 1].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top);
-	vertexArray[(1 * 4) + 2].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + cornerSize.y);
-	vertexArray[(1 * 4) + 3].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + cornerSize.y);
+	vertexArray[(1 * 6) + 0].position = sf::Vector2f(cornerSize.x, 0.0f);
+	vertexArray[(1 * 6) + 1].position = sf::Vector2f(cornerSize.x + barSize.x, 0.0f);
+	vertexArray[(1 * 6) + 2].position = sf::Vector2f(cornerSize.x + barSize.x, cornerSize.y);
+	vertexArray[(1 * 6) + 3].position = sf::Vector2f(cornerSize.x + barSize.x, cornerSize.y);
+	vertexArray[(1 * 6) + 4].position = sf::Vector2f(cornerSize.x, cornerSize.y);
+	vertexArray[(1 * 6) + 5].position = sf::Vector2f(cornerSize.x, 0.0f);
+	vertexArray[(1 * 6) + 0].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y);
+	vertexArray[(1 * 6) + 1].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y);
+	vertexArray[(1 * 6) + 2].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(1 * 6) + 3].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(1 * 6) + 4].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(1 * 6) + 5].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y);
 
 	//Top Right Corner
-	vertexArray[(2 * 4) + 0].position = sf::Vector2f(Size.x - cornerSize.x, 0.0f);
-	vertexArray[(2 * 4) + 1].position = sf::Vector2f(Size.x, 0.0f);
-	vertexArray[(2 * 4) + 2].position = sf::Vector2f(Size.x, cornerSize.y);
-	vertexArray[(2 * 4) + 3].position = sf::Vector2f(Size.x - cornerSize.x, cornerSize.y);
-	vertexArray[(2 * 4) + 0].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top);
-	vertexArray[(2 * 4) + 1].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width, (float)textureRect.top);
-	vertexArray[(2 * 4) + 2].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width, (float)textureRect.top + cornerSize.y);
-	vertexArray[(2 * 4) + 3].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + cornerSize.y);
+	vertexArray[(2 * 6) + 0].position = sf::Vector2f(Size.x - cornerSize.x, 0.0f);
+	vertexArray[(2 * 6) + 1].position = sf::Vector2f(Size.x, 0.0f);
+	vertexArray[(2 * 6) + 2].position = sf::Vector2f(Size.x, cornerSize.y);
+	vertexArray[(2 * 6) + 3].position = sf::Vector2f(Size.x, cornerSize.y);
+	vertexArray[(2 * 6) + 4].position = sf::Vector2f(Size.x - cornerSize.x, cornerSize.y);
+	vertexArray[(2 * 6) + 5].position = sf::Vector2f(Size.x - cornerSize.x, 0.0f);
+	vertexArray[(2 * 6) + 0].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y);
+	vertexArray[(2 * 6) + 1].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x, (float)textureRect.position.y);
+	vertexArray[(2 * 6) + 2].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(2 * 6) + 3].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(2 * 6) + 4].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(2 * 6) + 5].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y);
 
 	//Left Bar
-	vertexArray[(3 * 4) + 0].position = sf::Vector2f(0.0f, cornerSize.y);
-	vertexArray[(3 * 4) + 1].position = sf::Vector2f(cornerSize.x, cornerSize.y);
-	vertexArray[(3 * 4) + 2].position = sf::Vector2f(cornerSize.x, cornerSize.y + barSize.y);
-	vertexArray[(3 * 4) + 3].position = sf::Vector2f(0.0f, cornerSize.y + barSize.y);
-	vertexArray[(3 * 4) + 0].texCoords = sf::Vector2f((float)textureRect.left, (float)textureRect.top + cornerSize.y);
-	vertexArray[(3 * 4) + 1].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + cornerSize.y);
-	vertexArray[(3 * 4) + 2].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + textureRect.height - cornerSize.y);
-	vertexArray[(3 * 4) + 3].texCoords = sf::Vector2f((float)textureRect.left, (float)textureRect.top + textureRect.height - cornerSize.y);
+	vertexArray[(3 * 6) + 0].position = sf::Vector2f(0.0f, cornerSize.y);
+	vertexArray[(3 * 6) + 1].position = sf::Vector2f(cornerSize.x, cornerSize.y);
+	vertexArray[(3 * 6) + 2].position = sf::Vector2f(cornerSize.x, cornerSize.y + barSize.y);
+	vertexArray[(3 * 6) + 3].position = sf::Vector2f(cornerSize.x, cornerSize.y + barSize.y);
+	vertexArray[(3 * 6) + 4].position = sf::Vector2f(0.0f, cornerSize.y + barSize.y);
+	vertexArray[(3 * 6) + 5].position = sf::Vector2f(0.0f, cornerSize.y);
+	vertexArray[(3 * 6) + 0].texCoords = sf::Vector2f((float)textureRect.position.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(3 * 6) + 1].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(3 * 6) + 2].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(3 * 6) + 3].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(3 * 6) + 4].texCoords = sf::Vector2f((float)textureRect.position.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(3 * 6) + 5].texCoords = sf::Vector2f((float)textureRect.position.x, (float)textureRect.position.y + cornerSize.y);
 
 	//Centre
-	vertexArray[(4 * 4) + 0].position = sf::Vector2f(cornerSize.x, cornerSize.y);
-	vertexArray[(4 * 4) + 1].position = sf::Vector2f(cornerSize.x + barSize.x, cornerSize.y);
-	vertexArray[(4 * 4) + 2].position = sf::Vector2f(cornerSize.x + barSize.x, cornerSize.y + barSize.y);
-	vertexArray[(4 * 4) + 3].position = sf::Vector2f(cornerSize.x, cornerSize.y + barSize.y);
-	vertexArray[(4 * 4) + 0].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + cornerSize.y);
-	vertexArray[(4 * 4) + 1].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + cornerSize.y);
-	vertexArray[(4 * 4) + 2].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + textureRect.height - cornerSize.y);
-	vertexArray[(4 * 4) + 3].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + textureRect.height - cornerSize.y);
+	vertexArray[(4 * 6) + 0].position = sf::Vector2f(cornerSize.x, cornerSize.y);
+	vertexArray[(4 * 6) + 1].position = sf::Vector2f(cornerSize.x + barSize.x, cornerSize.y);
+	vertexArray[(4 * 6) + 2].position = sf::Vector2f(cornerSize.x + barSize.x, cornerSize.y + barSize.y);
+	vertexArray[(4 * 6) + 3].position = sf::Vector2f(cornerSize.x + barSize.x, cornerSize.y + barSize.y);
+	vertexArray[(4 * 6) + 4].position = sf::Vector2f(cornerSize.x, cornerSize.y + barSize.y);
+	vertexArray[(4 * 6) + 5].position = sf::Vector2f(cornerSize.x, cornerSize.y);
+	vertexArray[(4 * 6) + 0].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(4 * 6) + 1].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(4 * 6) + 2].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(4 * 6) + 3].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(4 * 6) + 4].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(4 * 6) + 5].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + cornerSize.y);
 
 	//Right Bar
-	vertexArray[(5 * 4) + 0].position = sf::Vector2f(Size.x - cornerSize.x, cornerSize.y);
-	vertexArray[(5 * 4) + 1].position = sf::Vector2f(Size.x, cornerSize.y);
-	vertexArray[(5 * 4) + 2].position = sf::Vector2f(Size.x, cornerSize.y + barSize.y);
-	vertexArray[(5 * 4) + 3].position = sf::Vector2f(Size.x - cornerSize.x, cornerSize.y + barSize.y);
-	vertexArray[(5 * 4) + 0].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + cornerSize.y);
-	vertexArray[(5 * 4) + 1].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width, (float)textureRect.top + cornerSize.y);
-	vertexArray[(5 * 4) + 2].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width, (float)textureRect.top + textureRect.height - cornerSize.y);
-	vertexArray[(5 * 4) + 3].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + textureRect.height - cornerSize.y);
+	vertexArray[(5 * 6) + 0].position = sf::Vector2f(Size.x - cornerSize.x, cornerSize.y);
+	vertexArray[(5 * 6) + 1].position = sf::Vector2f(Size.x, cornerSize.y);
+	vertexArray[(5 * 6) + 2].position = sf::Vector2f(Size.x, cornerSize.y + barSize.y);
+	vertexArray[(5 * 6) + 3].position = sf::Vector2f(Size.x, cornerSize.y + barSize.y);
+	vertexArray[(5 * 6) + 4].position = sf::Vector2f(Size.x - cornerSize.x, cornerSize.y + barSize.y);
+	vertexArray[(5 * 6) + 5].position = sf::Vector2f(Size.x - cornerSize.x, cornerSize.y);
+	vertexArray[(5 * 6) + 0].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(5 * 6) + 1].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x, (float)textureRect.position.y + cornerSize.y);
+	vertexArray[(5 * 6) + 2].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(5 * 6) + 3].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(5 * 6) + 4].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(5 * 6) + 5].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + cornerSize.y);
 
 	//Bottom Left Corner
-	vertexArray[(6 * 4) + 0].position = sf::Vector2f(0.0f, Size.y - cornerSize.y);
-	vertexArray[(6 * 4) + 1].position = sf::Vector2f(cornerSize.x, Size.y - cornerSize.y);
-	vertexArray[(6 * 4) + 2].position = sf::Vector2f(cornerSize.x, Size.y);
-	vertexArray[(6 * 4) + 3].position = sf::Vector2f(0.0f, Size.y);
-	vertexArray[(6 * 4) + 0].texCoords = sf::Vector2f((float)textureRect.left, (float)textureRect.top + textureRect.height - cornerSize.y);
-	vertexArray[(6 * 4) + 1].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + textureRect.height - cornerSize.y);
-	vertexArray[(6 * 4) + 2].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + textureRect.height);
-	vertexArray[(6 * 4) + 3].texCoords = sf::Vector2f((float)textureRect.left, (float)textureRect.top + textureRect.height);
+	vertexArray[(6 * 6) + 0].position = sf::Vector2f(0.0f, Size.y - cornerSize.y);
+	vertexArray[(6 * 6) + 1].position = sf::Vector2f(cornerSize.x, Size.y - cornerSize.y);
+	vertexArray[(6 * 6) + 2].position = sf::Vector2f(cornerSize.x, Size.y);
+	vertexArray[(6 * 6) + 3].position = sf::Vector2f(cornerSize.x, Size.y);
+	vertexArray[(6 * 6) + 4].position = sf::Vector2f(0.0f, Size.y);
+	vertexArray[(6 * 6) + 5].position = sf::Vector2f(0.0f, Size.y - cornerSize.y);
+	vertexArray[(6 * 6) + 0].texCoords = sf::Vector2f((float)textureRect.position.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(6 * 6) + 1].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(6 * 6) + 2].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + textureRect.size.y);
+	vertexArray[(6 * 6) + 3].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + textureRect.size.y);
+	vertexArray[(6 * 6) + 4].texCoords = sf::Vector2f((float)textureRect.position.x, (float)textureRect.position.y + textureRect.size.y);
+	vertexArray[(6 * 6) + 5].texCoords = sf::Vector2f((float)textureRect.position.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
 
 	//Bottom Bar
-	vertexArray[(7 * 4) + 0].position = sf::Vector2f(cornerSize.x, Size.y - cornerSize.y);
-	vertexArray[(7 * 4) + 1].position = sf::Vector2f(cornerSize.x + barSize.x, Size.y - cornerSize.y);
-	vertexArray[(7 * 4) + 2].position = sf::Vector2f(cornerSize.x + barSize.x, Size.y);
-	vertexArray[(7 * 4) + 3].position = sf::Vector2f(cornerSize.x, Size.y);
-	vertexArray[(7 * 4) + 0].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + textureRect.height - cornerSize.y);
-	vertexArray[(7 * 4) + 1].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + textureRect.height - cornerSize.y);
-	vertexArray[(7 * 4) + 2].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + textureRect.height);
-	vertexArray[(7 * 4) + 3].texCoords = sf::Vector2f((float)textureRect.left + cornerSize.x, (float)textureRect.top + textureRect.height);
+	vertexArray[(7 * 6) + 0].position = sf::Vector2f(cornerSize.x, Size.y - cornerSize.y);
+	vertexArray[(7 * 6) + 1].position = sf::Vector2f(cornerSize.x + barSize.x, Size.y - cornerSize.y);
+	vertexArray[(7 * 6) + 2].position = sf::Vector2f(cornerSize.x + barSize.x, Size.y);
+	vertexArray[(7 * 6) + 3].position = sf::Vector2f(cornerSize.x + barSize.x, Size.y);
+	vertexArray[(7 * 6) + 4].position = sf::Vector2f(cornerSize.x, Size.y);
+	vertexArray[(7 * 6) + 5].position = sf::Vector2f(cornerSize.x, Size.y - cornerSize.y);
+	vertexArray[(7 * 6) + 0].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(7 * 6) + 1].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(7 * 6) + 2].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + textureRect.size.y);
+	vertexArray[(7 * 6) + 3].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + textureRect.size.y);
+	vertexArray[(7 * 6) + 4].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + textureRect.size.y);
+	vertexArray[(7 * 6) + 5].texCoords = sf::Vector2f((float)textureRect.position.x + cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
 
 	//Bottom Right Corner
-	vertexArray[(8 * 4) + 0].position = sf::Vector2f(Size.x - cornerSize.x, Size.y - cornerSize.y);
-	vertexArray[(8 * 4) + 1].position = sf::Vector2f(Size.x, Size.y - cornerSize.y);
-	vertexArray[(8 * 4) + 2].position = sf::Vector2f(Size.x, Size.y);
-	vertexArray[(8 * 4) + 3].position = sf::Vector2f(Size.x - cornerSize.x, Size.y);
-	vertexArray[(8 * 4) + 0].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + textureRect.height - cornerSize.y);
-	vertexArray[(8 * 4) + 1].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width, (float)textureRect.top + textureRect.height - cornerSize.y);
-	vertexArray[(8 * 4) + 2].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width, (float)textureRect.top + textureRect.height);
-	vertexArray[(8 * 4) + 3].texCoords = sf::Vector2f((float)textureRect.left + textureRect.width - cornerSize.x, (float)textureRect.top + textureRect.height);
+	vertexArray[(8 * 6) + 0].position = sf::Vector2f(Size.x - cornerSize.x, Size.y - cornerSize.y);
+	vertexArray[(8 * 6) + 1].position = sf::Vector2f(Size.x, Size.y - cornerSize.y);
+	vertexArray[(8 * 6) + 2].position = sf::Vector2f(Size.x, Size.y);
+	vertexArray[(8 * 6) + 3].position = sf::Vector2f(Size.x, Size.y);
+	vertexArray[(8 * 6) + 4].position = sf::Vector2f(Size.x - cornerSize.x, Size.y);
+	vertexArray[(8 * 6) + 5].position = sf::Vector2f(Size.x - cornerSize.x, Size.y - cornerSize.y);
+	vertexArray[(8 * 6) + 0].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(8 * 6) + 1].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
+	vertexArray[(8 * 6) + 2].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x, (float)textureRect.position.y + textureRect.size.y);
+	vertexArray[(8 * 6) + 3].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x, (float)textureRect.position.y + textureRect.size.y);
+	vertexArray[(8 * 6) + 4].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + textureRect.size.y);
+	vertexArray[(8 * 6) + 5].texCoords = sf::Vector2f((float)textureRect.position.x + textureRect.size.x - cornerSize.x, (float)textureRect.position.y + textureRect.size.y - cornerSize.y);
 }
 
 V9Slice::V9Slice(sf::Vector2f Position, sf::Vector2f Size, const sf::String& Filename, const sf::Vector2f& Corner) : VObject(Position, Size)
 {
-	vertexArray.setPrimitiveType(sf::Quads);
-	vertexArray.resize(4 * 9);
+	vertexArray.setPrimitiveType(sf::PrimitiveType::Triangles);
+	vertexArray.resize(6 * 9);
 
 	if (Filename != "")
 		LoadGraphic(Filename, Corner);
@@ -143,8 +179,8 @@ V9Slice::V9Slice(sf::Vector2f Position, sf::Vector2f Size, const sf::String& Fil
 
 V9Slice::V9Slice(float x, float y, float width, float height, const sf::String& Filename, const sf::Vector2f& Corner) : VObject(x, y, width, height)
 {
-	vertexArray.setPrimitiveType(sf::Quads);
-	vertexArray.resize(4 * 9);
+	vertexArray.setPrimitiveType(sf::PrimitiveType::Triangles);
+	vertexArray.resize(6 * 9);
 
 	if (Filename != "")
 		LoadGraphic(Filename, Corner);

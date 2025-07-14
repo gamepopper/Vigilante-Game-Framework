@@ -8,7 +8,7 @@ VSprite::VSprite(sf::Vector2f Position, const sf::String& Filename) : VObject(Po
 	Scale = sf::Vector2f(1, 1);
 	Offset = sf::Vector2f();
 
-	vertexArray.setPrimitiveType(sf::Quads);
+	vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
 	vertexArray.resize(4);
 
 	if (Filename != "")
@@ -28,7 +28,7 @@ VSprite::VSprite(float x, float y, const sf::String& filename) : VObject(x, y)
 	Scale = sf::Vector2f(1, 1);
 	Offset = sf::Vector2f();
 
-	vertexArray.setPrimitiveType(sf::Quads);
+	vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
 	vertexArray.resize(4);
 
 	if (filename != "")
@@ -63,14 +63,14 @@ void VSprite::setSize(unsigned int texWidth, unsigned int texHeight, bool animat
 	Radius = Size.x < Size.y ? Size.x / 2 : Size.y / 2;
 
 	vertexArray[0].position = sf::Vector2f();
-	vertexArray[1].position = sf::Vector2f(Size.x, 0.0f);
-	vertexArray[2].position = sf::Vector2f(Size.x, Size.y);
-	vertexArray[3].position = sf::Vector2f(0.0f, Size.y);
+	vertexArray[2].position = sf::Vector2f(Size.x, 0.0f);
+	vertexArray[3].position = sf::Vector2f(Size.x, Size.y);
+	vertexArray[1].position = sf::Vector2f(0.0f, Size.y);
 }
 
 void VSprite::updateTransform()
 {
-	float angle = -Angle * VFRAME_PI / 180.f;
+	float angle = -Angle.asRadians();
 	float cosine = static_cast<float>(std::cos(angle));
 	float sine = static_cast<float>(std::sin(angle));
 	float sxc = Scale.x * cosine;
@@ -97,24 +97,24 @@ void VSprite::updateTransform()
 void VSprite::updateFrame()
 {
 	sf::FloatRect rect;
-	rect.left		= FlipX ? Animation.GetU() + (float)FrameSize.x : Animation.GetU();
-	rect.top		= FlipY ? Animation.GetV() + (float)FrameSize.y : Animation.GetV();
-	rect.width		= FlipX ? -(float)FrameSize.x : (float)FrameSize.x;
-	rect.height		= FlipY ? -(float)FrameSize.y : (float)FrameSize.y;
-	vertexArray[0].texCoords = sf::Vector2f(rect.left,				rect.top);
-	vertexArray[1].texCoords = sf::Vector2f(rect.left + rect.width, rect.top);
-	vertexArray[2].texCoords = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
-	vertexArray[3].texCoords = sf::Vector2f(rect.left,				rect.top + rect.height);
+	rect.position.x		= FlipX ? Animation.GetU() + (float)FrameSize.x : Animation.GetU();
+	rect.position.y		= FlipY ? Animation.GetV() + (float)FrameSize.y : Animation.GetV();
+	rect.size.x		= FlipX ? -(float)FrameSize.x : (float)FrameSize.x;
+	rect.size.y		= FlipY ? -(float)FrameSize.y : (float)FrameSize.y;
+	vertexArray[0].texCoords = sf::Vector2f(rect.position.x,				rect.position.y);
+	vertexArray[2].texCoords = sf::Vector2f(rect.position.x + rect.size.x, rect.position.y);
+	vertexArray[3].texCoords = sf::Vector2f(rect.position.x + rect.size.x, rect.position.y + rect.size.y);
+	vertexArray[1].texCoords = sf::Vector2f(rect.position.x,				rect.position.y + rect.size.y);
 }
 
-VSprite* VSprite::LoadGraphic(const sf::String& filename, bool animated, int width, int height, const sf::IntRect& area)
+VSprite* VSprite::LoadGraphic(const sf::String& filename, bool animated, unsigned int width, unsigned int height, const sf::IntRect& area)
 {
 	RenderState.texture = &VGlobal::p()->Content->LoadTexture(filename);
 
 	setSize(
-		area.width == 0 ? RenderState.texture->getSize().x : area.width, 
-		area.height == 0 ? RenderState.texture->getSize().y : area.height,
-		animated, width, height, area.left, area.top
+		area.size.x == 0 ? RenderState.texture->getSize().x : area.size.x, 
+		area.size.y == 0 ? RenderState.texture->getSize().y : area.size.y,
+		animated, width, height, area.position.x, area.position.y
 		);
 
 	updateFrame();
@@ -122,21 +122,21 @@ VSprite* VSprite::LoadGraphic(const sf::String& filename, bool animated, int wid
 	return this;
 }
 
-VSprite* VSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, int width, int height, const sf::IntRect& area)
+VSprite* VSprite::LoadGraphicFromTexture(sf::Texture& texture, bool animated, unsigned int width, unsigned int height, const sf::IntRect& area)
 {
 	RenderState.texture = &texture;
 
 	setSize(
-		area.width == 0 ? RenderState.texture->getSize().x : area.width,
-		area.height == 0 ? RenderState.texture->getSize().y : area.height,
-		animated, width, height, area.left, area.top
+		area.size.x == 0 ? RenderState.texture->getSize().x : area.size.x,
+		area.size.y == 0 ? RenderState.texture->getSize().y : area.size.y,
+		animated, width, height, area.position.x, area.position.y
 		);
 
 	updateFrame();
 	return this;
 }
 
-VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outline, sf::Color outlineColor)
+VSprite* VSprite::MakeGraphic(unsigned int width, unsigned int height, sf::Color color, float outline, sf::Color outlineColor)
 {
 	if (disposible && RenderState.texture)
 	{
@@ -150,22 +150,21 @@ VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outl
 	}
 
 	sf::Image image;
-	image.create(width, height, color);
+	image.resize({ width, height }, color);
 
-	for (int y = 0; y < height; y++)
+	for (unsigned int y = 0; y < height; y++)
 	{
-		for (int x = 0; x < width; x++)
+		for (unsigned int x = 0; x < width; x++)
 		{
 			if (x < outline || y < outline || x > width - outline || y > height - outline)
 			{
-				image.setPixel(x, y, outlineColor);
+				image.setPixel({ x, y }, outlineColor);
 			}
 		}
 	}
 
 	sf::Texture* texture = new sf::Texture();
-	texture->loadFromImage(image);
-	disposible = true;
+	disposible |= texture->loadFromImage(image);
 
 	RenderState.texture = texture;
 	setSize(width, height, false, width, height);
@@ -173,7 +172,7 @@ VSprite* VSprite::MakeGraphic(int width, int height, sf::Color color, float outl
 	return this;
 }
 
-VSprite* VSprite::MakeGraphicCircle(int radius, sf::Color color, float outline, sf::Color outlineColor)
+VSprite* VSprite::MakeGraphicCircle(unsigned int radius, sf::Color color, float outline, sf::Color outlineColor)
 {
 	if (disposible && RenderState.texture)
 	{
@@ -185,7 +184,7 @@ VSprite* VSprite::MakeGraphicCircle(int radius, sf::Color color, float outline, 
 	unsigned int diameter = radius * 2;
 
 	sf::Image image;
-	image.create(diameter, diameter, sf::Color::Transparent);
+	image.resize({ diameter, diameter }, sf::Color::Transparent);
 
 	for (unsigned int y = 0; y < diameter; y++)
 	{
@@ -198,16 +197,15 @@ VSprite* VSprite::MakeGraphicCircle(int radius, sf::Color color, float outline, 
 			if (length <= (radius * radius))
 			{
 				if (outline <= 0 || length <= ((radius - outline) * (radius - outline)))
-					image.setPixel(x, y, color);
+					image.setPixel({ x, y }, color);
 				else
-					image.setPixel(x, y, outlineColor);
+					image.setPixel({ x, y }, outlineColor);
 			}
 		}
 	}
 
 	sf::Texture* texture = new sf::Texture();
-	texture->loadFromImage(image);
-	disposible = true;
+	disposible |= texture->loadFromImage(image);
 
 	RenderState.texture = texture;
 	setSize(radius * 2, radius * 2, false, radius * 2, radius * 2);
@@ -241,10 +239,10 @@ void VSprite::Draw(sf::RenderTarget& RenderTarget)
 	if (Animation.GetLastFrame() != Animation.GetCurrentFrame())
 		updateTexture = true;
 
-	if ((FlipX && vertexArray[2].texCoords.x - vertexArray[0].texCoords.x > 0) || (!FlipX && vertexArray[2].texCoords.x - vertexArray[0].texCoords.x < 0))
+	if ((FlipX && vertexArray[3].texCoords.x - vertexArray[0].texCoords.x > 0) || (!FlipX && vertexArray[3].texCoords.x - vertexArray[0].texCoords.x < 0))
 		updateTexture = true;
 
-	if ((FlipY && vertexArray[2].texCoords.y - vertexArray[0].texCoords.y > 0) || (!FlipY && vertexArray[2].texCoords.y - vertexArray[0].texCoords.y < 0))
+	if ((FlipY && vertexArray[3].texCoords.y - vertexArray[0].texCoords.y > 0) || (!FlipY && vertexArray[3].texCoords.y - vertexArray[0].texCoords.y < 0))
 		updateTexture = true;
 
 	if (updateTexture)

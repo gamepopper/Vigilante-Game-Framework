@@ -8,14 +8,14 @@
 
 V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(maxSize), contextSettings(settings)
 {
-	renderTex.create(width, height, settings);
+	renderTex.resize({ width, height }, settings);
 	Sprite->Position = sf::Vector2f(x, y);
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 }
 
 V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(maxSize), contextSettings(settings)
 {
-	renderTex.create(size.x, size.y, settings);
+	renderTex.resize(size, settings);
 	Sprite->Position = position;
 	Sprite->Size = sf::Vector2f(size);
 }
@@ -55,10 +55,10 @@ void V3DScene::Destroy()
 	}
 }
 
-void V3DScene::Resize(int width, int height)
+void V3DScene::Resize(unsigned int width, unsigned int height)
 {
-	postProcessTex.create(width, height);
-	renderTex.create(width, height, contextSettings);
+	postProcessTex.resize({ width, height });
+	renderTex.resize({ width, height }, contextSettings);
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 }
 
@@ -130,13 +130,13 @@ const sf::Texture& V3DScene::GetTexture()
 	for (CurrentCamera = 0; CurrentCamera < Camera.size(); CurrentCamera++)
 	{
 		sf::IntRect Viewport(
-			(int)(Camera[CurrentCamera]->Viewport.left		* renderTex.getSize().x),
-			(int)(Camera[CurrentCamera]->Viewport.top		* renderTex.getSize().y),
-			(int)(Camera[CurrentCamera]->Viewport.width		* renderTex.getSize().x),
-			(int)(Camera[CurrentCamera]->Viewport.height	* renderTex.getSize().y)
+			{ (int)(Camera[CurrentCamera]->Viewport.position.x * renderTex.getSize().x),
+			(int)(Camera[CurrentCamera]->Viewport.position.y * renderTex.getSize().y) },
+			{ (int)(Camera[CurrentCamera]->Viewport.size.x * renderTex.getSize().x),
+			(int)(Camera[CurrentCamera]->Viewport.size.y * renderTex.getSize().y) }
 		);
 
-		glCheck(glViewport(Viewport.left, Viewport.top, Viewport.width, Viewport.height));
+		glCheck(glViewport(Viewport.position.x, Viewport.position.y, Viewport.size.x, Viewport.size.y));
 		Shader->SetCamera(Camera[CurrentCamera].get());
 		Shader->Update();
 		Shader->Bind();
@@ -187,7 +187,7 @@ void V3DScene::Draw(sf::RenderTarget& RenderTarget)
 	{
 		if (postProcessTex.getSize().x == 0 || postProcessTex.getSize().y == 0)
 		{
-			postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
+			postProcessTex.resize(renderTex.getSize());
 		}
 
 		PostEffect->Apply(renderTex.getTexture(), postProcessTex);

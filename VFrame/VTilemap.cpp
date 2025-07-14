@@ -19,8 +19,8 @@ void VTilemap::setupTilemap(const sf::String& graphicFile, int tileWidth, int ti
 	Size.x *= TileSize.x;
 	Size.y *= TileSize.y;
 
-	tileMapWidth = (graphicsArea.width == 0 ? RenderState.texture->getSize().x : graphicsArea.width) / TileSize.x;
-	textureOffset = sf::Vector2u(graphicsArea.left, graphicsArea.top);
+	tileMapWidth = (graphicsArea.size.x == 0 ? RenderState.texture->getSize().x : graphicsArea.size.x) / TileSize.x;
+	textureOffset = sf::Vector2u(graphicsArea.position.x, graphicsArea.position.y);
 
 	AutoTile = autoTile;
 
@@ -34,7 +34,7 @@ void VTilemap::updateTransform()
 		updateCollisionBox();
 	}
 
-	float angle = -Angle * VFRAME_PI / 180.f;
+	float angle = -Angle.asRadians();
 	float cosine = static_cast<float>(std::cos(angle));
 	float sine = static_cast<float>(std::sin(angle));
 	float sxc = Scale.x * cosine;
@@ -53,7 +53,7 @@ void VTilemap::updateTransform()
 void VTilemap::updateTilemap()
 {
 	autotile.clear();
-	vertices.setPrimitiveType(sf::Quads);
+	vertices.setPrimitiveType(sf::PrimitiveType::Triangles);
 
 	if (renderDir.empty())
 		return;
@@ -95,15 +95,10 @@ void VTilemap::updateTilemap()
 			if (renderDir.find(tilemap[(y * mapWidth) + x]) != renderDir.end())
 			{
 				sf::Vertex quad[4];
-				quad[0] = sf::Vertex();
-				quad[1] = sf::Vertex();
-				quad[2] = sf::Vertex();
-				quad[3] = sf::Vertex();
-
 				quad[0].position = sf::Vector2f(sf::Vector2u(x * TileSize.x,		y * TileSize.y));
-				quad[1].position = sf::Vector2f(sf::Vector2u((x + 1) * TileSize.x,	y * TileSize.y));
+				quad[1].position = sf::Vector2f(sf::Vector2u(x * TileSize.x,		(y + 1) * TileSize.y));
 				quad[2].position = sf::Vector2f(sf::Vector2u((x + 1) * TileSize.x,	(y + 1) * TileSize.y));
-				quad[3].position = sf::Vector2f(sf::Vector2u(x * TileSize.x,		(y + 1) * TileSize.y));
+				quad[3].position = sf::Vector2f(sf::Vector2u((x + 1) * TileSize.x,	y * TileSize.y));
 
 				int TileID = AutoTile ? autotile[(y * mapWidth) + x] + (renderDir[tilemap[(y * mapWidth) + x]]->AutoTileLevel * 16) : 
 					renderDir[tilemap[(y * mapWidth) + x]]->TileNumber;
@@ -111,9 +106,9 @@ void VTilemap::updateTilemap()
 				int v = TileID / tileMapWidth;
 
 				quad[0].texCoords = sf::Vector2f(textureOffset + sf::Vector2u(u * TileSize.x,		v * TileSize.y));
-				quad[1].texCoords = sf::Vector2f(textureOffset + sf::Vector2u((u + 1) * TileSize.x, v * TileSize.y));
+				quad[1].texCoords = sf::Vector2f(textureOffset + sf::Vector2u(u * TileSize.x, (v + 1) * TileSize.y));
 				quad[2].texCoords = sf::Vector2f(textureOffset + sf::Vector2u((u + 1) * TileSize.x, (v + 1) * TileSize.y));
-				quad[3].texCoords = sf::Vector2f(textureOffset + sf::Vector2u(u * TileSize.x, (v + 1) * TileSize.y));
+				quad[3].texCoords = sf::Vector2f(textureOffset + sf::Vector2u((u + 1) * TileSize.x, v * TileSize.y));
 
 				quad[0].color = colour;
 				quad[1].color = colour;
@@ -125,17 +120,21 @@ void VTilemap::updateTilemap()
 					vertices[vertexOffset + 0] = quad[0];
 					vertices[vertexOffset + 1] = quad[1];
 					vertices[vertexOffset + 2] = quad[2];
-					vertices[vertexOffset + 3] = quad[3];
+					vertices[vertexOffset + 3] = quad[2];
+					vertices[vertexOffset + 4] = quad[3];
+					vertices[vertexOffset + 5] = quad[0];
 				}
 				else
 				{
 					vertices.append(quad[0]);
 					vertices.append(quad[1]);
 					vertices.append(quad[2]);
+					vertices.append(quad[2]);
 					vertices.append(quad[3]);
+					vertices.append(quad[0]);
 				}
 
-				vertexOffset += 4;
+				vertexOffset += 6;
 			}
 		}
 

@@ -109,7 +109,7 @@ VAnimationManager::~VAnimationManager()
 
 sf::IntRect VAnimationManager::GetTextureArea()
 {
-	return sf::IntRect(offsetX, offsetY, frameWidth, frameHeight);
+	return sf::IntRect({ offsetX, offsetY }, { frameWidth, frameHeight });
 }
 
 void VAnimationManager::AddAnimation(const sf::String& name, const std::vector<int>& Frames, float FramesPerSecond, bool Looping, bool Reverse)

@@ -93,7 +93,7 @@ public:
 	* @param width Width of the sprite and texture area.
 	* @param height Height of the sprite and texture area.
 	*/
-	virtual void Resize(int width, int height) override;
+	virtual void Resize(unsigned int width, unsigned int height) override;
 
 	///@param value If true, sets the scene to be the current active context.
 	void SetActive(bool value = true);

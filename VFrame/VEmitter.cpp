@@ -1,7 +1,7 @@
 #include "VEmitter.h"
 #include "VGlobal.h"
 
-VEmitter* VEmitter::LoadParticlesFromFile(int Amount, const sf::String& Filename, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
+VEmitter* VEmitter::LoadParticlesFromFile(int Amount, const sf::String& Filename, bool Animated, unsigned int Width, unsigned int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
 	Clear(true);
 
@@ -12,7 +12,7 @@ VEmitter* VEmitter::LoadParticlesFromFile(int Amount, const sf::String& Filename
 	return this;
 }
 
-VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture& Texture, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
+VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture& Texture, bool Animated, unsigned int Width, unsigned int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
 	Clear(true);
 
@@ -23,7 +23,7 @@ VEmitter* VEmitter::LoadParticles(int Amount, sf::Texture& Texture, bool Animate
 	return this;
 }
 
-VEmitter* VEmitter::MakeParticles(int Amount, int Width, int Height, sf::Color Color)
+VEmitter* VEmitter::MakeParticles(int Amount, unsigned int Width, unsigned int Height, sf::Color Color)
 {
 	Clear(true);
 
@@ -36,25 +36,24 @@ VEmitter* VEmitter::MakeParticles(int Amount, int Width, int Height, sf::Color C
 	}
 
 	sf::Image image;
-	image.create(Width, Height, Color);
+	image.resize({ Width, Height }, Color);
 
 	sf::Texture* tex = new sf::Texture();
-	tex->loadFromImage(image);
-	disposible = true;
+	disposible |= tex->loadFromImage(image);
 
 	RenderState.texture = tex;
-	setSize(Amount, false, Width, Height, sf::IntRect(0, 0, Width, Height), false);
+	setSize(Amount, false, Width, Height, sf::IntRect(sf::Vector2i(), sf::Vector2i(Width, Height)), false);
 
 	return this;
 }
 
-void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const sf::IntRect& Rect, bool RandomFrames)
+void VEmitter::setSize(int Amount, bool Animated, unsigned int Width, unsigned int Height, const sf::IntRect& Rect, bool RandomFrames)
 {
 	sf::Vector2f Size;
 	int FrameCount;
 	int FrameCountY;
-	int TextureWidth = Rect.width == 0 ? RenderState.texture->getSize().x : Rect.width;
-	sf::Vector2f Offset = sf::Vector2f((float)Rect.left, (float)Rect.top);
+	int TextureWidth = Rect.size.x == 0 ? RenderState.texture->getSize().x : Rect.size.x;
+	sf::Vector2f Offset = sf::Vector2f((float)Rect.position.x, (float)Rect.position.y);
 
 	if (Animated)
 	{
@@ -65,7 +64,7 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const s
 	else
 	{
 		sf::Vector2u texRect = RenderState.texture->getSize();
-		Size = sf::Vector2f(sf::Vector2i(Rect.width * (Rect.width > 0) + texRect.x * (Rect.width == 0), Rect.height * (Rect.height > 0) + texRect.y * (Rect.height == 0)));
+		Size = sf::Vector2f(sf::Vector2i(Rect.size.x * (Rect.size.x > 0) + texRect.x * (Rect.size.x == 0), Rect.size.y * (Rect.size.y > 0) + texRect.y * (Rect.size.y == 0)));
 
 		FrameCount = 1;
 		FrameCountY = 1;
@@ -74,7 +73,7 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const s
 	ParticleInstance->Size = Size;
 
 	vertices.clear();
-	vertices.resize(Amount * 4);
+	vertices.resize(Amount * 6);
 
 	for (int i = 0; i < Amount; ++i)
 	{
@@ -85,10 +84,12 @@ void VEmitter::setSize(int Amount, bool Animated, int Width, int Height, const s
 		int FrameX = RandomFrame % FrameCount;
 		int FrameY = RandomFrame / FrameCount;
 
-		vertices[0 + (i * 4)].texCoords = Offset + sf::Vector2f(FrameX * Size.x, FrameY * Size.y);
-		vertices[1 + (i * 4)].texCoords = Offset + sf::Vector2f((FrameX + 1) * Size.x, FrameY * Size.y);
-		vertices[2 + (i * 4)].texCoords = Offset + sf::Vector2f((FrameX + 1) * Size.x, (FrameY + 1) * Size.y);
-		vertices[3 + (i * 4)].texCoords = Offset + sf::Vector2f(FrameX * Size.x, (FrameY + 1) * Size.y);
+		vertices[0 + (i * 6)].texCoords = Offset + sf::Vector2f(FrameX * Size.x, FrameY * Size.y);
+		vertices[1 + (i * 6)].texCoords = Offset + sf::Vector2f((FrameX + 1) * Size.x, FrameY * Size.y);
+		vertices[2 + (i * 6)].texCoords = Offset + sf::Vector2f((FrameX + 1) * Size.x, (FrameY + 1) * Size.y);
+		vertices[3 + (i * 6)].texCoords = Offset + sf::Vector2f((FrameX + 1) * Size.x, (FrameY + 1) * Size.y);
+		vertices[4 + (i * 6)].texCoords = Offset + sf::Vector2f(FrameX * Size.x, (FrameY + 1) * Size.y);
+		vertices[5 + (i * 6)].texCoords = Offset + sf::Vector2f(FrameX * Size.x, FrameY * Size.y);
 	}
 }
 
@@ -182,7 +183,7 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 	sf::View scrollView = RenderTarget.getDefaultView();
 
 	sf::Vector2f scroll = renderTargetView.getCenter() - scrollView.getCenter();
-	float rotate = renderTargetView.getRotation() - scrollView.getRotation();
+	sf::Angle rotate = renderTargetView.getRotation() - scrollView.getRotation();
 	float zoom = renderTargetView.getSize().x / scrollView.getSize().x;
 
 	if (ScrollFactor.x != 1 && ScrollFactor.y != 1 && RotateFactor != 1 && ZoomFactor != 1)
@@ -214,27 +215,35 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 			transformable.setRotation(base->Angle);
 			transform = transformable.getTransform();
 
-			vertices[0 + (i * 4)].position = transform.transformPoint(sf::Vector2f(0,0));
-			vertices[1 + (i * 4)].position = transform.transformPoint(sf::Vector2f(base->Size.x, 0));
-			vertices[2 + (i * 4)].position = transform.transformPoint(sf::Vector2f(base->Size.x, base->Size.y));
-			vertices[3 + (i * 4)].position = transform.transformPoint(sf::Vector2f(0, base->Size.y));
+			vertices[0 + (i * 6)].position = transform.transformPoint(sf::Vector2f(0,0));
+			vertices[1 + (i * 6)].position = transform.transformPoint(sf::Vector2f(base->Size.x, 0));
+			vertices[2 + (i * 6)].position = transform.transformPoint(sf::Vector2f(base->Size.x, base->Size.y));
+			vertices[3 + (i * 6)].position = transform.transformPoint(sf::Vector2f(base->Size.x, base->Size.y));
+			vertices[4 + (i * 6)].position = transform.transformPoint(sf::Vector2f(0, base->Size.y));
+			vertices[5 + (i * 6)].position = transform.transformPoint(sf::Vector2f(0, 0));
 
-			vertices[0 + (i * 4)].color = base->Tint;
-			vertices[1 + (i * 4)].color = base->Tint;
-			vertices[2 + (i * 4)].color = base->Tint;
-			vertices[3 + (i * 4)].color = base->Tint;
+			vertices[0 + (i * 6)].color = base->Tint;
+			vertices[1 + (i * 6)].color = base->Tint;
+			vertices[2 + (i * 6)].color = base->Tint;
+			vertices[3 + (i * 6)].color = base->Tint;
+			vertices[4 + (i * 6)].color = base->Tint;
+			vertices[5 + (i * 6)].color = base->Tint;
 		}
 		else
 		{
-			vertices[0 + (i * 4)].position = Position;
-			vertices[1 + (i * 4)].position = Position;
-			vertices[2 + (i * 4)].position = Position;
-			vertices[3 + (i * 4)].position = Position;
+			vertices[0 + (i * 6)].position = Position;
+			vertices[1 + (i * 6)].position = Position;
+			vertices[2 + (i * 6)].position = Position;
+			vertices[3 + (i * 6)].position = Position;
+			vertices[4 + (i * 6)].position = Position;
+			vertices[5 + (i * 6)].position = Position;
 
-			vertices[0 + (i * 4)].color.a = 0;
-			vertices[1 + (i * 4)].color.a = 0;
-			vertices[2 + (i * 4)].color.a = 0;
-			vertices[3 + (i * 4)].color.a = 0;
+			vertices[0 + (i * 6)].color.a = 0;
+			vertices[1 + (i * 6)].color.a = 0;
+			vertices[2 + (i * 6)].color.a = 0;
+			vertices[3 + (i * 6)].color.a = 0;
+			vertices[4 + (i * 6)].color.a = 0;
+			vertices[5 + (i * 6)].color.a = 0;
 		}
 	}
 
@@ -242,10 +251,10 @@ void VEmitter::Draw(sf::RenderTarget& RenderTarget)
 	float maxSize = fmaxf(scrollView.getSize().x, scrollView.getSize().y);
 	sf::FloatRect scrollBox = sf::FloatRect(scrollView.getCenter() - sf::Vector2f(maxSize, maxSize) / 2.0f, sf::Vector2f(maxSize, maxSize));
 
-	if (renderBox.left < scrollBox.left + scrollBox.width &&
-		renderBox.left + renderBox.width > scrollBox.left &&
-		renderBox.top <	 scrollBox.top + scrollBox.height &&
-		renderBox.top + renderBox.height > scrollBox.top)
+	if (renderBox.position.x < scrollBox.position.x + scrollBox.size.x &&
+		renderBox.position.x + renderBox.size.x > scrollBox.position.x &&
+		renderBox.position.y <	 scrollBox.position.y + scrollBox.size.y &&
+		renderBox.position.y + renderBox.size.y > scrollBox.position.y)
 	{
 		RenderTarget.setView(scrollView);
 		RenderTarget.draw(vertices, RenderState);
@@ -323,7 +332,7 @@ void VEmitter::EmitParticle()
 		particle->AngleDrag = VGlobal::p()->Random->GetFloat(AngleDragRange.B, AngleDragRange.A);
 		particle->AngleVelocity = VGlobal::p()->Random->GetFloat(AngleVelocityRange.B, AngleVelocityRange.A);
 
-		particle->Angle = VGlobal::p()->Random->GetFloat(AngleRange.B, AngleRange.A);
+		particle->Angle = sf::degrees(VGlobal::p()->Random->GetFloat(AngleRange.B, AngleRange.A));
 
 		particle->Lifespan = VGlobal::p()->Random->GetFloat(Lifespan.B, Lifespan.A);
 

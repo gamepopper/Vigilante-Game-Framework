@@ -32,7 +32,7 @@ void VTextPath::updateTextRender(const sf::String& text)
 	bool  outlined = outlineThickness > 0.0f;
 
 	sf::FloatRect xBounds = font->getGlyph(L'x', fontSize, bold).bounds;
-	float strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
+	float strikeThroughOffset = xBounds.position.y + xBounds.size.y / 2.f;
 
 	//float hspace = static_cast<float>(font->getGlyph(L' ', fontSize, bold).advance);
 
@@ -60,7 +60,7 @@ void VTextPath::updateTextRender(const sf::String& text)
 		float x = 0, xOffset = 0;
 		float y = static_cast<float>(fontSize);
 
-		sf::VertexArray verts(sf::Triangles, outlined ? item.length() * 6 * 2 : item.length() * 6);
+		sf::VertexArray verts(sf::PrimitiveType::Triangles, outlined ? item.length() * 6 * 2 : item.length() * 6);
 		//sf::Uint32 prevChar = 0;
 		int outlineOffset = item.length() * 6;
 
@@ -68,7 +68,7 @@ void VTextPath::updateTextRender(const sf::String& text)
 
 		for (size_t i = 0; i < item.length(); ++i)
 		{
-			sf::Uint32 curChar = item[i];
+			wchar_t curChar = item[i];
 			const sf::Glyph& glyph = font->getGlyph(curChar, fontSize, bold);
 
 			sf::Vector2f p = GetBezierPoint((float)i / textLength);
@@ -121,7 +121,7 @@ void VTextPath::updateTextRender(const sf::String& text)
 			}
 		}
 
-		float textWidth = verts.getBounds().width;
+		float textWidth = verts.getBounds().size.x;
 		if (alignment == VTextAlign::CENTRE)
 			xOffset = (Size.x / 2) - (textWidth / 2);
 		else if (alignment == VTextAlign::RIGHT)

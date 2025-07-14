@@ -165,7 +165,7 @@ void VSubState::SetFillColour(const sf::Color& colour)
 
 VSubState::VSubState(sf::Color colour) : VGroup()
 {
-	vertices.setPrimitiveType(sf::Quads);
+	vertices.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
 	vertices.resize(4);
 	SetFillColour(colour);
 
@@ -196,9 +196,9 @@ void VSubState::Draw(sf::RenderTarget &RenderTarget)
 
 	RenderTarget.setView(defaultView);
 	vertices[0].position = sf::Vector2f(0, 0);
-	vertices[1].position = sf::Vector2f(defaultView.getSize().x, 0);
-	vertices[2].position = defaultView.getSize();
-	vertices[3].position = sf::Vector2f(0, defaultView.getSize().y);
+	vertices[2].position = sf::Vector2f(defaultView.getSize().x, 0);
+	vertices[3].position = defaultView.getSize();
+	vertices[1].position = sf::Vector2f(0, defaultView.getSize().y);
 	RenderTarget.draw(vertices);
 
 	if (UseParentCamera)

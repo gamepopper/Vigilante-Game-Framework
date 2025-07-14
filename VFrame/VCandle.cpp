@@ -31,7 +31,7 @@ void VLight::SetPosition(const sf::Vector2f& pos)
 	light->setPosition(pos);
 }
 
-void VLight::SetAngle(float angle)
+void VLight::SetAngle(sf::Angle angle)
 {
 	candle::DirectedLight* l = dynamic_cast<candle::DirectedLight*>(light.get());
 	if (l) l->setRotation(angle);
@@ -71,7 +71,7 @@ sf::Vector2f VLight::GetPosition()
 float VLight::GetAngle()
 {
 	candle::DirectedLight* l = dynamic_cast<candle::DirectedLight*>(light.get());
-	if (l) return l->getRotation();
+	if (l) return l->getRotation().asDegrees();
 
 	return 0.0f;
 }

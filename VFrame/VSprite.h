@@ -111,7 +111,7 @@ public:
 	* @param height Height of sprite, ignored if animated is false.
 	* @param rect Only use a certain area of the texture, whether you are animated or not. Default value assumes whole texture is used. (Ignored if VTiledSprite or VBackdrop)
 	*/
-	virtual VSprite* LoadGraphic(const sf::String& filename, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect());
+	virtual VSprite* LoadGraphic(const sf::String& filename, bool animated = false, unsigned int width = 0, unsigned int height = 0, const sf::IntRect& rect = sf::IntRect());
 	
 	/**
 	* Load Graphic from an sf::Texture object.
@@ -121,7 +121,7 @@ public:
 	* @param height Height of sprite, ignored if animated is false.
 	* @param rect Only use a certain area of the texture, whether you are animated or not. Default value assumes whole texture is used. (Ignored if VTiledSprite or VBackdrop)
 	*/
-	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect());
+	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, unsigned int width = 0, unsigned int height = 0, const sf::IntRect& rect = sf::IntRect());
 	
 	/**
 	* Make sprite texture as a primitive rectangle. This should be used mainly for testing purposes with VSprites. For more permanent use of primitive shapes, look at the VShape class.
@@ -131,7 +131,7 @@ public:
 	* @param outline Outline thickness.
 	* @param outlineColor colour of sprite outline.
 	*/
-	virtual VSprite* MakeGraphic(int width, int height, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
+	virtual VSprite* MakeGraphic(unsigned int width, unsigned int height, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
 	
 	/**
 	* Make sprite texture a circle. This should be used mainly for testing purposes with VSprites. For more permanent use of primitive shapes, look at the VShape class.
@@ -140,7 +140,7 @@ public:
 	* @param outline Outline thickness.
 	* @param outlineColor colour of sprite outline.
 	*/
-	virtual VSprite* MakeGraphicCircle(int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
+	virtual VSprite* MakeGraphicCircle(unsigned int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent);
 
 	///Destroys the sprite rendering data (and texture if disposable is set for true).
 	virtual void Destroy() override;

@@ -2,10 +2,10 @@
 
 BloomPostEffect::BloomPostEffect()
 {
-	brightness.loadFromFile("Example/Assets/Brightness.frag", sf::Shader::Fragment);
-	downSample.loadFromFile("Example/Assets/DownSample.frag", sf::Shader::Fragment);
-	gaussianBlur.loadFromFile("Example/Assets/GaussianBlur.frag", sf::Shader::Fragment);
-	addition.loadFromFile("Example/Assets/Add.frag", sf::Shader::Fragment);
+	brightness.loadFromFile("Example/Assets/Brightness.frag", sf::Shader::Type::Fragment);
+	downSample.loadFromFile("Example/Assets/DownSample.frag", sf::Shader::Type::Fragment);
+	gaussianBlur.loadFromFile("Example/Assets/GaussianBlur.frag", sf::Shader::Type::Fragment);
+	addition.loadFromFile("Example/Assets/Add.frag", sf::Shader::Type::Fragment);
 
 	SetBloomFactor(1.2f);
 }
@@ -37,17 +37,20 @@ void BloomPostEffect::prepareTextures(sf::Vector2u size)
 {
 	if (mBrightnessTexture.getSize() != size)
 	{
-		mBrightnessTexture.create(size.x, size.y);
+		mBrightnessTexture.resize(size);
 		mBrightnessTexture.setSmooth(true);
 
-		mFirstPassTextures[0].create(size.x / 2, size.y / 2);
+		size = size.componentWiseDiv({ 2, 2 });
+
+		mFirstPassTextures[0].resize(size);
 		mFirstPassTextures[0].setSmooth(true);
-		mFirstPassTextures[1].create(size.x / 2, size.y / 2);
+		mFirstPassTextures[1].resize(size);
 		mFirstPassTextures[1].setSmooth(true);
 
-		mSecondPassTextures[0].create(size.x / 4, size.y / 4);
+		size = size.componentWiseDiv({ 2, 2 });
+		mSecondPassTextures[0].resize(size);
 		mSecondPassTextures[0].setSmooth(true);
-		mSecondPassTextures[1].create(size.x / 4, size.y / 4);
+		mSecondPassTextures[1].resize(size);
 		mSecondPassTextures[1].setSmooth(true);
 	}
 }

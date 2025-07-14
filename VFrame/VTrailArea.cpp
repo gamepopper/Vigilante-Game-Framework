@@ -2,13 +2,13 @@
 #include "VGlobal.h"
 #include "VTimer.h"
 
-VTrailArea::VTrailArea(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize)
+VTrailArea::VTrailArea(float x, float y, unsigned int width, unsigned int height, unsigned int maxSize) : VRenderGroup(x, y, width, height, maxSize), trailSprite(trailTexture)
 {
 	renderTex.clear(sf::Color::Transparent);
 	timer = new VTimer();
 }
 
-VTrailArea::VTrailArea(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize) : VRenderGroup(position, size, maxSize)
+VTrailArea::VTrailArea(sf::Vector2f position, sf::Vector2u size, unsigned int maxSize) : VRenderGroup(position, size, maxSize), trailSprite(trailTexture)
 {
 	renderTex.clear(sf::Color::Transparent);
 	timer = new VTimer();
@@ -30,20 +30,25 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 {
 	updateTransform();
 
+#ifdef _DEBUG
+	bool drawDebug = VGlobal::p()->DrawDebug;
+	VGlobal::p()->DrawDebug = false;
+#endif
+
 	float time = timer->Seconds();
 	if (time > Delay)
 	{
 		sf::View renderTexView = renderTex.getView();
 		renderTex.setView(renderTex.getDefaultView());
 		trailTexture = sf::Texture(renderTex.getTexture());
-		trailSprite.setTexture(trailTexture);
-		trailSprite.setPosition(lastPos.x - Sprite->Position.x, lastPos.y - Sprite->Position.y);
+		trailSprite.setTexture(trailTexture, true);
+		trailSprite.setPosition({ lastPos.x - Sprite->Position.x, lastPos.y - Sprite->Position.y });
 		trailSprite.setColor(
 			sf::Color(
-				255 - sf::Uint8(255 * RedMultiplier		* AlphaMultiplier   * time),
-				255 - sf::Uint8(255 * GreenMultiplier	* AlphaMultiplier	* time),
-				255 - sf::Uint8(255 * BlueMultiplier	* AlphaMultiplier	* time),
-				255 - sf::Uint8(255 * AlphaMultiplier	* time)
+				255 - uint8_t(255 * RedMultiplier	* AlphaMultiplier   * time),
+				255 - uint8_t(255 * GreenMultiplier	* AlphaMultiplier	* time),
+				255 - uint8_t(255 * BlueMultiplier	* AlphaMultiplier	* time),
+				255 - uint8_t(255 * AlphaMultiplier	* time)
 			)
 		);
 		renderTex.clear(sf::Color::Transparent);
@@ -60,8 +65,8 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 		sf::View renderTexView = renderTex.getView();
 		renderTex.setView(renderTex.getDefaultView());
 		trailTexture = sf::Texture(renderTex.getTexture());
-		trailSprite.setTexture(trailTexture);
-		trailSprite.setPosition(lastPos.x - Sprite->Position.x, lastPos.y - Sprite->Position.y);
+		trailSprite.setTexture(trailTexture, true);
+		trailSprite.setPosition({ lastPos.x - Sprite->Position.x, lastPos.y - Sprite->Position.y });
 		trailSprite.setColor(sf::Color::White);
 		renderTex.clear(sf::Color::Transparent);
 		renderTex.draw(trailSprite);
@@ -76,7 +81,10 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 	{
 		if (postProcessTex.getSize().x == 0 || postProcessTex.getSize().y == 0)
 		{
-			postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
+			if (!postProcessTex.resize(renderTex.getSize()))
+			{
+				VLogError("Invalid Texture Size to resize post processing texture in TrailArea");
+			}
 		}
 
 		postProcessTex.clear(sf::Color::Transparent);
@@ -90,8 +98,12 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 		updateTexture(renderTex.getTexture());
 	}
 
-	//Sprite->RenderState.blendMode = sf::BlendAdd;
+#ifdef _DEBUG
+	VGlobal::p()->DrawDebug = drawDebug;
+#endif
+
 	Sprite->Draw(RenderTarget);
+	Camera->Render(RenderTarget);
 
 	if (RenderOutside != VRENDERGROUP_NO)
 		VGroup::Draw(RenderTarget);

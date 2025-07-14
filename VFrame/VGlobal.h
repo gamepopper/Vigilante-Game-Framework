@@ -54,7 +54,7 @@
 #endif
 
 ///Currently defined build version of the Vigilante Game Framework
-#define VFRAME_VERSION "1.0.0.10"
+#define VFRAME_VERSION "1.1.0.0"
 
 class VBase;
 class VObject;
@@ -140,7 +140,7 @@ public:
 	///Asynchronous Function Handler for Multithreaded Functionality.
 	std::unique_ptr<VAsync> Async;
 	///Current Window Style being used (set with sf::Style).
-	int WindowStyle;
+	int WindowStyle = sf::Style::Default;
 	///@param newTitle The new text the window should display in the title bar.
 	void SetTitle(const char* newTitle);
 	///@param newTitle The new text the window should display in the title bar.

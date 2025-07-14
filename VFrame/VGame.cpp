@@ -40,27 +40,36 @@ int VGame::Init()
 			return 3;
 
 		renderTarget = std::make_unique<sf::RenderTexture>();
-		if (!renderTarget->create(VGlobal::p()->Width, VGlobal::p()->Height))
+		if (!renderTarget->resize({ VGlobal::p()->Width, VGlobal::p()->Height }))
 			return 4;
 
 		VGlobal::p()->Frame = renderTarget.get();
 
-		VGlobal::p()->WorldBounds = sf::FloatRect(0, 0, static_cast<float>(VGlobal::p()->Width), static_cast<float>(VGlobal::p()->Height));
+		VGlobal::p()->WorldBounds = sf::FloatRect({ 0, 0 }, { static_cast<float>(VGlobal::p()->Width), static_cast<float>(VGlobal::p()->Height) });
 		VGlobal::p()->App->requestFocus();
 		VCameraList::Default = renderTarget->getDefaultView();
 
 		vertexArray.resize(4);
-		vertexArray.setPrimitiveType(sf::Quads);
-		vertexArray[0] = sf::Vertex(sf::Vector2f(), sf::Color::White, sf::Vector2f());
-		vertexArray[1] = sf::Vertex(sf::Vector2f(VGlobal::p()->WorldBounds.width, 0.0f),
+		vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
+		vertexArray[0] = { 
+			sf::Vector2f(), 
+			sf::Color::White, 
+			sf::Vector2f() };
+		vertexArray[2] = { 
+			sf::Vector2f(VGlobal::p()->WorldBounds.size.x, 0.0f),
 			sf::Color::White,
-			sf::Vector2f(VGlobal::p()->WorldBounds.width, 0.0f));
-		vertexArray[2] = sf::Vertex(sf::Vector2f(VGlobal::p()->WorldBounds.width, VGlobal::p()->WorldBounds.height),
+			sf::Vector2f(VGlobal::p()->WorldBounds.size.x, 0.0f) 
+		};
+		vertexArray[3] = { 
+			sf::Vector2f(VGlobal::p()->WorldBounds.size.x, VGlobal::p()->WorldBounds.size.y),
 			sf::Color::White,
-			sf::Vector2f(VGlobal::p()->WorldBounds.width, VGlobal::p()->WorldBounds.height));
-		vertexArray[3] = sf::Vertex(sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.height),
+			sf::Vector2f(VGlobal::p()->WorldBounds.size.x, VGlobal::p()->WorldBounds.size.y) 
+		};
+		vertexArray[1] = {
+			sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.size.y),
 			sf::Color::White,
-			sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.height));
+			sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.size.y)
+		};
 
 #if _DEBUG
 		debugRenderer = new VDebugRenderer();
@@ -95,12 +104,12 @@ int VGame::Cleanup()
 	return EXIT_SUCCESS;
 }
 
-int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, int windowheight, float fps, int flags, const sf::ContextSettings& settings)
+int VGame::Run(const sf::String& title, VState* initialState, unsigned int windowwidth, unsigned int windowheight, float fps, int flags, const sf::ContextSettings& settings)
 {
 	return Run(title, initialState, windowwidth, windowheight, windowwidth, windowheight, fps, flags, settings);
 }
 
-int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, int windowheight, int screenwidth, int screenheight, float fps, int flags, const sf::ContextSettings& settings)
+int VGame::Run(const sf::String& title, VState* initialState, unsigned int windowwidth, unsigned int windowheight, int screenwidth, int screenheight, float fps, int flags, const sf::ContextSettings& settings)
 {
 	VGlobal::p()->Width = screenwidth;
 	VGlobal::p()->Height = screenheight;
@@ -109,7 +118,7 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 	VGlobal::p()->ContextSettings = settings;
 	VGlobal::p()->RenderState = sf::RenderStates::Default;
 
-	VGlobal::p()->App->create(sf::VideoMode(windowwidth, windowheight), title, flags, settings);
+	VGlobal::p()->App->create(sf::VideoMode({ windowwidth, windowheight }), title, flags, sf::State::Windowed, settings);
 
 	VBase::VLog("Welcome to the ViglanteFramework - Version: %s ", VFRAME_VERSION);
 
@@ -193,22 +202,21 @@ int VGame::Run(const sf::String& title, VState* initialState, int windowwidth, i
 
 void VGame::HandleEvents()
 {
-	sf::Event event;
 	VState* currentState = VGlobal::p()->CurrentState();
-	while (VGlobal::p()->App->pollEvent(event))
+	while (const std::optional event = VGlobal::p()->App->pollEvent())
 	{		
-		if (event.type == sf::Event::Closed)
+		if (event->is<sf::Event::Closed>())
 			VGlobal::p()->Exit();
 		else if (VGlobal::p()->FocusPause)
 		{
-			if (event.type == sf::Event::LostFocus)
+			if (event->is<sf::Event::FocusLost>())
 				focused = false;
-			if (event.type == sf::Event::GainedFocus)
+			if (event->is<sf::Event::FocusGained>())
 				focused = true;
 		}
 		
 		if (currentState->active)
-			currentState->HandleEvents(event);
+			currentState->HandleEvents(*event);
 	}
 
 	ResizeCheck();
@@ -226,7 +234,7 @@ void VGame::ResizeCheck()
 
 		VGlobal::p()->WindowWidth = windowSize.x;
 		VGlobal::p()->WindowHeight = windowSize.y;
-		VGlobal::p()->App->setView(sf::View(sf::FloatRect(0, 0, (float)windowSize.x, (float)windowSize.y)));
+		VGlobal::p()->App->setView(sf::View(sf::FloatRect({ 0, 0 }, { (float)windowSize.x, (float)windowSize.y })));
 
 		if (orientation == VGlobal::ANGLE_NONE || orientation == VGlobal::ANGLE_180)
 		{
@@ -242,17 +250,17 @@ void VGame::ResizeCheck()
 			if (orientation == VGlobal::ANGLE_NONE)
 			{
 				vertexArray[0].position = sf::Vector2f(scaleX, scaleY);
-				vertexArray[1].position = sf::Vector2f(scaleX + scaleW, scaleY);
-				vertexArray[2].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
-				vertexArray[3].position = sf::Vector2f(scaleX, scaleY + scaleH);
+				vertexArray[2].position = sf::Vector2f(scaleX + scaleW, scaleY);
+				vertexArray[3].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
+				vertexArray[1].position = sf::Vector2f(scaleX, scaleY + scaleH);
 				VGlobal::p()->ViewportOffset = vertexArray[0].position;
 			}
 			else
 			{
-				vertexArray[2].position = sf::Vector2f(scaleX, scaleY);
-				vertexArray[3].position = sf::Vector2f(scaleX + scaleW, scaleY);
+				vertexArray[3].position = sf::Vector2f(scaleX, scaleY);
+				vertexArray[1].position = sf::Vector2f(scaleX + scaleW, scaleY);
 				vertexArray[0].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
-				vertexArray[1].position = sf::Vector2f(scaleX, scaleY + scaleH);
+				vertexArray[2].position = sf::Vector2f(scaleX, scaleY + scaleH);
 				VGlobal::p()->ViewportOffset = vertexArray[2].position;
 			}
 		}
@@ -269,17 +277,17 @@ void VGame::ResizeCheck()
 
 			if (orientation == VGlobal::ANGLE_90)
 			{
-				vertexArray[3].position = sf::Vector2f(scaleX, scaleY);
+				vertexArray[1].position = sf::Vector2f(scaleX, scaleY);
 				vertexArray[0].position = sf::Vector2f(scaleX + scaleW, scaleY);
-				vertexArray[1].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
-				vertexArray[2].position = sf::Vector2f(scaleX, scaleY + scaleH);
+				vertexArray[2].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
+				vertexArray[3].position = sf::Vector2f(scaleX, scaleY + scaleH);
 				VGlobal::p()->ViewportOffset = vertexArray[3].position;
 			}
 			else
 			{
-				vertexArray[1].position = sf::Vector2f(scaleX, scaleY);
-				vertexArray[2].position = sf::Vector2f(scaleX + scaleW, scaleY);
-				vertexArray[3].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
+				vertexArray[2].position = sf::Vector2f(scaleX, scaleY);
+				vertexArray[3].position = sf::Vector2f(scaleX + scaleW, scaleY);
+				vertexArray[1].position = sf::Vector2f(scaleX + scaleW, scaleY + scaleH);
 				vertexArray[0].position = sf::Vector2f(scaleX, scaleY + scaleH);
 				VGlobal::p()->ViewportOffset = vertexArray[1].position;
 			}
@@ -349,23 +357,25 @@ void VGame::PostRender()
 
 	sf::RenderWindow* app = VGlobal::p()->App.get();
 
-	app->setActive(true);
-	app->setVerticalSyncEnabled(VGlobal::p()->VSync);
+	if (app->setActive(true))
+	{
+		app->setVerticalSyncEnabled(VGlobal::p()->VSync);
 
-	VGlobal::p()->RenderState.texture = &renderTarget->getTexture();
-	
-	renderTarget->setView(renderTarget->getDefaultView());
-	if (VGlobal::p()->PostProcess && VPostEffectBase::isSupported()) 
-		VGlobal::p()->PostProcess->Apply(*VGlobal::p()->RenderState.texture, *renderTarget);
+		VGlobal::p()->RenderState.texture = &renderTarget->getTexture();
 
-	app->draw(vertexArray, VGlobal::p()->RenderState);
+		renderTarget->setView(renderTarget->getDefaultView());
+		if (VGlobal::p()->PostProcess && VPostEffectBase::isSupported())
+			VGlobal::p()->PostProcess->Apply(*VGlobal::p()->RenderState.texture, *renderTarget);
 
-	VState* currentState = VGlobal::p()->CurrentState();
-	currentState->PostDraw(*VGlobal::p()->App);
-	
-	VSubState* subState = currentState->SubState();
-	if (subState && subState->visible)
-		subState->PostDraw(*VGlobal::p()->App);
+		app->draw(vertexArray, VGlobal::p()->RenderState);
 
-	app->display();
+		VState* currentState = VGlobal::p()->CurrentState();
+		currentState->PostDraw(*VGlobal::p()->App);
+
+		VSubState* subState = currentState->SubState();
+		if (subState && subState->visible)
+			subState->PostDraw(*VGlobal::p()->App);
+
+		app->display();
+	}
 }

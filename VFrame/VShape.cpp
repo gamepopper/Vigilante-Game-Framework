@@ -133,12 +133,12 @@ void VShape::SetOutlineThickness(float thickness)
 	shape->setOutlineThickness(thickness);
 }
 
-const sf::Color& VShape::GetFillTint()
+const sf::Color VShape::GetFillTint()
 {
 	return shape->getFillColor();
 }
 
-const sf::Color& VShape::GetOutlineTint()
+const sf::Color VShape::GetOutlineTint()
 {
 	return shape->getOutlineColor();
 }

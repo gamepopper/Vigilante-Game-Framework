@@ -13,16 +13,16 @@ bool VQuadTree::checkBounds(VObject* object, VCollideList list)
 	sf::FloatRect objRect = sf::FloatRect(object->Position, object->Size);
 
 	// Compute the min and max of the first rectangle on both axes
-	float r1MinX = std::min(bounds.left, bounds.left + bounds.width);
-	float r1MaxX = std::max(bounds.left, bounds.left + bounds.width);
-	float r1MinY = std::min(bounds.top, bounds.top + bounds.height);
-	float r1MaxY = std::max(bounds.top, bounds.top + bounds.height);
+	float r1MinX = std::min(bounds.position.x, bounds.position.x + bounds.size.x);
+	float r1MaxX = std::max(bounds.position.x, bounds.position.x + bounds.size.x);
+	float r1MinY = std::min(bounds.position.y, bounds.position.y + bounds.size.y);
+	float r1MaxY = std::max(bounds.position.y, bounds.position.y + bounds.size.y);
 
 	// Compute the min and max of the second rectangle on both axes
-	float r2MinX = std::min(objRect.left, objRect.left + objRect.width);
-	float r2MaxX = std::max(objRect.left, objRect.left + objRect.width);
-	float r2MinY = std::min(objRect.top, objRect.top + objRect.height);
-	float r2MaxY = std::max(objRect.top, objRect.top + objRect.height);
+	float r2MinX = std::min(objRect.position.x, objRect.position.x + objRect.size.x);
+	float r2MaxX = std::max(objRect.position.x, objRect.position.x + objRect.size.x);
+	float r2MinY = std::min(objRect.position.y, objRect.position.y + objRect.size.y);
+	float r2MaxY = std::max(objRect.position.y, objRect.position.y + objRect.size.y);
 
 	// Compute the intersection boundaries
 	float interLeft = std::max(r1MinX, r2MinX);
@@ -93,28 +93,28 @@ void VCollision::Cleanup()
 void VCollision::setupQuad(const sf::FloatRect& subsection, int remaining, bool create)
 {
 	sf::FloatRect NW = sf::FloatRect(
-		subsection.left, 
-		subsection.top,
-		subsection.width / 2,
-		subsection.height / 2);
+		{ subsection.position.x,
+		subsection.position.y },
+		{ subsection.size.x / 2,
+		subsection.size.y / 2 });
 
 	sf::FloatRect NE = sf::FloatRect(
-		subsection.left + (subsection.width / 2), 
-		subsection.top,
-		subsection.width / 2,
-		subsection.height / 2);
+		{ subsection.position.x + (subsection.size.x / 2),
+		subsection.position.y },
+		{ subsection.size.x / 2,
+		subsection.size.y / 2 });
 
 	sf::FloatRect SW = sf::FloatRect(
-		subsection.left,
-		subsection.top + (subsection.height / 2),
-		subsection.width / 2,
-		subsection.height / 2);
+		{ subsection.position.x,
+		subsection.position.y + (subsection.size.y / 2) },
+		{ subsection.size.x / 2,
+		subsection.size.y / 2 });
 
 	sf::FloatRect SE = sf::FloatRect(
-		subsection.left + (subsection.width / 2),
-		subsection.top + (subsection.height / 2),
-		subsection.width / 2,
-		subsection.height / 2);
+		{ subsection.position.x + (subsection.size.x / 2),
+		subsection.position.y + (subsection.size.y / 2) },
+		{ subsection.size.x / 2,
+		subsection.size.y / 2 });
 
 	if (remaining <= 0)
 	{

@@ -52,7 +52,7 @@ void VText::setDimensions()
 	}
 
 	vertices.clear();
-	vertices.setPrimitiveType(sf::Triangles);
+	vertices.setPrimitiveType(sf::PrimitiveType::Triangles);
 
 	sf::String printText = text.substring(0, length);
 
@@ -126,7 +126,7 @@ void VText::setDimensions()
 
 void VText::updateTransform()
 {
-	float angle = -Angle * VFRAME_PI / 180.f;
+	float angle = -Angle.asRadians();
 	float cosine = static_cast<float>(std::cos(angle));
 	float sine = static_cast<float>(std::sin(angle));
 	float sxc = Scale.x * cosine;
@@ -155,7 +155,7 @@ void VText::updateTextRender(const sf::String& text)
 	bool outlined = outlineThickness > 0.0f;
 
 	sf::FloatRect xBounds = font->getGlyph(L'x', fontSize, bold).bounds;
-	float strikeThroughOffset = xBounds.top + xBounds.height / 2.f;
+	float strikeThroughOffset = xBounds.position.y + xBounds.size.y / 2.f;
 
 	float hspace = static_cast<float>(font->getGlyph(L' ', fontSize, bold).advance);
 
@@ -165,13 +165,13 @@ void VText::updateTextRender(const sf::String& text)
 	{
 		float x = 0, xOffset = 0;
 
-		sf::VertexArray verts(sf::Triangles, outlined ? item.length() * 6 * 2 : item.length() * 6);
-		sf::Uint32 prevChar = 0;
+		sf::VertexArray verts(sf::PrimitiveType::Triangles, outlined ? item.length() * 6 * 2 : item.length() * 6);
+		wchar_t prevChar = 0;
 		int outlineVertOffset = item.length() * 6;
 
 		for (size_t i = 0; i < item.length(); ++i)
 		{
-			sf::Uint32 curChar = item[i];
+			wchar_t curChar = item[i];
 
 			x += font->getKerning(prevChar, curChar, fontSize);
 			prevChar = curChar;
@@ -238,7 +238,7 @@ void VText::updateTextRender(const sf::String& text)
 			}
 		}
 
-		float textWidth = verts.getBounds().width;
+		float textWidth = verts.getBounds().size.x;
 		if (alignment == VTextAlign::CENTRE)
 			xOffset = (Size.x / 2) - (textWidth / 2);
 		else if (alignment == VTextAlign::RIGHT)
@@ -262,15 +262,15 @@ void VText::setCharacterRender(const sf::Glyph& glyph, float x, float y, sf::Col
 {
 	color.a = fillColour.a;
 
-	float left		= std::floor(glyph.bounds.left);
-	float top		= std::floor(glyph.bounds.top);
-	float right		= std::ceil(glyph.bounds.left + glyph.bounds.width);
-	float bottom	= std::ceil(glyph.bounds.top + glyph.bounds.height);
+	float left		= std::floor(glyph.bounds.position.x);
+	float top		= std::floor(glyph.bounds.position.y);
+	float right		= std::ceil(glyph.bounds.position.x + glyph.bounds.size.x);
+	float bottom	= std::ceil(glyph.bounds.position.y + glyph.bounds.size.y);
 
-	float u1 = static_cast<float>(glyph.textureRect.left);
-	float v1 = static_cast<float>(glyph.textureRect.top);
-	float u2 = static_cast<float>(glyph.textureRect.left + glyph.textureRect.width);
-	float v2 = static_cast<float>(glyph.textureRect.top + glyph.textureRect.height);
+	float u1 = static_cast<float>(glyph.textureRect.position.x);
+	float v1 = static_cast<float>(glyph.textureRect.position.y);
+	float u2 = static_cast<float>(glyph.textureRect.position.x + glyph.textureRect.size.x);
+	float v2 = static_cast<float>(glyph.textureRect.position.y + glyph.textureRect.size.y);
 
 	vertices[index + 0].position = sf::Vector2f(x + left	- italic * top		- outline, y + top		- outline);	vertices[index + 0].color = color; vertices[index + 0].texCoords = sf::Vector2f(u1, v1);
 	vertices[index + 1].position = sf::Vector2f(x + right	- italic * top		- outline, y + top		- outline);	vertices[index + 1].color = color; vertices[index + 1].texCoords = sf::Vector2f(u2, v1);

@@ -76,7 +76,7 @@ private:
 public:
 
 	///The many types of easing functions, both intro, outtro and inouttros.
-	enum VInterpolateType
+	enum VInterpolateType : unsigned int
 	{
 		InBack,
 		OutBack,

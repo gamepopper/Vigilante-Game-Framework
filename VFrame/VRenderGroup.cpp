@@ -14,9 +14,9 @@ public:
 		FrameSize = texture.getSize();
 
 		vertexArray[0].position = sf::Vector2f();
-		vertexArray[1].position = sf::Vector2f((float)FrameSize.x, 0.0f);
-		vertexArray[2].position = sf::Vector2f((float)FrameSize.x, (float)FrameSize.y);
-		vertexArray[3].position = sf::Vector2f(0.0f, (float)FrameSize.y);
+		vertexArray[2].position = sf::Vector2f((float)FrameSize.x, 0.0f);
+		vertexArray[3].position = sf::Vector2f((float)FrameSize.x, (float)FrameSize.y);
+		vertexArray[1].position = sf::Vector2f(0.0f, (float)FrameSize.y);
 
 		vertexArray[0].texCoords = vertexArray[0].position;
 		vertexArray[1].texCoords = vertexArray[1].position;
@@ -40,7 +40,10 @@ VRenderGroup::VRenderGroup(float x, float y, unsigned int width, unsigned int he
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 	Sprite->Radius = Sprite->Size.x < Sprite->Size.y ? Sprite->Size.x / 2 : Sprite->Size.y / 2;
 
-	renderTex.create(width, height);
+	if (!renderTex.resize({ width, height }))
+	{
+		VLogError("Invalid Texture Size for RenderGroup");
+	}
 	sf::View defaultView = renderTex.getDefaultView();
 	Camera = std::make_unique<VCamera>(defaultView);
 
@@ -53,7 +56,10 @@ VRenderGroup::VRenderGroup(sf::Vector2f position, sf::Vector2u size, unsigned in
 	Sprite->Size = sf::Vector2f(size);
 	Sprite->Radius = Sprite->Size.x < Sprite->Size.y ? Sprite->Size.x / 2 : Sprite->Size.y / 2;
 
-	renderTex.create(size.x, size.y);
+	if (!renderTex.resize(size))
+	{
+		VLogError("Invalid Texture Size for RenderGroup");
+	}
 	sf::View defaultView = renderTex.getDefaultView();
 	Camera = std::make_unique<VCamera>(defaultView);
 
@@ -66,9 +72,9 @@ void VRenderGroup::updateTransform()
 
 	if (RenderViewTransform)
 	{
-		NewView.move(Sprite->Position + Sprite->Origin - Sprite->Offset);
-		NewView.rotate(Sprite->Angle);
 		NewView.setSize(sf::Vector2f(Sprite->Size.x * Sprite->Scale.x, Sprite->Size.y * Sprite->Scale.y));
+		NewView.setCenter(Sprite->Position + Sprite->Origin - Sprite->Offset + (NewView.getSize() / 2.0f));
+		NewView.setRotation(Sprite->Angle);
 	}
 	
 	renderTex.setView(NewView);
@@ -80,11 +86,15 @@ void VRenderGroup::updateTexture(const sf::Texture& texture)
 	render->SetTexture(texture);
 }
 
-void VRenderGroup::Resize(int width, int height)
+void VRenderGroup::Resize(unsigned int width, unsigned int height)
 {
-	postProcessTex.create(width, height);
-	renderTex.create(width, height);
-	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
+	if (postProcessTex.resize({ width, height }) && renderTex.resize({ width, height }))
+	{
+		Sprite->Size = sf::Vector2f(width, height);
+		return;
+	}
+
+	VLogError("Invalid Texture Size to resize RenderGroup");
 }
 
 void VRenderGroup::Kill()
@@ -146,7 +156,10 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 	{
 		if (postProcessTex.getSize().x == 0 || postProcessTex.getSize().y == 0)
 		{
-			postProcessTex.create(renderTex.getSize().x, renderTex.getSize().y);
+			if (!postProcessTex.resize(renderTex.getSize()))
+			{
+				VLogError("Invalid Texture Size to resize post processing texture in RenderGroup");
+			}
 		}
 
 		postProcessTex.clear(sf::Color::Transparent);

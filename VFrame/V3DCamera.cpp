@@ -8,7 +8,7 @@
 static const float MaxVerticalAngle = 85.0f; //must be less than 90 to avoid gimbal lock
 
 V3DCamera::V3DCamera(const sf::Vector3f& pos, float zNear, float zFar)
-	: Position(pos), Viewport(0.0f, 0.0f, 1.0f, 1.0f), fnear(zNear), ffar(zFar) {}
+	: Position(pos), Viewport({ 0.0f, 0.0f }, { 1.0f, 1.0f }), fnear(zNear), ffar(zFar) {}
 
 glm::mat4 V3DCamera::Orientation() const
 {

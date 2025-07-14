@@ -36,7 +36,7 @@
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/System/String.hpp>
-#include <SFML/Window/WindowStyle.hpp>
+#include <SFML/Window/WindowEnums.hpp>
 #include <SFML/Window/ContextSettings.hpp>
 #include <memory>
 #include "VBase.h"
@@ -63,7 +63,7 @@ public:
 	* @param  settings OpenGL Context settings. Default = 0 Depth + 0 Stencil + Version 1.1 + Default Attributes + No sRGB
 	* @return An integer returning the result of the game. If 0, there were no errors.
 	*/
-	int Run(const sf::String& title, VState* initialState, int windowwidth, int windowheight, float fps = 60, int flags = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
+	int Run(const sf::String& title, VState* initialState, unsigned int windowwidth, unsigned int windowheight, float fps = 60, int flags = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
 
 
 	/**
@@ -80,7 +80,7 @@ public:
 	* @param  settings OpenGL Context settings. Default = 0 Depth + 0 Stencil + Version 1.1 + Default Attributes + No sRGB
 	* @return An integer returning the result of the game. If 0, there were no errors.
 	*/
-	int Run(const sf::String& title, VState* initialState, int windowwidth, int windowheight, int screenwidth, int screenheight, float fps = 60, int flags = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
+	int Run(const sf::String& title, VState* initialState, unsigned int windowwidth, unsigned int windowheight, int screenwidth, int screenheight, float fps = 60, int flags = sf::Style::Default, const sf::ContextSettings& settings = sf::ContextSettings());
 
 protected:
 

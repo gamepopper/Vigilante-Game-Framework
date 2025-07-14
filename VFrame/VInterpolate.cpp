@@ -305,10 +305,10 @@ float VInterpolate::Float(float a, float b, float t, float d, VInterpolateType t
 sf::Color VInterpolate::Color(sf::Color a, sf::Color b, float t, float d, VInterpolateType type)
 {
 	sf::Color color;
-	color.r = sf::Uint8(Float((float)a.r, (float)b.r, t, d, type));
-	color.g = sf::Uint8(Float((float)a.g, (float)b.g, t, d, type));
-	color.b = sf::Uint8(Float((float)a.b, (float)b.b, t, d, type));
-	color.a = sf::Uint8(Float((float)a.a, (float)b.a, t, d, type));
+	color.r = uint8_t(Float((float)a.r, (float)b.r, t, d, type));
+	color.g = uint8_t(Float((float)a.g, (float)b.g, t, d, type));
+	color.b = uint8_t(Float((float)a.b, (float)b.b, t, d, type));
+	color.a = uint8_t(Float((float)a.a, (float)b.a, t, d, type));
 
 	return color;
 }

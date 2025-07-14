@@ -10,7 +10,7 @@ VMusic::~VMusic() {}
 */
 VMusic* VMusic::OpenMusicFile(const sf::String& filename)
 {
-	if (music.openFromFile(filename))
+	if (music.openFromFile(filename.toAnsiString()))
 	{
 		music.setVolume(masterVolume);
 		valid = true;
@@ -58,7 +58,7 @@ void VMusic::Update(float dt)
 	if (!valid)
 		return;
 
-	if (Status() == music.Playing)
+	if (Status() == sf::SoundStream::Status::Playing)
 	{
 		if (fadein || fadeout)
 		{
@@ -157,7 +157,7 @@ unsigned int VMusic::SampleRate()
 sf::SoundStream::Status VMusic::Status()
 {
 	if (!valid)
-		return sf::SoundStream::Stopped;
+		return sf::SoundStream::Status::Stopped;
 
 	return music.getStatus();
 }
@@ -175,7 +175,7 @@ bool VMusic::Loop()
 	if (!valid)
 		return false;
 
-	return music.getLoop();
+	return music.isLooping();
 }
 
 float VMusic::Pitch()
@@ -239,14 +239,11 @@ void VMusic::SetLoop(bool loop, float loopStart, float loopEnd)
 	if (!valid)
 		return;
 
-	/*looping = loop;
-	loopStartPoint = loopStart;
-	if (loopEnd == 0)
-		loopEndPoint = music.getDuration().asSeconds();*/
-
-	sf::Music::TimeSpan timespan = sf::Music::TimeSpan(sf::seconds(loopStart), sf::seconds(loopEnd - loopStart));
+	sf::Music::TimeSpan timespan;
+	timespan.offset = sf::seconds(loopStart);
+	timespan.length = sf::seconds(loopEnd - loopStart);
 	music.setLoopPoints(timespan);
-	music.setLoop(loop);
+	music.setLooping(loop);
 }
 
 void VMusic::SetPitch(float pitch)
@@ -275,7 +272,7 @@ void VMusic::SetPosition(float x, float y, float z)
 	if (!valid)
 		return;
 
-	music.setPosition(x, y, z);
+	music.setPosition({ x, y, z });
 }
 
 void VMusic::SetPosition(const sf::Vector3f& position)

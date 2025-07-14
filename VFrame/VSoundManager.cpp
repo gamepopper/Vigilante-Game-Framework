@@ -30,10 +30,9 @@ float VSoundManager::MasterPitch()
 
 bool VSoundManager::Load(const sf::String& filename, const sf::String& id)
 {
-	if (sounds.find(id) == sounds.end() || sounds[id].getBuffer() == nullptr)
+	if (sounds.find(id) == sounds.end())
 	{
-		soundBuffers[id] = &VGlobal::p()->Content->LoadSound(filename);
-		sounds[id] = sf::Sound(*soundBuffers[id]);
+		sounds[id] = std::make_unique<sf::Sound>(VGlobal::p()->Content->LoadSound(filename));
 	}
 
 	return true;
@@ -43,14 +42,14 @@ void VSoundManager::Play(const sf::String& id, float volume, float pitch, bool l
 {
 	if (sounds.find(id) != sounds.end())
 	{
-		if (sounds[id].getVolume() != ((volume / 100) * masterVolume)) 
-			sounds[id].setVolume((volume / 100) * masterVolume);
-		if (sounds[id].getPitch() != pitch * masterPitch) 
-			sounds[id].setPitch(pitch * masterPitch);
-		if (sounds[id].getLoop() != loop) 
-			sounds[id].setLoop(loop);
+		if (sounds[id]->getVolume() != ((volume / 100) * masterVolume)) 
+			sounds[id]->setVolume((volume / 100) * masterVolume);
+		if (sounds[id]->getPitch() != pitch * masterPitch) 
+			sounds[id]->setPitch(pitch * masterPitch);
+		if (sounds[id]->isLooping() != loop) 
+			sounds[id]->setLooping(loop);
 
-		sounds[id].play();
+		sounds[id]->play();
 	}
 }
 
@@ -58,15 +57,15 @@ void VSoundManager::Stop(const sf::String& id)
 {
 	if (sounds.find(id) != sounds.end())
 	{
-		sounds[id].stop();
+		sounds[id]->stop();
 	}
 }
 
 void VSoundManager::StopAll()
 {
-	for (std::pair<std::string, sf::Sound> pair : sounds)
+	for (VSoundStorageMap::iterator it = sounds.begin(); it != sounds.end(); ++it)
 	{
-		sounds[pair.first].stop();
+		it->second->stop();
 	}
 }
 
@@ -74,17 +73,17 @@ sf::SoundStream::Status VSoundManager::Status(const sf::String& id)
 {
 	if (sounds.find(id) != sounds.end())
 	{
-		return sounds[id].getStatus();
+		return sounds[id]->getStatus();
 	}
 
-	return sf::Sound::Stopped;
+	return sf::Sound::Status::Stopped;
 }
 
 sf::Sound* VSoundManager::GetSound(const sf::String& id)
 {
 	if (sounds.find(id) != sounds.end())
 	{
-		return &sounds[id];
+		return sounds[id].get();
 	}
 
 	return nullptr;
@@ -93,5 +92,4 @@ sf::Sound* VSoundManager::GetSound(const sf::String& id)
 void VSoundManager::Cleanup()
 {
 	sounds.clear();
-	soundBuffers.clear();
 }

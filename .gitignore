@@ -261,6 +261,7 @@ paket-files/
 
 # JetBrains Rider
 .idea/
+
 *NX*
 *.nnsdk.xml
 *.props
@@ -268,3 +269,5 @@ Application.arm.ilp32.nmeta
 Application.desc
 Application.fdf
 error.txt
+
+*.exe

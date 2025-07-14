@@ -122,7 +122,7 @@ public:
 	///Radius amount for Circle Collisions.
 	float Radius = 0;
 	///Angle of object.
-	float Angle = 0;
+	sf::Angle Angle;
 	///Velocity of rotation.
 	float AngleVelocity = 0;
 	///Acceleration of rotation.

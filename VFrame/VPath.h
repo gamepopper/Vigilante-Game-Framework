@@ -59,11 +59,16 @@ private:
 	float speed = 1.0f;
 	std::function<void()> onComplete;
 
+#if _DEBUG
+	unsigned int debugResolution = 5;
+	sf::Color debugPathColor = sf::Color::White;
+#endif
+
 	sf::Vector2f getBezierPoint(float t);
 
 public:
 	/// The types of paths to use.
-	enum VPathType
+	enum VPathType : unsigned int
 	{
 		///Follows a straight line between each point.
 		LINE,
@@ -74,6 +79,18 @@ public:
 
 	VPath() = default;
 	~VPath() = default;
+
+	/**
+	* Sets the number of steps to take when rendering a curve path for debugging purposes.
+	* @param value The resolution of the rendered path. Minimum is 1, default is 5. Value is multiplied by the number of points. The higher the value the smoother the curve will look.
+	*/
+	void SetDebugPathResolution(unsigned value);
+
+	/**
+	* Sets the color of the rendered path for debugging purposes.
+	* @param color The color of the path. Default is sf::Color::White.
+	*/
+	void SetDebugPathColor(const sf::Color& color);
 
 	/**
 	* Sets a path based on a list of points.

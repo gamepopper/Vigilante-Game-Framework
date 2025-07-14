@@ -38,7 +38,7 @@ sf::Texture& VContent::LoadTexture(const sf::String& name)
 	if (found == textureDir.end())
 	{
 		std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();
-		if (texture->loadFromFile(name))
+		if (texture->loadFromFile(name.toAnsiString()))
 		{
 			VBase::VLog("%s loaded", name.toUtf8().c_str());
 			textureDir[name] = std::move(texture);
@@ -58,7 +58,7 @@ sf::Image& VContent::LoadImage(const sf::String& name)
 	if (found == imageDir.end())
 	{
 		std::unique_ptr<sf::Image> image = std::make_unique<sf::Image>();
-		if (image->loadFromFile(name))
+		if (image->loadFromFile(name.toAnsiString()))
 		{
 			VBase::VLog("%s loaded", name.toUtf8().c_str());
 			imageDir[name] = std::move(image);
@@ -78,7 +78,7 @@ sf::Font& VContent::LoadFont(const sf::String& name)
 	if (found == fontDir.end())
 	{
 		std::unique_ptr<sf::Font> font = std::make_unique<sf::Font>();
-		if (font->loadFromFile(name))
+		if (font->openFromFile(name.toAnsiString()))
 		{
 			VBase::VLog("%s loaded", name.toUtf8().c_str());
 			fontDir[name] = std::move(font);
@@ -98,7 +98,7 @@ sf::SoundBuffer& VContent::LoadSound(const sf::String& name)
 	if (found == soundDir.end())
 	{
 		std::unique_ptr<sf::SoundBuffer> sound = std::make_unique<sf::SoundBuffer>();
-		if (sound->loadFromFile(name))
+		if (sound->loadFromFile(name.toAnsiString()))
 		{
 			VBase::VLog("%s loaded", name.toUtf8().c_str());
 			soundDir[name] = std::move(sound);

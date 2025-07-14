@@ -70,7 +70,7 @@ protected:
 	* @param Rect Area of the texture to use (default is the full texture size).
 	* @param RandomFrames Should the emitter use frames incrementally or random frames.
 	*/
-	void setSize(int Amount, bool Animated, int Width, int Height, const sf::IntRect& Rect = sf::IntRect(), bool RandomFrames = true);
+	void setSize(int Amount, bool Animated, unsigned int Width, unsigned int Height, const sf::IntRect& Rect = sf::IntRect(), bool RandomFrames = true);
 
 public:
 	///Used to call parent class functions when they are overrided in class.
@@ -161,7 +161,7 @@ public:
 															AlphaRange(1, 1)
 	{
 		exists = false;
-		vertices.setPrimitiveType(sf::PrimitiveType::Quads);
+		vertices.setPrimitiveType(sf::PrimitiveType::Triangles);
 		mainTint = sf::Color::White;
 	}
 
@@ -186,7 +186,7 @@ public:
 																	ColourRange(sf::Color::White, sf::Color::White),
 																	AlphaRange(1, 1)
 	{
-		vertices.setPrimitiveType(sf::PrimitiveType::Quads);
+		vertices.setPrimitiveType(sf::PrimitiveType::Triangles);
 		exists = false;
 		mainTint = sf::Color::White;
 	}
@@ -202,7 +202,7 @@ public:
 	* @param RandomFrames Whether the emitter should set frames in order from first to last, or random frames.
 	* @return The VEmitter that is being loaded, typically the one that the function is being called from.
 	*/
-	VEmitter* LoadParticlesFromFile(int Amount, const sf::String& Filename, bool Animated = false, int Width = 1, int Height = 1, const sf::IntRect& Rect = sf::IntRect(), bool RandomFrames = true);
+	VEmitter* LoadParticlesFromFile(int Amount, const sf::String& Filename, bool Animated = false, unsigned int Width = 1, unsigned int Height = 1, const sf::IntRect& Rect = sf::IntRect(), bool RandomFrames = true);
 	
 	/**
 	* Load set amount of particles from an sf::Texture object.
@@ -215,7 +215,7 @@ public:
 	* @param RandomFrames Whether the emitter should set frames in order from first to last, or random frames.
 	* @return The VEmitter that is being loaded, typically the one that the function is being called from.
 	*/
-	VEmitter* LoadParticles(int Amount, sf::Texture& Texture, bool Animated = false, int Width = 1, int Height = 1, const sf::IntRect& Rect = sf::IntRect(), bool RandomFrames = true);
+	VEmitter* LoadParticles(int Amount, sf::Texture& Texture, bool Animated = false, unsigned int Width = 1, unsigned int Height = 1, const sf::IntRect& Rect = sf::IntRect(), bool RandomFrames = true);
 
 	/**
 	* Makes a set of particles as a series of solid rectangles.
@@ -225,7 +225,7 @@ public:
 	* @param Color The colour of the rectangle of the particle. Note that this colour will be mutliplied with the tint set in ColourRange.
 	* @return The VEmitter that is being loaded, typically the one that the function is being called from.
 	*/
-	VEmitter* MakeParticles(int Amount, int Width, int Height, sf::Color Color = sf::Color::White);
+	VEmitter* MakeParticles(int Amount, unsigned int Width, unsigned int Height, sf::Color Color = sf::Color::White);
 
 	///Kills the emitter and all of its particles.
 	virtual void Kill() override;

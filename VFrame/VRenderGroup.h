@@ -107,7 +107,7 @@ public:
 	* @param width Width of the sprite and texture area.
 	* @param height Height of the sprite and texture area.
 	*/
-	virtual void Resize(int width, int height);
+	virtual void Resize(unsigned int width, unsigned int height);
 
 	///@return The sprite's texture after the scene is rendered to it.
 	virtual const sf::Texture& GetTexture();

@@ -116,9 +116,9 @@ public:
 	///@param thickness The thickness of the outline in pixels.
 	void SetOutlineThickness(float thickness);
 	///@return The colour of the shape's fill colour.
-	const sf::Color& GetFillTint();
+	const sf::Color GetFillTint();
 	///@return The colour of the shape's outline colour.
-	const sf::Color& GetOutlineTint();
+	const sf::Color GetOutlineTint();
 	///@return The thickness of the outline in thickness.
 	float GetOutlineThickness();
 	///@param texture The texture you want to set to, gets destroyed once removed. NULL by default.

@@ -17,6 +17,20 @@ sf::Vector2f VPath::getBezierPoint(float t)
 	return tmp[0];
 }
 
+void VPath::SetDebugPathResolution(unsigned value)
+{
+#if _DEBUG
+	debugResolution = value > 1 ? value : 1;
+#endif
+}
+
+void VPath::SetDebugPathColor(const sf::Color& color)
+{
+#if _DEBUG
+	debugPathColor = color;
+#endif
+}
+
 void VPath::SetPath(const std::vector<sf::Vector2f>& p)
 {
 	points.resize(p.size());
@@ -55,7 +69,7 @@ int VPath::GetNumPoints()
 
 void VPath::SetPathType(VPathType pathType)
 {
-	this->pathType = pathType;
+	this->pathType = static_cast<unsigned int>(pathType);
 	dirty = true;
 }
 
@@ -121,7 +135,7 @@ sf::Vector2f VPath::GetPoint(float t)
 
 	switch (pathType)
 	{
-		case VPath::LINE:
+		case VPath::VPathType::LINE:
 		{
 			unsigned int size = points.size() - 1;
 			float frac = 1.0f / size;
@@ -133,7 +147,7 @@ sf::Vector2f VPath::GetPoint(float t)
 			float partT = t - (part * frac);
 			return VInterpolate::Vector2f(points[part], points[part + 1], partT, frac);
 		}
-		case VPath::CURVE:
+		case VPath::VPathType::CURVE:
 		{
 			return getBezierPoint(t);
 		}
@@ -179,7 +193,7 @@ void VPath::Update(float dt)
 		if (angle)
 		{
 			sf::Vector2f diff = p1 - lastPos;
-			object->Angle = atan2f(diff.y, diff.x) * (180 / VFRAME_PI);
+			object->Angle = sf::degrees(atan2f(diff.y, diff.x) * (180 / VFRAME_PI));
 		}
 	}
 
@@ -188,17 +202,18 @@ void VPath::Update(float dt)
 
 void VPath::Draw(sf::RenderTarget& RenderTarget)
 {
+#if _DEBUG
 	if (GetNumPoints() < 2)
 		return;
 
 	if (dirty)
 	{
-		int points = 5 * GetNumPoints();
+		int points = debugResolution * GetNumPoints();
 		float thickness = 5.0f / 2.0f;
 		float dt = 0.0f;
 		float step = 1.0f / points;
 
-		vertexArray.setPrimitiveType(sf::TrianglesStrip);
+		vertexArray.setPrimitiveType(sf::PrimitiveType::TriangleStrip);
 		vertexArray.clear();
 		while (dt < 1.0f)
 		{
@@ -209,8 +224,8 @@ void VPath::Draw(sf::RenderTarget& RenderTarget)
 			diff /= sqrtf((diff.x * diff.x) + (diff.y * diff.y));
 			sf::Vector2f norm(-diff.y, diff.x);
 
-			vertexArray.append(sf::Vertex(p1 + (norm * thickness), sf::Color::White));
-			vertexArray.append(sf::Vertex(p1 + (norm * -thickness), sf::Color::White));
+			vertexArray.append({ p1 + (norm * thickness), debugPathColor });
+			vertexArray.append({ p1 + (norm * -thickness), debugPathColor });
 
 			dt += step;
 		}
@@ -222,9 +237,10 @@ void VPath::Draw(sf::RenderTarget& RenderTarget)
 		diff /= sqrtf((diff.x * diff.x) + (diff.y * diff.y));
 		sf::Vector2f norm(-diff.y, diff.x);
 
-		vertexArray.append(sf::Vertex(p2 + (norm * thickness), sf::Color::White));
-		vertexArray.append(sf::Vertex(p2 + (norm * -thickness), sf::Color::White));
+		vertexArray.append({ p2 + (norm * thickness), debugPathColor });
+		vertexArray.append({ p2 + (norm * -thickness), debugPathColor });
 	}
 
 	RenderTarget.draw(vertexArray);
+#endif
 }

@@ -447,10 +447,10 @@ sf::VertexArray m_DebugVertexArray;
 sf::Color toSFColor(cpSpaceDebugColor color)
 {
 	return sf::Color(
-		static_cast<sf::Uint8>(color.r * 255),
-		static_cast<sf::Uint8>(color.g * 255),
-		static_cast<sf::Uint8>(color.b * 255),
-		static_cast<sf::Uint8>(color.a * 255)
+		static_cast<uint8_t>(color.r * 255),
+		static_cast<uint8_t>(color.g * 255),
+		static_cast<uint8_t>(color.b * 255),
+		static_cast<uint8_t>(color.a * 255)
 	);
 }
 
@@ -477,33 +477,33 @@ void ChipmunkDebugDrawFatSegment(cpVect a, cpVect b, cpFloat radius, cpSpaceDebu
 	sf::Vector2f v6 = ToSFVector(cpvsub(a, cpvsub(nw, tw))); // {-1.0, -1.0}
 	sf::Vector2f v7 = ToSFVector(cpvadd(a, cpvadd(nw, tw))); // {-1.0,  1.0}
 
-	m_DebugVertexArray.append(sf::Vertex(v0, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v1, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v2, toSFColor(outlineColor)));
+	m_DebugVertexArray.append({v0, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v1, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v2, toSFColor(outlineColor)});
 
-	m_DebugVertexArray.append(sf::Vertex(v3, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v1, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v2, toSFColor(outlineColor)));
+	m_DebugVertexArray.append({v3, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v1, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v2, toSFColor(outlineColor)});
 
-	m_DebugVertexArray.append(sf::Vertex(v3, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v4, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v2, toSFColor(outlineColor)));
+	m_DebugVertexArray.append({v3, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v4, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v2, toSFColor(outlineColor)});
 
-	m_DebugVertexArray.append(sf::Vertex(v3, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v4, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v5, toSFColor(outlineColor)));
+	m_DebugVertexArray.append({v3, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v4, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v5, toSFColor(outlineColor)});
 
-	m_DebugVertexArray.append(sf::Vertex(v0, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v1, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v2, toSFColor(outlineColor)));
+	m_DebugVertexArray.append({v0, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v1, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v2, toSFColor(outlineColor)});
 
-	m_DebugVertexArray.append(sf::Vertex(v6, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v4, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v5, toSFColor(outlineColor)));
+	m_DebugVertexArray.append({v6, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v4, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v5, toSFColor(outlineColor)});
 
-	m_DebugVertexArray.append(sf::Vertex(v6, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v7, toSFColor(outlineColor)));
-	m_DebugVertexArray.append(sf::Vertex(v5, toSFColor(outlineColor)));
+	m_DebugVertexArray.append({v6, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v7, toSFColor(outlineColor)});
+	m_DebugVertexArray.append({v5, toSFColor(outlineColor)});
 }
 
 void ChipmunkDebugDrawSegment(cpVect a, cpVect b, cpSpaceDebugColor color)
@@ -553,9 +553,9 @@ void ChipmunkDebugDrawPolygon(int count, const cpVect *verts, cpFloat radius, cp
 		sf::Vector2f v1 = ToSFVector(cpvadd(verts[i + 1], cpvmult(extrude[i + 1].offset, inset)));
 		sf::Vector2f v2 = ToSFVector(cpvadd(verts[i + 2], cpvmult(extrude[i + 2].offset, inset)));
 
-		m_DebugVertexArray.append(sf::Vertex(v0, toSFColor(fillColor)));
-		m_DebugVertexArray.append(sf::Vertex(v1, toSFColor(fillColor)));
-		m_DebugVertexArray.append(sf::Vertex(v2, toSFColor(fillColor)));
+		m_DebugVertexArray.append({v0, toSFColor(fillColor)});
+		m_DebugVertexArray.append({v1, toSFColor(fillColor)});
+		m_DebugVertexArray.append({v2, toSFColor(fillColor)});
 	}
 
 	cpFloat outset = 1.0f + radius - inset;
@@ -584,31 +584,31 @@ void ChipmunkDebugDrawPolygon(int count, const cpVect *verts, cpFloat radius, cp
 		sf::Vector2f n1 = ToSFVector(nB);
 		sf::Vector2f offset0 = ToSFVector(offsetA);*/
 
-		m_DebugVertexArray.append(sf::Vertex(inner0, toSFColor(outlineColor)));
-		m_DebugVertexArray.append(sf::Vertex(inner1, toSFColor(outlineColor)));
-		m_DebugVertexArray.append(sf::Vertex(outer1, toSFColor(outlineColor)));
+		m_DebugVertexArray.append({inner0, toSFColor(outlineColor)});
+		m_DebugVertexArray.append({inner1, toSFColor(outlineColor)});
+		m_DebugVertexArray.append({outer1, toSFColor(outlineColor)});
 
-		m_DebugVertexArray.append(sf::Vertex(inner0, toSFColor(outlineColor)));
-		m_DebugVertexArray.append(sf::Vertex(outer0, toSFColor(outlineColor)));
-		m_DebugVertexArray.append(sf::Vertex(outer1, toSFColor(outlineColor)));
+		m_DebugVertexArray.append({inner0, toSFColor(outlineColor)});
+		m_DebugVertexArray.append({outer0, toSFColor(outlineColor)});
+		m_DebugVertexArray.append({outer1, toSFColor(outlineColor)});
 
-		m_DebugVertexArray.append(sf::Vertex(inner0, toSFColor(outlineColor)));
-		m_DebugVertexArray.append(sf::Vertex(outer0, toSFColor(outlineColor)));
-		m_DebugVertexArray.append(sf::Vertex(outer2, toSFColor(outlineColor)));
+		m_DebugVertexArray.append({inner0, toSFColor(outlineColor)});
+		m_DebugVertexArray.append({outer0, toSFColor(outlineColor)});
+		m_DebugVertexArray.append({outer2, toSFColor(outlineColor)});
 
-		m_DebugVertexArray.append(sf::Vertex(inner0, toSFColor(outlineColor)));
-		m_DebugVertexArray.append(sf::Vertex(outer2, toSFColor(outlineColor)));
-		m_DebugVertexArray.append(sf::Vertex(outer3, toSFColor(outlineColor)));
+		m_DebugVertexArray.append({inner0, toSFColor(outlineColor)});
+		m_DebugVertexArray.append({outer2, toSFColor(outlineColor)});
+		m_DebugVertexArray.append({outer3, toSFColor(outlineColor)});
 	}
 }
 
 void ChipmunkDebugDrawDot(cpFloat size, cpVect pos, cpSpaceDebugColor fillColor)
 {
 	float r = (float)(size*0.5f);
-	sf::Vertex a = sf::Vertex(sf::Vector2f((float)pos.x - r, (float)pos.y - r), toSFColor(fillColor));
-	sf::Vertex b = sf::Vertex(sf::Vector2f((float)pos.x - r, (float)pos.y + r), toSFColor(fillColor));
-	sf::Vertex c = sf::Vertex(sf::Vector2f((float)pos.x + r, (float)pos.y + r), toSFColor(fillColor));
-	sf::Vertex d = sf::Vertex(sf::Vector2f((float)pos.x + r, (float)pos.y - r), toSFColor(fillColor));
+	sf::Vertex a = {sf::Vector2f((float)pos.x - r, (float)pos.y - r), toSFColor(fillColor)};
+	sf::Vertex b = {sf::Vector2f((float)pos.x - r, (float)pos.y + r), toSFColor(fillColor)};
+	sf::Vertex c = {sf::Vector2f((float)pos.x + r, (float)pos.y + r), toSFColor(fillColor)};
+	sf::Vertex d = {sf::Vector2f((float)pos.x + r, (float)pos.y - r), toSFColor(fillColor)};
 
 	m_DebugVertexArray.append(a); m_DebugVertexArray.append(b); m_DebugVertexArray.append(c);
 	m_DebugVertexArray.append(a); m_DebugVertexArray.append(c); m_DebugVertexArray.append(d);
@@ -660,7 +660,7 @@ void VPhysicsGroup::Draw(sf::RenderTarget& RenderTarget)
 {
 	if (VGlobal::p()->DrawDebug)
 	{
-		m_DebugVertexArray.setPrimitiveType(sf::Triangles);
+		m_DebugVertexArray.setPrimitiveType(sf::PrimitiveType::Triangles);
 		m_DebugVertexArray.clear();
 		cpSpaceDebugDrawOptions drawOptions = {
 			DrawCircle,

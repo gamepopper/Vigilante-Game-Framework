@@ -79,8 +79,8 @@ public:
 		Animation.GetCurrentFrame();
 	}
 
-	virtual VSprite* LoadGraphic(const sf::String& filename, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect()) override;
-	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, int width = 0, int height = 0, const sf::IntRect& rect = sf::IntRect()) override;
+	virtual VSprite* LoadGraphic(const sf::String& filename, bool animated = false, unsigned int width = 0, unsigned int height = 0, const sf::IntRect& rect = sf::IntRect()) override;
+	virtual VSprite* LoadGraphicFromTexture(sf::Texture& texture, bool animated = false, unsigned int width = 0, unsigned int height = 0, const sf::IntRect& rect = sf::IntRect()) override;
 
 	/**
 	* Make sprite texture. (NOT USED FOR TILED SPRITE)
@@ -90,7 +90,7 @@ public:
 	* @param outline Outline thickness.
 	* @param outlineColor colour of sprite outline.
 	*/
-	virtual VSprite* MakeGraphic(int width, int height, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) override { return this; }
+	virtual VSprite* MakeGraphic(unsigned int width, unsigned int height, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) override { return this; }
 
 	/**
 	* Make sprite texture a circle. (NOT USED FOR TILED SPRITE)
@@ -99,7 +99,7 @@ public:
 	* @param outline Outline thickness.
 	* @param outlineColor colour of sprite outline.
 	*/
-	virtual VSprite* MakeGraphicCircle(int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) override { return this; }
+	virtual VSprite* MakeGraphicCircle(unsigned int radius, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) override { return this; }
 
 	/**
 	* Make sprite texture a multisided shape. (NOT USED FOR TILED SPRITE)
@@ -109,7 +109,7 @@ public:
 	* @param outline Outline thickness.
 	* @param outlineColor colour of sprite outline.
 	*/
-	virtual VSprite* MakeGraphicSided(int radius, int sides, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) { return this; }
+	virtual VSprite* MakeGraphicSided(unsigned int radius, unsigned int sides, sf::Color color, float outline = 0, sf::Color outlineColor = sf::Color::Transparent) { return this; }
 
 	/**
 	* Make sprite texture a convex shape. (NOT USED FOR TILED SPRITE)

@@ -86,27 +86,27 @@ public:
 
 	virtual void HandleEvents(const sf::Event& event)
 	{
-		if (event.type == event.KeyPressed)
+		if (const auto* key = event.getIf<sf::Event::KeyPressed>())
 		{
-			if (event.key.code == sf::Keyboard::Num1)
+			if (key->code == sf::Keyboard::Key::Num1)
 			{
 				animatedSprite->Animation.Play("start");
 				VGlobal::p()->Sound->Play("select");
 			}
 
-			if (event.key.code == sf::Keyboard::Num2)
+			if (key->code == sf::Keyboard::Key::Num2)
 			{
 				animatedSprite->Animation.Play("shotgun");
 				VGlobal::p()->Sound->Play("select");
 			}
 
-			if (event.key.code == sf::Keyboard::Num3)
+			if (key->code == sf::Keyboard::Key::Num3)
 			{
 				animatedSprite->Animation.Play("railgun");
 				VGlobal::p()->Sound->Play("select");
 			}
 
-			if (event.key.code == sf::Keyboard::Num4)
+			if (key->code == sf::Keyboard::Key::Num4)
 			{
 				animatedSprite->Animation.Play("doublegun");
 				VGlobal::p()->Sound->Play("select");
@@ -359,8 +359,7 @@ public:
 		platform[1]->Velocity.y = 32.0f;
 		Add(platform[1]);
 
-		VGlobal::p()->WorldBounds.width = tilemap->Size.x;
-		VGlobal::p()->WorldBounds.height = tilemap->Size.y;
+		VGlobal::p()->WorldBounds.size = tilemap->Size;
 		ParentState->Cameras[0]->SetToBounds(true);
 
 		sf::Vector2f playerPos;
@@ -464,7 +463,7 @@ public:
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
 
-				if (player->Angle > 360 || player->Angle < -360)
+				if (player->Angle.asDegrees() > 360 || player->Angle.asDegrees() < -360)
 					return PLAYER_POUND;
 
 				return -1;
@@ -481,7 +480,7 @@ public:
 			[](VBase* base, unsigned int state, void* data) //Exit
 			{
 				VObject* player = dynamic_cast<VObject*>(base);
-				player->Angle = 0;
+				player->Angle = sf::degrees(0);
 				player->MaxVelocity = sf::Vector2f(0, 800);
 				player->Velocity.y = 800;
 				player->AngleVelocity = 0;
@@ -547,8 +546,8 @@ public:
 	virtual void Cleanup()
 	{
 		VSUPERCLASS::Cleanup();
-		VGlobal::p()->WorldBounds.width = static_cast<float>(VGlobal::p()->Width);
-		VGlobal::p()->WorldBounds.height = static_cast<float>(VGlobal::p()->Height);
+		VGlobal::p()->WorldBounds.size.x = static_cast<float>(VGlobal::p()->Width);
+		VGlobal::p()->WorldBounds.size.y = static_cast<float>(VGlobal::p()->Height);
 	}
 
 	virtual void Update(float dt)
@@ -775,6 +774,7 @@ public:
 		playerPath->SetUpdateAngle(true);
 		playerPath->SetPathType(VPath::LINE);
 		playerPath->SetInterpolationType(VInterpolate::OutElastic);
+		playerPath->SetDebugPathResolution(100);
 	}
 
 	void AddPoint(sf::Vector2f p)
@@ -800,9 +800,9 @@ public:
 
 	virtual void HandleEvents(const sf::Event& event)
 	{
-		if (event.type == sf::Event::MouseButtonPressed)
+		if (const auto* mouseButton = event.getIf<sf::Event::MouseButtonPressed>())
 		{
-			if (event.mouseButton.button == sf::Mouse::Left)
+			if (mouseButton->button == sf::Mouse::Button::Left)
 			{
 				if (playerPath->GetNumPoints() == 0)
 				{
@@ -817,24 +817,24 @@ public:
 			}
 		}
 
-		if (event.type == sf::Event::KeyPressed)
+		if (const auto* key = event.getIf<sf::Event::KeyPressed>())
 		{
-			if (event.key.code == sf::Keyboard::Space)
+			if (key->code == sf::Keyboard::Key::Space)
 			{
 				playerPath->StartFollowing(playerControl, std::bind(&PathState::clearPath, this));
 			}
 
-			if (event.key.code == sf::Keyboard::O)
+			if (key->code == sf::Keyboard::Key::O)
 			{
 				playerPath->SetPathType(playerPath->GetPathType() == VPath::LINE ? VPath::CURVE : VPath::LINE);
 			}
 
-			if (event.key.code == sf::Keyboard::K)
+			if (key->code == sf::Keyboard::Key::K)
 			{
 				playerPath->SetInterpolationType((VInterpolate::VInterpolateType)(((int)playerPath->GetInterpolationType() - 1 + VInterpolate::NumInterpolationTypes) % VInterpolate::NumInterpolationTypes));
 			}
 
-			if (event.key.code == sf::Keyboard::L)
+			if (key->code == sf::Keyboard::Key::L)
 			{
 				playerPath->SetInterpolationType((VInterpolate::VInterpolateType)(((int)playerPath->GetInterpolationType() + 1 + VInterpolate::NumInterpolationTypes) % VInterpolate::NumInterpolationTypes));
 			}
@@ -1109,7 +1109,7 @@ public:
 		render->RenderOutside = VRenderGroup::VRENDERGROUP_BEFORE;
 		render->Sprite->SetPositionAtCentre(320, 200);
 
-		VPostEffect* postEffect = new VPostEffect("Example/Assets/AlphaThreshold.frag", sf::Shader::Fragment);
+		VPostEffect* postEffect = new VPostEffect("Example/Assets/AlphaThreshold.frag", sf::Shader::Type::Fragment);
 		postEffect->SetParameter("threshold", 0.85f);
 		postEffect->SetParameter("smoothness", 0.40f);
 		postEffect->SetParameter("unpremultiply", 1.0f);
@@ -1462,7 +1462,6 @@ public:
 	TrailAreaState() : VSubState() {}
 	~TrailAreaState() = default;
 	VShape* playerControl;
-	VTrailArea* render;
 
 	virtual void Initialise()
 	{
@@ -1474,8 +1473,8 @@ public:
 		playerControl->Drag = sf::Vector2f(500, 500);
 		playerControl->MaxVelocity = sf::Vector2f(200, 200);
 
-		render = new VTrailArea(VGlobal::p()->Width / 2.0f, 0, VGlobal::p()->Width / 2, VGlobal::p()->Height);
-		render->AlphaMultiplier = 0.99f;
+		auto render = new VTrailArea(0, 0, VGlobal::p()->Width / 2, VGlobal::p()->Height);
+		render->AlphaMultiplier = 0.8f;
 		render->Delay = 0.05f;
 		render->Add(playerControl);
 		render->RenderOutside = VRenderGroup::VRENDERGROUP_BEFORE;
@@ -1620,7 +1619,7 @@ public:
 
 		normalTex.loadFromFile("Example/Assets/normal.png");
 
-		lighting2DShader.loadFromFile("Example/Assets/Lighting.frag", sf::Shader::Fragment);
+		lighting2DShader.loadFromFile("Example/Assets/Lighting.frag", sf::Shader::Type::Fragment);
 		lighting2DShader.setUniform("texture", sf::Shader::CurrentTexture);
 		lighting2DShader.setUniform("height", normalTex);
 		lighting2DShader.setUniform("light", sf::Vector3f(0.5f, 0.5f, 0.0f));
@@ -1927,7 +1926,7 @@ public:
 		int height = VGlobal::p()->Height;
 		int width = VGlobal::p()->Width;
 
-		pixel->Vertices.setPrimitiveType(sf::Points);
+		pixel->Vertices.setPrimitiveType(sf::PrimitiveType::Points);
 		pixel->Vertices.resize(width * height);
 		pixel->Size = sf::Vector2f(sf::Vector2i(width, height));
 		std::vector<float> map = PerlinNoise::GenerateFloat(width, height, 3.0f, 7, 0.5f, 42);
@@ -1942,9 +1941,9 @@ public:
 
 				pixel->Vertices[pixelCount].position = sf::Vector2f(x + 0.5f, y + 0.5f);
 				pixel->Vertices[pixelCount].color = sf::Color(
-					sf::Uint8(255 * value),
-					sf::Uint8(255 * value),
-					sf::Uint8(255 * value),
+					uint8_t(255 * value),
+					uint8_t(255 * value),
+					uint8_t(255 * value),
 					255);
 				pixelCount++;
 
@@ -2016,34 +2015,34 @@ public:
 		box->SetRectangle(30.0f, 30.0f);
 		box->SetFillTint(sf::Color::Yellow);
 		box->Elasticity = 0.5f;
-		box->Angle = 45.0f;
+		box->Angle = sf::degrees(45.0f);
 
 		VShape* box2 = new VShape(100.0f, 200.0f);
 		box2->SetRectangle(30.0f, 30.0f);
 		box2->SetFillTint(sf::Color::Yellow);
 		box2->Elasticity = 0.5f;
-		box2->Angle = 45.0f;
+		box2->Angle = sf::degrees(45.0f);
 
 		VShape* slope = new VShape(150.0f, 200.0f);
 		slope->SetRectangle(120.0f, 1.0f);
 		slope->Origin = sf::Vector2f(0.0f, 0.5f);
 		slope->SetFillTint(sf::Color::White);
 		slope->Elasticity = 1.0f;
-		slope->Angle = 20.0f;
+		slope->Angle = sf::degrees(20.0f);
 
-		VShape* slope1 = new VShape(150.0f + cosf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f, 200.0f + sinf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f);
+		VShape* slope1 = new VShape(150.0f + cosf(slope->Angle.asDegrees() * (3.1415926f / 180.0f)) * 120.0f, 200.0f + sinf(slope->Angle.asRadians()) * 120.0f);
 		slope1->SetRectangle(120.0f, 1.0f);
 		slope1->Origin = sf::Vector2f(0.0f, 0.5f);
 		slope1->SetFillTint(sf::Color::White);
 		slope1->Elasticity = 1.0f;
-		slope1->Angle = 0.0f;
+		slope1->Angle = sf::degrees(0.0f);
 
-		VShape* slope2 = new VShape(270.0f + cosf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f, 200.0f + sinf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f);
+		VShape* slope2 = new VShape(270.0f + cosf(slope->Angle.asDegrees() * (3.1415926f / 180.0f)) * 120.0f, 200.0f + sinf(slope->Angle.asRadians()) * 120.0f);
 		slope2->SetRectangle(120.0f, 1.0f);
 		slope2->Origin = sf::Vector2f(0.0f, 0.5f);
 		slope2->SetFillTint(sf::Color::White);
 		slope2->Elasticity = 1.0f;
-		slope2->Angle = -20.0f;
+		slope2->Angle = sf::degrees(-20.0f);
 
 		VShape* ground = new VShape(0.0f, VGlobal::p()->Height - 30.0f);
 		ground->SetRectangle((float)VGlobal::p()->Width, 30.0f);
@@ -2118,11 +2117,11 @@ public:
 		boxPhysics->SetFriction(0.5f);
 		group->AddJoint(new VPhysicsPivotJoint(boxPhysics->GetBody(), group->GetBody(), box2->Position + (box2->Size / 2.0f)));
 
-		VPhysicsObject* slopePhysics = group->AddObject(slope, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope->Angle * (3.1415926f / 180.0f)) * 120.0f) });
+		VPhysicsObject* slopePhysics = group->AddObject(slope, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope->Angle.asRadians()) * 120.0f, sinf(slope->Angle.asRadians()) * 120.0f) });
 		slopePhysics->SetFriction(1.0f);
-		slopePhysics = group->AddObject(slope1, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope1->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope1->Angle * (3.1415926f / 180.0f)) * 120.0f) });
+		slopePhysics = group->AddObject(slope1, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope1->Angle.asRadians()) * 120.0f, sinf(slope1->Angle.asRadians()) * 120.0f) });
 		slopePhysics->SetFriction(1.0f);
-		slopePhysics = group->AddObject(slope2, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope2->Angle * (3.1415926f / 180.0f)) * 120.0f, sinf(slope2->Angle * (3.1415926f / 180.0f)) * 120.0f) });
+		slopePhysics = group->AddObject(slope2, VPhysicsObject::KINEMATIC, VPhysicsObject::LINE, { sf::Vector2f(0.0f, 0.0f), sf::Vector2f(cosf(slope2->Angle.asRadians()) * 120.0f, sinf(slope2->Angle.asRadians()) * 120.0f) });
 		slopePhysics->SetFriction(1.0f);
 
 		Add(box);
@@ -2135,9 +2134,9 @@ public:
 
 	virtual void HandleEvents(const sf::Event& event)
 	{
-		if (event.type == sf::Event::MouseButtonPressed)
+		if (const auto* mouseButton = event.getIf<sf::Event::MouseButtonPressed>())
 		{
-			if (event.mouseButton.button == sf::Mouse::Left)
+			if (mouseButton->button == sf::Mouse::Button::Left)
 			{
 				sf::Vector2f mousePos = VGlobal::p()->GetMousePosition();
 

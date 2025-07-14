@@ -117,13 +117,13 @@ void VGlobal::SetFullscreen(bool set)
 
 	if (set && !fullscreen)
 	{
-		App->create(sf::VideoMode::getDesktopMode(), title, sf::Style::Fullscreen);
+		App->create(sf::VideoMode::getDesktopMode(), title, sf::State::Fullscreen);
 		App->setMouseCursorVisible(!set);
 		fullscreen = true;
 	}
 	else if (!set && fullscreen)
 	{
-		App->create(sf::VideoMode(Width, Height), title, WindowStyle);
+		App->create(sf::VideoMode({ Width, Height }), title, WindowStyle, sf::State::Windowed);
 		App->setMouseCursorVisible(!set);
 		fullscreen = false;
 	}

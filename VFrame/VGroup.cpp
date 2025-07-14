@@ -1,5 +1,6 @@
 #include "VGroup.h"
 #include "VGlobal.h"
+#include "VRenderGroup.h"
 
 using std::vector;
 
@@ -224,6 +225,11 @@ void VGroup::ForEach(const std::function<void(VBase*)>& function, bool recursive
 				if (group != nullptr)
 				{
 					group->ForEach(function, recursive);
+
+					if (dynamic_cast<VRenderGroup*>(base))
+					{
+						function(base);
+					}
 				}
 				else
 				{
@@ -252,6 +258,11 @@ void VGroup::ForEachAlive(const std::function<void(VBase*)>& function, bool recu
 				if (group != nullptr)
 				{
 					group->ForEachAlive(function, recursive);
+
+					if (dynamic_cast<VRenderGroup*>(base))
+					{
+						function(base);
+					}
 				}
 				else
 				{
@@ -280,6 +291,11 @@ void VGroup::ForEachDead(const std::function<void(VBase*)>& function, bool recur
 				if (group != nullptr)
 				{
 					group->ForEachDead(function, recursive);
+
+					if (dynamic_cast<VRenderGroup*>(base))
+					{
+						function(base);
+					}
 				}
 				else
 				{
@@ -308,6 +324,11 @@ void VGroup::ForEachExists(const std::function<void(VBase*)>& function, bool rec
 				if (group != nullptr)
 				{
 					group->ForEachExists(function, recursive);
+
+					if (dynamic_cast<VRenderGroup*>(base))
+					{
+						function(base);
+					}
 				}
 				else
 				{

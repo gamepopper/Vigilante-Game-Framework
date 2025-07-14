@@ -27,7 +27,7 @@ public:
 	VLight(bool radial);
 
 	void SetPosition(const sf::Vector2f& pos);
-	void SetAngle(float angle);
+	void SetAngle(sf::Angle angle);
 	void SetWidth(float width);
 	void SetRange(float range);
 	void SetFade(float fade);
