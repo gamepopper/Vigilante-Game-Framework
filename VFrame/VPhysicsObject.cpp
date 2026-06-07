@@ -17,7 +17,7 @@ sf::Vector2f ToSFVector(const cpVect& v)
 	return sf::Vector2f((float)v.x, (float)v.y);
 }
 
-VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectShape Shape, std::vector<sf::Vector2f> Verts) : VBase(), shapeType(Shape), bodyType(BodyType)
+VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectShape Shape, std::vector<sf::Vector2f> Verts) : VBase(), shapeType(Shape), bodyType(BodyType), getPolyVertCount(0)
 {
 	baseObject = Object;
 
@@ -78,8 +78,8 @@ VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectSha
 		}
 	}
 
-	filter = &cpShapeFilterNew(CP_NO_GROUP, CP_ALL_CATEGORIES, CP_ALL_CATEGORIES);
-	cpShapeSetFilter(shape, *filter);
+	cpShapeFilter filter = cpShapeFilterNew(CP_NO_GROUP, CP_ALL_CATEGORIES, CP_ALL_CATEGORIES);
+	cpShapeSetFilter(shape, filter);
 
 	if (BodyType == VObjectType::DYNAMIC)
 	{
@@ -103,14 +103,6 @@ VPhysicsCPShape* VPhysicsObject::GetShape()
 	return shape;
 }
 
-//void VPhysicsObject::SetShapeType(VObjectShape shape)
-//{
-//	if (shape != shapeType)
-//	{
-//
-//	}
-//}
-
 VPhysicsObject::VObjectShape VPhysicsObject::GetShapeType()
 {
 	return shapeType;
@@ -118,11 +110,12 @@ VPhysicsObject::VObjectShape VPhysicsObject::GetShapeType()
 
 void VPhysicsObject::UpdateCollisionFilter(unsigned int group, unsigned int category, unsigned int mask)
 {
-	filter->group = group;
-	filter->categories = category;
-	filter->mask = mask;
+	cpShapeFilter filter;
+	filter.group = group;
+	filter.categories = category;
+	filter.mask = mask;
 
-	cpShapeSetFilter(shape, *filter);
+	cpShapeSetFilter(shape, filter);
 }
 
 void VPhysicsObject::SetBodyType(VObjectType newBodyType)

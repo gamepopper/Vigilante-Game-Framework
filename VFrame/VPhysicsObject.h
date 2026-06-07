@@ -116,8 +116,6 @@ protected:
 	VObjectShape shapeType;
 	///The type of body of the physics object.
 	VObjectType bodyType;
-	///A fast collision filter, defaults to allowing collisions from all objects.
-	cpShapeFilter* filter;
 
 public:
 	/**
