@@ -19,14 +19,14 @@ sf::Vector2f VPath::getBezierPoint(float t)
 
 void VPath::SetDebugPathResolution(unsigned value)
 {
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	debugResolution = value > 1 ? value : 1;
 #endif
 }
 
 void VPath::SetDebugPathColor(const sf::Color& color)
 {
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	debugPathColor = color;
 #endif
 }
@@ -202,7 +202,7 @@ void VPath::Update(float dt)
 
 void VPath::Draw(sf::RenderTarget& RenderTarget)
 {
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	if (GetNumPoints() < 2)
 		return;
 

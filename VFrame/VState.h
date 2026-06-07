@@ -38,10 +38,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <functional>
-
-#if _DEBUG
 #include <iostream>
-#endif
 
 class VSubState;
 ///Processes the game's current scene as well as 2D cameras and substates.

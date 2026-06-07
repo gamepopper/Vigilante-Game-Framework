@@ -90,7 +90,7 @@ void VRenderGroup::Resize(unsigned int width, unsigned int height)
 {
 	if (postProcessTex.resize({ width, height }) && renderTex.resize({ width, height }))
 	{
-		Sprite->Size = sf::Vector2f(width, height);
+		Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 		return;
 	}
 
@@ -143,7 +143,7 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 {
 	updateTransform();
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	bool drawDebug = VGlobal::p()->DrawDebug;
 	VGlobal::p()->DrawDebug = false;
 #endif
@@ -173,7 +173,7 @@ void VRenderGroup::Draw(sf::RenderTarget& RenderTarget)
 		updateTexture(renderTex.getTexture());
 	}
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	VGlobal::p()->DrawDebug = drawDebug;
 #endif
 

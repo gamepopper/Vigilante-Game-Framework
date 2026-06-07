@@ -100,7 +100,7 @@ protected:
 	///List of Collideable Tilesets.
 	std::vector<VTile*> tiles;
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	///Vertex data for displaying collision bounderies of the tilemap.
 	sf::VertexArray debuggingVertices;
 #endif
@@ -144,7 +144,7 @@ public:
 	{
 		type = VType::TILEMAP; 
 		Moves = false;
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 		DebugColor = sf::Color::Transparent;
 		debuggingVertices.setPrimitiveType(sf::PrimitiveType::Lines);
 #endif

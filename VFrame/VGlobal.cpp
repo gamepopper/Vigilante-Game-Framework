@@ -129,15 +129,15 @@ void VGlobal::SetFullscreen(bool set)
 	}
 
 #ifndef VFRAME_NO_3D
-	//Restore the GLStates.
-	auto popStatesFunc = [](VBase* base) {
-		V3DScene* scene = dynamic_cast<V3DScene*>(base);
-		if (scene)
-		{
-			//scene->PopGLStates();
-		}
-	};
-	CurrentState()->ForEach(popStatesFunc, true);
+	////Restore the GLStates.
+	//auto popStatesFunc = [](VBase* base) {
+	//	V3DScene* scene = dynamic_cast<V3DScene*>(base);
+	//	if (scene)
+	//	{
+	//		scene->PopGLStates();
+	//	}
+	//};
+	//CurrentState()->ForEach(popStatesFunc, true);
 #endif
 }
 

@@ -96,7 +96,7 @@ public:
 	virtual void Resize(unsigned int width, unsigned int height) override;
 
 	///@param value If true, sets the scene to be the current active context.
-	void SetActive(bool value = true);
+	bool SetActive(bool value = true);
 	///Push all the GL States up the stack to preserve them from any changes.
 	void PushGLStates();
 	///Pop all the GL States off the stack to restore them.

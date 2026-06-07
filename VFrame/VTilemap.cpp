@@ -279,9 +279,9 @@ void VTilemap::LoadFromCSV(const sf::String& mapData, const sf::String& graphicF
 	const std::vector<char>& collision, const sf::IntRect& rect)
 {
 	tilemap.clear();
-	std::locale ulocale(std::locale(), new std::codecvt_utf8<wchar_t>);
+
 	std::ifstream file(mapData.toAnsiString());
-	file.imbue(ulocale);
+	file.imbue(std::locale("en_US.UTF8"));
 
 	std::string line;
 	while (std::getline(file, line))
@@ -568,7 +568,7 @@ VTile::VTile(sf::Vector2f position, sf::Vector2f size) : VObject(position, size)
 
 	relativePos = Position;
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color::Red;
 #endif
 }
@@ -581,7 +581,7 @@ VTile::VTile(float x, float y, float width, float height) : VObject(x, y, width,
 
 	relativePos = Position;
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color::Red;
 #endif
 }

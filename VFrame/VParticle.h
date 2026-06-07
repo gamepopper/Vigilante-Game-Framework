@@ -56,13 +56,13 @@ public:
 	///The alpha range that is set from VEmitter.
 	VRange<float> AlphaRange;
 
-	VParticle() : VObject()
+	VParticle() : VObject(), AlphaRange()
 	{
 		Lifespan = 0;
 		Age = 0;
 		exists = false;
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 		DebugColor = sf::Color::Yellow;
 #endif
 	}

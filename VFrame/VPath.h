@@ -59,7 +59,7 @@ private:
 	float speed = 1.0f;
 	std::function<void()> onComplete;
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	unsigned int debugResolution = 5;
 	sf::Color debugPathColor = sf::Color::White;
 #endif

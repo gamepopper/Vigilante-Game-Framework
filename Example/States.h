@@ -1429,7 +1429,7 @@ public:
 		BloomPostEffect* bloom = new BloomPostEffect();
 		bloom->SetBloomFactor(0.4f);
 		multipass->AddPostEffect(bloom);
-		VGlobal::p()->PostProcess = scoreboard;*/
+		VGlobal::p()->PostProcess = std::move(std::unique_ptr<VPostEffectBase>(scoreboard));*/
 	}
 
 	virtual void Update(float dt)
@@ -2001,7 +2001,7 @@ public:
 #ifndef VFRAME_NO_PHYSICS
 class PhysicsState : public VSubState
 {
-	VPhysicsGroup* group;
+	VPhysicsGroup* group{ nullptr };
 
 public:
 	typedef VSubState VSUPERCLASS;

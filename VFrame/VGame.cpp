@@ -71,7 +71,7 @@ int VGame::Init()
 			sf::Vector2f(0.0f, VGlobal::p()->WorldBounds.size.y)
 		};
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 		debugRenderer = new VDebugRenderer();
 #endif
 

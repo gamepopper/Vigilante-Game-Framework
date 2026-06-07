@@ -277,7 +277,7 @@ public:
 	*/
 	virtual void ProcessCallback(VPhysicsCPConstraint* constraint, VPhysicsCPSpace* space, VPhysicsCallbackType type);
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	/**
 	* Draw the debug visual aides for the physics objects.
 	@param

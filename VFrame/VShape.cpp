@@ -12,7 +12,7 @@ VShape::VShape(float x, float y, float width, float height) : VObject(x, y, widt
 
 	Scale = sf::Vector2f(1, 1);
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color::Green;
 #endif
 }
@@ -24,7 +24,7 @@ VShape::VShape(sf::Vector2f Position, sf::Vector2f Size) : VObject(Position, Siz
 
 	Scale = sf::Vector2f(1, 1);
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color::Green;
 #endif
 }

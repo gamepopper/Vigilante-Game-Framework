@@ -20,6 +20,9 @@ sf::Vector2f ToSFVector(const cpVect& v)
 VPhysicsObject::VPhysicsObject(VObject* Object, VObjectType BodyType, VObjectShape Shape, std::vector<sf::Vector2f> Verts) : VBase(), shapeType(Shape), bodyType(BodyType), getPolyVertCount(0)
 {
 	baseObject = Object;
+#ifdef VFRAME_DEBUGDRAW
+	baseObject->DebugColor = sf::Color::Transparent;
+#endif
 
 	float moment = 0.0f;
 

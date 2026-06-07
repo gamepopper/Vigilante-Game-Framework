@@ -30,7 +30,7 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 {
 	updateTransform();
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	bool drawDebug = VGlobal::p()->DrawDebug;
 	VGlobal::p()->DrawDebug = false;
 #endif
@@ -98,7 +98,7 @@ void VTrailArea::Draw(sf::RenderTarget& RenderTarget)
 		updateTexture(renderTex.getTexture());
 	}
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	VGlobal::p()->DrawDebug = drawDebug;
 #endif
 

@@ -43,6 +43,7 @@ struct VPhysicsGroup::VPhysicsConstraintCallbackHelper
 VPhysicsGroup::VPhysicsGroup(unsigned int Amount) : VGroup(Amount)
 {
 	space = cpSpaceNew();
+
 	collisionHandler = cpSpaceAddDefaultCollisionHandler(space);
 	collisionHandler->userData = (void*)this;
 	collisionHandler->beginFunc = [](cpArbiter *arb, cpSpace *space, void* userData)
@@ -441,7 +442,7 @@ VPhysicsObject* VPhysicsGroup::FindPhysicsObject(VObject* object)
 	return nullptr;
 }
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 sf::VertexArray m_DebugVertexArray;
 
 sf::Color toSFColor(cpSpaceDebugColor color)

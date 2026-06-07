@@ -1,5 +1,5 @@
 #pragma once
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 #include "VBase.h"
 #include <SFML/Graphics/VertexArray.hpp>
 

@@ -180,7 +180,7 @@ public:
 	///Useful for moving platforms.
 	bool CollisionXDrag = true;
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	///Colour to display the collision boundary.
 	sf::Color DebugColor;
 #endif

@@ -51,30 +51,30 @@ enum class V3DVertexAttribute { Position, Normal, Color, TexCoord, COUNT };
 ///The 3D vertex structure for V3DModel.
 struct V3DVertex
 {
-	V3DVertex() {}
+	V3DVertex() : position(0, 0, 0), color(1, 1, 1, 1), texCoord(0, 0), normal(0, 0, 0) {}
 
 	/**
 	* @param pos Vertex Position.
 	*/
-	V3DVertex(const glm::vec3& pos) : position(pos), color(1,1,1,1) {}
+	V3DVertex(const glm::vec3& pos) : position(pos), color(1,1,1,1), texCoord(0, 0), normal(0, 0, 0) {}
 
 	/**
 	* @param pos Vertex Position.
 	* @param norm Vertex Normal.
 	*/
-	V3DVertex(const glm::vec3& pos, const glm::vec3& norm) : position(pos), normal(norm), color(1, 1, 1, 1) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec3& norm) : position(pos), normal(norm), color(1, 1, 1, 1), texCoord(0, 0) {}
 
 	/**
 	* @param pos Vertex Position.
 	* @param tex Vertex Texture Coordinate.
 	*/
-	V3DVertex(const glm::vec3& pos, const glm::vec2& tex) : position(pos), color(1, 1, 1, 1), texCoord(tex) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec2& tex) : position(pos), color(1, 1, 1, 1), texCoord(tex), normal(0, 0, 0) {}
 
 	/**
 	* @param pos Vertex Position.
 	* @param tint Vertex Colour.
 	*/
-	V3DVertex(const glm::vec3& pos, const glm::vec4& tint) : position(pos), color(tint) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec4& tint) : position(pos), color(tint), texCoord(0, 0), normal(0, 0, 0) {}
 
 	/**
 	* @param pos Vertex Position.
@@ -88,14 +88,14 @@ struct V3DVertex
 	* @param norm Vertex Normal.
 	* @param tint Vertex Colour.
 	*/
-	V3DVertex(const glm::vec3& pos, const glm::vec3& norm, const glm::vec4& tint) : position(pos), normal(norm), color(tint) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec3& norm, const glm::vec4& tint) : position(pos), normal(norm), color(tint), texCoord(0, 0) {}
 
 	/**
 	* @param pos Vertex Position.
 	* @param tint Vertex Colour.
 	* @param tex Vertex Texture Coordinate.
 	*/
-	V3DVertex(const glm::vec3& pos, const glm::vec2& tex, const glm::vec4& tint) : position(pos), color(tint), texCoord(tex) {}
+	V3DVertex(const glm::vec3& pos, const glm::vec2& tex, const glm::vec4& tint) : position(pos), color(tint), texCoord(tex), normal(0, 0, 0) {}
 
 	/**
 	* @param pos Vertex Position.

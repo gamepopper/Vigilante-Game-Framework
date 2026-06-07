@@ -16,7 +16,7 @@ VSprite::VSprite(sf::Vector2f Position, const sf::String& Filename) : VObject(Po
 		LoadGraphic(Filename);
 	}
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color(0, 255, 0, 128);
 #endif
 }
@@ -36,7 +36,7 @@ VSprite::VSprite(float x, float y, const sf::String& filename) : VObject(x, y)
 		LoadGraphic(filename);
 	}
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color(0, 255, 0, 128);
 #endif
 }

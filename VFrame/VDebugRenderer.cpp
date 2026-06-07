@@ -1,5 +1,5 @@
 #include "VDebugRenderer.h"
-#if _DEBUG
+#if VFRAME_DEBUGDRAW
 #include "VGlobal.h"
 #include "VRenderGroup.h"
 #include "VEmitter.h"
@@ -20,7 +20,7 @@ void VDebugRenderer::forEachExistingObject(VBase* b)
 		VRenderGroup* renderGroup = dynamic_cast<VRenderGroup*>(b);
 		object = renderGroup->Sprite.get();
 	}
-	else if (object->type == VType::TILEMAP)
+	else if (object && object->type == VType::TILEMAP)
 	{
 		VTilemap* tilemap = dynamic_cast<VTilemap*>(object);
 
@@ -51,6 +51,12 @@ void VDebugRenderer::forEachExistingObject(VBase* b)
 
 		return;
 	}
+
+	if (object == nullptr)
+		return;
+
+	if (object->DebugColor == sf::Color::Transparent)
+		return;
 
 	unsigned int vertexCount = debuggingVertices.getVertexCount();
 	if (vertexSet >= vertexCount)

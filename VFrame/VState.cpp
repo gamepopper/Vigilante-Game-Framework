@@ -222,8 +222,8 @@ void VStateManager::ChangeState(VState* state)
 		states.pop_back();
 	}
 
-	state->Initialise();
 	states.push_back(state);
+	state->Initialise();
 }
 
 void VStateManager::PushState(VState* state)

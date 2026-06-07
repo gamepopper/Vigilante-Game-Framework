@@ -251,7 +251,7 @@ void DemoStatesManager::HandleEvents(const sf::Event& event)
 			}
 		}
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 		if (key->code == sf::Keyboard::Key::Q)
 		{
 			VGlobal::p()->DrawDebug = !VGlobal::p()->DrawDebug;

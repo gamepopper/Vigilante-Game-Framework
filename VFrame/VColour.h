@@ -50,7 +50,7 @@ public:
 	static const sf::Color HSVtoRGB(float h, float s, float v, float a = 1.0f)
 	{
 		float hh, p, q, t, ff;
-		float r, g, b;
+		float r = 1.0f, g = 1.0f, b = 1.0f;
 		int i;
 
 		if (s <= 0)

@@ -16,7 +16,7 @@ fontSize(charSize)
 	Moves = false;
 	dirty = true;
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color(0, 0, 255, 128);
 #endif
 }
@@ -37,7 +37,7 @@ length(text.getSize())
 	Moves = false;
 	dirty = true;
 
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color(0, 0, 255, 128);
 #endif
 }
@@ -166,12 +166,12 @@ void VText::updateTextRender(const sf::String& text)
 		float x = 0, xOffset = 0;
 
 		sf::VertexArray verts(sf::PrimitiveType::Triangles, outlined ? item.length() * 6 * 2 : item.length() * 6);
-		wchar_t prevChar = 0;
+		char32_t prevChar = 0;
 		int outlineVertOffset = item.length() * 6;
 
 		for (size_t i = 0; i < item.length(); ++i)
 		{
-			wchar_t curChar = item[i];
+			char32_t curChar = item[i];
 
 			x += font->getKerning(prevChar, curChar, fontSize);
 			prevChar = curChar;

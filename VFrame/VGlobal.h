@@ -100,7 +100,7 @@ public:
 	bool Antialiasing = false;
 	///Should the game use Verticle Syncing (where the framerate is based on the monitor refresh rate) instead of the variable framerate?
 	bool VSync = false;
-#ifdef _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	///Show the rectangle collision area of each collideable object.
 	bool DrawDebug = false;
 #endif

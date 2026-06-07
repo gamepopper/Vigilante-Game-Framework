@@ -8,21 +8,25 @@
 
 V3DScene::V3DScene(float x, float y, unsigned int width, unsigned int height, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(maxSize), contextSettings(settings)
 {
-	renderTex.resize({ width, height }, settings);
-	Sprite->Position = sf::Vector2f(x, y);
-	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
+	if (renderTex.resize(sf::Vector2u(width, height), settings))
+	{
+		Sprite->Position = sf::Vector2f(x, y);
+		Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
+	}
 }
 
 V3DScene::V3DScene(sf::Vector2f position, sf::Vector2u size, const sf::ContextSettings& settings, unsigned int maxSize) : VRenderGroup(maxSize), contextSettings(settings)
 {
-	renderTex.resize(size, settings);
-	Sprite->Position = position;
-	Sprite->Size = sf::Vector2f(size);
+	if (renderTex.resize(size, settings))
+	{
+		Sprite->Position = position;
+		Sprite->Size = sf::Vector2f(size);
+	}
 }
 
-void V3DScene::SetActive(bool value)
+bool V3DScene::SetActive(bool value)
 {
-	renderTex.setActive(value);
+	return renderTex.setActive(value);
 }
 
 void V3DScene::PushGLStates()
@@ -46,19 +50,22 @@ void V3DScene::Destroy()
 	VSUPERCLASS::Destroy();
 
 	renderTex.resetGLStates();
-	renderTex.setActive(false);
-
-	if (V3DModel::DefaultTexture)
+	if (renderTex.setActive(false))
 	{
-		glDeleteTextures(1, &V3DModel::DefaultTexture);
-		V3DModel::DefaultTexture = 0;
+		if (V3DModel::DefaultTexture)
+		{
+			glDeleteTextures(1, &V3DModel::DefaultTexture);
+			V3DModel::DefaultTexture = 0;
+		}
 	}
 }
 
 void V3DScene::Resize(unsigned int width, unsigned int height)
 {
-	postProcessTex.resize({ width, height });
-	renderTex.resize({ width, height }, contextSettings);
+	if (!postProcessTex.resize({ width, height }))
+		return;
+	if (!renderTex.resize({ width, height }, contextSettings))
+		return;
 	Sprite->Size = sf::Vector2f(sf::Vector2u(width, height));
 }
 
@@ -116,7 +123,7 @@ void V3DScene::RenderGroup(VGroup* group)
 
 const sf::Texture& V3DScene::GetTexture()
 {
-	sf::Texture::getMaximumSize();
+	unsigned int maxSize = sf::Texture::getMaximumSize();
 
 	renderTex.setActive(true);
 	renderTex.clear(BackgroundTint);

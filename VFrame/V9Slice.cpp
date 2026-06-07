@@ -172,7 +172,7 @@ V9Slice::V9Slice(sf::Vector2f Position, sf::Vector2f Size, const sf::String& Fil
 	if (Filename != "")
 		LoadGraphic(Filename, Corner);
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color(0, 255, 0, 128);
 #endif
 }
@@ -185,7 +185,7 @@ V9Slice::V9Slice(float x, float y, float width, float height, const sf::String& 
 	if (Filename != "")
 		LoadGraphic(Filename, Corner);
 
-#if _DEBUG
+#ifdef VFRAME_DEBUGDRAW
 	DebugColor = sf::Color(0, 255, 0, 128);
 #endif
 }
